@@ -1,4 +1,3 @@
-import 'package:custom_mouse_cursor/custom_mouse_cursor.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_manager.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_utils.dart';
@@ -17,21 +16,9 @@ class ColorPickerMouseHandler extends StatefulWidget {
 }
 
 class _ColorPickerMouseHandlerState extends State<ColorPickerMouseHandler> {
-  MouseCursor colorPickerCursor = MouseCursor.defer;
-
   ColorPickerUtils? colorPicker;
   final GlobalKey _mouseRegionKey = GlobalKey();
   final GlobalKey _pickerKey = GlobalKey();
-
-  Future<void> initializeCursor() async {
-    colorPickerCursor = await CustomMouseCursor.icon(
-      Icons.colorize_outlined,
-      // hotY requires to be smaller then the icon size, otherwise the cursor
-      // won't be shown correctly
-      size: 24,
-      hotY: 23,
-    );
-  }
 
   @override
   void initState() {
@@ -46,7 +33,6 @@ class _ColorPickerMouseHandlerState extends State<ColorPickerMouseHandler> {
         setState(() {});
       }
     });
-    initializeCursor();
   }
 
   Offset localCursorPosition = Offset.zero;
@@ -76,7 +62,7 @@ class _ColorPickerMouseHandlerState extends State<ColorPickerMouseHandler> {
           MouseRegion(
             key: _mouseRegionKey,
             onHover: (event) => localCursorPosition = event.localPosition,
-            cursor: isActive ? colorPickerCursor : MouseCursor.defer,
+            cursor: isActive ? SystemMouseCursors.precise : MouseCursor.defer,
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: clickAction,

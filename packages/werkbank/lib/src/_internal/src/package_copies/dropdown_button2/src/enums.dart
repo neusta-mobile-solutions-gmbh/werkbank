@@ -1,3 +1,6 @@
+// Ignoring all of this because this file is a copy
+// ignore_for_file: lines_longer_than_80_chars
+
 part of 'dropdown_button2.dart';
 
 /// The direction of the dropdown menu in relation to the button.

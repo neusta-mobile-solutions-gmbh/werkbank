@@ -1,3 +1,6 @@
+// Ignoring all of this because this file is a copy
+// ignore_for_file: comment_references, deprecated_member_use, lines_longer_than_80_chars
+
 part of 'dropdown_button2.dart';
 
 /// A class to configure the theme of the button.
@@ -252,10 +255,10 @@ class DropdownSearchData<T> {
     this.searchInnerWidgetHeight,
     this.searchMatchFn,
   }) : assert(
-          (searchInnerWidget == null) == (searchInnerWidgetHeight == null),
-          'searchInnerWidgetHeight should not be null when using searchInnerWidget\n'
-          'This is necessary to properly determine menu limits and scroll offset',
-        );
+         (searchInnerWidget == null) == (searchInnerWidgetHeight == null),
+         'searchInnerWidgetHeight should not be null when using searchInnerWidget\n'
+         'This is necessary to properly determine menu limits and scroll offset',
+       );
 
   /// The TextEditingController used for searchable dropdowns. If this is null,
   /// then it'll perform as a normal dropdown without searching feature.

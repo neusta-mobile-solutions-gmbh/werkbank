@@ -1,3 +1,6 @@
+// Ignoring all of this because this file is a copy
+// ignore_for_file: prefer_asserts_with_message
+
 part of 'dropdown_button2.dart';
 
 // Copyright 2014 The Flutter Authors. All rights reserved.

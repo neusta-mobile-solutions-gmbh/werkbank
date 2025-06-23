@@ -1,0 +1,15 @@
+icon_font:
+  input_svg_dir: "icons"
+  output_font_file: "assets/fonts/werkbank_icon_font.otf"
+
+  output_class_file: "lib/src/theme/src/werkbank_icons.dart"
+  class_name: "WerkbankIcons"
+  package: werkbank
+  format: true
+
+  font_name: "Werkbank Icons"
+  normalize: false
+  ignore_shapes: true
+
+  recursive: true
+  verbose: false

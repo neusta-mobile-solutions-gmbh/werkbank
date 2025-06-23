@@ -1,0 +1,43 @@
+dartdoc:
+  categories:
+    Welcome:
+      markdown: doc/welcome.md
+    Get Started:
+      markdown: doc/get_started.md
+    File Structure:
+      markdown: doc/file_structure.md
+    IDE Integration:
+      markdown: doc/ide_integration.md
+    Writing Use Cases:
+      markdown: doc/writing_use_cases.md
+    Configuring Addons:
+      markdown: doc/configuring_addons.md
+    Customizing the AppConfig:
+      markdown: doc/customizing_the_appconfig.md
+    Overview:
+      markdown: doc/overview.md
+    Custom Use Case Metadata:
+      markdown: doc/custom_use_case_metadata.md
+    Display:
+      markdown: doc/display.md
+    Testing with Use Cases:
+      markdown: doc/testing_with_use_cases.md
+    Werkbank Components:
+      markdown: doc/werkbank_components.md
+    Writing Your Own Addons:
+      markdown: doc/writing_your_own_addons.md
+  categoryOrder:
+    - Welcome
+    - Get Started
+    - File Structure
+    - IDE Integration
+    - Writing Use Cases
+    - Configuring Addons
+    - Customizing the AppConfig
+    - Overview
+    - Custom Use Case Metadata
+    - Display
+    - Testing with Use Cases
+    - Werkbank Components
+    - Writing Your Own Addons
+  showUndocumentedCategories: true

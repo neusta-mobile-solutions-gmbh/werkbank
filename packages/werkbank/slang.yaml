@@ -1,0 +1,9 @@
+base_locale: en
+input_directory: assets/l10n
+input_file_pattern: '.yaml'
+output_directory: lib/src/_internal/src/localizations/src
+flutter_integration: false
+translation_class_visibility: public
+timestamp: false
+maps:
+  - locales

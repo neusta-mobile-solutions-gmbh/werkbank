@@ -1,0 +1,116 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+!.idea/runConfigurations/
+
+# Eclipse IDE or Java projects
+.classpath
+.project
+.settings/
+
+# VSCode related
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# mason related
+bricks.json
+
+# melos related
+pubspec_overrides.yaml
+**/pubspec_overrides.yaml
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+**/build/
+**/docs_artifacts/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+
+# FVM Version Cache
+.fvm/
+
+# packages file containing multi-root paths
+.packages.generated
+
+# Android related
+**/android/**/gradle-wrapper.jar
+.gradle/
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+*.jks
+
+# macOS
+**/Flutter/ephemeral/
+**/Pods/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/ephemeral
+**/xcuserdata/
+
+# Windows
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+**/windows/flutter/generated_plugins.cmake
+
+# Linux
+**/linux/flutter/generated_plugin_registrant.cc
+**/linux/flutter/generated_plugin_registrant.h
+**/linux/flutter/generated_plugins.cmake
+
+# Coverage
+coverage/
+
+Podfile.lock
+Gemfile.lock
+
+# fastlane related https://docs.fastlane.tools/best-practices/source-control/#source-control
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+
+apps/*/CHANGELOG.md
+apps/*/README.md
+
+# Testing
+**/failures/*.png
+
+# Dist
+public/

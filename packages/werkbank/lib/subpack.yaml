@@ -1,0 +1,9 @@
+index:
+  name: werkbank
+  # TODO(lzuttermeister): Better doc
+  docs: Werkbank;
+
+  exclude:
+    - src/werkbank_addons.dart
+    - src/werkbank_components.dart
+    - src/werkbank_internal.dart

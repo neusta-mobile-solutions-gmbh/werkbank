@@ -1,0 +1,61 @@
+name: werkbank
+sdkPath: .fvm/flutter_sdk
+
+packages:
+  - apps/*
+  - packages/*
+  - example/example_werkbank
+
+scripts:
+  flutter:pub_get:
+    description: Run flutter pub get
+    run: fvm dart run melos exec -c 1 -- fvm flutter pub get
+
+  flutter:pub_upgrade:
+    description: Run flutter pub upgrade
+    run: fvm dart run melos exec -c 1 -- fvm flutter pub upgrade
+
+  dart:format:
+    description: Runs the formatter in all packages.
+    run: |
+      if [ "$GITLAB_CI" = "true" ]; then
+        fvm dart run melos exec -c 1 -- fvm dart format --set-exit-if-changed lib
+      else
+        fvm dart run melos exec -- fvm dart format lib
+      fi
+
+  dart:fix:
+    description: Fixes all dart lints.
+    run: fvm dart run melos exec -- fvm dart fix --apply
+
+  index_generator:
+    description: Run the index_generator in all packages that require it.
+    packageFilters:
+      scope:
+        - werkbank
+    run: |
+      cd packages/werkbank &&
+      fvm dart run tool/generate_index_generator_yaml.dart &&
+      # We need to run the index_generator twice,
+      # since it seems to not add exports of index files
+      # that it generated itself for the first time.
+      fvm dart run index_generator &&
+      fvm dart run index_generator
+
+  flutter:clean:
+    description: Runs flutter clean in all packages.
+    run: fvm dart run melos exec -- fvm flutter clean
+
+  dart:slang:
+    description: Run the slang in all packages that require it.
+    packageFilters:
+      scope:
+        - werkbank
+    run: fvm dart run melos exec -- dart run slang
+
+  iconfont:generate:
+    description: Run the icon_font_genrator.
+    packageFilters:
+      scope:
+        - werkbank
+    run: fvm dart run melos exec -c 1 -- tool/generate_icon_font.sh

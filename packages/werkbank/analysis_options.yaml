@@ -1,0 +1,22 @@
+include: package:very_good_analysis/analysis_options.5.0.0.yaml
+
+formatter:
+  trailing_commas: preserve
+
+linter:
+  rules:
+    public_member_api_docs: false
+    sort_pub_dependencies: false
+    always_put_required_named_parameters_first: false
+
+analyzer:
+  exclude:
+    - lib/src/_internal/src/package_copies/**
+    - lib/**/*.*.dart
+    - lib/src/localization/**
+    - lib/**/*_icons.dart
+    - test/**/*.*.dart
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true

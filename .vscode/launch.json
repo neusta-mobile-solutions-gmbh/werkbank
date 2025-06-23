@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Werkbank Werkbank",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "apps/werkbank_werkbank/lib/main.dart",
+    },
+    {
+      "name": "Example Werkbank",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "example/example_werkbank/lib/main.dart",
+    },
+  ]
+}

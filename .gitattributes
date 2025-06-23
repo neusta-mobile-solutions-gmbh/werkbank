@@ -1,0 +1,5 @@
+*.lock -diff
+messages_*.dart -diff
+*.mocks.dart -diff
+l10n.dart -diff
+*.*.dart -diff

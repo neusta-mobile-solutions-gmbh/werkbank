@@ -1,0 +1,224 @@
+# Regenerate with `dart run slang`
+
+generic:
+  yesNoSwitch:
+    no: NO
+    yes: YES
+  onOffSwitch:
+    off: OFF
+    on: ON
+
+addons:
+  accessibility:
+    name: Accessibility
+    controls:
+      textScaleFactor: Text Scale Factor
+      boldText: Bold Text
+      semanticsMode:
+        name: Semantics Mode
+        values:
+          none: None
+          overlay: Overlay
+          inspection: Inspection
+      semanticsTree: Semantics Tree
+      activeSemanticsNode: Active Semantics Node
+      colorMode:
+        name: Simulated Color Blindness
+        values:
+          none: None
+          protanopia: Protanopia (red blindness)
+          deuteranopia: Deuteranopia (green blindness)
+          tritanopia: Tritanopia (blue blindness)
+          protanomaly: Protanomaly (red weakness)
+          deuteranomaly: Deuteranomaly (green weakness)
+          tritanomaly: Tritanomaly (blue weakness)
+          inverted: Inverted
+          grayscale: Grayscale
+    inspector:
+      name: Semantics Inspector
+
+  background:
+    name: Background
+    controls:
+      background:
+        label: Background
+        values:
+          useCaseDefault: Use Case Default
+  debugging:
+    name: Debugging (Experimental)
+    controls:
+      performanceOverlay: Performance Overlay
+      paintBaselines: Paint Baselines
+      paintSize: Paint Size
+      repaintTextRainbow: Repaint Text Rainbow
+      repaintRainbow: Repaint Rainbow
+      timeDilation: Time Dilation
+  hotReloadEffect:
+    name: Hot Reload Effect
+    controls:
+      hotReloadEffect: Hot Reload Effect
+  knobs:
+    name: Knobs
+    controls:
+      preset:
+        name: Preset
+        values:
+          initial: Initial
+          unknown: "-"
+    knobs:
+      boolean:
+        values:
+          falseLabel: "FALSE"
+          trueLabel: "TRUE"
+      interval:
+        begin: Begin
+        end: End
+      focusnode:
+        unfocused: "Unfocused"
+        focused: "Focused"
+  localization:
+    name: Localization
+    controls:
+      locale: Locale
+  ordering:
+    name: Ordering
+    controls:
+      order:
+        name: Order
+        values:
+          code: Code
+          alphabetical: Alphabetical
+  colorPicker:
+    name: Color Picker
+    controls:
+      colorPicker:
+        name: Color Picker
+        values:
+          color: Color
+          noSelectedColor: No color selected
+          colorCopied: Hex Code copied to clipboard
+          pickedColor: Picked Color
+  description:
+    component: Component Description
+    folder: Folder Description
+    tags: Tags
+    about: About
+    links: External Links
+  pageTransition:
+    name: Page Transition
+  recentHistory:
+    homePageComponentTitle: Recently Visited
+  acknowledged:
+    homePageComponentTitle: Recently Added
+  constraints:
+    name: Constraints
+    controls:
+      preset:
+        name: Preset
+        values:
+          initial: Initial
+          unknown: "-"
+      constraints:
+        name: Constraints
+        values:
+          minWidth: Min Width
+          maxWidth: Max Width
+          minHeight: Min Height
+          maxHeight: Max Height
+      size:
+        name: Size
+        values:
+          width: Width
+          height: Height
+    shortcuts:
+      title: Constraints Mode Change Shortcuts
+      subTitle: Use the ruler to size one axis to tight constraints
+      descriptionResize: Resize both axes to tight constraints
+      descriptionMinSize: Apply minimum size constraints
+      descriptionMaxSize: Apply maximum size constraints
+  werkbank_theme:
+    name: Werkbank Theme
+    controls:
+      theme: Theme
+  theming:
+    name: Theming
+    controls:
+      theme: Theme
+  zoom:
+    name: Zoom
+    controls:
+      enabled: Enabled
+      magnification: Magnification
+    shortcuts:
+      title: Zoom/Pan Shortcuts
+      descriptionZoom: Zoom in and out
+      keystrokeZoom: Mouse Wheel
+      descriptionReset: Reset zoom
+      descriptionZoomIn: Zoom in
+      descriptionZoomOut: Zoom out
+      descriptionPan: Pan the view
+      keystrokePan: Left or Middle Mouse Button Drag
+      descriptionZoomPan: Zoom/Pan the view
+      keystrokeZoomPan: Zoom/Pan gestures on Trackpad
+
+app:
+  duplicatePathErrorTitleMessage: Duplicate Paths Found
+  duplicatePathErrorContentMessageMarkdown: |-
+    There are multiple folders, components or use cases with the same path:
+    $duplicatePath
+
+    Rename some nodes such that all the paths are unique.
+
+navigationPanel:
+  lastUpdated: "LAST UPDATED $date"
+  search:
+    hint: Search
+  overview: Overview
+
+configurationPanel:
+  nameCopiedNotificationMessage: '"$name" copied to clipboard'
+  cantConfigureUseCaseInOverview: Cannot configure the use case when overviewing it.
+  noUseCaseSelected: No use case selected
+  tabs:
+    configure: CONFIGURE
+    inspect: INSPECT
+    settings: SETTINGS
+
+shortcuts:
+  general:
+    title: General
+    descriptionSearch: Open/Focus search
+    descriptionTogglePanel: Toggle Panels
+    descriptionHome: Home
+  navigationMode:
+    title: Navigation Shortcuts
+    descriptionPrevious: Navigate to the previous use case
+    keystrokePrevious: Arrow Up / Page Up
+    descriptionNext: Navigate to the next use case
+    keystrokeNext: Arrow Down / Page Down
+
+overview:
+  overflow_notification:
+    title: Fix Overflows in the Overview
+    # TODO(lzuttermeister): Also add link to docs?
+    contentMarkdown: |-
+      You seem to be having issues with overflows in the overview.
+      This may be because the thumbnails provide to little space for the widget being displayed.
+
+      There are several ways in which you can control the presentation of the thumbnail,
+      including setting the scale, which can effectively give the widget more space.
+
+      Explore these methods by typing `c.overview.` in your use case
+      and autocompleting the methods that are available.
+
+      Take a look at the "Overview" topic in the API docs, which explains these methods in detail.
+    contentWithConstraintsAddonMarkdown: |-
+      @:overview.overflow_notification.contentMarkdown
+
+      Additionally, since you are using the `ConstraintsAddon`, note that the lower bounds given to
+      `c.constraints.supported(...)` also set the minimum size that is used for the thumbnail
+      unless `limitOverviewSize` is set to `false`.
+      Also by using for example `c.constraints.overview(...)` you can set the view constraints
+      that are used in the overview. If this is not set, the view constraints used in the
+      overview falls back to the initial view constraints that are also used when
+      viewing the use case.

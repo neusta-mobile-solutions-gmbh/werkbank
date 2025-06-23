@@ -1,0 +1,15 @@
+include: package:very_good_analysis/analysis_options.5.0.0.yaml
+
+formatter:
+  trailing_commas: preserve
+
+linter:
+  rules:
+    public_member_api_docs: false
+
+analyzer:
+  exclude:
+    - lib/**/*.*.dart
+    - lib/src/localization/**
+    - lib/**/*_icons.dart
+    - test/**/*.*.dart

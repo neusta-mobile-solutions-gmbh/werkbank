@@ -95,7 +95,7 @@ class AddonConfig {
 
     final deduplicatedAddons = {
       for (final addon in allAddons) addon.id: addon,
-    }.values.toList(growable: false);
+    }.values.toList(growable: false)..sort((a, b) => a.id.compareTo(b.id));
     return AddonConfig._(deduplicatedAddons);
   }
 

@@ -2,7 +2,7 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 <p align="center">
   <a href="https://pub.dev/documentation/werkbank/latest/topics/Welcome-topic.html">Documentation</a> •
   <a href="https://pub.dev/documentation/werkbank/latest/topics/Get%20Started-topic.html">Get Started</a> •
-  <a href="https://example-werkbank-246cea10e259.playground.neusta-ms.de/">Web Example Werkbank</a>
+  <a href="https://example-werkbank-246cea10e259.playground.neusta-ms.de/">Web Demo</a>
 </p>
 
 > [!CAUTION]
@@ -101,7 +101,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
   - Learn everything about what Werkbank is and its technical details.
 - 🚀 [**Get Started**](https://pub.dev/documentation/werkbank/latest/topics/Get%20Started-topic.html)
   - If you already roughly know what Werkbank is, jump directly into setting up your Werkbank app.
-- 🌐 [**Web Example Werkbank**](https://example-werkbank-246cea10e259.playground.neusta-ms.de/)
+- 🌐 [**Example Werkbank Web Demo**](https://example-werkbank-246cea10e259.playground.neusta-ms.de/)
   - Try out a Werkbank app in your browser.
-- 🛠️ **Example Werkbank Code** (coming soon)
-  - Once we have migrated to a GitHub repo, we will link this.
+- 🛠️ [**Example Werkbank Code**](https://github.com/neusta-mobile-solutions-gmbh/werkbank/tree/main/example/example_werkbank)
+  - Take a look at the code of the example web demo above and use it as a starting point for your own Werkbank app. 

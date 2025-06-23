@@ -14,10 +14,11 @@ cd my_project_werkbank
 flutter pub add werkbank
 ```
 
-<!-- TODO: Add a link to the example project -->
 > [!TIP]
 > The following sections introduce you to a very basic setup of a Werkbank app.
-> Check out the example project in our repository for a more elaborate setup that will help you get the most
+> Check out the example project at
+> https://github.com/neusta-mobile-solutions-gmbh/werkbank/tree/main/example/example_werkbank
+> for a more elaborate setup that will help you get the most
 > out of Werkbank.
 
 ## WerkbankApp Setup

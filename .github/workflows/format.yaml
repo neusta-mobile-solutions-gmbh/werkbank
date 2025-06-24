@@ -1,0 +1,32 @@
+name: format
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  format:
+    strategy:
+      fail-fast: false
+      matrix:
+        directory:
+          - "apps/werkbank_werkbank"
+          - "example/example_werkbank"
+          - "packages/werkbank"
+
+    name: dart format
+    runs-on: ubuntu-latest
+    container: ghcr.io/cirruslabs/flutter:stable
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.directory }}
+        run: flutter pub get
+
+      - name: Check formatting of project source
+        working-directory: ${{ matrix.directory }}
+        run: dart format --output none --set-exit-if-changed .

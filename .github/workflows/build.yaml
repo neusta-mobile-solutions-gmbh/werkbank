@@ -38,3 +38,23 @@ jobs:
         with:
           path: example/example_werkbank/build/web
           retention-days: 90
+
+  deploy-example:
+    name: deploy example project
+    runs-on: ubuntu-latest
+    needs: build-example
+
+    if: ${{ github.ref == 'refs/heads/main' && vars.DEPLOY_PAGES }}
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

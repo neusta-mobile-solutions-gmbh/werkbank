@@ -190,5 +190,5 @@ Now you should have everything set up to run your Werkbank app.
 <!-- TODO: Check these links. Some topics don't exist yet. -->
 Take a look at these topics next to advance your Werkbank setup further:
 - [File Structure](File%20Structure-topic.html) - Learn how to organize the files and use cases in your project.
-- [Addon Configuration](Addon%20Configuration-topic.html) - Further configure the addons you are using.
-- [Writing Use Cases](Use%20Cases-topic.html) - Explore how to augment your use cases by utilizing the [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
+- [Addon Configuration](Configuring%20Addons-topic.html) - Further configure the addons you are using.
+- [Writing Use Cases](Writing%Use%20Cases-topic.html) - Explore how to augment your use cases by utilizing the [UseCaseComposer](../werkbank/UseCaseComposer-class.html).

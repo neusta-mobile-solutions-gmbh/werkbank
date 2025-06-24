@@ -5,17 +5,8 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
   <a href="https://example-werkbank-246cea10e259.playground.neusta-ms.de/">Web Demo</a>
 </p>
 
-> [!CAUTION]
-> THIS PACKAGE IS A WORK IN PROGRESS!
->
-> While Werkbank already offers many powerful features,
-> we are still in the process of polishing it for its 1.0.0 release.
-> We do not recommend using it in production yet.
->
-> If you do choose to try it out, expect:
-> - Incomplete or, in some cases, even incorrect documentation.
-> - Breaking changes without detailed migration guides.
-> - Bugs.
+> [!WARNING]
+> Werkbank is feature-rich but still evolving. Documentation is incomplete and APIs may change before the stable release.
 
 ## Features
 - **🧩 Use Cases**

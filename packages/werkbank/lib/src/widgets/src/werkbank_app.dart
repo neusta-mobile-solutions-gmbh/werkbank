@@ -298,7 +298,7 @@ class _WerkbankPersistance extends StatelessWidget {
           //
           // But this widget (SizedBox) is never visible either, since
           // [WerkbankPersistence] defers the first frame until
-          // the persistance is ready.
+          // the persistence is ready.
           // This way we avoid a jumping color effect when building the first
           // frames.
           const SizedBox.expand(),

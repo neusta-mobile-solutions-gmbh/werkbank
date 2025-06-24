@@ -5,7 +5,7 @@ class WTreeNode {
     required this.key,
     required this.title,
     this.leading,
-    this.trailling,
+    this.trailing,
     this.body,
     this.isInitiallyExpanded = false,
     this.children,
@@ -17,7 +17,7 @@ class WTreeNode {
   final LocalKey key;
   final Widget title;
   final Widget? leading;
-  final Widget? trailling;
+  final Widget? trailing;
   final Widget? body;
   final bool isInitiallyExpanded;
   final List<WTreeNode>? children;

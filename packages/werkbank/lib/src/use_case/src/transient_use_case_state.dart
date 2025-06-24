@@ -35,11 +35,11 @@ typedef _Self<T> = T;
 /// [TransientUseCaseStateEntry]s across hot reloads, [saveSnapshot] is called
 /// on each of the old and soon to be disposed [TransientUseCaseStateEntry]s.
 /// The returned snapshot is passed to [loadSnapshot] on the new
-/// [TransientUseCaseStateEntry]s after [prepareForBuild] ist called.
+/// [TransientUseCaseStateEntry]s after [prepareForBuild] is called.
 /// The type of the snapshot is defined by the generic type [S].
 ///
 /// This mechanism allows [TransientUseCaseStateEntry]s to store state which is
-/// dependant on the composition of the use case.
+/// dependent on the composition of the use case.
 /// For example, this is the case with knobs from the [KnobsAddon].
 ///
 /// See also [RetainedUseCaseStateEntry] for state that is retained

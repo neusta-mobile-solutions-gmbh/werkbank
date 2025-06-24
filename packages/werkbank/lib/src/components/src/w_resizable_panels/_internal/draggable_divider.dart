@@ -39,7 +39,7 @@ class _DraggableDividerState extends State<DraggableDivider> {
     // of the GestureDetector.
     // Otherwise, on the nect onPanDown + onPanUpdate
     // the dx and dy can be larger than expected
-    // due to the old postion of the GestureDetector.
+    // due to the old position of the GestureDetector.
 
     setState(() {
       accumulator = widget.initial;

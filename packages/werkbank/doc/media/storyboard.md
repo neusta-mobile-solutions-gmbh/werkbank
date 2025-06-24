@@ -21,11 +21,11 @@ runApp(
 
 ### Preparations
 - Have Constraints section collapsed at top and knobs below
-- Configue tab is initially selected
+- Configure tab is initially selected
 - Order in settings
   - Theming
   - Background
-  - Accessiblity
+  - Accessibility
   - Debugging (Collapsed)
   - Localization
   - Werkbank theme

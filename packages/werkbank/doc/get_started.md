@@ -14,6 +14,8 @@ cd my_project_werkbank
 flutter pub add werkbank
 ```
 
+You will also need to add a dependency to your flutter package or app where the widgets you want to showcase are located.
+
 > [!TIP]
 > The following sections introduce you to a very basic setup of a Werkbank app.
 > Check out the example project at

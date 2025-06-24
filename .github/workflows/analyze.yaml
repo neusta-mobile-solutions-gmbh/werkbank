@@ -1,0 +1,32 @@
+name: analyze
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  analyze:
+    strategy:
+      fail-fast: false
+      matrix:
+        directory:
+          - "apps/werkbank_werkbank"
+          - "example/example_werkbank"
+          - "packages/werkbank"
+
+    name: flutter analyze
+    runs-on: ubuntu-latest
+    container: ghcr.io/cirruslabs/flutter:stable
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.directory }}
+        run: flutter pub get
+
+      - name: Analyze project source
+        working-directory: ${{ matrix.directory }}
+        run: flutter analyze

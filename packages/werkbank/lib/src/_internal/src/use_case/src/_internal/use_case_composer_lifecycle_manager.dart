@@ -33,7 +33,7 @@ class UseCaseComposerLifecycleManager {
           for (final addon in addonConfig.addons)
             ...addon.createTransientUseCaseStateEntries(),
         ],
-        activeAddons: {
+        activeAddonIds: {
           for (final addon in addonConfig.addons) addon.id,
         },
       );

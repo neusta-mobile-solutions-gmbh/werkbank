@@ -8,8 +8,8 @@ class UseCaseComposerImpl implements UseCaseComposer {
   UseCaseComposerImpl({
     required WerkbankUseCase useCase,
     required List<AnyTransientUseCaseStateEntry> transientStateEntries,
-    required Set<String> activeAddons,
-  }) : _activeAddons = activeAddons,
+    required Set<String> activeAddonIds,
+  }) : _activeAddonIds = activeAddonIds,
        _useCase = useCase {
     final transientStateEntriesMap = <Type, AnyTransientUseCaseStateEntry>{};
     for (final entry in transientStateEntries) {
@@ -34,7 +34,7 @@ class UseCaseComposerImpl implements UseCaseComposer {
 
   final List<VoidCallback> _lateExecutionCallbacks = [];
 
-  final Set<String> _activeAddons;
+  final Set<String> _activeAddonIds;
 
   bool _active = true;
 
@@ -119,7 +119,7 @@ class UseCaseComposerImpl implements UseCaseComposer {
   @override
   bool isAddonActive(String addonId) {
     _ensureNotDisposed();
-    return _activeAddons.contains(addonId);
+    return _activeAddonIds.contains(addonId);
   }
 
   void _dispose() {

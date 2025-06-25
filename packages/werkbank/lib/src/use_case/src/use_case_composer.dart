@@ -78,4 +78,8 @@ abstract interface class UseCaseComposer {
   T getTransientStateEntry<
     T extends TransientUseCaseStateEntry<T, TransientUseCaseStateSnapshot>
   >();
+
+  /// Checks whether an addon with the given [addonId] is used in the current
+  /// use case composition.
+  bool isAddonActive(String addonId);
 }

@@ -32,19 +32,24 @@ class RelaxationCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
                 child: image,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 8.0,
-                children: [
-                  DefaultTextStyle.merge(
-                    style: Theme.of(context).textTheme.headlineSmall!,
-                    child: title,
-                  ),
-                  DefaultTextStyle.merge(
-                    style: Theme.of(context).textTheme.bodyMedium!,
-                    child: description,
-                  ),
-                ],
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 8.0,
+                  children: [
+                    DefaultTextStyle.merge(
+                      style: Theme.of(context).textTheme.headlineSmall!,
+                      child: title,
+                    ),
+                    Flexible(
+                      child: DefaultTextStyle.merge(
+                        style: Theme.of(context).textTheme.bodyMedium!,
+                        child: description,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

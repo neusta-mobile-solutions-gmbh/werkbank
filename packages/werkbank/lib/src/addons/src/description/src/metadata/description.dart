@@ -38,64 +38,94 @@ extension DescriptionMetadataExtension on UseCaseMetadata {
   Descriptions get descriptions => get<Descriptions>() ?? Descriptions.empty;
 }
 
+/// Defines how a new description should be merged with an existing one.
+enum DescriptionMergeStrategy {
+  /// Appends the new description to the existing one.
+  append,
+
+  /// Prepends the new description before the existing one.
+  prepend,
+
+  /// Replaces the existing description with the new one.
+  overwrite,
+}
+
 extension DescriptionComposerExtension on UseCaseComposer {
-  void description(String description) {
+  /// Adds a [description] to a use case, component, folder or the root.
+  /// The descriptions of a use case and all its ancestors are displayed
+  /// for a use case in the "INSPECT" tab.
+  ///
+  /// The [mergeStrategy] defines how the new description
+  /// should be merged with an existing one.
+  /// See [DescriptionMergeStrategy] for its values.
+  ///
+  /// If [forUseCase] is `true`, the description is added
+  /// to the [useCase] instead of the current [node].
+  void description(
+    String description, {
+    DescriptionMergeStrategy mergeStrategy = DescriptionMergeStrategy.append,
+    bool forUseCase = false,
+  }) {
     final currentDescriptions =
         getMetadata<Descriptions>() ?? Descriptions.empty;
-    final node = this.node;
+    final descriptionNode = forUseCase ? useCase : node;
+    final trimmedDescription = description.trim();
 
     DescriptionEntry<T> tryMergeIntoEntry<T extends WerkbankNode>({
       required DescriptionEntry<T>? entry,
       required T node,
-      required String description,
     }) {
       assert(
         entry == null || entry.node == node,
         'The node of the entry must match the current node.',
       );
+
       if (entry == null) {
         return DescriptionEntry<T>(
-          description: description,
+          description: trimmedDescription,
           node: node,
         );
       }
+
+      // Apply the merge strategy
+      final mergedDescription = switch (mergeStrategy) {
+        DescriptionMergeStrategy.append =>
+          '${entry.description}\n\n$trimmedDescription',
+        DescriptionMergeStrategy.prepend =>
+          '$trimmedDescription\n\n${entry.description}',
+        DescriptionMergeStrategy.overwrite => trimmedDescription,
+      };
+
       return DescriptionEntry<T>(
-        description: '${entry.description.trimRight()}\n\n$description',
+        description: mergedDescription,
         node: node,
       );
     }
 
-    switch (node) {
+    switch (descriptionNode) {
       // We treat description on the root as a folder description.
       case WerkbankSections():
         setMetadata(
           currentDescriptions.copyWith(
             sectionsDescription: tryMergeIntoEntry(
               entry: currentDescriptions.sectionsDescription,
-              node: node,
-              description: description,
+              node: descriptionNode,
             ),
           ),
         );
       case WerkbankFolder():
         final lastFolder = currentDescriptions.folderDescriptions.lastOrNull;
-        final current = lastFolder?.node == node ? lastFolder : null;
+        final current = lastFolder?.node == descriptionNode ? lastFolder : null;
         final newEntry = tryMergeIntoEntry(
           entry: current,
-          node: node,
-          description: description,
+          node: descriptionNode,
         );
         final newFolderDescriptions = currentDescriptions.folderDescriptions
             .toList();
         if (current != null) {
           newFolderDescriptions[newFolderDescriptions.length - 1] = newEntry;
         } else {
-          newFolderDescriptions.add(
-            DescriptionEntry<WerkbankFolder>(
-              description: description,
-              node: node,
-            ),
-          );
+          newFolderDescriptions.add(newEntry);
         }
         setMetadata(
           currentDescriptions.copyWith(
@@ -107,8 +137,7 @@ extension DescriptionComposerExtension on UseCaseComposer {
           currentDescriptions.copyWith(
             componentDescription: tryMergeIntoEntry(
               entry: currentDescriptions.componentDescription,
-              node: node,
-              description: description,
+              node: descriptionNode,
             ),
           ),
         );
@@ -117,8 +146,7 @@ extension DescriptionComposerExtension on UseCaseComposer {
           currentDescriptions.copyWith(
             useCaseDescription: tryMergeIntoEntry(
               entry: currentDescriptions.useCaseDescription,
-              node: node,
-              description: description,
+              node: descriptionNode,
             ),
           ),
         );
@@ -131,7 +159,7 @@ extension DescriptionComposerExtension on UseCaseComposer {
         semanticDescription: 'Description',
         entries: [
           FuzzySearchEntry(
-            searchString: description,
+            searchString: trimmedDescription,
             scoreThreshold: .1,
           ),
         ],

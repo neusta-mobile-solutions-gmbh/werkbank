@@ -204,8 +204,6 @@ List<SearchCluster> _otherClustersFor(
   final node = descriptor.node;
   final nameWithSpaces = _withSpaces(node.name);
   final justTheUpperCaseChars = _justTheUpperCaseChars(node.name);
-  final justTheUpperCaseCharsAndTheNextChar =
-      _justTheUpperCaseCharsAndTheNextChar(node.name);
   final wordsInTheName = _wordsIn(node.name);
   return [
     // Name of the UseCase
@@ -228,13 +226,6 @@ List<SearchCluster> _otherClustersFor(
         if (justTheUpperCaseChars.length > 1)
           FuzzySearchEntry(
             searchString: justTheUpperCaseChars,
-            scoreThreshold: .25,
-            ignoreCase: true,
-          ),
-        // NameOfTheUseCase -> NaOfThUsCa
-        if (justTheUpperCaseCharsAndTheNextChar.length > 2)
-          FuzzySearchEntry(
-            searchString: justTheUpperCaseCharsAndTheNextChar,
             scoreThreshold: .25,
             ignoreCase: true,
           ),
@@ -268,27 +259,6 @@ String _justTheUpperCaseChars(String name) {
       .where(_isAlpha)
       .where((element) => element.toUpperCase() == element)
       .join();
-}
-
-// Multiple Choice Dropdown -> MuChDr
-String _justTheUpperCaseCharsAndTheNextChar(String name) {
-  return name.split('').reduce((value, element) {
-    if (element == ' ') {
-      return value;
-    }
-
-    if (element.toUpperCase() == element) {
-      return '$value$element';
-    }
-
-    final latestChar = value.isNotEmpty ? value[value.length - 1] : null;
-    if (latestChar?.toUpperCase() == latestChar &&
-        element.toUpperCase() != element) {
-      return '$value$element';
-    }
-
-    return value;
-  });
 }
 
 String _withSpaces(String name) {

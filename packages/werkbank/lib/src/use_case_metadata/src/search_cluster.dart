@@ -4,6 +4,7 @@ import 'package:werkbank/src/werkbank_internal.dart';
 abstract class SearchClusterFoundation {
   SearchClusterFoundation({
     required this.semanticDescription,
+    required this.field,
   });
 
   /// Describes the meaning or context of this search cluster.
@@ -11,12 +12,20 @@ abstract class SearchClusterFoundation {
   /// Used to provide context for search results
   /// when activating [DebugWerkbankFilter]
   final String semanticDescription;
+
+  /// This allows the user to refine a search
+  /// by restricting results to entries that match a specific field,
+  /// such as "field:searchString".
+  /// For Example:
+  /// "tag:interactive"
+  final String field;
 }
 
 class SearchCluster extends SearchClusterFoundation {
   SearchCluster({
     required this.entries,
     required super.semanticDescription,
+    required super.field,
   }) : assert(
          entries.isNotEmpty,
          'entries must not be empty',
@@ -24,10 +33,11 @@ class SearchCluster extends SearchClusterFoundation {
 
   final List<SearchEntry> entries;
 
-  SearchClusterResult evaluate({required String query}) {
+  SearchClusterResult evaluate({required FilterCommand filterCommand}) {
     return SearchClusterResult(
       semanticDescription: semanticDescription,
-      entries: entries.map((e) => e.evaluate(query)).toIList(),
+      field: field,
+      entries: entries.map((e) => e.evaluate(filterCommand, this)).toIList(),
     );
   }
 }

@@ -63,6 +63,7 @@ extension DescriptionComposerExtension on UseCaseComposer {
     addSearchCluster(
       SearchCluster(
         semanticDescription: 'Description',
+        field: 'desc',
         entries: [
           FuzzySearchEntry(
             searchString: description,

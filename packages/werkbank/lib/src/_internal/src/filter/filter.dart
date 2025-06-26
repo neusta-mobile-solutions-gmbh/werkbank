@@ -4,6 +4,7 @@
 library filter;
 
 export 'src/debug_display_filter.dart';
+export 'src/filter_command.dart';
 export 'src/filter_result.dart';
 export 'src/root_descriptor_filter.dart';
 export 'src/search_cluster_result.dart';

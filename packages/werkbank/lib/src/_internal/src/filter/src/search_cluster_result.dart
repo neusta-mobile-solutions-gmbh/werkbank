@@ -5,6 +5,7 @@ class SearchClusterResult extends SearchClusterFoundation
     implements SearchResult {
   SearchClusterResult({
     required super.semanticDescription,
+    required super.field,
     required this.entries,
   }) : assert(
          entries.isNotEmpty,
@@ -20,6 +21,7 @@ class SearchClusterResult extends SearchClusterFoundation
   String toString() {
     return 'SearchClusterResult{isMatch: $isMatch, '
         'semanticDescription: $semanticDescription, '
+        'field: $field, '
         'entries: $entries}';
   }
 }

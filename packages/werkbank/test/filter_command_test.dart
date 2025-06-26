@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:werkbank/src/_internal/src/filter/src/_internal/filter_command.dart';
+import 'package:werkbank/src/_internal/src/filter/src/filter_command.dart';
 
 void _expectInvalidFor(String searchQuery, FilterCommand command) {
   expect(command.searchQuery, equals(searchQuery));

@@ -24,6 +24,7 @@ extension TagsComposerExtension on UseCaseComposer {
     addSearchCluster(
       SearchCluster(
         semanticDescription: 'Tag',
+        field: DescriptionAddon.tagField,
         entries: tags
             .map(
               (tag) => FuzzySearchEntry(

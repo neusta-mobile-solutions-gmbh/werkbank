@@ -15,7 +15,7 @@ class RootDescriptorFilter extends StatefulWidget {
 }
 
 class _RootDescriptorArrangerState extends State<RootDescriptorFilter>
-    with FilterExcecutor {
+    with FilterExecutor {
   late RootDescriptor _rootDescriptor;
   late FilterResult _filterResult;
   SearchQueryController? _controller;

@@ -53,32 +53,21 @@ class FuzzySearchEntryResult implements SearchResultEntry, FuzzySearchData {
   }
 }
 
-class IgnoreCaseSearchEntryResult extends SearchResultEntry
-    implements IgnoreCaseSearchData {
-  IgnoreCaseSearchEntryResult({
+class OverwrittenSearchEntryResult extends SearchResultEntry {
+  OverwrittenSearchEntryResult({
     required this.searchString,
-    required this.minCharsForMatch,
     required super.isMatch,
   });
 
-  @override
   final String searchString;
-  @override
-  final int minCharsForMatch;
-}
-
-class ExactMatchSearchEntryResult extends SearchResultEntry
-    implements ExactMatchSearchData {
-  ExactMatchSearchEntryResult({
-    required this.searchString,
-    required this.minCharsForMatch,
-    required super.isMatch,
-  });
 
   @override
-  final String searchString;
-  @override
-  final int minCharsForMatch;
+  String toString() {
+    return 'OverwrittenSearchEntryResult{'
+        'searchString: ${searchString.maxLength(50)}, '
+        'isMatch: $isMatch'
+        '}';
+  }
 }
 
 extension on String {

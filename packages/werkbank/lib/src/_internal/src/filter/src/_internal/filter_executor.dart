@@ -4,12 +4,13 @@ import 'package:werkbank/src/werkbank_internal.dart';
 
 const _printResults = false;
 
-mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
+mixin FilterExecutor<T extends StatefulWidget> on State<T> {
   FilterResult doFilter({
     required String searchQuery,
     required RootDescriptor rootDescriptor,
   }) {
-    final hasFilteringData = searchQuery.isNotEmpty;
+    final filterCommand = FilterCommand(searchQuery: searchQuery);
+    final hasFilteringData = filterCommand.searchQuery.isNotEmpty;
     if (!hasFilteringData) {
       return const FilterResult.notApplied();
     }
@@ -22,7 +23,6 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
         descendant: [
           ..._otherClustersFor(
             descendant,
-            searchQueryLength: searchQuery.length,
           ),
           if (descendant is UseCaseDescriptor)
             ...metadataMap[descendant]!.searchClusters,
@@ -32,7 +32,7 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
     if (_printResults) {
       debugPrint(
         '----------\n'
-        'searchQuery: $searchQuery\n'
+        '$filterCommand\n'
         '----------\n',
       );
     }
@@ -40,7 +40,7 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
     // These results represent if the descriptor itself has a match.
     final descriptorResultsWithoutRelatives = _calcDescriptorResults(
       clustersForDescriptors,
-      searchQuery,
+      filterCommand,
     );
 
     // These results represent if the descriptor has a matching relatives.
@@ -80,11 +80,11 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
 
   Map<Descriptor, DescriptorFilterResult> _calcDescriptorResults(
     Map<Descriptor, List<SearchCluster>> clustersForUseCases,
-    String searchQuery,
+    FilterCommand filterCommand,
   ) {
     final clusterResultsForUseCases = _calcClusterResults(
       clustersForUseCases,
-      searchQuery,
+      filterCommand,
     );
     final useCaseResults = _mapToUseCaseResult(clusterResultsForUseCases);
     return useCaseResults;
@@ -92,11 +92,13 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
 
   Map<Descriptor, List<SearchClusterResult>> _calcClusterResults(
     Map<Descriptor, List<SearchCluster>> clustersForUseCases,
-    String searchQuery,
+    FilterCommand filterCommand,
   ) {
     return clustersForUseCases.map((useCase, searchClusters) {
       final clusterResults = searchClusters.map((searchCluster) {
-        final clusterResult = searchCluster.evaluate(query: searchQuery);
+        final clusterResult = searchCluster.evaluate(
+          filterCommand: filterCommand,
+        );
         return clusterResult;
       }).toList();
 
@@ -198,9 +200,8 @@ void _askChildrenThanAddYourself(
 // The Choices for a useCase that are not due to searchEntries
 // but due to other features.
 List<SearchCluster> _otherClustersFor(
-  ChildDescriptor descriptor, {
-  required int searchQueryLength,
-}) {
+  ChildDescriptor descriptor,
+) {
   final node = descriptor.node;
   final nameWithSpaces = _withSpaces(node.name);
   final justTheUpperCaseChars = _justTheUpperCaseChars(node.name);
@@ -209,6 +210,7 @@ List<SearchCluster> _otherClustersFor(
     // Name of the UseCase
     SearchCluster(
       semanticDescription: 'Name of the ${descriptor.runtimeType}',
+      field: 'name',
       entries: [
         FuzzySearchEntry(
           // Name Of The Use Case

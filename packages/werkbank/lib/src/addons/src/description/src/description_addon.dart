@@ -75,7 +75,7 @@ class DescriptionAddon extends Addon {
       if (hasAnyDescription)
         InfoControlSection(
           id: 'description',
-          title: Text(context.sL10n.addons.description.about),
+          title: Text(context.sL10n.addons.description.description),
           children: [
             if (useCaseDescription != null)
               DescriptionSection(

@@ -102,7 +102,7 @@ addons:
     component: Component Description
     folder: Folder Description
     tags: Tags
-    about: About
+    description: Description
     links: External Links
   pageTransition:
     name: Page Transition

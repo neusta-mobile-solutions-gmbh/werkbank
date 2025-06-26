@@ -257,7 +257,7 @@ class TranslationsAddonsDescriptionEn {
 	String get component => 'Component Description';
 	String get folder => 'Folder Description';
 	String get tags => 'Tags';
-	String get about => 'About';
+	String get description => 'Description';
 	String get links => 'External Links';
 }
 
@@ -904,7 +904,7 @@ extension on Translations {
 			case 'addons.description.component': return 'Component Description';
 			case 'addons.description.folder': return 'Folder Description';
 			case 'addons.description.tags': return 'Tags';
-			case 'addons.description.about': return 'About';
+			case 'addons.description.description': return 'Description';
 			case 'addons.description.links': return 'External Links';
 			case 'addons.pageTransition.name': return 'Page Transition';
 			case 'addons.recentHistory.homePageComponentTitle': return 'Recently Visited';

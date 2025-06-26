@@ -5,9 +5,8 @@ import 'package:werkbank/src/werkbank_internal.dart';
 const _printResults = false;
 
 mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
-  String get searchQuery;
-
   FilterResult doFilter({
+    required String searchQuery,
     required RootDescriptor rootDescriptor,
   }) {
     final hasFilteringData = searchQuery.isNotEmpty;
@@ -41,6 +40,7 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
     // These results represent if the descriptor itself has a match.
     final descriptorResultsWithoutRelatives = _calcDescriptorResults(
       clustersForDescriptors,
+      searchQuery,
     );
 
     // These results represent if the descriptor has a matching relatives.
@@ -80,14 +80,19 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
 
   Map<Descriptor, DescriptorFilterResult> _calcDescriptorResults(
     Map<Descriptor, List<SearchCluster>> clustersForUseCases,
+    String searchQuery,
   ) {
-    final clusterResultsForUseCases = _calcClusterResults(clustersForUseCases);
+    final clusterResultsForUseCases = _calcClusterResults(
+      clustersForUseCases,
+      searchQuery,
+    );
     final useCaseResults = _mapToUseCaseResult(clusterResultsForUseCases);
     return useCaseResults;
   }
 
   Map<Descriptor, List<SearchClusterResult>> _calcClusterResults(
     Map<Descriptor, List<SearchCluster>> clustersForUseCases,
+    String searchQuery,
   ) {
     return clustersForUseCases.map((useCase, searchClusters) {
       final clusterResults = searchClusters.map((searchCluster) {

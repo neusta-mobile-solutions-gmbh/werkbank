@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/ignore_pointer_with_semantics.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_box_display.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_controller.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
@@ -89,7 +91,7 @@ class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
         SemanticsMonitor(
           controller: controller,
           onlyListenToIncluded: true,
-          child: IgnorePointer(
+          child: IgnorePointerWithSemantics(
             ignoring: isInspectionMode,
             child: widget.child,
           ),

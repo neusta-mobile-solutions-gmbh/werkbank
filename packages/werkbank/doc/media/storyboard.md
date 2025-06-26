@@ -46,6 +46,12 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 ### Use Cases
 - Prepare
   - Go to Inspect tab
+    - Sort sections:
+      - Description
+      - Tags
+      - External Links
+      - Color Picker
+      - Semantics Inspector
 - Start scrolled to top at overview
 - Scroll down and back up
 - Click on "Slider" use case in overview
@@ -55,10 +61,13 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Collapse "Fidget Spinner" folder
 - Click on "Pages" Folder
 - Click on Overview button
-- Type "Buton" with one "t" into the search to showcase fuzzy search
+- Type "butn" into the search to showcase fuzzy search
 - Visit Home page and show "Recently Visited" and "Recently Added"
 
 ### Knobs
+- Prepare
+  - Go to Configure tab
+    - Collapse Constraints but leave at top
 - Start on slider use case
 - Change slider value on slider
 - Change slider value in knobs
@@ -70,7 +79,7 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Set "Enabled" knob to false
 - Set "Tristate" to true
 - Set "Value" to null
-- Make right panel smaller until controls break to spacious layout
+- Make right panel a little larger and then smaller until controls break to spacious layout
 - Scroll slightly down
 - Select knob preset "Enabled, false"
 - Select knob preset "Enabled, null"
@@ -79,9 +88,10 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Select "Enabled, true"
 
 ### Constraints
-- Click on "RelaxationCard"
-- Adjust right panel larger until controls revert to compact layout
-- Collapse knobs section and expand constraints section
+- Prepare
+  - Go to Configure tab
+    - Collapse Knobs
+- Start on "RelaxationCard"
 - Change width via ruler back and forth and end at a size larger than 400
 - Set the min width via text field to 200
 - Move min constraints on both axes
@@ -89,8 +99,14 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Move size (both min and max) on both axes
 - End at size larger than the screen
 - Zoom out
+- Go to "Profile Page"
+- Switch through presets and zoom out when necessary
+  - Swap width and height after second preset
 
 ### Accessibility
+- Prepare
+  - Go to Inspect tab
+    - Move Semantics Inspector to top
 - Start on "MainPage"
 - Switch through tabs ending at profile
 - Go to inspect tab
@@ -103,12 +119,30 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Scroll down to "Active semantics node"
 - Switch selection between multiple nodes
 - Disable semantics inspector
+- Go to overview and scroll down
+- Go to settings and scroll to "Accessibility"
+- Play around with settings
 
-### Theme, Background
+### Theme, Background and Localization
+- Prepare
+  - Go to Settings tab
+- Start on Overview
+- Switch through themes and revert to initial
+- Switch through backgrounds in order:
+  - "Black"
+  - "Checkerboard"
+  - Back to "Use Case Default"
+- Go to "DatePickerDialog" via overview
+- Switch Locale to "de" and then back to "en"
 
 ### Customize Werkbank
-- TODO:
- - Resize panels
- - Reorder sections
- - Collapse sections
-- Switch to Werkbank to dark theme
+- Prepare
+  - Go to Settings tab
+- Start in Overview
+- Resize Right Panel such that the layout switches
+- Resize Left Panel and temporarily collapse it entirely
+- Go to focus mode and back
+- Toggle Werkbank theme to dark
+- Move Werkbank theme to top
+- Collapse Accessibility
+- Go to home page and scroll to shortcuts

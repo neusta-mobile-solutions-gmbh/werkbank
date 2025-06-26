@@ -22,7 +22,7 @@ ffmpeg -i in.mov -vcodec h264 -acodec aac output7.mp4
 ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_fmt rgb8 -r 10 output.gif
 ```
 
-## Readme Tour
+## Readme
 
 ### Preparations
 - Have Constraints section collapsed at top and knobs below
@@ -37,9 +37,29 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
   - Collapsed: Ordering, Hot Reload Effect, Page Transition
 
 ### Storyboard
+- Go to settings
+- Switch through all themes and end at dark
+- Change background to checkerboard
+- Move text scale factor
+- Go to home page and scroll down slowly
+
+### Use Cases
+- Prepare
+  - Go to Inspect tab
 - Start scrolled to top at overview
 - Scroll down and back up
-- Click on slider
+- Click on "Slider" use case in overview
+- Scroll down in tree
+- Click on "Switch" use case in tree
+- Click on "TextField" use case in tree
+- Collapse "Fidget Spinner" folder
+- Click on "Pages" Folder
+- Click on Overview button
+- Type "Buton" with one "t" into the search to showcase fuzzy search
+- Visit Home page and show "Recently Visited" and "Recently Added"
+
+### Knobs
+- Start on slider use case
 - Change slider value on slider
 - Change slider value in knobs
 - Toggle enabled off and on
@@ -57,7 +77,8 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Select knob preset "Disabled, true"
 - Go to knob preset overview
 - Select "Enabled, true"
-- Go to "Components" overview
+
+### Constraints
 - Click on "RelaxationCard"
 - Adjust right panel larger until controls revert to compact layout
 - Collapse knobs section and expand constraints section
@@ -68,8 +89,9 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Move size (both min and max) on both axes
 - End at size larger than the screen
 - Zoom out
-- Go to overview
-- Visit "MainPage"
+
+### Accessibility
+- Start on "MainPage"
 - Switch through tabs ending at profile
 - Go to inspect tab
 - Set semantics mode to "Overlay"
@@ -81,9 +103,12 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Scroll down to "Active semantics node"
 - Switch selection between multiple nodes
 - Disable semantics inspector
-- Go to settings
-- Switch through all themes and end at dark
-- Change background to checkerboard
-- Move text scale factor
+
+### Theme, Background
+
+### Customize Werkbank
+- TODO:
+ - Resize panels
+ - Reorder sections
+ - Collapse sections
 - Switch to Werkbank to dark theme
-- Go to home page and scroll down slowly

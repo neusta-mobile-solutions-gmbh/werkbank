@@ -24,6 +24,9 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 - **🔄 Hot Reload**
   - Update everything with just a hot reload.
 
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+</video>
+
 Werkbank has many more features. Here are some of the more advanced ones that make Werkbank special:
 
 - **📋 Knob Presets**

@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
-// ignore_for_file: avoid_print, avoid_slow_async_io
+// ignore_for_file: avoid_print, avoid_slow_async_io, lines_longer_than_80_chars
 
 /// Generates the ffmpeg command for video conversion
 String command(String input, String output) =>
+    // 'ffmpeg -i $input -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_fmt rgb8 -r 10 $output';
     'ffmpeg -i $input -vcodec h264 -acodec aac $output';
+
+String extension = 'mp4';
 
 void main() async {
   // Get the current directory
@@ -36,9 +39,14 @@ void main() async {
   for (final movFile in movFiles) {
     final fileName = p.basename(movFile.path);
     final baseName = p.basenameWithoutExtension(fileName);
-    final outputPath = p.join(outDir.path, '$baseName.mp4');
+    final outputPath = p.join(outDir.path, '$baseName.$extension');
+    final outFile = File(outputPath);
+    if (await outFile.exists()) {
+      print('Output file already exists: $outputPath');
+      continue; // Skip if output file already exists
+    }
 
-    print('Converting: $fileName -> $baseName.mp4');
+    print('Converting: $fileName -> $baseName.$extension');
 
     try {
       final cmd = command('"${movFile.path}"', '"$outputPath"');

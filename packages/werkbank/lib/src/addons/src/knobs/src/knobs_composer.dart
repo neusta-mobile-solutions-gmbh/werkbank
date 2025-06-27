@@ -19,6 +19,7 @@ extension KnobsComposerExtension on UseCaseComposer {
     addSearchCluster(
       SearchCluster(
         semanticDescription: 'Knob Preset $name',
+        field: 'kPreset',
         entries: [
           FuzzySearchEntry(searchString: preset.name),
         ],

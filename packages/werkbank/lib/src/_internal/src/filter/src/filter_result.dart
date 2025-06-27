@@ -22,15 +22,8 @@ class FilterResult {
 
   bool descriptorVisibleInTree(
     Descriptor descriptor,
-    // {
-    // required bool considerAncestors,
-    // }
   ) {
     if (!filterIsApplied) return true;
-
-    // if (!considerAncestors) {
-    //   return resultFor(descriptor)!.isMatch;
-    // }
 
     return resultFor(descriptor)!.isMatch;
   }

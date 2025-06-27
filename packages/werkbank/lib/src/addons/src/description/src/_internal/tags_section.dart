@@ -35,7 +35,7 @@ class Tag extends StatelessWidget {
       onPressed: () {
         WerkbankPersistence.maybeSearchQueryController(
           context,
-        )?.updateSearchQuery(tag);
+        )?.updateSearchQuery('${DescriptionAddon.tagField}:"$tag"');
       },
       label: Text(
         tag,

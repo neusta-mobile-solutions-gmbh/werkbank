@@ -26,6 +26,8 @@ dartdoc:
       markdown: doc/werkbank_components.md
     Writing Your Own Addons:
       markdown: doc/writing_your_own_addons.md
+    Search for Use Cases:
+      markdown: doc/search.md
   categoryOrder:
     - Welcome
     - Get Started
@@ -40,4 +42,5 @@ dartdoc:
     - Testing with Use Cases
     - Werkbank Components
     - Writing Your Own Addons
+    - Search for Use Cases
   showUndocumentedCategories: true

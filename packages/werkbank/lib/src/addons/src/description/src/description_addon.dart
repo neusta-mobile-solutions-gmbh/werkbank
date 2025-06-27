@@ -25,6 +25,8 @@ class DescriptionAddon extends Addon {
 
   static const addonId = 'description';
 
+  static const tagField = 'tag';
+
   @override
   List<HomePageComponent> buildHomePageComponents(BuildContext context) {
     final tags =

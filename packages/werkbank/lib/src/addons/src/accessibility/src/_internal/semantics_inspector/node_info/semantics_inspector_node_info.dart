@@ -150,6 +150,16 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
         ', ',
       ),
     );
+    addRawStringField(
+      'custom actions',
+      [
+        for (final customActionId
+            in data.customSemanticsActionIds ?? const Iterable<int>.empty())
+          CustomSemanticsAction.getAction(customActionId)?.label,
+      ].nonNulls.join(
+        ', ',
+      ),
+    );
 
     return fields;
   }

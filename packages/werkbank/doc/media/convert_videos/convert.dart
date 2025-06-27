@@ -9,10 +9,10 @@ import 'package:path/path.dart' as p;
   //   'ffmpeg -i $input -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_fmt rgb8 -r 10 $output',
   //   'gif',
   // );
-  return (
-    'ffmpeg -i $input -vcodec h264 -acodec aac $output',
-    'mp4',
-  );
+  // return (
+  //   'ffmpeg -i $input -vcodec h264 -acodec aac $output',
+  //   'mp4',
+  // );
   // return (
   //   'ffmpeg -i $input -vcodec libwebp -lossless 0  -compression_level 4 -loop 0 -an -vf fps=fps=30 $output',
   //   'webp',
@@ -23,10 +23,10 @@ import 'package:path/path.dart' as p;
   //   'webp',
   // );
   // Blurry but acceptable quality. Relatively large but not huge size.
-  // return (
-  //   'ffmpeg -i $input -vcodec libwebp -quality 50 -lossless 0 -loop 0 -an -vf fps=fps=10 -s 1280:720 $output',
-  //   'webp',
-  // );
+  return (
+    'ffmpeg -i $input -vcodec libwebp -quality 50 -lossless 0 -loop 0 -an -vf fps=fps=10 -s 1280:720 $output',
+    'webp',
+  );
 }
 
 void main() async {

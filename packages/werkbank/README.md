@@ -17,7 +17,7 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 - **Search** for use cases even with **typos** or **abbreviations**.
 - Browse **Recently Used** or **Recently Added** in the home page.
 - Categorize your use cases using **Tags**.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/4b270492-2b54-4d6c-bbf6-ce755372ff3f">
 </video>
 
 ### **🎛️ Knobs**
@@ -25,7 +25,7 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 - Define **knob presets** to configure predefined sets of values for your knobs and *view the widget in all its possible states* simultaneously using the overview.
 - There are knobs for most common types, like `double`, `int`, `bool`, `String`, `List<T>` etc. and their *nullable* counterparts.
 - There are even special knobs for **AnimationControllers** and **FocusNodes**.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/4510ff50-54f6-4322-85da-d4aa424da681">
 </video>
 
 ### **📏 Constraints**
@@ -34,21 +34,21 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 - Define **custom presets** for the constraints.
 - Or use predefined **device presets** for common device sizes.
 - Use the **zoom and pan gestures** to view use cases in sizes **larger than the viewport**.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/6a6d95b4-e0d4-4e24-9c28-d4dc4d169be0">
 </video>
 
 ### **♿ Accessibility**
 - Inspect the **semantic nodes** of your use cases and *all of their properties* using interactive semantics overlays.
 - Change **Text Scale** and **Bold Text** to test under different accessibility conditions.
 - Simulate **Color Blindness** to verify sufficient contrasts for all users.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/5f1495c5-8685-4549-a00e-04e9adc00064">
 </video>
 
 ### **🖼️ Theme, Background and Localization**
 - Change the **theme** of your use cases, even while viewing them in the overview.
 - Define **default backgrounds** for your use cases or select from **predefined background** to override the default ones.
 - Switch the **locale** used by your use cases.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/9481f912-3dd8-4b72-ba3f-5955495ea979">
 </video>
 
 ### **🛠 Customize your Werkbank**
@@ -56,7 +56,7 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 - Enter a **focus mode** for no distractions.
 - Toggle between **light mode** and **dark mode** of your Werkbank.
 - **Reorder** and **collapse panels**  to prioritize the ones you need most.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/379b3d2d-f75e-4f4e-b70b-7f31d1fa4fab">
 </video>
 
 ### **And much more!**

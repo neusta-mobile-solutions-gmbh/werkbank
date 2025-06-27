@@ -1,66 +1,61 @@
-> [!CAUTION]
-> This topic is under construction.
+# Search in Werkbank
 
-# Searching for UseCases
+Werkbank provides a search feature in the navigation panel, making it easy to find specific Use Cases, Components, or Folders (WerkbankNodes) within your WerkbankSections. It does more than a simple text search and keeps the familiar tree structure—only hiding nodes that do not match your query. The search is designed to be flexible and extensible, so you can quickly find what you are looking for—even in large projects.
 
-You may have noticed, Werkbank has a Search-Feature in it's Navigation-Panel. It can be used to find a specific UseCase, Component or Folder (WerkbankNodes) of your WerkbankSections. But it is not just a plain test WerkbankNode-Search.
+## How Search Works
 
-While searching, the WerkbankSection Tree-Structure stays the same. Just the mismatches get filtered out.
+By default, search is fuzzy and case-insensitive. You can search for:
 
-Searching by default it fuzzy, and you can search for UseCase/Component/Folder-Names, Tags, Descriptions, Constraints names Names, and Knob Preset names for now.
+- Use Case, Component, or Folder names
+- Tags
+- Descriptions
+- Constraint Preset names
+- Knob Preset names
 
-This is due to adding things to Werkbank that can be searched for is easy. There is an API for that. See [here](#adding-something-searchable-to-werkbank-yourself).
+Adding new searchable fields is straightforward—see [Adding Custom Search Fields](#adding-custom-search-fields) below.
 
-## Advances search
+## Advanced Search
 
-However when dealing with very many WerkbankNodes, finding what you are looking for becomes harder. We have implemented some feature to help out with that.
+As your Werkbank grows, finding the right node can become challenging. Werkbank supports advanced search syntax to help you narrow down results:
 
-For example, you can search for tags only by writing something like this
+- **Field-specific search:**
+  - General: `<field>:fuzzy text`
+  - Example: `tag:button`
+- **Exact search:**
+  - General: `"precise text search"`
+- **Combine both:**
+  - General: `<field>:"precise text"`
+  - Example: `desc:"hot reload"`
 
-- General: `<field>:fuzzy text`
-- Tag Example: `tag:button`
+### Supported Fields
 
-You can also override the default fuzzy-search behavior and do a more percise search, that is still case-insensitive for convinience.
+You can target the following fields in your search:
 
-- General: `"persice text search"`
+- `name` — Use Case, Component, or Folder name
+- `tag` — Tag
+- `desc` — Description
+- `cPreset` — Constraint Preset name
+- `kPreset` — Knob Preset name
 
-And you can also combine those features.
+## Adding Custom Search Fields
 
-- General: `<field>:"persice text"`
-- Tag Example: `desc:"hot reload"`
+Werkbank’s Addon API lets you extend the search to custom fields. You can add SearchClusters and SearchEntries to any WerkbankNode, making them discoverable via search.
 
-### All defined fields
-
-Fields you can search for are
-
-- UseCase/Component/Folder-Name `name`
-- Tag: `tag`
-- Description `desc`
-- Constraints Preset name `cPreset`
-- Knob Preset name `kPreset`
-
-
-## Adding something searchable to Werkbank yourself
-
-Our Addon-API enables you to add SearchClusters and SearchEntries to Werkbank. to make searching for affected WerkbankNodes possible.
-
-This for example
+For example, to make tags searchable:
 
 ```dart
 extension TagsComposerExtension on UseCaseComposer {
   void tags(List<String> tags) {
-    // [...]
+    // ...
     addSearchCluster(
       SearchCluster(
         semanticDescription: 'Tag',
         field: DescriptionAddon.tagField,
         entries: tags
-            .map(
-              (tag) => FuzzySearchEntry(
-                searchString: tag,
-                ignoreCase: true,
-              ),
-            )
+            .map((tag) => FuzzySearchEntry(
+                  searchString: tag,
+                  ignoreCase: true,
+                ))
             .toList(),
       ),
     );
@@ -68,13 +63,6 @@ extension TagsComposerExtension on UseCaseComposer {
 }
 ```
 
-demonstrates how tags are added to our Search API. This gets executed when you call `c.tags(['some', 'words'])` with the `UseCaseComposer c`;
+This extension allows you to call `c.tags(['some', 'words'])` in your UseCaseComposer. Each tag becomes a searchable entry.
 
-Now what is happening here.
-
-1. Add a `SearchCluster` to a WerkbankNode to add something, that can be searched for.
-  - Give it meaning be setting `semanticDescription`.
-  - Define what the user has to use for `field` to make use of the advanced search feature
-
-2. Add the actual `SearchEntries` to the cluster. In many cases, this will just be one. Each entry holds one searchstring, than can actually be searched for. For our example each tag the WerkbankNode has, can be used to find it. And using `scoreThreshold` and and `ignoreCase` you can fine-tune how easy or hard it is to find that exact SearchEntry, leading to the SearchCluster, leading to it's WerkbankNode, for example its `UseCase`. You could also implement your own SearchEntry if your not happy with its Fuzzy Behavior.
-
+See `SearchCluster` and `SearchEntry` to learn more about how to use them.

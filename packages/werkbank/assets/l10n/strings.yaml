@@ -99,10 +99,11 @@ addons:
           colorCopied: Hex Code copied to clipboard
           pickedColor: Picked Color
   description:
-    component: Component Description
-    folder: Folder Description
+    component: $name (Component)
+    folder: $name (Folder)
+    sections: (Sections)
     tags: Tags
-    about: About
+    description: Description
     links: External Links
   pageTransition:
     name: Page Transition

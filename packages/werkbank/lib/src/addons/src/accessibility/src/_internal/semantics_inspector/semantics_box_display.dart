@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantic_data_summary.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector.dart';
@@ -24,7 +25,14 @@ class SemanticsBoxDisplay extends StatelessWidget {
     );
     // TODO(lzuttermeister): Can we replace this with a GestureDetector somehow?
     return Listener(
-      onPointerDown: onTap == null ? null : (_) => onTap?.call(),
+      onPointerDown: onTap == null
+          ? null
+          : (e) {
+              if (e.buttons != kPrimaryButton) {
+                return;
+              }
+              onTap?.call();
+            },
       behavior: HitTestBehavior.translucent,
       child: IgnorePointer(
         child: AnimatedContainer(
@@ -32,7 +40,9 @@ class SemanticsBoxDisplay extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             border: Border.all(
-              color: SemanticsInspector.colorForSemanticsNodeId(displayData.id),
+              color: SemanticsInspector.colorForSemanticsNodeId(
+                displayData.id,
+              ),
               width: displayData.isActive ? 3 : 1,
             ),
             color: Colors.white.withValues(alpha: 0.25),

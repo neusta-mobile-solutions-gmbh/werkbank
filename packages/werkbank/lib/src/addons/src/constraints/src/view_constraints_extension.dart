@@ -127,7 +127,7 @@ extension ViewConstraintsExtension on ViewConstraintsComposer {
           )
       ..addSearchCluster(
         SearchCluster(
-          semanticDescription: 'Constraints $name',
+          semanticDescription: 'Constraints Preset $name',
           field: 'cPreset',
           entries: [
             FuzzySearchEntry(searchString: name),

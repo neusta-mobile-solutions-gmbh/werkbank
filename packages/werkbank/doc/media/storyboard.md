@@ -15,12 +15,7 @@ runApp(
 ```
 - Scale the right panel as small as it can be without breaking entries into the spacious layout.
 - Scale the left panel as large as it can be such that the overview has three columns.
-  - Leave a little wiggle room so that the right panel can be easily resized without affecting the overview. 
-- Convert
-```
-ffmpeg -i in.mov -vcodec h264 -acodec aac output.mp4
-ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_fmt rgb8 -r 10 output.gif
-```
+  - Leave a little wiggle room so that the right panel can be easily resized without affecting the overview.
 
 ## Readme
 
@@ -63,7 +58,9 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Click on "Profile Page" use case
 - Click on Overview button
 - Type "butn" into the search to showcase fuzzy search
-- Visit Home page and show "Recently Visited" and "Recently Added"
+- Visit Home page and show "Recently Visited", "Recently Added" and tags
+- Click on "Input" tag and visit overview
+- Clear search
 
 ### Knobs
 - Prepare
@@ -146,4 +143,3 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Toggle Werkbank theme to dark
 - Move Werkbank theme to top
 - Collapse Accessibility
-- Go to home page and scroll to shortcuts

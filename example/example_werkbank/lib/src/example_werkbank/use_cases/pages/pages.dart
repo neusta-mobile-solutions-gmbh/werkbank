@@ -8,7 +8,7 @@ WerkbankFolder get pagesFolder => WerkbankFolder(
   name: 'Pages',
   builder: (c) {
     c.description('A page.');
-    c.background.named('None');
+    c.background.named('Checkerboard');
     c.constraints.devicePresets();
     c.overview
       ..minimumSize(width: 350, height: 350)

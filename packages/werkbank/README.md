@@ -9,42 +9,69 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 > Werkbank is feature-rich but still evolving. Documentation is incomplete and APIs may change before the stable release.
 
 ## Features
-- **🧩 Use Cases**
-  - Write use cases for your UI components and view and test them in isolation.
-- **🖼️ Overview**
-  - Visually navigate use cases in a grid overview that shows *thumbnails* of your widgets, updating in real time.
-- **🎛️ Knobs**
-  - Configure your use case widgets using knobs that control your widget and *can be controlled by your widget* at the same time.
-- **🔍 Zoom and Pan**
-  - Navigate your use cases using Figma-like zoom and pan gestures.
-- **📏 Constraints**
-  - Interactively change the `BoxConstraints` passed to your widgets and see how your widgets react to different sizes.
-- **🧐 Semantics**
-  - Inspect the semantic nodes of your use cases and *all of their properties* using interactive semantics overlays.
-- **🔄 Hot Reload**
-  - Update everything with just a hot reload.
 
+### **🧩 Use Cases**
+- Write use cases for your UI components and view and test them in isolation.
+- Visually navigate use cases in a grid **overview** that shows thumbnails of your widgets, updating in real time.
+- Sort them in a **tree hierarchy** and navigate them using it.
+- **Search** for use cases even with **typos** or **abbreviations**.
+- Browse **Recently Used** or **Recently Added** in the home page.
+- Categorize your use cases using **Tags**.
 <video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
 </video>
 
-Werkbank has many more features. Here are some of the more advanced ones that make Werkbank special:
+### **🎛️ Knobs**
+- Configure your use case widgets using knobs that control your widget and *can be controlled by your widget* at the same time.
+- Define **knob presets** to configure predefined sets of values for your knobs and *view the widget in all its possible states* simultaneously using the overview.
+- There are knobs for most common types, like `double`, `int`, `bool`, `String`, `List<T>` etc. and their *nullable* counterparts.
+- There are even special knobs for **AnimationControllers** and **FocusNodes**.
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+</video>
 
-- **📋 Knob Presets**
-  - Define knob presets to configure predefined sets of values for your knobs and *view the widget in all its possible states* simultaneously using the overview.
-- **🎨 Theme and Locale**
-  - Control the theme and locale of your use cases to test them under different conditions.
-- **🖼️ Backgrounds**
-  - Define individual backgrounds for your use cases or select from predefined ones.
+### **📏 Constraints**
+- **Interactively change** the `BoxConstraints` passed to your widgets and see how your widgets react to different sizes.
+- Or change the constraints more **precisely using input fields**.
+- Define **custom presets** for the constraints.
+- Or use predefined **device presets** for common device sizes.
+- Use the **zoom and pan gestures** to view use cases in sizes **larger than the viewport**.
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+</video>
+
+### **♿ Accessibility**
+- Inspect the **semantic nodes** of your use cases and *all of their properties* using interactive semantics overlays.
+- Change **Text Scale** and **Bold Text** to test under different accessibility conditions.
+- Simulate **Color Blindness** to verify sufficient contrasts for all users.
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+</video>
+
+### **🖼️ Theme, Background and Localization**
+- Change the **theme** of your use cases, even while viewing them in the overview.
+- Define **default backgrounds** for your use cases or select from **predefined background** to override the default ones.
+- Switch the **locale** used by your use cases.
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+</video>
+
+### **🛠 Customize your Werkbank**
+- **Resize** or **collapse** panels.
+- Enter a **focus mode** for no distractions.
+- Toggle between **light mode** and **dark mode** of your Werkbank.
+- **Reorder** and **collapse panels**  to prioritize the ones you need most.
+<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/501685b9-cf81-49e0-b6c2-c4c0136cccb5">
+</video>
+
+### **And much more!**
+- **🔍 Zoom and Pan**
+  - Navigate your use cases using Figma-like zoom and pan gestures.
 - **🏷️ Metadata**
   - Augment use cases with metadata such as descriptions, tags, and URLs.
-- **📂 Folders**
-  - Organize your use cases into folders and define many properties on the folders to apply to all contained use cases.
 - **🧪 Tests**
   - Use your use cases for golden tests and widget tests by displaying them without the UI of Werkbank.
 - **🛠️ Addons**
   - Create your own Addons using the *extremely powerful Addon API*, which is also used to implement knobs, constraints selection, semantics inspection, and much more.
 - **🌐 Deployment**
   - Deploy your Werkbank using Flutter's web support to share it with your team and use it for *design reviews*.
+- **🔄 Hot Reload**
+  - Update everything with just a hot reload.
 
 ## Writing Use Cases
 To get a rough idea of how use cases are written, take a look at the following example.

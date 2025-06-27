@@ -1,6 +1,6 @@
-# Search in Werkbank
+# Search for Use Cases, Component or Folders
 
-Werkbank provides a search feature in the navigation panel, making it easy to find specific Use Cases, Components, or Folders (WerkbankNodes) within your WerkbankSections. It does more than a simple text search and keeps the familiar tree structure—only hiding nodes that do not match your query. The search is designed to be flexible and extensible, so you can quickly find what you are looking for—even in large projects.
+Werkbank provides a search feature in the navigation panel, helping to find specific Use Cases, Components, or Folders ([WerkbankNode](../werkbank/WerkbankNode-class.html)'s) within your [WerkbankSections](../werkbank/WerkbankSections-class.html). It does more than a simple text search and keeps the familiar tree structure, only hiding nodes that do not match your query. The search is designed to be flexible and extensible.
 
 ## How Search Works
 
@@ -12,7 +12,7 @@ By default, search is fuzzy and case-insensitive. You can search for:
 - Constraint Preset names
 - Knob Preset names
 
-Adding new searchable fields is straightforward—see [Adding Custom Search Fields](#adding-custom-search-fields) below.
+Adding new searchable fields is straightforward. See [Adding Custom Search Entries](#adding-custom-search-entries) below.
 
 ## Advanced Search
 
@@ -37,11 +37,11 @@ You can target the following fields in your search:
 - `cPreset` — Constraint Preset name
 - `kPreset` — Knob Preset name
 
-## Adding Custom Search Fields
+## Adding Custom Search Entries
 
-Werkbank’s Addon API lets you extend the search to custom fields. You can add SearchClusters and SearchEntries to any WerkbankNode, making them discoverable via search.
+Werkbank’s Addon API lets you extend the search to custom [SearchEntries](../werkbank/SearchEntry-class.html). You can add a [SearchCluster](../werkbank/SearchCluster-class.html) with [SearchEntries](../werkbank/SearchEntry-class.html) to the [UseCaseComposition](../werkbank/UseCaseComposition-class.html) of any [WerkbankNode](../werkbank/WerkbankNode-class.html), making them discoverable via search.
 
-For example, to make tags searchable:
+For example, tags are searchable using this implementation:
 
 ```dart
 extension TagsComposerExtension on UseCaseComposer {
@@ -63,6 +63,8 @@ extension TagsComposerExtension on UseCaseComposer {
 }
 ```
 
-This extension allows you to call `c.tags(['some', 'words'])` in your UseCaseComposer. Each tag becomes a searchable entry.
+This allows you to call `c.tags(['some', 'words'])` on [UseCaseComposer](../werkbank/UseCaseComposer-class.html). Each tag becomes a searchable entry.
 
-See `SearchCluster` and `SearchEntry` to learn more about how to use them.
+> [!Note]
+> All [SearchCluster's](../werkbank/SearchCluster-class.html) must be setup during composing the Use Cases. Thats why `addSearchCluster` is called on [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
+

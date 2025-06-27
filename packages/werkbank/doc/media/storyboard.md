@@ -18,7 +18,7 @@ runApp(
   - Leave a little wiggle room so that the right panel can be easily resized without affecting the overview. 
 - Convert
 ```
-ffmpeg -i in.mov -vcodec h264 -acodec aac output7.mp4
+ffmpeg -i in.mov -vcodec h264 -acodec aac output.mp4
 ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_fmt rgb8 -r 10 output.gif
 ```
 
@@ -60,6 +60,7 @@ ffmpeg -i in.mov -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_f
 - Click on "TextField" use case in tree
 - Collapse "Fidget Spinner" folder
 - Click on "Pages" Folder
+- Click on "Profile Page" use case
 - Click on Overview button
 - Type "butn" into the search to showcase fuzzy search
 - Visit Home page and show "Recently Visited" and "Recently Added"

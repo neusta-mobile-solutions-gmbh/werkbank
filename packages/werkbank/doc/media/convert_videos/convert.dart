@@ -4,11 +4,31 @@ import 'package:path/path.dart' as p;
 // ignore_for_file: avoid_print, avoid_slow_async_io, lines_longer_than_80_chars
 
 /// Generates the ffmpeg command for video conversion
-String command(String input, String output) =>
-    // 'ffmpeg -i $input -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_fmt rgb8 -r 10 $output';
-    'ffmpeg -i $input -vcodec h264 -acodec aac $output';
+(String, String) command(String input, String output) {
+  // return (
+  //   'ffmpeg -i $input -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_fmt rgb8 -r 10 $output',
+  //   'gif',
+  // );
+  // return (
+  //   'ffmpeg -i $input -vcodec h264 -acodec aac $output',
+  //   'mp4',
+  // );
+  // return (
+  //   'ffmpeg -i $input -vcodec libwebp -lossless 0  -compression_level 4 -loop 0 -an -vf fps=fps=30 $output',
+  //   'webp',
+  // );
+  // Better than gif and similar size
+  // return (
+  //   'ffmpeg -i $input -vcodec libwebp -lossless 0 -loop 0 -an -vf fps=fps=10 -s 960:540 $output',
+  //   'webp',
+  // );
+  return (
+    'ffmpeg -i $input -vcodec libwebp -quality 50 -lossless 0 -loop 0 -an -vf fps=fps=10 -s 1280:720 $output',
+    'webp',
+  );
+}
 
-String extension = 'mp4';
+String extension = 'webp';
 
 void main() async {
   // Get the current directory
@@ -39,7 +59,11 @@ void main() async {
   for (final movFile in movFiles) {
     final fileName = p.basename(movFile.path);
     final baseName = p.basenameWithoutExtension(fileName);
+
+    final extension = command('', '').$2;
     final outputPath = p.join(outDir.path, '$baseName.$extension');
+    // Hacky to call "command" twice but whatever :)
+    final cmd = command('"${movFile.path}"', '"$outputPath"').$1;
     final outFile = File(outputPath);
     if (await outFile.exists()) {
       print('Output file already exists: $outputPath');
@@ -49,7 +73,6 @@ void main() async {
     print('Converting: $fileName -> $baseName.$extension');
 
     try {
-      final cmd = command('"${movFile.path}"', '"$outputPath"');
       print('Executing: $cmd');
 
       final result = await Process.run('sh', ['-c', cmd]);
@@ -58,6 +81,7 @@ void main() async {
         print('Error: ${result.stderr}');
       } else {
         print('Successfully converted $fileName');
+        print(result.stdout);
       }
     } catch (e) {
       print('Exception while converting $fileName: $e');

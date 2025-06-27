@@ -2,11 +2,16 @@ import 'package:fuzzy/bitap/bitap.dart';
 import 'package:fuzzy/data/fuzzy_options.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
-sealed class SearchEntry {
+/// {@category Search for Use Cases}
+abstract class SearchEntry {
+  const SearchEntry({required this.searchString});
+
   SearchResultEntry evaluate(
     FilterCommand filterCommand,
     SearchCluster parentCluster,
   );
+
+  final String searchString;
 }
 
 abstract class FuzzySearchData {
@@ -27,7 +32,8 @@ abstract class FuzzySearchData {
   final bool ignoreCase;
 }
 
-class FuzzySearchEntry extends SearchEntry implements FuzzySearchData {
+/// {@category Search for Use Cases}
+class FuzzySearchEntry implements SearchEntry, FuzzySearchData {
   FuzzySearchEntry({
     required this.searchString,
     this.scoreThreshold = .4,

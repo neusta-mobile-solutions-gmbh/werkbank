@@ -21,6 +21,7 @@ abstract class SearchClusterFoundation {
   final String field;
 }
 
+/// {@category Search for Use Cases}
 class SearchCluster extends SearchClusterFoundation {
   SearchCluster({
     required this.entries,

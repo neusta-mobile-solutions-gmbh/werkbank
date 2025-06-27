@@ -65,7 +65,7 @@ class _DraggableRegionState extends State<DraggableRegion> {
             : widget.accelerationAndDirection.dy == 0
             ? SystemMouseCursors.resizeLeftRight
             // Apperently, macos does not include a resizeUpLeftDownRight
-            // cursor. Using percise as a fallback.
+            // cursor. Using precise as a fallback.
             : SystemMouseCursors.precise,
         /* TODO(lzuttermeister): These dividers should not be thicker visually.
              This is just temporary so that the drag area is large enough. */

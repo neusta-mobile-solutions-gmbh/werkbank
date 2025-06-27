@@ -4,7 +4,7 @@ import 'package:werkbank/src/_internal/src/filter/src/filter_command.dart';
 void _expectInvalidFor(String searchQuery, FilterCommand command) {
   expect(command.searchQuery, equals(searchQuery));
   expect(command.field, isNull);
-  expect(command.percise, isFalse);
+  expect(command.precise, isFalse);
   expect(command.patternInvalid, isTrue);
 }
 
@@ -16,7 +16,7 @@ void main() {
 
         expect(command.searchQuery, equals('test'));
         expect(command.field, isNull);
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -25,7 +25,7 @@ void main() {
 
         expect(command.searchQuery, equals(''));
         expect(command.field, isNull);
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -34,7 +34,7 @@ void main() {
 
         expect(command.searchQuery, equals('hello world'));
         expect(command.field, isNull);
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
     });
@@ -45,7 +45,7 @@ void main() {
 
         expect(command.searchQuery, equals('exact phrase'));
         expect(command.field, isNull);
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -54,7 +54,7 @@ void main() {
 
         expect(command.searchQuery, equals('test'));
         expect(command.field, isNull);
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -63,7 +63,7 @@ void main() {
 
         expect(command.searchQuery, equals(''));
         expect(command.field, isNull);
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -74,7 +74,7 @@ void main() {
 
         expect(command.searchQuery, equals('unclosed'));
         expect(command.field, equals('field'));
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
     });
@@ -85,7 +85,7 @@ void main() {
 
         expect(command.searchQuery, equals('flutter'));
         expect(command.field, equals('tag'));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -94,7 +94,7 @@ void main() {
 
         expect(command.searchQuery, equals('flutter widget'));
         expect(command.field, equals('desc'));
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -103,7 +103,7 @@ void main() {
 
         expect(command.searchQuery, equals(''));
         expect(command.field, equals('tag'));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -112,7 +112,7 @@ void main() {
 
         expect(command.searchQuery, equals(''));
         expect(command.field, equals('category'));
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -121,7 +121,7 @@ void main() {
 
         expect(command.searchQuery, equals('value'));
         expect(command.field, equals('field_name'));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
     });
@@ -170,7 +170,7 @@ void main() {
 
         expect(command.searchQuery, equals(''));
         expect(command.field, equals(''));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -181,7 +181,7 @@ void main() {
 
         expect(command.searchQuery, equals(''));
         expect(command.field, isNull);
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -204,7 +204,7 @@ void main() {
 
         expect(command.searchQuery, equals(r'test@#$%^&*()'));
         expect(command.field, isNull);
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -213,7 +213,7 @@ void main() {
 
         expect(command.searchQuery, equals('üöäß'));
         expect(command.field, isNull);
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -224,7 +224,7 @@ void main() {
 
         expect(command.searchQuery, equals('Schöne Übung'));
         expect(command.field, equals('beschreibung'));
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
     });
@@ -235,7 +235,7 @@ void main() {
 
         expect(command.searchQuery, equals('flutter'));
         expect(command.field, equals('tag'));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -244,7 +244,7 @@ void main() {
 
         expect(command.searchQuery, equals('custom widget'));
         expect(command.field, equals('desc'));
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -253,7 +253,7 @@ void main() {
 
         expect(command.searchQuery, equals('button'));
         expect(command.field, equals('title'));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -262,7 +262,7 @@ void main() {
 
         expect(command.searchQuery, equals('User Interface'));
         expect(command.field, equals('category'));
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
     });
@@ -279,7 +279,7 @@ void main() {
 
         expect(command.searchQuery, equals('value'));
         expect(command.field, equals('tag '));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -296,7 +296,7 @@ void main() {
 
         expect(command.searchQuery, equals('value'));
         expect(command.field, equals('CamelCase'));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -305,7 +305,7 @@ void main() {
 
         expect(command.searchQuery, equals('test'));
         expect(command.field, equals('field123'));
-        expect(command.percise, isFalse);
+        expect(command.precise, isFalse);
         expect(command.patternInvalid, isFalse);
       });
 
@@ -314,7 +314,7 @@ void main() {
 
         expect(command.searchQuery, equals(''));
         expect(command.field, equals('status'));
-        expect(command.percise, isTrue);
+        expect(command.precise, isTrue);
         expect(command.patternInvalid, isFalse);
       });
     });

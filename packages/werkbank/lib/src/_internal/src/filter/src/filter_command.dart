@@ -11,20 +11,20 @@ class FilterCommand
   FilterCommand._({
     required this.searchQuery,
     this.field,
-    this.percise = false,
+    this.precise = false,
     this.patternInvalid = false,
   });
 
   final String searchQuery;
   final String? field;
-  final bool percise;
+  final bool precise;
   final bool patternInvalid;
 
   @override
   List<Object?> get props => [
     searchQuery,
     field,
-    percise,
+    precise,
     patternInvalid,
   ];
 }
@@ -105,6 +105,6 @@ FilterCommand _parse(String searchQuery) {
   return FilterCommand._(
     searchQuery: actualSearchQuery,
     field: field,
-    percise: true,
+    precise: true,
   );
 }

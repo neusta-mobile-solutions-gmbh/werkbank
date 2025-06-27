@@ -61,7 +61,7 @@ class FuzzySearchEntry extends SearchEntry implements FuzzySearchData {
       );
     }
 
-    if (filterCommand.percise) {
+    if (filterCommand.precise) {
       return OverwrittenSearchEntryResult(
         searchString: searchString,
         isMatch: _ignoreCaseMatch(filterCommand, searchString),

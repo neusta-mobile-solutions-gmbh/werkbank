@@ -2,8 +2,16 @@ import 'package:fuzzy/bitap/bitap.dart';
 import 'package:fuzzy/data/fuzzy_options.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
-sealed class SearchEntry {
-  SearchResultEntry evaluate(String query);
+/// {@category Search for Use Cases}
+abstract class SearchEntry {
+  const SearchEntry({required this.searchString});
+
+  SearchResultEntry evaluate(
+    FilterCommand filterCommand,
+    SearchCluster parentCluster,
+  );
+
+  final String searchString;
 }
 
 abstract class FuzzySearchData {
@@ -24,7 +32,8 @@ abstract class FuzzySearchData {
   final bool ignoreCase;
 }
 
-class FuzzySearchEntry extends SearchEntry implements FuzzySearchData {
+/// {@category Search for Use Cases}
+class FuzzySearchEntry implements SearchEntry, FuzzySearchData {
   FuzzySearchEntry({
     required this.searchString,
     this.scoreThreshold = .4,
@@ -44,9 +53,31 @@ class FuzzySearchEntry extends SearchEntry implements FuzzySearchData {
   final bool ignoreCase;
 
   @override
-  SearchResultEntry evaluate(String query) {
+  SearchResultEntry evaluate(
+    FilterCommand filterCommand,
+    SearchCluster parentCluster,
+  ) {
+    final fieldMismatch =
+        filterCommand.field != null &&
+        filterCommand.field != parentCluster.field;
+    if (fieldMismatch || filterCommand.patternInvalid) {
+      return OverwrittenSearchEntryResult(
+        searchString: searchString,
+        isMatch: false,
+      );
+    }
+
+    if (filterCommand.precise) {
+      return OverwrittenSearchEntryResult(
+        searchString: searchString,
+        isMatch: _ignoreCaseMatch(filterCommand, searchString),
+      );
+    }
+
+    // Default case
+
     final bitap = Bitap(
-      query,
+      filterCommand.searchQuery,
       options: FuzzyOptions(
         threshold: scoreThreshold,
         isCaseSensitive: !ignoreCase,
@@ -65,73 +96,8 @@ class FuzzySearchEntry extends SearchEntry implements FuzzySearchData {
   }
 }
 
-abstract class IgnoreCaseSearchData {
-  IgnoreCaseSearchData({
-    required this.searchString,
-    required this.minCharsForMatch,
-  });
-
-  final String searchString;
-  final int minCharsForMatch;
-}
-
-class IgnoreCaseSearchEntry extends SearchEntry
-    implements IgnoreCaseSearchData {
-  IgnoreCaseSearchEntry({
-    required this.searchString,
-    this.minCharsForMatch = 3,
-  });
-
-  @override
-  final String searchString;
-  @override
-  final int minCharsForMatch;
-
-  @override
-  SearchResultEntry evaluate(String query) {
-    final ignoreCaseMatch =
-        query.length >= minCharsForMatch &&
-        searchString.toLowerCase().contains(query.toLowerCase());
-
-    return IgnoreCaseSearchEntryResult(
-      searchString: searchString,
-      minCharsForMatch: minCharsForMatch,
-      isMatch: ignoreCaseMatch,
+bool _ignoreCaseMatch(FilterCommand filterCommand, String searchString) =>
+    filterCommand.searchQuery.isNotEmpty &&
+    searchString.toLowerCase().contains(
+      filterCommand.searchQuery.toLowerCase(),
     );
-  }
-}
-
-class ExactMatchSearchData {
-  ExactMatchSearchData({
-    required this.searchString,
-    required this.minCharsForMatch,
-  });
-
-  final String searchString;
-  final int minCharsForMatch;
-}
-
-class ExactMatchSearchEntry extends SearchEntry
-    implements ExactMatchSearchData {
-  ExactMatchSearchEntry({
-    required this.searchString,
-    this.minCharsForMatch = 3,
-  });
-
-  @override
-  final String searchString;
-  @override
-  final int minCharsForMatch;
-
-  @override
-  SearchResultEntry evaluate(String query) {
-    final exactMatch =
-        query.length >= minCharsForMatch && searchString.contains(query);
-
-    return ExactMatchSearchEntryResult(
-      searchString: searchString,
-      minCharsForMatch: minCharsForMatch,
-      isMatch: exactMatch,
-    );
-  }
-}

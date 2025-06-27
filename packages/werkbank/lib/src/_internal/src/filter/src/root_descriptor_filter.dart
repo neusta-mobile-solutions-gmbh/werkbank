@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/filter/src/_internal/filter_executor.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
 class RootDescriptorFilter extends StatefulWidget {
@@ -10,22 +11,14 @@ class RootDescriptorFilter extends StatefulWidget {
   final Widget child;
 
   @override
-  State<RootDescriptorFilter> createState() => _RootDescripatorArrangerState();
+  State<RootDescriptorFilter> createState() => _RootDescriptorArrangerState();
 }
 
-class _RootDescripatorArrangerState extends State<RootDescriptorFilter>
-    with FilterExcecutor {
+class _RootDescriptorArrangerState extends State<RootDescriptorFilter>
+    with FilterExecutor {
   late RootDescriptor _rootDescriptor;
   late FilterResult _filterResult;
   SearchQueryController? _controller;
-
-  @override
-  String get searchQuery => _controller?.query ?? '';
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
@@ -40,8 +33,11 @@ class _RootDescripatorArrangerState extends State<RootDescriptorFilter>
   }
 
   void onChange() {
+    final searchQuery = _controller?.query ?? '';
+
     setState(() {
       _filterResult = doFilter(
+        searchQuery: searchQuery,
         rootDescriptor: _rootDescriptor,
       );
     });

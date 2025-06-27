@@ -2,6 +2,7 @@ import 'package:werkbank/src/werkbank_internal.dart';
 
 typedef Score = double;
 
+/// {@category Search for Use Cases}
 abstract class SearchResult {
   SearchResult({
     required this.isMatch,
@@ -10,7 +11,8 @@ abstract class SearchResult {
   final bool isMatch;
 }
 
-sealed class SearchResultEntry {
+/// {@category Search for Use Cases}
+abstract class SearchResultEntry {
   SearchResultEntry({
     required this.isMatch,
   });
@@ -18,6 +20,7 @@ sealed class SearchResultEntry {
   final bool isMatch;
 }
 
+/// {@category Search for Use Cases}
 class FuzzySearchEntryResult implements SearchResultEntry, FuzzySearchData {
   FuzzySearchEntryResult({
     required this.isMatch,
@@ -53,32 +56,21 @@ class FuzzySearchEntryResult implements SearchResultEntry, FuzzySearchData {
   }
 }
 
-class IgnoreCaseSearchEntryResult extends SearchResultEntry
-    implements IgnoreCaseSearchData {
-  IgnoreCaseSearchEntryResult({
+class OverwrittenSearchEntryResult extends SearchResultEntry {
+  OverwrittenSearchEntryResult({
     required this.searchString,
-    required this.minCharsForMatch,
     required super.isMatch,
   });
 
-  @override
   final String searchString;
-  @override
-  final int minCharsForMatch;
-}
-
-class ExactMatchSearchEntryResult extends SearchResultEntry
-    implements ExactMatchSearchData {
-  ExactMatchSearchEntryResult({
-    required this.searchString,
-    required this.minCharsForMatch,
-    required super.isMatch,
-  });
 
   @override
-  final String searchString;
-  @override
-  final int minCharsForMatch;
+  String toString() {
+    return 'OverwrittenSearchEntryResult{'
+        'searchString: ${searchString.maxLength(50)}, '
+        'isMatch: $isMatch'
+        '}';
+  }
 }
 
 extension on String {

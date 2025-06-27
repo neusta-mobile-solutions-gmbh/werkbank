@@ -4,13 +4,13 @@ import 'package:werkbank/src/werkbank_internal.dart';
 
 const _printResults = false;
 
-mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
-  String get searchQuery;
-
+mixin FilterExecutor<T extends StatefulWidget> on State<T> {
   FilterResult doFilter({
+    required String searchQuery,
     required RootDescriptor rootDescriptor,
   }) {
-    final hasFilteringData = searchQuery.isNotEmpty;
+    final filterCommand = FilterCommand(searchQuery: searchQuery);
+    final hasFilteringData = filterCommand.searchQuery.isNotEmpty;
     if (!hasFilteringData) {
       return const FilterResult.notApplied();
     }
@@ -23,7 +23,6 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
         descendant: [
           ..._otherClustersFor(
             descendant,
-            searchQueryLength: searchQuery.length,
           ),
           if (descendant is UseCaseDescriptor)
             ...metadataMap[descendant]!.searchClusters,
@@ -33,7 +32,7 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
     if (_printResults) {
       debugPrint(
         '----------\n'
-        'searchQuery: $searchQuery\n'
+        '$filterCommand\n'
         '----------\n',
       );
     }
@@ -41,6 +40,7 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
     // These results represent if the descriptor itself has a match.
     final descriptorResultsWithoutRelatives = _calcDescriptorResults(
       clustersForDescriptors,
+      filterCommand,
     );
 
     // These results represent if the descriptor has a matching relatives.
@@ -80,18 +80,25 @@ mixin FilterExcecutor<T extends StatefulWidget> on State<T> {
 
   Map<Descriptor, DescriptorFilterResult> _calcDescriptorResults(
     Map<Descriptor, List<SearchCluster>> clustersForUseCases,
+    FilterCommand filterCommand,
   ) {
-    final clusterResultsForUseCases = _calcClusterResults(clustersForUseCases);
+    final clusterResultsForUseCases = _calcClusterResults(
+      clustersForUseCases,
+      filterCommand,
+    );
     final useCaseResults = _mapToUseCaseResult(clusterResultsForUseCases);
     return useCaseResults;
   }
 
   Map<Descriptor, List<SearchClusterResult>> _calcClusterResults(
     Map<Descriptor, List<SearchCluster>> clustersForUseCases,
+    FilterCommand filterCommand,
   ) {
     return clustersForUseCases.map((useCase, searchClusters) {
       final clusterResults = searchClusters.map((searchCluster) {
-        final clusterResult = searchCluster.evaluate(query: searchQuery);
+        final clusterResult = searchCluster.evaluate(
+          filterCommand: filterCommand,
+        );
         return clusterResult;
       }).toList();
 
@@ -193,19 +200,17 @@ void _askChildrenThanAddYourself(
 // The Choices for a useCase that are not due to searchEntries
 // but due to other features.
 List<SearchCluster> _otherClustersFor(
-  ChildDescriptor descriptor, {
-  required int searchQueryLength,
-}) {
+  ChildDescriptor descriptor,
+) {
   final node = descriptor.node;
   final nameWithSpaces = _withSpaces(node.name);
   final justTheUpperCaseChars = _justTheUpperCaseChars(node.name);
-  final justTheUpperCaseCharsAndTheNextChar =
-      _justTheUpperCaseCharsAndTheNextChar(node.name);
   final wordsInTheName = _wordsIn(node.name);
   return [
     // Name of the UseCase
     SearchCluster(
       semanticDescription: 'Name of the ${descriptor.runtimeType}',
+      field: 'name',
       entries: [
         FuzzySearchEntry(
           // Name Of The Use Case
@@ -223,13 +228,6 @@ List<SearchCluster> _otherClustersFor(
         if (justTheUpperCaseChars.length > 1)
           FuzzySearchEntry(
             searchString: justTheUpperCaseChars,
-            scoreThreshold: .25,
-            ignoreCase: true,
-          ),
-        // NameOfTheUseCase -> NaOfThUsCa
-        if (justTheUpperCaseCharsAndTheNextChar.length > 2)
-          FuzzySearchEntry(
-            searchString: justTheUpperCaseCharsAndTheNextChar,
             scoreThreshold: .25,
             ignoreCase: true,
           ),
@@ -263,27 +261,6 @@ String _justTheUpperCaseChars(String name) {
       .where(_isAlpha)
       .where((element) => element.toUpperCase() == element)
       .join();
-}
-
-// Multiple Choice Dropdown -> MuChDr
-String _justTheUpperCaseCharsAndTheNextChar(String name) {
-  return name.split('').reduce((value, element) {
-    if (element == ' ') {
-      return value;
-    }
-
-    if (element.toUpperCase() == element) {
-      return '$value$element';
-    }
-
-    final latestChar = value.isNotEmpty ? value[value.length - 1] : null;
-    if (latestChar?.toUpperCase() == latestChar &&
-        element.toUpperCase() != element) {
-      return '$value$element';
-    }
-
-    return value;
-  });
 }
 
 String _withSpaces(String name) {

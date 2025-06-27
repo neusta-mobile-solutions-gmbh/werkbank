@@ -6,24 +6,24 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 </p>
 
 > [!WARNING]
-> Werkbank is feature-rich but still evolving. Documentation is incomplete and APIs may change before the stable release.
+> Werkbank is feature-rich but still evolving. Documentation is incomplete, and APIs may change before the stable release.
 
 ## Features
 
 ### **🧩 Use Cases**
-- Write use cases for your UI components and view and test them in isolation.
+- Write use cases for your UI components to view and test them in isolation.
 - Visually navigate use cases in a grid **overview** that shows thumbnails of your widgets, updating in real time.
-- Sort them in a **tree hierarchy** and navigate them using it.
-- **Search** for use cases even with **typos** or **abbreviations**.
-- Browse **Recently Used** or **Recently Added** in the home page.
+- Sort them in a **tree hierarchy** and navigate using it.
+- **Search** for use cases, even with **typos** or **abbreviations**.
+- Browse **Recently Used** or **Recently Added** on the home page.
 - Categorize your use cases using **Tags**.
 <video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/4b270492-2b54-4d6c-bbf6-ce755372ff3f">
 </video>
 
 ### **🎛️ Knobs**
-- Configure your use case widgets using knobs that control your widget and *can be controlled by your widget* at the same time.
+- Configure your use case widgets using knobs that control your widget and *can be controlled by your widget* simultaneously.
 - Define **knob presets** to configure predefined sets of values for your knobs and *view the widget in all its possible states* simultaneously using the overview.
-- There are knobs for most common types, like `double`, `int`, `bool`, `String`, `List<T>` etc. and their *nullable* counterparts.
+- There are knobs for most common types, like `double`, `int`, `bool`, `String`, `List<T>`, etc., and their *nullable* counterparts.
 - There are even special knobs for **AnimationControllers** and **FocusNodes**.
 <video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/4510ff50-54f6-4322-85da-d4aa424da681">
 </video>
@@ -33,20 +33,20 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 - Or change the constraints more **precisely using input fields**.
 - Define **custom presets** for the constraints.
 - Or use predefined **device presets** for common device sizes.
-- Use the **zoom and pan gestures** to view use cases in sizes **larger than the viewport**.
+- Use **zoom and pan gestures** to view use cases in sizes **larger than the viewport**.
 <video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/6a6d95b4-e0d4-4e24-9c28-d4dc4d169be0">
 </video>
 
 ### **♿ Accessibility**
 - Inspect the **semantic nodes** of your use cases and *all of their properties* using interactive semantics overlays.
 - Change **Text Scale** and **Bold Text** to test under different accessibility conditions.
-- Simulate **Color Blindness** to verify sufficient contrasts for all users.
+- Simulate **Color Blindness** to verify sufficient contrast for all users.
 <video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/5f1495c5-8685-4549-a00e-04e9adc00064">
 </video>
 
 ### **🖼️ Theme, Background and Localization**
 - Change the **theme** of your use cases, even while viewing them in the overview.
-- Define **default backgrounds** for your use cases or select from **predefined background** to override the default ones.
+- Define **default backgrounds** for your use cases or select from **predefined backgrounds** to override the default ones.
 - Switch the **locale** used by your use cases.
 <video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/9481f912-3dd8-4b72-ba3f-5955495ea979">
 </video>
@@ -54,8 +54,8 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 ### **🛠 Customize your Werkbank**
 - **Resize** or **collapse** panels.
 - Enter a **focus mode** for no distractions.
-- Toggle between **light mode** and **dark mode** of your Werkbank.
-- **Reorder** and **collapse panels**  to prioritize the ones you need most.
+- Toggle between **light mode** and **dark mode** in your Werkbank.
+- **Reorder** and **collapse panels** to prioritize the ones you need most.
 <video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/379b3d2d-f75e-4f4e-b70b-7f31d1fa4fab">
 </video>
 
@@ -125,4 +125,4 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
 - 🌐 [**Example Werkbank Web Demo**](https://example-werkbank-246cea10e259.playground.neusta-ms.de/)
   - Try out a Werkbank app in your browser.
 - 🛠️ [**Example Werkbank Code**](https://github.com/neusta-mobile-solutions-gmbh/werkbank/tree/main/example/example_werkbank)
-  - Take a look at the code of the example web demo above and use it as a starting point for your own Werkbank app. 
+  - Take a look at the code of the example web demo above and use it as a starting point for your own Werkbank app.

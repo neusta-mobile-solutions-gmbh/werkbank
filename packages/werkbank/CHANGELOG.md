@@ -1,5 +1,6 @@
 # 0.15.2
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.
+- Fix that pointer could interact with use case while trying to change constraints.
 
 # 0.15.1
 - Make some improvements to use case descriptions

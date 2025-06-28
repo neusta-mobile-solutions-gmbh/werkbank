@@ -1,3 +1,6 @@
+# 0.15.2
+- Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.
+
 # 0.15.1
 - Make some improvements to use case descriptions
   - Rename the "About" section for descriptions to "Description".

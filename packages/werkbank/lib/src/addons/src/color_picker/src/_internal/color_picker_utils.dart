@@ -33,7 +33,7 @@ class ColorPickerUtils {
     if (!backgroundBoundaryBox.contains(transformedClickPosition)) return null;
 
     // Pixel ratio requires to to be an odd number.
-    // Otherwise further calculations wont succeed
+    // Otherwise further calculations won't succeed
     final image = await backgroundBoundary.toImage(
       rect: cursorRect,
       pixelRatio: 31,

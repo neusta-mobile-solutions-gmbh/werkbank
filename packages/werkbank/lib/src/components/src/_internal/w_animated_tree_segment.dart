@@ -47,7 +47,7 @@ class _SAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
               : null,
           initExpanded: widget.node.isInitiallyExpanded,
           onTap: widget.node.onTap,
-          trailing: widget.node.trailling,
+          trailing: widget.node.trailing,
           leading: widget.node.leading,
         ),
         if (showContent)

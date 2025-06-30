@@ -76,7 +76,7 @@ class FuzzySearchEntry implements SearchEntry, FuzzySearchData {
 
     // Default case
 
-    final bitap = Bitap(
+    final bitap = Bitmap(
       filterCommand.searchQuery,
       options: FuzzyOptions(
         threshold: scoreThreshold,

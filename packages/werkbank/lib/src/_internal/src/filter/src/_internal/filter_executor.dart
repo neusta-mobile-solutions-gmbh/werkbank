@@ -114,7 +114,7 @@ Map<Descriptor, DescriptorFilterResult> _mapToUseCaseResult(
     for (final useCaseEntry in clusterResultsForUseCases.entries)
       useCaseEntry.key: WithClustersResult(
         clusters: useCaseEntry.value.toIList(),
-        // A useCase cant have descendants
+        // A useCase can't have descendants
         matchingDescendants: const IList.empty(),
         // At this point, we dont know if a ancestor is a match
         matchingAncestors: const IList.empty(),

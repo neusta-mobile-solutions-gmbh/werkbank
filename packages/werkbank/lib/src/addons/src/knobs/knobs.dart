@@ -17,6 +17,7 @@ export 'src/knobs/boolean_knob.dart';
 export 'src/knobs/date_knob.dart';
 export 'src/knobs/double_knob.dart';
 export 'src/knobs/focus_node_knob.dart';
+export 'src/knobs/input_knob.dart';
 export 'src/knobs/int_knob.dart';
 export 'src/knobs/interval/curve_knob.dart';
 export 'src/knobs/interval/curved_interval_knob.dart';

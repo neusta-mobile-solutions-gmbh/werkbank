@@ -53,6 +53,18 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       'Date',
       initialValue: DateTime.now(),
     ),
+    c.knobs.input(
+      'BigInt Input',
+      initialValue: BigInt.zero,
+      parser: _bigIntInputParser,
+      formatter: _bigIntInputFormatter,
+    ),
+    c.knobs.inputMultiLine(
+      'String List Input',
+      initialValue: const ['Line 1', 'Line 2', 'Line 3'],
+      parser: _stringListInputParser,
+      formatter: _stringListInputFormatter,
+    ),
     // Nullable
     c.knobs.nullable.boolean(
       'Nullable Boolean',
@@ -87,6 +99,18 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     c.knobs.nullable.date(
       'Nullable Date',
       initialValue: DateTime.now(),
+    ),
+    c.knobs.nullable.input(
+      'Nullable BigInt Input',
+      initialValue: BigInt.zero,
+      parser: _bigIntInputParser,
+      formatter: _bigIntInputFormatter,
+    ),
+    c.knobs.nullable.inputMultiLine(
+      'Nullable String List Input',
+      initialValue: const ['Line 1', 'Line 2', 'Line 3'],
+      parser: _stringListInputParser,
+      formatter: _stringListInputFormatter,
     ),
   ];
 
@@ -200,4 +224,34 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       ),
     );
   };
+}
+
+String _bigIntInputFormatter(BigInt value) {
+  return value.toString();
+}
+
+InputParseResult<BigInt> _bigIntInputParser(String input) {
+  final trimmedInput = input.trim();
+  if (trimmedInput.isEmpty) {
+    return InputParseSuccess(BigInt.zero);
+  }
+  final parsedValue = BigInt.tryParse(trimmedInput);
+  if (parsedValue != null) {
+    return InputParseSuccess(parsedValue);
+  } else {
+    return InputParseError('Invalid BigInt Format');
+  }
+}
+
+String _stringListInputFormatter(List<String> value) {
+  return value.join('\n');
+}
+
+InputParseResult<List<String>> _stringListInputParser(String input) {
+  final trimmedInput = input.trim();
+  if (trimmedInput.isEmpty) {
+    return const InputParseSuccess([]);
+  }
+  final parsedValue = trimmedInput.split('\n').map((e) => e.trim()).toList();
+  return InputParseSuccess(parsedValue);
 }

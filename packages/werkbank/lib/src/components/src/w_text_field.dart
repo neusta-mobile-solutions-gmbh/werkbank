@@ -102,6 +102,8 @@ class _STextFieldState extends State<WTextField> {
                   style: textTheme.input.copyWith(
                     color: colorScheme.fieldContent,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   child: widget.label!,
                 )
               : null,

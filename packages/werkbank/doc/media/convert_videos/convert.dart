@@ -24,7 +24,7 @@ import 'package:path/path.dart' as p;
   // );
   // Blurry but acceptable quality. Relatively large but not huge size.
   return (
-    'ffmpeg -i $input -vcodec libwebp -quality 50 -lossless 0 -loop 0 -an -vf fps=fps=10 -s 1280:720 $output',
+    'ffmpeg -i $input -vcodec libwebp -quality 30 -lossless 0 -loop 0 -an -vf "fps=fps=12,setpts=PTS/1.125" -s 1280:720 $output',
     'webp',
   );
 }
@@ -54,6 +54,8 @@ void main() async {
 
   print('Found ${movFiles.length} .mov files to convert:');
 
+  var totalFileSize = 0;
+
   // Convert each file
   for (final movFile in movFiles) {
     final fileName = p.basename(movFile.path);
@@ -66,6 +68,7 @@ void main() async {
     final outFile = File(outputPath);
     if (await outFile.exists()) {
       print('Output file already exists: $outputPath');
+      totalFileSize += await outFile.length();
       continue; // Skip if output file already exists
     }
 
@@ -75,6 +78,7 @@ void main() async {
       print('Executing: $cmd');
 
       final result = await Process.run('sh', ['-c', cmd]);
+      totalFileSize += await outFile.length();
 
       if (result.exitCode != 0) {
         print('Error: ${result.stderr}');
@@ -85,6 +89,13 @@ void main() async {
     } catch (e) {
       print('Exception while converting $fileName: $e');
     }
+  }
+  if (totalFileSize > 0) {
+    print(
+      'Total size of converted files: ${(totalFileSize / (1024 * 1024)).toStringAsFixed(3)} MiB',
+    );
+  } else {
+    print('No .mov files were converted.');
   }
 
   print('Conversion process complete.');

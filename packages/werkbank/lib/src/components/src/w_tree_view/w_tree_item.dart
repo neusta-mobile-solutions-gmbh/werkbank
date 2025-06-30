@@ -47,52 +47,63 @@ class _STreeItemState extends State<WTreeItem> {
   Widget build(BuildContext context) {
     final textTheme = context.werkbankTextTheme;
     final colorScheme = context.werkbankColorScheme;
+    final color = widget.isSelected
+        ? context.werkbankColorScheme.textActive
+        : context.werkbankColorScheme.text;
     return WButtonBase(
       onPressed: widget.onTap,
       backgroundColor: Colors.transparent,
       borderRadius: BorderRadius.circular(8),
+      showBorder: !widget.isSelected,
       isActive: widget.isSelected,
-      activeBackgroundColor: colorScheme.textHighlighted,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-        child: Row(
-          children: [
-            SizedBox(
-              width: _calculateIndentation(widget.nestingLevel.toDouble()),
-            ),
-            if (widget.onExpansionChanged != null)
-              WButtonBase(
-                backgroundColor: Colors.transparent,
-                onPressed: () {
-                  setState(() {
-                    expanded = !expanded;
-                  });
-                  widget.onExpansionChanged!(expanded);
-                },
-                child: WExpandedIndicator(
-                  isExpanded: expanded,
-                  iconColor: context.werkbankColorScheme.icon,
-                ),
-              )
-            else
-              const SizedBox(width: 16),
-            const SizedBox(width: 4),
-            if (widget.leading != null)
+      activeBackgroundColor: colorScheme.backgroundActive,
+      child: IconTheme.merge(
+        data: IconThemeData(
+          color: color,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+          child: Row(
+            children: [
               SizedBox(
-                width: 16,
-                child: widget.leading,
+                width: _calculateIndentation(widget.nestingLevel.toDouble()),
               ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: DefaultTextStyle.merge(
-                style: textTheme.detail.copyWith(color: colorScheme.text),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                child: widget.label,
+              if (widget.onExpansionChanged != null)
+                WButtonBase(
+                  backgroundColor: Colors.transparent,
+                  onPressed: () {
+                    setState(() {
+                      expanded = !expanded;
+                    });
+                    widget.onExpansionChanged!(expanded);
+                  },
+                  child: WExpandedIndicator(
+                    isExpanded: expanded,
+                    iconColor: color,
+                  ),
+                )
+              else
+                const SizedBox(width: 16),
+              const SizedBox(width: 4),
+              if (widget.leading != null)
+                SizedBox(
+                  width: 16,
+                  child: widget.leading,
+                ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: DefaultTextStyle.merge(
+                  style: textTheme.detail.apply(
+                    color: color,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  child: widget.label,
+                ),
               ),
-            ),
-            if (widget.trailing != null) widget.trailing!,
-          ],
+              if (widget.trailing != null) widget.trailing!,
+            ],
+          ),
         ),
       ),
     );

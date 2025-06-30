@@ -66,3 +66,18 @@ This allows you to call `c.tags(['some', 'words'])` on [UseCaseComposer](../werk
 > [!Note]
 > All [SearchCluster's](../werkbank/SearchCluster-class.html) must be setup during composing the Use Cases. Thats why `addSearchCluster` is called on [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
 
+### Debugging search matches
+
+To better understand why certain use cases are shown or hidden in search, you can enable a debug mode. This is mainly for advanced users fine-tuning their [SearchCluster](../werkbank/SearchCluster-class.html) or [SearchEntry](../werkbank/SearchEntry-class.html) setup.
+
+Enable debugging by setting the [DebugWerkbankFilter](../werkbank/DebugWerkbankFilter-class.html) in your app, for example in your `main()`:
+
+```dart
+void main() {
+  updateDebugWerkbankFilter(DebugWerkbankFilter.displayAllResults);
+  runApp(const YourWerkbank());
+}
+```
+
+You can also change the setting at runtime. This will show additional information about why nodes are included or excluded in the search results.
+

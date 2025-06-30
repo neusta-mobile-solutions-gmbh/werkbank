@@ -33,6 +33,6 @@ Add the following snippet between the curly braces:
     "  };",
     "}",
   ],
-  "description": "Creates a Speisekarte use case."
+  "description": "Creates a Werkbank use case."
 }
 ```

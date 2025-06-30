@@ -111,7 +111,7 @@ class ViewConstraintsPresetSelector extends StatelessWidget {
       final height => height.round().toString(),
     };
     final String width;
-    if (viewConstraints.minHeight == viewConstraints.maxHeight) {
+    if (viewConstraints.minWidth == viewConstraints.maxWidth) {
       width = minWidth;
     } else if (viewConstraints.minWidth == double.infinity &&
         viewConstraints.maxWidth == null) {

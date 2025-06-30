@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+/// {@category Search for Use Cases}
 sealed class DebugWerkbankFilter {
   const DebugWerkbankFilter(
     this.name,

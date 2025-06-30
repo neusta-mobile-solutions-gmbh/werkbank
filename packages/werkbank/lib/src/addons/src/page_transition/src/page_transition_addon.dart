@@ -9,6 +9,12 @@ import 'package:werkbank/src/werkbank_internal.dart';
 /// It only provides a switch to enable or disable the page transition.
 ///
 /// {@category Configuring Addons}
+///
+/// Note: This addon is not included by default in [AddonConfig],
+/// as most apps do not need to customize page transitions.
+/// You can add it manually to your addon list if needed.
+/// It is mainly provided as an example of how to control
+/// page transitions via an Addon.
 class PageTransitionAddon extends Addon {
   const PageTransitionAddon() : super(id: addonId);
 

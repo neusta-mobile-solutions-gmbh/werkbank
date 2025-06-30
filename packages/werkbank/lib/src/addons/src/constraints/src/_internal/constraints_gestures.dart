@@ -136,7 +136,10 @@ class ConstraintsGestures extends StatelessWidget {
         onStartOffsetUpdate: (offset) => _onStartOffsetUpdate(offset, null),
         onOffsetUpdate: (offset) => _onOffsetUpdate(offset, null),
         onEndOrCancel: onEndOrCancel,
-        child: child,
+        child: IgnorePointer(
+          ignoring: bothAxesGesturesEnabled,
+          child: child,
+        ),
       ),
     );
   }

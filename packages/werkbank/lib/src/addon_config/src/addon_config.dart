@@ -85,7 +85,10 @@ class AddonConfig {
       const WerkbankThemeAddon(),
       const HotReloadEffectAddon(),
       const OrderingAddon(),
-      const PageTransitionAddon(),
+      // Not included by default, as it's rarely needed.
+      // You can add it manually to check it out.
+      // Kept in the codebase as an example.
+      // const PageTransitionAddon(),
     ];
 
     final allAddons = [

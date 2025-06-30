@@ -62,7 +62,7 @@ class _STreeItemState extends State<WTreeItem> {
           color: color,
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
           child: Row(
             children: [
               SizedBox(

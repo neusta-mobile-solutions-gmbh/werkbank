@@ -65,7 +65,7 @@ class _ChildList extends StatelessWidget {
           Padding(
             key: node.key,
             padding: EdgeInsets.only(
-              top: i == 0 ? 0 : 4,
+              top: i == 0 ? 0 : 2,
             ),
             child: _Tree(
               wNode: node,

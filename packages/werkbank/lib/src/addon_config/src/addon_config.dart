@@ -84,10 +84,10 @@ class AddonConfig {
       const AcknowledgedAddon(),
       const WerkbankThemeAddon(),
       const HotReloadEffectAddon(),
-      const OrderingAddon(),
-      // Not included by default, as it's rarely needed.
+      // Both not included by default, as they are rarely needed.
       // You can add it manually to check it out.
       // Kept in the codebase as an example.
+      // const OrderingAddon(),
       // const PageTransitionAddon(),
     ];
 

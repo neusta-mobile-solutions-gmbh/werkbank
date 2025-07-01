@@ -7,7 +7,7 @@ By default, search is fuzzy and case-insensitive. You can search for:
 - Use Case, Component, or Folder names
 - Tags
 - Descriptions
-- Constraint Preset names
+- Constraints Preset names
 - Knob Preset names
 
 Adding new searchable fields is straightforward. See [Adding Custom Search Entries](#adding-custom-search-entries) below.
@@ -32,7 +32,7 @@ You can target the following fields in your search:
 - `name` — Use Case, Component, or Folder name
 - `tag` — Tag
 - `desc` — Description
-- `cPreset` — Constraint Preset name
+- `cPreset` — Constraints Preset name
 - `kPreset` — Knob Preset name
 
 ## Adding Custom Search Entries

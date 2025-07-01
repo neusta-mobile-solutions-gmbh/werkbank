@@ -35,7 +35,7 @@ class WTwoColsLayout extends StatelessWidget {
   }
 }
 
-/// This widget wont compain about overflows, like a normal column would.
+/// This widget won't complain about overflows, like a normal column would.
 /// You need to be careful yourself to not overflow.
 class _TwoColsLayout extends MultiChildRenderObjectWidget {
   const _TwoColsLayout({

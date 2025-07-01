@@ -42,7 +42,7 @@ class KnobsAddon extends Addon {
           const KnobPresetSelector(),
           /* TODO(lzuttermeister): Should this be allowed?
                In the design, the divider goes up to the edges.
-               But that is reserverd for the control sections. */
+               But that is reserved for the control sections. */
           const WDivider.horizontal(),
           for (final knob in knobsComposition.knobs)
             KeyedSubtree(

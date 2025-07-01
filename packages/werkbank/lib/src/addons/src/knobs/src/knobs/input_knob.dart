@@ -122,41 +122,80 @@ class _InputKnobState<T> extends State<_InputKnob<T>> {
     _textEditingController = TextEditingController(
       text: widget.formatter(widget.valueNotifier.value),
     );
-    _textEditingController.addListener(_textEditingControllerChanged);
-    widget.valueNotifier.addListener(_knobChanged);
+    _textEditingController.addListener(_syncValues);
+    widget.valueNotifier.addListener(_syncValues);
     _focusNode.addListener(_focusChanged);
   }
 
-  void _textEditingControllerChanged() {
+  @override
+  void didUpdateWidget(covariant _InputKnob<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    var sync = false;
+    if (oldWidget.valueNotifier != widget.valueNotifier) {
+      oldWidget.valueNotifier.removeListener(_syncValues);
+      widget.valueNotifier.addListener(_syncValues);
+      sync = true;
+    }
+    if (oldWidget.formatter != widget.formatter && !_focusNode.hasFocus) {
+      sync = true;
+    }
+    if (oldWidget.parser != widget.parser) {
+      if (!_focusNode.hasFocus) {
+        _updateFromText(updateValue: false);
+      }
+      sync = true;
+    }
+    if (sync) {
+      _syncValues();
+    }
+  }
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (!_focusNode.hasFocus) {
+      _updateFromText(updateValue: false);
+    }
+    _syncValues();
+  }
+
+  void _updateFromText({bool updateValue = true}) {
     final result = widget.parser(_textEditingController.text);
     switch (result) {
       case InputParseSuccess(:final value):
         setState(() => _errorLabel = null);
-        widget.valueNotifier.value = value;
+        if (updateValue) {
+          widget.valueNotifier.value = value;
+        }
       case InputParseError(:final errorLabel):
         setState(() => _errorLabel = errorLabel);
     }
   }
 
-  void _knobChanged() {
-    if (!_focusNode.hasFocus) {
-      _textEditingController.text = widget.formatter(
-        widget.valueNotifier.value,
-      );
+  void _updateFromKnob() {
+    _textEditingController.text = widget.formatter(
+      widget.valueNotifier.value,
+    );
+    _updateFromText(updateValue: false);
+  }
+
+  void _syncValues() {
+    if (_focusNode.hasFocus) {
+      _updateFromText();
+    } else if (_errorLabel == null) {
+      _updateFromKnob();
     }
   }
 
   void _focusChanged() {
     if (!_focusNode.hasFocus && _errorLabel == null) {
-      _textEditingController.text = widget.formatter(
-        widget.valueNotifier.value,
-      );
+      _updateFromKnob();
     }
   }
 
   @override
   void dispose() {
-    widget.valueNotifier.removeListener(_knobChanged);
+    widget.valueNotifier.removeListener(_syncValues);
     _textEditingController.dispose();
     _focusNode.dispose();
     super.dispose();

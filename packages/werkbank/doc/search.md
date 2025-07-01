@@ -64,7 +64,7 @@ extension TagsComposerExtension on UseCaseComposer {
 This allows you to call `c.tags(['some', 'words'])` on [UseCaseComposer](../werkbank/UseCaseComposer-class.html). Each tag becomes a searchable entry.
 
 > [!Note]
-> All [SearchCluster's](../werkbank/SearchCluster-class.html) must be setup during composing the Use Cases. Thats why `addSearchCluster` is called on [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
+> All [SearchCluster's](../werkbank/SearchCluster-class.html) must be setup during composing the Use Cases. That's why `addSearchCluster` is called on [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
 
 ### Debugging search matches
 

@@ -80,7 +80,7 @@ class ConstraintsAddon extends Addon {
           const ViewConstraintsPresetSelector(),
           /* TODO(lzuttermeister): Should this be allowed?
                In the design, the divider goes up to the edges.
-               But that is reserverd for the control sections. */
+               But that is reserved for the control sections. */
           const WDivider.horizontal(),
           ViewConstraintsSelector(
             constraintsComposition: constraintsComposition,

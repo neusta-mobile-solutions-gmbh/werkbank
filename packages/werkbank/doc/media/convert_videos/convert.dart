@@ -24,7 +24,7 @@ import 'package:path/path.dart' as p;
   // );
   // Blurry but acceptable quality. Relatively large but not huge size.
   return (
-    'ffmpeg -i $input -vcodec libwebp -quality 30 -lossless 0 -loop 0 -an -vf "fps=fps=12,setpts=PTS/1.125" -s 1280:720 $output',
+    'ffmpeg -i $input -vcodec libwebp -quality 30 -lossless 0 -loop 0 -an -vf "fps=fps=24,setpts=PTS/1.125" -s 1280:720 $output',
     'webp',
   );
 }

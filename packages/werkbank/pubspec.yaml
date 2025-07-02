@@ -144,7 +144,7 @@ screenshots:
     path: pub_images/knobs.webp
   - description: 'An animation showcasing the ability to set constraints.'
     path: pub_images/constraints.webp
-  - description: 'An animation showcasing accessibility.'
+  - description: 'An animation showcasing tools for accessibility.'
     path: pub_images/accessibility.webp
   - description: 'An animation showcasing theming and more.'
     path: pub_images/theme_and_more.webp

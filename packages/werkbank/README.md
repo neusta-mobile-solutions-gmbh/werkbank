@@ -46,7 +46,7 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 - Change **Text Scale** and **Bold Text** to test under different accessibility conditions.
 - Simulate **Color Blindness** to verify sufficient contrast for all users.
 
-[![An animation showcasing accessibility.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/accessibility.webp)](https://github.com/user-attachments/assets/5f1495c5-8685-4549-a00e-04e9adc00064)
+[![An animation showcasing tools for accessibility.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/accessibility.webp)](https://github.com/user-attachments/assets/5f1495c5-8685-4549-a00e-04e9adc00064)
 
 ### **🖼️ Theme, Background and Localization**
 

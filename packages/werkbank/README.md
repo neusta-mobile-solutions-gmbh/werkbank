@@ -1,4 +1,8 @@
-A powerful tool that helps you develop, test, visualize, and organize your Flutter UI components.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/2fbb22660cd5985d842e74d38fe98a5b5c60c4f5/packages/werkbank/pub_images/logo.png" alt="Werkbank"/><br/><br/>
+  <span>A powerful tool that helps you develop, test, visualize, and organize your Flutter UI components.</span>
+</p>
+
 <p align="center">
   <a href="https://pub.dev/documentation/werkbank/latest/topics/Welcome-topic.html">Documentation</a> •
   <a href="https://pub.dev/documentation/werkbank/latest/topics/Get%20Started-topic.html">Get Started</a> •

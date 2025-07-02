@@ -11,55 +11,62 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 ## Features
 
 ### **🧩 Use Cases**
+
 - Write use cases for your UI components to view and test them in isolation.
 - Visually navigate use cases in a grid **overview** that shows thumbnails of your widgets, updating in real time.
 - Sort them in a **tree hierarchy** and navigate using it.
 - **Search** for use cases, even with **typos** or **abbreviations**.
 - Browse **Recently Used** or **Recently Added** on the home page.
 - Categorize your use cases using **Tags**.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/4b270492-2b54-4d6c-bbf6-ce755372ff3f">
-</video>
+
+[![An animation showcasing use cases.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/use_cases.webp)](https://github.com/user-attachments/assets/4b270492-2b54-4d6c-bbf6-ce755372ff3f)
 
 ### **🎛️ Knobs**
+
 - Configure your use case widgets using knobs that control your widget and *can be controlled by your widget* simultaneously.
 - Define **knob presets** to configure predefined sets of values for your knobs and *view the widget in all its possible states* simultaneously using the overview.
 - There are knobs for most common types, like `double`, `int`, `bool`, `String`, `List<T>`, etc., and their *nullable* counterparts.
 - There are even special knobs for **AnimationControllers** and **FocusNodes**.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/4510ff50-54f6-4322-85da-d4aa424da681">
-</video>
+
+[![An animation showcasing knobs.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/knobs.webp)](https://github.com/user-attachments/assets/4510ff50-54f6-4322-85da-d4aa424da681)
 
 ### **📏 Constraints**
+
 - **Interactively change** the `BoxConstraints` passed to your widgets and see how your widgets react to different sizes.
 - Or change the constraints more **precisely using input fields**.
 - Define **custom presets** for the constraints.
 - Or use predefined **device presets** for common device sizes.
 - Use **zoom and pan gestures** to view use cases in sizes **larger than the viewport**.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/6a6d95b4-e0d4-4e24-9c28-d4dc4d169be0">
-</video>
+
+[![An animation showcasing the ability to set constraints.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/constraints.webp)](https://github.com/user-attachments/assets/6a6d95b4-e0d4-4e24-9c28-d4dc4d169be0)
 
 ### **♿ Accessibility**
+
 - Inspect the **semantic nodes** of your use cases and *all of their properties* using interactive semantics overlays.
 - Change **Text Scale** and **Bold Text** to test under different accessibility conditions.
 - Simulate **Color Blindness** to verify sufficient contrast for all users.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/5f1495c5-8685-4549-a00e-04e9adc00064">
-</video>
+
+[![An animation showcasing tools for accessibility.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/accessibility.webp)](https://github.com/user-attachments/assets/5f1495c5-8685-4549-a00e-04e9adc00064)
 
 ### **🖼️ Theme, Background and Localization**
+
 - Change the **theme** of your use cases, even while viewing them in the overview.
 - Define **default backgrounds** for your use cases or select from **predefined backgrounds** to override the default ones.
 - Switch the **locale** used by your use cases.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/9481f912-3dd8-4b72-ba3f-5955495ea979">
-</video>
 
-### **🛠 Customize your Werkbank**
+[![An animation showcasing theming and more.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/theme_and_more.webp)](https://github.com/user-attachments/assets/9481f912-3dd8-4b72-ba3f-5955495ea979)
+
+### **🛠️ Customize your Werkbank**
+
 - **Resize** or **collapse** panels.
 - Enter a **focus mode** for no distractions.
 - Toggle between **light mode** and **dark mode** in your Werkbank.
 - **Reorder** and **collapse panels** to prioritize the ones you need most.
-<video width="768" height="432" loop autoplay src="https://github.com/user-attachments/assets/379b3d2d-f75e-4f4e-b70b-7f31d1fa4fab">
-</video>
+
+[![An animation showcasing the customizability of Werkbank.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/customization.webp)](https://github.com/user-attachments/assets/379b3d2d-f75e-4f4e-b70b-7f31d1fa4fab)
 
 ### **And much more!**
+
 - **🔍 Zoom and Pan**
   - Navigate your use cases using Figma-like zoom and pan gestures.
 - **🏷️ Metadata**
@@ -74,6 +81,7 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
   - Update everything with just a hot reload.
 
 ## Writing Use Cases
+
 To get a rough idea of how use cases are written, take a look at the following example.
 For more detailed explanations, visit our [Documentation](https://pub.dev/documentation/werkbank/latest/topics/Welcome-topic.html).
 
@@ -118,6 +126,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
 ```
 
 ## Where to Go Next?
+
 - 📖 [**Documentation**](https://pub.dev/documentation/werkbank/latest/topics/Welcome-topic.html)
   - Learn everything about what Werkbank is and its technical details.
 - 🚀 [**Get Started**](https://pub.dev/documentation/werkbank/latest/topics/Get%20Started-topic.html)

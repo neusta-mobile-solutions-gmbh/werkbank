@@ -56,7 +56,7 @@ A powerful tool that helps you develop, test, visualize, and organize your Flutt
 
 [![An animation showcasing theming and more.](https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/a78751dcab9df74116fd589699a69fb3cbe97de9/packages/werkbank/pub_images/theme_and_more.webp)](https://github.com/user-attachments/assets/9481f912-3dd8-4b72-ba3f-5955495ea979)
 
-### **🛠 Customize your Werkbank**
+### **🛠️ Customize your Werkbank**
 
 - **Resize** or **collapse** panels.
 - Enter a **focus mode** for no distractions.

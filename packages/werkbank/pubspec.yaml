@@ -3,6 +3,7 @@ description: >-
   A powerful tool that helps you develop, test, visualize, and organize your Flutter UI components.
 version: 0.15.1
 repository: https://github.com/neusta-mobile-solutions-gmbh/werkbank/
+homepage: https://neusta-ms.de/werkbank/
 
 environment:
   sdk: ^3.8.0

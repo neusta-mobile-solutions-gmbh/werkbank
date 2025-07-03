@@ -42,13 +42,25 @@ class ReportComponent extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Flexible(
-          child: WBorderedBox(
-            borderRadius: const BorderRadius.all(Radius.circular(4)),
-            backgroundColor: context.werkbankColorScheme.field,
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: report.content,
-            ),
+          child: Builder(
+            builder: (context) {
+              Widget widget = WBorderedBox(
+                borderRadius: const BorderRadius.all(Radius.circular(4)),
+                backgroundColor: context.werkbankColorScheme.field,
+                child: Padding(
+                  padding: report.preview
+                      ? const EdgeInsets.fromLTRB(8, 8, 8, 48)
+                      : const EdgeInsets.all(8),
+                  child: report.content,
+                ),
+              );
+
+              if (report.preview) {
+                widget = WPreviewHeight(child: widget);
+              }
+
+              return widget;
+            },
           ),
         ),
       ],

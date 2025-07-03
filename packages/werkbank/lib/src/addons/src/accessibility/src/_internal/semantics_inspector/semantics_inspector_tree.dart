@@ -80,7 +80,7 @@ class SemanticsInspectorTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.werkbankTheme;
-    final semanticsInspectorController = InfoControlSection.access
+    final semanticsInspectorController = InspectControlSection.access
         .compositionOf(context)
         .accessibility
         .semanticsInspectorController;

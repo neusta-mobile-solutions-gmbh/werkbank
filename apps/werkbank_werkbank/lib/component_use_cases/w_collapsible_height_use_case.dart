@@ -6,10 +6,10 @@ const _loremIpsum = '''
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 ''';
 
-WidgetBuilder wCollapsableHeightUseCase(UseCaseComposer c) {
+WidgetBuilder wCollapsibleHeightUseCase(UseCaseComposer c) {
   c
     ..description(
-      'By using a `WCollapsableHeight`, you can '
+      'By using a `WCollapsibleHeight`, you can '
       'create a widget that can be expanded to its '
       'intrinsic height or collapsed to a fixed height. ',
     )
@@ -30,7 +30,7 @@ WidgetBuilder wCollapsableHeightUseCase(UseCaseComposer c) {
   );
 
   return (context) {
-    return WCollapsableHeight(
+    return WCollapsibleHeight(
       collapsedHeight: collapsedHeight.value,
       child: GestureDetector(
         onTap: () {

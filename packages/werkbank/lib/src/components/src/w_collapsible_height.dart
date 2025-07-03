@@ -5,8 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Werkbank Components}
-class WCollapsableHeight extends StatefulWidget {
-  const WCollapsableHeight({
+class WCollapsibleHeight extends StatefulWidget {
+  const WCollapsibleHeight({
     this.collapsedHeight = 200,
     this.duration = Durations.medium1,
     this.curve = Curves.easeInOutSine,
@@ -20,10 +20,10 @@ class WCollapsableHeight extends StatefulWidget {
   final Curve curve;
 
   @override
-  State<WCollapsableHeight> createState() => _WCollapsableHeightState();
+  State<WCollapsibleHeight> createState() => _WCollapsibleHeightState();
 }
 
-class _WCollapsableHeightState extends State<WCollapsableHeight>
+class _WCollapsibleHeightState extends State<WCollapsibleHeight>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
@@ -55,7 +55,7 @@ class _WCollapsableHeightState extends State<WCollapsableHeight>
   }
 
   @override
-  void didUpdateWidget(covariant WCollapsableHeight oldWidget) {
+  void didUpdateWidget(covariant WCollapsibleHeight oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.duration != widget.duration ||
         oldWidget.curve != widget.curve) {

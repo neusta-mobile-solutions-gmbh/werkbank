@@ -4,6 +4,7 @@ import 'package:werkbank_werkbank/component_use_cases/w_animated_visibility_use_
 import 'package:werkbank_werkbank/component_use_cases/w_bordered_box_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_button_base_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_chip_use_case.dart';
+import 'package:werkbank_werkbank/component_use_cases/w_collapsible_height_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_control_item_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_control_section_list_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_delayed_reveal_use_case.dart';
@@ -15,7 +16,6 @@ import 'package:werkbank_werkbank/component_use_cases/w_keyboard_button_use_case
 import 'package:werkbank_werkbank/component_use_cases/w_notification_use_cases.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_overview_tile_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_path_display_use_case.dart';
-import 'package:werkbank_werkbank/component_use_cases/w_preview_height_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_project_info_area_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_resizable_panels_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_shortcut_use_case.dart';
@@ -102,8 +102,8 @@ WerkbankRoot get root => WerkbankRoot(
           builder: wPathDisplayUseCase,
         ),
         WerkbankUseCase(
-          name: 'WCollapsableHeight',
-          builder: wCollapsableHeightUseCase,
+          name: 'WCollapsibleHeight',
+          builder: wCollapsibleHeightUseCase,
         ),
         WerkbankUseCase(
           name: 'WResizablePanels',

@@ -18,7 +18,12 @@ UseCaseBuilder colorsUseCaseBuilder({
         'A default UseCase of Werkbank to display '
         'all colors of a theme.',
       );
+
     builder(c);
+
+    if (c.isAddonActive(BackgroundAddon.addonId)) {
+      c.background.color(Colors.transparent);
+    }
     return (context) {
       return SingleChildScrollView(
         child: _ColorsShowCase(
@@ -41,6 +46,7 @@ class _ColorsShowCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = WerkbankSettings.werkbankThemeOf(context);
     return Padding(
       padding: const EdgeInsets.all(32),
       child: Wrap(
@@ -61,26 +67,43 @@ class _ColorsShowCase extends StatelessWidget {
                     border: Border.all(),
                   ),
                   child: IntrinsicWidth(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          color: color.value,
-                          height: size,
+                    child:
+                        /*WerkbankThemedBuilder(
+                      werkbankTheme: theme,
+                      themedBuilder: (context) => */
+                        UseCaseThemed(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                color: color.value,
+                                height: size,
+                              ),
+                              const SizedBox(height: 16),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: Text(
+                                  color.key,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: RestoreUseCaseTheme(
+                                  child: Text(
+                                    colorHexText,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+                          ),
                         ),
-                        const SizedBox(height: 16),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(color.key),
-                        ),
-                        const SizedBox(height: 4),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(colorHexText),
-                        ),
-                        const SizedBox(height: 16),
-                      ],
-                    ),
+                    //child:
                   ),
                 );
               },

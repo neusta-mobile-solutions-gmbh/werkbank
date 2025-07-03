@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/widgets/werkbank_store_theme.dart';
 
 /// {@category Welcome}
 /// {@category Get Started}
@@ -187,8 +188,10 @@ class WerkbankApp extends StatelessWidget {
                                       _MaterialApp(
                                         goRouter: goRouter,
                                         builder: (context, child) {
-                                          return AddonSpecificationsProvider(
-                                            child: child,
+                                          return WerkbankThemed(
+                                            child: AddonSpecificationsProvider(
+                                              child: child,
+                                            ),
                                           );
                                         },
                                       ),

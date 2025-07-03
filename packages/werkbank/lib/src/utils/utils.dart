@@ -11,4 +11,5 @@ export 'src/single_attachment_mixin.dart';
 export 'src/sort_hint.dart';
 export 'src/text_styles_use_case_builder.dart';
 export 'src/value_notifier_utils.dart';
+export 'src/werkbank_themed_builder.dart';
 export 'src/wrapper_builder.dart';

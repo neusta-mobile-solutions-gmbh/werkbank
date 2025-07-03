@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 import 'package:werkbank_werkbank/main.dart';
-import 'package:werkbank_werkbank/sections.dart';
+import 'package:werkbank_werkbank/root.dart';
 import 'package:werkbank_werkbank/tags.dart';
 
 WidgetBuilder displayUseCase(UseCaseComposer c) {
@@ -16,11 +16,11 @@ WidgetBuilder displayUseCase(UseCaseComposer c) {
   c.overview.withoutThumbnail();
 
   return (context) {
-    final rootDescriptor = RootDescriptor.fromWerkbankSections(
-      WerkbankSections(
-        children: sections.children,
+    final rootDescriptor = RootDescriptor.fromWerkbankRoot(
+      WerkbankRoot(
+        children: root.children,
         builder: (c) {
-          sections.builder?.call(c);
+          root.builder?.call(c);
           c.addLateExecutionCallback(() {
             c.background.named('None');
           });

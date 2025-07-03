@@ -25,7 +25,7 @@ class BackgroundAddon extends Addon {
   /// [BackgroundComposer] while composing the use case.
   /// Consider keeping this `null` and setting the default background
   /// using one of the methods on the [BackgroundComposer] inside of the
-  /// [WerkbankSections.builder]. This way, nested use cases can still override
+  /// [WerkbankRoot.builder]. This way, nested use cases can still override
   /// this with a different default background.
   BackgroundAddon({
     bool includeDefaultBackgrounds = true,

@@ -3,31 +3,31 @@ import 'package:werkbank/src/werkbank_internal.dart';
 
 class Descriptions extends UseCaseMetadataEntry<Descriptions> {
   const Descriptions({
-    required this.sectionsDescription,
+    required this.rootDescription,
     required this.folderDescriptions,
     required this.componentDescription,
     required this.useCaseDescription,
   });
 
   static const empty = Descriptions(
-    sectionsDescription: null,
+    rootDescription: null,
     folderDescriptions: [],
     componentDescription: null,
     useCaseDescription: null,
   );
 
-  final DescriptionEntry<WerkbankSections>? sectionsDescription;
+  final DescriptionEntry<WerkbankRoot>? rootDescription;
   final List<DescriptionEntry<WerkbankFolder>> folderDescriptions;
   final DescriptionEntry<WerkbankComponent>? componentDescription;
   final DescriptionEntry<WerkbankUseCase>? useCaseDescription;
 
   Descriptions copyWith({
-    DescriptionEntry<WerkbankSections>? sectionsDescription,
+    DescriptionEntry<WerkbankRoot>? rootDescription,
     List<DescriptionEntry<WerkbankFolder>>? folderDescriptions,
     DescriptionEntry<WerkbankComponent>? componentDescription,
     DescriptionEntry<WerkbankUseCase>? useCaseDescription,
   }) => Descriptions(
-    sectionsDescription: sectionsDescription ?? this.sectionsDescription,
+    rootDescription: rootDescription ?? this.rootDescription,
     folderDescriptions: folderDescriptions ?? this.folderDescriptions,
     componentDescription: componentDescription ?? this.componentDescription,
     useCaseDescription: useCaseDescription ?? this.useCaseDescription,
@@ -104,11 +104,11 @@ extension DescriptionComposerExtension on UseCaseComposer {
 
     switch (descriptionNode) {
       // We treat description on the root as a folder description.
-      case WerkbankSections():
+      case WerkbankRoot():
         setMetadata(
           currentDescriptions.copyWith(
-            sectionsDescription: tryMergeIntoEntry(
-              entry: currentDescriptions.sectionsDescription,
+            rootDescription: tryMergeIntoEntry(
+              entry: currentDescriptions.rootDescription,
               node: descriptionNode,
             ),
           ),

@@ -101,7 +101,7 @@ addons:
   description:
     component: $name (Component)
     folder: $name (Folder)
-    sections: (Sections)
+    root: (Root)
     tags: Tags
     description: Description
     links: External Links

@@ -1,4 +1,4 @@
-Werkbank provides a search feature in the navigation panel, helping to find specific Use Cases, Components, or Folders ([WerkbankNode](../werkbank/WerkbankNode-class.html)'s) within your [WerkbankSections](../werkbank/WerkbankSections-class.html). It does more than a simple text search and keeps the familiar tree structure, only hiding nodes that do not match your query. The search is designed to be flexible and extensible.
+Werkbank provides a search feature in the navigation panel, helping to find specific Use Cases, Components, or Folders ([WerkbankNode](../werkbank/WerkbankNode-class.html)'s) within your [WerkbankRoot](../werkbank/WerkbankRoot-class.html). It does more than a simple text search and keeps the familiar tree structure, only hiding nodes that do not match your query. The search is designed to be flexible and extensible.
 
 ## How Search Works
 

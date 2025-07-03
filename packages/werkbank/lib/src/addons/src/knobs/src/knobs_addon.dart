@@ -27,15 +27,15 @@ class KnobsAddon extends Addon {
   );
 
   @override
-  List<UseCaseControlSection> buildConfigureTabControlSections(
+  List<ConfigureControlSection> buildConfigureTabControlSections(
     BuildContext context,
   ) {
-    final useCasePath = UseCaseControlSection.access.useCaseOf(context).path;
-    final knobsComposition = UseCaseControlSection.access
+    final useCasePath = ConfigureControlSection.access.useCaseOf(context).path;
+    final knobsComposition = ConfigureControlSection.access
         .compositionOf(context)
         .knobs;
     return [
-      UseCaseControlSection(
+      ConfigureControlSection(
         id: 'knobs',
         title: Text(context.sL10n.addons.knobs.name),
         children: [

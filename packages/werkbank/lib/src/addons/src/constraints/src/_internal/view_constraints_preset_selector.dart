@@ -9,10 +9,10 @@ class ViewConstraintsPresetSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewConstraintsPresets = UseCaseControlSection.access
+    final viewConstraintsPresets = ConfigureControlSection.access
         .metadataOf(context)
         .viewConstraintsPresets;
-    final constraintsComposition = UseCaseControlSection.access
+    final constraintsComposition = ConfigureControlSection.access
         .compositionOf(context)
         .constraints;
     final textTheme = context.werkbankTextTheme;

@@ -32,7 +32,7 @@ extension WrappingComposerExtension on UseCaseComposer {
   /// the widget returned by the [WidgetBuilder].
   ///
   /// However when used inside a [UseCaseMetadataBuilder] within a
-  /// [WerkbankSections], [WerkbankFolder], or [WerkbankComponent]
+  /// [WerkbankRoot], [WerkbankFolder], or [WerkbankComponent]
   /// this will be wrapped around every use case contained within.
   ///
   /// Using the [WrappingLayer.surrounding] layer also allows you to wrap the

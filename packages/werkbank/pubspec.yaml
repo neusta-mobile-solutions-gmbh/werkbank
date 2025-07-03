@@ -1,8 +1,9 @@
 name: werkbank
 description: >-
   A powerful tool that helps you develop, test, visualize, and organize your Flutter UI components.
-version: 0.15.1
+version: 0.16.0
 repository: https://github.com/neusta-mobile-solutions-gmbh/werkbank/
+homepage: https://neusta-ms.de/werkbank/
 
 environment:
   sdk: ^3.8.0
@@ -41,9 +42,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/components/background/
   fonts:
     - family: Werkbank Icons
       fonts:
@@ -135,3 +133,17 @@ flutter:
           weight: 100
         - asset: assets/fonts/JetBrainsMono-Thin.ttf
           weight: 100
+
+screenshots:
+  - description: 'An animation showcasing use cases.'
+    path: pub_images/use_cases.webp
+  - description: 'An animation showcasing knobs.'
+    path: pub_images/knobs.webp
+  - description: 'An animation showcasing the ability to set constraints.'
+    path: pub_images/constraints.webp
+  - description: 'An animation showcasing tools for accessibility.'
+    path: pub_images/accessibility.webp
+  - description: 'An animation showcasing theming and more.'
+    path: pub_images/theme_and_more.webp
+  - description: 'An animation showcasing the customizability of Werkbank.'
+    path: pub_images/customization.webp

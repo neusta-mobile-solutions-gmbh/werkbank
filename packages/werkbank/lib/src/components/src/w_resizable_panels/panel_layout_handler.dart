@@ -9,7 +9,7 @@ typedef WidgetLayoutBuilder =
     );
 
 /// Sizes the panels and
-/// decides, if the panels need to be shrinked.
+/// decides, if the panels need to be shrunk.
 /// Tells the [PanelController] to do so.
 class PanelLayoutHandler extends StatelessWidget {
   const PanelLayoutHandler({
@@ -97,7 +97,7 @@ class _PanelLayoutState extends State<_PanelLayout> with PanelCalcMixin {
 /// If the application becomes
 /// too small, the panels automatically hide for once.
 /// You can still toggle them manually to make the visible again.
-/// In that case, this wouln't be triggered again.
+/// In that case, this wouldn't be triggered again.
 /// Vice versa, if the application becomes bigger again,
 /// the panels will be shown again, and you can of course
 /// hide them manually.

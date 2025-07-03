@@ -15,7 +15,8 @@ import 'package:werkbank/src/werkbank_internal.dart';
 ///   logo: const YourLogo(),
 ///   appConfig: AppConfig.material(),
 ///   addonConfig: AddonConfig(addons: []),
-///   sections: yourSections,
+///   // The root of your use case tree.
+///   root: root,
 /// );
 /// ```
 class WerkbankApp extends StatelessWidget {
@@ -25,7 +26,7 @@ class WerkbankApp extends StatelessWidget {
     this.lastUpdated,
     required this.appConfig,
     required this.addonConfig,
-    required this.sections,
+    required this.root,
     super.key,
   });
 
@@ -77,10 +78,11 @@ class WerkbankApp extends StatelessWidget {
   /// ```
   final AddonConfig addonConfig;
 
-  /// The sections of the [WerkbankApp].
+  /// The root of the use case tree.
+  ///
   /// This can be as simple as follows:
   /// ```dart
-  /// WerkbankSections get sections => WerkbankSections(
+  /// WerkbankRoot get root => WerkbankRoot(
   ///   children: [
   ///     WerkbankFolder(
   ///       name: 'My Folder',
@@ -104,11 +106,11 @@ class WerkbankApp extends StatelessWidget {
   ///
   /// Please note that using a getter is mandatory,
   /// for the hot reload to work properly.
-  final WerkbankSections sections;
+  final WerkbankRoot root;
 
   RootDescriptor _getRootDescriptor(BuildContext context) {
     try {
-      return RootDescriptor.fromWerkbankSections(sections);
+      return RootDescriptor.fromWerkbankRoot(root);
     } on DuplicateDescriptorPathsException catch (e, stackTrace) {
       final duplicatePaths = e.duplicatePaths;
       debugPrint(e.toString());
@@ -136,8 +138,8 @@ class WerkbankApp extends StatelessWidget {
         ),
         count: false,
       );
-      return RootDescriptor.fromWerkbankSections(
-        WerkbankSections(
+      return RootDescriptor.fromWerkbankRoot(
+        WerkbankRoot(
           children: [],
         ),
       );
@@ -161,7 +163,7 @@ class WerkbankApp extends StatelessWidget {
                   // It is important that the root descriptor is computed
                   // here in a build methods, since when a reassembly happens
                   // we need to re-compute the root descriptor even if the
-                  // sections are still identical.
+                  // WerkbankRoots are still identical.
                   // That way the controller manager will reassemble the
                   // controllers.
                   rootDescriptor: _getRootDescriptor(context),
@@ -298,7 +300,7 @@ class _WerkbankPersistance extends StatelessWidget {
           //
           // But this widget (SizedBox) is never visible either, since
           // [WerkbankPersistence] defers the first frame until
-          // the persistance is ready.
+          // the persistence is ready.
           // This way we avoid a jumping color effect when building the first
           // frames.
           const SizedBox.expand(),

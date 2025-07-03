@@ -1,4 +1,4 @@
-Werkbank provides a search feature in the navigation panel, helping to find specific Use Cases, Components, or Folders ([WerkbankNode](../werkbank/WerkbankNode-class.html)'s) within your [WerkbankSections](../werkbank/WerkbankSections-class.html). It does more than a simple text search and keeps the familiar tree structure, only hiding nodes that do not match your query. The search is designed to be flexible and extensible.
+Werkbank provides a search feature in the navigation panel, helping to find specific Use Cases, Components, or Folders ([WerkbankNode](../werkbank/WerkbankNode-class.html)'s) within your [WerkbankRoot](../werkbank/WerkbankRoot-class.html). It does more than a simple text search and keeps the familiar tree structure, only hiding nodes that do not match your query. The search is designed to be flexible and extensible.
 
 ## How Search Works
 
@@ -7,7 +7,7 @@ By default, search is fuzzy and case-insensitive. You can search for:
 - Use Case, Component, or Folder names
 - Tags
 - Descriptions
-- Constraint Preset names
+- Constraints Preset names
 - Knob Preset names
 
 Adding new searchable fields is straightforward. See [Adding Custom Search Entries](#adding-custom-search-entries) below.
@@ -32,7 +32,7 @@ You can target the following fields in your search:
 - `name` — Use Case, Component, or Folder name
 - `tag` — Tag
 - `desc` — Description
-- `cPreset` — Constraint Preset name
+- `cPreset` — Constraints Preset name
 - `kPreset` — Knob Preset name
 
 ## Adding Custom Search Entries
@@ -64,7 +64,7 @@ extension TagsComposerExtension on UseCaseComposer {
 This allows you to call `c.tags(['some', 'words'])` on [UseCaseComposer](../werkbank/UseCaseComposer-class.html). Each tag becomes a searchable entry.
 
 > [!Note]
-> All [SearchCluster's](../werkbank/SearchCluster-class.html) must be setup during composing the Use Cases. Thats why `addSearchCluster` is called on [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
+> All [SearchCluster's](../werkbank/SearchCluster-class.html) must be setup during composing the Use Cases. That's why `addSearchCluster` is called on [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
 
 ### Debugging search matches
 

@@ -27,22 +27,22 @@ class KnobsAddon extends Addon {
   );
 
   @override
-  List<UseCaseControlSection> buildConfigureTabControlSections(
+  List<ConfigureControlSection> buildConfigureTabControlSections(
     BuildContext context,
   ) {
-    final useCasePath = UseCaseControlSection.access.useCaseOf(context).path;
-    final knobsComposition = UseCaseControlSection.access
+    final useCasePath = ConfigureControlSection.access.useCaseOf(context).path;
+    final knobsComposition = ConfigureControlSection.access
         .compositionOf(context)
         .knobs;
     return [
-      UseCaseControlSection(
+      ConfigureControlSection(
         id: 'knobs',
         title: Text(context.sL10n.addons.knobs.name),
         children: [
           const KnobPresetSelector(),
           /* TODO(lzuttermeister): Should this be allowed?
                In the design, the divider goes up to the edges.
-               But that is reserverd for the control sections. */
+               But that is reserved for the control sections. */
           const WDivider.horizontal(),
           for (final knob in knobsComposition.knobs)
             KeyedSubtree(

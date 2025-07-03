@@ -47,15 +47,15 @@ class DescriptionAddon extends Addon {
   }
 
   @override
-  List<InfoControlSection> buildInspectTabControlSections(
+  List<InspectControlSection> buildInspectTabControlSections(
     BuildContext context,
   ) {
-    final metadata = InfoControlSection.access.metadataOf(context);
+    final metadata = InspectControlSection.access.metadataOf(context);
     final useCaseDescription = metadata.descriptions.useCaseDescription;
     final componentDescription = metadata.descriptions.componentDescription;
     final folderDescriptions =
         metadata.descriptions.folderDescriptions.reversed;
-    final sectionsDescription = metadata.descriptions.sectionsDescription;
+    final rootDescription = metadata.descriptions.rootDescription;
 
     final hasAnyDescription =
         useCaseDescription != null ||
@@ -66,7 +66,7 @@ class DescriptionAddon extends Addon {
 
     return [
       if (metadata.tags.isNotEmpty)
-        InfoControlSection(
+        InspectControlSection(
           id: 'tags',
           title: Text(context.sL10n.addons.description.tags),
           children: [
@@ -76,7 +76,7 @@ class DescriptionAddon extends Addon {
           ],
         ),
       if (hasAnyDescription)
-        InfoControlSection(
+        InspectControlSection(
           id: 'description',
           title: Text(context.sL10n.addons.description.description),
           children: [
@@ -103,17 +103,17 @@ class DescriptionAddon extends Addon {
                     ),
                   ),
                 ),
-            if (sectionsDescription != null)
+            if (rootDescription != null)
               DescriptionSection(
-                data: sectionsDescription.description,
+                data: rootDescription.description,
                 hint: Text(
-                  context.sL10n.addons.description.sections,
+                  context.sL10n.addons.description.root,
                 ),
               ),
           ],
         ),
       if (urls.isNotEmpty)
-        InfoControlSection(
+        InspectControlSection(
           id: 'urls',
           title: Text(context.sL10n.addons.description.links),
           children: [

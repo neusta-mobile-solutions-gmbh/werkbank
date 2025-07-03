@@ -1,0 +1,30 @@
+name: build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-example:
+    name: build example project
+    runs-on: ubuntu-latest
+    container: ghcr.io/cirruslabs/flutter:stable
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        working-directory: example/example_werkbank
+        run: flutter pub get
+
+      - name: Build web version of the example project
+        working-directory: example/example_werkbank
+        run: flutter build web --base-href /werkbank/
+
+      - name: Upload the generated artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: example/example_werkbank/build/web
+          retention-days: 90

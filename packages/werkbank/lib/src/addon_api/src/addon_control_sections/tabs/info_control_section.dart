@@ -1,20 +1,20 @@
 import 'package:werkbank/werkbank.dart';
 
-class InfoControlSection extends AddonControlSection {
-  const InfoControlSection({
+class InspectControlSection extends AddonControlSection {
+  const InspectControlSection({
     required super.id,
     required super.title,
     required super.children,
     super.sortHint = SortHint.central,
   });
 
-  static const access = InfoControlSectionAccessor();
+  static const access = InspectControlSectionAccessor();
 }
 
-class InfoControlSectionAccessor extends AddonControlSectionAccessor
+class InspectControlSectionAccessor extends AddonControlSectionAccessor
     with UseCaseAccessorMixin {
-  const InfoControlSectionAccessor();
+  const InspectControlSectionAccessor();
 
   @override
-  String get containerName => 'InfoControlSection';
+  String get containerName => 'InspectControlSection';
 }

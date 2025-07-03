@@ -1,20 +1,20 @@
 import 'package:werkbank/werkbank.dart';
 
-class UseCaseControlSection extends AddonControlSection {
-  const UseCaseControlSection({
+class ConfigureControlSection extends AddonControlSection {
+  const ConfigureControlSection({
     required super.id,
     required super.title,
     required super.children,
     super.sortHint = SortHint.central,
   });
 
-  static const access = UseCaseControlSectionAccessor();
+  static const access = ConfigureControlSectionAccessor();
 }
 
-class UseCaseControlSectionAccessor extends AddonControlSectionAccessor
+class ConfigureControlSectionAccessor extends AddonControlSectionAccessor
     with UseCaseAccessorMixin {
-  const UseCaseControlSectionAccessor();
+  const ConfigureControlSectionAccessor();
 
   @override
-  String get containerName => 'UseCaseControlSection';
+  String get containerName => 'ConfigureControlSection';
 }

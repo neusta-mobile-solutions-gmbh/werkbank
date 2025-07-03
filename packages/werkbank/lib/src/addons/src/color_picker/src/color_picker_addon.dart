@@ -47,11 +47,11 @@ class ColorPickerAddon extends Addon {
   }
 
   @override
-  List<InfoControlSection> buildInspectTabControlSections(
+  List<InspectControlSection> buildInspectTabControlSections(
     BuildContext context,
   ) {
     return [
-      InfoControlSection(
+      InspectControlSection(
         id: 'color_picker_section',
         title: Text(context.sL10n.addons.colorPicker.name),
         children: [const ColorPicker()],

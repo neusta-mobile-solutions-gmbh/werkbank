@@ -102,8 +102,8 @@ WerkbankRoot get root => WerkbankRoot(
           builder: wPathDisplayUseCase,
         ),
         WerkbankUseCase(
-          name: 'WPreviewHeight',
-          builder: wPreviewHeightUseCase,
+          name: 'WCollapsableHeight',
+          builder: wCollapsableHeightUseCase,
         ),
         WerkbankUseCase(
           name: 'WResizablePanels',

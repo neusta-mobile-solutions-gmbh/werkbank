@@ -5,7 +5,7 @@ const _loremIpsum = '''
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 ''';
 
-WidgetBuilder wPreviewHeightUseCase(UseCaseComposer c) {
+WidgetBuilder wCollapsableHeightUseCase(UseCaseComposer c) {
   final collapsedHeight = c.knobs.doubleSlider(
     'collapsedHeight',
     initialValue: 200,
@@ -21,7 +21,7 @@ WidgetBuilder wPreviewHeightUseCase(UseCaseComposer c) {
   );
 
   return (context) {
-    return WPreviewHeight(
+    return WCollapsableHeight(
       collapsedHeight: collapsedHeight.value,
       child: GestureDetector(
         onTap: () {

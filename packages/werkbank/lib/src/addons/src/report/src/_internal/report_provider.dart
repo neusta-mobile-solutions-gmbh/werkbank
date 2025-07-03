@@ -86,7 +86,7 @@ class _ReportProviderState extends State<ReportProvider> {
           id: 'shortcuts',
           title: 'Shortcuts',
           sortHint: SortHint(2000),
-          preview: true,
+          collapsable: true,
           content: ShortcutsComponent(),
         ),
       );

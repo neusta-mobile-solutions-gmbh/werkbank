@@ -9,7 +9,7 @@ abstract class Report {
     required this.title,
     required this.content,
     required this.sortHint,
-    required this.preview,
+    required this.collapsable,
   });
 
   final String id;
@@ -19,7 +19,7 @@ abstract class Report {
 
   final SortHint sortHint;
 
-  final bool preview;
+  final bool collapsable;
 
   bool display(ReportPersistentData data);
 }
@@ -30,7 +30,7 @@ class PermanentReport extends Report {
     required super.title,
     required super.content,
     super.sortHint = SortHint.central,
-    super.preview = false,
+    super.collapsable = false,
   });
 
   factory PermanentReport.markdown({
@@ -59,7 +59,7 @@ class AcceptableReport extends Report {
     required super.title,
     required super.content,
     super.sortHint = SortHint.central,
-    super.preview = false,
+    super.collapsable = false,
   });
 
   factory AcceptableReport.markdown({
@@ -90,7 +90,7 @@ class NewContentReport extends Report {
     required super.content,
     super.sortHint = SortHint.central,
     required this.publishDate,
-    super.preview = false,
+    super.collapsable = false,
   });
 
   factory NewContentReport.markdown({

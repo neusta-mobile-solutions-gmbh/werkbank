@@ -5,8 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Werkbank Components}
-class WPreviewHeight extends StatefulWidget {
-  const WPreviewHeight({
+class WCollapsableHeight extends StatefulWidget {
+  const WCollapsableHeight({
     this.collapsedHeight = 200,
     this.duration = Durations.medium1,
     this.curve = Curves.easeInOutSine,
@@ -20,10 +20,10 @@ class WPreviewHeight extends StatefulWidget {
   final Curve curve;
 
   @override
-  State<WPreviewHeight> createState() => _WPreviewHeightState();
+  State<WCollapsableHeight> createState() => _WCollapsableHeightState();
 }
 
-class _WPreviewHeightState extends State<WPreviewHeight>
+class _WCollapsableHeightState extends State<WCollapsableHeight>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
@@ -52,6 +52,16 @@ class _WPreviewHeightState extends State<WPreviewHeight>
       duration: widget.duration,
     );
     animation = CurveTween(curve: widget.curve).animate(controller);
+  }
+
+  @override
+  void didUpdateWidget(covariant WCollapsableHeight oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.duration != widget.duration ||
+        oldWidget.curve != widget.curve) {
+      controller.duration = widget.duration;
+      animation = CurveTween(curve: widget.curve).animate(controller);
+    }
   }
 
   @override

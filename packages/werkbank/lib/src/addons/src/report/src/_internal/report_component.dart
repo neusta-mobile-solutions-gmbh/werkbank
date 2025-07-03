@@ -48,15 +48,15 @@ class ReportComponent extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
                 backgroundColor: context.werkbankColorScheme.field,
                 child: Padding(
-                  padding: report.preview
+                  padding: report.collapsable
                       ? const EdgeInsets.fromLTRB(8, 8, 8, 48)
                       : const EdgeInsets.all(8),
                   child: report.content,
                 ),
               );
 
-              if (report.preview) {
-                widget = WPreviewHeight(child: widget);
+              if (report.collapsable) {
+                widget = WCollapsableHeight(child: widget);
               }
 
               return widget;

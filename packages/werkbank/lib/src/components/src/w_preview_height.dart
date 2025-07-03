@@ -7,58 +7,98 @@ import 'package:werkbank/src/werkbank_internal.dart';
 /// {@category Werkbank Components}
 class WPreviewHeight extends StatefulWidget {
   const WPreviewHeight({
-    required this.child,
     this.collapsedHeight = 200,
+    this.duration = Durations.medium1,
+    this.curve = Curves.easeInOutSine,
+    required this.child,
     super.key,
   });
 
   final double collapsedHeight;
   final Widget child;
+  final Duration duration;
+  final Curve curve;
 
   @override
   State<WPreviewHeight> createState() => _WPreviewHeightState();
 }
 
-class _WPreviewHeightState extends State<WPreviewHeight> {
-  late bool expand;
+class _WPreviewHeightState extends State<WPreviewHeight>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
+
   final GlobalKey _sizeKey = GlobalKey();
   double? recentHeight;
+
+  void toggleExpand() {
+    recentHeight = _sizeKey.currentContext?.size?.height;
+    switch (controller.status) {
+      case AnimationStatus.dismissed:
+      case AnimationStatus.reverse:
+        controller.forward();
+
+      case AnimationStatus.forward:
+      case AnimationStatus.completed:
+        controller.reverse();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    expand = false;
+    controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+    animation = CurveTween(curve: widget.curve).animate(controller);
   }
 
   @override
   Widget build(BuildContext context) {
-    return TweenAnimationBuilder(
-      curve: Curves.easeInOutSine,
-      duration: Durations.medium1,
-      tween: Tween<double>(begin: expand ? 1 : 0, end: expand ? 1 : 0),
-      builder: (context, t, child) {
-        final height = recentHeight != null
-            ? lerpDouble(widget.collapsedHeight, recentHeight, t)
-            : widget.collapsedHeight;
-        final gradientAlpha = lerpDouble(255, 0, t)!.toInt();
-        return Stack(
-          children: [
-            ClipRect(
-              child: ConstrainedBox(
+    final gradientColor = context.werkbankColorScheme.field;
+    return Stack(
+      fit: StackFit.passthrough,
+      children: [
+        ClipRect(
+          child: AnimatedBuilder(
+            animation: animation,
+            builder: (context, child) {
+              final t = animation.value;
+              final height = recentHeight != null
+                  ? lerpDouble(widget.collapsedHeight, recentHeight, t)
+                  : widget.collapsedHeight;
+              return ConstrainedBox(
                 constraints: BoxConstraints(
                   maxHeight: height ?? double.infinity,
                 ),
                 child: child,
+              );
+            },
+            child: OverflowBox(
+              maxHeight: double.infinity,
+              fit: OverflowBoxFit.deferToChild,
+              alignment: Alignment.topCenter,
+              child: KeyedSubtree(
+                key: _sizeKey,
+                child: widget.child,
               ),
             ),
-            Positioned.fill(
-              child: IgnorePointer(
-                child: DecoratedBox(
+          ),
+        ),
+        Positioned.fill(
+          child: IgnorePointer(
+            child: AnimatedBuilder(
+              animation: animation,
+              builder: (context, child) {
+                final t = animation.value;
+                final gradientAlpha = lerpDouble(255, 0, t)!.toInt();
+                return DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        context.werkbankColorScheme.field.withAlpha(0),
-                        context.werkbankColorScheme.field.withAlpha(
+                        gradientColor.withAlpha(0),
+                        gradientColor.withAlpha(
                           gradientAlpha,
                         ),
                       ],
@@ -66,40 +106,29 @@ class _WPreviewHeightState extends State<WPreviewHeight> {
                       end: const Alignment(0, .8),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: InkWell(
-                  onTap: () {
-                    recentHeight = _sizeKey.currentContext?.size?.height;
-                    setState(() {
-                      expand = !expand;
-                    });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: _Chevron(
-                      t: t,
-                    ),
+          ),
+        ),
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: InkWell(
+              onTap: toggleExpand,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: AnimatedBuilder(
+                  animation: animation,
+                  builder: (context, child) => _Chevron(
+                    t: animation.value,
                   ),
                 ),
               ),
             ),
-          ],
-        );
-      },
-      child: OverflowBox(
-        maxHeight: double.infinity,
-        fit: OverflowBoxFit.deferToChild,
-        alignment: Alignment.topCenter,
-        child: KeyedSubtree(
-          key: _sizeKey,
-          child: widget.child,
+          ),
         ),
-      ),
+      ],
     );
   }
 }
@@ -117,7 +146,7 @@ class _Chevron extends StatelessWidget {
     const height = 12.0;
     return CustomPaint(
       painter: _Painter(
-        width: 32,
+        width: width,
         height: lerpDouble(height, -height, t)!,
         color: context.werkbankColorScheme.logo,
       ),

@@ -9,6 +9,7 @@ abstract class Report {
     required this.title,
     required this.content,
     required this.sortHint,
+    required this.preview,
   });
 
   final String id;
@@ -17,6 +18,8 @@ abstract class Report {
   final Widget content;
 
   final SortHint sortHint;
+
+  final bool preview;
 
   bool display(ReportPersistentData data);
 }
@@ -27,6 +30,7 @@ class PermanentReport extends Report {
     required super.title,
     required super.content,
     super.sortHint = SortHint.central,
+    super.preview = false,
   });
 
   factory PermanentReport.markdown({
@@ -55,6 +59,7 @@ class AcceptableReport extends Report {
     required super.title,
     required super.content,
     super.sortHint = SortHint.central,
+    super.preview = false,
   });
 
   factory AcceptableReport.markdown({
@@ -85,6 +90,7 @@ class NewContentReport extends Report {
     required super.content,
     super.sortHint = SortHint.central,
     required this.publishDate,
+    super.preview = false,
   });
 
   factory NewContentReport.markdown({

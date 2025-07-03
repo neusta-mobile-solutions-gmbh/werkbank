@@ -29,6 +29,7 @@ export 'src/w_outline_box.dart';
 export 'src/w_overview_tile.dart';
 export 'src/w_path_display.dart';
 export 'src/w_path_text.dart';
+export 'src/w_preview_height.dart';
 export 'src/w_project_info_area.dart';
 export 'src/w_resizable_panels/panel_controller.dart';
 export 'src/w_resizable_panels/panel_controller_provider.dart';

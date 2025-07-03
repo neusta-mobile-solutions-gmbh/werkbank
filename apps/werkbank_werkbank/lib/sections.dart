@@ -15,6 +15,7 @@ import 'package:werkbank_werkbank/component_use_cases/w_keyboard_button_use_case
 import 'package:werkbank_werkbank/component_use_cases/w_notification_use_cases.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_overview_tile_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_path_display_use_case.dart';
+import 'package:werkbank_werkbank/component_use_cases/w_preview_height_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_project_info_area_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_resizable_panels_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_shortcut_use_case.dart';
@@ -99,6 +100,10 @@ WerkbankSections get sections => WerkbankSections(
         WerkbankUseCase(
           name: 'WPathDisplay',
           builder: wPathDisplayUseCase,
+        ),
+        WerkbankUseCase(
+          name: 'WPreviewHeight',
+          builder: wPreviewHeightUseCase,
         ),
         WerkbankUseCase(
           name: 'WResizablePanels',

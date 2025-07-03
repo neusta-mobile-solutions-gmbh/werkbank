@@ -66,24 +66,28 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
   }
 }
 
-class WerkbankThemePersistentController extends PersistentController {
-  WerkbankThemePersistentController({
-    required super.prefsWithCache,
-  });
+class WerkbankThemePersistentController
+    extends PersistentController<WerkbankThemePersistentController> {
+  WerkbankThemePersistentController() : super(id: 'werkbank_theme');
 
   @override
-  String get id => 'werkbank_theme';
-
-  @override
-  void init(String? unsafeJson) {
-    themeName = unsafeJson ?? 'Werkbank Light';
+  void tryLoadFromJson(Object? json) {
+    if (json is String) {
+      themeName = json;
+      notifyListeners();
+    }
   }
 
-  late String themeName;
+  @override
+  Object? toJson() {
+    return themeName;
+  }
+
+  // TODO: private
+  String themeName = 'Werkbank Light';
 
   void setTheme(String newThemeName) {
     themeName = newThemeName;
-    setJson(themeName);
     notifyListeners();
   }
 }

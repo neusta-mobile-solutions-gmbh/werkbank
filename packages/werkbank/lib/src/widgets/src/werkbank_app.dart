@@ -262,13 +262,11 @@ class _WerkbankPersistance extends StatelessWidget {
       context,
     ).descendants.map((e) => e.path).toSet();
     return WerkbankPersistence(
-      controllerMapFactory: (prefsWithCache) {
-        final wasAliveController = WasAliveController(
-          prefsWithCache: prefsWithCache,
-        );
+      persistentControllers: (prefsWithCache) {
+        final wasAliveController = WasAliveController();
         return {
           for (final addon in addonConfig.addons)
-            ...addon.controllerMapFactory(prefsWithCache),
+            ...addon.createPersistentControllers(),
           HistoryController: HistoryControllerImpl(
             prefsWithCache: prefsWithCache,
           ),

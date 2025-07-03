@@ -16,12 +16,9 @@ class WerkbankThemeAddon extends Addon {
   ];
 
   @override
-  ControllerMapFactory get controllerMapFactory =>
-      (prefsWithCache) => {
-        WerkbankThemePersistentController: WerkbankThemePersistentController(
-          prefsWithCache: prefsWithCache,
-        ),
-      };
+  List<PersistentController> createPersistentControllers() => [
+    WerkbankThemePersistentController(),
+  ];
 
   @override
   AddonLayerEntries get layers => AddonLayerEntries(

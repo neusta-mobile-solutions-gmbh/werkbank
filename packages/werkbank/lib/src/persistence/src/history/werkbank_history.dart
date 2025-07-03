@@ -9,9 +9,8 @@ class WerkbankHistory {
   });
 
   // Throws FormatException if the JSON is invalid or contains invalid data.
-  static WerkbankHistory fromJson(String json) {
-    final map = jsonDecode(json) as Map<String, dynamic>;
-    if (map case {'entries': final List<dynamic> entries}) {
+  static WerkbankHistory fromJson(Object? json) {
+    if (json case {'entries': final List<dynamic> entries}) {
       return WerkbankHistory(
         entries: IList<WerkbankHistoryEntry>(
           entries.map((dynamic entry) {
@@ -36,10 +35,12 @@ class WerkbankHistory {
     }
   }
 
-  String toJson() {
-    return jsonEncode(<String, dynamic>{
-      'entries': entries.map((e) => e.toMap()).toList(),
-    });
+  Object? toJson() {
+    return {
+      'entries': [
+        for (final entry in entries) entry.toJson(),
+      ],
+    };
   }
 
   final IList<WerkbankHistoryEntry> entries;
@@ -57,7 +58,7 @@ class WerkbankHistoryEntry with EquatableMixin {
     required this.timestamp,
   });
 
-  Map<String, dynamic> toMap() {
+  Object? toJson() {
     return <String, dynamic>{
       'path': path,
       'timestamp': timestamp.toIso8601String(),

@@ -16,7 +16,7 @@ class PanelTabsPersistentData {
 
   final IMap<PanelTab, TabSectionData> tabs;
 
-  static PanelTabsPersistentData fromJson(dynamic json) {
+  static PanelTabsPersistentData fromJson(Object? json) {
     if (json case {'tabs': final Map<String, dynamic> tabs}) {
       return PanelTabsPersistentData(
         tabs: {
@@ -40,14 +40,13 @@ class PanelTabsPersistentData {
     }
   }
 
-  dynamic toJson() {
-    final map = <String, dynamic>{
+  Object? toJson() {
+    return {
       'tabs': {
         for (final entry in tabs.entries)
           entry.key._jsonKey: entry.value.toJson(),
       },
     };
-    return map;
   }
 
   PanelTabsPersistentData copyWith({

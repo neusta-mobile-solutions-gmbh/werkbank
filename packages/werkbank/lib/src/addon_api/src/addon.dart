@@ -20,6 +20,9 @@ abstract class Addon {
     BuildContext context,
   ) => [];
 
+  // TODO: Document
+  List<PersistentController> createPersistentControllers() => [];
+
   /// Creates [TransientUseCaseStateEntry]s which are attached to the
   /// [UseCaseComposer] at the beginning of the use case setup.
   /// The created transient state entries can be retrieved via the
@@ -90,12 +93,6 @@ abstract class Addon {
   ) => [];
 
   AddonLayerEntries get layers => AddonLayerEntries();
-
-  /// Experimental: This is not tested and might change in the future or even
-  /// be removed.
-  @experimental
-  ControllerMapFactory get controllerMapFactory =>
-      (prefsWithCache) => {};
 
   /// Add a description to the addon. This may be used in multiple ways
   /// and places in the future.

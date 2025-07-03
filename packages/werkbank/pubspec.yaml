@@ -42,9 +42,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/components/background/
   fonts:
     - family: Werkbank Icons
       fonts:

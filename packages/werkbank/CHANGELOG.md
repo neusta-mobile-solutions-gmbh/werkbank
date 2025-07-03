@@ -1,8 +1,10 @@
-- Make small changes to the tree UI to make it easier to overview the items and find the selected item.
 
-# 0.15.2
+# 0.16.0
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.
 - Fix that pointer could interact with use case while trying to change constraints.
+- Make small changes to the tree UI to make it easier to overview the items and find the selected item.
+- Rename `WerkbankSections` to `WerkbankRoot`. **(BREAKING CHANGE)**
+  - This also means that the `sections` parameter of `WerkbankApp` has been renamed to `root`.
 
 # 0.15.1
 - Make some improvements to use case descriptions

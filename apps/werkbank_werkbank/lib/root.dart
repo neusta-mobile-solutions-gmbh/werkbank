@@ -39,7 +39,7 @@ import 'package:werkbank_werkbank/feature_use_cases/semantics_use_cases.dart';
 import 'package:werkbank_werkbank/feature_use_cases/sizing_use_case.dart';
 import 'package:werkbank_werkbank/feature_use_cases/wrapping_use_cases.dart';
 
-WerkbankSections get sections => WerkbankSections(
+WerkbankRoot get root => WerkbankRoot(
   builder: (c) {
     c.background.named('T: Surface');
   },

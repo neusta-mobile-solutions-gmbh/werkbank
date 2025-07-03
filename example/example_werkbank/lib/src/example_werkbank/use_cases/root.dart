@@ -3,7 +3,7 @@ import 'package:example_werkbank/src/example_werkbank/use_cases/pages/pages.dart
 import 'package:example_werkbank/src/example_werkbank/use_cases/theme_use_cases.dart';
 import 'package:werkbank/werkbank.dart';
 
-WerkbankSections get sections => WerkbankSections(
+WerkbankRoot get root => WerkbankRoot(
   children: [
     componentsFolder,
     pagesFolder,

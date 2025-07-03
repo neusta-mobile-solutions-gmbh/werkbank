@@ -55,7 +55,7 @@ class DescriptionAddon extends Addon {
     final componentDescription = metadata.descriptions.componentDescription;
     final folderDescriptions =
         metadata.descriptions.folderDescriptions.reversed;
-    final sectionsDescription = metadata.descriptions.sectionsDescription;
+    final rootDescription = metadata.descriptions.rootDescription;
 
     final hasAnyDescription =
         useCaseDescription != null ||
@@ -103,11 +103,11 @@ class DescriptionAddon extends Addon {
                     ),
                   ),
                 ),
-            if (sectionsDescription != null)
+            if (rootDescription != null)
               DescriptionSection(
-                data: sectionsDescription.description,
+                data: rootDescription.description,
                 hint: Text(
-                  context.sL10n.addons.description.sections,
+                  context.sL10n.addons.description.root,
                 ),
               ),
           ],

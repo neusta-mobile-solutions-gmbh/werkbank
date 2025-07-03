@@ -256,7 +256,7 @@ class TranslationsAddonsDescriptionEn {
 	// Translations
 	String component({required Object name}) => '${name} (Component)';
 	String folder({required Object name}) => '${name} (Folder)';
-	String get sections => '(Sections)';
+	String get root => '(Root)';
 	String get tags => 'Tags';
 	String get description => 'Description';
 	String get links => 'External Links';
@@ -904,7 +904,7 @@ extension on Translations {
 			case 'addons.colorPicker.controls.colorPicker.values.pickedColor': return 'Picked Color';
 			case 'addons.description.component': return ({required Object name}) => '${name} (Component)';
 			case 'addons.description.folder': return ({required Object name}) => '${name} (Folder)';
-			case 'addons.description.sections': return '(Sections)';
+			case 'addons.description.root': return '(Root)';
 			case 'addons.description.tags': return 'Tags';
 			case 'addons.description.description': return 'Description';
 			case 'addons.description.links': return 'External Links';

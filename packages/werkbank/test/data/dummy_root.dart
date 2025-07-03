@@ -2,7 +2,7 @@ import 'package:werkbank/werkbank.dart';
 
 import 'dummy_use_cases.dart';
 
-WerkbankSections get dummySections => WerkbankSections(
+WerkbankRoot get dummyRoot => WerkbankRoot(
   children: [
     WerkbankFolder(
       name: 'Dummy Folder',

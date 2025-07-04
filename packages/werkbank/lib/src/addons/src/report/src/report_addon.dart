@@ -22,12 +22,9 @@ class ReportAddon extends Addon {
   final bool showFeatureIntroductions;
 
   @override
-  ControllerMapFactory get controllerMapFactory =>
-      (prefsWithCache) => {
-        ReportPersistentController: ReportPersistentController(
-          prefsWithCache: prefsWithCache,
-        ),
-      };
+  List<PersistentController> createPersistentControllers() => [
+    ReportPersistentController(),
+  ];
 
   @override
   AddonLayerEntries get layers {

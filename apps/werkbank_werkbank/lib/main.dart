@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/werkbank.dart';
-import 'package:werkbank_werkbank/nms/nms_logo.dart';
 import 'package:werkbank_werkbank/root.dart';
 
 void main() {

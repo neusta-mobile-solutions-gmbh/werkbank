@@ -4,6 +4,7 @@
 - Fix that pointer could interact with use case while trying to change constraints.
 - Make small changes to the tree UI to make it easier to overview the items and find the selected item.
 - Change icons of use cases and components.
+- Add `WerkbankLogo` widget.
 - Rename `WerkbankSections` to `WerkbankRoot`. **(BREAKING CHANGE)**
   - This also means that the `sections` parameter of `WerkbankApp` has been renamed to `root`.
 - Rename `UseCaseControlSection` to `ConfigureControlSection` and `InfoControlSection` to `InspectControlSection`. **(BREAKING CHANGE)**

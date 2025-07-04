@@ -22,6 +22,7 @@
 - Fix that semantics inspector in "Inspection" mode would not allow to select semantic boxes in the main view on web.
 - Add custom semantics actions to semantics inspector.
 - Add advanced search features. TL;DR: `fuzzy text`, `<field>:fuzzy text`, `"precise text"`, `<field>:"precise text"`
+- Add ability to check if an addon is active using the `UseCaseComposer` by doing `c.isAddonActive(SomeAddon.addonId)`.
 - Replace a few dependencies and fix lints to make pub.dev happy.
 
 # 0.15.0

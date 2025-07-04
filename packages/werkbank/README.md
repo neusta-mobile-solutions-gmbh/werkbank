@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/2fbb22660cd5985d842e74d38fe98a5b5c60c4f5/packages/werkbank/pub_images/logo.png" alt="Werkbank"/><br/><br/>
+  <img src="https://raw.githubusercontent.com/neusta-mobile-solutions-gmbh/werkbank/bb74636725009157442cc92666858f5216ccef9c/assets/banner.png" alt="Werkbank"/><br/><br/>
   <span>A powerful tool that helps you develop, test, visualize, and organize your Flutter UI components.</span>
 </p>
 

@@ -11,7 +11,7 @@ class ExampleWerkbankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return WerkbankApp(
       name: 'Example Werkbank',
-      logo: const FlutterLogo(),
+      logo: const WerkbankLogo(),
       appConfig: appConfig,
       addonConfig: addonConfig,
       root: root,

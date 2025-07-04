@@ -37,6 +37,7 @@ import 'package:werkbank_werkbank/feature_use_cases/notification_use_case.dart';
 import 'package:werkbank_werkbank/feature_use_cases/search_use_cases.dart';
 import 'package:werkbank_werkbank/feature_use_cases/semantics_use_cases.dart';
 import 'package:werkbank_werkbank/feature_use_cases/sizing_use_case.dart';
+import 'package:werkbank_werkbank/feature_use_cases/werkbank_logo_use_case.dart';
 import 'package:werkbank_werkbank/feature_use_cases/wrapping_use_cases.dart';
 
 WerkbankRoot get root => WerkbankRoot(
@@ -316,6 +317,10 @@ WerkbankRoot get root => WerkbankRoot(
         WerkbankUseCase(
           name: 'Notification',
           builder: notificationUseCase,
+        ),
+        WerkbankUseCase(
+          name: 'WerkbankLogo',
+          builder: werkbankLogoUseCase,
         ),
         searchDemoFolder,
         descriptionSection,

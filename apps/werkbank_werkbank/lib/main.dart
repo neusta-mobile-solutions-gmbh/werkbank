@@ -113,7 +113,7 @@ class WerkbankWerkbank extends StatelessWidget {
 
     return WerkbankApp(
       name: 'Werkbank',
-      logo: const NmsLogo(),
+      logo: const WerkbankLogo(),
       lastUpdated: lastUpdated,
       appConfig: AppConfig.material(),
       root: root,

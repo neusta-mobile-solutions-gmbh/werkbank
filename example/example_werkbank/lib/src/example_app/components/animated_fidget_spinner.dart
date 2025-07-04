@@ -316,7 +316,7 @@ class _FidgetPainter extends CustomPainter {
     );
     path.close();
 
-    Paint paint = Paint()..color = color;
+    final paint = Paint()..color = color;
     const pathSize = 240;
     final squareSize = min(size.width, size.height);
     canvas.translate(

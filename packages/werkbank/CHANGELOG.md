@@ -1,4 +1,3 @@
-
 # 0.16.0
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.
 - Fix that pointer could interact with use case while trying to change constraints.
@@ -11,6 +10,7 @@
   - This change should only affect custom addon authors.
   - The tabs had been renamed from "USE CASE" to "CONFIGURE" and from "INFO" to "INSPECT" some time ago. However these classes were missed.
 - Rename `UseCaseMetadataBuilder` to `UseCaseParentBuilder`. **(BREAKING CHANGE)**
+- Extend `Report`'s to be collapsible when enabled; this is now used for shortcuts on the homepage.
 
 # 0.15.1
 - Make some improvements to use case descriptions

@@ -10,6 +10,7 @@ export 'src/w_bordered_box.dart';
 export 'src/w_button_base.dart';
 export 'src/w_checkerboard_background.dart';
 export 'src/w_chip.dart';
+export 'src/w_collapsible_height.dart';
 export 'src/w_control_item.dart';
 export 'src/w_control_section_list.dart';
 export 'src/w_delayed_reveal.dart';

@@ -4,6 +4,7 @@ import 'package:werkbank_werkbank/component_use_cases/w_animated_visibility_use_
 import 'package:werkbank_werkbank/component_use_cases/w_bordered_box_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_button_base_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_chip_use_case.dart';
+import 'package:werkbank_werkbank/component_use_cases/w_collapsible_height_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_control_item_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_control_section_list_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_delayed_reveal_use_case.dart';
@@ -100,6 +101,10 @@ WerkbankRoot get root => WerkbankRoot(
         WerkbankUseCase(
           name: 'WPathDisplay',
           builder: wPathDisplayUseCase,
+        ),
+        WerkbankUseCase(
+          name: 'WCollapsibleHeight',
+          builder: wCollapsibleHeightUseCase,
         ),
         WerkbankUseCase(
           name: 'WResizablePanels',

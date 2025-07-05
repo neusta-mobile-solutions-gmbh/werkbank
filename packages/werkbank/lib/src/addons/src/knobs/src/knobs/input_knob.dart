@@ -115,6 +115,19 @@ class _InputKnobState<T> extends State<_InputKnob<T>> {
   late TextEditingController _textEditingController;
   final _focusNode = FocusNode();
   TextSpan? _errorLabel;
+  (String, InputParseResult<T>)? _parseCache;
+
+  InputParseResult<T> get _parseResult {
+    final input = _textEditingController.text;
+    switch (_parseCache) {
+      case (final cacheInput, final parseResult) when cacheInput == input:
+        return parseResult;
+      case _:
+        final parseResult = widget.parser(input);
+        _parseCache = (input, parseResult);
+        return parseResult;
+    }
+  }
 
   @override
   void initState() {
@@ -140,6 +153,7 @@ class _InputKnobState<T> extends State<_InputKnob<T>> {
       sync = true;
     }
     if (oldWidget.parser != widget.parser) {
+      _parseCache = null;
       if (!_focusNode.hasFocus) {
         _updateFromText(updateValue: false);
       }
@@ -160,8 +174,7 @@ class _InputKnobState<T> extends State<_InputKnob<T>> {
   }
 
   void _updateFromText({bool updateValue = true}) {
-    final result = widget.parser(_textEditingController.text);
-    switch (result) {
+    switch (_parseResult) {
       case InputParseSuccess(:final value):
         setState(() => _errorLabel = null);
         if (updateValue) {

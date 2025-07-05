@@ -8,7 +8,7 @@
   - This also means that the `sections` parameter of `WerkbankApp` has been renamed to `root`.
 - Rename `UseCaseControlSection` to `ConfigureControlSection` and `InfoControlSection` to `InspectControlSection`. **(BREAKING CHANGE)**
   - This change should only affect custom addon authors.
-  - The tabs had been renamed from "USE CASE" to "CONFIGURE" and from "INFO" to "INSPECT" some time ago. However these classes were missed.
+  - The tabs had been renamed from "USE CASE" to "CONFIGURE" and from "INFO" to "INSPECT" some time ago. However, these classes were missed.
 - Rename `UseCaseMetadataBuilder` to `UseCaseParentBuilder`. **(BREAKING CHANGE)**
 - Extend `Report`'s to be collapsible when enabled; this is now used for shortcuts on the homepage.
 

@@ -6,7 +6,7 @@ extension StringKnobExtension on KnobsComposer {
     String label, {
     required String initialValue,
   }) {
-    return input<String>(
+    return input(
       label,
       initialValue: initialValue,
       parser: InputParseSuccess.new,
@@ -18,7 +18,7 @@ extension StringKnobExtension on KnobsComposer {
     String label, {
     required String initialValue,
   }) {
-    return inputMultiLine<String>(
+    return inputMultiLine(
       label,
       initialValue: initialValue,
       parser: InputParseSuccess.new,
@@ -33,7 +33,7 @@ extension NullableStringKnobExtension on NullableKnobs {
     required String initialValue,
     bool initiallyNull = false,
   }) {
-    return input<String>(
+    return input(
       label,
       initialValue: initialValue,
       parser: InputParseSuccess.new,
@@ -47,7 +47,7 @@ extension NullableStringKnobExtension on NullableKnobs {
     required String initialValue,
     bool initiallyNull = false,
   }) {
-    return inputMultiLine<String>(
+    return inputMultiLine(
       label,
       initialValue: initialValue,
       parser: InputParseSuccess.new,

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/knobs/knobs.dart';
-import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/werkbank.dart';
 
 extension InputKnobExt on KnobsComposer {
   WritableKnob<T> input<T>(
     String label, {
     required T initialValue,
     required InputParser<T> parser,
-    required InputFormatter<T> formatter,
+    required ValueFormatter<T> formatter,
   }) {
     return makeRegularKnob(
       label,
@@ -27,7 +26,7 @@ extension InputKnobExt on KnobsComposer {
     String label, {
     required T initialValue,
     required InputParser<T> parser,
-    required InputFormatter<T> formatter,
+    required ValueFormatter<T> formatter,
   }) {
     return makeRegularKnob(
       label,
@@ -50,7 +49,7 @@ extension NullableInputKnobExt on NullableKnobs {
     String label, {
     required T initialValue,
     required InputParser<T> parser,
-    required InputFormatter<T> formatter,
+    required ValueFormatter<T> formatter,
     bool initiallyNull = false,
   }) {
     return makeNullableKnob(
@@ -72,7 +71,7 @@ extension NullableInputKnobExt on NullableKnobs {
     String label, {
     required T initialValue,
     required InputParser<T> parser,
-    required InputFormatter<T> formatter,
+    required ValueFormatter<T> formatter,
     bool initiallyNull = false,
   }) {
     return makeNullableKnob(
@@ -103,7 +102,7 @@ class _InputKnob<T> extends StatefulWidget {
 
   final ValueNotifier<T> valueNotifier;
   final InputParser<T> parser;
-  final InputFormatter<T> formatter;
+  final ValueFormatter<T> formatter;
   final bool isMultiLine;
   final bool enabled;
 
@@ -227,7 +226,6 @@ class _InputKnobState<T> extends State<_InputKnob<T>> {
 }
 
 typedef InputParser<T> = InputParseResult<T> Function(String input);
-typedef InputFormatter<T> = String Function(T value);
 
 sealed class InputParseResult<T> {
   const InputParseResult();

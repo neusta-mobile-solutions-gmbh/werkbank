@@ -71,8 +71,8 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       min: const TimeOfDay(hour: 0, minute: 0),
       max: const TimeOfDay(hour: 24, minute: 0),
       divisions: 60 * 60,
-      doubleEncoder: _timeOfDayEncoder,
-      doubleDecoder: _timeOfDayDecoder,
+      encoder: _timeOfDayEncoder,
+      decoder: _timeOfDayDecoder,
       valueFormatter: _timeOfDayFormatter,
     ),
     c.knobs.customSwitch(
@@ -136,8 +136,8 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       min: const TimeOfDay(hour: 0, minute: 0),
       max: const TimeOfDay(hour: 24, minute: 0),
       divisions: 60 * 60,
-      doubleEncoder: _timeOfDayEncoder,
-      doubleDecoder: _timeOfDayDecoder,
+      encoder: _timeOfDayEncoder,
+      decoder: _timeOfDayDecoder,
       valueFormatter: _timeOfDayFormatter,
     ),
     c.knobs.nullable.customSwitch(

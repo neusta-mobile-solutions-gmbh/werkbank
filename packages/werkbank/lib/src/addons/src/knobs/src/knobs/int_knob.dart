@@ -15,8 +15,8 @@ extension IntKnobExtension on KnobsComposer {
       min: min,
       max: max,
       divisions: max - min,
-      doubleEncoder: (v) => v.toDouble(),
-      doubleDecoder: (d) => d.toInt(),
+      encoder: (v) => v.toDouble(),
+      decoder: (d) => d.toInt(),
       valueFormatter: valueFormatter,
     );
   }
@@ -38,13 +38,11 @@ extension NullableIntKnobExtension on NullableKnobs {
       min: min,
       max: max,
       divisions: max - min,
-      doubleEncoder: (v) => v.toDouble(),
-      doubleDecoder: (d) => d.toInt(),
+      encoder: (v) => v.toDouble(),
+      decoder: (d) => d.toInt(),
       valueFormatter: valueFormatter,
     );
   }
 }
-
-typedef IntFormatter = String Function(int value);
 
 String _defaultFormatter(int value) => value.toString();

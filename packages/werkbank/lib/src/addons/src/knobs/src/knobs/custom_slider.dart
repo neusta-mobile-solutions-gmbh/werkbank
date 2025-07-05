@@ -9,8 +9,8 @@ extension CustomSliderKnobExtension on KnobsComposer {
     required T min,
     required T max,
     int? divisions,
-    required DoubleEncoder<T> doubleEncoder,
-    required DoubleDecoder<T> doubleDecoder,
+    required DoubleEncoder<T> encoder,
+    required DoubleDecoder<T> decoder,
     required ValueFormatter<T> valueFormatter,
   }) {
     return makeRegularKnob(
@@ -21,8 +21,8 @@ extension CustomSliderKnobExtension on KnobsComposer {
         min: min,
         max: max,
         divisions: divisions,
-        doubleEncoder: doubleEncoder,
-        doubleDecoder: doubleDecoder,
+        encoder: encoder,
+        decoder: decoder,
         valueFormatter: valueFormatter,
         enabled: true,
       ),
@@ -38,8 +38,8 @@ extension NullableCustomKnobExtension on NullableKnobs {
     required T min,
     required T max,
     int? divisions,
-    required DoubleEncoder<T> doubleEncoder,
-    required DoubleDecoder<T> doubleDecoder,
+    required DoubleEncoder<T> encoder,
+    required DoubleDecoder<T> decoder,
     required ValueFormatter<T> valueFormatter,
   }) {
     return makeNullableKnob(
@@ -51,8 +51,8 @@ extension NullableCustomKnobExtension on NullableKnobs {
         min: min,
         max: max,
         divisions: divisions,
-        doubleEncoder: doubleEncoder,
-        doubleDecoder: doubleDecoder,
+        encoder: encoder,
+        decoder: decoder,
         valueFormatter: valueFormatter,
         enabled: enabled,
       ),
@@ -67,8 +67,8 @@ class _CustomSliderKnob<T> extends StatelessWidget {
     required this.max,
     required this.divisions,
     required this.valueFormatter,
-    required this.doubleDecoder,
-    required this.doubleEncoder,
+    required this.decoder,
+    required this.encoder,
     required this.enabled,
   });
 
@@ -77,26 +77,21 @@ class _CustomSliderKnob<T> extends StatelessWidget {
   final T max;
   final int? divisions;
   final ValueFormatter<T> valueFormatter;
-  final DoubleDecoder<T> doubleDecoder;
-  final DoubleEncoder<T> doubleEncoder;
+  final DoubleDecoder<T> decoder;
+  final DoubleEncoder<T> encoder;
   final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return WSlider(
-      value: doubleEncoder(valueNotifier.value),
-      min: doubleEncoder(min),
-      max: doubleEncoder(max),
+      value: encoder(valueNotifier.value),
+      min: encoder(min),
+      max: encoder(max),
       divisions: divisions,
-      valueFormatter: (d) => valueFormatter(doubleDecoder(d)),
+      valueFormatter: (d) => valueFormatter(decoder(d)),
       onChanged: enabled
-          ? (value) => valueNotifier.value = doubleDecoder(value)
+          ? (value) => valueNotifier.value = decoder(value)
           : null,
     );
   }
 }
-
-typedef ValueFormatter<T> = String Function(T value);
-
-typedef DoubleEncoder<T> = double Function(T value);
-typedef DoubleDecoder<T> = T Function(double value);

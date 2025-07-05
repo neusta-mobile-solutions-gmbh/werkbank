@@ -16,8 +16,8 @@ extension DoubleKnobExtension on KnobsComposer {
       min: min,
       max: max,
       divisions: divisions,
-      doubleEncoder: (v) => v,
-      doubleDecoder: (d) => d,
+      encoder: (v) => v,
+      decoder: (d) => d,
       valueFormatter: valueFormatter,
     );
   }
@@ -40,8 +40,8 @@ extension NullableDoubleKnobExtension on NullableKnobs {
       min: min,
       max: max,
       divisions: divisions,
-      doubleEncoder: (v) => v,
-      doubleDecoder: (d) => d,
+      encoder: (v) => v,
+      decoder: (d) => d,
       valueFormatter: valueFormatter,
     );
   }

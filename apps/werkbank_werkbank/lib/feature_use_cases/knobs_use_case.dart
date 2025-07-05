@@ -53,6 +53,36 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       'Date',
       initialValue: DateTime.now(),
     ),
+    c.knobs.customField(
+      'BigInt Input',
+      initialValue: BigInt.zero,
+      parser: _bigIntInputParser,
+      formatter: _bigIntInputFormatter,
+    ),
+    c.knobs.customFieldMultiLine(
+      'String List Input',
+      initialValue: const ['Line 1', 'Line 2', 'Line 3'],
+      parser: _stringListInputParser,
+      formatter: _stringListInputFormatter,
+    ),
+    c.knobs.customSlider(
+      'Time Of Day',
+      initialValue: const TimeOfDay(hour: 0, minute: 0),
+      min: const TimeOfDay(hour: 0, minute: 0),
+      max: const TimeOfDay(hour: 24, minute: 0),
+      divisions: 60 * 60,
+      encoder: _timeOfDayEncoder,
+      decoder: _timeOfDayDecoder,
+      valueFormatter: _timeOfDayFormatter,
+    ),
+    c.knobs.customSwitch(
+      'Brighness',
+      initialValue: Brightness.dark,
+      leftValue: Brightness.dark,
+      rightValue: Brightness.light,
+      leftLabel: 'DARK',
+      rightLabel: 'LIGHT',
+    ),
     // Nullable
     c.knobs.nullable.boolean(
       'Nullable Boolean',
@@ -87,6 +117,36 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     c.knobs.nullable.date(
       'Nullable Date',
       initialValue: DateTime.now(),
+    ),
+    c.knobs.nullable.customField(
+      'Nullable BigInt Input',
+      initialValue: BigInt.zero,
+      parser: _bigIntInputParser,
+      formatter: _bigIntInputFormatter,
+    ),
+    c.knobs.nullable.customFieldMultiLine(
+      'Nullable String List Input',
+      initialValue: const ['Line 1', 'Line 2', 'Line 3'],
+      parser: _stringListInputParser,
+      formatter: _stringListInputFormatter,
+    ),
+    c.knobs.nullable.customSlider(
+      'Nullable Time Of Day',
+      initialValue: const TimeOfDay(hour: 0, minute: 0),
+      min: const TimeOfDay(hour: 0, minute: 0),
+      max: const TimeOfDay(hour: 24, minute: 0),
+      divisions: 60 * 60,
+      encoder: _timeOfDayEncoder,
+      decoder: _timeOfDayDecoder,
+      valueFormatter: _timeOfDayFormatter,
+    ),
+    c.knobs.nullable.customSwitch(
+      'Nullable Brighness',
+      initialValue: Brightness.dark,
+      leftValue: Brightness.dark,
+      rightValue: Brightness.light,
+      leftLabel: 'DARK',
+      rightLabel: 'LIGHT',
     ),
   ];
 
@@ -200,4 +260,50 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       ),
     );
   };
+}
+
+InputParseResult<BigInt> _bigIntInputParser(String input) {
+  final trimmedInput = input.trim();
+  if (trimmedInput.isEmpty) {
+    return InputParseSuccess(BigInt.zero);
+  }
+  final parsedValue = BigInt.tryParse(trimmedInput);
+  if (parsedValue != null) {
+    return InputParseSuccess(parsedValue);
+  } else {
+    return InputParseError('Invalid BigInt Format');
+  }
+}
+
+String _bigIntInputFormatter(BigInt value) {
+  return value.toString();
+}
+
+InputParseResult<List<String>> _stringListInputParser(String input) {
+  final trimmedInput = input.trim();
+  if (trimmedInput.isEmpty) {
+    return const InputParseSuccess([]);
+  }
+  final parsedValue = trimmedInput.split('\n').map((e) => e.trim()).toList();
+  return InputParseSuccess(parsedValue);
+}
+
+String _stringListInputFormatter(List<String> value) {
+  return value.join('\n');
+}
+
+TimeOfDay _timeOfDayDecoder(double value) {
+  final hours = value ~/ 60;
+  final minutes = (value % 60).toInt();
+  return TimeOfDay(hour: hours, minute: minutes);
+}
+
+double _timeOfDayEncoder(TimeOfDay time) {
+  return (time.hour * 60 + time.minute).toDouble();
+}
+
+String _timeOfDayFormatter(TimeOfDay time) {
+  final hours = time.hour.toString().padLeft(2, '0');
+  final minutes = time.minute.toString().padLeft(2, '0');
+  return '$hours:$minutes';
 }

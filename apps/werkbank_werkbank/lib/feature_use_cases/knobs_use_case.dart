@@ -65,6 +65,16 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       parser: _stringListInputParser,
       formatter: _stringListInputFormatter,
     ),
+    c.knobs.customSlider(
+      'Time Of Day',
+      initialValue: const TimeOfDay(hour: 0, minute: 0),
+      min: const TimeOfDay(hour: 0, minute: 0),
+      max: const TimeOfDay(hour: 24, minute: 0),
+      divisions: 60 * 60,
+      doubleEncoder: _timeOfDayEncoder,
+      doubleDecoder: _timeOfDayDecoder,
+      valueFormatter: _timeOfDayFormatter,
+    ),
     // Nullable
     c.knobs.nullable.boolean(
       'Nullable Boolean',
@@ -111,6 +121,16 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       initialValue: const ['Line 1', 'Line 2', 'Line 3'],
       parser: _stringListInputParser,
       formatter: _stringListInputFormatter,
+    ),
+    c.knobs.nullable.customSlider(
+      'Nullable Time Of Day',
+      initialValue: const TimeOfDay(hour: 0, minute: 0),
+      min: const TimeOfDay(hour: 0, minute: 0),
+      max: const TimeOfDay(hour: 24, minute: 0),
+      divisions: 60 * 60,
+      doubleEncoder: _timeOfDayEncoder,
+      doubleDecoder: _timeOfDayDecoder,
+      valueFormatter: _timeOfDayFormatter,
     ),
   ];
 
@@ -226,10 +246,6 @@ This use case demonstrates the various knobs supported by the knobs addon in the
   };
 }
 
-String _bigIntInputFormatter(BigInt value) {
-  return value.toString();
-}
-
 InputParseResult<BigInt> _bigIntInputParser(String input) {
   final trimmedInput = input.trim();
   if (trimmedInput.isEmpty) {
@@ -243,8 +259,8 @@ InputParseResult<BigInt> _bigIntInputParser(String input) {
   }
 }
 
-String _stringListInputFormatter(List<String> value) {
-  return value.join('\n');
+String _bigIntInputFormatter(BigInt value) {
+  return value.toString();
 }
 
 InputParseResult<List<String>> _stringListInputParser(String input) {
@@ -254,4 +270,24 @@ InputParseResult<List<String>> _stringListInputParser(String input) {
   }
   final parsedValue = trimmedInput.split('\n').map((e) => e.trim()).toList();
   return InputParseSuccess(parsedValue);
+}
+
+String _stringListInputFormatter(List<String> value) {
+  return value.join('\n');
+}
+
+TimeOfDay _timeOfDayDecoder(double value) {
+  final hours = value ~/ 60;
+  final minutes = (value % 60).toInt();
+  return TimeOfDay(hour: hours, minute: minutes);
+}
+
+double _timeOfDayEncoder(TimeOfDay time) {
+  return (time.hour * 60 + time.minute).toDouble();
+}
+
+String _timeOfDayFormatter(TimeOfDay time) {
+  final hours = time.hour.toString().padLeft(2, '0');
+  final minutes = time.minute.toString().padLeft(2, '0');
+  return '$hours:$minutes';
 }

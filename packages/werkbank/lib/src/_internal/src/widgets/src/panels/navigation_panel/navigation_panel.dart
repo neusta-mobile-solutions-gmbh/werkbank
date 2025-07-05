@@ -41,8 +41,8 @@ class NavigationPanel extends StatelessWidget with OrderExecutor {
 
     final leading = switch (descriptor) {
       FolderDescriptor() => const Icon(WerkbankIcons.folderSimple),
-      ComponentDescriptor() => const Icon(WerkbankIcons.bookOpen),
-      UseCaseDescriptor() => const Icon(WerkbankIcons.bookmarkSimple),
+      ComponentDescriptor() => const Icon(WerkbankIcons.bigDots),
+      UseCaseDescriptor() => const Icon(WerkbankIcons.bigDot),
     };
 
     return WTreeNode(

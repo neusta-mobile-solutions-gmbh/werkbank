@@ -12,7 +12,7 @@ import 'package:werkbank/src/werkbank_internal.dart';
 /// [WerkbankComponent] to do things with the [UseCaseComposer] before the
 /// [UseCaseBuilder] of a [WerkbankUseCase] is called.
 ///
-/// Since in typical use, the [UseCaseMetadataBuilder]s on
+/// Since in typical use, the [UseCaseParentBuilder]s on
 /// [WerkbankFolder]s and [WerkbankComponent]s are much smaller than
 /// [UseCaseBuilder] definitions, it is fine to simply add them as a callback.
 ///
@@ -31,7 +31,7 @@ import 'package:werkbank/src/werkbank_internal.dart';
 /// Like with the [UseCaseBuilder], the available features depend on which
 /// [Addon]s are used.
 /// See [UseCaseBuilder] for more information.
-typedef UseCaseMetadataBuilder = void Function(UseCaseComposer c);
+typedef UseCaseParentBuilder = void Function(UseCaseComposer c);
 
 /// {@category Get Started}
 /// {@category Structure}
@@ -76,11 +76,11 @@ sealed class WerkbankParentNode<T extends WerkbankChildNode>
     required this.children,
   });
 
-  /// The [UseCaseMetadataBuilder] for this node.
+  /// The [UseCaseParentBuilder] for this node.
   ///
-  /// See [UseCaseMetadataBuilder] for information on how to
+  /// See [UseCaseParentBuilder] for information on how to
   /// define such a builder.
-  final UseCaseMetadataBuilder? builder;
+  final UseCaseParentBuilder? builder;
 
   /// The children of this node.
   final List<T> children;

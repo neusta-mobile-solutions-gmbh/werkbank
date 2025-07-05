@@ -4,6 +4,7 @@ import 'package:werkbank_werkbank/component_use_cases/w_animated_visibility_use_
 import 'package:werkbank_werkbank/component_use_cases/w_bordered_box_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_button_base_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_chip_use_case.dart';
+import 'package:werkbank_werkbank/component_use_cases/w_collapsible_height_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_control_item_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_control_section_list_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_delayed_reveal_use_case.dart';
@@ -37,6 +38,7 @@ import 'package:werkbank_werkbank/feature_use_cases/notification_use_case.dart';
 import 'package:werkbank_werkbank/feature_use_cases/search_use_cases.dart';
 import 'package:werkbank_werkbank/feature_use_cases/semantics_use_cases.dart';
 import 'package:werkbank_werkbank/feature_use_cases/sizing_use_case.dart';
+import 'package:werkbank_werkbank/feature_use_cases/werkbank_logo_use_case.dart';
 import 'package:werkbank_werkbank/feature_use_cases/wrapping_use_cases.dart';
 
 WerkbankRoot get root => WerkbankRoot(
@@ -99,6 +101,10 @@ WerkbankRoot get root => WerkbankRoot(
         WerkbankUseCase(
           name: 'WPathDisplay',
           builder: wPathDisplayUseCase,
+        ),
+        WerkbankUseCase(
+          name: 'WCollapsibleHeight',
+          builder: wCollapsibleHeightUseCase,
         ),
         WerkbankUseCase(
           name: 'WResizablePanels',
@@ -316,6 +322,10 @@ WerkbankRoot get root => WerkbankRoot(
         WerkbankUseCase(
           name: 'Notification',
           builder: notificationUseCase,
+        ),
+        WerkbankUseCase(
+          name: 'WerkbankLogo',
+          builder: werkbankLogoUseCase,
         ),
         searchDemoFolder,
         descriptionSection,

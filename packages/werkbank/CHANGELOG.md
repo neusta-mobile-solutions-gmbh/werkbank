@@ -1,13 +1,16 @@
-
 # 0.16.0
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.
 - Fix that pointer could interact with use case while trying to change constraints.
 - Make small changes to the tree UI to make it easier to overview the items and find the selected item.
+- Change icons of use cases and components.
+- Add `WerkbankLogo` widget.
 - Rename `WerkbankSections` to `WerkbankRoot`. **(BREAKING CHANGE)**
   - This also means that the `sections` parameter of `WerkbankApp` has been renamed to `root`.
 - Rename `UseCaseControlSection` to `ConfigureControlSection` and `InfoControlSection` to `InspectControlSection`. **(BREAKING CHANGE)**
   - This change should only affect custom addon authors.
-  - The tabs had been renamed from "USE CASE" to "CONFIGURE" and from "INFO" to "INSPECT" some time ago. However these classes were missed.
+  - The tabs had been renamed from "USE CASE" to "CONFIGURE" and from "INFO" to "INSPECT" some time ago. However, these classes were missed.
+- Rename `UseCaseMetadataBuilder` to `UseCaseParentBuilder`. **(BREAKING CHANGE)**
+- Extend `Report`'s to be collapsible when enabled; this is now used for shortcuts on the homepage.
 
 # 0.15.1
 - Make some improvements to use case descriptions
@@ -19,6 +22,7 @@
 - Fix that semantics inspector in "Inspection" mode would not allow to select semantic boxes in the main view on web.
 - Add custom semantics actions to semantics inspector.
 - Add advanced search features. TL;DR: `fuzzy text`, `<field>:fuzzy text`, `"precise text"`, `<field>:"precise text"`
+- Add ability to check if an addon is active using the `UseCaseComposer` by doing `c.isAddonActive(SomeAddon.addonId)`.
 - Replace a few dependencies and fix lints to make pub.dev happy.
 
 # 0.15.0

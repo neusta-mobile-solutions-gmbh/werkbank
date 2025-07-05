@@ -31,7 +31,7 @@ extension WrappingComposerExtension on UseCaseComposer {
   /// particularly useful since the widget could just as well be wrapped around
   /// the widget returned by the [WidgetBuilder].
   ///
-  /// However when used inside a [UseCaseMetadataBuilder] within a
+  /// However when used inside a [UseCaseParentBuilder] within a
   /// [WerkbankRoot], [WerkbankFolder], or [WerkbankComponent]
   /// this will be wrapped around every use case contained within.
   ///

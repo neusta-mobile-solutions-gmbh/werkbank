@@ -15,6 +15,7 @@ export 'src/knobs/animation_controller/animation_controller_knob.dart';
 export 'src/knobs/animation_controller/named_duration.dart';
 export 'src/knobs/boolean_knob.dart';
 export 'src/knobs/custom_slider.dart';
+export 'src/knobs/custom_switch.dart';
 export 'src/knobs/date_knob.dart';
 export 'src/knobs/double_knob.dart';
 export 'src/knobs/focus_node_knob.dart';

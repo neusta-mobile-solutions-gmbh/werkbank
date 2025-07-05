@@ -75,6 +75,14 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       doubleDecoder: _timeOfDayDecoder,
       valueFormatter: _timeOfDayFormatter,
     ),
+    c.knobs.customSwitch(
+      'Brighness',
+      initialValue: Brightness.dark,
+      leftValue: Brightness.dark,
+      rightValue: Brightness.light,
+      leftLabel: 'DARK',
+      rightLabel: 'LIGHT',
+    ),
     // Nullable
     c.knobs.nullable.boolean(
       'Nullable Boolean',
@@ -131,6 +139,14 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       doubleEncoder: _timeOfDayEncoder,
       doubleDecoder: _timeOfDayDecoder,
       valueFormatter: _timeOfDayFormatter,
+    ),
+    c.knobs.nullable.customSwitch(
+      'Nullable Brighness',
+      initialValue: Brightness.dark,
+      leftValue: Brightness.dark,
+      rightValue: Brightness.light,
+      leftLabel: 'DARK',
+      rightLabel: 'LIGHT',
     ),
   ];
 

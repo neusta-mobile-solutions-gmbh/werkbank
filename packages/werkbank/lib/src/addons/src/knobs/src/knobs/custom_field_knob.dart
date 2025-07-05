@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
-extension InputKnobExt on KnobsComposer {
-  WritableKnob<T> input<T>(
+extension CustomFieldKnobExt on KnobsComposer {
+  WritableKnob<T> customField<T>(
     String label, {
     required T initialValue,
     required InputParser<T> parser,
@@ -11,7 +11,7 @@ extension InputKnobExt on KnobsComposer {
     return makeRegularKnob(
       label,
       initialValue: initialValue,
-      knobBuilder: (context, valueNotifier) => _InputKnob(
+      knobBuilder: (context, valueNotifier) => _CustomFieldKnob(
         valueNotifier: valueNotifier,
         parser: parser,
         formatter: formatter,
@@ -22,7 +22,7 @@ extension InputKnobExt on KnobsComposer {
     );
   }
 
-  WritableKnob<T> inputMultiLine<T>(
+  WritableKnob<T> customFieldMultiLine<T>(
     String label, {
     required T initialValue,
     required InputParser<T> parser,
@@ -31,7 +31,7 @@ extension InputKnobExt on KnobsComposer {
     return makeRegularKnob(
       label,
       initialValue: initialValue,
-      knobBuilder: (context, valueNotifier) => _InputKnob(
+      knobBuilder: (context, valueNotifier) => _CustomFieldKnob(
         valueNotifier: valueNotifier,
         parser: parser,
         formatter: formatter,
@@ -45,7 +45,7 @@ extension InputKnobExt on KnobsComposer {
 }
 
 extension NullableInputKnobExt on NullableKnobs {
-  WritableKnob<T?> input<T extends Object>(
+  WritableKnob<T?> customField<T extends Object>(
     String label, {
     required T initialValue,
     required InputParser<T> parser,
@@ -56,7 +56,7 @@ extension NullableInputKnobExt on NullableKnobs {
       label,
       initialValue: initialValue,
       initiallyNull: initiallyNull,
-      knobBuilder: (context, enabled, valueNotifier) => _InputKnob(
+      knobBuilder: (context, enabled, valueNotifier) => _CustomFieldKnob(
         valueNotifier: valueNotifier,
         parser: parser,
         formatter: formatter,
@@ -67,7 +67,7 @@ extension NullableInputKnobExt on NullableKnobs {
     );
   }
 
-  WritableKnob<T?> inputMultiLine<T extends Object>(
+  WritableKnob<T?> customFieldMultiLine<T extends Object>(
     String label, {
     required T initialValue,
     required InputParser<T> parser,
@@ -78,7 +78,7 @@ extension NullableInputKnobExt on NullableKnobs {
       label,
       initialValue: initialValue,
       initiallyNull: initiallyNull,
-      knobBuilder: (context, enabled, valueNotifier) => _InputKnob(
+      knobBuilder: (context, enabled, valueNotifier) => _CustomFieldKnob(
         valueNotifier: valueNotifier,
         parser: parser,
         formatter: formatter,
@@ -91,8 +91,8 @@ extension NullableInputKnobExt on NullableKnobs {
   }
 }
 
-class _InputKnob<T> extends StatefulWidget {
-  const _InputKnob({
+class _CustomFieldKnob<T> extends StatefulWidget {
+  const _CustomFieldKnob({
     required this.valueNotifier,
     required this.parser,
     required this.formatter,
@@ -107,10 +107,10 @@ class _InputKnob<T> extends StatefulWidget {
   final bool enabled;
 
   @override
-  State<_InputKnob<T>> createState() => _InputKnobState();
+  State<_CustomFieldKnob<T>> createState() => _CustomFieldKnobState();
 }
 
-class _InputKnobState<T> extends State<_InputKnob<T>> {
+class _CustomFieldKnobState<T> extends State<_CustomFieldKnob<T>> {
   late TextEditingController _textEditingController;
   final _focusNode = FocusNode();
   TextSpan? _errorLabel;
@@ -140,7 +140,7 @@ class _InputKnobState<T> extends State<_InputKnob<T>> {
   }
 
   @override
-  void didUpdateWidget(covariant _InputKnob<T> oldWidget) {
+  void didUpdateWidget(covariant _CustomFieldKnob<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     var sync = false;
     if (oldWidget.valueNotifier != widget.valueNotifier) {

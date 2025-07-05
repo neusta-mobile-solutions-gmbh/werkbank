@@ -53,13 +53,13 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       'Date',
       initialValue: DateTime.now(),
     ),
-    c.knobs.input(
+    c.knobs.customField(
       'BigInt Input',
       initialValue: BigInt.zero,
       parser: _bigIntInputParser,
       formatter: _bigIntInputFormatter,
     ),
-    c.knobs.inputMultiLine(
+    c.knobs.customFieldMultiLine(
       'String List Input',
       initialValue: const ['Line 1', 'Line 2', 'Line 3'],
       parser: _stringListInputParser,
@@ -118,13 +118,13 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       'Nullable Date',
       initialValue: DateTime.now(),
     ),
-    c.knobs.nullable.input(
+    c.knobs.nullable.customField(
       'Nullable BigInt Input',
       initialValue: BigInt.zero,
       parser: _bigIntInputParser,
       formatter: _bigIntInputFormatter,
     ),
-    c.knobs.nullable.inputMultiLine(
+    c.knobs.nullable.customFieldMultiLine(
       'Nullable String List Input',
       initialValue: const ['Line 1', 'Line 2', 'Line 3'],
       parser: _stringListInputParser,

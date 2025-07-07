@@ -314,16 +314,12 @@ InputParseResult<BigInt> _bigIntInputParser(String input) {
     return InputParseSuccess(BigInt.zero);
   }
   final parsedValue = BigInt.tryParse(trimmedInput);
-  if (parsedValue != null) {
-    return InputParseSuccess(parsedValue);
-  } else {
-    return InputParseError('Invalid BigInt Format');
-  }
+  return parsedValue != null
+      ? InputParseSuccess(parsedValue)
+      : InputParseError('Invalid BigInt Format');
 }
 
-String _bigIntInputFormatter(BigInt value) {
-  return value.toString();
-}
+String _bigIntInputFormatter(BigInt value) => value.toString();
 
 extension HexColorKnobExtension on KnobsComposer {
   WritableKnob<Color> hexColor(
@@ -472,10 +468,9 @@ InputParseResult<List<String>> _stringListInputParser(String input) {
   if (trimmedInput.isEmpty) {
     return const InputParseSuccess([]);
   }
-  final parsedValue = trimmedInput.split('\n').map((e) => e.trim()).toList();
-  return InputParseSuccess(parsedValue);
+  return InputParseSuccess(
+    trimmedInput.split('\n').map((e) => e.trim()).toList(),
+  );
 }
 
-String _stringListInputFormatter(List<String> value) {
-  return value.join('\n');
-}
+String _stringListInputFormatter(List<String> value) => value.join('\n');

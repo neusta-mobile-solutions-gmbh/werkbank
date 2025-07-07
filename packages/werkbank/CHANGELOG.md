@@ -1,3 +1,10 @@
+# 0.16.1
+- Add new knobs with generic return types that allow you to create custom knobs with little effort:
+  - `c.knobs.customField<T>(...)` and `c.knobs.customFieldMultiLine<T>(...)` (for custom text field controlled knobs)
+  - `c.knobs.customSlider<T>(...)` (for custom slider controlled knobs)
+  - `c.knobs.customSwitch<T>(...)` (for custom switch controlled knobs)
+- Add `falseLabel` and `trueLabel` parameters to `c.knobs.boolean(...)` to allow customizing the labels of the switch.
+
 # 0.16.0
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.
 - Fix that pointer could interact with use case while trying to change constraints.

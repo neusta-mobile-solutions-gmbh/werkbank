@@ -2,6 +2,11 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension StringKnobExtension on KnobsComposer {
+  /// Creates a string knob controlled by a text field in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
   WritableKnob<String> string(
     String label, {
     required String initialValue,
@@ -14,6 +19,11 @@ extension StringKnobExtension on KnobsComposer {
     );
   }
 
+  /// Creates a string knob controlled by a multi-line text field in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
   WritableKnob<String> stringMultiLine(
     String label, {
     required String initialValue,
@@ -28,6 +38,11 @@ extension StringKnobExtension on KnobsComposer {
 }
 
 extension NullableStringKnobExtension on NullableKnobs {
+  /// Creates a nullable string knob controlled by a text field in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
   WritableKnob<String?> string(
     String label, {
     required String initialValue,
@@ -42,6 +57,12 @@ extension NullableStringKnobExtension on NullableKnobs {
     );
   }
 
+  /// Creates a nullable string knob controlled by a multi-line
+  /// text field in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
   WritableKnob<String?> stringMultiLine(
     String label, {
     required String initialValue,

@@ -37,22 +37,22 @@ extension BooleanKnobExtension on KnobsComposer {
   }
 }
 
-/// Creates a nullable boolean knob controlled by a switch in the UI.
-///
-/// {@macro werkbank.knobs.label}
-///
-/// {@template werkbank.knobs.nullableInitial}
-/// If [initiallyNull] is `false`, [initialValue] defines the state of the knob
-/// when first created and when the initial knob preset is selected.
-/// If [initiallyNull] is `true`, the knob starts in a `null` state and is set
-/// to `null` when the initial knob preset is selected.
-/// In this case, [initialValue] still
-/// determines the initial value of the knob control in the UI, which is then
-/// selected when the `null` state is toggled off.
-/// {@endtemplate}
-///
-/// {@macro werkbank.knobs.boolean.labels}
 extension NullableBooleanKnobExtension on NullableKnobs {
+  /// Creates a nullable boolean knob controlled by a switch in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@template werkbank.knobs.nullableInitial}
+  /// If [initiallyNull] is `false`, [initialValue] defines the state of
+  /// the knob when first created and when the initial knob preset is selected.
+  /// If [initiallyNull] is `true`, the knob starts in a `null` state and is set
+  /// to `null` when the initial knob preset is selected.
+  /// In this case, [initialValue] still
+  /// determines the initial value of the knob control in the UI, which is then
+  /// selected when the `null` state is toggled off.
+  /// {@endtemplate}
+  ///
+  /// {@macro werkbank.knobs.boolean.labels}
   WritableKnob<bool?> boolean(
     String label, {
     required bool initialValue,

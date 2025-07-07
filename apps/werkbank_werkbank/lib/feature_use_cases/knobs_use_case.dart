@@ -62,6 +62,10 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       'BigInt Input',
       initialValue: BigInt.zero,
     ),
+    c.knobs.hexColor(
+      'Hex Color',
+      initialValue: Colors.red,
+    ),
     c.knobs.stringList(
       'String List Input',
       initialValue: const ['Line 1', 'Line 2', 'Line 3'],
@@ -109,6 +113,10 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     c.knobs.nullable.bigInt(
       'Nullable BigInt Input',
       initialValue: BigInt.zero,
+    ),
+    c.knobs.nullable.hexColor(
+      'Nullable Hex Color',
+      initialValue: Colors.red,
     ),
     c.knobs.nullable.stringList(
       'Nullable String List Input',
@@ -315,6 +323,60 @@ InputParseResult<BigInt> _bigIntInputParser(String input) {
 
 String _bigIntInputFormatter(BigInt value) {
   return value.toString();
+}
+
+extension HexColorKnobExtension on KnobsComposer {
+  WritableKnob<Color> hexColor(
+    String label, {
+    required Color initialValue,
+  }) {
+    return customField(
+      label,
+      initialValue: initialValue,
+      parser: _hexColorInputParser,
+      formatter: _hexColorInputFormatter,
+    );
+  }
+}
+
+extension NullableHexColorKnobExtension on NullableKnobsComposer {
+  WritableKnob<Color?> hexColor(
+    String label, {
+    required Color initialValue,
+    bool initiallyNull = false,
+  }) {
+    return customField(
+      label,
+      initialValue: initialValue,
+      parser: _hexColorInputParser,
+      formatter: _hexColorInputFormatter,
+      initiallyNull: initiallyNull,
+    );
+  }
+}
+
+final RegExp _hexColor = RegExp(r'^(#|0x)?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$');
+
+InputParseResult<Color> _hexColorInputParser(String input) {
+  final trimmedInput = input.trim();
+  final match = _hexColor.firstMatch(trimmedInput);
+  if (match == null) {
+    return InputParseError('Invalid Hex Color Format');
+  }
+  final hex = match.group(2)!;
+  final effectiveHex = hex.length == 6 ? 'FF$hex' : hex;
+  return InputParseSuccess(Color(int.parse(effectiveHex, radix: 16)));
+}
+
+String _hexColorInputFormatter(Color value) {
+  final argb32 = value.toARGB32();
+  final String hex;
+  if (argb32 >> 24 == 0xFF) {
+    hex = argb32.toRadixString(16).substring(2).padLeft(6, '0');
+  } else {
+    hex = argb32.toRadixString(16).padLeft(8, '0');
+  }
+  return '#${hex.toUpperCase()}';
 }
 
 extension TimeOfDayKnobExtension on KnobsComposer {

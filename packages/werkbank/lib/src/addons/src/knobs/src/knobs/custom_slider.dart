@@ -118,7 +118,8 @@ extension CustomSliderKnobExtension on KnobsComposer {
 }
 
 extension NullableCustomSliderKnobExtension on NullableKnobsComposer {
-  /// Creates a nullable knob for a generic type [T] controlled by a slider in the UI.
+  /// Creates a nullable knob for a generic type [T] controlled by a slider
+  /// in the UI.
   ///
   /// {@macro werkbank.knobs.customSlider.use}
   ///

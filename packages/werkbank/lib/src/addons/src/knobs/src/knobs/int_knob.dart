@@ -34,7 +34,7 @@ extension IntKnobExtension on KnobsComposer {
   }
 }
 
-extension NullableIntKnobExtension on NullableKnobs {
+extension NullableIntKnobExtension on NullableKnobsComposer {
   /// Creates a nullable integer knob controlled by a slider in the UI.
   ///
   /// {@macro werkbank.knobs.label}

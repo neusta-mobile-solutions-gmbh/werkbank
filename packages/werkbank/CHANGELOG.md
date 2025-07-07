@@ -8,6 +8,7 @@
 - Change parameters of  `c.knobs.list<T>(...)` and `c.knobs.nullable.list<T>(...)` to make them consistent with other knobs. **(BREAKING CHANGE)**
   - Rename `initialOption` to `initialValue`.
   - Make `initialValue` required and non-nullable.
+- Rename `NullableKnobs` to `NullableKnobsComposer`. **(BREAKING CHANGE)**
 
 # 0.16.0
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.

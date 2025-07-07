@@ -37,7 +37,7 @@ extension StringKnobExtension on KnobsComposer {
   }
 }
 
-extension NullableStringKnobExtension on NullableKnobs {
+extension NullableStringKnobExtension on NullableKnobsComposer {
   /// Creates a nullable string knob controlled by a text field in the UI.
   ///
   /// {@macro werkbank.knobs.label}

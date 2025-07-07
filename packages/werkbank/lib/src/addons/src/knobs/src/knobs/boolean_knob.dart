@@ -37,7 +37,7 @@ extension BooleanKnobExtension on KnobsComposer {
   }
 }
 
-extension NullableBooleanKnobExtension on NullableKnobs {
+extension NullableBooleanKnobExtension on NullableKnobsComposer {
   /// Creates a nullable boolean knob controlled by a switch in the UI.
   ///
   /// {@macro werkbank.knobs.label}

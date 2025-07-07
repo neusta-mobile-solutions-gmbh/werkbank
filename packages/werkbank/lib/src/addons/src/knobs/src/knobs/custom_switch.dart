@@ -26,7 +26,7 @@ extension CustomSwitchKnobExtension on KnobsComposer {
   }
 }
 
-extension NullableCustomSwitchKnobExtension on NullableKnobs {
+extension NullableCustomSwitchKnobExtension on NullableKnobsComposer {
   WritableKnob<T?> customSwitch<T extends Object>(
     String label, {
     required T initialValue,

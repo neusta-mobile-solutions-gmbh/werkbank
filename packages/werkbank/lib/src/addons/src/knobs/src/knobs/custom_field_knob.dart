@@ -44,7 +44,7 @@ extension CustomFieldKnobExt on KnobsComposer {
   }
 }
 
-extension NullableInputKnobExt on NullableKnobs {
+extension NullableInputKnobExt on NullableKnobsComposer {
   WritableKnob<T?> customField<T extends Object>(
     String label, {
     required T initialValue,

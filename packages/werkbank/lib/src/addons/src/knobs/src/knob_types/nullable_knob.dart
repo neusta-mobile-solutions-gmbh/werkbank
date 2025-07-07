@@ -9,7 +9,7 @@ typedef NullableKnobBuilder<T extends Object> =
       ValueNotifier<T> valueNotifier,
     );
 
-extension type NullableKnobs(KnobsComposer _knobs) {
+extension type NullableKnobsComposer(KnobsComposer _knobs) {
   WritableKnob<T?> makeNullableKnob<T extends Object>(
     String label, {
     required T initialValue,
@@ -32,7 +32,9 @@ extension type NullableKnobs(KnobsComposer _knobs) {
 }
 
 extension NullableKnobsExtension on KnobsComposer {
-  NullableKnobs get nullable => NullableKnobs(this);
+  /// Returns a [NullableKnobsComposer] with many methods to create nullable
+  /// knobs for the use case.
+  NullableKnobsComposer get nullable => NullableKnobsComposer(this);
 }
 
 class NullableKnob<T extends Object> extends BuildableWritableKnob<T?>

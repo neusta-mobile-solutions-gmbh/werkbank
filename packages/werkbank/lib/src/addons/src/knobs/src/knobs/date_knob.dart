@@ -24,7 +24,7 @@ extension DateKnobExtension on KnobsComposer {
   }
 }
 
-extension NullableDateKnobExtension on NullableKnobs {
+extension NullableDateKnobExtension on NullableKnobsComposer {
   /// Creates a nullable date knob controlled by a date picker in the UI.
   ///
   /// {@macro werkbank.knobs.label}

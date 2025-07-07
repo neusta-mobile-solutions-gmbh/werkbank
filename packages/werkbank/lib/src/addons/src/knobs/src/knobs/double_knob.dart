@@ -38,7 +38,7 @@ extension DoubleKnobExtension on KnobsComposer {
   }
 }
 
-extension NullableDoubleKnobExtension on NullableKnobs {
+extension NullableDoubleKnobExtension on NullableKnobsComposer {
   /// Creates a nullable double knob controlled by a slider in the UI.
   ///
   /// {@macro werkbank.knobs.label}

@@ -30,7 +30,7 @@ extension CustomSliderKnobExtension on KnobsComposer {
   }
 }
 
-extension NullableCustomKnobExtension on NullableKnobs {
+extension NullableCustomKnobExtension on NullableKnobsComposer {
   WritableKnob<T?> customSlider<T extends Object>(
     String label, {
     required T initialValue,

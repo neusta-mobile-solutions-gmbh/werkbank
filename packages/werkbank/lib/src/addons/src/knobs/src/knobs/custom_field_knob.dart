@@ -5,7 +5,7 @@ extension CustomFieldKnobExtension on KnobsComposer {
   /// Creates a knob for a generic type [T] controlled by a text field
   /// in the UI.
   ///
-  /// {@template werkbank.knobs.customFieldUse}
+  /// {@template werkbank.knobs.customField.use}
   /// You can use this to create custom knobs for editing values of type [T]
   /// using a text field.
   /// {@endtemplate}
@@ -100,7 +100,7 @@ extension CustomFieldKnobExtension on KnobsComposer {
   /// Creates a knob for a generic type [T] controlled by a multi-line
   /// text field in the UI.
   ///
-  /// {@macro werkbank.knobs.customFieldUse}
+  /// {@macro werkbank.knobs.customField.use}
   ///
   /// {@macro werkbank.knobs.label}
   ///
@@ -180,7 +180,7 @@ extension NullableCustomFieldKnobExtension on NullableKnobsComposer {
   /// Creates a nullable knob for a generic type [T] controlled by a text field
   /// in the UI.
   ///
-  /// {@macro werkbank.knobs.customFieldUse}
+  /// {@macro werkbank.knobs.customField.use}
   ///
   /// {@macro werkbank.knobs.label}
   ///
@@ -214,7 +214,7 @@ extension NullableCustomFieldKnobExtension on NullableKnobsComposer {
   /// Creates a nullable knob for a generic type [T] controlled by a
   /// multi-line text field in the UI.
   ///
-  /// {@macro werkbank.knobs.customFieldUse}
+  /// {@macro werkbank.knobs.customField.use}
   ///
   /// {@macro werkbank.knobs.label}
   ///

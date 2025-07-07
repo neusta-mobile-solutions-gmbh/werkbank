@@ -5,7 +5,7 @@ import 'package:werkbank/werkbank.dart';
 extension CustomSwitchKnobExtension on KnobsComposer {
   /// Creates a knob for a generic type [T] controlled by a switch in the UI.
   ///
-  /// {@template werkbank.knobs.customSwitchUse}
+  /// {@template werkbank.knobs.customSwitch.use}
   /// You can use this to create custom knobs for switching between two
   /// values of type [T].
   /// {@endtemplate}
@@ -86,7 +86,7 @@ extension NullableCustomSwitchKnobExtension on NullableKnobsComposer {
   /// Creates a nullable knob for a generic type [T] controlled by a switch
   /// in the UI.
   ///
-  /// {@macro werkbank.knobs.customSwitchUse}
+  /// {@macro werkbank.knobs.customSwitch.use}
   ///
   /// {@macro werkbank.knobs.label}
   ///

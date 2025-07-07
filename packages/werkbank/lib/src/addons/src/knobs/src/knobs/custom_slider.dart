@@ -5,7 +5,7 @@ import 'package:werkbank/werkbank.dart';
 extension CustomSliderKnobExtension on KnobsComposer {
   /// Creates a knob for a generic type [T] controlled by a slider in the UI.
   ///
-  /// {@template werkbank.knobs.customSliderUse}
+  /// {@template werkbank.knobs.customSlider.use}
   /// You can use this to create custom knobs for types that can be mapped to
   /// a number.
   /// {@endtemplate}
@@ -120,7 +120,7 @@ extension CustomSliderKnobExtension on KnobsComposer {
 extension NullableCustomSliderKnobExtension on NullableKnobsComposer {
   /// Creates a nullable knob for a generic type [T] controlled by a slider in the UI.
   ///
-  /// {@macro werkbank.knobs.customSliderUse}
+  /// {@macro werkbank.knobs.customSlider.use}
   ///
   /// {@macro werkbank.knobs.label}
   ///

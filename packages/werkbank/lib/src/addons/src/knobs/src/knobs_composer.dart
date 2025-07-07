@@ -11,6 +11,8 @@ extension type KnobsComposer(UseCaseComposer _c) {
 }
 
 extension KnobsComposerExtension on UseCaseComposer {
+  /// Returns a [KnobsComposer] with many methods to create knobs
+  /// for the use case.
   KnobsComposer get knobs => KnobsComposer(this);
 
   void knobPreset(String name, VoidCallback setKnobs) {

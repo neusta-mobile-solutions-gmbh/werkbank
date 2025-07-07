@@ -1,35 +1,32 @@
 import 'package:flutter/material.dart' hide Element;
-import 'package:werkbank/src/addons/src/knobs/src/_internal/knobs_state_entry.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/element.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/element_snapshot.dart';
-import 'package:werkbank/werkbank.dart';
 
-abstract class BuildableElement<T> implements Element<T> {
+class BuildableElement<T> implements Element<T> {
   BuildableElement({
     required this.label,
-  });
+    required T initialValue,
+  }) : notifier = ValueNotifier<T>(initialValue);
 
   @override
   final String label;
 
+  @override
+  late final ValueNotifier<T> notifier;
+
   @mustCallSuper
   void prepareForBuild(BuildContext context) {}
 
-  ElementSnapshot createSnapshot();
+  ElementSnapshot createSnapshot() {
+    throw UnimplementedError();
+  }
 
-  void tryLoadSnapshot(ElementSnapshot snapshot);
+  void tryLoadSnapshot(ElementSnapshot snapshot) {
+    throw UnimplementedError();
+  }
 
-  Listenable get contentChangedListenable;
-
-  @override
-  T get value;
-
-  @mustCallSuper
   void dispose() {
-    // We shouldn't ever put anything here, since if classes such as
-    // [BuildableWritableKnob] mix in [ChangeNotifier], they will create their
-    // own dispose method which overrides this one without ever calling this
-    // one as `super.dispose()`.
+    notifier.dispose();
   }
 }
 

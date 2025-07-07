@@ -24,8 +24,7 @@ class ElementsStateEntry
   @override
   Listenable? createRebuildListenable() {
     return Listenable.merge([
-      for (final element in _elementsById.values)
-        element.contentChangedListenable,
+      for (final element in _elementsById.values) element.notifier,
     ]);
   }
 
@@ -64,8 +63,8 @@ class ElementsStateEntry
 
   @override
   void dispose() {
-    for (final knob in _elementsById.values) {
-      knob.dispose();
+    for (final element in _elementsById.values) {
+      element.dispose();
     }
     super.dispose();
   }

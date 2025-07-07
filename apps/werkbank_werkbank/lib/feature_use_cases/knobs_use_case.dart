@@ -100,7 +100,7 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       'Nullable List',
       options: ['A', 'B', 'C'],
       optionLabel: (e) => e,
-      initialOption: 'A',
+      initialValue: 'A',
     ),
     c.knobs.nullable.string(
       'Nullable String',

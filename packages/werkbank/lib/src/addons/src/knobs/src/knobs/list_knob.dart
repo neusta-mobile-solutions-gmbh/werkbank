@@ -5,9 +5,9 @@ import 'package:werkbank/werkbank.dart';
 extension ListKnobExtension on KnobsComposer {
   WritableKnob<T> list<T>(
     String label, {
+    required T initialValue,
     required List<T> options,
     required String Function(T) optionLabel,
-    T? initialOption,
   }) {
     assert(
       options.isNotEmpty,
@@ -15,7 +15,7 @@ extension ListKnobExtension on KnobsComposer {
     );
     return makeRegularKnob(
       label,
-      initialValue: initialOption ?? options.first,
+      initialValue: initialValue,
       knobBuilder: (context, valueNotifier) => _ListKnob<T>(
         valueNotifier: valueNotifier,
         options: options,
@@ -29,10 +29,10 @@ extension ListKnobExtension on KnobsComposer {
 extension NullableListKnobExtension on NullableKnobs {
   WritableKnob<T?> list<T extends Object>(
     String label, {
+    required T initialValue,
+    bool initiallyNull = false,
     required List<T> options,
     required String Function(T) optionLabel,
-    T? initialOption,
-    bool initiallyNull = false,
   }) {
     assert(
       options.isNotEmpty,
@@ -40,7 +40,7 @@ extension NullableListKnobExtension on NullableKnobs {
     );
     return makeNullableKnob(
       label,
-      initialValue: initialOption ?? options.first,
+      initialValue: initialValue,
       initiallyNull: initiallyNull,
       knobBuilder: (context, enabled, valueNotifier) => _ListKnob<T>(
         valueNotifier: valueNotifier,

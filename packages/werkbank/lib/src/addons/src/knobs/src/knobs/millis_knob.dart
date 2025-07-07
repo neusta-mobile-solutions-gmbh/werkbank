@@ -5,6 +5,16 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension MillisKnobExtension on KnobsComposer {
+  /// Creates a duration knob controlled by a milliseconds slider in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
+  ///
+  /// {@template werkbank.knobs.millis.slider}
+  /// The [min] and [max] parameters define the slider's range.
+  /// They default to [Durations.short1] and [Durations.extralong4].
+  /// {@endtemplate}
   WritableKnob<Duration> millis(
     String label, {
     required Duration initialValue,
@@ -25,6 +35,14 @@ extension MillisKnobExtension on KnobsComposer {
 }
 
 extension NullableMillisKnobExtension on NullableKnobs {
+  /// Creates a nullable duration knob controlled by a milliseconds slider
+  /// in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
+  ///
+  /// {@macro werkbank.knobs.millis.slider}
   WritableKnob<Duration?> millis(
     String label, {
     required Duration initialValue,

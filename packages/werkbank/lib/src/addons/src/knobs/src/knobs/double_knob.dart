@@ -2,6 +2,21 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension DoubleKnobExtension on KnobsComposer {
+  /// Creates a double knob controlled by a slider in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
+  ///
+  /// {@template werkbank.knobs.doubleSlider}
+  /// The [min] and [max] parameters define the slider's range.
+  /// They default to 0 and 1.
+  ///
+  /// [divisions] sets the number of discrete divisions if non-`null`.
+  ///
+  /// [valueFormatter] customizes the display of the value.
+  /// This defaults to showing two decimal places.
+  /// {@endtemplate}
   WritableKnob<double> doubleSlider(
     String label, {
     required double initialValue,
@@ -24,6 +39,13 @@ extension DoubleKnobExtension on KnobsComposer {
 }
 
 extension NullableDoubleKnobExtension on NullableKnobs {
+  /// Creates a nullable double knob controlled by a slider in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
+  ///
+  /// {@macro werkbank.knobs.doubleSlider}
   WritableKnob<double?> doubleSlider(
     String label, {
     required double initialValue,

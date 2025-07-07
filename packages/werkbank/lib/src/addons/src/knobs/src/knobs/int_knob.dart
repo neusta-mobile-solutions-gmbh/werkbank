@@ -2,6 +2,18 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension IntKnobExtension on KnobsComposer {
+  /// Creates an integer knob controlled by a slider in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
+  ///
+  /// {@template werkbank.knobs.intSlider}
+  /// The [min] and [max] parameters define the slider's range.
+  /// They default to 0 and 1.
+  ///
+  /// [valueFormatter] customizes the display of the value.
+  /// {@endtemplate}
   WritableKnob<int> intSlider(
     String label, {
     required int initialValue,
@@ -23,6 +35,13 @@ extension IntKnobExtension on KnobsComposer {
 }
 
 extension NullableIntKnobExtension on NullableKnobs {
+  /// Creates a nullable integer knob controlled by a slider in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
+  ///
+  /// {@macro werkbank.knobs.intSlider}
   WritableKnob<int?> intSlider(
     String label, {
     required int initialValue,

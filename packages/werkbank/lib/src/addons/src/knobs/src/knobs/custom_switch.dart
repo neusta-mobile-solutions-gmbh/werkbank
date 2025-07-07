@@ -3,6 +3,62 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension CustomSwitchKnobExtension on KnobsComposer {
+  /// Creates a knob for a generic type [T] controlled by a switch in the UI.
+  ///
+  /// {@template werkbank.knobs.customSwitchUse}
+  /// You can use this to create custom knobs for switching between two
+  /// values of type [T].
+  /// {@endtemplate}
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
+  ///
+  /// {@template werkbank.knobs.customSwitch}
+  /// The [leftValue] and [rightValue] parameters specify the two values
+  /// of type [T] that the switch toggles between.
+  ///
+  /// [leftLabel] and [rightLabel] define the labels shown for the
+  /// left and right positions of the switch, respectively.
+  ///
+  /// For example, you can create a switch for toggling between
+  /// [Brightness] values like this:
+  /// ```dart
+  /// extension BrightnessKnobExtension on KnobsComposer {
+  ///   WritableKnob<Brightness> brightness(
+  ///       String label, {
+  ///         required Brightness initialValue,
+  ///       }) {
+  ///     return customSwitch(
+  ///       label,
+  ///       initialValue: initialValue,
+  ///       leftValue: Brightness.dark,
+  ///       rightValue: Brightness.light,
+  ///       leftLabel: 'DARK',
+  ///       rightLabel: 'LIGHT',
+  ///     );
+  ///   }
+  /// }
+  ///
+  /// extension NullableBrightnessKnobExtension on NullableKnobsComposer {
+  ///   WritableKnob<Brightness?> brightness(
+  ///       String label, {
+  ///         required Brightness initialValue,
+  ///         bool initiallyNull = false,
+  ///       }) {
+  ///     return customSwitch(
+  ///       label,
+  ///       initialValue: initialValue,
+  ///       initiallyNull: initiallyNull,
+  ///       leftValue: Brightness.dark,
+  ///       rightValue: Brightness.light,
+  ///       leftLabel: 'DARK',
+  ///       rightLabel: 'LIGHT',
+  ///     );
+  ///   }
+  /// }
+  /// ```
+  /// {@endtemplate}
   WritableKnob<T> customSwitch<T>(
     String label, {
     required T initialValue,
@@ -27,6 +83,16 @@ extension CustomSwitchKnobExtension on KnobsComposer {
 }
 
 extension NullableCustomSwitchKnobExtension on NullableKnobsComposer {
+  /// Creates a nullable knob for a generic type [T] controlled by a switch
+  /// in the UI.
+  ///
+  /// {@macro werkbank.knobs.customSwitchUse}
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
+  ///
+  /// {@macro werkbank.knobs.customSwitch}
   WritableKnob<T?> customSwitch<T extends Object>(
     String label, {
     required T initialValue,

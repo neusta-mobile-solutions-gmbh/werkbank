@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
-extension CustomFieldKnobExt on KnobsComposer {
+extension CustomFieldKnobExtension on KnobsComposer {
   /// Creates a knob for a generic type [T] controlled by a text field
   /// in the UI.
   ///
@@ -176,8 +176,9 @@ extension CustomFieldKnobExt on KnobsComposer {
   }
 }
 
-extension NullableInputKnobExt on NullableKnobsComposer {
-  /// Creates a nullable knob for a generic type [T] controlled by a text field in the UI.
+extension NullableCustomFieldKnobExtension on NullableKnobsComposer {
+  /// Creates a nullable knob for a generic type [T] controlled by a text field
+  /// in the UI.
   ///
   /// {@macro werkbank.knobs.customFieldUse}
   ///
@@ -210,7 +211,8 @@ extension NullableInputKnobExt on NullableKnobsComposer {
     );
   }
 
-  /// Creates a nullable knob for a generic type [T] controlled by a multi-line text field in the UI.
+  /// Creates a nullable knob for a generic type [T] controlled by a
+  /// multi-line text field in the UI.
   ///
   /// {@macro werkbank.knobs.customFieldUse}
   ///

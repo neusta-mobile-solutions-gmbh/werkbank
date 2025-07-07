@@ -39,7 +39,12 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     c.knobs.boolean('Boolean', initialValue: false),
     c.knobs.intSlider('Int Slider', initialValue: 0),
     c.knobs.doubleSlider('Double Slider', initialValue: 0),
-    c.knobs.list('List', options: ['A', 'B', 'C'], optionLabel: (e) => e),
+    c.knobs.list(
+      'List',
+      initialValue: 'A',
+      options: ['A', 'B', 'C'],
+      optionLabel: (e) => e,
+    ),
     c.knobs.string('String', initialValue: 'Hello'),
     c.knobs.stringMultiLine(
       'String Multi Line',

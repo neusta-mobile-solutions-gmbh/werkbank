@@ -16,6 +16,7 @@ WidgetBuilder wTreeItemUseCase(UseCaseComposer c) {
   );
   final iconData = c.knobs.list(
     'icons',
+    initialValue: WerkbankIcons.folderSimple,
     options: [
       WerkbankIcons.folderSimple,
       WerkbankIcons.bookOpen,

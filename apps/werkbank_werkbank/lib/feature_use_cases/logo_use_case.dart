@@ -5,9 +5,9 @@ import 'package:werkbank_werkbank/nms/nms_logo.dart';
 WidgetBuilder logoUseCase(UseCaseComposer c) {
   final color = c.knobs.list<NmsOrbColor>(
     'Color',
+    initialValue: NmsOrbColor.farbig,
     options: NmsOrbColor.values,
     optionLabel: (e) => e.name,
-    initialOption: NmsOrbColor.farbig,
   );
   return (context) {
     return NmsLogo(

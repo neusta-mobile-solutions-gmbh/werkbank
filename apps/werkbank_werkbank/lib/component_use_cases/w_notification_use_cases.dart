@@ -113,8 +113,8 @@ WidgetBuilder wNotificationWidgetsUseCase(UseCaseComposer c) {
 
   final heightOption = c.knobs.list(
     'HeightOption',
+    initialValue: _HeightOptions.none,
     options: _HeightOptions.values,
-    initialOption: _HeightOptions.none,
     optionLabel: (option) => option.name,
   );
 

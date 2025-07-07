@@ -20,6 +20,7 @@ WidgetBuilder wDropdownUseCase(UseCaseComposer c) {
   final items = ['Item 1', 'Item 2', 'Item 3'];
   final valueKnob = c.knobs.list<String>(
     'Value',
+    initialValue: items.first,
     options: items,
     optionLabel: (item) => item,
   );

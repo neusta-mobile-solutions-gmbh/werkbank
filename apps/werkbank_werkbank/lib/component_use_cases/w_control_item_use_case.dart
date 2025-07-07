@@ -24,8 +24,8 @@ WidgetBuilder wControlItemUseCase(UseCaseComposer c) {
   final title = c.knobs.string('Title', initialValue: 'Title');
   final layout = c.knobs.list(
     'Layout',
+    initialValue: ControlItemLayout.compact,
     options: [ControlItemLayout.compact, ControlItemLayout.spacious],
-    initialOption: ControlItemLayout.compact,
     optionLabel: (ControlItemLayout layout) => switch (layout) {
       ControlItemLayout.compact => 'Compact',
       ControlItemLayout.spacious => 'Spacious',

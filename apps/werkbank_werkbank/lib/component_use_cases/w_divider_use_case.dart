@@ -8,6 +8,7 @@ WidgetBuilder wDividerUseCase(UseCaseComposer c) {
 
   final axis = c.knobs.list(
     'Axis',
+    initialValue: Axis.horizontal,
     options: Axis.values,
     optionLabel: (axis) => switch (axis) {
       Axis.horizontal => 'Horizontal',

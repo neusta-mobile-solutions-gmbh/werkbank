@@ -4,18 +4,18 @@ import 'package:werkbank/src/addons/src/state/src/_internal/elements_state_entry
 import 'package:werkbank/werkbank.dart';
 
 extension type StatesComposer(UseCaseComposer _c) {
-  ValueNotifier<T> register<T>(String label, T element) {
-    final buildableElement = BuildableElement<T>(
+  ValueNotifier<T> register<T>(String label, {required T initialValue}) {
+    final element = BuildableElement<T>(
       label: label,
-      initialValue: element,
+      initialValue: initialValue,
     );
     _c.getTransientStateEntry<ElementsStateEntry>().addElement(
-      buildableElement,
+      element,
     );
-    return buildableElement.notifier;
+    return element.notifier;
   }
 
-  // registerMutable
+  // TODO(lwiedekamp): registerMutable
 }
 
 extension StatesComposerExtension on UseCaseComposer {

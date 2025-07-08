@@ -3,7 +3,7 @@ import 'package:werkbank/src/addons/src/state/src/_internal/elements_state_entry
 import 'package:werkbank/werkbank.dart';
 
 extension StatesCompositionExtension on UseCaseComposition {
-  StatesComposition get knobs => StatesComposition(this);
+  StatesComposition get states => StatesComposition(this);
 }
 
 extension type StatesComposition(UseCaseComposition _composition) {

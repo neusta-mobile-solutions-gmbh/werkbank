@@ -4,3 +4,5 @@
 library state;
 
 export 'src/state_addon.dart';
+export 'src/states_composer.dart';
+export 'src/states_composition.dart';

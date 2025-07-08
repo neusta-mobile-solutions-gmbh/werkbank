@@ -14,7 +14,7 @@ WidgetBuilder wTreeItemUseCase(UseCaseComposer c) {
     max: 8,
     divisions: 8,
   );
-  final iconData = c.knobs.list(
+  final iconData = c.knobs.customDropdown(
     'icons',
     initialValue: WerkbankIcons.folderSimple,
     options: [

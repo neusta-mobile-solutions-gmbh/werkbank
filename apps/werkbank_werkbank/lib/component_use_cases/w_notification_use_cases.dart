@@ -111,7 +111,7 @@ WidgetBuilder wNotificationWidgetsUseCase(UseCaseComposer c) {
     max: 200,
   );
 
-  final heightOption = c.knobs.list(
+  final heightOption = c.knobs.customDropdown(
     'HeightOption',
     initialValue: _HeightOptions.none,
     options: _HeightOptions.values,

@@ -39,7 +39,7 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     c.knobs.boolean('Boolean', initialValue: false),
     c.knobs.intSlider('Int Slider', initialValue: 0),
     c.knobs.doubleSlider('Double Slider', initialValue: 0),
-    c.knobs.list(
+    c.knobs.customDropdown(
       'List',
       initialValue: 'A',
       options: ['A', 'B', 'C'],
@@ -88,7 +88,7 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       'Nullable Double Slider',
       initialValue: 0,
     ),
-    c.knobs.nullable.list(
+    c.knobs.nullable.customDropdown(
       'Nullable List',
       options: ['A', 'B', 'C'],
       optionLabel: (e) => e,

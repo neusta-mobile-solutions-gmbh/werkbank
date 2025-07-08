@@ -22,7 +22,7 @@ WidgetBuilder wControlItemUseCase(UseCaseComposer c) {
   c.overview.minimumSize(width: 200);
 
   final title = c.knobs.string('Title', initialValue: 'Title');
-  final layout = c.knobs.list(
+  final layout = c.knobs.customDropdown(
     'Layout',
     initialValue: ControlItemLayout.compact,
     options: [ControlItemLayout.compact, ControlItemLayout.spacious],

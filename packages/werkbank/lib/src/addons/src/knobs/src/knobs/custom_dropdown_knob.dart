@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
-extension ListKnobExtension on KnobsComposer {
-  WritableKnob<T> list<T>(
+extension CustomDropdownKnobExtension on KnobsComposer {
+  WritableKnob<T> customDropdown<T>(
     String label, {
     required T initialValue,
     required List<T> options,
@@ -16,7 +16,7 @@ extension ListKnobExtension on KnobsComposer {
     return makeRegularKnob(
       label,
       initialValue: initialValue,
-      knobBuilder: (context, valueNotifier) => _ListKnob<T>(
+      knobBuilder: (context, valueNotifier) => _CustomDropdownKnob<T>(
         valueNotifier: valueNotifier,
         options: options,
         optionLabel: optionLabel,
@@ -27,8 +27,8 @@ extension ListKnobExtension on KnobsComposer {
 }
 
 /// {@category Knobs}
-extension NullableListKnobExtension on NullableKnobsComposer {
-  WritableKnob<T?> list<T extends Object>(
+extension NullableCustomDropdownKnobExtension on NullableKnobsComposer {
+  WritableKnob<T?> customDropdown<T extends Object>(
     String label, {
     required T initialValue,
     bool initiallyNull = false,
@@ -43,7 +43,7 @@ extension NullableListKnobExtension on NullableKnobsComposer {
       label,
       initialValue: initialValue,
       initiallyNull: initiallyNull,
-      knobBuilder: (context, enabled, valueNotifier) => _ListKnob<T>(
+      knobBuilder: (context, enabled, valueNotifier) => _CustomDropdownKnob<T>(
         valueNotifier: valueNotifier,
         options: options,
         optionLabel: optionLabel,
@@ -53,8 +53,8 @@ extension NullableListKnobExtension on NullableKnobsComposer {
   }
 }
 
-class _ListKnob<T> extends StatelessWidget {
-  const _ListKnob({
+class _CustomDropdownKnob<T> extends StatelessWidget {
+  const _CustomDropdownKnob({
     required this.valueNotifier,
     required this.options,
     required this.optionLabel,

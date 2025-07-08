@@ -37,6 +37,7 @@ extension StringKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableStringKnobExtension on NullableKnobsComposer {
   /// Creates a nullable string knob controlled by a text field in the UI.
   ///

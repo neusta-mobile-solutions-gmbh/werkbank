@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
+/// {@category Knobs}
 extension CustomFieldKnobExtension on KnobsComposer {
   /// Creates a knob for a generic type [T] controlled by a text field
   /// in the UI.
@@ -176,6 +177,7 @@ extension CustomFieldKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableCustomFieldKnobExtension on NullableKnobsComposer {
   /// Creates a nullable knob for a generic type [T] controlled by a text field
   /// in the UI.

@@ -34,6 +34,7 @@ extension MillisKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableMillisKnobExtension on NullableKnobsComposer {
   /// Creates a nullable duration knob controlled by a milliseconds slider
   /// in the UI.

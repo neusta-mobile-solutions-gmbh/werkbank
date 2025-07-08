@@ -26,6 +26,7 @@ extension ListKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableListKnobExtension on NullableKnobsComposer {
   WritableKnob<T?> list<T extends Object>(
     String label, {

@@ -34,6 +34,7 @@ extension IntKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableIntKnobExtension on NullableKnobsComposer {
   /// Creates a nullable integer knob controlled by a slider in the UI.
   ///

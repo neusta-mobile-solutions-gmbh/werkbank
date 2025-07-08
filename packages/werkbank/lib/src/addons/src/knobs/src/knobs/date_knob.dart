@@ -24,6 +24,7 @@ extension DateKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableDateKnobExtension on NullableKnobsComposer {
   /// Creates a nullable date knob controlled by a date picker in the UI.
   ///

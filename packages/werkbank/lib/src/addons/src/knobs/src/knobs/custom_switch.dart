@@ -82,6 +82,7 @@ extension CustomSwitchKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableCustomSwitchKnobExtension on NullableKnobsComposer {
   /// Creates a nullable knob for a generic type [T] controlled by a switch
   /// in the UI.

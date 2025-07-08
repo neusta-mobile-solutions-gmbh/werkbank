@@ -37,6 +37,7 @@ extension BooleanKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableBooleanKnobExtension on NullableKnobsComposer {
   /// Creates a nullable boolean knob controlled by a switch in the UI.
   ///

@@ -117,6 +117,7 @@ extension CustomSliderKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableCustomSliderKnobExtension on NullableKnobsComposer {
   /// Creates a nullable knob for a generic type [T] controlled by a slider
   /// in the UI.

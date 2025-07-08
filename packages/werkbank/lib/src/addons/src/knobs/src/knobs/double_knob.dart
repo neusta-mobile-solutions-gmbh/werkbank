@@ -38,6 +38,7 @@ extension DoubleKnobExtension on KnobsComposer {
   }
 }
 
+/// {@category Knobs}
 extension NullableDoubleKnobExtension on NullableKnobsComposer {
   /// Creates a nullable double knob controlled by a slider in the UI.
   ///

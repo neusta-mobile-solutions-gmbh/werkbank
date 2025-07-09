@@ -34,115 +34,117 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     ..constraints.initial(width: 500)
     ..overview.withoutThumbnail();
 
-  final knobs = [
-    // Regular
-    c.knobs.boolean('Boolean', initialValue: false),
-    c.knobs.intSlider('Int Slider', initialValue: 0),
-    c.knobs.doubleSlider('Double Slider', initialValue: 0),
-    c.knobs.customDropdown(
-      'List',
-      initialValue: 'A',
-      options: ['A', 'B', 'C'],
-      optionLabel: (e) => e,
-    ),
-    c.knobs.string('String', initialValue: 'Hello'),
-    c.knobs.stringMultiLine(
-      'String Multi Line',
-      initialValue: 'Hello\nWorld',
-    ),
-    c.knobs.millis(
-      'Milliseconds',
-      initialValue: Durations.long1,
-    ),
-    c.knobs.date(
-      'Date',
-      initialValue: DateTime.now(),
-    ),
-    c.knobs.bigInt(
-      'BigInt Input',
-      initialValue: BigInt.zero,
-    ),
-    c.knobs.hexColor(
-      'Hex Color',
-      initialValue: Colors.red,
-    ),
-    c.knobs.stringList(
-      'String List Input',
-      initialValue: const ['Line 1', 'Line 2', 'Line 3'],
-    ),
-    c.knobs.timeOfDay(
-      'Time Of Day',
-      initialValue: const TimeOfDay(hour: 0, minute: 0),
-    ),
-    c.knobs.brightness('Brightness', initialValue: Brightness.dark),
-    c.knobs.percentage(
-      'Percentage',
-      initialValue: 0.5,
-    ),
-    // Nullable
-    c.knobs.nullable.boolean(
-      'Nullable Boolean',
-      initialValue: false,
-    ),
-    c.knobs.nullable.intSlider(
-      'Nullable Int Slider',
-      initialValue: 0,
-    ),
-    c.knobs.nullable.doubleSlider(
-      'Nullable Double Slider',
-      initialValue: 0,
-    ),
-    c.knobs.nullable.customDropdown(
-      'Nullable List',
-      options: ['A', 'B', 'C'],
-      optionLabel: (e) => e,
-      initialValue: 'A',
-    ),
-    c.knobs.nullable.string(
-      'Nullable String',
-      initialValue: 'Hello',
-    ),
-    c.knobs.nullable.stringMultiLine(
-      'Nullable String Multi Line',
-      initialValue: 'Hello\nWorld',
-    ),
-    c.knobs.nullable.millis(
-      'Nullable Milliseconds',
-      initialValue: Durations.long1,
-    ),
-    c.knobs.nullable.date(
-      'Nullable Date',
-      initialValue: DateTime.now(),
-    ),
-    c.knobs.nullable.bigInt(
-      'Nullable BigInt Input',
-      initialValue: BigInt.zero,
-    ),
-    c.knobs.nullable.hexColor(
-      'Nullable Hex Color',
-      initialValue: Colors.red,
-    ),
-    c.knobs.nullable.stringList(
-      'Nullable String List Input',
-      initialValue: const ['Line 1', 'Line 2', 'Line 3'],
-    ),
-    c.knobs.nullable.timeOfDay(
-      'Nullable Time Of Day',
-      initialValue: const TimeOfDay(hour: 0, minute: 0),
-    ),
-    c.knobs.nullable.brightness(
-      'Nullable Brightness',
-      initialValue: Brightness.dark,
-    ),
-    c.knobs.nullable.percentage(
-      'Nullable Percentage',
-      initialValue: 0.5,
-    ),
-  ];
+  final booleanKnob = c.knobs.boolean('Boolean', initialValue: false);
+  final nullableBooleanKnob = c.knobs.nullable.boolean(
+    'Nullable Boolean',
+    initialValue: false,
+  );
+
+  final intSliderKnob = c.knobs.intSlider('Int Slider', initialValue: 0);
+  final nullableIntSliderKnob = c.knobs.nullable.intSlider(
+    'Nullable Int Slider',
+    initialValue: 0,
+  );
+
+  final doubleSliderKnob = c.knobs.doubleSlider(
+    'Double Slider',
+    initialValue: 0,
+  );
+  final nullableDoubleSliderKnob = c.knobs.nullable.doubleSlider(
+    'Nullable Double Slider',
+    initialValue: 0,
+  );
+
+  final listKnob = c.knobs.customDropdown(
+    'List',
+    initialValue: 'A',
+    options: ['A', 'B', 'C'],
+    optionLabel: (e) => e,
+  );
+  final nullableListKnob = c.knobs.nullable.customDropdown(
+    'Nullable List',
+    options: ['A', 'B', 'C'],
+    optionLabel: (e) => e,
+    initialValue: 'A',
+  );
+
+  final stringKnob = c.knobs.string('String', initialValue: 'Hello');
+  final nullableStringKnob = c.knobs.nullable.string(
+    'Nullable String',
+    initialValue: 'Hello',
+  );
+
+  final stringMultiLineKnob = c.knobs.stringMultiLine(
+    'String Multi Line',
+    initialValue: 'Hello\nWorld',
+  );
+  final nullableStringMultiLineKnob = c.knobs.nullable.stringMultiLine(
+    'Nullable String Multi Line',
+    initialValue: 'Hello\nWorld',
+  );
+
+  final millisKnob = c.knobs.millis(
+    'Milliseconds',
+    initialValue: Durations.long1,
+  );
+  final nullableMillisKnob = c.knobs.nullable.millis(
+    'Nullable Milliseconds',
+    initialValue: Durations.long1,
+  );
+
+  final dateKnob = c.knobs.date('Date', initialValue: DateTime.now());
+  final nullableDateKnob = c.knobs.nullable.date(
+    'Nullable Date',
+    initialValue: DateTime.now(),
+  );
+
+  final bigIntKnob = c.knobs.bigInt('BigInt Input', initialValue: BigInt.zero);
+  final nullableBigIntKnob = c.knobs.nullable.bigInt(
+    'Nullable BigInt Input',
+    initialValue: BigInt.zero,
+  );
+
+  final hexColorKnob = c.knobs.hexColor('Hex Color', initialValue: Colors.red);
+  final nullableHexColorKnob = c.knobs.nullable.hexColor(
+    'Nullable Hex Color',
+    initialValue: Colors.red,
+  );
+
+  final stringListKnob = c.knobs.stringList(
+    'String List Input',
+    initialValue: const ['Line 1', 'Line 2', 'Line 3'],
+  );
+  final nullableStringListKnob = c.knobs.nullable.stringList(
+    'Nullable String List Input',
+    initialValue: const ['Line 1', 'Line 2', 'Line 3'],
+  );
+
+  final timeOfDayKnob = c.knobs.timeOfDay(
+    'Time Of Day',
+    initialValue: const TimeOfDay(hour: 0, minute: 0),
+  );
+  final nullableTimeOfDayKnob = c.knobs.nullable.timeOfDay(
+    'Nullable Time Of Day',
+    initialValue: const TimeOfDay(hour: 0, minute: 0),
+  );
+
+  final brightnessKnob = c.knobs.brightness(
+    'Brightness',
+    initialValue: Brightness.dark,
+  );
+  final nullableBrightnessKnob = c.knobs.nullable.brightness(
+    'Nullable Brightness',
+    initialValue: Brightness.dark,
+  );
+
+  final percentageKnob = c.knobs.percentage('Percentage', initialValue: 0.5);
+  final nullablePercentageKnob = c.knobs.nullable.percentage(
+    'Nullable Percentage',
+    initialValue: 0.5,
+  );
 
   final animationControllerKnob = c.knobs.animationController(
     'Animation Controller',
-    // initialValue: 0,
     initialDuration: const Duration(seconds: 2),
   );
 
@@ -150,28 +152,15 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     'Interval',
     initialValue: const Interval(0, .5),
   );
-
-  final curveKnob = c.knobs.curve(
-    'Curve',
-    initialValue: Curves.ease,
-  );
-
+  final curveKnob = c.knobs.curve('Curve', initialValue: Curves.ease);
   final curvedIntervalKnob = c.knobs.curvedInterval(
     'CurvedInterval',
     initialValue: const Interval(0, 1, curve: Curves.ease),
   );
 
-  final focusNodeKnob = c.knobs.focusNode(
-    'FocusNode',
-  );
-
-  final focusNodeParentKnob = c.knobs.focusNode(
-    'FocusNode Parent',
-  );
-
-  final focusNodeChildKnob = c.knobs.focusNode(
-    'FocusNode Child',
-  );
+  final focusNodeKnob = c.knobs.focusNode('FocusNode');
+  final focusNodeParentKnob = c.knobs.focusNode('FocusNode Parent');
+  final focusNodeChildKnob = c.knobs.focusNode('FocusNode Child');
 
   c
     ..knobPreset('Focus Single Widget', () {
@@ -195,17 +184,66 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       CurveTween(curve: curvedIntervalKnob.value),
     );
 
-    final text = [
-      for (final knob in knobs)
-        '${knob.label}: ${knob.value.toString().replaceAll('\n', r'\n')}',
-    ].join('\n');
+    TextSpan knobSpan<T extends Object>(
+      Knob<T> knob,
+      Knob<T?> nullableKnob, [
+      InlineSpan Function(T value)? valueSpan,
+    ]) {
+      final effectiveValueSpan =
+          valueSpan ??
+          (v) => TextSpan(
+            text: v.toString(),
+          );
+      return TextSpan(
+        children: [
+          TextSpan(text: '${knob.label}: '),
+          effectiveValueSpan(knob.value),
+          const TextSpan(text: '\n'),
+          TextSpan(text: '${nullableKnob.label}: '),
+          if (nullableKnob.value != null)
+            effectiveValueSpan(nullableKnob.value!)
+          else
+            const TextSpan(text: 'null'),
+          const TextSpan(text: '\n'),
+        ],
+      );
+    }
+
+    final textSpans = [
+      knobSpan(booleanKnob, nullableBooleanKnob),
+      knobSpan(intSliderKnob, nullableIntSliderKnob),
+      knobSpan(doubleSliderKnob, nullableDoubleSliderKnob),
+      knobSpan(listKnob, nullableListKnob),
+      knobSpan(stringKnob, nullableStringKnob),
+      knobSpan(stringMultiLineKnob, nullableStringMultiLineKnob),
+      knobSpan(millisKnob, nullableMillisKnob),
+      knobSpan(dateKnob, nullableDateKnob),
+      knobSpan(bigIntKnob, nullableBigIntKnob),
+      knobSpan(
+        hexColorKnob,
+        nullableHexColorKnob,
+        (v) => WidgetSpan(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: v,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: const SizedBox(width: 16, height: 16),
+          ),
+        ),
+      ),
+      knobSpan(stringListKnob, nullableStringListKnob),
+      knobSpan(timeOfDayKnob, nullableTimeOfDayKnob),
+      knobSpan(brightnessKnob, nullableBrightnessKnob),
+      knobSpan(percentageKnob, nullablePercentageKnob),
+    ];
 
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          WTextArea(
-            text: text,
+          WTextArea.textSpan(
+            textSpan: TextSpan(children: textSpans),
           ),
           const SizedBox(height: 16),
           RotationTransition(

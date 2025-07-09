@@ -123,7 +123,7 @@ extension NullablePercentageKnobExtension on NullableKnobsComposer {
 </details>
 
 <details>
-<summary><b>Example:</b> <a href="https://api.flutter.dev/flutter/dart-ui/Brightness.html">Brighness</a> switch knob. (Uses <a href="../werkbank/CustomSwitchKnobExtension/customSwitch.html">customSwitch</a>)</summary>
+<summary><b>Example:</b> <a href="https://api.flutter.dev/flutter/dart-ui/Brightness.html">Brightness</a> switch knob. (Uses <a href="../werkbank/CustomSwitchKnobExtension/customSwitch.html">customSwitch</a>)</summary>
 
 ```dart
 extension BrightnessKnobExtension on KnobsComposer {

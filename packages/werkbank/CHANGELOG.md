@@ -1,9 +1,7 @@
 # 0.17.0
-- Rename `list` knob to `customDropdown` and make other changes to it. **(BREAKING CHANGE)**
-  - These changes affect both the regular and nullable variants as well as some related things. 
-  - Change parameters to make them consistent with other knobs.
-    - Rename `initialOption` to `initialValue`.
-    - Make `initialValue` required and non-nullable.
+- Deprecate `list` knob. Use `customDropdown` instead.
+- Add `customDropdown` knob.
+  - Compared to `list`, some parameters were changed to be more consistent with other knobs.
 - Add new knobs with generic return types that allow you to create custom knobs with little effort:
   - `c.knobs.customField<T>(...)` and `c.knobs.customFieldMultiLine<T>(...)` (for custom text field controlled knobs)
   - `c.knobs.customSlider<T>(...)` (for custom slider controlled knobs)

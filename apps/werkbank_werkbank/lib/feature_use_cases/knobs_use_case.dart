@@ -31,7 +31,7 @@ This use case demonstrates the various knobs supported by the knobs addon in the
 - **Focus Node Child Knob**: A knob for selecting a focus node for a child widget.
 ''')
     ..tags([Tags.knobs, Tags.useCase, Tags.addon])
-    ..constraints.initial(width: 500, viewLimitedMaxHeight: false)
+    ..constraints.initial(width: 500)
     ..overview.withoutThumbnail();
 
   final knobs = [
@@ -75,6 +75,10 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       initialValue: const TimeOfDay(hour: 0, minute: 0),
     ),
     c.knobs.brightness('Brightness', initialValue: Brightness.dark),
+    c.knobs.percentage(
+      'Percentage',
+      initialValue: 0.5,
+    ),
     // Nullable
     c.knobs.nullable.boolean(
       'Nullable Boolean',
@@ -129,6 +133,10 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     c.knobs.nullable.brightness(
       'Nullable Brightness',
       initialValue: Brightness.dark,
+    ),
+    c.knobs.nullable.percentage(
+      'Nullable Percentage',
+      initialValue: 0.5,
     ),
   ];
 
@@ -244,6 +252,36 @@ This use case demonstrates the various knobs supported by the knobs addon in the
   };
 }
 
+extension PercentageKnobExtension on KnobsComposer {
+  WritableKnob<double> percentage(
+    String label, {
+    required double initialValue,
+  }) {
+    return doubleSlider(
+      label,
+      initialValue: initialValue,
+      divisions: 100,
+      valueFormatter: (value) => '${(value * 100).toInt()}%',
+    );
+  }
+}
+
+extension NullablePercentageKnobExtension on NullableKnobsComposer {
+  WritableKnob<double?> percentage(
+    String label, {
+    required double initialValue,
+    bool initiallyNull = false,
+  }) {
+    return doubleSlider(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      divisions: 100,
+      valueFormatter: (value) => '${(value * 100).toInt()}%',
+    );
+  }
+}
+
 extension BrightnessKnobExtension on KnobsComposer {
   WritableKnob<Brightness> brightness(
     String label, {
@@ -351,11 +389,13 @@ extension NullableHexColorKnobExtension on NullableKnobsComposer {
   }
 }
 
-final RegExp _hexColor = RegExp(r'^(#|0x)?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$');
+final RegExp _hexColorRegExp = RegExp(
+  r'^(#|0x)?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$',
+);
 
 InputParseResult<Color> _hexColorInputParser(String input) {
   final trimmedInput = input.trim();
-  final match = _hexColor.firstMatch(trimmedInput);
+  final match = _hexColorRegExp.firstMatch(trimmedInput);
   if (match == null) {
     return InputParseError('Invalid Hex Color Format');
   }

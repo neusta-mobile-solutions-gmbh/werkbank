@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart' show SchedulerBinding;
 import 'package:werkbank/src/werkbank_internal.dart';
 
 class WerkbankThemeManager extends StatefulWidget {
@@ -23,8 +24,20 @@ class WerkbankThemeManager extends StatefulWidget {
   State<WerkbankThemeManager> createState() => _WerkbankThemeManagerState();
 }
 
-class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
+class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
+    with WidgetsBindingObserver {
   late WerkbankThemePersistentController _werkbankThemeController;
+
+  late bool systemIsInDarkMode;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+
+    _updateDarkMode();
+  }
 
   @override
   void didChangeDependencies() {
@@ -32,6 +45,24 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
     // TODO(cjaros): wrong layer used
     _werkbankThemeController = ApplicationOverlayLayerEntry.access
         .persistentControllerOf<WerkbankThemePersistentController>(context);
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    setState(_updateDarkMode);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
+  }
+
+  void _updateDarkMode() {
+    systemIsInDarkMode =
+        SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+        Brightness.dark;
   }
 
   @override
@@ -51,9 +82,17 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
                 ),
                 textTheme: WerkbankTextTheme.standard(),
               ),
-              'Werkbank Light' || _ => WerkbankTheme(
+              'Werkbank Light' => WerkbankTheme(
                 colorScheme: WerkbankColorScheme.fromPalette(
                   const WerkbankPalette.light(),
+                ),
+                textTheme: WerkbankTextTheme.standard(),
+              ),
+              'Werkbank System' || _ => WerkbankTheme(
+                colorScheme: WerkbankColorScheme.fromPalette(
+                  systemIsInDarkMode
+                      ? const WerkbankPalette.dark()
+                      : const WerkbankPalette.light(),
                 ),
                 textTheme: WerkbankTextTheme.standard(),
               ),

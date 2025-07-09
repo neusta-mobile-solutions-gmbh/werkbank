@@ -143,6 +143,15 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     initialValue: 0.5,
   );
 
+  final axisDirectionKnob = c.knobs.axisDirection(
+    'Axis Direction',
+    initialValue: AxisDirection.up,
+  );
+  final nullableAxisDirectionKnob = c.knobs.nullable.axisDirection(
+    'Nullable Axis Direction',
+    initialValue: AxisDirection.up,
+  );
+
   final animationControllerKnob = c.knobs.animationController(
     'Animation Controller',
     initialDuration: const Duration(seconds: 2),
@@ -232,10 +241,17 @@ This use case demonstrates the various knobs supported by the knobs addon in the
           ),
         ),
       ),
-      knobSpan(stringListKnob, nullableStringListKnob),
+      knobSpan(
+        stringListKnob,
+        nullableStringListKnob,
+        (v) => TextSpan(
+          text: v.map((e) => "'$e'").toList().toString(),
+        ),
+      ),
       knobSpan(timeOfDayKnob, nullableTimeOfDayKnob),
       knobSpan(brightnessKnob, nullableBrightnessKnob),
       knobSpan(percentageKnob, nullablePercentageKnob),
+      knobSpan(axisDirectionKnob, nullableAxisDirectionKnob),
     ];
 
     return SingleChildScrollView(
@@ -377,9 +393,9 @@ extension NullableBigIntKnobExtension on NullableKnobsComposer {
     return customField(
       label,
       initialValue: initialValue,
+      initiallyNull: initiallyNull,
       parser: _bigIntInputParser,
       formatter: _bigIntInputFormatter,
-      initiallyNull: initiallyNull,
     );
   }
 }
@@ -420,9 +436,9 @@ extension NullableHexColorKnobExtension on NullableKnobsComposer {
     return customField(
       label,
       initialValue: initialValue,
+      initiallyNull: initiallyNull,
       parser: _hexColorInputParser,
       formatter: _hexColorInputFormatter,
-      initiallyNull: initiallyNull,
     );
   }
 }
@@ -446,7 +462,7 @@ String _hexColorInputFormatter(Color value) {
   final argb32 = value.toARGB32();
   final String hex;
   if (argb32 >> 24 == 0xFF) {
-    hex = argb32.toRadixString(16).substring(2).padLeft(6, '0');
+    hex = argb32.toRadixString(16).substring(2);
   } else {
     hex = argb32.toRadixString(16).padLeft(8, '0');
   }
@@ -534,21 +550,57 @@ extension NullableStringListKnobExtension on NullableKnobsComposer {
     return customFieldMultiLine(
       label,
       initialValue: initialValue,
+      initiallyNull: initiallyNull,
       parser: _stringListInputParser,
       formatter: _stringListInputFormatter,
-      initiallyNull: initiallyNull,
     );
   }
 }
 
 InputParseResult<List<String>> _stringListInputParser(String input) {
-  final trimmedInput = input.trim();
-  if (trimmedInput.isEmpty) {
-    return const InputParseSuccess([]);
+  var lines = input.split('\n');
+  if (lines.isNotEmpty && lines.last.isEmpty) {
+    lines = lines.sublist(0, lines.length - 1);
   }
-  return InputParseSuccess(
-    trimmedInput.split('\n').map((e) => e.trim()).toList(),
-  );
+  return InputParseSuccess(lines);
 }
 
-String _stringListInputFormatter(List<String> value) => value.join('\n');
+String _stringListInputFormatter(List<String> value) =>
+    value.join('\n') + (value.lastOrNull?.isEmpty ?? false ? '\n' : '');
+
+extension AxisDirectionKnobExtension on KnobsComposer {
+  WritableKnob<AxisDirection> axisDirection(
+    String label, {
+    required AxisDirection initialValue,
+  }) {
+    return customDropdown(
+      label,
+      initialValue: initialValue,
+      options: AxisDirection.values,
+      optionLabel: _axisDirectionLabel,
+    );
+  }
+}
+
+extension NullableAxisDirectionKnobExtension on NullableKnobsComposer {
+  WritableKnob<AxisDirection?> axisDirection(
+    String label, {
+    required AxisDirection initialValue,
+    bool initiallyNull = false,
+  }) {
+    return customDropdown(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      options: AxisDirection.values,
+      optionLabel: _axisDirectionLabel,
+    );
+  }
+}
+
+String _axisDirectionLabel(AxisDirection direction) => switch (direction) {
+  AxisDirection.up => 'Up',
+  AxisDirection.down => 'Down',
+  AxisDirection.left => 'Left',
+  AxisDirection.right => 'Right',
+};

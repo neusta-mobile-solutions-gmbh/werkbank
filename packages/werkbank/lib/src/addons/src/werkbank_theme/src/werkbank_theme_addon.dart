@@ -10,10 +10,14 @@ class WerkbankThemeAddon extends Addon {
 
   static const addonId = 'werkbank_theme';
 
+  static const lightThemeName = 'Werkbank Light';
+  static const darkThemeName = 'Werkbank Dark';
+  static const systemThemeName = 'Werkbank System';
+
   static const List<String> _themeNames = [
-    'Werkbank Light',
-    'Werkbank Dark',
-    'Werkbank System',
+    lightThemeName,
+    darkThemeName,
+    systemThemeName,
   ];
 
   @override

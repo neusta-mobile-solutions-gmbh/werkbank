@@ -55,18 +55,19 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
           child: WerkbankSettings(
             orderOption: WerkbankSettings.orderOptionOf(context),
             werkbankTheme: switch (themeName) {
-              'Werkbank Dark' => WerkbankTheme(
+              WerkbankThemeAddon.darkThemeName => WerkbankTheme(
                 colorScheme: darkColorScheme,
                 textTheme: WerkbankTextTheme.standard(),
               ),
-              'Werkbank Light' => WerkbankTheme(
+              WerkbankThemeAddon.lightThemeName => WerkbankTheme(
                 colorScheme: lightColorScheme,
                 textTheme: WerkbankTextTheme.standard(),
               ),
-              'Werkbank System' || _ => WerkbankTheme(
-                colorScheme: brightness == Brightness.dark
-                    ? darkColorScheme
-                    : lightColorScheme,
+              WerkbankThemeAddon.systemThemeName || _ => WerkbankTheme(
+                colorScheme: switch (brightness) {
+                  Brightness.dark => darkColorScheme,
+                  Brightness.light => lightColorScheme,
+                },
                 textTheme: WerkbankTextTheme.standard(),
               ),
             },
@@ -88,7 +89,7 @@ class WerkbankThemePersistentController extends PersistentController {
 
   @override
   void init(String? unsafeJson) {
-    themeName = unsafeJson ?? 'Werkbank System';
+    themeName = unsafeJson ?? WerkbankThemeAddon.systemThemeName;
   }
 
   late String themeName;

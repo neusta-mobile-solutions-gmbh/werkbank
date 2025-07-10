@@ -108,7 +108,7 @@ class WerkbankThemePersistentController extends PersistentController {
 
   @override
   void init(String? unsafeJson) {
-    themeName = unsafeJson ?? 'Werkbank Light';
+    themeName = unsafeJson ?? 'Werkbank System';
   }
 
   late String themeName;

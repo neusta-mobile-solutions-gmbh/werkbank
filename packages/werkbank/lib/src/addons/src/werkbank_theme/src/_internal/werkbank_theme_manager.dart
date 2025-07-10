@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart' show SchedulerBinding;
 import 'package:werkbank/src/werkbank_internal.dart';
 
 class WerkbankThemeManager extends StatefulWidget {
@@ -28,15 +27,11 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
     with WidgetsBindingObserver {
   late WerkbankThemePersistentController _werkbankThemeController;
 
-  late Brightness brightness;
-
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addObserver(this);
-
-    _updateDarkMode();
   }
 
   @override
@@ -49,7 +44,7 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
 
   @override
   void didChangePlatformBrightness() {
-    setState(_updateDarkMode);
+    setState(() {});
   }
 
   @override
@@ -59,13 +54,10 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
     super.dispose();
   }
 
-  void _updateDarkMode() {
-    brightness =
-        SchedulerBinding.instance.platformDispatcher.platformBrightness;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.platformBrightnessOf(context);
+
     return ListenableBuilder(
       listenable: _werkbankThemeController,
       builder: (context, child) {

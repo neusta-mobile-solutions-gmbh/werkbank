@@ -23,16 +23,8 @@ class WerkbankThemeManager extends StatefulWidget {
   State<WerkbankThemeManager> createState() => _WerkbankThemeManagerState();
 }
 
-class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
-    with WidgetsBindingObserver {
+class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
   late WerkbankThemePersistentController _werkbankThemeController;
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addObserver(this);
-  }
 
   @override
   void didChangeDependencies() {
@@ -40,18 +32,6 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
     // TODO(cjaros): wrong layer used
     _werkbankThemeController = ApplicationOverlayLayerEntry.access
         .persistentControllerOf<WerkbankThemePersistentController>(context);
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    setState(() {});
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-
-    super.dispose();
   }
 
   @override

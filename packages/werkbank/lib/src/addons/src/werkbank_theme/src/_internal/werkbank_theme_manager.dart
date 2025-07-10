@@ -61,6 +61,14 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
     return ListenableBuilder(
       listenable: _werkbankThemeController,
       builder: (context, child) {
+        final darkColorScheme = WerkbankColorScheme.fromPalette(
+          const WerkbankPalette.dark(),
+        );
+
+        final lightColorScheme = WerkbankColorScheme.fromPalette(
+          const WerkbankPalette.light(),
+        );
+
         final themeName = _werkbankThemeController.themeName;
         return _InheritedWerkbankThemeState(
           themeName: themeName,
@@ -68,23 +76,17 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
             orderOption: WerkbankSettings.orderOptionOf(context),
             werkbankTheme: switch (themeName) {
               'Werkbank Dark' => WerkbankTheme(
-                colorScheme: WerkbankColorScheme.fromPalette(
-                  const WerkbankPalette.dark(),
-                ),
+                colorScheme: darkColorScheme,
                 textTheme: WerkbankTextTheme.standard(),
               ),
               'Werkbank Light' => WerkbankTheme(
-                colorScheme: WerkbankColorScheme.fromPalette(
-                  const WerkbankPalette.light(),
-                ),
+                colorScheme: lightColorScheme,
                 textTheme: WerkbankTextTheme.standard(),
               ),
               'Werkbank System' || _ => WerkbankTheme(
-                colorScheme: WerkbankColorScheme.fromPalette(
-                  brightness == Brightness.dark
-                      ? const WerkbankPalette.dark()
-                      : const WerkbankPalette.light(),
-                ),
+                colorScheme: brightness == Brightness.dark
+                    ? darkColorScheme
+                    : lightColorScheme,
                 textTheme: WerkbankTextTheme.standard(),
               ),
             },

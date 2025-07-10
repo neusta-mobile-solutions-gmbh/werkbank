@@ -28,7 +28,7 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
     with WidgetsBindingObserver {
   late WerkbankThemePersistentController _werkbankThemeController;
 
-  late bool systemIsInDarkMode;
+  late Brightness brightness;
 
   @override
   void initState() {
@@ -60,9 +60,8 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
   }
 
   void _updateDarkMode() {
-    systemIsInDarkMode =
-        SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-        Brightness.dark;
+    brightness =
+        SchedulerBinding.instance.platformDispatcher.platformBrightness;
   }
 
   @override
@@ -90,7 +89,7 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager>
               ),
               'Werkbank System' || _ => WerkbankTheme(
                 colorScheme: WerkbankColorScheme.fromPalette(
-                  systemIsInDarkMode
+                  brightness == Brightness.dark
                       ? const WerkbankPalette.dark()
                       : const WerkbankPalette.light(),
                 ),

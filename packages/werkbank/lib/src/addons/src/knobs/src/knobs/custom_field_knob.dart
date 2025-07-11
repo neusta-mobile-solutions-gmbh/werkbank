@@ -272,6 +272,7 @@ class _CustomFieldKnobState<T> extends State<_CustomFieldKnob<T>> {
   late TextEditingController _textEditingController;
   final _focusNode = FocusNode();
   TextSpan? _errorLabel;
+  bool _handWrittenError = false;
   (String, InputParseResult<T>)? _parseCache;
 
   InputParseResult<T> get _parseResult {
@@ -333,12 +334,18 @@ class _CustomFieldKnobState<T> extends State<_CustomFieldKnob<T>> {
   void _updateFromText({bool updateValue = true}) {
     switch (_parseResult) {
       case InputParseSuccess(:final value):
-        setState(() => _errorLabel = null);
+        setState(() {
+          _errorLabel = null;
+          _handWrittenError = false;
+        });
         if (updateValue) {
           widget.valueNotifier.value = value;
         }
       case InputParseError(:final errorLabel):
-        setState(() => _errorLabel = errorLabel);
+        setState(() {
+          _errorLabel = errorLabel;
+          _handWrittenError |= _focusNode.hasFocus;
+        });
     }
   }
 
@@ -352,14 +359,19 @@ class _CustomFieldKnobState<T> extends State<_CustomFieldKnob<T>> {
   void _syncValues() {
     if (_focusNode.hasFocus) {
       _updateFromText();
-    } else if (_errorLabel == null) {
+    } else if (!_handWrittenError || _errorLabel == null) {
       _updateFromKnob();
     }
   }
 
   void _focusChanged() {
-    if (!_focusNode.hasFocus && _errorLabel == null) {
+    if (!_focusNode.hasFocus && (!_handWrittenError || _errorLabel == null)) {
       _updateFromKnob();
+    }
+    if (_focusNode.hasFocus && _errorLabel != null && !_handWrittenError) {
+      setState(() {
+        _handWrittenError = true;
+      });
     }
   }
 
@@ -373,10 +385,21 @@ class _CustomFieldKnobState<T> extends State<_CustomFieldKnob<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = context.werkbankColorScheme;
     return WTextField(
       controller: _textEditingController,
       focusNode: _focusNode,
-      label: _errorLabel == null ? null : Text.rich(_errorLabel!),
+      label: _errorLabel == null
+          ? null
+          : Text.rich(
+              _errorLabel!,
+              style: _handWrittenError
+                  ? null
+                  : TextStyle(
+                      // TODO(lzuttermeister): Use theme colors.
+                      color: colorScheme.fieldContent.withValues(alpha: 0.8),
+                    ),
+            ),
       maxLines: widget.isMultiLine ? 3 : 1,
       enabled: widget.enabled,
     );

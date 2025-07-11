@@ -36,25 +36,38 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.platformBrightnessOf(context);
+
     return ListenableBuilder(
       listenable: _werkbankThemeController,
       builder: (context, child) {
+        final darkColorScheme = WerkbankColorScheme.fromPalette(
+          const WerkbankPalette.dark(),
+        );
+
+        final lightColorScheme = WerkbankColorScheme.fromPalette(
+          const WerkbankPalette.light(),
+        );
+
         final themeName = _werkbankThemeController.themeName;
         return _InheritedWerkbankThemeState(
           themeName: themeName,
           child: WerkbankSettings(
             orderOption: WerkbankSettings.orderOptionOf(context),
             werkbankTheme: switch (themeName) {
-              'Werkbank Dark' => WerkbankTheme(
-                colorScheme: WerkbankColorScheme.fromPalette(
-                  const WerkbankPalette.dark(),
-                ),
+              WerkbankThemeAddon.darkThemeName => WerkbankTheme(
+                colorScheme: darkColorScheme,
                 textTheme: WerkbankTextTheme.standard(),
               ),
-              'Werkbank Light' || _ => WerkbankTheme(
-                colorScheme: WerkbankColorScheme.fromPalette(
-                  const WerkbankPalette.light(),
-                ),
+              WerkbankThemeAddon.lightThemeName => WerkbankTheme(
+                colorScheme: lightColorScheme,
+                textTheme: WerkbankTextTheme.standard(),
+              ),
+              WerkbankThemeAddon.systemThemeName || _ => WerkbankTheme(
+                colorScheme: switch (brightness) {
+                  Brightness.dark => darkColorScheme,
+                  Brightness.light => lightColorScheme,
+                },
                 textTheme: WerkbankTextTheme.standard(),
               ),
             },
@@ -76,7 +89,7 @@ class WerkbankThemePersistentController extends PersistentController {
 
   @override
   void init(String? unsafeJson) {
-    themeName = unsafeJson ?? 'Werkbank Light';
+    themeName = unsafeJson ?? WerkbankThemeAddon.systemThemeName;
   }
 
   late String themeName;

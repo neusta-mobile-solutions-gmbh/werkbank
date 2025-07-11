@@ -1,4 +1,5 @@
 # 0.17.0
+- Added a `Werkbank System` theme, which will always match your system. It's also default now.
 - Deprecate `list` knob. Use `customDropdown` instead.
 - Add `customDropdown` knob.
   - Compared to `list`, some parameters were changed to be more consistent with other knobs.

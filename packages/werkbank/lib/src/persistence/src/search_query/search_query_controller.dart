@@ -23,7 +23,8 @@ class SearchQueryController extends PersistentController {
     const fallback = SearchQueryPersistentData(query: '');
 
     try {
-      _persistentData = unsafeJson != null
+      _persistentData =
+          unsafeJson != null && !_wasAliveController.isColdAppStart
           ? SearchQueryPersistentData.fromJson(jsonDecode(unsafeJson))
           : fallback;
     } on FormatException {
@@ -41,11 +42,7 @@ class SearchQueryController extends PersistentController {
   late SearchQueryPersistentData _persistentData;
 
   String get query {
-    return !_queryOutdated ? _persistentData.query : '';
-  }
-
-  bool get _queryOutdated {
-    return !_wasAliveController.appWasAliveRecently;
+    return _persistentData.query;
   }
 
   void updateSearchQuery(String query) {

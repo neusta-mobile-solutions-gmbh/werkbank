@@ -107,13 +107,13 @@ class _RouterBuilderState extends State<RouterBuilder> {
       return null;
     }
     // This is a appstart.
-    final appWasRecentlyAlive =
+    final appWasAliveRecently =
         WerkbankPersistence.maybeWasAliveController(
           context,
         )?.appWasAliveRecently ??
         false;
 
-    if (!appWasRecentlyAlive) {
+    if (!appWasAliveRecently) {
       // The app was not recently alive, we don't want to restore
       // history that is too old.
       return null;

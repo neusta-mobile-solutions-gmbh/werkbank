@@ -6,20 +6,20 @@ extension CustomDropdownKnobExtension on KnobsComposer {
   WritableKnob<T> customDropdown<T>(
     String label, {
     required T initialValue,
-    required List<T> options,
-    required String Function(T) optionLabel,
+    required List<T> values,
+    required String Function(T) valueLabel,
   }) {
     assert(
-      options.isNotEmpty,
-      'List of options must not be empty',
+      values.isNotEmpty,
+      'List of values must not be empty',
     );
     return makeRegularKnob(
       label,
       initialValue: initialValue,
       knobBuilder: (context, valueNotifier) => _CustomDropdownKnob<T>(
         valueNotifier: valueNotifier,
-        options: options,
-        optionLabel: optionLabel,
+        values: values,
+        valueLabel: valueLabel,
         enabled: true,
       ),
     );
@@ -37,7 +37,7 @@ extension NullableCustomDropdownKnobExtension on NullableKnobsComposer {
   }) {
     assert(
       options.isNotEmpty,
-      'List of options must not be empty',
+      'List of values must not be empty',
     );
     return makeNullableKnob(
       label,
@@ -45,8 +45,8 @@ extension NullableCustomDropdownKnobExtension on NullableKnobsComposer {
       initiallyNull: initiallyNull,
       knobBuilder: (context, enabled, valueNotifier) => _CustomDropdownKnob<T>(
         valueNotifier: valueNotifier,
-        options: options,
-        optionLabel: optionLabel,
+        values: options,
+        valueLabel: optionLabel,
         enabled: enabled,
       ),
     );
@@ -56,14 +56,14 @@ extension NullableCustomDropdownKnobExtension on NullableKnobsComposer {
 class _CustomDropdownKnob<T> extends StatelessWidget {
   const _CustomDropdownKnob({
     required this.valueNotifier,
-    required this.options,
-    required this.optionLabel,
+    required this.values,
+    required this.valueLabel,
     required this.enabled,
   });
 
   final ValueNotifier<T> valueNotifier;
-  final List<T> options;
-  final String Function(T) optionLabel;
+  final List<T> values;
+  final String Function(T) valueLabel;
   final bool enabled;
 
   @override
@@ -77,12 +77,12 @@ class _CustomDropdownKnob<T> extends StatelessWidget {
       value: valueNotifier.value,
       items: [
         /* TODO(lzuttermeister): Is this really the best way to handle values
-             that are not in the options? */
-        for (final option in {...options, valueNotifier.value})
+             that are not in the values list? */
+        for (final value in {...values, valueNotifier.value})
           WDropdownMenuItem(
-            value: option,
+            value: value,
             child: Text(
-              optionLabel(option),
+              valueLabel(value),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

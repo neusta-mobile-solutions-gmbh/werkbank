@@ -25,8 +25,8 @@ WidgetBuilder wControlItemUseCase(UseCaseComposer c) {
   final layout = c.knobs.customDropdown(
     'Layout',
     initialValue: ControlItemLayout.compact,
-    options: [ControlItemLayout.compact, ControlItemLayout.spacious],
-    optionLabel: (ControlItemLayout layout) => switch (layout) {
+    values: [ControlItemLayout.compact, ControlItemLayout.spacious],
+    valueLabel: (ControlItemLayout layout) => switch (layout) {
       ControlItemLayout.compact => 'Compact',
       ControlItemLayout.spacious => 'Spacious',
     },

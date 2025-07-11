@@ -26,8 +26,8 @@ extension ListKnobExtension on KnobsComposer {
     return customDropdown(
       label,
       initialValue: initialOption ?? options.first,
-      options: options,
-      optionLabel: optionLabel,
+      values: options,
+      valueLabel: optionLabel,
     );
   }
 }

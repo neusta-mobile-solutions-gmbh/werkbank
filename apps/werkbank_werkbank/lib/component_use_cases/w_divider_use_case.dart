@@ -9,8 +9,8 @@ WidgetBuilder wDividerUseCase(UseCaseComposer c) {
   final axis = c.knobs.customDropdown(
     'Axis',
     initialValue: Axis.horizontal,
-    options: Axis.values,
-    optionLabel: (axis) => switch (axis) {
+    values: Axis.values,
+    valueLabel: (axis) => switch (axis) {
       Axis.horizontal => 'Horizontal',
       Axis.vertical => 'Vertical',
     },

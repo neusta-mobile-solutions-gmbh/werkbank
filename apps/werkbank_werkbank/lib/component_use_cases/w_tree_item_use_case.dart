@@ -17,12 +17,12 @@ WidgetBuilder wTreeItemUseCase(UseCaseComposer c) {
   final iconData = c.knobs.customDropdown(
     'icons',
     initialValue: WerkbankIcons.folderSimple,
-    options: [
+    values: [
       WerkbankIcons.folderSimple,
       WerkbankIcons.bookOpen,
       WerkbankIcons.bookmarkSimple,
     ],
-    optionLabel: (icon) => switch (icon) {
+    valueLabel: (icon) => switch (icon) {
       WerkbankIcons.folderSimple => 'Folder',
       WerkbankIcons.bookOpen => 'Menu',
       WerkbankIcons.bookmarkSimple => 'Bookmark',

@@ -21,8 +21,8 @@ WidgetBuilder wDropdownUseCase(UseCaseComposer c) {
   final valueKnob = c.knobs.customDropdown<String>(
     'Value',
     initialValue: items.first,
-    options: items,
-    optionLabel: (item) => item,
+    values: items,
+    valueLabel: (item) => item,
   );
 
   return (context) {

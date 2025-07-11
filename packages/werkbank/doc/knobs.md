@@ -396,8 +396,8 @@ extension AxisDirectionKnobExtension on KnobsComposer {
     return customDropdown(
       label,
       initialValue: initialValue,
-      options: AxisDirection.values,
-      optionLabel: _axisDirectionLabel,
+      values: AxisDirection.values,
+      valueLabel: _axisDirectionLabel,
     );
   }
 }
@@ -412,8 +412,8 @@ extension NullableAxisDirectionKnobExtension on NullableKnobsComposer {
       label,
       initialValue: initialValue,
       initiallyNull: initiallyNull,
-      options: AxisDirection.values,
-      optionLabel: _axisDirectionLabel,
+      values: AxisDirection.values,
+      valueLabel: _axisDirectionLabel,
     );
   }
 }

@@ -114,8 +114,8 @@ WidgetBuilder wNotificationWidgetsUseCase(UseCaseComposer c) {
   final heightOption = c.knobs.customDropdown(
     'HeightOption',
     initialValue: _HeightOptions.none,
-    options: _HeightOptions.values,
-    optionLabel: (option) => option.name,
+    values: _HeightOptions.values,
+    valueLabel: (option) => option.name,
   );
 
   final animation = c.knobs.animationController(

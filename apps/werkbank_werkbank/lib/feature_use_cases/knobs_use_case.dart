@@ -46,12 +46,31 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     initialValue: 0,
   );
 
+  final intFieldKnob = c.knobs.intField(
+    'Int Field',
+    initialValue: 0,
+  );
+
+  final nullableIntFieldKnob = c.knobs.nullable.intField(
+    'Nullable Int Field',
+    initialValue: 0,
+  );
+
   final doubleSliderKnob = c.knobs.doubleSlider(
     'Double Slider',
     initialValue: 0,
   );
   final nullableDoubleSliderKnob = c.knobs.nullable.doubleSlider(
     'Nullable Double Slider',
+    initialValue: 0,
+  );
+
+  final doubleFieldKnob = c.knobs.doubleField(
+    'Double Field',
+    initialValue: 0,
+  );
+  final nullableDoubleFieldKnob = c.knobs.nullable.doubleField(
+    'Nullable Double Field',
     initialValue: 0,
   );
 
@@ -221,7 +240,9 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     final textSpans = [
       knobSpan(booleanKnob, nullableBooleanKnob),
       knobSpan(intSliderKnob, nullableIntSliderKnob),
+      knobSpan(intFieldKnob, nullableIntFieldKnob),
       knobSpan(doubleSliderKnob, nullableDoubleSliderKnob),
+      knobSpan(doubleFieldKnob, nullableDoubleFieldKnob),
       knobSpan(dropdownKnob, nullableDropdownKnob),
       knobSpan(stringKnob, nullableStringKnob),
       knobSpan(stringMultiLineKnob, nullableStringMultiLineKnob),

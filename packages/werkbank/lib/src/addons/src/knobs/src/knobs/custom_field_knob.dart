@@ -72,7 +72,7 @@ extension CustomFieldKnobExtension on KnobsComposer {
   ///   final parsedValue = BigInt.tryParse(trimmedInput);
   ///   return parsedValue != null
   ///       ? InputParseSuccess(parsedValue)
-  ///       : InputParseError('Invalid BigInt Format');
+  ///       : InputParseError('Invalid BigInt format');
   /// }
   ///
   /// String _bigIntInputFormatter(BigInt value) => value.toString();

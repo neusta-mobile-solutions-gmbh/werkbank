@@ -268,7 +268,7 @@ InputParseResult<BigInt> _bigIntInputParser(String input) {
   final parsedValue = BigInt.tryParse(trimmedInput);
   return parsedValue != null
     ? InputParseSuccess(parsedValue)
-    : InputParseError('Invalid BigInt Format');
+    : InputParseError('Invalid BigInt format');
 }
 
 String _bigIntInputFormatter(BigInt value) => value.toString();
@@ -317,7 +317,7 @@ InputParseResult<Color> _hexColorInputParser(String input) {
   final trimmedInput = input.trim();
   final match = _hexColorRegExp.firstMatch(trimmedInput);
   if (match == null) {
-    return InputParseError('Invalid Hex Color Format');
+    return InputParseError('Invalid hex color format');
   }
   final hex = match.group(2)!;
   final effectiveHex = hex.length == 6 ? 'FF$hex' : hex;

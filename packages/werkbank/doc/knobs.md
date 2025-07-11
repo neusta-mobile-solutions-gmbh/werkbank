@@ -67,7 +67,7 @@ The following sections will explain the three approaches in more detail.
 
 Most existing knobs have some parameters that allow you to customize them in some way.
 If you use a certain configuration often, you can write an extension
-with a custom knob that uses an existing knob as a base and configures it
+for a custom knob that uses an existing knob as a base and configures it
 accordingly.
 
 Especially versatile are knobs that can return any type `T`:

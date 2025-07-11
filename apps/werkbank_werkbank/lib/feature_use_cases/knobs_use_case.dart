@@ -55,14 +55,14 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     initialValue: 0,
   );
 
-  final listKnob = c.knobs.customDropdown(
-    'List',
+  final dropdownKnob = c.knobs.customDropdown(
+    'Dropdown',
     initialValue: 'A',
     options: ['A', 'B', 'C'],
     optionLabel: (e) => e,
   );
-  final nullableListKnob = c.knobs.nullable.customDropdown(
-    'Nullable List',
+  final nullableDropdownKnob = c.knobs.nullable.customDropdown(
+    'Nullable Dropdown',
     options: ['A', 'B', 'C'],
     optionLabel: (e) => e,
     initialValue: 'A',
@@ -222,7 +222,7 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       knobSpan(booleanKnob, nullableBooleanKnob),
       knobSpan(intSliderKnob, nullableIntSliderKnob),
       knobSpan(doubleSliderKnob, nullableDoubleSliderKnob),
-      knobSpan(listKnob, nullableListKnob),
+      knobSpan(dropdownKnob, nullableDropdownKnob),
       knobSpan(stringKnob, nullableStringKnob),
       knobSpan(stringMultiLineKnob, nullableStringMultiLineKnob),
       knobSpan(millisKnob, nullableMillisKnob),

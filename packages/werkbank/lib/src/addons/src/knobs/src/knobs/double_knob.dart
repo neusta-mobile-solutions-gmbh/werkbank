@@ -14,7 +14,7 @@ extension DoubleKnobExtension on KnobsComposer {
   ///
   /// [divisions] sets the number of discrete divisions if non-`null`.
   ///
-  /// [valueFormatter] customizes the display of the value.
+  /// [valueLabel] is a function that returns the display label for each value.
   /// This defaults to showing two decimal places.
   /// {@endtemplate}
   WritableKnob<double> doubleSlider(
@@ -23,7 +23,8 @@ extension DoubleKnobExtension on KnobsComposer {
     double min = 0,
     double max = 1,
     int? divisions,
-    DoubleFormatter valueFormatter = _defaultFormatter,
+    @Deprecated('Use valueLabel instead') DoubleFormatter? valueFormatter,
+    DoubleFormatter valueLabel = _defaultLabel,
   }) {
     return customSlider(
       label,
@@ -33,7 +34,7 @@ extension DoubleKnobExtension on KnobsComposer {
       divisions: divisions,
       encoder: (v) => v,
       decoder: (d) => d,
-      valueFormatter: valueFormatter,
+      valueLabel: valueFormatter ?? valueLabel,
     );
   }
 
@@ -93,7 +94,8 @@ extension NullableDoubleKnobExtension on NullableKnobsComposer {
     double min = 0,
     double max = 1,
     int? divisions,
-    DoubleFormatter valueFormatter = _defaultFormatter,
+    @Deprecated('Use valueLabel instead') DoubleFormatter? valueFormatter,
+    DoubleFormatter valueLabel = _defaultLabel,
   }) {
     return customSlider(
       label,
@@ -104,7 +106,7 @@ extension NullableDoubleKnobExtension on NullableKnobsComposer {
       divisions: divisions,
       encoder: (v) => v,
       decoder: (d) => d,
-      valueFormatter: valueFormatter,
+      valueLabel: valueFormatter ?? valueLabel,
     );
   }
 
@@ -140,7 +142,7 @@ extension NullableDoubleKnobExtension on NullableKnobsComposer {
   }
 }
 
-String _defaultFormatter(double value) => value.toStringAsFixed(2);
+String _defaultLabel(double value) => value.toStringAsFixed(2);
 
 String _doubleFormatter(double value) => value.toString();
 

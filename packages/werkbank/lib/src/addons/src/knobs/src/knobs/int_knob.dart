@@ -12,14 +12,15 @@ extension IntKnobExtension on KnobsComposer {
   /// The [min] and [max] parameters define the slider's range.
   /// They default to 0 and 1.
   ///
-  /// [valueFormatter] customizes the display of the value.
+  /// [valueLabel] is a function that returns the display label for each value.
   /// {@endtemplate}
   WritableKnob<int> intSlider(
     String label, {
     required int initialValue,
     int min = 0,
     int max = 10,
-    IntFormatter valueFormatter = _defaultFormatter,
+    @Deprecated('Use valueLabel instead') IntFormatter? valueFormatter,
+    IntFormatter valueLabel = _defaultLabel,
   }) {
     return customSlider(
       label,
@@ -29,7 +30,7 @@ extension IntKnobExtension on KnobsComposer {
       divisions: max - min,
       encoder: (v) => v.toDouble(),
       decoder: (d) => d.toInt(),
-      valueFormatter: valueFormatter,
+      valueLabel: valueFormatter ?? valueLabel,
     );
   }
 
@@ -52,7 +53,7 @@ extension IntKnobExtension on KnobsComposer {
       label,
       initialValue: initialValue,
       parser: (input) => _intInputParser(input, min: min, max: max),
-      formatter: _defaultFormatter,
+      formatter: _intFormatter,
     );
   }
 }
@@ -72,7 +73,8 @@ extension NullableIntKnobExtension on NullableKnobsComposer {
     bool initiallyNull = false,
     int min = 0,
     int max = 10,
-    IntFormatter valueFormatter = _defaultFormatter,
+    @Deprecated('Use valueLabel instead') IntFormatter? valueFormatter,
+    IntFormatter valueLabel = _defaultLabel,
   }) {
     return customSlider(
       label,
@@ -83,7 +85,7 @@ extension NullableIntKnobExtension on NullableKnobsComposer {
       divisions: max - min,
       encoder: (v) => v.toDouble(),
       decoder: (d) => d.toInt(),
-      valueFormatter: valueFormatter,
+      valueLabel: valueFormatter ?? valueLabel,
     );
   }
 
@@ -105,13 +107,15 @@ extension NullableIntKnobExtension on NullableKnobsComposer {
       label,
       initialValue: initialValue,
       parser: (input) => _intInputParser(input, min: min, max: max),
-      formatter: _defaultFormatter,
+      formatter: _intFormatter,
       initiallyNull: initiallyNull,
     );
   }
 }
 
-String _defaultFormatter(int value) => value.toString();
+String _defaultLabel(int value) => value.toString();
+
+String _intFormatter(int value) => value.toString();
 
 InputParseResult<int> _intInputParser(
   String input, {

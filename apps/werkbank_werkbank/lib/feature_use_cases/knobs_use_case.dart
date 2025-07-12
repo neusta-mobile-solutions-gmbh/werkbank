@@ -336,7 +336,7 @@ extension PercentageKnobExtension on KnobsComposer {
       label,
       initialValue: initialValue,
       divisions: 100,
-      valueFormatter: (value) => '${(value * 100).toInt()}%',
+      valueLabel: (value) => '${(value * 100).toInt()}%',
     );
   }
 }
@@ -352,7 +352,7 @@ extension NullablePercentageKnobExtension on NullableKnobsComposer {
       initialValue: initialValue,
       initiallyNull: initiallyNull,
       divisions: 100,
-      valueFormatter: (value) => '${(value * 100).toInt()}%',
+      valueLabel: (value) => '${(value * 100).toInt()}%',
     );
   }
 }
@@ -505,7 +505,7 @@ extension TimeOfDayKnobExtension on KnobsComposer {
       divisions: 24 * 60,
       encoder: _timeOfDayEncoder,
       decoder: _timeOfDayDecoder,
-      valueFormatter: _timeOfDayFormatter,
+      valueLabel: _timeOfDayFormatter,
     );
   }
 }
@@ -527,7 +527,7 @@ extension NullableTimeOfDayKnobExtension on NullableKnobsComposer {
       divisions: 24 * 60,
       encoder: _timeOfDayEncoder,
       decoder: _timeOfDayDecoder,
-      valueFormatter: _timeOfDayFormatter,
+      valueLabel: _timeOfDayFormatter,
     );
   }
 }

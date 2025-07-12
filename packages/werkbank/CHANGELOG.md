@@ -1,6 +1,8 @@
 # 0.17.0
 - Added a `Werkbank System` theme, which will always match your system. It's also default now.
 - Deprecate `list` knob. Use `customDropdown` instead.
+- Rename `valueFormatter` parameters in `doubleSlider` and `intSlider` knobs to `valueLabel`.
+  The old parameter names are still available but deprecated.
 - Add `customDropdown` knob.
   - Compared to `list`, some parameters were changed to be more consistent with other knobs.
 - Add new knobs with generic return types that allow you to create custom knobs with little effort:

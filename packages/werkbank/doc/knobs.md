@@ -99,7 +99,7 @@ extension PercentageKnobExtension on KnobsComposer {
       label,
       initialValue: initialValue,
       divisions: 100,
-      valueFormatter: (value) => '${(value * 100).toInt()}%',
+      valueLabel: (value) => '${(value * 100).toInt()}%',
     );
   }
 }
@@ -115,7 +115,7 @@ extension NullablePercentageKnobExtension on NullableKnobsComposer {
       initialValue: initialValue,
       initiallyNull: initiallyNull,
       divisions: 100,
-      valueFormatter: (value) => '${(value * 100).toInt()}%',
+      valueLabel: (value) => '${(value * 100).toInt()}%',
     );
   }
 }

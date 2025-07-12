@@ -27,7 +27,7 @@ extension CustomSliderKnobExtension on KnobsComposer {
   ///
   /// [divisions] sets the number of discrete divisions if non-`null`.
   ///
-  /// [valueFormatter] customizes the display of the value.
+  /// [valueLabel] is a function that returns the display label for each value.
   ///
   /// See the example below for how to use this to create a [TimeOfDay] knob:
   /// ```dart
@@ -98,7 +98,7 @@ extension CustomSliderKnobExtension on KnobsComposer {
     int? divisions,
     required DoubleEncoder<T> encoder,
     required DoubleDecoder<T> decoder,
-    required ValueFormatter<T> valueFormatter,
+    required ValueFormatter<T> valueLabel,
   }) {
     return makeRegularKnob(
       label,
@@ -110,7 +110,7 @@ extension CustomSliderKnobExtension on KnobsComposer {
         divisions: divisions,
         encoder: encoder,
         decoder: decoder,
-        valueFormatter: valueFormatter,
+        valueLabel: valueLabel,
         enabled: true,
       ),
     );
@@ -138,7 +138,7 @@ extension NullableCustomSliderKnobExtension on NullableKnobsComposer {
     int? divisions,
     required DoubleEncoder<T> encoder,
     required DoubleDecoder<T> decoder,
-    required ValueFormatter<T> valueFormatter,
+    required ValueFormatter<T> valueLabel,
   }) {
     return makeNullableKnob(
       label,
@@ -151,7 +151,7 @@ extension NullableCustomSliderKnobExtension on NullableKnobsComposer {
         divisions: divisions,
         encoder: encoder,
         decoder: decoder,
-        valueFormatter: valueFormatter,
+        valueLabel: valueLabel,
         enabled: enabled,
       ),
     );
@@ -164,7 +164,7 @@ class _CustomSliderKnob<T> extends StatelessWidget {
     required this.min,
     required this.max,
     required this.divisions,
-    required this.valueFormatter,
+    required this.valueLabel,
     required this.decoder,
     required this.encoder,
     required this.enabled,
@@ -174,7 +174,7 @@ class _CustomSliderKnob<T> extends StatelessWidget {
   final T min;
   final T max;
   final int? divisions;
-  final ValueFormatter<T> valueFormatter;
+  final ValueFormatter<T> valueLabel;
   final DoubleDecoder<T> decoder;
   final DoubleEncoder<T> encoder;
   final bool enabled;
@@ -186,7 +186,7 @@ class _CustomSliderKnob<T> extends StatelessWidget {
       min: encoder(min),
       max: encoder(max),
       divisions: divisions,
-      valueFormatter: (d) => valueFormatter(decoder(d)),
+      valueFormatter: (d) => valueLabel(decoder(d)),
       onChanged: enabled
           ? (value) => valueNotifier.value = decoder(value)
           : null,

@@ -30,7 +30,7 @@ WidgetBuilder _animatedUseCase(UseCaseComposer c) {
     'Size',
     initialValue: 256,
     max: 256,
-    valueFormatter: (v) => '$v px',
+    valueLabel: (v) => '$v px',
   );
   final turnsKnob = c.knobs.animationController(
     'Turns',
@@ -64,27 +64,27 @@ WidgetBuilder _simulationUseCase(UseCaseComposer c) {
     'Size',
     initialValue: 256,
     max: 256,
-    valueFormatter: (v) => '$v px',
+    valueLabel: (v) => '$v px',
   );
   final targetTurnsKnob = c.knobs.doubleSlider(
     'Target Angle',
     initialValue: 2.13,
     max: 5,
-    valueFormatter: (v) => '${(v * 360).toInt()}°',
+    valueLabel: (v) => '${(v * 360).toInt()}°',
   );
   final massKnob = c.knobs.doubleSlider(
     'Mass',
     initialValue: 1.0,
     min: 0.1,
     max: 10.0,
-    valueFormatter: (v) => '${v.toStringAsFixed(2)} kg',
+    valueLabel: (v) => '${v.toStringAsFixed(2)} kg',
   );
   final stiffnessKnob = c.knobs.doubleSlider(
     'Stiffness',
     initialValue: 20.0,
     min: 1.0,
     max: 100.0,
-    valueFormatter: (v) => '${v.toStringAsFixed(1)} N/m',
+    valueLabel: (v) => '${v.toStringAsFixed(1)} N/m',
   );
   final dampingRatioKnob = c.knobs.doubleSlider(
     'Damping Ratio',

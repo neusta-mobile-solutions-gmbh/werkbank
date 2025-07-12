@@ -49,7 +49,7 @@ extension IntKnobExtension on KnobsComposer {
     int? min,
     int? max,
   }) {
-    return customField<int>(
+    return customField(
       label,
       initialValue: initialValue,
       parser: (input) => _intInputParser(input, min: min, max: max),
@@ -103,7 +103,7 @@ extension NullableIntKnobExtension on NullableKnobsComposer {
     int? min,
     int? max,
   }) {
-    return customField<int>(
+    return customField(
       label,
       initialValue: initialValue,
       parser: (input) => _intInputParser(input, min: min, max: max),

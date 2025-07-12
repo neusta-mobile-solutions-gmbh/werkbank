@@ -63,7 +63,7 @@ extension DoubleKnobExtension on KnobsComposer {
     bool allowInfinites = false,
     bool allowNaN = false,
   }) {
-    return customField<double>(
+    return customField(
       label,
       initialValue: initialValue,
       parser: (input) => _doubleInputParser(
@@ -126,7 +126,7 @@ extension NullableDoubleKnobExtension on NullableKnobsComposer {
     bool allowInfinites = false,
     bool allowNaN = false,
   }) {
-    return customField<double>(
+    return customField(
       label,
       initialValue: initialValue,
       parser: (input) => _doubleInputParser(

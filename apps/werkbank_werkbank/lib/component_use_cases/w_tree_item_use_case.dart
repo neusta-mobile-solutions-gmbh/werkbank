@@ -14,14 +14,15 @@ WidgetBuilder wTreeItemUseCase(UseCaseComposer c) {
     max: 8,
     divisions: 8,
   );
-  final iconData = c.knobs.list(
+  final iconData = c.knobs.customDropdown(
     'icons',
-    options: [
+    initialValue: WerkbankIcons.folderSimple,
+    values: [
       WerkbankIcons.folderSimple,
       WerkbankIcons.bookOpen,
       WerkbankIcons.bookmarkSimple,
     ],
-    optionLabel: (icon) => switch (icon) {
+    valueLabel: (icon) => switch (icon) {
       WerkbankIcons.folderSimple => 'Folder',
       WerkbankIcons.bookOpen => 'Menu',
       WerkbankIcons.bookmarkSimple => 'Bookmark',

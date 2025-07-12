@@ -10,6 +10,7 @@ class WasAliveController extends PersistentController<WasAliveController> {
   void tryLoadFromJson(Object? json) {
     try {
       _persistentData = WasAlivePersistentData.fromJson(json);
+      _isColdAppStart = !appWasAliveRecently;
     } on FormatException {
       debugPrint(
         'Restoring WasAlivePersistentData failed. Throwing it away. '
@@ -27,17 +28,24 @@ class WasAliveController extends PersistentController<WasAliveController> {
   late WasAlivePersistentData _persistentData = WasAlivePersistentData(
     appWasAlive: DateTime.now(),
   );
+  late bool _isColdAppStart = true;
 
-  // If the app was not alive recently, this will just be false
-  // for the first frame of the app.
-  // PostFrame, it will be set to true again.
+  /// If this was a regular app start, this will be set to true.
+  /// Else if this was just a restart of the app, this will be false.
+  ///
+  /// It will only be set once per app start.
+  bool get isColdAppStart {
+    return _isColdAppStart;
+  }
+
+  /// Usually this is true.
+  /// Just for the first frame of an app start, this will be false,
+  /// if the app was not running in the last 30 seconds.
   bool get appWasAliveRecently {
     final result =
         DateTime.now().difference(_persistentData.appWasAlive).inSeconds < 30;
     return result;
   }
-
-  DateTime get appWasAliveDateTime => _persistentData.appWasAlive;
 
   void logAppIsAlive() {
     _persistentData = WasAlivePersistentData(

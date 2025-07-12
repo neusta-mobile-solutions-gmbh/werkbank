@@ -18,6 +18,9 @@ class SearchQueryController
 
   @override
   void tryLoadFromJson(Object? json) {
+    if (_wasAliveController.isColdAppStart) {
+      return;
+    }
     try {
       _persistentData = SearchQueryPersistentData.fromJson(json);
       notifyListeners();
@@ -43,11 +46,7 @@ class SearchQueryController
   );
 
   String get query {
-    return !_queryOutdated ? _persistentData.query : '';
-  }
-
-  bool get _queryOutdated {
-    return !_wasAliveController.appWasAliveRecently;
+    return _persistentData.query;
   }
 
   void updateSearchQuery(String query) {

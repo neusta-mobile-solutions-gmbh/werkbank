@@ -476,7 +476,6 @@ class TranslationsAddonsKnobsKnobsEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAddonsKnobsKnobsBooleanEn boolean = TranslationsAddonsKnobsKnobsBooleanEn._(_root);
 	late final TranslationsAddonsKnobsKnobsIntervalEn interval = TranslationsAddonsKnobsKnobsIntervalEn._(_root);
 	late final TranslationsAddonsKnobsKnobsFocusnodeEn focusnode = TranslationsAddonsKnobsKnobsFocusnodeEn._(_root);
 }
@@ -631,16 +630,6 @@ class TranslationsAddonsKnobsControlsPresetEn {
 	late final TranslationsAddonsKnobsControlsPresetValuesEn values = TranslationsAddonsKnobsControlsPresetValuesEn._(_root);
 }
 
-// Path: addons.knobs.knobs.boolean
-class TranslationsAddonsKnobsKnobsBooleanEn {
-	TranslationsAddonsKnobsKnobsBooleanEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	late final TranslationsAddonsKnobsKnobsBooleanValuesEn values = TranslationsAddonsKnobsKnobsBooleanValuesEn._(_root);
-}
-
 // Path: addons.knobs.knobs.interval
 class TranslationsAddonsKnobsKnobsIntervalEn {
 	TranslationsAddonsKnobsKnobsIntervalEn._(this._root);
@@ -769,17 +758,6 @@ class TranslationsAddonsKnobsControlsPresetValuesEn {
 	String get unknown => '-';
 }
 
-// Path: addons.knobs.knobs.boolean.values
-class TranslationsAddonsKnobsKnobsBooleanValuesEn {
-	TranslationsAddonsKnobsKnobsBooleanValuesEn._(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-	String get falseLabel => 'FALSE';
-	String get trueLabel => 'TRUE';
-}
-
 // Path: addons.ordering.controls.order.values
 class TranslationsAddonsOrderingControlsOrderValuesEn {
 	TranslationsAddonsOrderingControlsOrderValuesEn._(this._root);
@@ -884,8 +862,6 @@ extension on Translations {
 			case 'addons.knobs.controls.preset.name': return 'Preset';
 			case 'addons.knobs.controls.preset.values.initial': return 'Initial';
 			case 'addons.knobs.controls.preset.values.unknown': return '-';
-			case 'addons.knobs.knobs.boolean.values.falseLabel': return 'FALSE';
-			case 'addons.knobs.knobs.boolean.values.trueLabel': return 'TRUE';
 			case 'addons.knobs.knobs.interval.begin': return 'Begin';
 			case 'addons.knobs.knobs.interval.end': return 'End';
 			case 'addons.knobs.knobs.focusnode.unfocused': return 'Unfocused';

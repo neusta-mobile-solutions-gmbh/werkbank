@@ -22,11 +22,11 @@ WidgetBuilder wControlItemUseCase(UseCaseComposer c) {
   c.overview.minimumSize(width: 200);
 
   final title = c.knobs.string('Title', initialValue: 'Title');
-  final layout = c.knobs.list(
+  final layout = c.knobs.customDropdown(
     'Layout',
-    options: [ControlItemLayout.compact, ControlItemLayout.spacious],
-    initialOption: ControlItemLayout.compact,
-    optionLabel: (ControlItemLayout layout) => switch (layout) {
+    initialValue: ControlItemLayout.compact,
+    values: [ControlItemLayout.compact, ControlItemLayout.spacious],
+    valueLabel: (ControlItemLayout layout) => switch (layout) {
       ControlItemLayout.compact => 'Compact',
       ControlItemLayout.spacious => 'Spacious',
     },

@@ -32,11 +32,11 @@ extension NullableCustomDropdownKnobExtension on NullableKnobsComposer {
     String label, {
     required T initialValue,
     bool initiallyNull = false,
-    required List<T> options,
-    required String Function(T) optionLabel,
+    required List<T> values,
+    required String Function(T) valueLabel,
   }) {
     assert(
-      options.isNotEmpty,
+      values.isNotEmpty,
       'List of values must not be empty',
     );
     return makeNullableKnob(
@@ -45,8 +45,8 @@ extension NullableCustomDropdownKnobExtension on NullableKnobsComposer {
       initiallyNull: initiallyNull,
       knobBuilder: (context, enabled, valueNotifier) => _CustomDropdownKnob<T>(
         valueNotifier: valueNotifier,
-        values: options,
-        valueLabel: optionLabel,
+        values: values,
+        valueLabel: valueLabel,
         enabled: enabled,
       ),
     );

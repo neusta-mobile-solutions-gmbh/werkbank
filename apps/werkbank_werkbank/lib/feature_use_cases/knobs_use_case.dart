@@ -82,8 +82,8 @@ This use case demonstrates the various knobs supported by the knobs addon in the
   );
   final nullableDropdownKnob = c.knobs.nullable.customDropdown(
     'Nullable Dropdown',
-    options: ['A', 'B', 'C'],
-    optionLabel: (e) => e,
+    values: ['A', 'B', 'C'],
+    valueLabel: (e) => e,
     initialValue: 'A',
   );
 
@@ -613,8 +613,8 @@ extension NullableAxisDirectionKnobExtension on NullableKnobsComposer {
       label,
       initialValue: initialValue,
       initiallyNull: initiallyNull,
-      options: AxisDirection.values,
-      optionLabel: _axisDirectionLabel,
+      values: AxisDirection.values,
+      valueLabel: _axisDirectionLabel,
     );
   }
 }

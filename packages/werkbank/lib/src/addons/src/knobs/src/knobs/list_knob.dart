@@ -60,8 +60,8 @@ extension NullableListKnobExtension on NullableKnobsComposer {
       label,
       initialValue: initialOption ?? options.first,
       initiallyNull: initiallyNull,
-      options: options,
-      optionLabel: optionLabel,
+      values: options,
+      valueLabel: optionLabel,
     );
   }
 }

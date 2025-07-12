@@ -52,12 +52,13 @@ extension CustomDropdownKnobExtension on KnobsComposer {
   ///   }
   /// }
   ///
-  /// String _axisDirectionLabel(AxisDirection direction) => switch (direction) {
-  ///   AxisDirection.up => 'Up',
-  ///   AxisDirection.down => 'Down',
-  ///   AxisDirection.left => 'Left',
-  ///   AxisDirection.right => 'Right',
-  /// };
+  /// String _axisDirectionLabel(AxisDirection direction) =>
+  ///     switch (direction) {
+  ///       AxisDirection.up => 'Up',
+  ///       AxisDirection.down => 'Down',
+  ///       AxisDirection.left => 'Left',
+  ///       AxisDirection.right => 'Right',
+  ///     };
   /// ```
   /// {@endtemplate}
   WritableKnob<T> customDropdown<T>(

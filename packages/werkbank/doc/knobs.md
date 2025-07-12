@@ -57,7 +57,7 @@ Their nullable variants should have an optional `initiallyNull` parameter defaul
 For immutable values, the return type of the knob is usually
 [WritableKnob](../werkbank/WritableKnob-class.html).
 For mutable values it may just be [Knob](../werkbank/Knob-class.html) or
-a more specific type if you implement you choose the third approach and implement your own knob class.
+a more specific type if you choose the third approach and implement your own knob class.
 
 The parameters and implementation depend on the type of knob you want to create and the approach you choose.
 
@@ -65,7 +65,7 @@ The following sections will explain the three approaches in more detail.
 
 ### Approach 1: Using Existing Knobs
 
-Most existing knobs have some parameters that allow you to customize them in some way.
+Many existing knobs have some parameters that allow you to customize them in some way.
 If you use a certain configuration often, you can write an extension
 for a custom knob that uses an existing knob as a base and configures it
 accordingly.
@@ -76,6 +76,7 @@ Especially versatile are knobs that can return any type `T`:
 - [customField](../werkbank/CustomFieldKnobExtension/customField.html)
 - [customFieldMultiLine](../werkbank/CustomFieldMultiLineKnobExtension/customFieldMultiLine.html)
 - [customDropdown](../werkbank/CustomDropdownKnobExtension/customDropdown.html)
+
 These are intended to be used for writing custom knobs using extensions.
 In fact, they are used to implement many of the other knobs.
 

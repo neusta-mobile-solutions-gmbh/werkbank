@@ -10,7 +10,7 @@
   - `c.knobs.customSlider<T>(...)` (for custom slider controlled knobs)
   - `c.knobs.customSwitch<T>(...)` (for custom switch controlled knobs)
   - And the corresponding nullable variants.
-- Add `intInput` and `doubleInput` knobs.
+- Add `intField` and `doubleField` knobs.
 - Add `falseLabel` and `trueLabel` parameters to `c.knobs.boolean(...)` to allow customizing the labels of the switch.
 - Rename `NullableKnobs` to `NullableKnobsComposer`. The old type is still available but deprecated.
 

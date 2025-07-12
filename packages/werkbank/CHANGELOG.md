@@ -12,7 +12,7 @@
   - And the corresponding nullable variants.
 - Add `intInput` and `doubleInput` knobs.
 - Add `falseLabel` and `trueLabel` parameters to `c.knobs.boolean(...)` to allow customizing the labels of the switch.
-- Rename `NullableKnobs` to `NullableKnobsComposer`. **(BREAKING CHANGE)**
+- Rename `NullableKnobs` to `NullableKnobsComposer`. The old type is still available but deprecated.
 
 # 0.16.0
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.

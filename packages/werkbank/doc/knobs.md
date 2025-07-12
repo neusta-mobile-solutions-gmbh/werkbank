@@ -46,8 +46,8 @@ extension MyNullableKnobExtension on NullableKnobsComposer {
 }
 ```
 
-Consider putting these extensions in a separate file so that they can be
-reused in multiple use cases.
+Avoid defining these extensions in the use case file where you need them.
+Instead, put them in a separate file so that they can be reused in other use cases later.
 
 By convention knobs have a single positional `label` parameter.
 If they control immutable values, they should also have a required positional

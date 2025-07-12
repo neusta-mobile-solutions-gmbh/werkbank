@@ -14,6 +14,8 @@ dartdoc:
       markdown: doc/configuring_addons.md
     Customizing the AppConfig:
       markdown: doc/customizing_the_appconfig.md
+    Knobs:
+      markdown: doc/knobs.md
     Overview:
       markdown: doc/overview.md
     Custom Use Case Metadata:
@@ -36,6 +38,7 @@ dartdoc:
     - Writing Use Cases
     - Configuring Addons
     - Customizing the AppConfig
+    - Knobs
     - Overview
     - Custom Use Case Metadata
     - Display

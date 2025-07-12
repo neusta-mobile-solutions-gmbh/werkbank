@@ -6,10 +6,11 @@ WidgetBuilder wDividerUseCase(UseCaseComposer c) {
     'A divider with a configurable axis.',
   );
 
-  final axis = c.knobs.list(
+  final axis = c.knobs.customDropdown(
     'Axis',
-    options: Axis.values,
-    optionLabel: (axis) => switch (axis) {
+    initialValue: Axis.horizontal,
+    values: Axis.values,
+    valueLabel: (axis) => switch (axis) {
       Axis.horizontal => 'Horizontal',
       Axis.vertical => 'Vertical',
     },

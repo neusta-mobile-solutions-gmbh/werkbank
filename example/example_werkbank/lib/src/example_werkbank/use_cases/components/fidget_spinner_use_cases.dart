@@ -26,10 +26,11 @@ WidgetBuilder _animatedUseCase(UseCaseComposer c) {
   );
   c.overview.minimumSize(width: 256, height: 256);
 
-  final sizeKnob = c.knobs.doubleSlider(
+  final sizeKnob = c.knobs.intSlider(
     'Size',
     initialValue: 256,
     max: 256,
+    valueLabel: (v) => '$v px',
   );
   final turnsKnob = c.knobs.animationController(
     'Turns',
@@ -38,7 +39,7 @@ WidgetBuilder _animatedUseCase(UseCaseComposer c) {
 
   return (context) {
     return AnimatedFidgetSpinner(
-      size: sizeKnob.value,
+      size: sizeKnob.value.toDouble(),
       color: Theme.of(context).colorScheme.primary,
       turns: turnsKnob.value,
     );
@@ -53,31 +54,37 @@ WidgetBuilder _simulationUseCase(UseCaseComposer c) {
     'different** from how it does in the main view. '
     'This shows that widgets can be configured depending on if they '
     'are shown in the overview or even changed completely for '
-    'a **custom thumbnail**.\n',
+    'a **custom thumbnail**.\n'
+    '- The numbers of **slider knobs** can have arbitrary **formatting** '
+    'like for example units.',
   );
   c.overview.minimumSize(width: 256, height: 256);
 
-  final sizeKnob = c.knobs.doubleSlider(
+  final sizeKnob = c.knobs.intSlider(
     'Size',
     initialValue: 256,
     max: 256,
+    valueLabel: (v) => '$v px',
   );
   final targetTurnsKnob = c.knobs.doubleSlider(
-    'Target Turns',
+    'Target Angle',
     initialValue: 2.13,
     max: 5,
+    valueLabel: (v) => '${(v * 360).toInt()}°',
   );
   final massKnob = c.knobs.doubleSlider(
     'Mass',
     initialValue: 1.0,
     min: 0.1,
     max: 10.0,
+    valueLabel: (v) => '${v.toStringAsFixed(2)} kg',
   );
   final stiffnessKnob = c.knobs.doubleSlider(
     'Stiffness',
     initialValue: 20.0,
     min: 1.0,
     max: 100.0,
+    valueLabel: (v) => '${v.toStringAsFixed(1)} N/m',
   );
   final dampingRatioKnob = c.knobs.doubleSlider(
     'Damping Ratio',
@@ -91,7 +98,7 @@ WidgetBuilder _simulationUseCase(UseCaseComposer c) {
       fit: StackFit.passthrough,
       children: [
         FidgetSpinnerSimulation(
-          size: sizeKnob.value,
+          size: sizeKnob.value.toDouble(),
           color: Theme.of(context).colorScheme.primary,
           targetTurns: targetTurnsKnob.value,
           mass: massKnob.value,

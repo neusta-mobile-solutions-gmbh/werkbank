@@ -1,6 +1,18 @@
-# Unreleased
-
+# 0.16.1
 - Added a `Werkbank System` theme, which will always match your system. It's also default now.
+- Deprecate `list` knob. Use `customDropdown` instead.
+- Rename `valueFormatter` parameters in `doubleSlider` and `intSlider` knobs to `valueLabel`.
+  The old parameter names are still available but deprecated.
+- Add `customDropdown` knob.
+  - Compared to `list`, some parameters were changed to be more consistent with other knobs.
+- Add new knobs with generic return types that allow you to create custom knobs with little effort:
+  - `c.knobs.customField<T>(...)` and `c.knobs.customFieldMultiLine<T>(...)` (for custom text field controlled knobs)
+  - `c.knobs.customSlider<T>(...)` (for custom slider controlled knobs)
+  - `c.knobs.customSwitch<T>(...)` (for custom switch controlled knobs)
+  - And the corresponding nullable variants.
+- Add `intField` and `doubleField` knobs.
+- Add `falseLabel` and `trueLabel` parameters to `c.knobs.boolean(...)` to allow customizing the labels of the switch.
+- Rename `NullableKnobs` to `NullableKnobsComposer`. The old type is still available but deprecated.
 
 # 0.16.0
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.

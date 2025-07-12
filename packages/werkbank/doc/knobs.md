@@ -171,18 +171,18 @@ extension TimeOfDayKnobExtension on KnobsComposer {
   WritableKnob<TimeOfDay> timeOfDay(
     String label, {
       required TimeOfDay initialValue,
-      TimeOfDay? min,
-      TimeOfDay? max,
+      TimeOfDay min = const TimeOfDay(hour: 0, minute: 0),
+      TimeOfDay max = const TimeOfDay(hour: 23, minute: 59),
     }) {
     return customSlider(
       label,
       initialValue: initialValue,
-      min: min ?? const TimeOfDay(hour: 0, minute: 0),
-      max: max ?? const TimeOfDay(hour: 23, minute: 59),
-      divisions: 24 * 60,
+      min: min,
+      max: max,
+      divisions: 24 * 60 - 1,
       encoder: _timeOfDayEncoder,
       decoder: _timeOfDayDecoder,
-      valueFormatter: _timeOfDayFormatter,
+      valueLabel: _timeOfDayFormatter,
     );
   }
 }
@@ -192,19 +192,19 @@ extension NullableTimeOfDayKnobExtension on NullableKnobsComposer {
     String label, {
       required TimeOfDay initialValue,
       bool initiallyNull = false,
-      TimeOfDay? min,
-      TimeOfDay? max,
+      TimeOfDay min = const TimeOfDay(hour: 0, minute: 0),
+      TimeOfDay max = const TimeOfDay(hour: 23, minute: 59),
     }) {
     return customSlider(
       label,
       initialValue: initialValue,
       initiallyNull: initiallyNull,
-      min: min ?? const TimeOfDay(hour: 0, minute: 0),
-      max: max ?? const TimeOfDay(hour: 23, minute: 59),
-      divisions: 24 * 60,
+      min: min,
+      max: max,
+      divisions: 24 * 60 - 1,
       encoder: _timeOfDayEncoder,
       decoder: _timeOfDayDecoder,
-      valueFormatter: _timeOfDayFormatter,
+      valueLabel: _timeOfDayFormatter,
     );
   }
 }

@@ -3,6 +3,63 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension CustomDropdownKnobExtension on KnobsComposer {
+  /// Creates a knob for a generic type [T] controlled by a dropdown in the UI.
+  ///
+  /// {@template werkbank.knobs.customDropdown.use}
+  /// You can use this to create custom knobs for types with only a
+  /// small number of possible values.
+  /// {@endtemplate}
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
+  ///
+  /// {@template werkbank.knobs.customDropdown}
+  /// The [values] parameter defines the list of selectable values of type [T].
+  ///
+  /// [valueLabel] is a function that returns the display label for each value.
+  ///
+  /// See the example below for how to use this to create an
+  /// [AxisDirection] knob:
+  /// ```dart
+  /// extension AxisDirectionKnobExtension on KnobsComposer {
+  ///   WritableKnob<AxisDirection> axisDirection(
+  ///     String label, {
+  ///     required AxisDirection initialValue,
+  ///   }) {
+  ///     return customDropdown(
+  ///       label,
+  ///       initialValue: initialValue,
+  ///       values: AxisDirection.values,
+  ///       valueLabel: _axisDirectionLabel,
+  ///     );
+  ///   }
+  /// }
+  ///
+  /// extension NullableAxisDirectionKnobExtension on NullableKnobsComposer {
+  ///   WritableKnob<AxisDirection?> axisDirection(
+  ///     String label, {
+  ///     required AxisDirection initialValue,
+  ///     bool initiallyNull = false,
+  ///   }) {
+  ///     return customDropdown(
+  ///       label,
+  ///       initialValue: initialValue,
+  ///       initiallyNull: initiallyNull,
+  ///       values: AxisDirection.values,
+  ///       valueLabel: _axisDirectionLabel,
+  ///     );
+  ///   }
+  /// }
+  ///
+  /// String _axisDirectionLabel(AxisDirection direction) => switch (direction) {
+  ///   AxisDirection.up => 'Up',
+  ///   AxisDirection.down => 'Down',
+  ///   AxisDirection.left => 'Left',
+  ///   AxisDirection.right => 'Right',
+  /// };
+  /// ```
+  /// {@endtemplate}
   WritableKnob<T> customDropdown<T>(
     String label, {
     required T initialValue,
@@ -28,6 +85,16 @@ extension CustomDropdownKnobExtension on KnobsComposer {
 
 /// {@category Knobs}
 extension NullableCustomDropdownKnobExtension on NullableKnobsComposer {
+  /// Creates a nullable knob for a generic type [T] controlled by a dropdown
+  /// in the UI.
+  ///
+  /// {@macro werkbank.knobs.customDropdown.use}
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
+  ///
+  /// {@macro werkbank.knobs.customDropdown}
   WritableKnob<T?> customDropdown<T extends Object>(
     String label, {
     required T initialValue,

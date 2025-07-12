@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 @immutable
@@ -8,7 +10,7 @@ class SearchQueryPersistentData {
 
   final String query;
 
-  static SearchQueryPersistentData fromJson(dynamic json) {
+  static SearchQueryPersistentData fromJson(Object? json) {
     if (json case {
       'query': final String query,
     }) {
@@ -20,10 +22,9 @@ class SearchQueryPersistentData {
     }
   }
 
-  dynamic toJson() {
-    final map = <String, dynamic>{
+  Object? toJson() {
+    return {
       'query': query,
     };
-    return map;
   }
 }

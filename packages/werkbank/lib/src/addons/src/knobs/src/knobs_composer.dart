@@ -15,6 +15,30 @@ extension KnobsComposerExtension on UseCaseComposer {
   /// for the use case.
   KnobsComposer get knobs => KnobsComposer(this);
 
+  /// Adds a knob preset with the given [name].
+  ///
+  /// The [setKnobs] callback is called when the preset is selected.
+  /// Set the values of the knobs in this callback.
+  ///
+  /// Example:
+  /// ```dart
+  /// WidgetBuilder filledButtonUseCase(UseCaseComposer c) {
+  ///   final enabledKnob = c.knobs.boolean('Enabled', initialValue: true);
+  ///   final labelKnob = c.knobs.string('Label', initialValue: 'Label Text');
+  ///
+  ///   c.knobPreset('Disabled & Long Label', () {
+  ///     enabledKnob.value = false;
+  ///     labelKnob.value = 'This is a long label text';
+  ///   });
+  ///
+  ///   return (context) {
+  ///     return FilledButton(
+  ///       onPressed: enabledKnob.value ? () {} : null,
+  ///       child: Text(labelKnob.value),
+  ///     );
+  ///   };
+  /// }
+  /// ```
   void knobPreset(String name, VoidCallback setKnobs) {
     final preset = DefinedKnobPreset(name);
     getTransientStateEntry<KnobsStateEntry>().addPreset(preset, setKnobs);

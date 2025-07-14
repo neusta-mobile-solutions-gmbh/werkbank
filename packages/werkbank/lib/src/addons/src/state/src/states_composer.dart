@@ -38,7 +38,7 @@ For mutable objects, use c.states.mutable() instead.''',
       StateContainerId(label),
       stateContainer,
     );
-    return stateContainer.notifier;
+    return stateContainer;
   }
 }
 

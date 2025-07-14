@@ -28,7 +28,7 @@ class StateContainersStateEntry
   @override
   Listenable? createRebuildListenable() {
     return Listenable.merge([
-      for (final container in _stateContainersById.values) container.notifier,
+      for (final container in _stateContainersById.values) container,
     ]);
   }
 

@@ -1,89 +1,143 @@
-import 'dart:core';
-
-import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension IntKnobExtension on KnobsComposer {
+  /// Creates an integer knob controlled by a slider in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
+  ///
+  /// {@template werkbank.knobs.intSlider}
+  /// The [min] and [max] parameters define the slider's range.
+  /// They default to 0 and 1.
+  ///
+  /// [valueLabel] is a function that returns the display label for each value.
+  /// {@endtemplate}
   WritableKnob<int> intSlider(
     String label, {
     required int initialValue,
     int min = 0,
     int max = 10,
-    IntFormatter valueFormatter = _IntSliderKnob.defaultFormatter,
+    @Deprecated('Use valueLabel instead') IntFormatter? valueFormatter,
+    IntFormatter valueLabel = _defaultLabel,
   }) {
-    return makeRegularKnob(
+    return customSlider(
       label,
       initialValue: initialValue,
-      knobBuilder: (context, valueNotifier) => _IntSliderKnob(
-        valueNotifier: valueNotifier,
-        min: min,
-        max: max,
-        valueFormatter: valueFormatter,
-        enabled: true,
-      ),
+      min: min,
+      max: max,
+      divisions: max - min,
+      encoder: (v) => v.toDouble(),
+      decoder: (d) => d.toInt(),
+      valueLabel: valueFormatter ?? valueLabel,
+    );
+  }
+
+  /// Creates an integer knob controlled by a text field in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
+  ///
+  /// {@template werkbank.knobs.intField}
+  /// The [min] and [max] parameters define the range of allowed values.
+  /// {@endtemplate}
+  WritableKnob<int> intField(
+    String label, {
+    required int initialValue,
+    int? min,
+    int? max,
+  }) {
+    return customField(
+      label,
+      initialValue: initialValue,
+      parser: (input) => _intInputParser(input, min: min, max: max),
+      formatter: _intFormatter,
     );
   }
 }
 
-extension NullableIntKnobExtension on NullableKnobs {
+/// {@category Knobs}
+extension NullableIntKnobExtension on NullableKnobsComposer {
+  /// Creates a nullable integer knob controlled by a slider in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
+  ///
+  /// {@macro werkbank.knobs.intSlider}
   WritableKnob<int?> intSlider(
     String label, {
     required int initialValue,
     bool initiallyNull = false,
     int min = 0,
     int max = 10,
-    IntFormatter valueFormatter = _IntSliderKnob.defaultFormatter,
+    @Deprecated('Use valueLabel instead') IntFormatter? valueFormatter,
+    IntFormatter valueLabel = _defaultLabel,
   }) {
-    return makeNullableKnob(
+    return customSlider(
       label,
       initialValue: initialValue,
       initiallyNull: initiallyNull,
-      knobBuilder: (context, enabled, valueNotifier) => _IntSliderKnob(
-        valueNotifier: valueNotifier,
-        min: min,
-        max: max,
-        valueFormatter: valueFormatter,
-        enabled: enabled,
-      ),
+      min: min,
+      max: max,
+      divisions: max - min,
+      encoder: (v) => v.toDouble(),
+      decoder: (d) => d.toInt(),
+      valueLabel: valueFormatter ?? valueLabel,
+    );
+  }
+
+  /// Creates a nullable integer knob controlled by a text field in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
+  ///
+  /// {@macro werkbank.knobs.intField}
+  WritableKnob<int?> intField(
+    String label, {
+    required int initialValue,
+    bool initiallyNull = false,
+    int? min,
+    int? max,
+  }) {
+    return customField(
+      label,
+      initialValue: initialValue,
+      parser: (input) => _intInputParser(input, min: min, max: max),
+      formatter: _intFormatter,
+      initiallyNull: initiallyNull,
     );
   }
 }
 
-typedef IntFormatter = String Function(int value);
+String _defaultLabel(int value) => value.toString();
 
-class _IntSliderKnob extends StatelessWidget {
-  const _IntSliderKnob({
-    required this.valueNotifier,
-    required this.min,
-    required this.max,
-    required this.valueFormatter,
-    required this.enabled,
-  });
+String _intFormatter(int value) => value.toString();
 
-  static String defaultFormatter(int value) {
-    return value.toString();
+InputParseResult<int> _intInputParser(
+  String input, {
+  int? min,
+  int? max,
+}) {
+  final trimmedInput = input.trim();
+  if (trimmedInput.isEmpty) {
+    return InputParseError('Input required');
   }
 
-  final ValueNotifier<int> valueNotifier;
-  final int min;
-  final int max;
-  final IntFormatter valueFormatter;
-  final bool enabled;
-
-  @override
-  Widget build(BuildContext context) {
-    return WSlider(
-      value: valueNotifier.value.toDouble(),
-      onChanged: enabled
-          ? (value) {
-              valueNotifier.setValue(value.toInt());
-            }
-          : null,
-      min: min.toDouble(),
-      max: max.toDouble(),
-      divisions: max - min,
-      valueFormatter: (value) => valueFormatter(value.toInt()),
-    );
+  final value = int.tryParse(trimmedInput);
+  if (value == null) {
+    return InputParseError('Invalid integer format');
   }
+
+  if (min != null && value < min) {
+    return InputParseError('Must be ≥ $min');
+  }
+  if (max != null && value > max) {
+    return InputParseError('Must be ≤ $max');
+  }
+
+  return InputParseSuccess(value);
 }

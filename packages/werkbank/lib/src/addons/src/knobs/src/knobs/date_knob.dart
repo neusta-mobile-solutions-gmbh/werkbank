@@ -4,6 +4,11 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension DateKnobExtension on KnobsComposer {
+  /// Creates a date knob controlled by a date picker in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.regularInitial}
   WritableKnob<DateTime> date(
     String label, {
     required DateTime initialValue,
@@ -19,7 +24,13 @@ extension DateKnobExtension on KnobsComposer {
   }
 }
 
-extension NullableDateKnobExtension on NullableKnobs {
+/// {@category Knobs}
+extension NullableDateKnobExtension on NullableKnobsComposer {
+  /// Creates a nullable date knob controlled by a date picker in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@macro werkbank.knobs.nullableInitial}
   WritableKnob<DateTime?> date(
     String label, {
     required DateTime initialValue,

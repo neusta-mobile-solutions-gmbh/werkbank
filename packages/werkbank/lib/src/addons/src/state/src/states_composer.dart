@@ -32,10 +32,10 @@ For mutable objects, use c.states.mutable() instead.''',
     );
 
     final stateContainer = StateContainer<T>(
-      label: label,
       initialValue: initialValue,
     );
     _c.getTransientStateEntry<StateContainersStateEntry>().addStateContainer(
+      StateContainerId(label),
       stateContainer,
     );
     return stateContainer.notifier;

@@ -5,13 +5,8 @@ extension type StateContainerId(String _label) {}
 
 class StateContainer<T> {
   StateContainer({
-    required this.label,
     required T initialValue,
   }) : notifier = ValueNotifier<T>(initialValue);
-
-  final String label;
-
-  StateContainerId get id => StateContainerId(label);
 
   late final ValueNotifier<T> notifier;
 

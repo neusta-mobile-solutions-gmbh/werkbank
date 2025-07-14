@@ -32,12 +32,15 @@ class StateContainersStateEntry
     ]);
   }
 
-  void addStateContainer(StateContainer<Object?> stateContainer) {
+  void addStateContainer(
+    StateContainerId label,
+    StateContainer<Object?> stateContainer,
+  ) {
     assert(
-      !_stateContainersById.containsKey(stateContainer.id),
-      'StateContainer with label "${stateContainer.id}" already exists',
+      !_stateContainersById.containsKey(label),
+      'StateContainer with label "$label" already exists',
     );
-    _stateContainersById[stateContainer.id] = stateContainer;
+    _stateContainersById[label] = stateContainer;
   }
 
   List<StateContainer<Object?>> get stateContainers =>
@@ -45,12 +48,13 @@ class StateContainersStateEntry
 
   @override
   void loadSnapshot(StateContainersSnapshot snapshot) {
-    for (final container in _stateContainersById.values) {
-      if (snapshot.stateContainerSnapshots.containsKey(container.id)) {
-        final containerSnapshot =
-            snapshot.stateContainerSnapshots[container.id];
+    for (final entry in _stateContainersById.entries) {
+      final label = entry.key;
+      final stateContainer = entry.value;
+      if (snapshot.stateContainerSnapshots.containsKey(label)) {
+        final containerSnapshot = snapshot.stateContainerSnapshots[label];
         if (containerSnapshot != null) {
-          container.tryLoadSnapshot(containerSnapshot);
+          stateContainer.tryLoadSnapshot(containerSnapshot);
         }
       }
     }

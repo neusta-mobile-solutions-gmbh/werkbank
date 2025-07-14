@@ -43,10 +43,10 @@ WidgetBuilder statesUseCase(UseCaseComposer c) {
   );
 
   // ignore: unused_local_variable
-  final shouldNotWork = c.states.immutable(
-    'Mutable',
-    initialValue: ScrollController(),
-  );
+  // final shouldNotWork = c.states.immutable(
+  //   'Mutable',
+  //   initialValue: ScrollController(),
+  // );
 
   return (context) {
     return Row(

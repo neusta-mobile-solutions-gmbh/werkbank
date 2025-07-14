@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/buildable_state_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/state_container.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/state_containers_state_entry.dart';
 import 'package:werkbank/werkbank.dart';
 
@@ -31,7 +31,7 @@ Common mutable objects to avoid:
 For mutable objects, use c.states.mutable() instead.''',
     );
 
-    final stateContainer = BuildableStateContainer<T>(
+    final stateContainer = StateContainer<T>(
       label: label,
       initialValue: initialValue,
     );

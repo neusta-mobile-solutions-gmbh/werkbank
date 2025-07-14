@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/buildable_state_container.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/state_container.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/state_containers_snapshot.dart';
 import 'package:werkbank/werkbank.dart';
@@ -12,8 +11,8 @@ class StateContainersStateEntry
           StateContainersStateEntry,
           StateContainersSnapshot
         > {
-  final Map<StateContainerId, BuildableStateContainer<Object?>>
-  _stateContainersById = {};
+  final Map<StateContainerId, StateContainer<Object?>> _stateContainersById =
+      {};
 
   @override
   void prepareForBuild(
@@ -33,7 +32,7 @@ class StateContainersStateEntry
     ]);
   }
 
-  void addStateContainer(BuildableStateContainer<Object?> stateContainer) {
+  void addStateContainer(StateContainer<Object?> stateContainer) {
     assert(
       !_stateContainersById.containsKey(stateContainer.id),
       'StateContainer with label "${stateContainer.id}" already exists',
@@ -41,7 +40,7 @@ class StateContainersStateEntry
     _stateContainersById[stateContainer.id] = stateContainer;
   }
 
-  List<BuildableStateContainer<Object?>> get stateContainers =>
+  List<StateContainer<Object?>> get stateContainers =>
       UnmodifiableListView(_stateContainersById.values);
 
   @override

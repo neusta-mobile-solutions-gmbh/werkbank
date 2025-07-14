@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_container.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_containers_state_entry.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_management_state_entry.dart';
+import 'package:werkbank/src/addons/src/state/src/mutable_value_container.dart';
 import 'package:werkbank/werkbank.dart';
 
 extension type StatesComposer(UseCaseComposer _c) {
@@ -39,6 +42,32 @@ For mutable objects, use c.states.mutable() instead.''',
       stateContainer,
     );
     return stateContainer;
+  }
+
+  MutableValueContainer<T> mutable<T extends Object>(
+    String label, {
+    required T Function() create,
+    required void Function(T value) dispose,
+  }) {
+    return mutableWithTickerProvider<T>(
+      label,
+      create: (_) => create(),
+      dispose: dispose,
+    );
+  }
+
+  MutableValueContainer<T> mutableWithTickerProvider<T extends Object>(
+    String label, {
+    required T Function(TickerProvider tickerProvider) create,
+    required void Function(T value) dispose,
+  }) {
+    return _c
+        .getTransientStateEntry<MutableStateManagmentStateEntry>()
+        .addMutableStateContainer<T>(
+          MutableStateContainerId(label),
+          create,
+          dispose,
+        );
   }
 }
 

@@ -21,7 +21,7 @@ class StateContainersStateEntry
   ) {
     super.prepareForBuild(composition, context);
     for (final container in _stateContainersById.values) {
-      container.prepareForBuild(context);
+      container.prepareForBuild();
     }
   }
 

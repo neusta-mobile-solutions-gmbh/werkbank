@@ -10,7 +10,7 @@ class StateContainer<T> extends ValueNotifier<T> {
 
   bool _isAfterBuild = false;
 
-  void prepareForBuild(BuildContext context) {
+  void prepareForBuild() {
     _isAfterBuild = true;
   }
 

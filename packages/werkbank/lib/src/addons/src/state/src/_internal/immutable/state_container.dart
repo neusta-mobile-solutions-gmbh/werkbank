@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/state_containers_snapshot.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_containers_snapshot.dart';
 
 extension type StateContainerId(String _label) {}
 

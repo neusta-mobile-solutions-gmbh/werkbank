@@ -24,7 +24,7 @@ WidgetBuilder statesUseCase(UseCaseComposer c) {
     ..tags([Tags.addon])
     ..overview.withoutThumbnail();
 
-  final exampleState = c.states.register(
+  final exampleState = c.states.immutable(
     'Example',
     initialValue: _SomeExampleState(
       ready: true,
@@ -33,13 +33,19 @@ WidgetBuilder statesUseCase(UseCaseComposer c) {
     ),
   );
 
-  final otherExampleState = c.states.register(
+  final otherExampleState = c.states.immutable(
     'Other Example',
     initialValue: _SomeExampleState(
       ready: false,
       text: 'Other Example State',
       number: 24,
     ),
+  );
+
+  // ignore: unused_local_variable
+  final shouldNotWork = c.states.immutable(
+    'Mutable',
+    initialValue: ScrollController(),
   );
 
   return (context) {

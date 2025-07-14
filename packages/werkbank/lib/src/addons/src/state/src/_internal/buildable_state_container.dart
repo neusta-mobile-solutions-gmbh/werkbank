@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart' hide Element;
-import 'package:werkbank/src/addons/src/state/src/_internal/element.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/element_snapshot.dart';
+import 'package:flutter/material.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/state_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/state_containers_snapshot.dart';
 
-class BuildableElement<T> implements Element<T> {
-  BuildableElement({
+class BuildableStateContainer<T> implements StateContainer<T> {
+  BuildableStateContainer({
     required this.label,
     required T initialValue,
   }) : notifier = ValueNotifier<T>(initialValue);
@@ -16,11 +16,11 @@ class BuildableElement<T> implements Element<T> {
 
   void prepareForBuild(BuildContext context) {}
 
-  ElementSnapshot createSnapshot() {
-    return ElementSnapshot(value: notifier.value);
+  StateContainerSnapshot createSnapshot() {
+    return StateContainerSnapshot(value: notifier.value);
   }
 
-  void tryLoadSnapshot(ElementSnapshot snapshot) {
+  void tryLoadSnapshot(StateContainerSnapshot snapshot) {
     final snapshotValue = snapshot.value;
     if (snapshotValue is T) {
       notifier.value = snapshotValue;

@@ -1,4 +1,4 @@
-import 'package:werkbank/src/addons/src/state/src/_internal/elements_state_entry.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/state_containers_state_entry.dart';
 import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
@@ -10,6 +10,6 @@ class StateAddon extends Addon {
 
   @override
   List<AnyTransientUseCaseStateEntry> createTransientUseCaseStateEntries() => [
-    ElementsStateEntry(),
+    StateContainersStateEntry(),
   ];
 }

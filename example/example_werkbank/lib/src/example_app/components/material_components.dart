@@ -1,9 +1,9 @@
 export 'package:flutter/material.dart'
     show
-        Switch,
         Checkbox,
-        FilledButton,
         DatePickerDialog,
+        FilledButton,
+        IconButton,
         Slider,
-        TextField,
-        IconButton;
+        Switch,
+        TextField;

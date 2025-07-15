@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:yaml/yaml.dart';
 
+// ignore_for_file: avoid_print, avoid_dynamic_calls
+
 final allLints = getLinterRulesFromPath('tool/lints/all.yaml');
 
 final blacklistedLints = getLinterRulesFromPath('tool/lints/blacklisted.yaml');

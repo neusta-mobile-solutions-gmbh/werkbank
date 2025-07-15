@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'lints.dart';
 
+// ignore_for_file: avoid_print
+
 final instantLintsFile = File('./lib/werkbank_lints.yaml');
 
 Future<void> main() async {

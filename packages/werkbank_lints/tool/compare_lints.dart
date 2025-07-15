@@ -1,5 +1,7 @@
 import 'lints.dart';
 
+// ignore_for_file: avoid_print
+
 Future<void> main() async {
   final goalLints = allLints.difference(blacklistedLints);
   print('The flutter_lints package is missing:');

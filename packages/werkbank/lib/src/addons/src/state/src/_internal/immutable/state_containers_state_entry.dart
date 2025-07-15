@@ -48,9 +48,8 @@ class StateContainersStateEntry
 
   @override
   void loadSnapshot(StateContainersSnapshot snapshot) {
-    for (final entry in _stateContainersById.entries) {
-      final label = entry.key;
-      final stateContainer = entry.value;
+    for (final MapEntry(key: label, value: stateContainer)
+        in _stateContainersById.entries) {
       if (snapshot.stateContainerSnapshots.containsKey(label)) {
         final containerSnapshot = snapshot.stateContainerSnapshots[label];
         if (containerSnapshot != null) {

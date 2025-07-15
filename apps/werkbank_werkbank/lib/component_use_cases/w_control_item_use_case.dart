@@ -26,7 +26,7 @@ WidgetBuilder wControlItemUseCase(UseCaseComposer c) {
     'Layout',
     initialValue: ControlItemLayout.compact,
     values: [ControlItemLayout.compact, ControlItemLayout.spacious],
-    valueLabel: (ControlItemLayout layout) => switch (layout) {
+    valueLabel: (layout) => switch (layout) {
       ControlItemLayout.compact => 'Compact',
       ControlItemLayout.spacious => 'Spacious',
     },

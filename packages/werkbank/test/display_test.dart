@@ -11,7 +11,7 @@ void main() {
     );
 
     for (final useCases in rootDescriptor.useCases) {
-      testWidgets(useCases.path, (WidgetTester tester) async {
+      testWidgets(useCases.path, (tester) async {
         await tester.pumpWidget(
           DisplayApp.singleUseCase(
             appConfig: AppConfig.material(),

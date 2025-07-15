@@ -74,7 +74,9 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'I am the Dart mascot, and I love to help developers build amazing apps with Dart and Flutter. I am always here to assist you with your coding journey!',
+                'I am the Dart mascot, and I love to help developers build '
+                'amazing apps with Dart and Flutter. I am always here to '
+                'assist you with your coding journey!',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 24),

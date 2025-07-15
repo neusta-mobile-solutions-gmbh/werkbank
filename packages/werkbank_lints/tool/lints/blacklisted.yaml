@@ -46,7 +46,7 @@ linter:
     # - directives_ordering
     # - discarded_futures
     - do_not_use_environment
-    # - document_ignores
+    - document_ignores
     # - eol_at_end_of_file
     # - flutter_style_todos
     # - implicit_reopen

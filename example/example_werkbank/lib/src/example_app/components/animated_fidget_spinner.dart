@@ -48,9 +48,9 @@ class _FidgetSpinnerIcon extends StatelessWidget {
 }
 
 class _FidgetPainter extends CustomPainter {
-  final Color color;
-
   _FidgetPainter({required this.color});
+
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {

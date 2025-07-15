@@ -139,11 +139,12 @@ screenshots:
     path: pub_images/use_cases.webp
   - description: 'An animation showcasing knobs.'
     path: pub_images/knobs.webp
-  - description: 'An animation showcasing the ability to set constraints.'
-    path: pub_images/constraints.webp
-  - description: 'An animation showcasing tools for accessibility.'
-    path: pub_images/accessibility.webp
-  - description: 'An animation showcasing theming and more.'
-    path: pub_images/theme_and_more.webp
+  # TODO(lzuttermeister): Disabled for now, since they surpass the 4MB limit.
+  #  - description: 'An animation showcasing the ability to set constraints.'
+  #    path: pub_images/constraints.webp
+  #  - description: 'An animation showcasing tools for accessibility.'
+  #    path: pub_images/accessibility.webp
+  #  - description: 'An animation showcasing theming and more.'
+  #    path: pub_images/theme_and_more.webp
   - description: 'An animation showcasing the customizability of Werkbank.'
     path: pub_images/customization.webp

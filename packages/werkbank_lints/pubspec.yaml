@@ -9,3 +9,4 @@ dependencies:
   flutter_lints: ^6.0.0
 
 dev_dependencies:
+  yaml: ^3.1.3

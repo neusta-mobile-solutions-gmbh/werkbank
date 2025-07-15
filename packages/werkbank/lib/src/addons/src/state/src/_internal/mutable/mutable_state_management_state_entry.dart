@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_container.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_retainment_state_entry.dart';
-import 'package:werkbank/src/addons/src/state/src/mutable_value_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/mutable_state_ticker_provider_provider.dart';
 import 'package:werkbank/werkbank.dart';
 
-class MutableStateManagmentStateEntry
+class MutableStateManagementStateEntry
     extends
         TransientUseCaseStateEntry<
-          MutableStateManagmentStateEntry,
+          MutableStateManagementStateEntry,
           TransientUseCaseStateSnapshot
         > {
   final Map<MutableStateContainerId, _MutableStateBundle> _stateBundlesById =
@@ -21,15 +21,24 @@ class MutableStateManagmentStateEntry
     super.prepareForBuild(composition, context);
     final retainmentStateEntry = composition
         .getRetainedStateEntry<MutableStateRetainmentStateEntry>();
+    // ignore: cascade_invocations
+    retainmentStateEntry.clean(
+      (id) => !_stateBundlesById.containsKey(id),
+    );
     for (final MapEntry(key: id, value: bundle) in _stateBundlesById.entries) {
       final currentValue = retainmentStateEntry.getMutableValue(id);
-      // bundle.container.prepareForBuild(currentValue);
+      final hasValue =
+          currentValue != null && bundle.trySetContainerValue(currentValue);
+      if (!hasValue) {
+        final tickerProvider = MutableStateTickerProviderProvider.of(context);
+        final value = bundle.createAndSetContainerValue(tickerProvider);
+        retainmentStateEntry.setMutableValue(
+          id,
+          value,
+          bundle.dispose,
+        );
+      }
     }
-  }
-
-  @override
-  Listenable? createRebuildListenable() {
-    // TODO: Should mutable state be allowed to define a rebuild listenable?
   }
 
   MutableValueContainer<T> addMutableStateContainer<T extends Object>(
@@ -57,11 +66,6 @@ class MutableStateManagmentStateEntry
   @override
   TransientUseCaseStateSnapshot saveSnapshot() =>
       const TransientUseCaseStateSnapshot();
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }
 
 class _MutableStateBundle<T extends Object> {
@@ -74,4 +78,20 @@ class _MutableStateBundle<T extends Object> {
   final MutableStateContainer<T> container;
   final T Function(TickerProvider tickerProvider) create;
   final void Function(T value) dispose;
+
+  bool trySetContainerValue(Object value) {
+    if (value is! T) {
+      return false;
+    }
+    container.prepareForBuild(value);
+    return true;
+  }
+
+  T createAndSetContainerValue(
+    TickerProvider tickerProvider,
+  ) {
+    final value = create(tickerProvider);
+    container.prepareForBuild(value);
+    return value;
+  }
 }

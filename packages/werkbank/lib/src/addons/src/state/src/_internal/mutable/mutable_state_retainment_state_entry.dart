@@ -3,35 +3,42 @@ import 'package:werkbank/src/use_case/src/retained_use_case_state.dart';
 
 class MutableStateRetainmentStateEntry
     extends RetainedUseCaseStateEntry<MutableStateRetainmentStateEntry> {
-  final Map<MutableStateContainerId, _DisposableMutableValue<Object>>
+  final Map<MutableStateContainerId, _DisposableMutableValue>
   _disposableValuesById = {};
 
-  void addMutableStateContainer<T extends Object>(
-    MutableStateContainerId label,
-    T value,
-    void Function(T value) dispose,
+  void clean(bool Function(MutableStateContainerId id) shouldRemove) {
+    _disposableValuesById.removeWhere((label, container) {
+      if (shouldRemove(label)) {
+        container.dispose();
+        return true;
+      }
+      return false;
+    });
+  }
+
+  void setMutableValue(
+    MutableStateContainerId id,
+    Object value,
+    void Function(Object value) dispose,
   ) {
-    final previousValue = _disposableValuesById[label];
+    final previousValue = _disposableValuesById[id];
     if (previousValue != null) {
       previousValue.dispose();
     }
-    _disposableValuesById[label] = _DisposableMutableValue<T>(
+    _disposableValuesById[id] = _DisposableMutableValue(
       value: value,
       dispose: dispose,
     );
   }
 
-  T? getMutableValue<T extends Object>(
-    MutableStateContainerId label,
+  Object? getMutableValue(
+    MutableStateContainerId id,
   ) {
-    final container = _disposableValuesById[label];
-    if (container == null) {
-      throw StateError(
-        'No mutable value found for label "$label". '
-        'Have you added the mutable value to the state entry?',
-      );
+    final disposableValue = _disposableValuesById[id];
+    if (disposableValue == null) {
+      return null;
     }
-    return container.value as T;
+    return disposableValue.value;
   }
 
   @override
@@ -43,14 +50,14 @@ class MutableStateRetainmentStateEntry
   }
 }
 
-class _DisposableMutableValue<T extends Object> {
+class _DisposableMutableValue {
   _DisposableMutableValue({
     required this.value,
-    required void Function(T value) dispose,
+    required void Function(Object value) dispose,
   }) : _dispose = dispose;
 
-  final T value;
-  final void Function(T value) _dispose;
+  final Object value;
+  final void Function(Object value) _dispose;
 
   void dispose() {
     _dispose(value);

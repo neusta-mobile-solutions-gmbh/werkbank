@@ -14,7 +14,7 @@ class MutableStateContainer<T extends Object> extends MutableValueContainer<T> {
 
   @override
   T get value {
-    if (_value != null) {
+    if (_value == null) {
       throw StateError(
         'The value of a state container can only '
         'be read after the use case has '

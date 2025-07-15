@@ -35,7 +35,7 @@ class MutableStateManagementStateEntry
         retainmentStateEntry.setMutableValue(
           id,
           value,
-          bundle.dispose,
+          bundle.tryDispose,
         );
       }
     }
@@ -93,5 +93,15 @@ class _MutableStateBundle<T extends Object> {
     final value = create(tickerProvider);
     container.prepareForBuild(value);
     return value;
+  }
+
+  void tryDispose(Object? value) {
+    if (value is T) {
+      dispose(value);
+    } else {
+      throw ArgumentError(
+        'Value must be of type $T, but was ${value.runtimeType}',
+      );
+    }
   }
 }

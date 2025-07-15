@@ -48,22 +48,58 @@ WidgetBuilder statesUseCase(UseCaseComposer c) {
   //   initialValue: ScrollController(),
   // );
 
+  final textEditingControllerContainer = c.states.mutable(
+    'TextEditingController',
+    create: () => TextEditingController(text: 'Initial Text'),
+    dispose: (controller) => controller.dispose(),
+  );
+
+  final tabControllerContainer = c.states
+      .mutableWithTickerProvider<TabController>(
+        'TabController',
+        create: (tickerProvider) => TabController(
+          length: 3,
+          vsync: tickerProvider,
+        ),
+        dispose: (controller) => controller.dispose(),
+      );
+
   return (context) {
-    return Row(
+    return Column(
+      spacing: 24,
       mainAxisSize: MainAxisSize.min,
       children: [
-        _SomeExampleComponent(
-          state: exampleState.value,
-          onStateChanged: (newState) {
-            exampleState.value = newState;
-          },
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 24,
+          children: [
+            _SomeExampleComponent(
+              state: exampleState.value,
+              onStateChanged: (newState) {
+                exampleState.value = newState;
+              },
+            ),
+            _SomeExampleComponent(
+              state: otherExampleState.value,
+              onStateChanged: (newState) {
+                otherExampleState.value = newState;
+              },
+            ),
+          ],
         ),
-        const SizedBox(width: 20),
-        _SomeExampleComponent(
-          state: otherExampleState.value,
-          onStateChanged: (newState) {
-            otherExampleState.value = newState;
-          },
+        SizedBox(
+          width: 256,
+          child: WTextField(
+            controller: textEditingControllerContainer.value,
+          ),
+        ),
+        TabBar(
+          controller: tabControllerContainer.value,
+          tabs: const [
+            Tab(text: 'Tab 1'),
+            Tab(text: 'Tab 2'),
+            Tab(text: 'Tab 3'),
+          ],
         ),
       ],
     );

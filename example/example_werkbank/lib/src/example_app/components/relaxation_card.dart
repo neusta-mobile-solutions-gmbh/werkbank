@@ -39,12 +39,12 @@ class RelaxationCard extends StatelessWidget {
                   spacing: 8,
                   children: [
                     DefaultTextStyle.merge(
-                      style: Theme.of(context).textTheme.headlineSmall!,
+                      style: Theme.of(context).textTheme.headlineSmall,
                       child: title,
                     ),
                     Flexible(
                       child: DefaultTextStyle.merge(
-                        style: Theme.of(context).textTheme.bodyMedium!,
+                        style: Theme.of(context).textTheme.bodyMedium,
                         child: description,
                       ),
                     ),

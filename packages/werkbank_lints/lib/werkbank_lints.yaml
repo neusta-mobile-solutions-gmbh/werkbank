@@ -106,7 +106,6 @@ linter:
     - use_is_even_rather_than_modulo
     - use_late_for_private_fields_and_variables
     - use_named_constants
-    - use_null_aware_elements
     - use_raw_strings
     - use_setters_to_change_properties
     - use_string_buffers

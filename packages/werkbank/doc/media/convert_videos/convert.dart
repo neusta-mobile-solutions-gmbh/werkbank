@@ -86,7 +86,7 @@ void main() async {
         print('Successfully converted $fileName');
         print(result.stdout);
       }
-    } catch (e) {
+    } on Object catch (e) {
       print('Exception while converting $fileName: $e');
     }
   }

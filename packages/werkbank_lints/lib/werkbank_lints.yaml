@@ -38,7 +38,6 @@ linter:
     - avoid_unused_constructor_parameters
     - avoid_void_async
     - cancel_subscriptions
-    - cascade_invocations
     - cast_nullable_to_non_nullable
     - close_sinks
     - combinators_ordering

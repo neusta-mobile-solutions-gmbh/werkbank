@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
-// Ignored for clarity
-// ignore_for_file: cascade_invocations
-
 // --------------------------------
 // THIS IS A VERY MINIMAL EXAMPLE.
 // Check out

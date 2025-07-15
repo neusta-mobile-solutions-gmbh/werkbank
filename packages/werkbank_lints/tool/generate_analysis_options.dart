@@ -22,6 +22,9 @@ String generateYaml(Set<String> lints) {
   return '''
 include: package:flutter_lints/flutter.yaml
 
+formatter:
+  trailing_commas: preserve
+
 analyzer:
   language:
     strict-casts: true

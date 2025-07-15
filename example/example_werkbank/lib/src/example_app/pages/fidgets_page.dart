@@ -18,8 +18,8 @@ class FidgetsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fidgets = <Widget>[
-      _StateHolder(
-        initialValue: 0.0,
+      _StateHolder<double>(
+        initialValue: 0,
         builder: (context, value, onValueChanged) {
           return Slider(
             value: value,
@@ -28,8 +28,8 @@ class FidgetsPage extends StatelessWidget {
           );
         },
       ),
-      _StateHolder(
-        initialValue: 0.0,
+      _StateHolder<double>(
+        initialValue: 0,
         builder: (context, value, onValueChanged) {
           return Slider(
             value: value,
@@ -94,13 +94,13 @@ class FidgetsPage extends StatelessWidget {
     ];
     final random = Random(0);
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16),
       child: SafeArea(
         child: SizedBox(
           width: double.infinity,
           child: Wrap(
-            spacing: 16.0,
-            runSpacing: 16.0,
+            spacing: 16,
+            runSpacing: 16,
             alignment: WrapAlignment.center,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [

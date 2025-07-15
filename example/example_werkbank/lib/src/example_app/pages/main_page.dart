@@ -63,9 +63,9 @@ class _MainPageState extends State<MainPage> {
             icon: FidgetSpinnerSimulation(
               // Values were optimized using the use case.
               targetTurns: _selectedIndex == 1 ? 2.0 : 0.0,
-              mass: 1.0,
-              stiffness: 20.0,
-              dampingRatio: 1.0,
+              mass: 1,
+              stiffness: 20,
+              dampingRatio: 1,
             ),
             label: 'Fidgets',
           ),

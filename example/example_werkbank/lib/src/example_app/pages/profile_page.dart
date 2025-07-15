@@ -10,7 +10,7 @@ class ProfilePage extends StatelessWidget {
         top: false,
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
               const SizedBox(height: 16),
@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primaryContainer,
                       ),
                       child: const Padding(
-                        padding: EdgeInsets.all(4.0),
+                        padding: EdgeInsets.all(4),
                         child: Image(
                           image: AssetImage('assets/Dash_the_dart_mascot.png'),
                           fit: BoxFit.cover,
@@ -51,7 +51,7 @@ class ProfilePage extends StatelessWidget {
               Card(
                 elevation: 4,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

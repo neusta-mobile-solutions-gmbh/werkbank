@@ -74,22 +74,22 @@ WidgetBuilder _simulationUseCase(UseCaseComposer c) {
   );
   final massKnob = c.knobs.doubleSlider(
     'Mass',
-    initialValue: 1.0,
+    initialValue: 1,
     min: 0.1,
-    max: 10.0,
+    max: 10,
     valueLabel: (v) => '${v.toStringAsFixed(2)} kg',
   );
   final stiffnessKnob = c.knobs.doubleSlider(
     'Stiffness',
-    initialValue: 20.0,
-    min: 1.0,
-    max: 100.0,
+    initialValue: 20,
+    min: 1,
+    max: 100,
     valueLabel: (v) => '${v.toStringAsFixed(1)} N/m',
   );
   final dampingRatioKnob = c.knobs.doubleSlider(
     'Damping Ratio',
-    initialValue: 1.0,
-    max: 2.0,
+    initialValue: 1,
+    max: 2,
   );
 
   return (context) {

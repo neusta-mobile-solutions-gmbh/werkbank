@@ -89,7 +89,6 @@ WidgetBuilder _simulationUseCase(UseCaseComposer c) {
   final dampingRatioKnob = c.knobs.doubleSlider(
     'Damping Ratio',
     initialValue: 1.0,
-    min: 0.0,
     max: 2.0,
   );
 

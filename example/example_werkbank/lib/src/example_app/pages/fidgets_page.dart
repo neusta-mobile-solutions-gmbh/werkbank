@@ -23,7 +23,6 @@ class FidgetsPage extends StatelessWidget {
         builder: (context, value, onValueChanged) {
           return Slider(
             value: value.toDouble(),
-            min: 0,
             max: 10,
             onChanged: onValueChanged,
           );
@@ -34,7 +33,6 @@ class FidgetsPage extends StatelessWidget {
         builder: (context, value, onValueChanged) {
           return Slider(
             value: value.toDouble(),
-            min: 0,
             max: 10,
             divisions: 10,
             onChanged: onValueChanged,

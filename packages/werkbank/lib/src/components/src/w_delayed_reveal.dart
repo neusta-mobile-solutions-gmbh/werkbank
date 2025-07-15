@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class _SDelayedRevealState extends State<WDelayedReveal>
       vsync: this,
       duration: widget.revealDuration,
     );
-    _startRevealSequence();
+    unawaited(_startRevealSequence());
   }
 
   @override

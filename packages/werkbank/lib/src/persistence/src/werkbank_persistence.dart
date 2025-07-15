@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,7 +99,7 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
     // This way we avoid a jumping color effect when building the first
     // frames.
     RendererBinding.instance.deferFirstFrame();
-    _init();
+    unawaited(_init());
   }
 
   Future<void> _init() async {

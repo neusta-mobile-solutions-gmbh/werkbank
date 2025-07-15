@@ -73,7 +73,7 @@ class _OverviewOverflowNotifierState extends State<OverviewOverflowNotifier> {
 
   @override
   void dispose() {
-    _errorSubscription?.cancel();
+    unawaited(_errorSubscription?.cancel());
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (_sub?.status == NotificationStatus.visible) {
         _sub?.dismiss();

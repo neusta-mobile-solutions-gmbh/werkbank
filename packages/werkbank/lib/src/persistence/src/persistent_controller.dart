@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,11 +20,11 @@ abstract class PersistentController extends ChangeNotifier {
   String get id;
 
   void setJson(String json) {
-    _prefsWithCache.setString(id, json);
+    unawaited(_prefsWithCache.setString(id, json));
   }
 
   void clear() {
-    _prefsWithCache.remove(id);
+    unawaited(_prefsWithCache.remove(id));
     notifyListeners();
   }
 }

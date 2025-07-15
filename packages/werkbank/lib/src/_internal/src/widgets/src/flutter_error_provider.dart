@@ -49,7 +49,7 @@ class _FlutterErrorProviderState extends State<FlutterErrorProvider> {
     if (FlutterError.onError == ourOnError) {
       FlutterError.onError = prevOnError;
     }
-    _errorStreamController.close();
+    unawaited(_errorStreamController.close());
     super.dispose();
   }
 

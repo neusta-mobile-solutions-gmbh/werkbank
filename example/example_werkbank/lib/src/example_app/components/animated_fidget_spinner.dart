@@ -54,7 +54,7 @@ class _FidgetPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Path path = Path();
+    final path = Path();
 
     path.moveTo(212.92581889, 137.87862145);
     path.cubicTo(

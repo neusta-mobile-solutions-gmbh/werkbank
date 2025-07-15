@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library constraints;
+library;
 
 export 'src/constraints_addon.dart';
 export 'src/constraints_composition.dart';

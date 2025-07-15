@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library use_case;
+library;
 
 export 'src/retained_use_case_state.dart';
 export 'src/transient_use_case_state.dart';

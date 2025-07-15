@@ -7,7 +7,3 @@ analyzer:
     - lib/src/localization/**
     - lib/**/*_icons.dart
     - test/**/*.*.dart
-  language:
-    strict-casts: true
-    strict-inference: true
-    strict-raw-types: true

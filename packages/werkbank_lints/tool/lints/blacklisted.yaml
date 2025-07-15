@@ -99,10 +99,10 @@ linter:
     - require_trailing_commas
     # - sized_box_shrink_expand
     # - sort_constructors_first
-    # - sort_pub_dependencies
+    - sort_pub_dependencies
     # - sort_unnamed_constructors_first
     - specify_nonobvious_local_variable_types
-    # - specify_nonobvious_property_types
+    - specify_nonobvious_property_types
     # - test_types_in_equals
     - throw_in_finally
     - tighten_type_of_initializing_formals
@@ -114,14 +114,15 @@ linter:
     - unnecessary_final
     # - unnecessary_ignore
     # - unnecessary_lambdas
-    # - unnecessary_library_directive
+    # TODO: Remove this from blacklist after some index_generator changes?
+    - unnecessary_library_directive
     # - unnecessary_null_aware_operator_on_extension_on_nullable
     # - unnecessary_null_checks
     # - unnecessary_parenthesis
     # - unnecessary_raw_strings
     # - unnecessary_statements
     # - unreachable_from_main
-    # - unsafe_variance
+    - unsafe_variance
     # - use_colored_box
     # - use_decorated_box
     # - use_enums

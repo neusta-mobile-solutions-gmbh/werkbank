@@ -323,8 +323,9 @@ class _FidgetPainter extends CustomPainter {
       (size.height - squareSize) / 2,
     );
     final scale = squareSize / pathSize;
-    canvas.scale(scale);
-    canvas.drawPath(path, paint);
+    canvas
+      ..scale(scale)
+      ..drawPath(path, paint);
   }
 
   @override

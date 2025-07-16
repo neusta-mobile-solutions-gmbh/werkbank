@@ -324,9 +324,9 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
     super.dispose();
   }
 
-  final _states = <MaterialState>{
-    MaterialState.dragged,
-    MaterialState.hovered,
+  final _states = <WidgetState>{
+    WidgetState.dragged,
+    WidgetState.hovered,
   };
 
   bool get _isIOS => Theme.of(context).platform == TargetPlatform.iOS;
@@ -877,8 +877,6 @@ class _DropdownMenuItemContainer extends StatelessWidget {
   ///
   /// The [child] argument is required.
   const _DropdownMenuItemContainer({
-    // ignore: unused_element
-    super.key,
     this.alignment = AlignmentDirectional.centerStart,
     required this.child,
   });
@@ -1447,10 +1445,9 @@ class DropdownButton2State<T> extends State<DropdownButton2<T>> with WidgetsBind
   // Similarly, we don't reduce the height of the button so much that its icon
   // would be clipped.
   double get _denseButtonHeight {
-    final double textScaleFactor = MediaQuery.textScaleFactorOf(context);
     final double fontSize =
         _textStyle!.fontSize ?? Theme.of(context).textTheme.titleMedium!.fontSize!;
-    final double scaledFontSize = textScaleFactor * fontSize;
+    final double scaledFontSize = MediaQuery.textScalerOf(context).scale(fontSize);
     return math.max(scaledFontSize, math.max(_iconStyle.iconSize, _kDenseButtonHeight));
   }
 
@@ -1643,10 +1640,10 @@ class DropdownButton2State<T> extends State<DropdownButton2<T>> with WidgetsBind
       );
     }
 
-    final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor>(
-      MaterialStateMouseCursor.clickable,
-      <MaterialState>{
-        if (!_enabled) MaterialState.disabled,
+    final MouseCursor effectiveMouseCursor = WidgetStateProperty.resolveAs<MouseCursor>(
+      WidgetStateMouseCursor.clickable,
+      <WidgetState>{
+        if (!_enabled) WidgetState.disabled,
       },
     );
 
@@ -1841,9 +1838,9 @@ class DropdownButtonFormField2<T> extends FormField<T> {
     return decoration ??
         InputDecoration(
           focusColor:
-              buttonStyleData?.overlayColor?.resolve(<MaterialState>{MaterialState.focused}),
+              buttonStyleData?.overlayColor?.resolve(<WidgetState>{WidgetState.focused}),
           hoverColor:
-              buttonStyleData?.overlayColor?.resolve(<MaterialState>{MaterialState.hovered}),
+              buttonStyleData?.overlayColor?.resolve(<WidgetState>{WidgetState.hovered}),
         );
   }
 

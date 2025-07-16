@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,13 +32,13 @@ class PersistenceReady extends WerkbankPersistencePhase {
 class WerkbankPersistence extends StatefulWidget {
   const WerkbankPersistence({
     required this.builder,
-    required this.controllerMapFactory,
+    required this.persistentControllers,
     required this.child,
     super.key,
   });
 
   final PersistencePhaseWidgetBuilder builder;
-  final ControllerMapFactory controllerMapFactory;
+  final List<PersistentController> persistentControllers;
   final Widget child;
 
   /// {@template werkbank.controller_available_in_app}
@@ -75,7 +76,7 @@ class WerkbankPersistence extends StatefulWidget {
     return maybeControllerOf<WasAliveController>(context);
   }
 
-  static T? maybeControllerOf<T extends PersistentController>(
+  static T? maybeControllerOf<T extends PersistentController<T>>(
     BuildContext context,
   ) {
     return _InheritedWerkbankPersistence.of(context)?.controllers[T] as T?;
@@ -87,7 +88,7 @@ class WerkbankPersistence extends StatefulWidget {
 
 class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   late final SharedPreferencesWithCache _prefsWithCache;
-  late final Map<Type, PersistentController> _controllers;
+  Map<Type, PersistentController>? _controllers;
 
   bool _initialized = false;
 
@@ -100,6 +101,33 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
     // frames.
     RendererBinding.instance.deferFirstFrame();
     unawaited(_init());
+  }
+
+  void _updateControllers() {
+    void update() {
+      _controllers = {
+        for (final controller in widget.persistentControllers)
+          controller.type: controller,
+      };
+    }
+
+    final controllers = _controllers;
+    if (controllers != null) {
+      final jsonSnapshots = {
+        for (final controller in controllers.values)
+          controller.type: controller.toJson(),
+      };
+      for (final controller in controllers.values) {
+        controller.dispose();
+      }
+      update();
+      for (final controller in _controllers!.values) {
+        final json = jsonSnapshots[controller.type];
+        controller.tryLoadFromJson(json);
+      }
+    } else {
+      update();
+    }
   }
 
   Future<void> _init() async {
@@ -118,7 +146,7 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   }
 
   Future<void> _initControllers() async {
-    _controllers = widget.controllerMapFactory(_prefsWithCache);
+    _controllers = widget.persistentControllers(_prefsWithCache);
   }
 
   @override

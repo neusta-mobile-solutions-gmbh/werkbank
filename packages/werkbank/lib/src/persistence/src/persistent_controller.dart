@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class PersistentController<T extends PersistentController<T>>
     extends ChangeNotifier {

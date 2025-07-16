@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,11 +35,11 @@ class SharedPreferencesStore implements JsonStore {
   @override
   void set(String key, Object? json) {
     if (json == null) {
-      _sharedPrefs.remove(key);
+      unawaited(_sharedPrefs.remove(key));
       return;
     }
     final jsonString = jsonEncode(json);
-    _sharedPrefs.setString(key, jsonString);
+    unawaited(_sharedPrefs.setString(key, jsonString));
   }
 
   @override

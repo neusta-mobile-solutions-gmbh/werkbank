@@ -12,10 +12,10 @@ class WNotificationInAndOut extends StatefulWidget {
   final Widget child;
 
   @override
-  State<WNotificationInAndOut> createState() => _SNotificationInAndOutState();
+  State<WNotificationInAndOut> createState() => _WNotificationInAndOutState();
 }
 
-class _SNotificationInAndOutState extends State<WNotificationInAndOut>
+class _WNotificationInAndOutState extends State<WNotificationInAndOut>
     with TickerProviderStateMixin {
   late final AnimationController primary;
 

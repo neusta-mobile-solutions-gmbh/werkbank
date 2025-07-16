@@ -1,3 +1,4 @@
+import 'package:example_werkbank/src/example_werkbank/use_case_index.dart';
 import 'package:example_werkbank/src/example_werkbank/use_cases/components/material/checkbox_use_cases.dart';
 import 'package:example_werkbank/src/example_werkbank/use_cases/components/material/date_picker_use_cases.dart';
 import 'package:example_werkbank/src/example_werkbank/use_cases/components/material/filled_button_use_cases.dart';
@@ -5,7 +6,6 @@ import 'package:example_werkbank/src/example_werkbank/use_cases/components/mater
 import 'package:example_werkbank/src/example_werkbank/use_cases/components/material/slider_use_cases.dart';
 import 'package:example_werkbank/src/example_werkbank/use_cases/components/material/switch_use_cases.dart';
 import 'package:example_werkbank/src/example_werkbank/use_cases/components/material/text_field_use_cases.dart';
-import 'package:example_werkbank/src/example_werkbank/use_case_index.dart';
 
 WerkbankFolder get materialFolder => WerkbankFolder(
   name: 'Material',

@@ -65,7 +65,7 @@ class UseCaseComposerLifecycleManager {
         composer.abortAndDispose();
         rethrow;
       }
-    } catch (e, stackTrace) {
+    } on Object catch (e, stackTrace) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: stackTrace);
       return UseCaseComposerLifecycleManager._initialize(

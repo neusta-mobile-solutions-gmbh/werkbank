@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
@@ -143,9 +145,9 @@ class _AutoVisibilityChangeState extends State<_AutoVisibilityChange>
               visibilityAutoSetting != previousVisibilityAutoSetting;
           if (automaticVisibilityChanged) {
             if (visibilityAutoSetting) {
-              controller.show();
+              unawaited(controller.show());
             } else {
-              controller.hide();
+              unawaited(controller.hide());
             }
             previousVisibilityAutoSetting = visibilityAutoSetting;
           }

@@ -174,7 +174,7 @@ WerkbankRoot get root => WerkbankRoot(
           name: 'Colors',
           builder: colorsUseCaseBuilder(
             builder: (c) {},
-            colors: (BuildContext context) {
+            colors: (context) {
               final scheme = context.werkbankColorScheme;
               return {
                 'background': scheme.background,
@@ -201,7 +201,7 @@ WerkbankRoot get root => WerkbankRoot(
           name: 'Text Styles',
           builder: textStylesUseCaseBuilder(
             builder: (c) {},
-            styles: (BuildContext context) {
+            styles: (context) {
               final scheme = context.werkbankTextTheme;
               return {
                 'defaultText': scheme.defaultText,
@@ -220,7 +220,7 @@ WerkbankRoot get root => WerkbankRoot(
           name: 'Icons',
           builder: iconsUseCaseBuilder(
             builder: (c) {},
-            icons: (BuildContext context) {
+            icons: (context) {
               return {
                 'arrowSquareOut': WerkbankIcons.arrowSquareOut,
                 'plusSquare': WerkbankIcons.plusSquare,

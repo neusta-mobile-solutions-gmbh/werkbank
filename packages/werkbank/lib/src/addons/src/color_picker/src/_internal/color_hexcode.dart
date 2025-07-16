@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_manager.dart';
@@ -49,8 +51,10 @@ class ColorHexcode extends StatelessWidget {
       trailing: color != null
           ? WIconButton(
               onPressed: () {
-                Clipboard.setData(
-                  ClipboardData(text: _buildHexString(color)),
+                unawaited(
+                  Clipboard.setData(
+                    ClipboardData(text: _buildHexString(color)),
+                  ),
                 );
                 ColorPickerManager.setEnabled(context, enabled: false);
                 WerkbankNotifications.dispatch(

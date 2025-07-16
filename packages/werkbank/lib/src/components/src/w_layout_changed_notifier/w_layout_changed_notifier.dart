@@ -48,10 +48,10 @@ class WLayoutChangedNotifier extends StatefulWidget {
   final void Function(LayoutInfo layoutInfo) onLayoutChanged;
 
   @override
-  State<WLayoutChangedNotifier> createState() => _SLayoutChangedNotifierState();
+  State<WLayoutChangedNotifier> createState() => _WLayoutChangedNotifierState();
 }
 
-class _SLayoutChangedNotifierState extends State<WLayoutChangedNotifier> {
+class _WLayoutChangedNotifierState extends State<WLayoutChangedNotifier> {
   final _measuredWidgetKey = GlobalKey();
   Size? prevSize;
   Matrix4? prevTransform;

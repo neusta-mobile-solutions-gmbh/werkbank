@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
@@ -25,8 +27,10 @@ class ConfigurationPanel extends StatelessWidget {
                 ? null
                 : () {
                     final copyText = nameSegments.last;
-                    Clipboard.setData(
-                      ClipboardData(text: copyText),
+                    unawaited(
+                      Clipboard.setData(
+                        ClipboardData(text: copyText),
+                      ),
                     );
                     WerkbankNotifications.controllerOf(context).dispatch(
                       WerkbankNotification.text(

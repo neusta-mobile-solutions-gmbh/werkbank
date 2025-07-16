@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -49,10 +50,10 @@ class WDelayedReveal extends StatefulWidget {
   final Widget child;
 
   @override
-  State<WDelayedReveal> createState() => _SDelayedRevealState();
+  State<WDelayedReveal> createState() => _WDelayedRevealState();
 }
 
-class _SDelayedRevealState extends State<WDelayedReveal>
+class _WDelayedRevealState extends State<WDelayedReveal>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   bool isSwitched = false;
@@ -65,7 +66,7 @@ class _SDelayedRevealState extends State<WDelayedReveal>
       vsync: this,
       duration: widget.revealDuration,
     );
-    _startRevealSequence();
+    unawaited(_startRevealSequence());
   }
 
   @override

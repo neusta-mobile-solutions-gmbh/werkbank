@@ -9,7 +9,8 @@ WidgetBuilder _useCase(UseCaseComposer c) {
   c.description(
     'A text field that allows to enter text.\n'
     '## Notable Werkbank Features:\n'
-    '- The text field uses a special **focus node knob** that synchronizes the focus state of the text field with the knob.\n',
+    '- The text field uses a special **focus node knob** that synchronizes the '
+    'focus state of the text field with the knob.\n',
   );
   c.tags([ExampleTags.input]);
   c.urls([

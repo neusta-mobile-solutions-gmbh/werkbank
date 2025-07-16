@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Werkbank;
-library werkbank;
+library;
 
 export 'src/addon_api/addon_api.dart';
 export 'src/addon_config/addon_config.dart';

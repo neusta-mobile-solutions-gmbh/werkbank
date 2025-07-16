@@ -32,7 +32,7 @@ WerkbankFolder get themeFolder => WerkbankFolder(
             ..minimumSize(width: 800, height: 800)
             ..withoutPadding();
         },
-        styles: (BuildContext context) {
+        styles: (context) {
           final textTheme = Theme.of(context).textTheme;
           return {
             'Display Large': textTheme.displayLarge!,

@@ -3,11 +3,11 @@ import 'package:io/io.dart';
 import 'package:path/path.dart' as path;
 import 'package:yaml/yaml.dart';
 
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, avoid_dynamic_calls
 
 void main() async {
-  verifyToolInstalled('inkscape');
-  verifyToolInstalled('svgcleaner');
+  await verifyToolInstalled('inkscape');
+  await verifyToolInstalled('svgcleaner');
 
   final currentDir = Directory.current;
   final iconsRawDir = Directory(path.join(currentDir.path, 'icons_raw'));
@@ -84,7 +84,7 @@ void main() async {
     return;
   }
   final content = dartFile.readAsStringSync();
-  final importLine = "import 'package:flutter/widgets.dart';";
+  const importLine = "import 'package:flutter/widgets.dart';";
   if (!content.contains(importLine)) {
     print(
       'Import line not found in $outputClassFile, lint ignores not inserted.',

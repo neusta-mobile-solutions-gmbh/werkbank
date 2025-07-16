@@ -1,5 +1,10 @@
 include: package:werkbank_lints/werkbank_lints.yaml
 
+# We need to include this here, even though it is already included in werkbank_lints.yaml,
+# because pana will not recognize this otherwise. See https://github.com/dart-lang/pana/issues/1459.
+formatter:
+  trailing_commas: preserve
+
 analyzer:
   exclude:
     - lib/src/_internal/src/package_copies/**

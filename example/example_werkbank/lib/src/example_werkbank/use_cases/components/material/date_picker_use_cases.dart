@@ -49,9 +49,8 @@ WidgetBuilder _dialogUseCase(UseCaseComposer c) {
     '- The **overview thumbnail** of the date picker dialog is scaled down to '
     'fulfill a minimum size. '
     'This highlights the **customizability** of the thumbnails.\n'
-    '- The selectable **constraints** are **limited to a minimum size**, since the '
-    'dialog is known to **overflow when smaller**.'
-    '',
+    '- The selectable **constraints** are **limited to a minimum size**, '
+    'since the  dialog is known to **overflow when smaller**.',
   );
   c.tags([ExampleTags.input]);
 

@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library widgets;
+library;
 
 export 'src/display/display_app.dart';
 export 'src/display/use_case_display.dart';

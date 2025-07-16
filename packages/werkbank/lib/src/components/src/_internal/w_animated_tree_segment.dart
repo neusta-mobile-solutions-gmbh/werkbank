@@ -14,10 +14,10 @@ class WAnimatedTreeSegment extends StatefulWidget {
   final int nestingLevel;
 
   @override
-  State<WAnimatedTreeSegment> createState() => _SAnimatedTreeSegmentState();
+  State<WAnimatedTreeSegment> createState() => _WAnimatedTreeSegmentState();
 }
 
-class _SAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
+class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
   late bool isExpanded;
 
   @override

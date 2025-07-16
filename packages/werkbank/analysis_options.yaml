@@ -1,13 +1,9 @@
-include: package:very_good_analysis/analysis_options.5.0.0.yaml
+include: package:werkbank_lints/werkbank_lints.yaml
 
+# We need to include this here, even though it is already included in werkbank_lints.yaml,
+# because pana will not recognize this otherwise. See https://github.com/dart-lang/pana/issues/1459.
 formatter:
   trailing_commas: preserve
-
-linter:
-  rules:
-    public_member_api_docs: false
-    sort_pub_dependencies: false
-    always_put_required_named_parameters_first: false
 
 analyzer:
   exclude:
@@ -16,7 +12,3 @@ analyzer:
     - lib/src/localization/**
     - lib/**/*_icons.dart
     - test/**/*.*.dart
-  language:
-    strict-casts: true
-    strict-inference: true
-    strict-raw-types: true

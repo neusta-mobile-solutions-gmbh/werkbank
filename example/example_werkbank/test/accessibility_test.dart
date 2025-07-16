@@ -31,7 +31,7 @@ void main() {
           if (presetName != null) presetName,
         ].join(' ');
         // Test the use case with the respective knob preset
-        testWidgets(testName, (WidgetTester tester) async {
+        testWidgets(testName, (tester) async {
           await tester.pumpWidget(
             RepaintBoundary(
               key: repaintBoundaryKey,

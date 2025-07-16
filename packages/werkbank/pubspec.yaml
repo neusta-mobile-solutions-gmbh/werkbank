@@ -1,7 +1,7 @@
 name: werkbank
 description: >-
   A powerful tool that helps you develop, test, visualize, and organize your Flutter UI components.
-version: 0.16.0
+version: 0.16.1
 repository: https://github.com/neusta-mobile-solutions-gmbh/werkbank/
 homepage: https://neusta-ms.de/werkbank/
 
@@ -32,12 +32,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
-  very_good_analysis: ^8.0.0
+  werkbank_lints:
+    path: ../werkbank_lints
   index_generator: ^3.4.1
   icon_font_generator: ^4.0.0
   path: ^1.9.1
   yaml: ^3.1.3
+  io: ^1.0.5
   # localizations? `fvm dart run slang`
 
 flutter:
@@ -139,11 +140,12 @@ screenshots:
     path: pub_images/use_cases.webp
   - description: 'An animation showcasing knobs.'
     path: pub_images/knobs.webp
-  - description: 'An animation showcasing the ability to set constraints.'
-    path: pub_images/constraints.webp
-  - description: 'An animation showcasing tools for accessibility.'
-    path: pub_images/accessibility.webp
-  - description: 'An animation showcasing theming and more.'
-    path: pub_images/theme_and_more.webp
+  # TODO(lzuttermeister): Disabled for now, since they surpass the 4MB limit.
+  #  - description: 'An animation showcasing the ability to set constraints.'
+  #    path: pub_images/constraints.webp
+  #  - description: 'An animation showcasing tools for accessibility.'
+  #    path: pub_images/accessibility.webp
+  #  - description: 'An animation showcasing theming and more.'
+  #    path: pub_images/theme_and_more.webp
   - description: 'An animation showcasing the customizability of Werkbank.'
     path: pub_images/customization.webp

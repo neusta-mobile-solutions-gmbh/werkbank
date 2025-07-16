@@ -10,15 +10,21 @@ WidgetBuilder _useCase(UseCaseComposer c) {
     'A checkbox that allows to select a value.\n'
     '## Notable Werkbank Features:\n'
     '- **Knobs** adjust the checkbox state interactively.  '
-    'Not only can the knobs affect the checkbox, but the **checkbox can also affect the knobs**.\n'
-    '- **Knob presets** allow you to quickly set the checkbox state to common configurations.\n'
+    'Not only can the knobs affect the checkbox, but the **checkbox can also '
+    'affect the knobs**.\n'
+    '- **Knob presets** allow you to quickly set the checkbox state to '
+    'common configurations.\n'
     '  - By clicking the small button left of the knob preset selector, '
     'you can visit an **overview** over all the **knob presets**. '
-    'This allows you to see the checkbox in **all its possible states** at once. '
+    'This allows you to see the checkbox in **all its possible states** '
+    'at once. '
     'During development this would allow you to see the **effects of '
-    'code changes** on multiple widgets states using at once after doing a **hot reload**.\n'
-    '- The **overview thumbnail** of the checkbox is **bigger** than the checkbox '
-    'normally would be. This highlights the **customizability** of the thumbnails.',
+    'code changes** on multiple widgets states using at once after doing '
+    'a **hot reload**.\n'
+    '- The **overview thumbnail** of the checkbox is **bigger** than '
+    'the checkbox '
+    'normally would be. This highlights the **customizability** of '
+    'the thumbnails.',
   );
   c.tags([ExampleTags.input]);
   c.urls([

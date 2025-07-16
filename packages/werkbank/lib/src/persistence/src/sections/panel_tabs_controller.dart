@@ -20,7 +20,7 @@ class PanelTabsController extends PersistentController<PanelTabsController> {
           ? PanelTabsPersistentData.fromJson(json)
           : emptyDataObj;
       notifyListeners();
-    } catch (_) {
+    } on FormatException catch (_) {
       debugPrint(
         'Restoring PanelTabsPersistentData failed. Throwing it away. '
         'This can happen if changes to werkbank were made. '

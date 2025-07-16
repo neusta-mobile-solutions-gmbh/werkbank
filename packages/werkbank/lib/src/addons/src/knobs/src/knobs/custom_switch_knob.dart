@@ -151,7 +151,8 @@ class _CustomSwitchKnob<T> extends StatelessWidget {
           'leftValue $leftValue or rightValue $rightValue',
         );
       }
-    } catch (e, stackTrace) {
+      // ignore: avoid_catching_errors
+    } on ArgumentError catch (e, stackTrace) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: stackTrace);
       isRight = false;

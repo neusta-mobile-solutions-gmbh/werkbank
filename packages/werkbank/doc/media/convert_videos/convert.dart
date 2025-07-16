@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
-// ignore_for_file: avoid_print, avoid_slow_async_io, lines_longer_than_80_chars
+// ignore_for_file: avoid_print, lines_longer_than_80_chars
 
 /// Generates the ffmpeg command for video conversion
 (String, String) command(String input, String output) {
@@ -86,7 +86,7 @@ void main() async {
         print('Successfully converted $fileName');
         print(result.stdout);
       }
-    } catch (e) {
+    } on Object catch (e) {
       print('Exception while converting $fileName: $e');
     }
   }

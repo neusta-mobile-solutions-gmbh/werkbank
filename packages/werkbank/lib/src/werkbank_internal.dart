@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library werkbank_internal;
+library;
 
 export '_internal/internal.dart';
 export 'addon_api/addon_api.dart';

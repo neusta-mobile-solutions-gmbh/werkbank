@@ -14,10 +14,10 @@ class WTabView extends StatefulWidget {
   final List<WTab> tabs;
 
   @override
-  State<WTabView> createState() => _STabViewState();
+  State<WTabView> createState() => _WTabViewState();
 }
 
-class _STabViewState extends State<WTabView> {
+class _WTabViewState extends State<WTabView> {
   late int _index;
 
   @override
@@ -43,7 +43,7 @@ class _STabViewState extends State<WTabView> {
           children: [
             for (final (i, tab) in widget.tabs.indexed)
               Expanded(
-                child: _STabButton(
+                child: _WTabButton(
                   onPressed: () {
                     setState(() {
                       _index = i;
@@ -68,8 +68,8 @@ class _STabViewState extends State<WTabView> {
   }
 }
 
-class _STabButton extends StatelessWidget {
-  const _STabButton({
+class _WTabButton extends StatelessWidget {
+  const _WTabButton({
     required this.onPressed,
     required this.isActive,
     required this.isAtStart,

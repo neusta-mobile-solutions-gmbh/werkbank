@@ -7,6 +7,8 @@
  * Copyright 2014 The Flutter Authors. All rights reserved.
 */
 
+// dart format off
+
 import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

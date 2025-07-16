@@ -34,14 +34,16 @@ scripts:
       dart run index_generator &&
       dart run index_generator
 
-  dart:slang:
+  slang:
     description: Run the slang in all packages that require it.
     packageFilters:
       scope:
         - werkbank
-    run: dart run melos exec -- "dart run slang"
+    run: |
+      dart run melos exec -- "dart run slang"
+      dart run melos exec -- "dart format lib"
 
-  iconfont:generate:
+  icon_font_generator:
     description: Run the icon_font_genrator.
     packageFilters:
       scope:

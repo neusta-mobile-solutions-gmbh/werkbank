@@ -46,4 +46,6 @@ scripts:
     packageFilters:
       scope:
         - werkbank
-    run: dart run melos exec -c 1 -- "tool/generate_icon_font.sh"
+    run: |
+      cd packages/werkbank &&
+      dart run tool/generate_icon_font.dart

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:io/io.dart';
 import 'package:path/path.dart' as path;
+import 'package:yaml/yaml.dart';
 
 // ignore_for_file: avoid_print
 
@@ -64,6 +65,42 @@ void main() async {
   }
 
   print('Done.');
+
+  final iconFontYamlFile = File(path.join(currentDir.path, 'icon_font.yaml'));
+  if (!iconFontYamlFile.existsSync()) {
+    print('icon_font.yaml not found.');
+    return;
+  }
+  final yamlContent = iconFontYamlFile.readAsStringSync();
+  final yamlMap = loadYaml(yamlContent);
+  final outputClassFile = yamlMap['icon_font']?['output_class_file'];
+  if (outputClassFile == null || outputClassFile is! String) {
+    print('output_class_file not found in icon_font.yaml');
+    return;
+  }
+  final dartFile = File(path.join(currentDir.path, outputClassFile));
+  if (!dartFile.existsSync()) {
+    print('Generated Dart file not found: $outputClassFile');
+    return;
+  }
+  final content = dartFile.readAsStringSync();
+  final importLine = "import 'package:flutter/widgets.dart';";
+  if (!content.contains(importLine)) {
+    print(
+      'Import line not found in $outputClassFile, lint ignores not inserted.',
+    );
+    return;
+  }
+  final lintLines = [
+    '// dart format off',
+    '// ignore_for_file: unintended_html_in_doc_comment',
+  ].join('\n');
+  final updatedContent = content.replaceFirst(
+    importLine,
+    '$lintLines\n$importLine',
+  );
+  dartFile.writeAsStringSync(updatedContent);
+  print('Inserted lint ignores in $outputClassFile');
 }
 
 Future<void> verifyToolInstalled(

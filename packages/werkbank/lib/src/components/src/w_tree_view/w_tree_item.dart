@@ -27,10 +27,10 @@ class WTreeItem extends StatefulWidget {
   final VoidCallback? onTap;
 
   @override
-  State<WTreeItem> createState() => _STreeItemState();
+  State<WTreeItem> createState() => _WTreeItemState();
 }
 
-class _STreeItemState extends State<WTreeItem> {
+class _WTreeItemState extends State<WTreeItem> {
   late bool expanded;
 
   @override

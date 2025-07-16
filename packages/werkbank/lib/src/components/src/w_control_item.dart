@@ -22,10 +22,10 @@ class WControlItem extends StatefulWidget {
   final Widget control;
 
   @override
-  State<WControlItem> createState() => _SControlItemState();
+  State<WControlItem> createState() => _WControlItemState();
 }
 
-class _SControlItemState extends State<WControlItem> {
+class _WControlItemState extends State<WControlItem> {
   final _controlKey = GlobalKey();
 
   @override

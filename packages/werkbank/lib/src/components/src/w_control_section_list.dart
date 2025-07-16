@@ -38,10 +38,10 @@ class WControlSectionList extends StatefulWidget {
   final ToggleVisibilityCallback onToggleVisibility;
 
   @override
-  State<WControlSectionList> createState() => _SControlSectionListState();
+  State<WControlSectionList> createState() => _WControlSectionListState();
 }
 
-class _SControlSectionListState extends State<WControlSectionList> {
+class _WControlSectionListState extends State<WControlSectionList> {
   @override
   Widget build(BuildContext context) {
     return Overlay.wrap(

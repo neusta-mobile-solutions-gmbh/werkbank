@@ -25,10 +25,10 @@ class WNotification extends StatefulWidget {
   final Animation<double>? visibilityAnimation;
 
   @override
-  State<WNotification> createState() => _SNotificationState();
+  State<WNotification> createState() => _WNotificationState();
 }
 
-class _SNotificationState extends State<WNotification>
+class _WNotificationState extends State<WNotification>
     with TickerProviderStateMixin {
   late final AnimationController _counterVisibilityController;
   late final Animation<double> _counterSizeFactor;

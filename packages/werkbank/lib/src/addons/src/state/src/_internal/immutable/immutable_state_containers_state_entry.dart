@@ -1,18 +1,18 @@
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_container.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_containers_snapshot.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_containers_snapshot.dart';
 import 'package:werkbank/werkbank.dart';
 
-class StateContainersStateEntry
+class ImmutableStateContainersStateEntry
     extends
         TransientUseCaseStateEntry<
-          StateContainersStateEntry,
-          StateContainersSnapshot
+          ImmutableStateContainersStateEntry,
+          ImmutableStateContainersSnapshot
         > {
-  final Map<StateContainerId, StateContainer<Object?>> _stateContainersById =
-      {};
+  final Map<ImmutableStateContainerId, ImmutableStateContainer<Object?>>
+  _stateContainersById = {};
 
   @override
   void prepareForBuild(
@@ -33,8 +33,8 @@ class StateContainersStateEntry
   }
 
   void addStateContainer(
-    StateContainerId id,
-    StateContainer<Object?> stateContainer,
+    ImmutableStateContainerId id,
+    ImmutableStateContainer<Object?> stateContainer,
   ) {
     assert(
       !_stateContainersById.containsKey(id),
@@ -43,15 +43,15 @@ class StateContainersStateEntry
     _stateContainersById[id] = stateContainer;
   }
 
-  List<StateContainer<Object?>> get stateContainers =>
+  List<ImmutableStateContainer<Object?>> get stateContainers =>
       UnmodifiableListView(_stateContainersById.values);
 
   @override
-  void loadSnapshot(StateContainersSnapshot snapshot) {
+  void loadSnapshot(ImmutableStateContainersSnapshot snapshot) {
     for (final MapEntry(key: id, value: stateContainer)
         in _stateContainersById.entries) {
-      if (snapshot.stateContainerSnapshots.containsKey(id)) {
-        final containerSnapshot = snapshot.stateContainerSnapshots[id];
+      if (snapshot.immutableStateContainerSnapshots.containsKey(id)) {
+        final containerSnapshot = snapshot.immutableStateContainerSnapshots[id];
         if (containerSnapshot != null) {
           stateContainer.tryLoadSnapshot(containerSnapshot);
         }
@@ -60,9 +60,9 @@ class StateContainersStateEntry
   }
 
   @override
-  StateContainersSnapshot saveSnapshot() {
-    return StateContainersSnapshot(
-      stateContainerSnapshots: {
+  ImmutableStateContainersSnapshot saveSnapshot() {
+    return ImmutableStateContainersSnapshot(
+      immutableStateContainerSnapshots: {
         for (final MapEntry(:key, :value) in _stateContainersById.entries)
           key: value.createSnapshot(),
       }.lockUnsafe,

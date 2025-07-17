@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_container.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_containers_state_entry.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_containers_state_entry.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_container.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_management_state_entry.dart';
 import 'package:werkbank/werkbank.dart';
@@ -33,13 +33,15 @@ Common mutable objects to avoid:
 For mutable objects, use c.states.mutable() instead.''',
     );
 
-    final stateContainer = StateContainer<T>(
+    final stateContainer = ImmutableStateContainer<T>(
       initialValue: initialValue,
     );
-    _c.getTransientStateEntry<StateContainersStateEntry>().addStateContainer(
-      StateContainerId(id),
-      stateContainer,
-    );
+    _c
+        .getTransientStateEntry<ImmutableStateContainersStateEntry>()
+        .addStateContainer(
+          ImmutableStateContainerId(id),
+          stateContainer,
+        );
     return stateContainer;
   }
 

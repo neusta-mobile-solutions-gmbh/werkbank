@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_containers_snapshot.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_containers_snapshot.dart';
 
-extension type StateContainerId(String _id) {}
+extension type ImmutableStateContainerId(String _id) {}
 
-class StateContainer<T> extends ValueNotifier<T> {
-  StateContainer({
+class ImmutableStateContainer<T> extends ValueNotifier<T> {
+  ImmutableStateContainer({
     required T initialValue,
   }) : super(initialValue);
 
@@ -45,11 +45,11 @@ class StateContainer<T> extends ValueNotifier<T> {
     return super.value;
   }
 
-  StateContainerSnapshot createSnapshot() {
-    return StateContainerSnapshot(value: value);
+  ImmutableStateContainerSnapshot createSnapshot() {
+    return ImmutableStateContainerSnapshot(value: value);
   }
 
-  void tryLoadSnapshot(StateContainerSnapshot snapshot) {
+  void tryLoadSnapshot(ImmutableStateContainerSnapshot snapshot) {
     final snapshotValue = snapshot.value;
     if (snapshotValue is T) {
       value = snapshotValue;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/immutable/state_containers_snapshot.dart';
 
-extension type StateContainerId(String _label) {}
+extension type StateContainerId(String _id) {}
 
 class StateContainer<T> extends ValueNotifier<T> {
   StateContainer({

@@ -42,13 +42,13 @@ class MutableStateManagementStateEntry
   }
 
   MutableValueContainer<T> addMutableStateContainer<T extends Object>(
-    MutableStateContainerId label,
+    MutableStateContainerId id,
     T Function(TickerProvider tickerProvider) create,
     void Function(T value) dispose,
   ) {
     assert(
-      !_stateBundlesById.containsKey(label),
-      'Mutable value with label "$label" already exists',
+      !_stateBundlesById.containsKey(id),
+      'Mutable value with id "$id" already exists',
     );
     final container = MutableStateContainer<T>();
     final bundle = _MutableStateBundle<T>(
@@ -56,7 +56,7 @@ class MutableStateManagementStateEntry
       create: create,
       dispose: dispose,
     );
-    _stateBundlesById[label] = bundle;
+    _stateBundlesById[id] = bundle;
     return container;
   }
 

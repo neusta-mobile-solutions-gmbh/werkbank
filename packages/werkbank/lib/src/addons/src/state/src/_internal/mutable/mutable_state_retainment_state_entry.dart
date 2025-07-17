@@ -7,8 +7,8 @@ class MutableStateRetainmentStateEntry
   _disposableValuesById = {};
 
   void clean(bool Function(MutableStateContainerId id) shouldRemove) {
-    _disposableValuesById.removeWhere((label, container) {
-      if (shouldRemove(label)) {
+    _disposableValuesById.removeWhere((id, container) {
+      if (shouldRemove(id)) {
         container.dispose();
         return true;
       }

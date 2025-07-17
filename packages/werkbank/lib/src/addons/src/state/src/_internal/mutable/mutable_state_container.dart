@@ -1,6 +1,6 @@
 import 'package:werkbank/src/addons/src/state/src/mutable_value_container.dart';
 
-extension type MutableStateContainerId(String _label) {}
+extension type MutableStateContainerId(String _id) {}
 
 class MutableStateContainer<T extends Object> extends MutableValueContainer<T> {
   MutableStateContainer();

@@ -6,7 +6,7 @@ import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_stat
 import 'package:werkbank/werkbank.dart';
 
 extension type StatesComposer(UseCaseComposer _c) {
-  ValueNotifier<T> immutable<T>(String label, {required T initialValue}) {
+  ValueNotifier<T> immutable<T>(String id, {required T initialValue}) {
     // Ensure that the initial value is actually immutable.
     assert(
       () {
@@ -37,33 +37,33 @@ For mutable objects, use c.states.mutable() instead.''',
       initialValue: initialValue,
     );
     _c.getTransientStateEntry<StateContainersStateEntry>().addStateContainer(
-      StateContainerId(label),
+      StateContainerId(id),
       stateContainer,
     );
     return stateContainer;
   }
 
   MutableValueContainer<T> mutable<T extends Object>(
-    String label, {
+    String id, {
     required T Function() create,
     required void Function(T value) dispose,
   }) {
     return mutableWithTickerProvider<T>(
-      label,
+      id,
       create: (_) => create(),
       dispose: dispose,
     );
   }
 
   MutableValueContainer<T> mutableWithTickerProvider<T extends Object>(
-    String label, {
+    String id, {
     required T Function(TickerProvider tickerProvider) create,
     required void Function(T value) dispose,
   }) {
     return _c
         .getTransientStateEntry<MutableStateManagementStateEntry>()
         .addMutableStateContainer<T>(
-          MutableStateContainerId(label),
+          MutableStateContainerId(id),
           create,
           dispose,
         );

@@ -33,4 +33,3 @@ export 'src/knobs/string_knob.dart';
 export 'src/knobs_addon.dart';
 export 'src/knobs_composer.dart';
 export 'src/knobs_composition.dart';
-export 'src/ticker_provider_provider.dart';

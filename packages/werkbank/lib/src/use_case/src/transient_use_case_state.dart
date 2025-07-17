@@ -83,7 +83,7 @@ abstract class TransientUseCaseStateEntry<
   /// {@template werkbank.state_entry_build_context}
   /// The passed [BuildContext] is guaranteed to be a descendant of the
   /// layers in the [AddonLayer.management] layer.
-  /// If a dependency for example to an [InheritedWidget] is make on the
+  /// If a dependency for example to an [InheritedWidget] is made on the
   /// [context], a change to that dependency will cause the use case to
   /// recompose.
   /// {@endtemplate}

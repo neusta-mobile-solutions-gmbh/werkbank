@@ -77,3 +77,12 @@ class ImmutableStateContainersStateEntry
     super.dispose();
   }
 }
+
+class ImmutableStateContainersSnapshot extends TransientUseCaseStateSnapshot {
+  const ImmutableStateContainersSnapshot({
+    required this.immutableStateContainerSnapshots,
+  });
+
+  final IMap<ImmutableStateContainerId, ImmutableStateContainerSnapshot>
+  immutableStateContainerSnapshots;
+}

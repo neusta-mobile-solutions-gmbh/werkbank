@@ -17,6 +17,16 @@ class KnobsAddon extends Addon {
   ];
 
   @override
+  AddonLayerEntries get layers => AddonLayerEntries(
+    management: [
+      ManagementLayerEntry(
+        id: 'ticker_provider_provider',
+        builder: (context, child) => TickerProviderProvider(child: child),
+      ),
+    ],
+  );
+
+  @override
   List<ConfigureControlSection> buildConfigureTabControlSections(
     BuildContext context,
   ) {

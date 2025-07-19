@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_container.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_retainment_state_entry.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/mutable_state_ticker_provider_provider.dart';
 import 'package:werkbank/werkbank.dart';
 
 class MutableStateManagementStateEntry
@@ -29,7 +30,7 @@ class MutableStateManagementStateEntry
       final hasValue =
           currentValue != null && bundle.trySetContainerValue(currentValue);
       if (!hasValue) {
-        final tickerProvider = TickerProviderProvider.of(context);
+        final tickerProvider = MutableStateTickerProviderProvider.of(context);
         final value = bundle.createAndSetContainerValue(tickerProvider);
         retainmentStateEntry.setMutableValue(
           id,

@@ -1,4 +1,4 @@
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_containers_state_entry.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holders_state_entry.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_management_state_entry.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_retainment_state_entry.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable_state_ticker_provider_provider.dart';
@@ -24,7 +24,7 @@ class StateAddon extends Addon {
 
   @override
   List<AnyTransientUseCaseStateEntry> createTransientUseCaseStateEntries() => [
-    ImmutableStateContainersStateEntry(),
+    ImmutableStateHoldersStateEntry(),
     MutableStateManagementStateEntry(),
   ];
 

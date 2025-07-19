@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_containers_snapshot.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holders_snapshot.dart';
 
-extension type ImmutableStateContainerId(String _id) {}
+extension type ImmutableStateHolderId(String _id) {}
 
-class ImmutableStateContainer<T> extends ValueNotifier<T> {
-  ImmutableStateContainer({
+class ImmutableStateHolder<T> extends ValueNotifier<T> {
+  ImmutableStateHolder({
     required T initialValue,
   }) : super(initialValue);
 
@@ -18,7 +18,7 @@ class ImmutableStateContainer<T> extends ValueNotifier<T> {
   set value(T newValue) {
     if (!_isAfterBuild) {
       throw StateError(
-        'The value of a state container can only be set after the use case has '
+        'The value of a state holder can only be set after the use case has '
         'finished composing. '
         'Have you accidentally set a state value directly in the '
         'UseCaseBuilder function instead of its returned WidgetBuilder? '
@@ -33,7 +33,7 @@ class ImmutableStateContainer<T> extends ValueNotifier<T> {
   T get value {
     if (!_isAfterBuild) {
       throw StateError(
-        'The value of a state container can only '
+        'The value of a state holder can only '
         'be read after the use case has '
         'finished composing. '
         'Have you accidentally accessed a state value directly in the '
@@ -45,11 +45,11 @@ class ImmutableStateContainer<T> extends ValueNotifier<T> {
     return super.value;
   }
 
-  ImmutableStateContainerSnapshot createSnapshot() {
-    return ImmutableStateContainerSnapshot(value: value);
+  ImmutableStateHolderSnapshot createSnapshot() {
+    return ImmutableStateHolderSnapshot(value: value);
   }
 
-  void tryLoadSnapshot(ImmutableStateContainerSnapshot snapshot) {
+  void tryLoadSnapshot(ImmutableStateHolderSnapshot snapshot) {
     final snapshotValue = snapshot.value;
     if (snapshotValue is T) {
       value = snapshotValue;

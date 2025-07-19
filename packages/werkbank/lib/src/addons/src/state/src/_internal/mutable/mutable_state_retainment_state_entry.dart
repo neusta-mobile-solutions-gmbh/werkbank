@@ -1,15 +1,15 @@
-import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_holder.dart';
 import 'package:werkbank/src/use_case/src/retained_use_case_state.dart';
 
 class MutableStateRetainmentStateEntry
     extends RetainedUseCaseStateEntry<MutableStateRetainmentStateEntry> {
-  final Map<MutableStateContainerId, _DisposableMutableValue>
+  final Map<MutableStateHolderId, _DisposableMutableValue>
   _disposableValuesById = {};
 
-  void clean(bool Function(MutableStateContainerId id) shouldRemove) {
-    _disposableValuesById.removeWhere((id, container) {
+  void clean(bool Function(MutableStateHolderId id) shouldRemove) {
+    _disposableValuesById.removeWhere((id, holder) {
       if (shouldRemove(id)) {
-        container.dispose();
+        holder.dispose();
         return true;
       }
       return false;
@@ -17,7 +17,7 @@ class MutableStateRetainmentStateEntry
   }
 
   void setMutableValue(
-    MutableStateContainerId id,
+    MutableStateHolderId id,
     Object value,
     void Function(Object value) dispose,
   ) {
@@ -32,7 +32,7 @@ class MutableStateRetainmentStateEntry
   }
 
   Object? getMutableValue(
-    MutableStateContainerId id,
+    MutableStateHolderId id,
   ) {
     final disposableValue = _disposableValuesById[id];
     if (disposableValue == null) {
@@ -43,8 +43,8 @@ class MutableStateRetainmentStateEntry
 
   @override
   void dispose() {
-    for (final container in _disposableValuesById.values) {
-      container.dispose();
+    for (final holder in _disposableValuesById.values) {
+      holder.dispose();
     }
     super.dispose();
   }

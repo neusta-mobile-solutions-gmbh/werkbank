@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class ImmutableStateContainerSnapshot {
-  const ImmutableStateContainerSnapshot({
+class ImmutableStateHolderSnapshot {
+  const ImmutableStateHolderSnapshot({
     required this.value,
   });
 

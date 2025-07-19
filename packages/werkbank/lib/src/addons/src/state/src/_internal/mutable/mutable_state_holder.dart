@@ -1,9 +1,9 @@
-import 'package:werkbank/src/addons/src/state/src/mutable_value_container.dart';
+import 'package:werkbank/src/addons/src/state/src/value_container.dart';
 
-extension type MutableStateContainerId(String _id) {}
+extension type MutableStateHolderId(String _id) {}
 
-class MutableStateContainer<T extends Object> extends MutableValueContainer<T> {
-  MutableStateContainer();
+class MutableStateHolder<T extends Object> extends ValueContainer<T> {
+  MutableStateHolder();
 
   // ignore: use_setters_to_change_properties
   void prepareForBuild(T value) {
@@ -16,7 +16,7 @@ class MutableStateContainer<T extends Object> extends MutableValueContainer<T> {
   T get value {
     if (_value == null) {
       throw StateError(
-        'The value of a state container can only '
+        'The value of a state holder can only '
         'be read after the use case has '
         'finished composing. '
         'Have you accidentally accessed a state value directly in the '

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_container.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_containers_state_entry.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holder.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holders_state_entry.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_holder.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_management_state_entry.dart';
 import 'package:werkbank/werkbank.dart';
 
@@ -33,19 +33,17 @@ Common mutable objects to avoid:
 For mutable objects, use c.states.mutable() instead.''',
     );
 
-    final stateContainer = ImmutableStateContainer<T>(
+    final stateHolder = ImmutableStateHolder<T>(
       initialValue: initialValue,
     );
-    _c
-        .getTransientStateEntry<ImmutableStateContainersStateEntry>()
-        .addStateContainer(
-          ImmutableStateContainerId(id),
-          stateContainer,
-        );
-    return stateContainer;
+    _c.getTransientStateEntry<ImmutableStateHoldersStateEntry>().addStateHolder(
+      ImmutableStateHolderId(id),
+      stateHolder,
+    );
+    return stateHolder;
   }
 
-  MutableValueContainer<T> mutable<T extends Object>(
+  ValueContainer<T> mutable<T extends Object>(
     String id, {
     required T Function() create,
     required void Function(T value) dispose,
@@ -57,15 +55,15 @@ For mutable objects, use c.states.mutable() instead.''',
     );
   }
 
-  MutableValueContainer<T> mutableWithTickerProvider<T extends Object>(
+  ValueContainer<T> mutableWithTickerProvider<T extends Object>(
     String id, {
     required T Function(TickerProvider tickerProvider) create,
     required void Function(T value) dispose,
   }) {
     return _c
         .getTransientStateEntry<MutableStateManagementStateEntry>()
-        .addMutableStateContainer<T>(
-          MutableStateContainerId(id),
+        .addMutableStateHolder<T>(
+          MutableStateHolderId(id),
           create,
           dispose,
         );

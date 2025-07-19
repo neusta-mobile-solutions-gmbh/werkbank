@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_container.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_holder.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_retainment_state_entry.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable_state_ticker_provider_provider.dart';
 import 'package:werkbank/werkbank.dart';
@@ -10,8 +10,7 @@ class MutableStateManagementStateEntry
           MutableStateManagementStateEntry,
           TransientUseCaseStateSnapshot
         > {
-  final Map<MutableStateContainerId, _MutableStateBundle> _stateBundlesById =
-      {};
+  final Map<MutableStateHolderId, _MutableStateBundle> _stateBundlesById = {};
 
   @override
   void prepareForBuild(
@@ -28,10 +27,10 @@ class MutableStateManagementStateEntry
     for (final MapEntry(key: id, value: bundle) in _stateBundlesById.entries) {
       final currentValue = retainmentStateEntry.getMutableValue(id);
       final hasValue =
-          currentValue != null && bundle.trySetContainerValue(currentValue);
+          currentValue != null && bundle.trySetHolderValue(currentValue);
       if (!hasValue) {
         final tickerProvider = MutableStateTickerProviderProvider.of(context);
-        final value = bundle.createAndSetContainerValue(tickerProvider);
+        final value = bundle.createAndSetHolderValue(tickerProvider);
         retainmentStateEntry.setMutableValue(
           id,
           value,
@@ -41,8 +40,8 @@ class MutableStateManagementStateEntry
     }
   }
 
-  MutableValueContainer<T> addMutableStateContainer<T extends Object>(
-    MutableStateContainerId id,
+  ValueContainer<T> addMutableStateHolder<T extends Object>(
+    MutableStateHolderId id,
     T Function(TickerProvider tickerProvider) create,
     void Function(T value) dispose,
   ) {
@@ -50,14 +49,14 @@ class MutableStateManagementStateEntry
       !_stateBundlesById.containsKey(id),
       'Mutable value with id "$id" already exists',
     );
-    final container = MutableStateContainer<T>();
+    final holder = MutableStateHolder<T>();
     final bundle = _MutableStateBundle<T>(
-      container: container,
+      holder: holder,
       create: create,
       dispose: dispose,
     );
     _stateBundlesById[id] = bundle;
-    return container;
+    return holder;
   }
 
   @override
@@ -70,28 +69,28 @@ class MutableStateManagementStateEntry
 
 class _MutableStateBundle<T extends Object> {
   _MutableStateBundle({
-    required this.container,
+    required this.holder,
     required this.create,
     required this.dispose,
   });
 
-  final MutableStateContainer<T> container;
+  final MutableStateHolder<T> holder;
   final T Function(TickerProvider tickerProvider) create;
   final void Function(T value) dispose;
 
-  bool trySetContainerValue(Object value) {
+  bool trySetHolderValue(Object value) {
     if (value is! T) {
       return false;
     }
-    container.prepareForBuild(value);
+    holder.prepareForBuild(value);
     return true;
   }
 
-  T createAndSetContainerValue(
+  T createAndSetHolderValue(
     TickerProvider tickerProvider,
   ) {
     final value = create(tickerProvider);
-    container.prepareForBuild(value);
+    holder.prepareForBuild(value);
     return value;
   }
 

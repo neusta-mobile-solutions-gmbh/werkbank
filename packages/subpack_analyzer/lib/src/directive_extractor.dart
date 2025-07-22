@@ -4,21 +4,17 @@ import 'package:analyzer/dart/analysis/features.dart';
 import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as p;
-import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/usages/usages_model.dart';
 import 'package:subpack_analyzer/src/core/utils/emotes.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 
 class DirectiveExtractor with SubpackLogger {
   DirectiveExtractor({
-    required Logger logger,
     required this.packageRoot,
-  }) {
-    logger = logger;
-  }
+  });
 
   final PackageRoot packageRoot;
 
@@ -104,9 +100,7 @@ class DirectiveExtractor with SubpackLogger {
       return LocalUsage(dartFile: treeNode, usageType: LocalUsageType.import);
     } else {
       // TODO(jwolyniec): Find a better solution than an exception
-      throw FileSystemException(
-        '',
-      );
+      throw const FileSystemException();
     }
   }
 }

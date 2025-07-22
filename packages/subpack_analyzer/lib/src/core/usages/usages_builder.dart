@@ -1,16 +1,23 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as p;
-import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
-
-import 'package:subpack_analyzer/src/directive_extractor.dart';
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
-import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 import 'package:subpack_analyzer/src/core/usages/usages_model.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
+import 'package:subpack_analyzer/src/directive_extractor.dart';
 
-/// Builds a model of all import and export usages within a package by traversing its directory tree.
-/// Collects usage information for each Dart file and tracks the deepest source directory for each file.
+/// Builds a model of all import and export usages within a package by
+/// traversing its directory tree. Collects usage information for each
+/// Dart file and tracks the deepest source directory for each file.
 class UsagesBuilder with SubpackLogger {
+  UsagesBuilder._usagesBuilder({
+    required PackageRoot packageRoot,
+  }) : _packageRoot = packageRoot,
+       _directiveExtractor = DirectiveExtractor(
+         packageRoot: packageRoot,
+       );
+
   /// Builds and returns a [UsagesModel] for the given [packageRoot].
   /// This function analyzes all Dart files in the package and collects their import/export usages.
   static Future<UsagesModel> buildUsages({
@@ -19,20 +26,8 @@ class UsagesBuilder with SubpackLogger {
   }) {
     final usagesBuilder = UsagesBuilder._usagesBuilder(
       packageRoot: packageRoot,
-      logger: logger,
     );
     return usagesBuilder._buildUsagesModel();
-  }
-
-  UsagesBuilder._usagesBuilder({
-    required PackageRoot packageRoot,
-    required logger,
-  }) : _packageRoot = packageRoot,
-       _directiveExtractor = DirectiveExtractor(
-         logger: logger,
-         packageRoot: packageRoot,
-       ) {
-    logger = logger;
   }
 
   final PackageRoot _packageRoot;

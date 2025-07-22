@@ -1,36 +1,29 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as p;
-import 'package:subpack_analyzer/src/core/utils/subpack_error_collector.dart';
-import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
-import 'package:yaml/yaml.dart';
-
+import 'package:subpack_analyzer/src/core/dependencies/dependencies_error_model.dart';
 import 'package:subpack_analyzer/src/core/dependencies/dependencies_model.dart';
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/utils/emotes.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_error_collector.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
-import 'package:subpack_analyzer/src/core/dependencies/dependencies_error_model.dart';
+import 'package:yaml/yaml.dart';
 
 class DependenciesBuilder with SubpackLogger {
+  DependenciesBuilder({
+    required PackageRoot packageRoot,
+  }) : _packageRoot = packageRoot,
+       _errors = SubpackErrorCollector<DependenciesError>();
+
   static Future<DependenciesModel> buildDependencies({
     required PackageRoot packageRoot,
     required Logger logger,
   }) async {
     final dependenciesBuilder = DependenciesBuilder(
       packageRoot: packageRoot,
-      logger: logger,
     );
     return await dependenciesBuilder._buildDependenciesModel();
-  }
-
-  DependenciesBuilder({
-    required PackageRoot packageRoot,
-    required logger,
-  }) : _packageRoot = packageRoot,
-       _errors = SubpackErrorCollector<DependenciesError>(
-         logger: logger,
-       ) {
-    logger = logger;
   }
 
   final PackageRoot _packageRoot;
@@ -213,8 +206,8 @@ class DependenciesBuilder with SubpackLogger {
     }
   }
 
-  /// Returns a new path by trimming `sourcePath` up to (but not including) `targetDirectory`,
-  /// then appending `relativePath`.
+  /// Returns a new path by trimming `sourcePath` up to (but not including)
+  /// `targetDirectory`, then appending `relativePath`.
   /// Returns null if `targetDirectory` is not found in `sourcePath`.
   String? _getParallelPath({
     required String sourcePath,

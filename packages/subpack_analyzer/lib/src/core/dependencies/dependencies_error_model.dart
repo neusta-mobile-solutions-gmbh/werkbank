@@ -51,8 +51,8 @@ class SubpackFromPathDoesNotExistError extends DependenciesError {
       ),
       message: falsePath,
     );
-    return '\nThe path $falsePathLink does not lead to a subpack directory and should not'
-        'be used as a subpack dependency.';
+    return '\nThe path $falsePathLink does not lead to a subpack directory and'
+        ' should not be used as a subpack dependency.';
   }
 }
 
@@ -74,7 +74,7 @@ class DependencyOnOwnPackageError extends DependenciesError {
       ),
       message: dependency,
     );
-    return '\nThe dependency $dependencyLink '
-        'should not be referencing the package it\'s being used in, which is ${packageRoot.name}.';
+    return '\nThe dependency $dependencyLink should not be referencing the '
+        "package it's being used in, which is ${packageRoot.name}.";
   }
 }

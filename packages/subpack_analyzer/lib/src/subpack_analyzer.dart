@@ -49,7 +49,7 @@ class SubpackAnalyzer with SubpackLogger {
   static Future<int> startSubpackAnalyzer({
     required Directory rootDirectory,
     Set<String> optionalDirectories = const {},
-  }) async {
+  }) {
     final subpackAnalyzer = SubpackAnalyzer._subpackAnalyzer(
       optionalDirectories: optionalDirectories,
       rootDirectory: rootDirectory,

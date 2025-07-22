@@ -1,18 +1,31 @@
 > [!CAUTION]
 > This topic is under construction.
 
-In [Get Started](Get%20Started-topic.html) and [File Structure](File%20Structure-topic.html)
-you have learned how to create basic use cases and how to structure them in your project.
-In this topic we will explore the many ways to customize your use cases and how to
-get the most out of Werkbank.
+This topic gives an overview of the techniques that can be used to customize your use cases.
+You can find more detailed information for some of the features in their respective topics.
+We recommended reading [Get Started](Get%20Started-topic.html) and [File Structure](File%20Structure-topic.html) before this topic to
+learn how to create basic use cases and how to structure them in your project.
+
+
+## UseCaseComposer Basics
 
 At the core of customizing your use cases is the
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) which is passed to the
 [UseCaseBuilder](../werkbank/UseCaseBuilder-class.html) function.
 
-There are many functions and getters defined on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
-which can be used in the use case before returning the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html)
-in order to customize the use case.
+```dart
+WidgetBuilder exampleUseCase(UseCaseComposer c) {
+  // Use `c` here to customize the use case.
+  
+  return (context) {
+    return ExampleWidget();
+  };
+}
+```
+
+There are many functions and getters defined on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
+They can be used in the use case before returning the
+[WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html) to customize the use case.
 
 > [!IMPORTANT]
 > You can't use the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`

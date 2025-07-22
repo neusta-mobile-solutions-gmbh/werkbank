@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// A mixin that provides access to data in the [BuildContext] that is
 /// available from every place where there is a specific use case in the

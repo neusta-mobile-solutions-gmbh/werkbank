@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// An inherited widget that tells the viewport at which scale it is displayed.
 /// This will influence how much the [UseCaseViewport.sizePadding] is

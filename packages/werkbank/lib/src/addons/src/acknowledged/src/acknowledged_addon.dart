@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_component.dart';
 import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_manager.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Configuring Addons}
 /// This addon just displays the acknowledged state of the app.

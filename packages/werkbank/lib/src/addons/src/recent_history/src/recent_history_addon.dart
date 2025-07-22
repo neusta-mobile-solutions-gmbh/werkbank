@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/recent_history/src/_internal/recent_history_component.dart';
 import 'package:werkbank/src/addons/src/recent_history/src/_internal/recent_history_manager.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Configuring Addons}
 /// This addon just displays the history of the app.

@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werkbank/src/_internal/src/routing/src/_internal/routes.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 typedef RoutesWidgetBuilder =
     Widget Function(

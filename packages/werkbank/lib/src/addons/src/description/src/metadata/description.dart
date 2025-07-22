@@ -1,5 +1,3 @@
-import 'package:werkbank/src/werkbank_internal.dart';
-
 class Descriptions extends UseCaseMetadataEntry<Descriptions> {
   const Descriptions({
     required this.rootDescription,

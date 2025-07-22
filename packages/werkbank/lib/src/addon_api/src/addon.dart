@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Writing Your Own Addons}
 /// {@category Custom Addons}

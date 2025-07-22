@@ -3,7 +3,6 @@ import 'package:werkbank/src/addons/src/description/src/_internal/description_se
 import 'package:werkbank/src/addons/src/description/src/_internal/tags_homepage_component.dart';
 import 'package:werkbank/src/addons/src/description/src/_internal/tags_section.dart';
 import 'package:werkbank/src/addons/src/description/src/_internal/urls_section.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Configuring Addons}
 /// This addon provides the ability to add a description, urls and tags

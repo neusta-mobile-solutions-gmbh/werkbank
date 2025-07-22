@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class ConfigurationPanel extends StatelessWidget {
   const ConfigurationPanel({super.key});

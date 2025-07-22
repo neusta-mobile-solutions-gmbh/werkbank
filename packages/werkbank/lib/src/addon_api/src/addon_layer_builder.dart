@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graphs/graphs.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class AddonLayerBuilder extends StatefulWidget {
   const AddonLayerBuilder({

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 // TODO(lzuttermeister): Change this to a widget?
 class UseCase {

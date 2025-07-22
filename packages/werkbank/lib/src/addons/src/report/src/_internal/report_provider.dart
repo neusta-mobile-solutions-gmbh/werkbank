@@ -4,7 +4,6 @@ import 'package:werkbank/src/addons/src/report/src/_internal/reports/feature_int
 import 'package:werkbank/src/addons/src/report/src/_internal/reports/report_change_log.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/sanitize_reports.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/shortcuts_component.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class ReportsManager {
   ReportsManager({

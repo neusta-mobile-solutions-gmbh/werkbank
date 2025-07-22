@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// A widget that sets up the app for displaying use cases without the UI of a
 /// [WerkbankApp]. Usually one or more [UseCaseDisplay] widgets as

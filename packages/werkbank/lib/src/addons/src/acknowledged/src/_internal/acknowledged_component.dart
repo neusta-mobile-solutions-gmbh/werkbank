@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_manager.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class AcknowledgedComponent extends StatefulWidget {
   const AcknowledgedComponent({this.maxCount = 10, super.key});

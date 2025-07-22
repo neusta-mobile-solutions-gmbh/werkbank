@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 // TODO(lzuttermeister): Make a stateless WTabBar instead?
 /// {@category Werkbank Components}

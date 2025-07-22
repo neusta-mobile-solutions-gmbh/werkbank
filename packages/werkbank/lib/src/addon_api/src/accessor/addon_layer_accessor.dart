@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// A class that provides access to data in the [BuildContext] that is
 /// available from within the widgets built by the [AddonLayerEntry.builder]

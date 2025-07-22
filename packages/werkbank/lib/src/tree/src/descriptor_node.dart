@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 sealed class Descriptor {
   Descriptor._({

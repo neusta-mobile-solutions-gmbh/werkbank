@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/recent_history/src/_internal/recent_history_manager.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class RecentHistoryComponent extends StatefulWidget {
   const RecentHistoryComponent({this.maxCount = 10, super.key});

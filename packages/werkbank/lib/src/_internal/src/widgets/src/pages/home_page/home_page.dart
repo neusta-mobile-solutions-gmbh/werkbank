@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_background.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 const _maxContentWidth = 1200;
 const _twoColumnsBreakpoint = 800;

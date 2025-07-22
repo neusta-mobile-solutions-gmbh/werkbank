@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/filter/src/_internal/filter_executor.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class RootDescriptorFilter extends StatefulWidget {
   const RootDescriptorFilter({

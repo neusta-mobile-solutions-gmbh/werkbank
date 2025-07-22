@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/use_case/src/_internal/use_case_composer_impl.dart';
 import 'package:werkbank/src/_internal/src/use_case/src/_internal/use_case_composition_impl.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class UseCaseComposerLifecycleManager {
   UseCaseComposerLifecycleManager._(

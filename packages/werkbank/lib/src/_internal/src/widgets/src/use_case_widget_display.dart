@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// Displays the use case defined controller in
 /// [UseCaseControllerProvider].

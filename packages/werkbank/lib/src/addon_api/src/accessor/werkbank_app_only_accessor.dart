@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// A mixin that provides access to data in the [BuildContext] that is
 /// available inside a [WerkbankApp].

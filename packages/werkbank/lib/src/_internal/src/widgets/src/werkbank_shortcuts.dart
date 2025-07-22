@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class WerkbankShortcuts extends StatelessWidget with OrderExecutor {
   const WerkbankShortcuts({

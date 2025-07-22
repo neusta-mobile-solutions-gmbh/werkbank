@@ -1,5 +1,3 @@
-import 'package:werkbank/src/werkbank_internal.dart';
-
 typedef Score = double;
 
 /// {@category Search for Use Cases}

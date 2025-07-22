@@ -7,7 +7,6 @@ import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_in
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/simulated_color_blindness_type_control.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/text_scale_factor_control.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Configuring Addons}
 class AccessibilityAddon extends Addon {

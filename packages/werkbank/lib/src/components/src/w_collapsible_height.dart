@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Werkbank Components}
 class WCollapsibleHeight extends StatefulWidget {

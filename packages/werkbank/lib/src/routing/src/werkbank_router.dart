@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werkbank/src/_internal/src/routing/src/_internal/routes.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// A Proxy Router for the [WerkbankApp] since we don't want to
 /// expose GoRouter

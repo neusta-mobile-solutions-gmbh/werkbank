@@ -1,8 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:werkbank/src/werkbank_internal.dart';
-
 mixin PanelCalcMixin {
   double maxPanelWidth(double maxWidth) => max(
     maxWidth * PanelController.maxRelativPanelWidth,

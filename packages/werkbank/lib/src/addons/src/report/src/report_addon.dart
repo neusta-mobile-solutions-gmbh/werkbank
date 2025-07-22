@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_component.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_controller.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_provider.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 /// {@category Configuring Addons}
 class ReportAddon extends Addon {

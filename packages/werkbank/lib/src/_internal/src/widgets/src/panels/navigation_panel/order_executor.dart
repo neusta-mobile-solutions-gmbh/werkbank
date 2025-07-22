@@ -1,5 +1,3 @@
-import 'package:werkbank/src/werkbank_internal.dart';
-
 mixin OrderExecutor {
   List<Descriptor> orderFlattenedTree(
     Descriptor descriptor,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werkbank/src/_internal/src/routing/src/_internal/transitions/werkbank_page.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 const _descriptorPathSegment = 'view';
 

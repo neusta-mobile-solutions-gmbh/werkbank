@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_background.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
 
 class UseCasePage extends StatelessWidget {
   const UseCasePage({

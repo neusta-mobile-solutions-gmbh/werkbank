@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library components;
+library;
 
 export 'src/utility_widgets/global_callback_shortcuts.dart';
 export 'src/utility_widgets/mapping_value_listenable_builder.dart';
@@ -10,6 +10,7 @@ export 'src/w_bordered_box.dart';
 export 'src/w_button_base.dart';
 export 'src/w_checkerboard_background.dart';
 export 'src/w_chip.dart';
+export 'src/w_collapsible_height.dart';
 export 'src/w_control_item.dart';
 export 'src/w_control_section_list.dart';
 export 'src/w_delayed_reveal.dart';

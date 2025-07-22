@@ -25,10 +25,10 @@ class WButtonBase extends StatefulWidget {
   final Widget child;
 
   @override
-  State<WButtonBase> createState() => _SButtonBaseState();
+  State<WButtonBase> createState() => _WButtonBaseState();
 }
 
-class _SButtonBaseState extends State<WButtonBase> {
+class _WButtonBaseState extends State<WButtonBase> {
   bool _focused = false;
   bool _hovering = false;
   late final Map<Type, Action<Intent>> _actionMap = <Type, Action<Intent>>{

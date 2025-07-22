@@ -114,7 +114,7 @@ class _DebugText extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: switch (entry.key.node) {
-                          WerkbankSections() => 'Root',
+                          WerkbankRoot() => 'Root',
                           WerkbankChildNode(:final name) => name,
                         },
                         style: const TextStyle(

@@ -1,62 +1,74 @@
-import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension BooleanKnobExtension on KnobsComposer {
+  /// Creates a boolean knob controlled by a switch in the UI.
+  ///
+  /// {@template werkbank.knobs.label}
+  /// The [label] specifies the text displayed in the UI for this knob.
+  /// It also uniquely identifies the knob, ensuring its state persists across
+  /// hot reloads.
+  /// {@endtemplate}
+  ///
+  /// {@template werkbank.knobs.regularInitial}
+  /// The [initialValue] defines the state of the knob when first created
+  /// and when the initial knob preset is selected.
+  /// {@endtemplate}
+  ///
+  /// {@template werkbank.knobs.boolean.labels}
+  /// Use [falseLabel] and [trueLabel] to customize the switch labels.
+  /// For example, set them to `'OFF'`/`'ON'` or `'NO'`/`'YES'` if this
+  /// fits the parameter controlled by the knob better.
+  /// {@endtemplate}
   WritableKnob<bool> boolean(
     String label, {
     required bool initialValue,
+    String falseLabel = 'FALSE',
+    String trueLabel = 'TRUE',
   }) {
-    return makeRegularKnob(
+    return customSwitch(
       label,
       initialValue: initialValue,
-      knobBuilder: (context, valueNotifier) => _BooleanKnob(
-        valueNotifier: valueNotifier,
-        enabled: true,
-      ),
+      leftValue: false,
+      rightValue: true,
+      leftLabel: falseLabel,
+      rightLabel: trueLabel,
     );
   }
 }
 
-extension NullableBooleanKnobExtension on NullableKnobs {
+/// {@category Knobs}
+extension NullableBooleanKnobExtension on NullableKnobsComposer {
+  /// Creates a nullable boolean knob controlled by a switch in the UI.
+  ///
+  /// {@macro werkbank.knobs.label}
+  ///
+  /// {@template werkbank.knobs.nullableInitial}
+  /// If [initiallyNull] is `false`, [initialValue] defines the state of
+  /// the knob when first created and when the initial knob preset is selected.
+  /// If [initiallyNull] is `true`, the knob starts in a `null` state and is set
+  /// to `null` when the initial knob preset is selected.
+  /// In this case, [initialValue] still
+  /// determines the initial value of the knob control in the UI, which is then
+  /// selected when the `null` state is toggled off.
+  /// {@endtemplate}
+  ///
+  /// {@macro werkbank.knobs.boolean.labels}
   WritableKnob<bool?> boolean(
     String label, {
     required bool initialValue,
     bool initiallyNull = false,
+    String falseLabel = 'FALSE',
+    String trueLabel = 'TRUE',
   }) {
-    return makeNullableKnob(
+    return customSwitch(
       label,
       initialValue: initialValue,
       initiallyNull: initiallyNull,
-      knobBuilder: (context, enabled, valueNotifier) => _BooleanKnob(
-        valueNotifier: valueNotifier,
-        enabled: enabled,
-      ),
-    );
-  }
-}
-
-class _BooleanKnob extends StatelessWidget {
-  const _BooleanKnob({
-    required this.valueNotifier,
-    required this.enabled,
-  });
-
-  final ValueNotifier<bool> valueNotifier;
-  final bool enabled;
-
-  @override
-  Widget build(BuildContext context) {
-    return WSwitch(
-      value: valueNotifier.value,
-      onChanged: enabled ? valueNotifier.setValue : null,
-      falseLabel: Text(
-        context.sL10n.addons.knobs.knobs.boolean.values.falseLabel,
-      ),
-      trueLabel: Text(
-        context.sL10n.addons.knobs.knobs.boolean.values.trueLabel,
-      ),
+      leftValue: false,
+      rightValue: true,
+      leftLabel: falseLabel,
+      rightLabel: trueLabel,
     );
   }
 }

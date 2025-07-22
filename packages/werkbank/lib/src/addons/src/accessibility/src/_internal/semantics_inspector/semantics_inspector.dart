@@ -42,7 +42,7 @@ class _SemanticsInspectorPanel extends StatelessWidget {
       disposeInvisible: true,
       padding: const EdgeInsets.only(top: 16),
       child: _SemanticsInspectorPanelContent(
-        controller: InfoControlSection.access
+        controller: InspectControlSection.access
             .compositionOf(context)
             .accessibility
             .semanticsInspectorController

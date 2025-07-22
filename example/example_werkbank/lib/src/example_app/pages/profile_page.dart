@@ -10,9 +10,8 @@ class ProfilePage extends StatelessWidget {
         top: false,
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 16),
               Stack(
@@ -27,7 +26,7 @@ class ProfilePage extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primaryContainer,
                       ),
                       child: const Padding(
-                        padding: EdgeInsets.all(4.0),
+                        padding: EdgeInsets.all(4),
                         child: Image(
                           image: AssetImage('assets/Dash_the_dart_mascot.png'),
                           fit: BoxFit.cover,
@@ -52,7 +51,7 @@ class ProfilePage extends StatelessWidget {
               Card(
                 elevation: 4,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -75,7 +74,9 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'I am the Dart mascot, and I love to help developers build amazing apps with Dart and Flutter. I am always here to assist you with your coding journey!',
+                'I am the Dart mascot, and I love to help developers build '
+                'amazing apps with Dart and Flutter. I am always here to '
+                'assist you with your coding journey!',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 24),

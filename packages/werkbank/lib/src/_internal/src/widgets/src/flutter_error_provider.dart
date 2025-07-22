@@ -31,7 +31,7 @@ class _FlutterErrorProviderState extends State<FlutterErrorProvider> {
   @override
   void initState() {
     prevOnError = FlutterError.onError;
-    FlutterError.onError = ourOnError = (FlutterErrorDetails details) {
+    FlutterError.onError = ourOnError = (details) {
       if (!_errorStreamController.isClosed) {
         _errorStreamController.add(details);
       }
@@ -49,7 +49,7 @@ class _FlutterErrorProviderState extends State<FlutterErrorProvider> {
     if (FlutterError.onError == ourOnError) {
       FlutterError.onError = prevOnError;
     }
-    _errorStreamController.close();
+    unawaited(_errorStreamController.close());
     super.dispose();
   }
 

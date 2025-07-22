@@ -14,18 +14,21 @@ class SemanticsInspectorTree extends StatelessWidget {
   Widget _buildLabel(
     WerkbankTheme theme,
     SemanticsNodeSnapshot node,
+    bool isSelected,
   ) {
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
     final label = node.data.label;
     const normalStyle = TextStyle(fontWeight: FontWeight.w500);
-    final lightStyle = TextStyle(color: colorScheme.textLight);
+    final lightStyle = TextStyle(
+      color: isSelected ? colorScheme.textActive : colorScheme.textLight,
+    );
     return Text.rich(
       TextSpan(
         style: textTheme.input.copyWith(
           // TODO(lzuttermeister): Use theme font
           fontSize: 13,
-          color: colorScheme.text,
+          color: isSelected ? colorScheme.textActive : colorScheme.text,
         ),
         children: [
           if (label.isNotEmpty)
@@ -50,22 +53,23 @@ class SemanticsInspectorTree extends StatelessWidget {
     int? activeNodeId,
     SemanticsInspectorController controller,
   ) {
+    final isSelected = node.id == activeNodeId;
     return WTreeNode(
       key: ValueKey(node.id),
-      title: _buildLabel(theme, node),
+      title: _buildLabel(theme, node, isSelected),
       leading: Icon(
         Icons.rectangle_rounded,
         color: SemanticsInspector.colorForSemanticsNodeId(node.id),
       ),
       onTap: () {
-        if (node.id == activeNodeId) {
+        if (isSelected) {
           controller.setActiveSemanticsNodeId(null);
         } else {
           controller.setActiveSemanticsNodeId(node.id);
         }
       },
       isInitiallyExpanded: true,
-      isSelected: node.id == activeNodeId,
+      isSelected: isSelected,
       children: [
         for (final child in node.children)
           _buildTreeNode(theme, child, activeNodeId, controller),
@@ -76,7 +80,7 @@ class SemanticsInspectorTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.werkbankTheme;
-    final semanticsInspectorController = InfoControlSection.access
+    final semanticsInspectorController = InspectControlSection.access
         .compositionOf(context)
         .accessibility
         .semanticsInspectorController;

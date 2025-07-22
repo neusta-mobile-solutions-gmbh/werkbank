@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library addons;
+library;
 
 export 'src/accessibility/accessibility.dart';
 export 'src/acknowledged/acknowledged.dart';

@@ -8,11 +8,11 @@ import 'package:werkbank/src/werkbank_internal.dart';
 /// A function too manipulate the [UseCaseComposer] like it would be done at the
 /// beginning of a [UseCaseBuilder] definition.
 ///
-/// This builder can be added to a [WerkbankSections], [WerkbankFolder] or
+/// This builder can be added to a [WerkbankRoot], [WerkbankFolder] or
 /// [WerkbankComponent] to do things with the [UseCaseComposer] before the
 /// [UseCaseBuilder] of a [WerkbankUseCase] is called.
 ///
-/// Since in typical use, the [UseCaseMetadataBuilder]s on
+/// Since in typical use, the [UseCaseParentBuilder]s on
 /// [WerkbankFolder]s and [WerkbankComponent]s are much smaller than
 /// [UseCaseBuilder] definitions, it is fine to simply add them as a callback.
 ///
@@ -31,7 +31,7 @@ import 'package:werkbank/src/werkbank_internal.dart';
 /// Like with the [UseCaseBuilder], the available features depend on which
 /// [Addon]s are used.
 /// See [UseCaseBuilder] for more information.
-typedef UseCaseMetadataBuilder = void Function(UseCaseComposer c);
+typedef UseCaseParentBuilder = void Function(UseCaseComposer c);
 
 /// {@category Get Started}
 /// {@category Structure}
@@ -68,7 +68,7 @@ sealed class WerkbankNode {}
 /// A superclass for [WerkbankNode]s which can have children.
 ///
 /// Specifically the subclasses are
-/// [WerkbankSections], [WerkbankComponent] and [WerkbankFolder].
+/// [WerkbankRoot], [WerkbankComponent] and [WerkbankFolder].
 sealed class WerkbankParentNode<T extends WerkbankChildNode>
     extends WerkbankNode {
   WerkbankParentNode({
@@ -76,11 +76,11 @@ sealed class WerkbankParentNode<T extends WerkbankChildNode>
     required this.children,
   });
 
-  /// The [UseCaseMetadataBuilder] for this node.
+  /// The [UseCaseParentBuilder] for this node.
   ///
-  /// See [UseCaseMetadataBuilder] for information on how to
+  /// See [UseCaseParentBuilder] for information on how to
   /// define such a builder.
-  final UseCaseMetadataBuilder? builder;
+  final UseCaseParentBuilder? builder;
 
   /// The children of this node.
   final List<T> children;
@@ -112,8 +112,8 @@ sealed class WerkbankChildNode extends WerkbankNode {
 ///
 /// The [children] define your tree structure of [WerkbankFolder]s,
 /// [WerkbankComponent]s, and [WerkbankUseCase]s.
-class WerkbankSections extends WerkbankParentNode<WerkbankChildNode> {
-  WerkbankSections({
+class WerkbankRoot extends WerkbankParentNode<WerkbankChildNode> {
+  WerkbankRoot({
     super.builder,
     required super.children,
   });

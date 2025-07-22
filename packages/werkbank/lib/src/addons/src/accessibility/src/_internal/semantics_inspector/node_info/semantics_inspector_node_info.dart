@@ -166,7 +166,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final semanticsInspectorController = InfoControlSection.access
+    final semanticsInspectorController = InspectControlSection.access
         .compositionOf(context)
         .accessibility
         .semanticsInspectorController;

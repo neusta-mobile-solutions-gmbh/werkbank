@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -35,11 +36,13 @@ class _AcknowledgedComponentState extends State<AcknowledgedComponent> {
     } else {
       // To prevent the UI
       // from flickering while changing the page.
-      Future<void>.delayed(pageTransitionDuration).then((_) {
-        if (mounted) {
-          _update(newEntriesCapped);
-        }
-      });
+      unawaited(
+        Future<void>.delayed(pageTransitionDuration).then((_) {
+          if (mounted) {
+            _update(newEntriesCapped);
+          }
+        }),
+      );
     }
   }
 

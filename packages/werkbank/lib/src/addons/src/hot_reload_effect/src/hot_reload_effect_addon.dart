@@ -7,9 +7,12 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
 class HotReloadEffectAddon extends Addon {
-  const HotReloadEffectAddon() : super(id: addonId);
+  const HotReloadEffectAddon({
+    this.showControl = false,
+  }) : super(id: addonId);
 
   static const addonId = 'hot_reload_effect';
+  final bool showControl;
 
   @override
   AddonLayerEntries get layers {
@@ -50,21 +53,22 @@ class HotReloadEffectAddon extends Addon {
     }
 
     return [
-      SettingsControlSection(
-        id: 'hot_reload_effect',
-        title: Text(context.sL10n.addons.hotReloadEffect.name),
-        sortHint: const SortHint(10000),
-        children: [
-          WSwitch(
-            value: HotReloadEffectManager.enabledOf(context),
-            onChanged: (value) {
-              HotReloadEffectManager.setEnabled(context, enabled: value);
-            },
-            falseLabel: Text(context.sL10n.generic.onOffSwitch.off),
-            trueLabel: Text(context.sL10n.generic.onOffSwitch.on),
-          ),
-        ],
-      ),
+      if (showControl)
+        SettingsControlSection(
+          id: 'hot_reload_effect',
+          title: Text(context.sL10n.addons.hotReloadEffect.name),
+          sortHint: const SortHint(10000),
+          children: [
+            WSwitch(
+              value: HotReloadEffectManager.enabledOf(context),
+              onChanged: (value) {
+                HotReloadEffectManager.setEnabled(context, enabled: value);
+              },
+              falseLabel: Text(context.sL10n.generic.onOffSwitch.off),
+              trueLabel: Text(context.sL10n.generic.onOffSwitch.on),
+            ),
+          ],
+        ),
     ];
   }
 }

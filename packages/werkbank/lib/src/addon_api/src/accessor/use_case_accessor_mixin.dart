@@ -10,8 +10,8 @@ import 'package:werkbank/src/werkbank_internal.dart';
 /// - [UseCaseLayerEntry]
 /// - [UseCaseLayoutLayerEntry]
 /// - [UseCaseFittedLayerEntry]
-/// - [UseCaseControlSection]
-/// - [InfoControlSection]
+/// - [ConfigureControlSection]
+/// - [InspectControlSection]
 ///
 /// To obtain an instance of this mixin call the static `access` field on the
 /// class listed above from which the widgets you want to access the data

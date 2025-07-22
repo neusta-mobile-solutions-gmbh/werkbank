@@ -67,7 +67,7 @@ class SubpackUtils {
     );
   }
 
-  /// Returns wether the program runs in vscode
+  /// Returns whether the program runs in vscode
   static bool isRunningInVSCodeTerminal() {
     final env = Platform.environment;
     return env.containsKey('TERM_PROGRAM') && env['TERM_PROGRAM'] == 'vscode' ||

@@ -103,7 +103,7 @@ class DirectiveExtractor with SubpackLogger {
     if (treeNode is DartFile) {
       return LocalUsage(dartFile: treeNode, usageType: LocalUsageType.import);
     } else {
-      // TODO(jwolyniec): Finde was besseres statt der Exception
+      // TODO(jwolyniec): Find a better solution than an exception
       throw FileSystemException(
         '',
       );

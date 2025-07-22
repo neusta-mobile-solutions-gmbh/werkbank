@@ -18,7 +18,6 @@ class RelationsModel {
   final IMap<SubpackDirectory, ISet<DartFile>> exposedFiles;
 
   /// Dart files that are contained in these subpackages
-  /// wenns in subpackage order ist
   final IMap<SubpackDirectory, ISet<DartFile>> containedFiles;
 
   /// Subpackages that expose these dart files

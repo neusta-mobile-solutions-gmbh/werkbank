@@ -89,7 +89,7 @@ class FileStructureTreeBuilder with SubpackLogger {
 
     SubpackFile? subpackFile;
 
-    // Split files from directories, handle them seperately
+    // Split files from directories, handle them separately
     await for (final entity in entry.list(followLinks: false)) {
       if (entity is Directory) {
         directories.add(entity);

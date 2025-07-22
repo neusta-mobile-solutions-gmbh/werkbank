@@ -55,24 +55,6 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
 }
 ```
 
-Knobs returned by `c.knobs.<knobType>` are of the type [Knob<T>](../werkbank/Knob-class.html).
-The value of a knob can be read using the [`knob.value`](../werkbank/Knob/value.html) getter from
-within the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
-If the knob value changes the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html)
-will be rebuilt automatically.
-
-Knobs which control immutable values (such as `double` in this case) also implement
-[WritableKnob<T>](../werkbank/WritableKnob-class.html), which allows
-their value to be set using [`knob.value = ...`](../werkbank/WritableKnob/value.html) setter.
-
-> [!IMPORTANT]
-> Knob values cannot be read or modified above the returned
-> [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html)
-> and can therefore not influence anything done with the
-> [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
-> including the existence or label of other knobs.
-> ```
-
 ## Constraints
 
 ## Descriptions, Tags & URLs

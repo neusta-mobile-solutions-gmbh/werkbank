@@ -25,6 +25,8 @@ class DescriptionAddon extends Addon {
 
   static const addonId = 'description';
 
+  static const tagField = 'tag';
+
   @override
   List<HomePageComponent> buildHomePageComponents(BuildContext context) {
     final tags =
@@ -45,14 +47,15 @@ class DescriptionAddon extends Addon {
   }
 
   @override
-  List<InfoControlSection> buildInspectTabControlSections(
+  List<InspectControlSection> buildInspectTabControlSections(
     BuildContext context,
   ) {
-    final metadata = InfoControlSection.access.metadataOf(context);
+    final metadata = InspectControlSection.access.metadataOf(context);
     final useCaseDescription = metadata.descriptions.useCaseDescription;
     final componentDescription = metadata.descriptions.componentDescription;
     final folderDescriptions =
         metadata.descriptions.folderDescriptions.reversed;
+    final rootDescription = metadata.descriptions.rootDescription;
 
     final hasAnyDescription =
         useCaseDescription != null ||
@@ -63,7 +66,7 @@ class DescriptionAddon extends Addon {
 
     return [
       if (metadata.tags.isNotEmpty)
-        InfoControlSection(
+        InspectControlSection(
           id: 'tags',
           title: Text(context.sL10n.addons.description.tags),
           children: [
@@ -73,31 +76,44 @@ class DescriptionAddon extends Addon {
           ],
         ),
       if (hasAnyDescription)
-        InfoControlSection(
+        InspectControlSection(
           id: 'description',
-          title: Text(context.sL10n.addons.description.about),
+          title: Text(context.sL10n.addons.description.description),
           children: [
             if (useCaseDescription != null)
               DescriptionSection(
-                data: useCaseDescription,
+                data: useCaseDescription.description,
               ),
             if (componentDescription != null)
               DescriptionSection(
-                data: componentDescription,
-                hint: Text(context.sL10n.addons.description.component),
+                data: componentDescription.description,
+                hint: Text(
+                  context.sL10n.addons.description.component(
+                    name: componentDescription.node.name,
+                  ),
+                ),
               ),
             if (folderDescriptions.isNotEmpty)
               for (final folderDescription in folderDescriptions)
                 DescriptionSection(
-                  data: folderDescription,
+                  data: folderDescription.description,
                   hint: Text(
-                    context.sL10n.addons.description.folder,
+                    context.sL10n.addons.description.folder(
+                      name: folderDescription.node.name,
+                    ),
                   ),
                 ),
+            if (rootDescription != null)
+              DescriptionSection(
+                data: rootDescription.description,
+                hint: Text(
+                  context.sL10n.addons.description.root,
+                ),
+              ),
           ],
         ),
       if (urls.isNotEmpty)
-        InfoControlSection(
+        InspectControlSection(
           id: 'urls',
           title: Text(context.sL10n.addons.description.links),
           children: [

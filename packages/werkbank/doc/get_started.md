@@ -14,10 +14,13 @@ cd my_project_werkbank
 flutter pub add werkbank
 ```
 
-<!-- TODO: Add a link to the example project -->
+You will also need to add a dependency to your flutter package or app where the widgets you want to showcase are located.
+
 > [!TIP]
 > The following sections introduce you to a very basic setup of a Werkbank app.
-> Check out the example project in our repository for a more elaborate setup that will help you get the most
+> Check out the example project at
+> https://github.com/neusta-mobile-solutions-gmbh/werkbank/tree/main/example/example_werkbank
+> for a more elaborate setup that will help you get the most
 > out of Werkbank.
 
 ## WerkbankApp Setup
@@ -30,7 +33,7 @@ widget.
 ```dart
 // ---- lib/main.dart ---- //
 
-import 'package:my_project_werkbank/sections.dart';
+import 'package:my_project_werkbank/root.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
@@ -52,7 +55,8 @@ class MyProjectWerkbankApp extends StatelessWidget {
           // Add more addons like the ThemingAddon or LocalizationAddon.
         ],
       ),
-      sections: sections,
+      // The root of your use case tree.
+      root: root,
     );
   }
 }
@@ -60,7 +64,7 @@ class MyProjectWerkbankApp extends StatelessWidget {
 
 > [!IMPORTANT]  
 > Do not pass the `WerkbankApp` directly to `runApp`, as this will prevent
-> hot reload from updating the sections and addons when you change them.
+> hot reload from updating the use cases, addons and more when you change them.
 
 The **[name](../werkbank/WerkbankApp/name.html)** and **[logo](../werkbank/WerkbankApp/logo.html)** will be displayed in the top left corner of the
 [WerkbankApp](../werkbank/WerkbankApp-class.html).
@@ -91,19 +95,19 @@ even if your app only supports one language.
 <!-- TODO: Rename to "Configuring Addons"? -->
 To learn more about configuring your addons, visit the [Addons](Addons-topic.html) documentation.
 
-### Defining Sections
-The **[sections](../werkbank/WerkbankApp/sections.html)** parameter
+### Defining the Use Case Tree
+The **[root](../werkbank/WerkbankApp/root.html)** parameter
 expects a
-[WerkbankSections](../werkbank/WerkbankSections-class.html)
+[WerkbankRoot](../werkbank/WerkbankRoot-class.html)
 instance with children that form a hierarchy of your use cases.
 
 ```dart
-// ---- lib/sections.dart ---- //
+// ---- lib/root.dart ---- //
 
 import 'package:my_project_werkbank/example_use_cases.dart';
 import 'package:werkbank/werkbank.dart';
 
-WerkbankSections get sections => WerkbankSections(
+WerkbankRoot get root => WerkbankRoot(
       children: [
         exampleUseCase,
         WerkbankFolder(
@@ -117,7 +121,7 @@ WerkbankSections get sections => WerkbankSections(
     );
 ```
 
-The [WerkbankSections](../werkbank/WerkbankSections-class.html) forms the root of a tree
+The [WerkbankRoot](../werkbank/WerkbankRoot-class.html) forms the root of a tree
 with all your use cases.
 Use cases are defined in the tree using [WerkbankUseCase](../werkbank/WerkbankUseCase-class.html).
 You can nest use cases inside [WerkbankFolder](../werkbank/WerkbankFolder-class.html) or
@@ -128,7 +132,7 @@ The difference between these two is:
 - [WerkbankComponent](../werkbank/WerkbankComponent-class.html) has a different icon in the navigation tree than folders.
 - [WerkbankFolder](../werkbank/WerkbankFolder-class.html) is sorted to the top among its siblings, unlike
   [WerkbankComponent](../werkbank/WerkbankComponent-class.html)s, which are sorted exactly like use cases.
-<!-- TODO: Link to topic about sections tree? -->
+<!-- TODO: Link to topic about use case tree? -->
 
 ## Creating UseCases
 
@@ -157,7 +161,7 @@ WidgetBuilder _exampleUseCase(UseCaseComposer c) {
 
 > [!IMPORTANT]
 > Always define your
-> [WerkbankSections](../werkbank/WerkbankSections-class.html),
+> [WerkbankRoot](../werkbank/WerkbankRoot-class.html),
 > [WerkbankFolder](../werkbank/WerkbankFolder-class.html)s,
 > [WerkbankComponent](../werkbank/WerkbankComponent-class.html)s, and
 > [WerkbankUseCase](../werkbank/WerkbankUseCase-class.html)s
@@ -189,5 +193,5 @@ Now you should have everything set up to run your Werkbank app.
 <!-- TODO: Check these links. Some topics don't exist yet. -->
 Take a look at these topics next to advance your Werkbank setup further:
 - [File Structure](File%20Structure-topic.html) - Learn how to organize the files and use cases in your project.
-- [Addon Configuration](Addon%20Configuration-topic.html) - Further configure the addons you are using.
-- [Writing Use Cases](Use%20Cases-topic.html) - Explore how to augment your use cases by utilizing the [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
+- [Addon Configuration](Configuring%20Addons-topic.html) - Further configure the addons you are using.
+- [Writing Use Cases](Writing%Use%20Cases-topic.html) - Explore how to augment your use cases by utilizing the [UseCaseComposer](../werkbank/UseCaseComposer-class.html).

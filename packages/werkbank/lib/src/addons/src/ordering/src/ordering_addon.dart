@@ -4,6 +4,13 @@ import 'package:werkbank/src/addons/src/ordering/src/_internal/ordering_selector
 import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
+/// An [Addon] that enables control over the ordering of the [WerkbankNode]
+/// tree structure in the navigation panel.
+///
+/// Note: This addon is not included by default in [AddonConfig].
+/// You can add it manually to your addon list if needed.
+/// It is mainly provided as an example of how to control
+/// the ordering of nodes via an Addon.
 class OrderingAddon extends Addon {
   const OrderingAddon() : super(id: addonId);
 

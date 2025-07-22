@@ -9,18 +9,18 @@ class KnobPresetSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final composition = UseCaseControlSection.access.compositionOf(context);
+    final composition = ConfigureControlSection.access.compositionOf(context);
     final knobsComposition = composition.knobs;
-    final metadata = UseCaseControlSection.access.metadataOf(context);
+    final metadata = ConfigureControlSection.access.metadataOf(context);
 
     final presetL10n = context.sL10n.addons.knobs.controls.preset;
     void goToPresetOverview() {
       final snapshot = composition.saveSnapshot();
-      UseCaseControlSection.access
+      ConfigureControlSection.access
           .routerOf(context)
           .goTo(
             UseCaseOverviewNavState(
-              descriptor: UseCaseControlSection.access.useCaseOf(context),
+              descriptor: ConfigureControlSection.access.useCaseOf(context),
               config: UseCaseOverviewConfig(
                 entryBuilder: (metadata) {
                   return [

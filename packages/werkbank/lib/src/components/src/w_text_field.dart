@@ -31,10 +31,10 @@ class WTextField extends StatefulWidget {
   final int? maxLength;
 
   @override
-  State<WTextField> createState() => _STextFieldState();
+  State<WTextField> createState() => _WTextFieldState();
 }
 
-class _STextFieldState extends State<WTextField> {
+class _WTextFieldState extends State<WTextField> {
   static const _textFieldRadius = 4.0;
 
   bool isHovering = false;
@@ -102,6 +102,8 @@ class _STextFieldState extends State<WTextField> {
                   style: textTheme.input.copyWith(
                     color: colorScheme.fieldContent,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   child: widget.label!,
                 )
               : null,

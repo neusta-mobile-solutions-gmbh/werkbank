@@ -65,14 +65,14 @@ class ConstraintsAddon extends Addon {
   }
 
   @override
-  List<UseCaseControlSection> buildConfigureTabControlSections(
+  List<ConfigureControlSection> buildConfigureTabControlSections(
     BuildContext context,
   ) {
-    final constraintsComposition = UseCaseControlSection.access
+    final constraintsComposition = ConfigureControlSection.access
         .compositionOf(context)
         .constraints;
     return [
-      UseCaseControlSection(
+      ConfigureControlSection(
         id: 'constraints',
         title: Text(context.sL10n.addons.constraints.name),
         sortHint: SortHint.beforeMost,
@@ -80,7 +80,7 @@ class ConstraintsAddon extends Addon {
           const ViewConstraintsPresetSelector(),
           /* TODO(lzuttermeister): Should this be allowed?
                In the design, the divider goes up to the edges.
-               But that is reserverd for the control sections. */
+               But that is reserved for the control sections. */
           const WDivider.horizontal(),
           ViewConstraintsSelector(
             constraintsComposition: constraintsComposition,

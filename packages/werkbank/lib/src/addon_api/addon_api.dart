@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library addon_api;
+library;
 
 export 'src/accessor/addon_accessor.dart';
 export 'src/accessor/addon_control_section_accessor.dart';
@@ -12,9 +12,9 @@ export 'src/accessor/werkbank_app_only_accessor.dart';
 export 'src/addon.dart';
 export 'src/addon_config_provider.dart';
 export 'src/addon_control_sections/addon_control_section.dart';
-export 'src/addon_control_sections/tabs/info_control_section.dart';
+export 'src/addon_control_sections/tabs/configure_control_section.dart';
+export 'src/addon_control_sections/tabs/inspect_control_section.dart';
 export 'src/addon_control_sections/tabs/settings_control_section.dart';
-export 'src/addon_control_sections/tabs/use_case_control_section.dart';
 export 'src/addon_description.dart';
 export 'src/addon_layer_builder.dart';
 export 'src/addon_layer_entries/addon_layer_entries.dart';

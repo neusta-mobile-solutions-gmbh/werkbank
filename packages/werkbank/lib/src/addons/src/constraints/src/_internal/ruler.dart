@@ -105,7 +105,7 @@ class _RulerPainter extends CustomPainter {
         useCaseExtent = useCaseSize.width;
         minConstraintsExtent = constraints.minWidth;
         maxConstraintsExtent = constraints.maxWidth;
-        posToMarkPoint = (double pos) => MatrixUtils.transformPoint(
+        posToMarkPoint = (pos) => MatrixUtils.transformPoint(
           inverseTransform,
           Offset(pos, 0),
         );
@@ -115,7 +115,7 @@ class _RulerPainter extends CustomPainter {
         useCaseExtent = useCaseSize.height;
         minConstraintsExtent = constraints.minHeight;
         maxConstraintsExtent = constraints.maxHeight;
-        posToMarkPoint = (double pos) {
+        posToMarkPoint = (pos) {
           return MatrixUtils.transformPoint(
             inverseTransform,
             Offset(0, extent - pos),

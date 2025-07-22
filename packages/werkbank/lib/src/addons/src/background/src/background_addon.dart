@@ -6,6 +6,27 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
 class BackgroundAddon extends Addon {
+  /// Creates a [BackgroundAddon] that allows you to select
+  /// the background of the use case.
+  ///
+  /// Unless [includeDefaultBackgrounds] is set to `false`,
+  /// some default backgrounds are included:
+  /// - White
+  /// - Black
+  /// - None (transparent)
+  /// - Checkerboard
+  ///
+  /// Additionally, you can provide your own [backgroundOptions].
+  ///
+  /// The [initialBackgroundOptionName] can be used to set the
+  /// [BackgroundOption] that is initially selected for all use cases.
+  /// When this is `null`, the default background option of the use case
+  /// is used, which can be controlled by calls of methods on the
+  /// [BackgroundComposer] while composing the use case.
+  /// Consider keeping this `null` and setting the default background
+  /// using one of the methods on the [BackgroundComposer] inside of the
+  /// [WerkbankRoot.builder]. This way, nested use cases can still override
+  /// this with a different default background.
   BackgroundAddon({
     bool includeDefaultBackgrounds = true,
     this.initialBackgroundOptionName,

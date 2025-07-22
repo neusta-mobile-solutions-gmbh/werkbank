@@ -134,17 +134,17 @@ class RootDescriptor extends ParentDescriptor<ChildDescriptor> {
     required super.children,
   }) : super._();
 
-  factory RootDescriptor.fromWerkbankSections(
-    WerkbankSections sections,
+  factory RootDescriptor.fromWerkbankRoot(
+    WerkbankRoot root,
   ) {
-    final nodePath = [sections];
+    final nodePath = [root];
 
-    _checkForDuplicates(sections, nodePath);
+    _checkForDuplicates(root, nodePath);
 
     return RootDescriptor._(
       nodePath: nodePath,
       children: [
-        for (final child in sections.children)
+        for (final child in root.children)
           switch (child) {
             WerkbankFolder() => _convertFolder(
               child,
@@ -223,7 +223,7 @@ class RootDescriptor extends ParentDescriptor<ChildDescriptor> {
   }
 
   @override
-  WerkbankSections get node => nodePath.last as WerkbankSections;
+  WerkbankRoot get node => nodePath.last as WerkbankRoot;
 }
 
 class FolderDescriptor extends ParentDescriptor<ChildDescriptor>

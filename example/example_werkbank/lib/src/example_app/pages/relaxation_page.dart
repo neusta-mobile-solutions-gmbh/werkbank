@@ -22,7 +22,7 @@ class RelaxationPage extends StatelessWidget {
       slivers: [
         SliverSafeArea(
           sliver: SliverPadding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 for (final (i, asset) in _assets.indexed)

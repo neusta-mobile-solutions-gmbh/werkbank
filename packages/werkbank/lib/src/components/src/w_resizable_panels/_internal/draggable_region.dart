@@ -34,7 +34,7 @@ class _DraggableRegionState extends State<DraggableRegion> {
     // of the GestureDetector.
     // Otherwise, on the nect onPanDown + onPanUpdate
     // the dx and dy can be larger than expected
-    // due to the old postion of the GestureDetector.
+    // due to the old position of the GestureDetector.
 
     setState(() {
       accumulator = widget.initial;
@@ -64,8 +64,8 @@ class _DraggableRegionState extends State<DraggableRegion> {
             ? SystemMouseCursors.resizeUpDown
             : widget.accelerationAndDirection.dy == 0
             ? SystemMouseCursors.resizeLeftRight
-            // Apperently, macos does not include a resizeUpLeftDownRight
-            // cursor. Using percise as a fallback.
+            // Apparently, macos does not include a resizeUpLeftDownRight
+            // cursor. Using precise as a fallback.
             : SystemMouseCursors.precise,
         /* TODO(lzuttermeister): These dividers should not be thicker visually.
              This is just temporary so that the drag area is large enough. */

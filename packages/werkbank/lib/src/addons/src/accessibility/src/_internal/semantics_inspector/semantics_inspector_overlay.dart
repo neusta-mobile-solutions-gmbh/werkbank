@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/ignore_pointer_with_semantics.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_box_display.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_controller.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
@@ -78,23 +80,32 @@ class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
       SemanticMode.none => false,
       SemanticMode.overlay || SemanticMode.inspection => true,
     };
+    final isInspectionMode = switch (semanticMode) {
+      SemanticMode.none || SemanticMode.overlay => false,
+      SemanticMode.inspection => true,
+    };
     final controller = inspectorController.semanticsMonitorController;
     return Stack(
       children: [
         SemanticsMonitor(
           controller: controller,
           onlyListenToIncluded: true,
-          child: widget.child,
+          child: IgnorePointerWithSemantics(
+            ignoring: isInspectionMode,
+            child: widget.child,
+          ),
         ),
         if (showSemantics)
           Positioned.fill(
             child: IgnorePointer(
-              ignoring: switch (semanticMode) {
-                SemanticMode.none || SemanticMode.overlay => true,
-                SemanticMode.inspection => false,
-              },
-              child: GestureDetector(
-                onTap: _handleTap,
+              ignoring: !isInspectionMode,
+              child: Listener(
+                onPointerDown: (e) {
+                  if (e.buttons != kPrimaryButton) {
+                    return;
+                  }
+                  _handleTap();
+                },
                 behavior: HitTestBehavior.opaque,
                 child: SemanticsNodesDisplay(
                   controller: controller,

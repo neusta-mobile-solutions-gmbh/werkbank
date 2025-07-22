@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/werkbank.dart';
-import 'package:werkbank_werkbank/nms/nms_logo.dart';
-import 'package:werkbank_werkbank/sections.dart';
+import 'package:werkbank_werkbank/root.dart';
 
 void main() {
   runApp(const WerkbankWerkbank());
@@ -113,10 +112,10 @@ class WerkbankWerkbank extends StatelessWidget {
 
     return WerkbankApp(
       name: 'Werkbank',
-      logo: const NmsLogo(),
+      logo: const WerkbankLogo(),
       lastUpdated: lastUpdated,
       appConfig: AppConfig.material(),
-      sections: sections,
+      root: root,
       addonConfig: addons,
     );
   }

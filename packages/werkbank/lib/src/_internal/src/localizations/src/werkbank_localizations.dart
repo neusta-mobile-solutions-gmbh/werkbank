@@ -39,7 +39,7 @@ class _WerkbankLocalizationsDelegate
   }
 
   @override
-  Future<WerkbankLocalizations> load(Locale locale) async {
+  Future<WerkbankLocalizations> load(Locale locale) {
     final languageCode = locale.languageCode;
     final languageTag = locale.toLanguageTag();
     Translations translations;

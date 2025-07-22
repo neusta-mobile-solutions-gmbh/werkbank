@@ -1,8 +1,18 @@
-import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
-/// {@category Knobs}
+@Deprecated(
+  'Use customDropdown knob instead. '
+  'Also consider writing a custom knob as an extension. '
+  'See the "Knobs" topic in the documentation for more information. '
+  'This will be removed in a future version.',
+)
 extension ListKnobExtension on KnobsComposer {
+  @Deprecated(
+    'Use customDropdown knob instead. '
+    'Also consider writing a custom knob as an extension. '
+    'See the "Knobs" topic in the documentation for more information. '
+    'This will be removed in a future version.',
+  )
   WritableKnob<T> list<T>(
     String label, {
     required List<T> options,
@@ -13,20 +23,28 @@ extension ListKnobExtension on KnobsComposer {
       options.isNotEmpty,
       'List of options must not be empty',
     );
-    return makeRegularKnob(
+    return customDropdown(
       label,
       initialValue: initialOption ?? options.first,
-      knobBuilder: (context, valueNotifier) => _ListKnob<T>(
-        valueNotifier: valueNotifier,
-        options: options,
-        optionLabel: optionLabel,
-        enabled: true,
-      ),
+      values: options,
+      valueLabel: optionLabel,
     );
   }
 }
 
-extension NullableListKnobExtension on NullableKnobs {
+@Deprecated(
+  'Use customDropdown knob instead. '
+  'Also consider writing a custom knob as an extension. '
+  'See the "Knobs" topic in the documentation for more information. '
+  'This will be removed in a future version.',
+)
+extension NullableListKnobExtension on NullableKnobsComposer {
+  @Deprecated(
+    'Use customDropdown knob instead. '
+    'Also consider writing a custom knob as an extension. '
+    'See the "Knobs" topic in the documentation for more information. '
+    'This will be removed in a future version.',
+  )
   WritableKnob<T?> list<T extends Object>(
     String label, {
     required List<T> options,
@@ -38,55 +56,12 @@ extension NullableListKnobExtension on NullableKnobs {
       options.isNotEmpty,
       'List of options must not be empty',
     );
-    return makeNullableKnob(
+    return customDropdown(
       label,
       initialValue: initialOption ?? options.first,
       initiallyNull: initiallyNull,
-      knobBuilder: (context, enabled, valueNotifier) => _ListKnob<T>(
-        valueNotifier: valueNotifier,
-        options: options,
-        optionLabel: optionLabel,
-        enabled: enabled,
-      ),
-    );
-  }
-}
-
-class _ListKnob<T> extends StatelessWidget {
-  const _ListKnob({
-    required this.valueNotifier,
-    required this.options,
-    required this.optionLabel,
-    required this.enabled,
-  });
-
-  final ValueNotifier<T> valueNotifier;
-  final List<T> options;
-  final String Function(T) optionLabel;
-  final bool enabled;
-
-  @override
-  Widget build(BuildContext context) {
-    return WDropdown<T>(
-      onChanged: enabled
-          ? (value) {
-              if (value != null) valueNotifier.value = value;
-            }
-          : null,
-      value: valueNotifier.value,
-      items: [
-        /* TODO(lzuttermeister): Is this really the best way to handle values
-             that are not in the options? */
-        for (final option in {...options, valueNotifier.value})
-          WDropdownMenuItem(
-            value: option,
-            child: Text(
-              optionLabel(option),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-      ],
+      values: options,
+      valueLabel: optionLabel,
     );
   }
 }

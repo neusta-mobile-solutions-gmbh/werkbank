@@ -39,9 +39,9 @@ abstract class Addon {
 
   /// Builds the control sections to be added into the "CONFIGURE" tab.
   ///
-  /// All methods on [UseCaseControlSection.access] can be used with the
+  /// All methods on [ConfigureControlSection.access] can be used with the
   /// [context] of this builder and within the widgets built in the
-  /// [UseCaseControlSection.children].
+  /// [ConfigureControlSection.children].
   ///
   /// {@template werkbank.application_layers_in_context}
   /// The widgets introduced in the [AddonLayerEntries.management] and
@@ -50,18 +50,18 @@ abstract class Addon {
   /// This means for example all inherited widgets introduced there are
   /// available in the [context].
   /// {@endtemplate}
-  List<UseCaseControlSection> buildConfigureTabControlSections(
+  List<ConfigureControlSection> buildConfigureTabControlSections(
     BuildContext context,
   ) => [];
 
   /// Builds the control sections to be added into the "INSPECT" tab.
   ///
-  /// All methods on [InfoControlSection.access] can be used with the
+  /// All methods on [InspectControlSection.access] can be used with the
   /// [context] of this builder and within the widgets built in the
-  /// [InfoControlSection.children].
+  /// [InspectControlSection.children].
   ///
   /// {@macro werkbank.application_layers_in_context}
-  List<InfoControlSection> buildInspectTabControlSections(
+  List<InspectControlSection> buildInspectTabControlSections(
     BuildContext context,
   ) => [];
 

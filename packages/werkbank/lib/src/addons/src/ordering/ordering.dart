@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library ordering;
+library;
 
 export 'src/ordering_addon.dart';

@@ -38,7 +38,7 @@ Future<void> main() async {
       {
         'path': subpackagePath,
         'name': subpackageName,
-        'library': subpackageName,
+        'library': '',
         'docs': docs,
         'include': [
           'src/**',

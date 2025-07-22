@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library localizations;
+library;
 
 export 'src/werkbank_localizations.dart';

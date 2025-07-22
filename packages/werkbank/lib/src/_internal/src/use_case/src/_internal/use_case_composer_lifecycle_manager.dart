@@ -33,6 +33,9 @@ class UseCaseComposerLifecycleManager {
           for (final addon in addonConfig.addons)
             ...addon.createTransientUseCaseStateEntries(),
         ],
+        activeAddonIds: {
+          for (final addon in addonConfig.addons) addon.id,
+        },
       );
       try {
         for (final node in useCaseDescriptor.nodePath) {
@@ -62,7 +65,7 @@ class UseCaseComposerLifecycleManager {
         composer.abortAndDispose();
         rethrow;
       }
-    } catch (e, stackTrace) {
+    } on Object catch (e, stackTrace) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: stackTrace);
       return UseCaseComposerLifecycleManager._initialize(

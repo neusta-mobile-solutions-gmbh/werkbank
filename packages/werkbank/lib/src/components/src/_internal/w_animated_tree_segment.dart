@@ -14,10 +14,10 @@ class WAnimatedTreeSegment extends StatefulWidget {
   final int nestingLevel;
 
   @override
-  State<WAnimatedTreeSegment> createState() => _SAnimatedTreeSegmentState();
+  State<WAnimatedTreeSegment> createState() => _WAnimatedTreeSegmentState();
 }
 
-class _SAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
+class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
   late bool isExpanded;
 
   @override
@@ -47,7 +47,7 @@ class _SAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
               : null,
           initExpanded: widget.node.isInitiallyExpanded,
           onTap: widget.node.onTap,
-          trailing: widget.node.trailling,
+          trailing: widget.node.trailing,
           leading: widget.node.leading,
         ),
         if (showContent)

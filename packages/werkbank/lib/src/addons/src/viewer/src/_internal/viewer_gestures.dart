@@ -150,7 +150,7 @@ class _ViewerGesturesState extends State<ViewerGestures> {
     if (event is PointerScrollEvent || event is PointerScaleEvent) {
       GestureBinding.instance.pointerSignalResolver.register(
         event,
-        (PointerSignalEvent event) {
+        (event) {
           final double scale;
           if (event is PointerScrollEvent) {
             final delta = event.scrollDelta;

@@ -148,7 +148,7 @@ class RenderSScaledBox extends RenderProxyBox {
     return result.addWithPaintTransform(
       transform: Matrix4.diagonal3Values(scaleX, scaleY, 1),
       position: position,
-      hitTest: (BoxHitTestResult result, Offset position) =>
+      hitTest: (result, position) =>
           super.hitTestChildren(result, position: position),
     );
   }

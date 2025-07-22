@@ -9,10 +9,10 @@ class ViewConstraintsPresetSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewConstraintsPresets = UseCaseControlSection.access
+    final viewConstraintsPresets = ConfigureControlSection.access
         .metadataOf(context)
         .viewConstraintsPresets;
-    final constraintsComposition = UseCaseControlSection.access
+    final constraintsComposition = ConfigureControlSection.access
         .compositionOf(context)
         .constraints;
     final textTheme = context.werkbankTextTheme;
@@ -111,7 +111,7 @@ class ViewConstraintsPresetSelector extends StatelessWidget {
       final height => height.round().toString(),
     };
     final String width;
-    if (viewConstraints.minHeight == viewConstraints.maxHeight) {
+    if (viewConstraints.minWidth == viewConstraints.maxWidth) {
       width = minWidth;
     } else if (viewConstraints.minWidth == double.infinity &&
         viewConstraints.maxWidth == null) {

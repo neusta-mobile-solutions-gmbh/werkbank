@@ -150,13 +150,23 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
         ', ',
       ),
     );
+    addRawStringField(
+      'custom actions',
+      [
+        for (final customActionId
+            in data.customSemanticsActionIds ?? const Iterable<int>.empty())
+          CustomSemanticsAction.getAction(customActionId)?.label,
+      ].nonNulls.join(
+        ', ',
+      ),
+    );
 
     return fields;
   }
 
   @override
   Widget build(BuildContext context) {
-    final semanticsInspectorController = InfoControlSection.access
+    final semanticsInspectorController = InspectControlSection.access
         .compositionOf(context)
         .accessibility
         .semanticsInspectorController;

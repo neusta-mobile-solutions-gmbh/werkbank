@@ -118,9 +118,9 @@ class UndependedLocalUsageError implements AnalyzerError {
 
     return '\nThe file $dartFileLink uses $usageLink but the usage is not'
         ' depended on.\n'
-        'To fix this error depend on one of the subpacks that expose the'
-        ' used file. The dependency has to be added in one of the subpacks'
-        ' containing the file.\n'
+        'To fix this error depend on one of the subpacks that expose the '
+        'used file. The dependency has to be added in one of the subpacks '
+        'containing the file.\n'
         'The file is contained in these subpacks:\n$containingSubpacks'
         '$exposingSubpacks';
   }

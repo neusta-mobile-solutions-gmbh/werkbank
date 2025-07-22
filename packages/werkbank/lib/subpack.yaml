@@ -1,7 +1,7 @@
 index:
   name: werkbank
   # TODO(lzuttermeister): Better doc
-  docs: werkbank;
+  docs: Werkbank;
 
   exclude:
     - src/werkbank_addons.dart

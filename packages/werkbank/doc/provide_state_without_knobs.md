@@ -1,65 +1,73 @@
-Sometimes you need something for your component, like a custom UI-Model, oder an UI-Controller like a `ScrollController`, or `TabController` that is not or not yet implemented as a knob. Of course you could do that, but there is an easier approach that may fits your need just as well or even better.
+The States addon provides a simple solution for managing state that doesn't need visual controls in the knobs panel. Think of it as "headless knobs" - you get the same reactive state management capabilities as knobs, but without the UI controls. This is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
 
-We have implemented the `states addon` as a simple solution to offer generic state-handling for use cases. You can think of it as knobs, just without the knob; a headless knob.
+States behave similarly to knobs: they preserve their values during hot reloads, provide reactive updates through `ValueNotifier`, and integrate seamlessly with your use cases. The key difference is that states don't appear as controllable elements in the right panel.
 
-This example demostrates how similar both approaches are. You can use the states addon to provide a `string`, just like you would with knobs. It will also be a ValueNotifier that you can get and set, just like with knobs. But it cannot be controlled with a control-component in the right panel.
+## When to Use States vs. Knobs
+
+**Always prefer knobs when a suitable one exists.** Knobs provide interactive controls that make testing and experimentation much easier.
+
+Use **knobs** (first choice):
+- When there's an existing knob for your data type
+- When you need interactive controls for testing different values
+
+Use **states** when:
+- No suitable knob exists for your data type and you don't need user controls
+- Working with Flutter controllers (`TextEditingController`, `ScrollController`, `TabController`) or custom controllers
+- Managing custom data models that don't require interactive manipulation
+- Quick prototyping where implementing a custom knob would be overkill
+
+If you need a control but no suitable knob exists, consider [implementing a custom knob](knobs.html) instead of using states.
+
+## Types of States
+
+There are three types of state containers available:
+
+### Immutable States
+
+Use [`immutable`](../werkbank/StatesComposer/immutable.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
 
 ```dart
-WidgetBuilder statesUseCase(UseCaseComposer c) {
-  final someStringKnob = c.knobs.string(
-    'Some String',
-    initialValue: 'Initial Value',
-  );
+// ---- lib/example_use_case.dart ---- //
 
-  final someStringState = c.states.immutable(
-    'Also Some String',
-    initialValue: 'Initial Value',
-  );
+final componentModel = c.states.immutable(
+  'Component Model',
+  initialValue: MyComponentModel(
+    title: 'Hello',
+    count: 0,
+    isEnabled: true,
+  ),
+);
 
-  return (context) {
-    return Text(someStringState.value);
-  } 
-}
+// Use componentModel.value just like with knobs
 ```
 
-Now the advantage is that you can use this for anything
+### Mutable States
+
+Use [`mutable`](../werkbank/StatesComposer/mutable.html) for objects that have internal state and need lifecycle management:
 
 ```dart
-WidgetBuilder statesUseCase(UseCaseComposer c) {
-  final someComponentState = c.states.immutable(
-    'Some Component Model',
-    initialValue: SomeComponentModel(
-      ready: true,
-      number: 24,
-    ),
-  );
-
-  /// No knob for that.
-
-  final textEditingControllerContainer = c.states.mutable(
-    'TextEditingController',
-    create: () => TextEditingController(text: 'Initial Text'),
-    dispose: (controller) => controller.dispose(),
-  );
-
-  // Also no knob for that
-
-  return (context) {
-    /// ...
-  };
-}
+final scrollController = c.states.mutable(
+  'Scroll Controller', 
+  create: () => ScrollController(),
+  dispose: (controller) => controller.dispose(),
+);
 ```
 
-Just like for knobs, when doing a hot reload, state is retained.
+### Mutable States with Ticker Provider
 
+Use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html) for objects that require a `TickerProvider`, such as animation controllers:
 
---- 
+```dart
+final tabController = c.states.mutableWithTickerProvider(
+  'Tab Controller',
+  create: (tickerProvider) => TabController(
+    length: 3,
+    vsync: tickerProvider,
+  ),
+  dispose: (controller) => controller.dispose(),
+);
+```
 
-Now when you end up in a situation where there is no Knob for the thing you need you can implement a custom knob or use this feature.
-
-# Info Dump
-
-- c.states.immutable for immutables (especially useful for custom data classes like Component-Models)
-- c.states.mutable for mutables ( TextEditingController, ScrollController, TabController, FocusNode)
-- c.states.mutableWithTickerProvider for mutables with ticker (like TabController, AnimationController)
+> [!NOTE]
+> All state values are preserved during hot reloads, just like knobs. This makes iterative development smooth and efficient.
 

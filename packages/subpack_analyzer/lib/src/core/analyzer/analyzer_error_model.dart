@@ -109,12 +109,18 @@ class UndependedLocalUsageError implements AnalyzerError {
       fileContainingSubpacks,
     );
 
+    final localUsageTypeString = switch (usage.usageType) {
+      LocalUsageType.import => 'imported',
+      LocalUsageType.export => 'exported',
+    };
+
     final exposingSubpacks = usageExposingSubpacks.isEmpty
         ? '\nThe usage is not esposed in any subpacks.'
-        : SubpackUtils.createSubpackLinks(
-            packageRoot.rootDirectory,
-            usageExposingSubpacks,
-          );
+        : 'The $localUsageTypeString file is exposed in the following subpacks:'
+              '\n${SubpackUtils.createSubpackLinks(
+                packageRoot.rootDirectory,
+                usageExposingSubpacks,
+              )}';
 
     return '\nThe file $dartFileLink uses $usageLink but the usage is not'
         ' depended on.\n'

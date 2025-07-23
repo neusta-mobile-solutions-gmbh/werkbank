@@ -41,15 +41,6 @@ class DirectiveExtractor with SubpackLogger {
     final directives = result.unit.directives;
     for (final directive in directives) {
       if (directive is NamespaceDirective) {
-        // TODO(jwolyniec): Differentiate import/export
-        // switch (directive){
-        //   case ExportDirective():
-        //     // TODO: Handle this case.
-        //     throw UnimplementedError();
-        //   case ImportDirective():
-        //     // TODO: Handle this case.
-        //     throw UnimplementedError();
-        // }
         final usage = handleNamespaceDirective(directive, file);
         if (usage != null) {
           logVerbose(
@@ -96,11 +87,17 @@ class DirectiveExtractor with SubpackLogger {
 
     final rootRelativePath = p.join(p.dirname(file.file.path), path);
     final treeNode = packageRoot.fromPath(rootRelativePath);
+    final localUsageType = switch (namespaceDirective) {
+      ExportDirective() => LocalUsageType.export,
+      ImportDirective() => LocalUsageType.import,
+    };
     if (treeNode is DartFile) {
-      return LocalUsage(dartFile: treeNode, usageType: LocalUsageType.import);
+      return LocalUsage(dartFile: treeNode, usageType: localUsageType);
     } else {
-      // TODO(jwolyniec): Find a better solution than an exception
-      throw const FileSystemException();
+      throw const FileSystemException(
+        'If this exeption is thrown '
+        'somehing must be terribly wrong ☕🔥',
+      );
     }
   }
 }

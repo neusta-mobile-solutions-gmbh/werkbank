@@ -27,8 +27,6 @@ There are three types of state containers available:
 Use [`immutable`](../werkbank/StatesComposer/immutable.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
 
 ```dart
-// ---- lib/example_use_case.dart ---- //
-
 final componentModel = c.states.immutable(
   'Component Model',
   initialValue: MyComponentModel(
@@ -38,8 +36,13 @@ final componentModel = c.states.immutable(
   ),
 );
 
-// Use componentModel.value just like with knobs
+// ...
+
+// Read and write just like with knobs
+componentModel.value = componentModel.value.copyWith(count: 1);
 ```
+
+Immutable states behave exactly like knobs: you can read and write their values through the `ValueNotifier` interface.
 
 ### Mutable States
 
@@ -51,7 +54,14 @@ final scrollController = c.states.mutable(
   create: () => ScrollController(),
   dispose: (controller) => controller.dispose(),
 );
+
+// ...
+
+// Read-only access: the object is created once and managed internally
+scrollController.value.animateTo(100);
 ```
+
+Mutable states are read-only containers. The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. You cannot reassign the value in your use case.
 
 ### Mutable States with Ticker Provider
 
@@ -66,8 +76,73 @@ final tabController = c.states.mutableWithTickerProvider(
   ),
   dispose: (controller) => controller.dispose(),
 );
+
+// ...
+
+// Read-only access: use the controller's methods to change state
+tabController.value.animateTo(1);
 ```
+
+Like mutable states, these are read-only containers with lifecycle management.
 
 > [!NOTE]
 > All state values are preserved during hot reloads, just like knobs. This makes iterative development smooth and efficient.
 
+## Complete Example
+
+Here's a comprehensive example showing how states and knobs work together:
+
+```dart
+WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
+  final messageKnob = c.knobs.string(
+    'Message',
+    initialValue: 'Hello, World!',
+  );
+
+  // Immutable state for custom data model
+  final customModel = c.states.immutable(
+    'UI Model',
+    initialValue: CustomModel(
+      isLoading: false,
+      itemCount: 5,
+    ),
+  );
+
+  // Mutable state for controller
+  final textController = c.states.mutable(
+    'Text Controller',
+    create: () {
+      final controller = TextEditingController();
+
+      // This serves no purpose other than to demonstrate
+      // that some mutable state is able to update some other state
+      // and a knob.
+      controller.addListener(() {
+        messageKnob.value = controller.text;
+        customModel.value = MyUIModel(
+          isLoading: controller.text.hashCode.isEven,
+          itemCount: controller.text.length,
+        );
+      });
+      // End of example
+      return controller;
+    },
+    dispose: (controller) => controller.dispose(),
+  );
+
+  return (context) {
+    return Column(
+      children: [
+        Text(messageKnob.value),
+        _CustomComponent(
+          model: customModel.value,
+          onModelChanged: (newModel) {
+            customModel.value = newModel;
+          },
+        ),
+        TextField(controller: textController.value),
+      ],
+    );
+  };
+}
+```

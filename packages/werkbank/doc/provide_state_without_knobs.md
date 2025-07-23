@@ -119,7 +119,7 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
       // and a knob.
       controller.addListener(() {
         messageKnob.value = controller.text;
-        customModel.value = MyUIModel(
+        customModel.value = CustomModel(
           isLoading: controller.text.hashCode.isEven,
           itemCount: controller.text.length,
         );

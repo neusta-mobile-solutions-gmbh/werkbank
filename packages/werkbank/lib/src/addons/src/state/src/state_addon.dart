@@ -6,6 +6,7 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
 /// {@category State}
+/// {@category Provide State Without Knobs}
 class StateAddon extends Addon {
   const StateAddon() : super(id: addonId);
 

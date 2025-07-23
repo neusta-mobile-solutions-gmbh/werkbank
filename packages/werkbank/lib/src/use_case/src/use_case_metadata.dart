@@ -1,5 +1,9 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:meta/meta.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/src/use_case.dart';
+import 'package:werkbank/src/use_case/src/use_case_composer.dart';
+import 'package:werkbank/src/use_case/src/use_case_composition.dart';
 
 /// The metadata of a use case.
 ///

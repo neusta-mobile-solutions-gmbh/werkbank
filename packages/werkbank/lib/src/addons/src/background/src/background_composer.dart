@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addons/src/background/src/background_addon.dart';
 import 'package:werkbank/src/addons/src/background/src/background_metadata.dart';
+import 'package:werkbank/src/addons/src/background/src/background_option.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 extension BackgroundComposerExtension on UseCaseComposer {

@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/src/transient_use_case_state.dart';
+import 'package:werkbank/src/use_case/src/use_case_composition.dart';
 import 'package:werkbank/src/use_case/src/use_case_metadata.dart';
 
 /// A class of which an instance is passed to a [UseCaseBuilder], allowing use

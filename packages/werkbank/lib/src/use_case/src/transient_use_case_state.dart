@@ -1,4 +1,10 @@
+/// @docImport 'package:werkbank/src/addon_api/addon_api.dart';
+/// @docImport 'package:werkbank/src/addons/src/knobs/knobs.dart';
+library;
+
 import 'package:flutter/cupertino.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/src/retained_use_case_state.dart';
 import 'package:werkbank/src/use_case/src/use_case_composer.dart';
 import 'package:werkbank/src/use_case/src/use_case_composition.dart';
 

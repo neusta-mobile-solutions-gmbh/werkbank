@@ -1,3 +1,4 @@
+import 'package:werkbank/src/addon_api/src/addon.dart';
 import 'package:werkbank/src/addon_api/src/addon_description.dart';
 
 /// An [AddonSpecification] is a simplified representation of an [Addon] that

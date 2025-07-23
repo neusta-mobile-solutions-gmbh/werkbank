@@ -1,4 +1,11 @@
+/// @docImport 'package:werkbank/src/widgets/widgets.dart';
+library;
+
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/src/accessor/addon_layer_accessor.dart';
+import 'package:werkbank/src/addon_api/src/accessor/use_case_accessor_mixin.dart';
+import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entries.dart';
+import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 typedef AddonLayerWidgetBuilder =

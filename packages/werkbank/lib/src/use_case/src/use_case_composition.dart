@@ -1,6 +1,14 @@
+/// @docImport 'package:werkbank/src/addon_api/addon_api.dart';
+/// @docImport 'package:werkbank/src/addons/src/knobs/knobs.dart';
+/// @docImport 'package:werkbank/src/widgets/widgets.dart';
+library;
+
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/src/retained_use_case_state.dart';
 import 'package:werkbank/src/use_case/src/transient_use_case_state.dart';
+import 'package:werkbank/src/use_case/src/use_case.dart';
+import 'package:werkbank/src/use_case/src/use_case_composer.dart';
 import 'package:werkbank/src/use_case/src/use_case_metadata.dart';
 import 'package:werkbank/src/use_case/src/use_case_snapshot.dart';
 

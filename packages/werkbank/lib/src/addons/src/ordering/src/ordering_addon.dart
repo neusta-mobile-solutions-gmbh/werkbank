@@ -1,7 +1,11 @@
+/// @docImport 'package:werkbank/src/addon_config/addon_config.dart';
+library;
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/ordering/src/_internal/ordering_manager.dart';
 import 'package:werkbank/src/addons/src/ordering/src/_internal/ordering_selector.dart';
+import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}

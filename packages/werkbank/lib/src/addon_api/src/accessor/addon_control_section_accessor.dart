@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/src/accessor/addon_accessor.dart';
 import 'package:werkbank/src/addon_api/src/accessor/werkbank_app_only_accessor.dart';
+import 'package:werkbank/src/addon_api/src/addon_control_sections/addon_control_section.dart';
 
 /// A class that provides access to data in the [BuildContext] that is
 /// available from within the widgets built by the

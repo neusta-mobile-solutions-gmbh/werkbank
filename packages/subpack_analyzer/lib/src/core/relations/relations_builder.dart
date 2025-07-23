@@ -98,9 +98,9 @@ class RelationsBuilder {
       );
     }
 
-    for (final directory in directory.directories) {
+    for (final child in directory.directories) {
       await _handleDirectory(
-        directory: directory,
+        directory: child,
         containingSubpacks: newContainingSubpacks,
         exposingSubpacks: newExposingSubpacks,
         isDirInSubpack: directory is SubpackDirectory,

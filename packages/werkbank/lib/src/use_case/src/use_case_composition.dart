@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/use_case/src/retained_use_case_state.dart';
+import 'package:werkbank/src/use_case/src/transient_use_case_state.dart';
+import 'package:werkbank/src/use_case/src/use_case_metadata.dart';
+import 'package:werkbank/src/use_case/src/use_case_snapshot.dart';
 
 /// A function that mutates the state of a use case using the provided
 /// [UseCaseComposition].

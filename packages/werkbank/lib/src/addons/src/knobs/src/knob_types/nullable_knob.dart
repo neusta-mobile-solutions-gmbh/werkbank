@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/addons/src/knobs/src/buildable_knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knob_snapshot.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knobs_composer.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 typedef NullableKnobBuilder<T extends Object> =
     Widget Function(

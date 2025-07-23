@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/components/src/utility_widgets/mapping_value_listenable_builder.dart';
 
 /// {@category Werkbank Components}
 class WAnimatedVisibility extends ImplicitlyAnimatedWidget {

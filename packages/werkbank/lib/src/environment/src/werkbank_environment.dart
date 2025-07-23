@@ -1,4 +1,4 @@
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 /// An enum that describes in which environment everything is built.
 enum WerkbankEnvironment {

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/src/transient_use_case_state.dart';
+import 'package:werkbank/src/use_case/src/use_case_metadata.dart';
 
 /// A class of which an instance is passed to a [UseCaseBuilder], allowing use
 /// cases to do all kinds of useful things with it.

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_data.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 // Not sealed because you may want to add your own report types.
 abstract class Report {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/ordering/src/_internal/ordering_manager.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 class OrderingSelector extends StatelessWidget {
   const OrderingSelector({super.key});

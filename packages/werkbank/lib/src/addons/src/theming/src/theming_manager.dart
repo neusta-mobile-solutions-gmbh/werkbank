@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/addons/src/theming/src/theming_addon.dart';
 
 class ThemingManager extends StatefulWidget {
   const ThemingManager({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Werkbank Components}
 class WLayoutReference extends SingleChildRenderObjectWidget {

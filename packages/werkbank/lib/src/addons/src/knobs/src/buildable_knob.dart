@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/knobs_state_entry.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knob_snapshot.dart';
 
 /// A knob that can build a widget to control its value.
 ///

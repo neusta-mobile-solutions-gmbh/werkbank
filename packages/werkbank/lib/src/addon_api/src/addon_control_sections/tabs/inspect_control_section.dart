@@ -2,7 +2,6 @@ import 'package:werkbank/src/addon_api/src/accessor/addon_control_section_access
 import 'package:werkbank/src/addon_api/src/accessor/use_case_accessor_mixin.dart';
 import 'package:werkbank/src/addon_api/src/addon_control_sections/addon_control_section.dart';
 import 'package:werkbank/src/utils/utils.dart';
-import 'package:werkbank/werkbank_old.dart';
 
 class InspectControlSection extends AddonControlSection {
   const InspectControlSection({

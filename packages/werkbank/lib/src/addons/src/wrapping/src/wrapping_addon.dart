@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/wrapping/src/_internal/wrapping_applier.dart';
 import 'package:werkbank/src/addons/src/wrapping/src/_internal/wrapping_state_entry.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/addons/src/wrapping/src/wrapping_composer.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 // Maximum integer that is also safe to use when compiling to JavaScript.
 const _maxInt = 9007199254740991;

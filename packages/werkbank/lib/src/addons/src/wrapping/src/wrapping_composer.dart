@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/wrapping/src/_internal/wrapping_state_entry.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// An enum that defines where in the use case the wrapping should be applied.
 enum WrappingLayer {

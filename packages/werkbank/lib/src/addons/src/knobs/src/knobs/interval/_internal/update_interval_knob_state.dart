@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/named_interval.dart';
 
 mixin UpdateIntervalKnobState {
   ({

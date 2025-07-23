@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/components/src/w_resizable_panels/panel_controller.dart';
+import 'package:werkbank/src/components/src/w_resizable_panels/panel_utils.dart';
 
 class PanelControllerProvider extends StatefulWidget {
   const PanelControllerProvider({

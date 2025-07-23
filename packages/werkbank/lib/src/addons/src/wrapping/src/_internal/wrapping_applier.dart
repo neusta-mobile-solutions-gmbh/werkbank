@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/wrapping/src/_internal/wrapping_state_entry.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/addons/src/wrapping/src/wrapping_composer.dart';
 
 class WrappingApplier extends StatefulWidget {
   const WrappingApplier({

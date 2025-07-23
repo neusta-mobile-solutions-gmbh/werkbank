@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/app_config/src/app_config.dart';
+import 'package:werkbank/src/tree/tree.dart';
 
 class WerkbankAppInfo extends InheritedWidget {
   const WerkbankAppInfo({

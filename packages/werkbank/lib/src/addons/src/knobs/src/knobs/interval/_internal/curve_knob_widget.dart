@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/named_curve.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class CurveKnobWidget extends StatelessWidget {
   const CurveKnobWidget({

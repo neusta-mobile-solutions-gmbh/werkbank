@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/use_case/src/use_case_composer.dart';
+import 'package:werkbank/src/use_case/src/use_case_composition.dart';
 
 /// A typedef for any [TransientUseCaseStateEntry] regardless of its generic
 /// types.

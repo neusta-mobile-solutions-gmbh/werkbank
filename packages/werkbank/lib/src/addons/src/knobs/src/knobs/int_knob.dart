@@ -1,4 +1,9 @@
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knob_types/nullable_knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knobs/custom_field_knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knobs/custom_slider_knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knobs_composer.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Knobs}
 extension IntKnobExtension on KnobsComposer {

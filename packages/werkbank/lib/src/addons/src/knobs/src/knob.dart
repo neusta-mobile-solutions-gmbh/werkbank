@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:werkbank/werkbank_old.dart';
 
 /// A unique identifier for a knob.
 extension type KnobId(String _label) {}

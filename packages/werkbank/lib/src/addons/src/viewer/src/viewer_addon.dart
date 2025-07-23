@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/viewer/src/_internal/viewer_gestures.dart';
 import 'package:werkbank/src/addons/src/viewer/src/_internal/viewport_reference.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
 class ViewerAddon extends Addon {

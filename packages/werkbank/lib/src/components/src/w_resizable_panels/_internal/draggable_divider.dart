@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/components/src/w_divider.dart';
 
 enum DraggableDividerDirection {
   startToEnd,

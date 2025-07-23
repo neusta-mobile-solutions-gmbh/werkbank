@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/components/src/w_animated_visibility.dart';
+import 'package:werkbank/src/components/src/w_tree_view/w_tree_item.dart';
+import 'package:werkbank/src/components/src/w_tree_view/w_tree_model.dart';
 
 class WAnimatedTreeSegment extends StatefulWidget {
   const WAnimatedTreeSegment({

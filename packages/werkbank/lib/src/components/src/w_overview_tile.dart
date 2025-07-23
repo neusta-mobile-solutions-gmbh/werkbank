@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank_old.dart';
+import 'package:werkbank/src/components/src/w_button_base.dart';
+import 'package:werkbank/src/components/src/w_delayed_reveal.dart';
+import 'package:werkbank/src/components/src/w_path_text.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}
 class WOverviewTile extends StatelessWidget {

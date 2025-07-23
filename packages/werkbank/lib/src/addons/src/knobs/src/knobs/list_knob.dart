@@ -1,4 +1,4 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 @Deprecated(
   'Use customDropdown knob instead. '

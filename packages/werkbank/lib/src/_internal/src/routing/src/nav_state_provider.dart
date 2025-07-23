@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werkbank/src/_internal/src/routing/src/_internal/routes.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/routing/routing.dart';
 
 class NavStateProvider extends StatelessWidget {
   const NavStateProvider({

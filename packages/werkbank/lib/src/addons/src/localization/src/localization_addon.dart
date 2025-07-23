@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/localization/src/_internal/locale_selector.dart';
 import 'package:werkbank/src/addons/src/localization/src/_internal/localizations_applier.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 /// {@category Configuring Addons}
 class LocalizationAddon extends Addon {

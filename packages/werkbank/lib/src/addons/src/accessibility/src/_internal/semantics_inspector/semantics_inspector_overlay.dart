@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/ignore_pointer_with_semantics.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_box_display.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_controller.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_nodes_display.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/accessibility_composition.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/accessibility_manager.dart';
 
 class SemanticsInspectorOverlay extends StatefulWidget {
   const SemanticsInspectorOverlay({

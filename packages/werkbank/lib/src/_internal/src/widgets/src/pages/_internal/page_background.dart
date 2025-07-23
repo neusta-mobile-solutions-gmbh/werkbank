@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class PageBackground extends StatelessWidget {
   const PageBackground({

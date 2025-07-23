@@ -5,7 +5,7 @@ import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/inter
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/predefined_curves.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/update_curve_knob_state.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/update_interval_knob_state.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 /// {@category Knobs}
 extension CurvedIntervalKnobExtension on KnobsComposer {

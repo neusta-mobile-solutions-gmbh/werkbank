@@ -3,7 +3,7 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 class SemanticsMonitor extends StatefulWidget {
   const SemanticsMonitor({

@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 @immutable
 sealed class NavState {}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 // We can't merge this with [FocusNodeKnob], since
 // the [ValueGuardingKnobMixin] needs a concrete implementation

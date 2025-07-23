@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/constraints/src/view_constraints_composer.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 class _SupportedSizesMetadataEntry
     extends UseCaseMetadataEntry<_SupportedSizesMetadataEntry> {

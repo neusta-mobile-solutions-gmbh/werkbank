@@ -3,7 +3,7 @@ import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/curve
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/curves_info_button.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/predefined_curves.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/update_curve_knob_state.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 /// {@category Knobs}
 extension CurveKnobExtension on KnobsComposer {

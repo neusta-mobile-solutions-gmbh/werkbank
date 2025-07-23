@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_provider.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 class ReportComponent extends StatelessWidget {
   const ReportComponent({

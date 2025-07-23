@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:werkbank/src/addons/src/viewer/src/_internal/view_transform.dart';
 import 'package:werkbank/src/addons/src/viewer/src/_internal/viewport_reference.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 class ViewerGestures extends StatefulWidget {
   const ViewerGestures({

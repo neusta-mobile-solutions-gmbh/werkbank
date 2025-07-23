@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/ordering/src/_internal/ordering_manager.dart';
 import 'package:werkbank/src/addons/src/ordering/src/_internal/ordering_selector.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 /// {@category Configuring Addons}
 /// An [Addon] that enables control over the ordering of the [WerkbankNode]

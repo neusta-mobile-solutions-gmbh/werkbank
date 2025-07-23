@@ -1,4 +1,4 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addon_api/src/addon_description.dart';
 
 /// An [AddonSpecification] is a simplified representation of an [Addon] that
 /// is available to other addons. It can be used in an [Addon] to make

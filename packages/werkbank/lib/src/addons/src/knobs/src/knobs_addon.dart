@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/knob_preset_selector.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/knobs_state_entry.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 /// {@category Configuring Addons}
 /// {@category Knobs}

@@ -1,4 +1,7 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knob_types/nullable_knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knobs/custom_field_knob.dart';
+import 'package:werkbank/src/addons/src/knobs/src/knobs_composer.dart';
 
 /// {@category Knobs}
 extension StringKnobExtension on KnobsComposer {

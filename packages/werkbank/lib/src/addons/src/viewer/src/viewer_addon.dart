@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/viewer/src/_internal/viewer_gestures.dart';
 import 'package:werkbank/src/addons/src/viewer/src/_internal/viewport_reference.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 /// {@category Configuring Addons}
 class ViewerAddon extends Addon {

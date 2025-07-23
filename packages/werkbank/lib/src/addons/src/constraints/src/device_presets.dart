@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/constraints/src/view_constraints_composer.dart';
+import 'package:werkbank/src/addons/src/constraints/src/view_constraints_extension.dart';
 
 extension DevicePresetComposerExtension on ViewConstraintsComposer {
   void devicePresets({

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/theming/src/_internal/theme_option_applier.dart';
 import 'package:werkbank/src/addons/src/theming/src/_internal/theme_selector.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 /// {@category Configuring Addons}
 class ThemingAddon extends Addon {

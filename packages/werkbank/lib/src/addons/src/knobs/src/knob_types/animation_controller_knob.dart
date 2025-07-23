@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/animation_controller_status_listenable_builder.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/verbose_animation_controller.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/werkbank_old.dart';
 
 // We can't merge this with [AnimationControllerKnob], since
 // the [ValueGuardingKnobMixin] needs a concrete implementation

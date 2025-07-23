@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/colorblindness_overlay/colorblindness_type.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/accessibility_manager.dart';
+import 'package:werkbank/src/components/components.dart';
 
 /// A control widget that allows users to toggle
 /// between different colorblindness modes

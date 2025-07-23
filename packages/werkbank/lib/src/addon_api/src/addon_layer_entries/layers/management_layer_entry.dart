@@ -1,4 +1,6 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addon_api/src/accessor/addon_layer_accessor.dart';
+import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entry.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 class ManagementLayerEntry extends AddonLayerEntry {
   const ManagementLayerEntry({

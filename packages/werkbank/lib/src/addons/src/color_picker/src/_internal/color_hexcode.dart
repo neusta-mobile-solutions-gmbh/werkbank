@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_manager.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/notifications/notifications.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class ColorHexcode extends StatelessWidget {
   const ColorHexcode({

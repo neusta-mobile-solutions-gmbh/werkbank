@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/components/src/w_button_base.dart';
+import 'package:werkbank/src/components/src/w_temp_disabler.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}
 class WSwitch extends StatelessWidget {

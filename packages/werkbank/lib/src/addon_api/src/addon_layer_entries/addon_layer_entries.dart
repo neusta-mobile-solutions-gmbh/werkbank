@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/app_config/app_config.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 /// {@category Writing Your Own Addons}
 class AddonLayerEntries {

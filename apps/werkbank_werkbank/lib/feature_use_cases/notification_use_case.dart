@@ -1,11 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
-// This is using the internal API of werkbank on purpose
-// to show all the behavior of the notification system.
-// ignore: implementation_imports
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/werkbank.dart';
 import 'package:werkbank_werkbank/tags.dart';
 
 // Default Constructors

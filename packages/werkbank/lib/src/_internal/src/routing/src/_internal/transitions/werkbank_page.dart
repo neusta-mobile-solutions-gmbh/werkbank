@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/routing/routing.dart';
 
 class WerkbankPage<R> extends Page<R> {
   const WerkbankPage({

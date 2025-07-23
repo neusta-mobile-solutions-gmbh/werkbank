@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/components/src/w_keyboard_button.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}
 class WShortcut extends StatelessWidget {

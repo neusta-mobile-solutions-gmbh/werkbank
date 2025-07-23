@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:werkbank/src/addon_api/src/accessor/use_case_accessor_mixin.dart';
+import 'package:werkbank/src/addon_api/src/addon_control_sections/tabs/configure_control_section.dart';
+import 'package:werkbank/src/addon_api/src/addon_control_sections/tabs/inspect_control_section.dart';
+import 'package:werkbank/src/addon_api/src/addon_control_sections/tabs/settings_control_section.dart';
+import 'package:werkbank/src/addon_api/src/addon_description.dart';
+import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entries.dart';
+import 'package:werkbank/src/addon_api/src/home_page_component.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 /// {@category Writing Your Own Addons}
 /// {@category Custom Addons}

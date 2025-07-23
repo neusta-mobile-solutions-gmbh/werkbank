@@ -1,3 +1,5 @@
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
+
 typedef Score = double;
 
 /// {@category Search for Use Cases}

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 
 class ConfigureTab extends StatelessWidget {
   const ConfigureTab({

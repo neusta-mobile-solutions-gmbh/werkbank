@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/persistence/src/persistent_controller.dart';
+import 'package:werkbank/src/persistence/src/was_alive/was_alive_persistant_data.dart';
 
 class WasAliveController extends PersistentController {
   WasAliveController({

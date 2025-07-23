@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/components/src/w_button_base.dart';
+import 'package:werkbank/src/components/src/w_divider.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 // TODO(lzuttermeister): Make a stateless WTabBar instead?
 /// {@category Werkbank Components}

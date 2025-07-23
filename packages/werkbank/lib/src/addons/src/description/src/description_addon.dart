@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/description/src/_internal/description_section.dart';
 import 'package:werkbank/src/addons/src/description/src/_internal/tags_homepage_component.dart';
 import 'package:werkbank/src/addons/src/description/src/_internal/tags_section.dart';
 import 'package:werkbank/src/addons/src/description/src/_internal/urls_section.dart';
+import 'package:werkbank/src/addons/src/description/src/metadata/description.dart';
+import 'package:werkbank/src/addons/src/description/src/metadata/tags.dart';
+import 'package:werkbank/src/addons/src/description/src/metadata/urls.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
 /// This addon provides the ability to add a description, urls and tags

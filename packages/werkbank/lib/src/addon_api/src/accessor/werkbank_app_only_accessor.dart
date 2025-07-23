@@ -1,6 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 /// A mixin that provides access to data in the [BuildContext] that is
 /// available inside a [WerkbankApp].

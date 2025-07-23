@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 /// {@category Overview}
 class OverviewSettings extends UseCaseMetadataEntry<OverviewSettings> {

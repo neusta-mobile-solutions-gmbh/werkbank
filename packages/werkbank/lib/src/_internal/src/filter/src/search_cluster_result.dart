@@ -1,4 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:werkbank/src/_internal/src/filter/filter.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 class SearchClusterResult extends SearchClusterFoundation
     implements SearchResult {

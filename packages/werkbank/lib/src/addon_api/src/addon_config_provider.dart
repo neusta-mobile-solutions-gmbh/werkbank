@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/src/addon.dart';
+import 'package:werkbank/src/addon_config/addon_config.dart';
 
 class AddonConfigProvider extends InheritedWidget {
   const AddonConfigProvider({

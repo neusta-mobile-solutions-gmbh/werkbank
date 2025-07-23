@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/filter/filter.dart';
+import 'package:werkbank/src/filter/filter.dart';
+import 'package:werkbank/src/theme/theme.dart';
+import 'package:werkbank/src/tree/tree.dart';
 
 class DebugDisplayFilter extends StatefulWidget {
   const DebugDisplayFilter({

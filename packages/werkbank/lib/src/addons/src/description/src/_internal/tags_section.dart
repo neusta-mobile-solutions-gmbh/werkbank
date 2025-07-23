@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addons/src/description/description.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 
 class TagsSection extends StatelessWidget {
   const TagsSection({

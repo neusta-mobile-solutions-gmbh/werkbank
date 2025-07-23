@@ -1,4 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:werkbank/src/addons/src/description/description.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 class _TagsMetadataEntry extends UseCaseMetadataEntry<_TagsMetadataEntry> {
   const _TagsMetadataEntry(this.tags);

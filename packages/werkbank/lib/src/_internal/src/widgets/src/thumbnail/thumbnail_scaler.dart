@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/components/components.dart';
 
 class ThumbnailScaler extends StatelessWidget {
   const ThumbnailScaler({

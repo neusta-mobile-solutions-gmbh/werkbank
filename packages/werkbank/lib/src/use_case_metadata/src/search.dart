@@ -1,4 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/use_case_metadata/src/search_cluster.dart';
 
 class _SearchMetadataEntry extends UseCaseMetadataEntry<_SearchMetadataEntry> {
   const _SearchMetadataEntry(this.searchClusters);

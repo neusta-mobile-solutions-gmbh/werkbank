@@ -1,4 +1,9 @@
 import 'package:collection/collection.dart';
+import 'package:werkbank/src/_internal/src/use_case/use_case.dart';
+import 'package:werkbank/src/addon_config/addon_config.dart';
+import 'package:werkbank/src/tree/src/duplicate_descriptor_paths_exception.dart';
+import 'package:werkbank/src/tree/src/werkbank_node.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 sealed class Descriptor {
   Descriptor._({

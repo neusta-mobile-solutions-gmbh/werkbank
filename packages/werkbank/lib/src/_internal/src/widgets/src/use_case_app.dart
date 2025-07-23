@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/internal.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/providers/werkbank_environment_provider.dart';
 import 'package:werkbank/werkbank.dart';
 
 class UseCaseApp extends StatelessWidget {

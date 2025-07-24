@@ -13,7 +13,7 @@ class InvalidPackageNameError extends DependenciesError {
 
   @override
   String get errorMessage {
-    return 'The package name $invalidPackageName is invalid!';
+    return '\nThe package name $invalidPackageName is invalid!';
   }
 }
 

@@ -173,7 +173,7 @@ Set this to a value that makes your widget look like it's in its "natural" or be
 Load presets using the "Preset" dropdown in the "CONFIGURE" tab under the "Constraints" section.
 Adding presets is useful when your widget changes its appearance significantly depending on the constraints.
 This way you can cover for example multiple layouts of your widget in one use case.
-For pages there is also the convenience method [`c.constraints.devicePresets()`](werkbank/DevicePresetComposerExtension/devicePresets.html)
+For pages there is also the convenience method [`c.constraints.devicePresets()`](../werkbank/DevicePresetComposerExtension/devicePresets.html)
 which automatically adds presets for common device sizes.
 
 **Overview constraints** are used for the [Overview](Overview-topic.html) thumbnails of the use case.
@@ -196,14 +196,14 @@ c.constraints.initial(width: 200, height: 100);
 c.constraints.presetSize('Preset Name', const Size(400, 200));
 c.constraints.overviewConstraints(const BoxConstraints(minWidth: 100, minHeight: 100));
 ```
-Each of the nine methods also have optional `bool viewLimitedMaxWidth` and `bool viewLimitedMaxHeight` parameters.
+Each of the nine methods also has optional `bool viewLimitedMaxWidth` and `bool viewLimitedMaxHeight` parameters.
 They convert infinite maximum constraints to the size of the main view when `true` (the default).
 This allows use cases to fill the available space in the Werkbank UI.
 Set these to `false` if you want to use infinite maximum constraints instead.
 
 The **supported constraints** limit the range of constraints that can be set for the use case.
 For example if you know that your widget will overflow when the width is less than 50 pixels,
-you can use `c.constraints.supported(const BoxConstraints(minWidth: 50))`
+you can use [`c.constraints.supported(const BoxConstraints(minWidth: 50))`](../werkbank/SupportedSizesComposerExtension/supported.html)
 to prevent setting constraints smaller than that.
 
 ## Descriptions, Tags & URLs

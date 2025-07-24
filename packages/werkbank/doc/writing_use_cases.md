@@ -65,6 +65,7 @@ Here is an example of a use case that uses a double slider knob to control the v
 
 ```dart
 WidgetBuilder sliderUseCase(UseCaseComposer c) {
+  // Create a double slider knob to control the value of the slider.
   final valueKnob = c.knobs.doubleSlider(
     'Value',
     initialValue: 0.5,
@@ -91,6 +92,7 @@ WidgetBuilder filledButtonUseCase(UseCaseComposer c) {
   final enabledKnob = c.knobs.boolean('Enabled', initialValue: true);
   final labelKnob = c.knobs.string('Label', initialValue: 'Label Text');
 
+  // Define a knob preset to quickly set the values of the knobs.
   c.knobPreset('Disabled & Long Label', () {
     enabledKnob.value = false;
     labelKnob.value = 'This is a long label text';
@@ -135,21 +137,25 @@ You can set constraints in two ways:
 - Programmatically, by defining initial constraints, constraints presets, overview constraints, and supported constraints
   using the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c` in your use case.
 
+Even when setting constraints programmatically, you can always change them interactively in the Werkbank UI.
+
+Here is an example of a use case that customizes the constraints of a slider widget:
 ```dart
 WidgetBuilder sliderUseCase(UseCaseComposer c) {
-  // Set initial constraints for the use case
+  // Set initial constraints for the use case.
   c.constraints.initial(width: 200);
 
-  // Define constraints presets
+  // Define constraints presets.
   c.constraints.preset('Narrow', width: 100);
   c.constraints.preset('Wide', width: 400);
-  // Add predefined presets for common device sizes for use cases showcasing whole pages
+  // Add predefined presets for common device sizes for use cases showcasing whole pages.
+  // (Technically wrong here, since a slider is not a page.)
   c.constraints.devicePresets();
 
-  // Set constraints for overview thumbnails
+  // Set constraints for overview thumbnails.
   c.constraints.overview(width: 100);
 
-  // Limit the range of constraints that can be set
+  // Limit the range of constraints that can be set.
   c.constraints.supported(const BoxConstraints(minWidth: 50));
 
   return (context) {

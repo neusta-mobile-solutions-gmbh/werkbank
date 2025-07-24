@@ -1,3 +1,9 @@
+# Unreleased
+
+- Add `state addon` to provide states without knobs.
+  - Immutable state, for instance data models, can be added by calling `c.states.immutable(...)`
+  - Mutable state, like controllers, can be added by calling `c.states.mutable(...)`. Its lifecycle will be managed by Werkbank.
+  
 # 0.16.1
 - Added a `Werkbank System` theme, which will always match your system. It's also default now.
 - Deprecate `list` knob. Use `customDropdown` instead.

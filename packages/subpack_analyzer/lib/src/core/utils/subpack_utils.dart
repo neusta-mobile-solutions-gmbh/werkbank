@@ -101,5 +101,12 @@ class SubpackUtils {
     return subpackLinks.toString();
   }
 
+  /// Returns wether packageName is valid by [this definition](https://dart.dev/tools/linter-rules/package_names).
+  /// Does not check for reserved words!
+  static bool isValidPackageName(String packageName) {
+    final pattern = RegExp(r'^[a-z_][a-z0-9_]*$');
+    return pattern.hasMatch(packageName);
+  }
+
   static bool get isVerbose => Zone.current[#verbose] == true;
 }

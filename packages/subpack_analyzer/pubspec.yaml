@@ -20,4 +20,4 @@ dependencies:
 
 dev_dependencies:
   werkbank_lints:
-    path: /Users/jacobwolyniec/Developer/nms/werkbank/packages/werkbank_lints
+    path: ../werkbank_lints

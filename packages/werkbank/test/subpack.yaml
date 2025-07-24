@@ -1,0 +1,4 @@
+dependencies:
+  - flutter
+  - flutter_test
+  - fast_immutable_collections

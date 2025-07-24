@@ -51,3 +51,35 @@ scripts:
     run: |
       cd packages/werkbank &&
       dart run tool/generate_icon_font.dart
+
+  subpack_analyzer:
+    description: Run the subpack_analyzer in all packages that require it.
+    packageFilters:
+      scope:
+        - werkbank
+    run: cd packages/subpack_analyzer &&
+      fvm dart run bin/subpack_analyzer.dart run
+
+  subpack_analyzer_verbose:
+    description: Run the subpack_analyzer in all packages that require it.
+    packageFilters:
+      scope:
+        - werkbank
+    run: cd packages/subpack_analyzer &&
+      fvm dart run bin/subpack_analyzer.dart run --verbose
+
+  subpack_analyzer_analysisDirs:
+    description: Run the subpack_analyzer in all packages that require it.
+    packageFilters:
+      scope:
+        - werkbank
+    run: cd packages/subpack_analyzer &&
+      fvm dart run bin/subpack_analyzer.dart run --analysisDirs=tool,example
+
+  subpack_analyzer_analysisDirs_verbose:
+    description: Run the subpack_analyzer in all packages that require it.
+    packageFilters:
+      scope:
+        - werkbank
+    run: cd packages/subpack_analyzer &&
+      fvm dart run bin/subpack_analyzer.dart run --analysisDirs=tool,example --verbose

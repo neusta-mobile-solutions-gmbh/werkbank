@@ -12,26 +12,31 @@ import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 
 class DirectiveExtractor with SubpackLogger {
-  DirectiveExtractor({
-    required this.packageRoot,
-  });
+  DirectiveExtractor._directiveExtractor({
+    required PackageRoot packageRoot,
+  }) : _packageRoot = packageRoot;
 
-  final PackageRoot packageRoot;
-
-  ISet<Usage> extractDirectives({
+  static ISet<Usage> extractDirectives({
+    required PackageRoot packageRoot,
     required DartFile file,
   }) {
+    final directiveExtractor = DirectiveExtractor._directiveExtractor(
+      packageRoot: packageRoot,
+    );
+    return directiveExtractor._extractWithDartAnalyzer(file: file);
+  }
+
+  final PackageRoot _packageRoot;
+
+  ISet<Usage> _extractWithDartAnalyzer({required DartFile file}) {
     logVerbose(
       '\n${Emotes.directiveOther}  Extracting directives from '
       '${SubpackUtils.getFileUri(
-        rootDirectory: packageRoot.rootDirectory,
+        rootDirectory: _packageRoot.rootDirectory,
         relativePath: file.file.path,
       )}:',
     );
-    return extractWithDartAnalyzer(file);
-  }
 
-  ISet<Usage> extractWithDartAnalyzer(DartFile file) {
     // For now this is fine
     final featureSet = FeatureSet.latestLanguageVersion();
     final result = parseFile(path: file.file.path, featureSet: featureSet);
@@ -41,12 +46,12 @@ class DirectiveExtractor with SubpackLogger {
     final directives = result.unit.directives;
     for (final directive in directives) {
       if (directive is NamespaceDirective) {
-        final usage = handleNamespaceDirective(directive, file);
+        final usage = _handleNamespaceDirective(directive, file);
         if (usage != null) {
           logVerbose(
             '  - ${Emotes.directiveImport}'
             '  import: ${SubpackUtils.getFileUri(
-              rootDirectory: packageRoot.rootDirectory,
+              rootDirectory: _packageRoot.rootDirectory,
               relativePath: usage.toString(),
             )}',
           );
@@ -60,7 +65,7 @@ class DirectiveExtractor with SubpackLogger {
     return usages.lockUnsafe;
   }
 
-  Usage? handleNamespaceDirective(
+  Usage? _handleNamespaceDirective(
     NamespaceDirective namespaceDirective,
     DartFile file,
   ) {
@@ -72,7 +77,7 @@ class DirectiveExtractor with SubpackLogger {
       return null;
     } else if (uri.scheme == 'package') {
       final packageName = uri.pathSegments.first;
-      if (packageName == packageRoot.name) {
+      if (packageName == _packageRoot.name) {
         path = p.joinAll(['/lib', ...uri.pathSegments.skip(1)]);
       } else {
         return PackageUsage(packageName: packageName);
@@ -86,7 +91,7 @@ class DirectiveExtractor with SubpackLogger {
     }
 
     final rootRelativePath = p.join(p.dirname(file.file.path), path);
-    final treeNode = packageRoot.fromPath(rootRelativePath);
+    final treeNode = _packageRoot.fromPath(rootRelativePath);
     final localUsageType = switch (namespaceDirective) {
       ExportDirective() => LocalUsageType.export,
       ImportDirective() => LocalUsageType.import,

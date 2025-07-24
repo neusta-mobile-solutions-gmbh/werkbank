@@ -13,10 +13,7 @@ import 'package:subpack_analyzer/src/directive_extractor.dart';
 class UsagesBuilder with SubpackLogger {
   UsagesBuilder._usagesBuilder({
     required PackageRoot packageRoot,
-  }) : _packageRoot = packageRoot,
-       _directiveExtractor = DirectiveExtractor(
-         packageRoot: packageRoot,
-       );
+  }) : _packageRoot = packageRoot;
 
   /// Builds and returns a [UsagesModel] for the given [packageRoot].
   /// This function analyzes all Dart files in the package and collects their import/export usages.
@@ -31,8 +28,6 @@ class UsagesBuilder with SubpackLogger {
   }
 
   final PackageRoot _packageRoot;
-  // final SubpackErrorCollector _errors;
-  final DirectiveExtractor _directiveExtractor;
 
   final _usingDirectives = <DartFile, ISet<Usage>>{};
   final _deepestSrcDirectory = <DartFile, TreeDirectory?>{};
@@ -90,7 +85,8 @@ class UsagesBuilder with SubpackLogger {
     required DartFile file,
     required TreeDirectory? srcDirectory,
   }) {
-    final usages = _directiveExtractor.extractDirectives(
+    final usages = DirectiveExtractor.extractDirectives(
+      packageRoot: _packageRoot,
       file: file,
     );
 

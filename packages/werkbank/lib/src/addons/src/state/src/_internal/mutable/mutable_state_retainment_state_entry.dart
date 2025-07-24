@@ -1,12 +1,10 @@
-import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_holder.dart';
-import 'package:werkbank/src/use_case/src/retained_use_case_state.dart';
+import 'package:werkbank/werkbank.dart';
 
 class MutableStateRetainmentStateEntry
     extends RetainedUseCaseStateEntry<MutableStateRetainmentStateEntry> {
-  final Map<MutableStateHolderId, _DisposableMutableValue>
-  _disposableValuesById = {};
+  final Map<MutableStateId, _DisposableMutableValue> _disposableValuesById = {};
 
-  void clean(bool Function(MutableStateHolderId id) shouldRemove) {
+  void clean(bool Function(MutableStateId id) shouldRemove) {
     _disposableValuesById.removeWhere((id, holder) {
       if (shouldRemove(id)) {
         holder.dispose();
@@ -17,7 +15,7 @@ class MutableStateRetainmentStateEntry
   }
 
   void setMutableValue(
-    MutableStateHolderId id,
+    MutableStateId id,
     Object value,
     void Function(Object value) dispose,
   ) {
@@ -32,7 +30,7 @@ class MutableStateRetainmentStateEntry
   }
 
   Object? getMutableValue(
-    MutableStateHolderId id,
+    MutableStateId id,
   ) {
     final disposableValue = _disposableValuesById[id];
     if (disposableValue == null) {

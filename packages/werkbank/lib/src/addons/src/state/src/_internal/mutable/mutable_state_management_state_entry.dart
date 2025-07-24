@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_holder.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_retainment_state_entry.dart';
@@ -10,7 +12,7 @@ class MutableStateManagementStateEntry
           MutableStateManagementStateEntry,
           TransientUseCaseStateSnapshot
         > {
-  final Map<MutableStateHolderId, _MutableStateBundle> _stateBundlesById = {};
+  final Map<MutableStateId, _MutableStateBundle> _stateBundlesById = {};
 
   @override
   void prepareForBuild(
@@ -41,7 +43,7 @@ class MutableStateManagementStateEntry
   }
 
   ValueContainer<T> addMutableStateHolder<T extends Object>(
-    MutableStateHolderId id,
+    MutableStateId id,
     T Function(TickerProvider tickerProvider) create,
     void Function(T value) dispose,
   ) {
@@ -58,6 +60,11 @@ class MutableStateManagementStateEntry
     _stateBundlesById[id] = bundle;
     return holder;
   }
+
+  Map<MutableStateId, MutableStateHolder<Object?>> get stateHolders =>
+      UnmodifiableMapView(
+        _stateBundlesById.map((key, value) => MapEntry(key, value.holder)),
+      );
 
   @override
   void loadSnapshot(TransientUseCaseStateSnapshot snapshot) {}

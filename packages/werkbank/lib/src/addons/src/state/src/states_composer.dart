@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holder.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holders_state_entry.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_holder.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_management_state_entry.dart';
 import 'package:werkbank/werkbank.dart';
 
@@ -37,7 +36,7 @@ For mutable objects, use c.states.mutable() instead.''',
       initialValue: initialValue,
     );
     _c.getTransientStateEntry<ImmutableStateHoldersStateEntry>().addStateHolder(
-      ImmutableStateHolderId(id),
+      ImmutableStateId(id),
       stateHolder,
     );
     return stateHolder;
@@ -63,7 +62,7 @@ For mutable objects, use c.states.mutable() instead.''',
     return _c
         .getTransientStateEntry<MutableStateManagementStateEntry>()
         .addMutableStateHolder<T>(
-          MutableStateHolderId(id),
+          MutableStateId(id),
           create,
           dispose,
         );

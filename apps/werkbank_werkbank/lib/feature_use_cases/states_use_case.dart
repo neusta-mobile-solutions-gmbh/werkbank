@@ -65,6 +65,9 @@ WidgetBuilder statesUseCase(UseCaseComposer c) {
       );
 
   return (context) {
+    final composition = UseCase.compositionOf(context);
+    final mutableStates = composition.states.mutable;
+    final immutableStates = composition.states.immutable;
     return Column(
       spacing: 24,
       mainAxisSize: MainAxisSize.min,
@@ -101,6 +104,9 @@ WidgetBuilder statesUseCase(UseCaseComposer c) {
             Tab(text: 'Tab 3'),
           ],
         ),
+        const SizedBox(height: 40),
+        Text('Mutable States: ${mutableStates.length}'),
+        Text('Immutable States: ${immutableStates.length}'),
       ],
     );
   };

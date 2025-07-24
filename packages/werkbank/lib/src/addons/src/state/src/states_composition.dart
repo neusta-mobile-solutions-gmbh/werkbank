@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holders_state_entry.dart';
+import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_management_state_entry.dart';
 import 'package:werkbank/werkbank.dart';
 
 extension StatesCompositionExtension on UseCaseComposition {
@@ -7,8 +8,11 @@ extension StatesCompositionExtension on UseCaseComposition {
 }
 
 extension type StatesComposition(UseCaseComposition _composition) {
-  ImmutableStateHoldersStateEntry get _stateEntry =>
-      _composition.getTransientStateEntry<ImmutableStateHoldersStateEntry>();
+  Map<ImmutableStateId, ValueNotifier<Object?>> get immutable => _composition
+      .getTransientStateEntry<ImmutableStateHoldersStateEntry>()
+      .stateHolders;
 
-  List<ValueNotifier<Object?>> get states => _stateEntry.stateHolders;
+  Map<MutableStateId, ValueContainer<Object?>> get mutable => _composition
+      .getTransientStateEntry<MutableStateManagementStateEntry>()
+      .stateHolders;
 }

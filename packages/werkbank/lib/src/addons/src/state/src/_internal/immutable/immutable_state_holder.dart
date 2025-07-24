@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holders_snapshot.dart';
 
-extension type ImmutableStateHolderId(String _id) {}
-
 class ImmutableStateHolder<T> extends ValueNotifier<T> {
   ImmutableStateHolder({
     required T initialValue,

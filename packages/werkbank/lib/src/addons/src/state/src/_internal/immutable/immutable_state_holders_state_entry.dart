@@ -11,8 +11,8 @@ class ImmutableStateHoldersStateEntry
           ImmutableStateHoldersStateEntry,
           ImmutableStateHoldersSnapshot
         > {
-  final Map<ImmutableStateHolderId, ImmutableStateHolder<Object?>>
-  _stateHoldersById = {};
+  final Map<ImmutableStateId, ImmutableStateHolder<Object?>> _stateHoldersById =
+      {};
 
   @override
   void prepareForBuild(
@@ -33,7 +33,7 @@ class ImmutableStateHoldersStateEntry
   }
 
   void addStateHolder(
-    ImmutableStateHolderId id,
+    ImmutableStateId id,
     ImmutableStateHolder<Object?> stateHolder,
   ) {
     assert(
@@ -43,8 +43,8 @@ class ImmutableStateHoldersStateEntry
     _stateHoldersById[id] = stateHolder;
   }
 
-  List<ImmutableStateHolder<Object?>> get stateHolders =>
-      UnmodifiableListView(_stateHoldersById.values);
+  Map<ImmutableStateId, ImmutableStateHolder<Object?>> get stateHolders =>
+      UnmodifiableMapView(_stateHoldersById);
 
   @override
   void loadSnapshot(ImmutableStateHoldersSnapshot snapshot) {
@@ -83,6 +83,6 @@ class ImmutableStateHoldersSnapshot extends TransientUseCaseStateSnapshot {
     required this.immutableStateHolderSnapshots,
   });
 
-  final IMap<ImmutableStateHolderId, ImmutableStateHolderSnapshot>
+  final IMap<ImmutableStateId, ImmutableStateHolderSnapshot>
   immutableStateHolderSnapshots;
 }

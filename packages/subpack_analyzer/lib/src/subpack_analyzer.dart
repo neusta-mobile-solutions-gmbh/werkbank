@@ -113,8 +113,11 @@ class SubpackAnalyzer with SubpackLogger {
       for (final error in errors) {
         logError(error.errorMessage);
       }
+      final errorCountString = errors.length == 1
+          ? '1 error has been found!'
+          : '${errors.length} errors have been found!';
       logAttention(
-        '\n${Emotes.redExMark} ${errors.length} errors have been found!',
+        '\n${Emotes.redExMark} $errorCountString',
       );
     } else {
       logSuccess('\n${Emotes.checkmark} No errors have been found!');

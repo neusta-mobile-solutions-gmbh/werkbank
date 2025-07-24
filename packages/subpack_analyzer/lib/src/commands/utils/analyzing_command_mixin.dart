@@ -1,0 +1,61 @@
+import 'dart:io';
+
+import 'package:path/path.dart' as p;
+import 'package:subpack_analyzer/src/commands/utils/subpack_command.dart';
+
+mixin AnalyzingCommandMixin on SubpackCommand {
+  @override
+  void initialize() {
+    super.initialize();
+    argParser
+      ..addOption(
+        'root',
+        abbr: 'r',
+        help:
+            'Specifies the root directory where the subpack analysis begins. '
+            'All paths used during the analysis will be resolved relative to'
+            ' this directory.',
+        valueHelp: './path/to/project',
+      )
+      ..addMultiOption(
+        'analysisDirs',
+        abbr: 'o',
+        help: 'Adds optional directories to the analysis.',
+        defaultsTo: ['lib', 'bin'],
+        // TODO: Better help message.
+        valueHelp: '["tool", "assets"]',
+      );
+  }
+
+  late final AnalysisParameters analysisParameters = () {
+    final argResults = this.argResults!;
+    final rootPath = argResults.option('root');
+    final optionalDirectories = argResults.multiOption('analysisDirs');
+    final rootDirectory = rootPath == null
+        ? Directory.current
+        : Directory(rootPath);
+    // TODO: Enable this later.
+    // final directories = {
+    //   for (final dir in optionalDirectories)
+    //     Directory(p.join(rootDirectory.path, dir)),
+    // };
+
+    return AnalysisParameters(
+      rootDirectory: rootDirectory,
+      directories: optionalDirectories.toSet(),
+    );
+  }();
+}
+
+class AnalysisParameters {
+  AnalysisParameters({
+    required this.rootDirectory,
+    required this.directories,
+  });
+
+  final Directory rootDirectory;
+
+  // TODO: Enable this later.
+  // final Set<Directory> directories;
+  final Set<String> directories;
+}

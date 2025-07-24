@@ -22,6 +22,12 @@ WidgetBuilder exampleUseCase(UseCaseComposer c) {
 }
 ```
 
+All customizations with the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) are **optional**.
+Your use case will work even if minimal, such as in the example above.
+However, most are worth the time and effort to implement, since they
+improve your development experience, make testing and design review easier,
+or help to impress your customers.
+
 There are many functions and getters defined on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
 They can be used in the use case before returning the
 [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html) to customize the use case.
@@ -131,6 +137,7 @@ The [ConstraintsAddon](../werkbank/ConstraintsAddon-class.html) allows you to mo
 passed to your use case, enabling you to test how your widget behaves under different size restrictions.
 
 You can set constraints in two ways:
+
 - In the Werkbank UI by dragging the rulers, using shortcuts, or entering values in the text fields.
   - Learn more about this in the [Constraints](Constraints-topic.html) topic
     or by viewing the shortcuts in the home page of your Werkbank by tapping the name or logo in the top left corner.
@@ -140,6 +147,7 @@ You can set constraints in two ways:
 Even when setting constraints programmatically, you can always change them interactively in the Werkbank UI.
 
 Here is an example of a use case that customizes the constraints of a slider widget:
+
 ```dart
 WidgetBuilder sliderUseCase(UseCaseComposer c) {
   // Set initial constraints for the use case.
@@ -207,6 +215,38 @@ you can use [`c.constraints.supported(const BoxConstraints(minWidth: 50))`](../w
 to prevent setting constraints smaller than that.
 
 ## Descriptions, Tags & URLs
+
+The [DescriptionAddon](../werkbank/DescriptionAddon-class.html) allows you to add metadata about your use case
+that is displayed in the "INSPECT" tab of the Werkbank UI.
+
+```dart
+WidgetBuilder sliderUseCase(UseCaseComposer c) {
+  // Add a description of your widget.
+  c.description(
+    'A *slider* that allows to select a `value` from a range.\n'
+      'You can even use **Markdown** syntax here!',
+  );
+  // Add tags to categorize your use case.
+  c.tags(['input', 'slider']);
+  // Add URLs to link to documentation or other resources.
+  c.urls([
+    'https://api.flutter.dev/flutter/material/Slider-class.html',
+    'https://m3.material.io/components/sliders',
+  ]);
+
+  return (context) {
+    return Slider(/* ... */);
+  };
+}
+```
+
+The **description** is a text that describes the use case is some way.
+You can use it to:
+- Describe the widget and its purpose.
+- Provide context about where the widget should be used.
+- Explain the effect of the knobs.
+- Or anything else you want.
+You can even use Markdown syntax to format the text.
 
 ## Background
 

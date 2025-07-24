@@ -14,6 +14,8 @@ const String src = 'src';
 class SubpackUtils {
   SubpackUtils._();
 
+  static RegExp validPackageNamePattern = RegExp(r'^[a-z_][a-z0-9_]*$');
+
   /// Returns the content read from a yaml file.
   static Future<YamlMap?> readYaml(String filePath) async {
     final subpackFile = File(filePath);
@@ -104,8 +106,7 @@ class SubpackUtils {
   /// Returns wether packageName is valid by [this definition](https://dart.dev/tools/linter-rules/package_names).
   /// Does not check for reserved words!
   static bool isValidPackageName(String packageName) {
-    final pattern = RegExp(r'^[a-z_][a-z0-9_]*$');
-    return pattern.hasMatch(packageName);
+    return validPackageNamePattern.hasMatch(packageName);
   }
 
   static bool get isVerbose => Zone.current[#verbose] == true;

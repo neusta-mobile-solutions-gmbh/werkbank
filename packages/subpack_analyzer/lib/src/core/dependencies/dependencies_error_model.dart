@@ -6,6 +6,17 @@ import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 
 sealed class DependenciesError extends SubpackError {}
 
+class InvalidPackageNameError extends DependenciesError {
+  InvalidPackageNameError({required this.invalidPackageName});
+
+  final String invalidPackageName;
+
+  @override
+  String get errorMessage {
+    return 'The package name $invalidPackageName is invalid!';
+  }
+}
+
 class DirectoryIsNotPartOfPathError extends DependenciesError {
   DirectoryIsNotPartOfPathError({
     required this.packageRoot,

@@ -16,7 +16,7 @@ Use **states** when:
 - Managing custom data models that don't require interactive manipulation
 - Quick prototyping where implementing a custom knob would be overkill
 
-If you need a control but no suitable knob exists, consider [implementing a custom knob](knobs.html) instead of using states.
+If you need a control but no suitable knob exists, consider [implementing a custom knob](Knobs-topic.html) instead of using states.
 
 ## Types of States
 

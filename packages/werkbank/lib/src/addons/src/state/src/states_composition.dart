@@ -7,6 +7,7 @@ extension StatesCompositionExtension on UseCaseComposition {
   StatesComposition get states => StatesComposition(this);
 }
 
+/// {@category Provide State Without Knobs}
 extension type StatesComposition(UseCaseComposition _composition) {
   Map<ImmutableStateId, ValueNotifier<Object?>> get immutable => _composition
       .getTransientStateEntry<ImmutableStateHoldersStateEntry>()

@@ -4,6 +4,7 @@ import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_management_state_entry.dart';
 import 'package:werkbank/werkbank.dart';
 
+/// {@category Provide State Without Knobs}
 extension type StatesComposer(UseCaseComposer _c) {
   ValueNotifier<T> immutable<T>(String id, {required T initialValue}) {
     // Ensure that the initial value is actually immutable.

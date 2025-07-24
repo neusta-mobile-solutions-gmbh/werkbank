@@ -214,6 +214,8 @@ For example if you know that your widget will overflow when the width is less th
 you can use [`c.constraints.supported(const BoxConstraints(minWidth: 50))`](../werkbank/SupportedSizesComposerExtension/supported.html)
 to prevent setting constraints smaller than that.
 
+Learn more about constraints in the [Constraints](Constraints-topic.html) topic.
+
 ## Descriptions, Tags & URLs
 
 The [DescriptionAddon](../werkbank/DescriptionAddon-class.html) allows you to add metadata about your use case
@@ -244,9 +246,17 @@ The **description** is a text that describes the use case is some way.
 You can use it to:
 - Describe the widget and its purpose.
 - Provide context about where the widget should be used.
-- Explain the effect of the knobs.
 - Or anything else you want.
-You can even use Markdown syntax to format the text.
+
+Markdown syntax is also supported.
+To add a description, use the [`c.description('Description Text')`](../werkbank/DescriptionComposerExtension/description.html) method.
+
+The **tags** are a list of strings that categorize your use case.
+You can view the tags of a use case in the "INSPECT" tab.
+In addition, the home page shows a list of all tags used in your project.
+Clicking on a tag will paste `tag:"TAG_NAME"` into the search field,
+filtering the use cases by that tag.
+To add tags, use the [`c.tags(['tag1', 'tag2'])`](../werkbank/TagsComposerExtension/tags.html) method.
 
 ## Background
 

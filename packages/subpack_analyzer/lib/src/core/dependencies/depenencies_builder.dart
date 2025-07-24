@@ -202,6 +202,10 @@ class DependenciesBuilder with SubpackLogger {
         return null;
       }
       // Dart package
+      final isValidPackageName = SubpackUtils.isValidPackageName(dependency);
+      if (!isValidPackageName) {
+        _errors.add(InvalidPackageNameError(invalidPackageName: dependency));
+      }
       return DartPackageDependency(name: dependency);
     }
   }

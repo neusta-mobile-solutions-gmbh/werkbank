@@ -115,7 +115,7 @@ class UndependedLocalUsageError implements AnalyzerError {
     };
 
     final exposingSubpacks = usageExposingSubpacks.isEmpty
-        ? '\nThe usage is not esposed in any subpacks.'
+        ? 'The usage is not esposed in any subpacks.'
         : 'The $localUsageTypeString file is exposed in the following subpacks:'
               '\n${SubpackUtils.createSubpackLinks(
                 packageRoot.rootDirectory,

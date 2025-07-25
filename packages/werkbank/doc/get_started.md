@@ -92,8 +92,7 @@ For example, you should consider adding the
 [ThemingAddon](../werkbank/ThemingAddon-class.html) and the
 [LocalizationAddon](../werkbank/LocalizationAddon-class.html), since almost every app uses theming, and it is also good practice to use a localization framework
 even if your app only supports one language.
-<!-- TODO: Rename to "Configuring Addons"? -->
-To learn more about configuring your addons, visit the [Addons](Addons-topic.html) documentation.
+To learn more about addons, visit the [Configuring Addons](Configuring%20Addons-topic.html) topic.
 
 ### Defining the Use Case Tree
 The **[root](../werkbank/WerkbankApp/root.html)** parameter
@@ -179,7 +178,7 @@ then returns the widget that the use case is supposed to showcase.
 <!-- TODO: Check link. This topic doesn't exist yet. -->
 The [UseCaseComposer](../werkbank/UseCaseComposer-class.html) can be used
 in many different ways to configure and augment the use case.
-Visit the [Writing Use Cases](Use%20Cases-topic.html) topic to learn more about
+Visit the [Writing Use Cases](Writing%20Use%20Cases-topic.html) topic to learn more about
 how to expertly write use cases and utilize the
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) to its full potential.
 
@@ -193,5 +192,5 @@ Now you should have everything set up to run your Werkbank app.
 <!-- TODO: Check these links. Some topics don't exist yet. -->
 Take a look at these topics next to advance your Werkbank setup further:
 - [File Structure](File%20Structure-topic.html) - Learn how to organize the files and use cases in your project.
-- [Addon Configuration](Configuring%20Addons-topic.html) - Further configure the addons you are using.
-- [Writing Use Cases](Writing%Use%20Cases-topic.html) - Explore how to augment your use cases by utilizing the [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
+- [Configuring Addons](Configuring%20Addons-topic.html) - Further configure the addons you are using.
+- [Writing Use Cases](Writing%20Use%20Cases-topic.html) - Explore how to augment your use cases by utilizing the [UseCaseComposer](../werkbank/UseCaseComposer-class.html).

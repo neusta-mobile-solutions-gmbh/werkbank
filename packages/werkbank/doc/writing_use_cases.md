@@ -10,7 +10,7 @@ learn how to create basic use cases and how to structure them in your project.
 
 At the core of customizing your use cases is the
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) which is passed to the
-[UseCaseBuilder](../werkbank/UseCaseBuilder-class.html) function.
+[UseCaseBuilder](../werkbank/UseCaseBuilder.html) function.
 
 ```dart
 WidgetBuilder exampleUseCase(UseCaseComposer c) {

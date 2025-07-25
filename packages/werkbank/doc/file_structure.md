@@ -8,7 +8,7 @@ However, in the end, it is up to you to decide what works best for your project.
 <!-- TODO: Check link. This topic doesn't exist yet. -->
 While use cases may start small at first,
 they can grow quite large once you start augmenting them, for example, with the techniques described in the
-[Writing Use Cases](Use%20Cases-topic.html) topic.
+[Writing Use Cases](Writing%20Use%20Cases-topic.html) topic.
 
 Because of this, we recommend creating a separate file for each component/widget you want to showcase.
 If your component has multiple use cases, it is likely sufficient to put them in the same file.
@@ -17,7 +17,7 @@ This file should contain a getter for the
 or
 [WerkbankComponent](../werkbank/WerkbankComponent-class.html),
 as well as the
-[UseCaseBuilder](../werkbank/UseCaseBuilder-class.html)
+[UseCaseBuilder](../werkbank/UseCaseBuilder.html)
 functions for the use cases.
 
 For example, such a file with multiple use cases could look like this:
@@ -61,7 +61,7 @@ Since the getter already publicly exposes the
 or
 [WerkbankComponent](../werkbank/WerkbankComponent-class.html),
 you can make the
-[UseCaseBuilder](../werkbank/UseCaseBuilder-class.html)s
+[UseCaseBuilder](../werkbank/UseCaseBuilder.html)s
 private, and if you have only one of them, you can even just call it `_useCase`.
 
 When creating a file for a component,
@@ -115,4 +115,3 @@ for example, when writing golden tests
 using a [DisplayApp](../werkbank/DisplayApp-class.html),
 as described in the
 [Testing with Use Cases](Testing%20with%20Use%20Cases-topic.html) topic.
-<!-- TODO: Check link. This topic doesn't exist yet. -->

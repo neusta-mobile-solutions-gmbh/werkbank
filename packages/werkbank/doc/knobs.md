@@ -32,7 +32,7 @@ In increasing order, they become more complex, but also more powerful.
    - Easy
    - Sufficient in most cases.
 2. Use [makeRegularKnob](../werkbank/RegularKnobsExtension/makeRegularKnob.html) and
-   [makeNullableKnob](../werkbank/NullableKnobsExtension/makeNullableKnob.html) to create a knob with a custom control widget.
+   [makeNullableKnob](../werkbank/NullableKnobsComposer/makeNullableKnob.html) to create a knob with a custom control widget.
    - Medium Difficulty
    - Only for knobs with **immutable** value type.
 3. Use [registerKnob](../werkbank/KnobsComposer/registerKnob.html) to register a custom [Knob](../werkbank/Knob-class.html) implementation.
@@ -96,7 +96,7 @@ Especially versatile are knobs that can return any type `T`:
 - [customSwitch](../werkbank/CustomSwitchKnobExtension/customSwitch.html)
 - [customSlider](../werkbank/CustomSliderKnobExtension/customSlider.html)
 - [customField](../werkbank/CustomFieldKnobExtension/customField.html)
-- [customFieldMultiLine](../werkbank/CustomFieldMultiLineKnobExtension/customFieldMultiLine.html)
+- [customFieldMultiLine](../werkbank/CustomFieldKnobExtension/customFieldMultiLine.html)
 - [customDropdown](../werkbank/CustomDropdownKnobExtension/customDropdown.html)
 
 These are intended to be used for writing custom knobs using extensions.
@@ -361,7 +361,7 @@ String _hexColorInputFormatter(Color value) {
 </details>
 
 <details>
-<summary><b>Example:</b> <code>List&lt;String&gt;</code> knob. (Uses <a href="../werkbank/CustomFieldKnobExtension/customFieldMultiline.html">customFieldMultiline</a>)</summary>
+<summary><b>Example:</b> <code>List&lt;String&gt;</code> knob. (Uses <a href="../werkbank/CustomFieldKnobExtension/customFieldMultiLine.html">customFieldMultiline</a>)</summary>
 
 ```dart
 extension StringListKnobExtension on KnobsComposer {

@@ -4,7 +4,7 @@
 > This documentation is under construction and therefore very minimal.
 
 ## Commit Messages
-We follow the Guideline at https://cbea.ms/git-commit:
+We follow the guideline at https://cbea.ms/git-commit:
 - Separate subject from body with a blank line
 - Limit the subject line to 50 characters
 - Capitalize the subject line

@@ -1,3 +1,7 @@
+# 0.16.2 (unreleased)
+- Increase maximum `go_router` version to 16.0.0 and lower minimum version to 13.1.0.
+  This should lower the risk of dependency conflicts.
+
 # 0.16.1
 - Added a `Werkbank System` theme, which will always match your system. It's also default now.
 - Add a "Knobs" documentation topic which explains how to create your own knobs.

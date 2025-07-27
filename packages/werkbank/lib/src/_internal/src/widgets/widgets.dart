@@ -38,4 +38,5 @@ export 'src/use_case_viewport_size.dart';
 export 'src/use_case_widget_display.dart';
 export 'src/w_breakpoints.dart';
 export 'src/web_fixer/web_fixer.dart';
+export 'src/werkbank_persistence.dart';
 export 'src/werkbank_shortcuts.dart';

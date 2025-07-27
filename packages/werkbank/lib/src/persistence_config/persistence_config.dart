@@ -4,4 +4,5 @@
 library;
 
 export 'src/persistence_config.dart';
+export 'src/persistent_controller_initialization.dart';
 export 'src/store.dart';

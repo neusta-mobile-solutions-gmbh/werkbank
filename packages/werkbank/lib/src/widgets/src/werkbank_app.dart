@@ -26,6 +26,7 @@ class WerkbankApp extends StatelessWidget {
     this.lastUpdated,
     required this.appConfig,
     required this.addonConfig,
+    this.persistenceConfig = const PersistenceConfig(),
     required this.root,
     super.key,
   });
@@ -77,6 +78,9 @@ class WerkbankApp extends StatelessWidget {
   /// ),
   /// ```
   final AddonConfig addonConfig;
+
+  // TODO: Document
+  final PersistenceConfig persistenceConfig;
 
   /// The root of the use case tree.
   ///

@@ -294,20 +294,7 @@ class _WerkbankPersistance extends StatelessWidget {
           ),
         };
       },
-      builder: (context, phase) => switch (phase) {
-        PersistenceInitializing() =>
-          // While initializing the Persistence, almost the whole werkbank
-          // widget-tree will not be built and therefore there will be
-          // no conflicts regarding the missing Persistence.
-          //
-          // But this widget (SizedBox) is never visible either, since
-          // [WerkbankPersistence] defers the first frame until
-          // the persistence is ready.
-          // This way we avoid a jumping color effect when building the first
-          // frames.
-          const SizedBox.expand(),
-        PersistenceReady(:final child) => child,
-      },
+      placeholder: const SizedBox.expand(),
       child: child,
     );
   }

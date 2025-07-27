@@ -5,39 +5,21 @@ import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
-typedef PersistencePhaseWidgetBuilder =
-    Widget Function(
-      BuildContext context,
-      WerkbankPersistencePhase phase,
-    );
-
 typedef ControllerMapFactory =
     Map<Type, PersistentController> Function(
       SharedPreferencesWithCache prefsWithCache,
     );
 
-sealed class WerkbankPersistencePhase {
-  const WerkbankPersistencePhase();
-}
-
-class PersistenceInitializing extends WerkbankPersistencePhase {}
-
-class PersistenceReady extends WerkbankPersistencePhase {
-  const PersistenceReady(this.child);
-
-  final Widget child;
-}
-
 class WerkbankPersistence extends StatefulWidget {
   const WerkbankPersistence({
-    required this.builder,
     required this.persistentControllers,
+    required this.placeholder,
     required this.child,
     super.key,
   });
 
-  final PersistencePhaseWidgetBuilder builder;
   final List<PersistentController> persistentControllers;
+  final Widget placeholder;
   final Widget child;
 
   /// {@template werkbank.controller_available_in_app}
@@ -159,20 +141,12 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   @override
   Widget build(BuildContext context) {
     if (!_initialized) {
-      return widget.builder(
-        context,
-        PersistenceInitializing(),
-      );
+      return widget.placeholder;
     }
 
-    return widget.builder(
-      context,
-      PersistenceReady(
-        _InheritedWerkbankPersistence(
-          controllers: _controllers,
-          child: widget.child,
-        ),
-      ),
+    return _InheritedWerkbankPersistence(
+      controllers: _controllers,
+      child: widget.child,
     );
   }
 }

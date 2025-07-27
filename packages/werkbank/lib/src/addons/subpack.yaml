@@ -1,0 +1,10 @@
+dependencies:
+  - /lib/src/addon_api
+  - /lib/src/app_config
+  - /lib/src/components
+  - /lib/src/environment
+  # TODO... probably more
+  # Usually we do not want to depend on internal sub-packages, since that would make it impossible
+  # for third parties to develop the same addon.
+  # Localizations are an exception to that.
+  - /lib/src/_internal/src/localizations

@@ -1,0 +1,3 @@
+# Test Subpack
+dependencies:
+  - ../../another_nested_subpack

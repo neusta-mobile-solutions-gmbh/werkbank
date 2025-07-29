@@ -1,6 +1,8 @@
 dependencies:
   - go_router
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
   - /lib/src/_internal/src/routing
+  - /lib/src/_internal/src/widgets
   - /lib/src/use_case
   - /lib/src/tree
 

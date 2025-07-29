@@ -1,0 +1,4 @@
+dependencies:
+  - /lib/src/use_case
+  - /lib/src/tree
+  - web

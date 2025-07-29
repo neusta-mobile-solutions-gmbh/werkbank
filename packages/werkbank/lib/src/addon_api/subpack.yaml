@@ -1,3 +1,14 @@
-dependency:
+dependencies:
   # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
   - /lib/src/_internal/src/widgets
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/_internal/src/routing
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/widgets
+  - /lib/src/tree
+  - /lib/src/app_config
+  - /lib/src/addon_config
+  - /lib/src/environment
+  - /lib/src/use_case
+  - /lib/src/routing
+  - /lib/src/persistence

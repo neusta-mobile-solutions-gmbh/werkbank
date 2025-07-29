@@ -51,8 +51,8 @@ class Analyzer {
   final SubpackErrorCollector<AnalyzerError> _errors;
 
   AnalyzerModel _analyzeRelations() {
-    for (final file in _usages.usingDirectives.keys) {
-      for (final usage in _usages.usingDirectives[file]!) {
+    for (final file in _usages.getUsingDirectives().keys) {
+      for (final usage in _usages.getUsingDirectives()[file]!) {
         _checkUndependedUsage(file, usage);
       }
     }

@@ -5,11 +5,13 @@ enum LocalUsageType { import, export }
 
 class UsagesModel {
   UsagesModel({
-    required this.usingDirectives,
-  });
+    required IMap<DartFile, ISet<Usage>> usingDirectives,
+  }) : _usingDirectives = usingDirectives;
 
   /// Imports of dart files
-  final IMap<DartFile, ISet<Usage>> usingDirectives;
+  final IMap<DartFile, ISet<Usage>> _usingDirectives;
+
+  IMap<DartFile, ISet<Usage>> getUsingDirectives() => _usingDirectives;
 }
 
 /// Import/Export classes

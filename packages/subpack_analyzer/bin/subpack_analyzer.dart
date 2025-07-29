@@ -7,7 +7,7 @@ import 'package:subpack_analyzer/src/commands/run/run_command.dart';
 Future<void> main(List<String> args) async {
   final runner = CommandRunner<void>(
     'subpack_analyzer',
-    "A tool to analyzer your dart package's subpackages.",
+    "A tool to analyze your dart package's subpackages.",
   );
   runner.addCommand(RunCommand());
   runner.addCommand(GraphCommand());

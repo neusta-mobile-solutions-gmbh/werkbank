@@ -1,69 +1,93 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:args/command_runner.dart';
-import 'package:mason_logger/mason_logger.dart';
+import 'package:subpack_analyzer/src/commands/utils/analyzing_command_mixin.dart';
+import 'package:subpack_analyzer/src/commands/utils/exit_code.dart';
+import 'package:subpack_analyzer/src/commands/utils/logging_command_mixin.dart';
+import 'package:subpack_analyzer/src/commands/utils/subpack_command.dart';
+import 'package:subpack_analyzer/src/core/analyzer/analyzer.dart';
+import 'package:subpack_analyzer/src/core/analyzer/analyzer_model.dart';
+import 'package:subpack_analyzer/src/core/dependencies/dependencies_model.dart';
+import 'package:subpack_analyzer/src/core/dependencies/depenencies_builder.dart';
+import 'package:subpack_analyzer/src/core/relations/relations_builder.dart';
+import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_builder.dart';
+import 'package:subpack_analyzer/src/core/usages/usages_builder.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 
-import 'package:subpack_analyzer/src/subpack_analyzer.dart';
-
-class RunCommand extends Command<void> {
-  RunCommand() {
-    argParser
-      ..addOption(
-        'root',
-        abbr: 'r',
-        help:
-            'Specifies the root directory where the subpack analysis begins. '
-            'All paths used during the analysis will be resolved relative to'
-            ' this directory.',
-        valueHelp: './path/to/project',
-      )
-      ..addMultiOption(
-        'analysisDirs',
-        abbr: 'o',
-        help:
-            'Adds optional directories to the analysis. "lib" and "bin" are'
-            ' included by default.',
-        valueHelp: '["lib", "bin"]',
-        defaultsTo: ['lib', 'bin'],
-      )
-      ..addFlag(
-        'verbose',
-        abbr: 'v',
-        negatable: false,
-        help: 'Enables additional log messages during the analysis process.',
-      );
-  }
-
+class RunCommand extends SubpackCommand
+    with LoggingCommandMixin, SubpackLogger, AnalyzingCommandMixin {
   @override
   String get name => 'run';
 
   @override
   String get description => 'Runs the analyzer.';
 
-  @override
-  Future<void> run() async {
-    final argResults = this.argResults!;
-    final rootPath = argResults.option('root');
-    final analysisDirs = argResults.multiOption('analysisDirs');
-    final verbose = argResults.flag('verbose');
-    final useAnsi = (Platform.environment['MELOS_ROOT_PATH'] != null);
+  static const String _banner = r"""
 
-    return await runZoned(
-      () async {
-        final exitCode = await SubpackAnalyzer.startSubpackAnalyzer(
-          rootDirectory: rootPath == null
-              ? Directory.current
-              : Directory(rootPath),
-          analysisDirectories: analysisDirs.toSet(),
-        );
-        exit(exitCode);
-      },
-      zoneValues: {
-        #verbose: verbose,
-        AnsiCode: useAnsi, // Make this true by default?
-        // Also pass rootDirectory in here for 'global' access?
-      },
+ ,-.      .               ,
+(   `     |               |
+ `-.  . . |-. ;-. ,-: ,-. | ,
+.   ) | | | | | | | | |   |<
+ `-'  `-` `-' |-' `-` `-' ' `
+              '
+       ,.          .
+      /  \         |
+      |--| ;-. ,-: | . . ,-, ,-. ;-.
+      |  | | | | | | | |  /  |-' |
+      '  ' ' ' `-` ' `-| '-' `-' '
+                     `-'
+                     """;
+
+  @override
+  Future<SubpackExitCode> run() async {
+    logInfo(_banner);
+    logInfo('\n\n>> Starting analysis...');
+
+    final packageRoot = await FileStructureTreeBuilder.buildFileStructureTree(
+      rootDirectory: analysisParameters.rootDirectory,
+      analysisDirectories: analysisParameters.directories,
+      logger: logger,
     );
+
+    final dependenciesModel = await DependenciesBuilder.buildDependencies(
+      packageRoot: packageRoot,
+      logger: logger,
+    );
+    switch (dependenciesModel) {
+      case DependenciesFailiureModel():
+        return finalizeAnalysis(
+          exitCode: SubpackExitCode.invalidDependencies,
+          errors: dependenciesModel.errors,
+        );
+      case DependenciesSuccessModel():
+    }
+
+    final usagesModel = await UsagesBuilder.buildUsages(
+      packageRoot: packageRoot,
+      logger: logger,
+    );
+
+    final relations = await RelationsBuilder.buildRelations(
+      logger: logger,
+      packageRoot: packageRoot,
+    );
+
+    final result = await Analyzer.analyzeRelations(
+      relations: relations,
+      packageRoot: packageRoot,
+      logger: logger,
+      dependencies: dependenciesModel,
+      usages: usagesModel,
+    );
+    switch (result) {
+      case AnalyzerFailiureModel():
+        return finalizeAnalysis(
+          exitCode: SubpackExitCode.undependedUsages,
+          errors: result.errors,
+        );
+      case AnalyzerSuccessModel():
+    }
+
+    return finalizeAnalysis(exitCode: SubpackExitCode.success, errors: null);
   }
 }

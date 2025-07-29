@@ -5,7 +5,7 @@ import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_mod
 import 'package:subpack_analyzer/src/core/usages/usages_model.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
-import 'package:subpack_analyzer/src/directive_extractor.dart';
+import 'package:subpack_analyzer/src/core/usages/directive_extractor.dart';
 
 /// Builds a model of all import and export usages within a package by
 /// traversing its directory tree. Collects usage information for each

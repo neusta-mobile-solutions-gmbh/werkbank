@@ -258,7 +258,7 @@ packages:
     source: hosted
     version: "0.2.16"
   meta:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: meta
       sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
@@ -436,8 +436,8 @@ packages:
   werkbank_lints:
     dependency: "direct dev"
     description:
-      path: "/Users/jacobwolyniec/Developer/nms/werkbank/packages/werkbank_lints"
-      relative: false
+      path: "../werkbank_lints"
+      relative: true
     source: path
     version: "1.0.0"
   win32:

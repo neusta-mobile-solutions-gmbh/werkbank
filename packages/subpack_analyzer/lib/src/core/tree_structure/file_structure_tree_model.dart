@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:path/path.dart' as p;
 
 sealed class TreeNode {
@@ -113,4 +114,21 @@ class PackageRoot {
   }
 
   String get name => p.basename(rootDirectory.path);
+
+  late final IList<SubpackDirectory> allSubpackDirectories = () {
+    final subpackDirectoriesList = <SubpackDirectory>[];
+    void collectSubpackDirectories(TreeDirectory directory) {
+      if (directory is SubpackDirectory) {
+        subpackDirectoriesList.add(directory);
+      }
+      for (final child in directory.directories) {
+        collectSubpackDirectories(child);
+      }
+    }
+
+    for (final directory in subpackDirectories) {
+      collectSubpackDirectories(directory);
+    }
+    return subpackDirectoriesList.lockUnsafe;
+  }();
 }

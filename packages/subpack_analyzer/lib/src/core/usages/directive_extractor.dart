@@ -37,7 +37,7 @@ class DirectiveExtractor with SubpackLogger {
       )}:',
     );
 
-    // For now this is fine
+    // TODO(lzuttermeister): Read version from pubspec.yaml
     final featureSet = FeatureSet.latestLanguageVersion();
     final result = parseFile(path: file.file.path, featureSet: featureSet);
 

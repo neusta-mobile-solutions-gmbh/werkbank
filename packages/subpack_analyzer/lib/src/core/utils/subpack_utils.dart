@@ -103,7 +103,7 @@ class SubpackUtils {
     return subpackLinks.toString();
   }
 
-  /// Returns wether packageName is valid by [this definition](https://dart.dev/tools/linter-rules/package_names).
+  /// Returns whether packageName is valid by [this definition](https://dart.dev/tools/linter-rules/package_names).
   /// Does not check for reserved words!
   static bool isValidPackageName(String packageName) {
     return validPackageNamePattern.hasMatch(packageName);

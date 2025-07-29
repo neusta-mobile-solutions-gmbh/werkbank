@@ -100,7 +100,7 @@ class DirectiveExtractor with SubpackLogger {
       return LocalUsage(dartFile: treeNode, usageType: localUsageType);
     } else {
       throw const FileSystemException(
-        'If this exeption is thrown '
+        'If this exception is thrown '
         'somehing must be terribly wrong ☕🔥',
       );
     }

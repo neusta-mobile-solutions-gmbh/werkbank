@@ -1,2 +1,6 @@
 dependencies:
   - go_router
+  - /lib/src/_internal/src/routing
+  - /lib/src/use_case
+  - /lib/src/tree
+

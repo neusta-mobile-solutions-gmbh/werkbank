@@ -1,4 +1,5 @@
-import 'package:werkbank/src/widgets/widgets.dart';
+/// @docImport 'package:werkbank/src/widgets/widgets.dart';
+library;
 
 /// An enum that describes in which environment the use case is displayed
 /// within a [WerkbankApp].

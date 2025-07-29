@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/addons.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/tree/tree.dart';
-import 'package:werkbank/src/use_case/src/use_case_composer.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 UseCaseBuilder textStylesUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,

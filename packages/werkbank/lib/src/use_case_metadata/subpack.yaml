@@ -1,0 +1,6 @@
+dependencies:
+  - /lib/src/filter
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/_internal/src/filter
+  - /lib/src/use_case
+  - fuzzy

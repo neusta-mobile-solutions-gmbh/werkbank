@@ -5,8 +5,8 @@ dependencies:
   - /lib/src/addon_api
   - /lib/src/_internal/src/widgets
   - /lib/src/_internal/src/routing
-  - lib/src/_internal/src/localizations
-  - lib/src/_internal/src/filter
+  - /lib/src/_internal/src/localizations
+  - /lib/src/_internal/src/filter
   - /lib/src/environment
   - /lib/src/app_config
   - /lib/src/addon_config
@@ -14,3 +14,7 @@ dependencies:
   - /lib/src/persistence
   - /lib/src/notifications
   - /lib/src/components
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - go_router
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - animations

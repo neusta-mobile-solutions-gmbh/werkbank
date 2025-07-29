@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/theme/src/werkbank_theme.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class WerkbankSettings extends StatelessWidget {
   const WerkbankSettings({

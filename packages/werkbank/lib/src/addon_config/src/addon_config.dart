@@ -1,6 +1,6 @@
 import 'package:werkbank/werkbank.dart';
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category File Structure}
 /// {@category Configuring Addons}
 /// A class that defines which addons are used.

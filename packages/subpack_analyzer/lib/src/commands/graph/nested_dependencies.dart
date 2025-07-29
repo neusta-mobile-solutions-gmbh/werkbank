@@ -26,7 +26,11 @@ class NestedDependenciesCommand extends SubpackCommand
   int getSubpackDirectoryId(SubpackDirectory directory) =>
       _idForSubpackDirectory[directory] ??= _nextSubpackDirectoryId++;
 
-  void _addPackages(TreeDirectory directory, StringBuffer buffer, int level) {
+  void _addPackages(
+    TreeDirectory directory,
+    StringBuffer buffer,
+    int level,
+  ) {
     if (directory is SubpackDirectory) {
       final indent = '  ' * level;
       final id = getSubpackDirectoryId(directory);
@@ -63,18 +67,6 @@ class NestedDependenciesCommand extends SubpackCommand
     }
   }
 
-  // TODO: Improve this.
-  Iterable<SubpackDirectory> _getAllSubpackDirectories(
-    Iterable<TreeDirectory> directories,
-  ) sync* {
-    for (final directory in directories) {
-      if (directory is SubpackDirectory) {
-        yield directory;
-      }
-      yield* _getAllSubpackDirectories(directory.directories);
-    }
-  }
-
   @override
   Future<void> run() async {
     final packageRoot = await FileStructureTreeBuilder.buildFileStructureTree(
@@ -103,9 +95,7 @@ class NestedDependenciesCommand extends SubpackCommand
     for (final directory in packageRoot.subpackDirectories) {
       _addPackages(directory, buffer, 1);
     }
-    for (final directory in _getAllSubpackDirectories(
-      packageRoot.subpackDirectories,
-    )) {
+    for (final directory in packageRoot.allSubpackDirectories) {
       final dependencies = dependenciesModel.getSubpackDependencies(
         directory,
       );

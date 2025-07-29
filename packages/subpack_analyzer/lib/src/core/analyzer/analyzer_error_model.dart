@@ -24,7 +24,8 @@ class SubpackageIsReferencingOwnPackageError implements AnalyzerError {
     );
     final subpackLink = link(uri: subpackUri, message: 'subpackage');
 
-    return '\nThe $subpackLink references the containing package $packageName in it\'s dependencies.';
+    return '\nThe $subpackLink references the containing package $packageName'
+        " in it's dependencies.";
   }
 }
 
@@ -59,9 +60,11 @@ class UndependedPackageUsageError extends AnalyzerError {
       fileContainingSubpacks,
     );
 
-    return '\nThe file $dartFileLink uses the ${usage.packageName} package but the usage is not depended on.\n'
-        'To fix this error depend on one of the subpacks that are exposing the usage. '
-        'The dependency has to be added in one of the subpacks containing the file.\n'
+    return '\nThe file $dartFileLink uses the ${usage.packageName} package but'
+        ' the usage is not depended on.\n'
+        'To fix this error depend on one of the subpacks that are exposing the'
+        ' usage. The dependency has to be added in one of the subpacks'
+        ' containing the file.\n'
         'The file is contained in these subpacks:\n$containingSubpacks';
   }
 }
@@ -106,16 +109,24 @@ class UndependedLocalUsageError implements AnalyzerError {
       fileContainingSubpacks,
     );
 
-    final exposingSubpacks = usageExposingSubpacks.isEmpty
-        ? '\nThe usage is not esposed in any subpacks.'
-        : SubpackUtils.createSubpackLinks(
-            packageRoot.rootDirectory,
-            usageExposingSubpacks,
-          );
+    final localUsageTypeString = switch (usage.usageType) {
+      LocalUsageType.import => 'imported',
+      LocalUsageType.export => 'exported',
+    };
 
-    return '\nThe file $dartFileLink uses $usageLink but the usage is not depended on.\n'
-        'To fix this error depend on one of the subpacks that expose the used file.'
-        'The dependency has to be added in one of the subpacks containing the file.\n'
+    final exposingSubpacks = usageExposingSubpacks.isEmpty
+        ? 'The usage is not esposed in any subpacks.'
+        : 'The $localUsageTypeString file is exposed in the following subpacks:'
+              '\n${SubpackUtils.createSubpackLinks(
+                packageRoot.rootDirectory,
+                usageExposingSubpacks,
+              )}';
+
+    return '\nThe file $dartFileLink uses $usageLink but the usage is not'
+        ' depended on.\n'
+        'To fix this error depend on one of the subpacks that expose the '
+        'used file. The dependency has to be added in one of the subpacks '
+        'containing the file.\n'
         'The file is contained in these subpacks:\n$containingSubpacks'
         '$exposingSubpacks';
   }

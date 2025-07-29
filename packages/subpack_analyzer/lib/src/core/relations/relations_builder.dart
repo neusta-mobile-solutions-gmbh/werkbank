@@ -1,31 +1,31 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as p;
-
+import 'package:subpack_analyzer/src/core/relations/relations_model.dart';
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
-import 'package:subpack_analyzer/src/core/relations/relations_model.dart';
 
-/// Builds a model of file and subpackage relationships within a package by traversing its directory tree.
-/// Tracks which Dart files are contained in or exposed by each subpackage, and records the deepest source directory for each file.
+/// Builds a model of file and subpackage relationships within a package by
+/// traversing its directory tree.
+/// Tracks which Dart files are contained in or exposed by each subpackage,
+/// and records the deepest source directory for each file.
 class RelationsBuilder {
+  RelationsBuilder._relationsBuilder({
+    required PackageRoot packageRoot,
+  }) : _packageRoot = packageRoot;
+
   /// Builds and returns a [RelationsModel] for the given [packageRoot].
-  /// This function analyzes the package structure to determine which files are exposed or contained by each subpackage.
+  /// This function analyzes the package structure to determine
+  /// which files are exposed or contained by each subpackage.
   static Future<RelationsModel> buildRelations({
     required PackageRoot packageRoot,
     required Logger logger,
-  }) async {
+  }) {
     final relationsBuilder = RelationsBuilder._relationsBuilder(
       packageRoot: packageRoot,
-      logger: logger,
     );
     return relationsBuilder._buildRelations();
   }
-
-  RelationsBuilder._relationsBuilder({
-    required PackageRoot packageRoot,
-    required Logger logger,
-  }) : _packageRoot = packageRoot;
 
   final PackageRoot _packageRoot;
 
@@ -98,9 +98,9 @@ class RelationsBuilder {
       );
     }
 
-    for (final directory in directory.directories) {
+    for (final child in directory.directories) {
       await _handleDirectory(
-        directory: directory,
+        directory: child,
         containingSubpacks: newContainingSubpacks,
         exposingSubpacks: newExposingSubpacks,
         isDirInSubpack: directory is SubpackDirectory,

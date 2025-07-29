@@ -1,2 +1,16 @@
 dependencies:
   - /lib/src/_internal
+  - /lib/src/use_case
+  - /lib/src/tree
+  - /lib/src/addon_api
+  - /lib/src/_internal/src/widgets
+  - /lib/src/_internal/src/routing
+  - lib/src/_internal/src/localizations
+  - lib/src/_internal/src/filter
+  - /lib/src/environment
+  - /lib/src/app_config
+  - /lib/src/addon_config
+  - /lib/src/theme
+  - /lib/src/persistence
+  - /lib/src/notifications
+  - /lib/src/components

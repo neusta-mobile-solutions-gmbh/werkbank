@@ -44,7 +44,6 @@ class UsagesBuilder with SubpackLogger {
 
     return UsagesModel(
       usingDirectives: _usingDirectives.lock,
-      deepestSrcDirectory: _deepestSrcDirectory.lock,
     );
   }
 

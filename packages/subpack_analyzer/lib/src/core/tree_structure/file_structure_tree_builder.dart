@@ -37,18 +37,15 @@ class FileStructureTreeBuilder with SubpackLogger {
   Future<PackageRoot> _buildFileStructureTree() async {
     logVerbose('\n${Emotes.hammer} Building file tree structure...');
 
-    for (final analysisDir in _analysisDirectories) {
-      if (!await analysisDir.exists()) {
+    final treeDirectories = <TreeDirectory>[];
+    for (final directory in _analysisDirectories) {
+      if (!await directory.exists()) {
         logVerboseWarning(
-          '${Emotes.indexFinger} Directory "$analysisDir" '
+          '${Emotes.indexFinger} Directory "$directory" '
           'does not exist in $_rootDirectory.',
         );
+        continue;
       }
-    }
-
-    final treeDirectories = <TreeDirectory>[];
-
-    for (final directory in _analysisDirectories) {
       final treeDirectory = await _handleDirectory(directory, isToplevel: true);
       treeDirectories.add(treeDirectory);
     }

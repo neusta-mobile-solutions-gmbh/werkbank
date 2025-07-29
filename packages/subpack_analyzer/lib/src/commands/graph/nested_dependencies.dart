@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:subpack_analyzer/src/commands/utils/analyzing_command_mixin.dart';
+import 'package:subpack_analyzer/src/commands/utils/exit_code.dart';
 import 'package:subpack_analyzer/src/commands/utils/logging_command_mixin.dart';
 import 'package:subpack_analyzer/src/commands/utils/subpack_command.dart';
 import 'package:subpack_analyzer/src/core/dependencies/dependencies_model.dart';
@@ -12,7 +13,7 @@ import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_mod
 import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 
 class NestedDependenciesCommand extends SubpackCommand
-    with AnalyzingCommandMixin, LoggingCommandMixin, SubpackLogger {
+    with SubpackLogger, AnalyzingCommandMixin, LoggingCommandMixin {
   @override
   String get name => 'nested-dependencies';
 
@@ -68,7 +69,7 @@ class NestedDependenciesCommand extends SubpackCommand
   }
 
   @override
-  Future<void> run() async {
+  Future<SubpackExitCode> run() async {
     final packageRoot = await FileStructureTreeBuilder.buildFileStructureTree(
       rootDirectory: analysisParameters.rootDirectory,
       analysisDirectories: analysisParameters.directories,
@@ -81,12 +82,10 @@ class NestedDependenciesCommand extends SubpackCommand
     );
     switch (dependenciesModel) {
       case DependenciesFailiureModel():
-        // TODO: Handle the same as for analysis.
-        throw Exception();
-      // return finalizeAnalysis(
-      //   exitCode: 1,
-      //   errors: dependenciesModel.errors,
-      // );
+        return finalizeAnalysis(
+          exitCode: SubpackExitCode.invalidDependencies,
+          errors: dependenciesModel.errors,
+        );
       case DependenciesSuccessModel():
     }
     final buffer = StringBuffer();
@@ -101,5 +100,6 @@ class NestedDependenciesCommand extends SubpackCommand
       _addDependencies(directory, buffer, dependencies);
     }
     stdout.write(buffer);
+    return SubpackExitCode.success;
   }
 }

@@ -3,16 +3,18 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:subpack_analyzer/src/commands/graph/graph.dart';
 import 'package:subpack_analyzer/src/commands/run/run_command.dart';
+import 'package:subpack_analyzer/src/commands/utils/exit_code.dart';
 
 Future<void> main(List<String> args) async {
-  final runner = CommandRunner<void>(
+  final runner = CommandRunner<SubpackExitCode>(
     'subpack_analyzer',
     "A tool to analyze your dart package's subpackages.",
   );
   runner.addCommand(RunCommand());
   runner.addCommand(GraphCommand());
   try {
-    await runner.run(args);
+    final exitCode = await runner.run(args);
+    exit(exitCode?.code ?? 1);
   } on UsageException catch (e) {
     stdout.writeln(e.message);
     exit(64);

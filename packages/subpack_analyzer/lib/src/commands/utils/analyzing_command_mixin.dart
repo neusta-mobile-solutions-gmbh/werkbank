@@ -1,9 +1,14 @@
 import 'dart:io';
 
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:path/path.dart' as p;
+import 'package:subpack_analyzer/src/commands/utils/exit_code.dart';
 import 'package:subpack_analyzer/src/commands/utils/subpack_command.dart';
+import 'package:subpack_analyzer/src/core/utils/emotes.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_error.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 
-mixin AnalyzingCommandMixin on SubpackCommand {
+mixin AnalyzingCommandMixin on SubpackCommand, SubpackLogger {
   @override
   void initialize() {
     super.initialize();
@@ -44,6 +49,28 @@ mixin AnalyzingCommandMixin on SubpackCommand {
       directories: directories,
     );
   }();
+
+  SubpackExitCode finalizeAnalysis({
+    required SubpackExitCode exitCode,
+    required ISet<SubpackError>? errors,
+  }) {
+    logFinish('\n${Emotes.finishFlag} Finished!');
+
+    if (errors != null) {
+      for (final error in errors) {
+        logError(error.errorMessage);
+      }
+      final errorCountString = errors.length == 1
+          ? '1 error has been found!'
+          : '${errors.length} errors have been found!';
+      logAttention(
+        '\n${Emotes.redExMark} $errorCountString',
+      );
+    } else {
+      logSuccess('\n${Emotes.checkmark} No errors have been found!');
+    }
+    return exitCode;
+  }
 }
 
 class AnalysisParameters {

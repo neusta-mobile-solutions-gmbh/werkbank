@@ -7,25 +7,53 @@ import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_mod
 
 class RelationsModel {
   RelationsModel({
-    required this.exposedFiles,
-    required this.containedFiles,
-    required this.exposingSubpackages,
-    required this.containingSubpackages,
-    required this.deepestSrcDirectory,
-  });
+    required IMap<SubpackDirectory, ISet<DartFile>> exposedFiles,
+    required IMap<SubpackDirectory, ISet<DartFile>> containedFiles,
+    required IMap<DartFile, ISet<SubpackDirectory>> exposingSubpackages,
+    required IMap<DartFile, ISet<SubpackDirectory>> containingSubpackages,
+    required IMap<DartFile, TreeDirectory> deepestSrcDirectory,
+  }) : _deepestSrcDirectory = deepestSrcDirectory,
+       _containedFiles = containedFiles,
+       _exposedFiles = exposedFiles,
+       _exposingSubpackages = exposingSubpackages,
+       _containingSubpackages = containingSubpackages;
+
+  final IMap<SubpackDirectory, ISet<DartFile>> _exposedFiles;
+  final IMap<SubpackDirectory, ISet<DartFile>> _containedFiles;
+  final IMap<DartFile, ISet<SubpackDirectory>> _exposingSubpackages;
+  final IMap<DartFile, ISet<SubpackDirectory>> _containingSubpackages;
+  final IMap<DartFile, TreeDirectory> _deepestSrcDirectory;
 
   /// Dart files that are exposed by these subpackages
-  final IMap<SubpackDirectory, ISet<DartFile>> exposedFiles;
+  ISet<DartFile> exposedFiles(SubpackDirectory subpackDirectory) {
+    return _exposedFiles[subpackDirectory]!;
+  }
 
   /// Dart files that are contained in these subpackages
-  final IMap<SubpackDirectory, ISet<DartFile>> containedFiles;
+  ISet<DartFile> containedFiles(SubpackDirectory subpackDirectory) {
+    return _containedFiles[subpackDirectory]!;
+  }
 
   /// Subpackages that expose these dart files
-  final IMap<DartFile, ISet<SubpackDirectory>> exposingSubpackages;
+  ISet<SubpackDirectory> exposingSubpackages(DartFile dartFile) {
+    return _exposingSubpackages[dartFile]!;
+  }
 
   /// Subpackages that contain these dart files
-  final IMap<DartFile, ISet<SubpackDirectory>> containingSubpackages;
+  ISet<SubpackDirectory> containingSubpackages(DartFile dartFile) {
+    return _containingSubpackages[dartFile]!;
+  }
 
-  ///
-  final IMap<DartFile, TreeDirectory> deepestSrcDirectory;
+  /// The deepest subpack directory that contains the Dart file.
+  SubpackDirectory deepestContainingSubpack(DartFile dartFile) {
+    final directories = containingSubpackages(dartFile);
+    assert(
+      directories.isNotEmpty,
+      'Every Dart file should be contained in at least one subpack.',
+    );
+    // Since sets are ordered linked sets by default and we add the
+    // subpack directories in the order of their depth,
+    // the last one is the deepest.
+    return directories.last;
+  }
 }

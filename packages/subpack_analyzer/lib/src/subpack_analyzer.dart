@@ -13,7 +13,6 @@ import 'package:subpack_analyzer/src/core/utils/emotes.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_error.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 
-Set<String> _defaultAnalysisDirectories = {'lib', 'bin'};
 String _banner = r"""
 
  ,-.      .               ,
@@ -32,27 +31,24 @@ String _banner = r"""
 
 class SubpackAnalyzer with SubpackLogger {
   SubpackAnalyzer._subpackAnalyzer({
-    Set<String> optionalDirectories = const {},
+    required Set<String> analysisDirectories,
     required Directory rootDirectory,
   }) : _rootDirectory = rootDirectory,
-       _topLevelDirectories = {
-         ..._defaultAnalysisDirectories,
-         ...optionalDirectories,
-       };
+       _analysisDirectories = analysisDirectories;
 
   final Directory _rootDirectory;
 
   /// All top-level directories that are taken into consideration
   /// for the subpackage analysis.
-  final Set<String> _topLevelDirectories;
+  final Set<String> _analysisDirectories;
 
   static Future<int> startSubpackAnalyzer({
     required Directory rootDirectory,
-    Set<String> optionalDirectories = const {},
-  }) async {
+    Set<String> analysisDirectories = const {},
+  }) {
     final subpackAnalyzer = SubpackAnalyzer._subpackAnalyzer(
-      optionalDirectories: optionalDirectories,
       rootDirectory: rootDirectory,
+      analysisDirectories: analysisDirectories,
     );
     return subpackAnalyzer._startAnalyzing();
   }
@@ -63,7 +59,7 @@ class SubpackAnalyzer with SubpackLogger {
 
     final packageRoot = await FileStructureTreeBuilder.buildFileStructureTree(
       rootDirectory: _rootDirectory,
-      rootDirectories: _topLevelDirectories,
+      rootDirectories: _analysisDirectories,
       logger: logger,
     );
 
@@ -113,8 +109,11 @@ class SubpackAnalyzer with SubpackLogger {
       for (final error in errors) {
         logError(error.errorMessage);
       }
+      final errorCountString = errors.length == 1
+          ? '1 error has been found!'
+          : '${errors.length} errors have been found!';
       logAttention(
-        '\n${Emotes.redExMark} ${errors.length} errors have been found!',
+        '\n${Emotes.redExMark} $errorCountString',
       );
     } else {
       logSuccess('\n${Emotes.checkmark} No errors have been found!');

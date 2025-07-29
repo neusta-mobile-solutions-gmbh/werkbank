@@ -13,7 +13,7 @@ typedef AppBuilder =
       Widget home,
     );
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category File Structure}
 /// A class that defines how to build the app widget, which is typically one of
 /// [MaterialApp], [CupertinoApp], or [WidgetsApp].

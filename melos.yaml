@@ -11,7 +11,6 @@ scripts:
     description: Run flutter pub get
     run: dart run melos exec -c 1 -- "flutter pub get"
 
-
   dart:format:
     description: Runs the formatter in all packages.
     run: dart run melos exec --  "dart format lib"
@@ -65,21 +64,21 @@ scripts:
     packageFilters:
       scope:
         - werkbank
-    run: cd packages/subpack_analyzer &&
-      fvm dart run bin/subpack_analyzer.dart run --verbose
+    run: cd packages/werkbank &&
+      fvm dart run ../subpack_analyzer/bin/subpack_analyzer.dart run --verbose
 
   subpack_analyzer_analysisDirs:
     description: Run the subpack_analyzer in all packages that require it.
     packageFilters:
       scope:
         - werkbank
-    run: cd packages/subpack_analyzer &&
-      fvm dart run bin/subpack_analyzer.dart run --analysisDirs=tool,example
+    run: cd packages/werkbank &&
+      fvm dart run ../subpack_analyzer/bin/subpack_analyzer.dart run --analysisDirs=tool,example
 
   subpack_analyzer_analysisDirs_verbose:
     description: Run the subpack_analyzer in all packages that require it.
     packageFilters:
       scope:
         - werkbank
-    run: cd packages/subpack_analyzer &&
-      fvm dart run bin/subpack_analyzer.dart run --analysisDirs=tool,example --verbose
+    run: cd packages/werkbank &&
+      fvm dart run ../subpack_analyzer/bin/subpack_analyzer.dart run --analysisDirs=tool,example --verbose

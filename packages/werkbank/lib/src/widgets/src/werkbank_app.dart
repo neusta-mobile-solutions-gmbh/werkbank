@@ -21,7 +21,7 @@ import 'package:werkbank/src/widgets/src/werkbank_app_info.dart';
 import 'package:werkbank/src/widgets/src/werkbank_settings.dart';
 
 /// {@category Welcome}
-/// {@category Get Started}
+/// {@category Getting Started}
 /// The main entry point for a Werkbank.
 ///
 /// Minimal example:
@@ -52,7 +52,7 @@ class WerkbankApp extends StatelessWidget {
   /// The logo of your project that this [WerkbankApp] is for.
   final Widget? logo;
 
-  /// {@category Get Started}
+  /// {@category Getting Started}
   /// The date when the data was last updated.
   ///
   /// If you are deploying the werkbank with a CI, you can set this

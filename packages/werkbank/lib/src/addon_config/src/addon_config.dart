@@ -5,7 +5,7 @@ library;
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/addons.dart';
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category File Structure}
 /// {@category Configuring Addons}
 /// A class that defines which addons are used.

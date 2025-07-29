@@ -85,8 +85,8 @@ class SubpackDirectory extends TreeDirectory {
     required this.subpackFile,
   });
 
-  /// Nullable because directories like lib, bin, and test do not have a subpack file,
-  /// but are still considered subpack directories by default.
+  /// Nullable because directories like lib, bin, and test do not have a subpack
+  /// file, but are still considered subpack directories by default.
   final SubpackFile? subpackFile;
 }
 
@@ -100,8 +100,9 @@ class PackageRoot {
   final List<SubpackDirectory> subpackDirectories;
   final Directory rootDirectory;
 
-  /// Returns the [TreeNode] corresponding to the given [path] within the package tree,
-  /// or null if the path does not exist. The path is resolved relative to [rootDirectory].
+  /// Returns the [TreeNode] corresponding to the given [path] within the
+  /// package tree, or null if the path does not exist.
+  /// The path is resolved relative to [rootDirectory].
   TreeNode? fromPath(String path) {
     final pathSegments = Uri.file(path).pathSegments;
     return DirectoryNode(

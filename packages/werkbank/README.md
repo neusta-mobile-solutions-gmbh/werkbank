@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="https://pub.dev/documentation/werkbank/latest/topics/Welcome-topic.html">Documentation</a> •
-  <a href="https://pub.dev/documentation/werkbank/latest/topics/Get%20Started-topic.html">Get Started</a> •
+  <a href="https://pub.dev/documentation/werkbank/latest/topics/Getting%20Started-topic.html">Get Started</a> •
   <a href="https://neusta-mobile-solutions-gmbh.github.io/werkbank/">Web Demo</a>
 </p>
 
@@ -133,7 +133,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
 
 - 📖 [**Documentation**](https://pub.dev/documentation/werkbank/latest/topics/Welcome-topic.html)
   - Learn everything about what Werkbank is and its technical details.
-- 🚀 [**Get Started**](https://pub.dev/documentation/werkbank/latest/topics/Get%20Started-topic.html)
+- 🚀 [**Get Started**](https://pub.dev/documentation/werkbank/latest/topics/Getting%20Started-topic.html)
   - If you already roughly know what Werkbank is, jump directly into setting up your Werkbank app.
 - 🌐 [**Example Werkbank Web Demo**](https://neusta-mobile-solutions-gmbh.github.io/werkbank/)
   - Try out a Werkbank app in your browser.

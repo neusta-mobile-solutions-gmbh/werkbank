@@ -1,7 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/report/report.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_data.dart';
+import 'package:werkbank/src/addons/src/report/src/report.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
 class ReportPersistentController extends PersistentController {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/description/description.dart';
+import 'package:werkbank/src/addons/src/description/src/description_addon.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 

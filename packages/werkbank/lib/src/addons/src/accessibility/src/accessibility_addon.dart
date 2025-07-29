@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/accessibility_state_entry.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/bold_text_control.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/colorblindness_overlay/colorblindness_simulation_overlay.dart';
@@ -10,6 +9,7 @@ import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_in
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/simulated_color_blindness_type_control.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/text_scale_factor_control.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/accessibility_manager.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/utils/utils.dart';
 

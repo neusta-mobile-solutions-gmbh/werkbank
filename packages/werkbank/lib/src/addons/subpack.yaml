@@ -1,6 +1,7 @@
 dependencies:
   - /lib/src/addon_api
   - /lib/src/app_config
+  - /lib/src/addon_config
   - /lib/src/components
   - /lib/src/environment
   - /lib/src/tree
@@ -8,8 +9,13 @@ dependencies:
   - /lib/src/theme
   - /lib/src/use_case
   - /lib/src/notifications
-  # TODO... probably more
+  - /lib/src/persistence
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/widgets
+  - /lib/src/use_case_metadata
   # Usually we do not want to depend on internal sub-packages, since that would make it impossible
   # for third parties to develop the same addon.
   # Localizations are an exception to that.
   - /lib/src/_internal/src/localizations
+  - url_launcher
+  - intl

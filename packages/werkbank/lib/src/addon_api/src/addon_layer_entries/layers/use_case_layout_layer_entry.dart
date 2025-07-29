@@ -1,8 +1,13 @@
+/// @docImport 'package:werkbank/src/widgets/widgets.dart';
+library;
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
-import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addon_api/src/accessor/addon_layer_accessor.dart';
+import 'package:werkbank/src/addon_api/src/accessor/maybe_werkbank_app_accessor.dart';
+import 'package:werkbank/src/addon_api/src/accessor/use_case_accessor_mixin.dart';
+import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entry.dart';
 import 'package:werkbank/src/utils/utils.dart';
-import 'package:werkbank/src/widgets/widgets.dart';
 
 class UseCaseLayoutLayerEntry extends AddonLayerEntry {
   const UseCaseLayoutLayerEntry({

@@ -1,5 +1,5 @@
-import 'package:werkbank/src/addons/src/report/report.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_data.dart';
+import 'package:werkbank/src/addons/src/report/src/report.dart';
 
 Set<Report> sanitizeReports(Set<Report> reports, ReportPersistentData data) {
   final sanitizedReports = <Report>{};

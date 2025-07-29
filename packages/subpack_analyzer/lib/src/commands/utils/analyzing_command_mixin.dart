@@ -23,14 +23,14 @@ mixin AnalyzingCommandMixin on SubpackCommand {
         help: 'Adds optional directories to the analysis.',
         defaultsTo: ['lib', 'bin'],
         // TODO: Better help message.
-        valueHelp: '["tool", "assets"]',
+        valueHelp: '["lib", "bin"]',
       );
   }
 
   late final AnalysisParameters analysisParameters = () {
     final argResults = this.argResults!;
     final rootPath = argResults.option('root');
-    final optionalDirectories = argResults.multiOption('analysisDirs');
+    final analysisDirs = argResults.multiOption('analysisDirs');
     final rootDirectory = rootPath == null
         ? Directory.current
         : Directory(rootPath);
@@ -42,7 +42,7 @@ mixin AnalyzingCommandMixin on SubpackCommand {
 
     return AnalysisParameters(
       rootDirectory: rootDirectory,
-      directories: optionalDirectories.toSet(),
+      directories: analysisDirs.toSet(),
     );
   }();
 }

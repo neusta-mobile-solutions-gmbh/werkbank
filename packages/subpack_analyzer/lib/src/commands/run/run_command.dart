@@ -19,7 +19,7 @@ class RunCommand extends SubpackCommand
   Future<void> run() async {
     final exitCode = await SubpackAnalyzer.startSubpackAnalyzer(
       rootDirectory: analysisParameters.rootDirectory,
-      optionalDirectories: analysisParameters.directories,
+      analysisDirectories: analysisParameters.directories,
     );
     exit(exitCode);
   }

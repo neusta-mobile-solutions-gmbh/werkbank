@@ -34,15 +34,14 @@ mixin AnalyzingCommandMixin on SubpackCommand {
     final rootDirectory = rootPath == null
         ? Directory.current
         : Directory(rootPath);
-    // TODO: Enable this later.
-    // final directories = {
-    //   for (final dir in optionalDirectories)
-    //     Directory(p.join(rootDirectory.path, dir)),
-    // };
+    final directories = {
+      for (final dir in analysisDirs)
+        Directory(p.join(rootDirectory.path, dir)),
+    };
 
     return AnalysisParameters(
       rootDirectory: rootDirectory,
-      directories: analysisDirs.toSet(),
+      directories: directories,
     );
   }();
 }
@@ -54,8 +53,5 @@ class AnalysisParameters {
   });
 
   final Directory rootDirectory;
-
-  // TODO: Enable this later.
-  // final Set<Directory> directories;
-  final Set<String> directories;
+  final Set<Directory> directories;
 }

@@ -31,7 +31,7 @@ String _banner = r"""
 
 class SubpackAnalyzer with SubpackLogger {
   SubpackAnalyzer._subpackAnalyzer({
-    required Set<String> analysisDirectories,
+    required Set<Directory> analysisDirectories,
     required Directory rootDirectory,
   }) : _rootDirectory = rootDirectory,
        _analysisDirectories = analysisDirectories;
@@ -40,11 +40,11 @@ class SubpackAnalyzer with SubpackLogger {
 
   /// All top-level directories that are taken into consideration
   /// for the subpackage analysis.
-  final Set<String> _analysisDirectories;
+  final Set<Directory> _analysisDirectories;
 
   static Future<int> startSubpackAnalyzer({
     required Directory rootDirectory,
-    Set<String> analysisDirectories = const {},
+    Set<Directory> analysisDirectories = const {},
   }) {
     final subpackAnalyzer = SubpackAnalyzer._subpackAnalyzer(
       rootDirectory: rootDirectory,
@@ -59,7 +59,7 @@ class SubpackAnalyzer with SubpackLogger {
 
     final packageRoot = await FileStructureTreeBuilder.buildFileStructureTree(
       rootDirectory: _rootDirectory,
-      rootDirectories: _analysisDirectories,
+      analysisDirectories: _analysisDirectories,
       logger: logger,
     );
 

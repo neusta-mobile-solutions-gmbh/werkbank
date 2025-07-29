@@ -71,8 +71,7 @@ class NestedDependenciesCommand extends SubpackCommand
   Future<void> run() async {
     final packageRoot = await FileStructureTreeBuilder.buildFileStructureTree(
       rootDirectory: analysisParameters.rootDirectory,
-      // TODO: Rename parameter.
-      rootDirectories: analysisParameters.directories,
+      analysisDirectories: analysisParameters.directories,
       logger: logger,
     );
 

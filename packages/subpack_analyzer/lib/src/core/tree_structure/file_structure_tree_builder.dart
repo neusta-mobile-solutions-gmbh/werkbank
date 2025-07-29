@@ -12,42 +12,35 @@ import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 class FileStructureTreeBuilder with SubpackLogger {
   FileStructureTreeBuilder._fileStructureTreeBuilder({
     required Directory rootDirectory,
-    required Set<String> rootDirectories,
-  }) : _rootDirectories = rootDirectories,
+    required Set<Directory> analysisDirectories,
+  }) : _analysisDirectories = analysisDirectories,
        _rootDirectory = rootDirectory;
 
   static Future<PackageRoot> buildFileStructureTree({
     required Directory rootDirectory,
-    required Set<String> rootDirectories,
+    required Set<Directory> analysisDirectories,
     required Logger logger,
   }) {
     final fileStructureBuilder =
         FileStructureTreeBuilder._fileStructureTreeBuilder(
           rootDirectory: rootDirectory,
-          rootDirectories: rootDirectories,
+          analysisDirectories: analysisDirectories,
         );
     return fileStructureBuilder._buildFileStructureTree();
   }
 
   final String _dartExtension = '.dart';
   final Directory _rootDirectory;
-  final Set<String> _rootDirectories;
+  final Set<Directory> _analysisDirectories;
 
   /// Initializes build of a tree structure for the subpackage analysis.
   Future<PackageRoot> _buildFileStructureTree() async {
     logVerbose('\n${Emotes.hammer} Building file tree structure...');
-    final directories = <Directory>[];
 
-    for (final dirPath in _rootDirectories) {
-      final dirExists = await Directory(
-        p.join(_rootDirectory.path, dirPath),
-      ).exists();
-      if (dirExists) {
-        final dir = Directory(dirPath);
-        directories.add(dir);
-      } else {
+    for (final analysisDir in _analysisDirectories) {
+      if (!await analysisDir.exists()) {
         logVerboseWarning(
-          '${Emotes.indexFinger} Directory "$dirPath" '
+          '${Emotes.indexFinger} Directory "$analysisDir" '
           'does not exist in $_rootDirectory.',
         );
       }
@@ -55,7 +48,7 @@ class FileStructureTreeBuilder with SubpackLogger {
 
     final treeDirectories = <TreeDirectory>[];
 
-    for (final directory in directories) {
+    for (final directory in _analysisDirectories) {
       final treeDirectory = await _handleDirectory(directory, isToplevel: true);
       treeDirectories.add(treeDirectory);
     }

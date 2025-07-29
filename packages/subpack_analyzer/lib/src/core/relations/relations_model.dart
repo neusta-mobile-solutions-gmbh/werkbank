@@ -11,9 +11,7 @@ class RelationsModel {
     required IMap<SubpackDirectory, ISet<DartFile>> containedFiles,
     required IMap<DartFile, ISet<SubpackDirectory>> exposingSubpackages,
     required IMap<DartFile, ISet<SubpackDirectory>> containingSubpackages,
-    required IMap<DartFile, TreeDirectory> deepestSrcDirectory,
-  }) : _deepestSrcDirectory = deepestSrcDirectory,
-       _containedFiles = containedFiles,
+  }) : _containedFiles = containedFiles,
        _exposedFiles = exposedFiles,
        _exposingSubpackages = exposingSubpackages,
        _containingSubpackages = containingSubpackages;
@@ -22,7 +20,6 @@ class RelationsModel {
   final IMap<SubpackDirectory, ISet<DartFile>> _containedFiles;
   final IMap<DartFile, ISet<SubpackDirectory>> _exposingSubpackages;
   final IMap<DartFile, ISet<SubpackDirectory>> _containingSubpackages;
-  final IMap<DartFile, TreeDirectory> _deepestSrcDirectory;
 
   /// Dart files that are exposed by these subpackages
   ISet<DartFile> exposedFiles(SubpackDirectory subpackDirectory) {

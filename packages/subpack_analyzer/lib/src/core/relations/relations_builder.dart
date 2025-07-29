@@ -10,9 +10,8 @@ import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 /// Tracks which Dart files are contained in or exposed by each subpackage,
 /// and records the deepest source directory for each file.
 class RelationsBuilder {
-  RelationsBuilder._relationsBuilder({
-    required PackageRoot packageRoot,
-  }) : _packageRoot = packageRoot;
+  RelationsBuilder._relationsBuilder({required PackageRoot packageRoot})
+    : _packageRoot = packageRoot;
 
   /// Builds and returns a [RelationsModel] for the given [packageRoot].
   /// This function analyzes the package structure to determine
@@ -33,7 +32,6 @@ class RelationsBuilder {
   final _containedFiles = <SubpackDirectory, Set<DartFile>>{};
   final _exposingSubpackages = <DartFile, ISet<SubpackDirectory>>{};
   final _containingSubpackages = <DartFile, ISet<SubpackDirectory>>{};
-  final _deepestSrcDirectory = <DartFile, TreeDirectory>{};
 
   Future<RelationsModel> _buildRelations() async {
     for (final directory in _packageRoot.subpackDirectories) {
@@ -42,7 +40,6 @@ class RelationsBuilder {
         containingSubpacks: {directory}.lockUnsafe,
         exposingSubpacks: {directory}.lockUnsafe,
         isDirInSubpack: true,
-        srcDirectory: null,
       );
     }
 
@@ -57,7 +54,6 @@ class RelationsBuilder {
       }.lockUnsafe,
       exposingSubpackages: _exposingSubpackages.lock,
       containingSubpackages: _containingSubpackages.lock,
-      deepestSrcDirectory: _deepestSrcDirectory.lock,
     );
   }
 
@@ -66,7 +62,6 @@ class RelationsBuilder {
     required ISet<SubpackDirectory> containingSubpacks,
     required ISet<SubpackDirectory> exposingSubpacks,
     required bool isDirInSubpack,
-    required TreeDirectory? srcDirectory,
   }) async {
     final newContainingSubpacks = directory is SubpackDirectory
         ? containingSubpacks.add(directory)
@@ -77,15 +72,11 @@ class RelationsBuilder {
 
     final ISet<SubpackDirectory> newExposingSubpacks;
 
-    final TreeDirectory? newSrcDirectory;
     if (currentIsSrcDirectory) {
-      newSrcDirectory = directory;
       newExposingSubpacks = <SubpackDirectory>{}.lockUnsafe;
     } else if (directory is SubpackDirectory) {
-      newSrcDirectory = null;
       newExposingSubpacks = exposingSubpacks.add(directory);
     } else {
-      newSrcDirectory = srcDirectory;
       newExposingSubpacks = exposingSubpacks;
     }
 
@@ -94,7 +85,6 @@ class RelationsBuilder {
         file: file,
         containingSubpacks: newContainingSubpacks,
         exposingSubpacks: newExposingSubpacks,
-        srcDirectory: newSrcDirectory,
       );
     }
 
@@ -104,7 +94,6 @@ class RelationsBuilder {
         containingSubpacks: newContainingSubpacks,
         exposingSubpacks: newExposingSubpacks,
         isDirInSubpack: directory is SubpackDirectory,
-        srcDirectory: newSrcDirectory,
       );
     }
   }
@@ -115,7 +104,6 @@ class RelationsBuilder {
     required DartFile file,
     required ISet<SubpackDirectory> containingSubpacks,
     required ISet<SubpackDirectory> exposingSubpacks,
-    required TreeDirectory? srcDirectory,
   }) {
     for (final containingSubpack in containingSubpacks) {
       (_containedFiles[containingSubpack] ??= {}).add(file);
@@ -126,9 +114,5 @@ class RelationsBuilder {
       (_exposedFiles[exposingSubpack] ??= {}).add(file);
     }
     _exposingSubpackages[file] = exposingSubpacks;
-
-    if (srcDirectory != null) {
-      _deepestSrcDirectory[file] = srcDirectory;
-    }
   }
 }

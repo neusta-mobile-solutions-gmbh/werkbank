@@ -22,3 +22,6 @@ dependencies:
 dev_dependencies:
   werkbank_lints:
     path: ../werkbank_lints
+
+executables:
+  subpack_analyzer:

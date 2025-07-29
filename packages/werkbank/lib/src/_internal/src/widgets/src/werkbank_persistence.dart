@@ -12,12 +12,14 @@ typedef ControllerMapFactory =
 
 class WerkbankPersistence extends StatefulWidget {
   const WerkbankPersistence({
+    required this.persistenceConfig,
     required this.persistentControllers,
     required this.placeholder,
     required this.child,
     super.key,
   });
 
+  final PersistenceConfig persistenceConfig;
   final List<PersistentController> persistentControllers;
   final Widget placeholder;
   final Widget child;

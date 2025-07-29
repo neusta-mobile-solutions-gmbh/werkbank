@@ -1,26 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
-class WasAliveController extends PersistentController {
-  WasAliveController({
-    required super.prefsWithCache,
-  });
+class WasAliveController extends PersistentController<WasAliveController> {
+  WasAliveController() : super(id: 'was_alive');
 
   @override
-  String get id => 'was_alive';
-
-  @override
-  void init(String? unsafeJson) {
-    late final fallback = WasAlivePersistentData(
-      appWasAlive: DateTime.now(),
-    );
-
+  void tryLoadFromJson(Object? json) {
     try {
-      _persistentData = unsafeJson != null
-          ? WasAlivePersistentData.fromJson(jsonDecode(unsafeJson))
-          : fallback;
+      _persistentData = WasAlivePersistentData.fromJson(json);
       _isColdAppStart = !appWasAliveRecently;
     } on FormatException {
       debugPrint(
@@ -28,13 +15,18 @@ class WasAliveController extends PersistentController {
         'This can happen if changes to werkbank were made. '
         "It's not backwards compatible on purpose.",
       );
-      _persistentData = fallback;
-      _isColdAppStart = true;
     }
   }
 
-  late WasAlivePersistentData _persistentData;
-  late bool _isColdAppStart;
+  @override
+  Object? toJson() {
+    return _persistentData.toJson();
+  }
+
+  late WasAlivePersistentData _persistentData = WasAlivePersistentData(
+    appWasAlive: DateTime.now(),
+  );
+  late bool _isColdAppStart = true;
 
   /// If this was a regular app start, this will be set to true.
   /// Else if this was just a restart of the app, this will be false.
@@ -57,11 +49,6 @@ class WasAliveController extends PersistentController {
     _persistentData = WasAlivePersistentData(
       appWasAlive: DateTime.now(),
     );
-    _update();
-  }
-
-  void _update() {
-    setJson(jsonEncode(_persistentData.toJson()));
     notifyListeners();
   }
 }

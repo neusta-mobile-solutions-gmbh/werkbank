@@ -13,14 +13,15 @@ class DisplayApp extends StatelessWidget {
     super.key,
     required this.appConfig,
     required this.addonConfig,
+    this.persistenceConfig = const PersistenceConfig.memory(),
     required this.child,
   });
 
   /// A convenience constructor to create a [DisplayApp] with a
   /// [UseCaseDisplay] as child.
   ///
-  /// The [appConfig] and [addonConfig] parameters are passed to the
-  /// [DisplayApp].
+  /// The [appConfig], [addonConfig] and [persistenceConfig] parameters are
+  /// passed to the [DisplayApp].
   /// The [useCase] and [initialMutation] parameters are passed to the
   /// [UseCaseDisplay].
   /// The [useCaseWrapper] parameter can be used to wrap the
@@ -29,6 +30,7 @@ class DisplayApp extends StatelessWidget {
   factory DisplayApp.singleUseCase({
     required AppConfig appConfig,
     required AddonConfig addonConfig,
+    PersistenceConfig persistenceConfig = const PersistenceConfig.memory(),
     required UseCaseDescriptor useCase,
     UseCaseStateMutation? initialMutation,
     WrapperBuilder? useCaseWrapper,
@@ -53,12 +55,17 @@ class DisplayApp extends StatelessWidget {
     return DisplayApp(
       appConfig: appConfig,
       addonConfig: addonConfig,
+      persistenceConfig: persistenceConfig,
       child: effectiveUseCaseDisplay,
     );
   }
 
   final AppConfig appConfig;
   final AddonConfig addonConfig;
+
+  // TODO: Document
+  final PersistenceConfig persistenceConfig;
+
   final Widget child;
 
   @override

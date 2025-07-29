@@ -1,30 +1,26 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class PersistentController extends ChangeNotifier {
+/// A typedef for any [PersistentController] regardless of its generic
+/// type.
+typedef AnyPersistentController = _Self<PersistentController<Object?>>;
+
+// This is a workaround for a dart bug.
+// For some reason the type cannot be declared directly as a typedef.
+typedef _Self<T> = T;
+
+abstract class PersistentController<T extends PersistentController<T>>
+    extends ChangeNotifier {
   PersistentController({
-    required SharedPreferencesWithCache prefsWithCache,
-  }) : _prefsWithCache = prefsWithCache {
-    final json = _prefsWithCache.getString(id);
-    init(json);
-  }
-
-  void init(String? unsafeJson);
-
-  final SharedPreferencesWithCache _prefsWithCache;
+    required this.id,
+  });
 
   /// A string that uniquely identifies
   /// this controller and its persisted storage.
-  String get id;
+  final String id;
 
-  void setJson(String json) {
-    unawaited(_prefsWithCache.setString(id, json));
-  }
+  Type get type => T;
 
-  void clear() {
-    unawaited(_prefsWithCache.remove(id));
-    notifyListeners();
-  }
+  void tryLoadFromJson(Object? json);
+
+  Object? toJson();
 }

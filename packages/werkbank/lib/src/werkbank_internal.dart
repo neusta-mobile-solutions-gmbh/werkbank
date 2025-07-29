@@ -11,6 +11,7 @@ export 'environment/environment.dart';
 export 'filter/filter.dart';
 export 'notifications/notifications.dart';
 export 'persistence/persistence.dart';
+export 'persistence_config/persistence_config.dart';
 export 'routing/routing.dart';
 export 'theme/theme.dart';
 export 'tree/tree.dart';

@@ -5,39 +5,23 @@ import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
-typedef PersistencePhaseWidgetBuilder =
-    Widget Function(
-      BuildContext context,
-      WerkbankPersistencePhase phase,
-    );
-
 typedef ControllerMapFactory =
     Map<Type, PersistentController> Function(
       SharedPreferencesWithCache prefsWithCache,
     );
 
-sealed class WerkbankPersistencePhase {
-  const WerkbankPersistencePhase();
-}
-
-class PersistenceInitializing extends WerkbankPersistencePhase {}
-
-class PersistenceReady extends WerkbankPersistencePhase {
-  const PersistenceReady(this.child);
-
-  final Widget child;
-}
-
 class WerkbankPersistence extends StatefulWidget {
   const WerkbankPersistence({
-    required this.builder,
-    required this.controllerMapFactory,
+    required this.persistenceConfig,
+    required this.persistentControllers,
+    required this.placeholder,
     required this.child,
     super.key,
   });
 
-  final PersistencePhaseWidgetBuilder builder;
-  final ControllerMapFactory controllerMapFactory;
+  final PersistenceConfig persistenceConfig;
+  final List<PersistentController> persistentControllers;
+  final Widget placeholder;
   final Widget child;
 
   /// {@template werkbank.controller_available_in_app}
@@ -75,7 +59,7 @@ class WerkbankPersistence extends StatefulWidget {
     return maybeControllerOf<WasAliveController>(context);
   }
 
-  static T? maybeControllerOf<T extends PersistentController>(
+  static T? maybeControllerOf<T extends PersistentController<T>>(
     BuildContext context,
   ) {
     return _InheritedWerkbankPersistence.of(context)?.controllers[T] as T?;
@@ -87,7 +71,7 @@ class WerkbankPersistence extends StatefulWidget {
 
 class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   late final SharedPreferencesWithCache _prefsWithCache;
-  late final Map<Type, PersistentController> _controllers;
+  Map<Type, PersistentController>? _controllers;
 
   bool _initialized = false;
 
@@ -100,6 +84,33 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
     // frames.
     RendererBinding.instance.deferFirstFrame();
     unawaited(_init());
+  }
+
+  void _updateControllers() {
+    void update() {
+      _controllers = {
+        for (final controller in widget.persistentControllers)
+          controller.type: controller,
+      };
+    }
+
+    final controllers = _controllers;
+    if (controllers != null) {
+      final jsonSnapshots = {
+        for (final controller in controllers.values)
+          controller.type: controller.toJson(),
+      };
+      for (final controller in controllers.values) {
+        controller.dispose();
+      }
+      update();
+      for (final controller in _controllers!.values) {
+        final json = jsonSnapshots[controller.type];
+        controller.tryLoadFromJson(json);
+      }
+    } else {
+      update();
+    }
   }
 
   Future<void> _init() async {
@@ -118,7 +129,7 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   }
 
   Future<void> _initControllers() async {
-    _controllers = widget.controllerMapFactory(_prefsWithCache);
+    _controllers = widget.persistentControllers(_prefsWithCache);
   }
 
   @override
@@ -132,20 +143,12 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   @override
   Widget build(BuildContext context) {
     if (!_initialized) {
-      return widget.builder(
-        context,
-        PersistenceInitializing(),
-      );
+      return widget.placeholder;
     }
 
-    return widget.builder(
-      context,
-      PersistenceReady(
-        _InheritedWerkbankPersistence(
-          controllers: _controllers,
-          child: widget.child,
-        ),
-      ),
+    return _InheritedWerkbankPersistence(
+      controllers: _controllers,
+      child: widget.child,
     );
   }
 }

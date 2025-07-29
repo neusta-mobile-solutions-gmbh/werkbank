@@ -12,6 +12,7 @@ export 'src/environment/environment.dart';
 export 'src/filter/filter.dart';
 export 'src/notifications/notifications.dart';
 export 'src/persistence/persistence.dart';
+export 'src/persistence_config/persistence_config.dart';
 export 'src/routing/routing.dart';
 export 'src/theme/theme.dart';
 export 'src/tree/tree.dart';

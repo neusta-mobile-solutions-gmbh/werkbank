@@ -436,8 +436,8 @@ packages:
   werkbank_lints:
     dependency: "direct dev"
     description:
-      path: "/Users/jacobwolyniec/Developer/nms/werkbank/packages/werkbank_lints"
-      relative: false
+      path: "../werkbank_lints"
+      relative: true
     source: path
     version: "1.0.0"
   win32:

@@ -1,10 +1,8 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:path/path.dart' as p;
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/usages/usages_model.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
-import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 import 'package:subpack_analyzer/src/directive_extractor.dart';
 
 /// Builds a model of all import and export usages within a package by

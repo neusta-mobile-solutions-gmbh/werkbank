@@ -30,7 +30,10 @@ class DirectiveExtractor with SubpackLogger {
   ISet<Usage> _extractWithDartAnalyzer({required DartFile file}) {
     logVerbose(
       '\n${Emotes.directiveOther}  Extracting directives from '
-      '${SubpackUtils.getFileUri(rootDirectory: _packageRoot.rootDirectory, relativePath: file.file.path)}:',
+      '${SubpackUtils.getFileUri(
+        rootDirectory: _packageRoot.rootDirectory,
+        relativePath: file.file.path,
+      )}:',
     );
 
     // For now this is fine
@@ -46,7 +49,10 @@ class DirectiveExtractor with SubpackLogger {
         if (usage != null) {
           logVerbose(
             '  - ${Emotes.directiveImport}'
-            '  import: ${SubpackUtils.getFileUri(rootDirectory: _packageRoot.rootDirectory, relativePath: usage.toString())}',
+            '  import: ${SubpackUtils.getFileUri(
+              rootDirectory: _packageRoot.rootDirectory,
+              relativePath: usage.toString(),
+            )}',
           );
           usages.add(usage);
         }

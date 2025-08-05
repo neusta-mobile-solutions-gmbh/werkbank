@@ -1,21 +1,33 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:subpack_analyzer/src/core/utils/subpack_error_collector.dart';
-
+import 'package:subpack_analyzer/src/core/analyzer/analyzer_error_model.dart';
+import 'package:subpack_analyzer/src/core/analyzer/analyzer_model.dart';
 import 'package:subpack_analyzer/src/core/dependencies/dependencies_model.dart';
 import 'package:subpack_analyzer/src/core/relations/relations_model.dart';
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/usages/usages_model.dart';
-import 'package:subpack_analyzer/src/core/analyzer/analyzer_error_model.dart';
-import 'package:subpack_analyzer/src/core/analyzer/analyzer_model.dart';
+import 'package:subpack_analyzer/src/core/utils/subpack_error_collector.dart';
 
 /// Applies the Subpack Analyzer rules
 /// on the subpack model and checks for rule violations.
 class Analyzer {
-  /// Applies all analyzer rules to the provided dependency, usage, and relation models.
-  /// Checks for rule violations and returns an [AnalyzerModel] containing the results.
+  Analyzer._analyzer({
+    required DependenciesSuccessModel dependencies,
+    required UsagesModel usages,
+    required RelationsModel relations,
+    required PackageRoot packageRoot,
+  }) : _packageRoot = packageRoot,
+       _usages = usages,
+       _dependencies = dependencies,
+       _relations = relations,
+       _errors = SubpackErrorCollector<AnalyzerError>();
+
+  /// Applies all analyzer rules to the provided dependency, usage,
+  /// and relation models. Checks for rule violations and returns
+  /// an [AnalyzerModel] containing the results.
   ///
-  /// This function is the main entry point for validating the subpack structure and its dependencies.
+  /// This function is the main entry point for validating
+  /// the subpack structure and its dependencies.
   static Future<AnalyzerModel> analyzeRelations({
     required DependenciesSuccessModel dependencies,
     required UsagesModel usages,
@@ -28,22 +40,9 @@ class Analyzer {
       usages: usages,
       relations: relations,
       packageRoot: packageRoot,
-      logger: logger,
     );
     return analyzer._analyzeRelations();
   }
-
-  Analyzer._analyzer({
-    required DependenciesSuccessModel dependencies,
-    required UsagesModel usages,
-    required RelationsModel relations,
-    required PackageRoot packageRoot,
-    required Logger logger,
-  })  : _packageRoot = packageRoot,
-        _usages = usages,
-        _dependencies = dependencies,
-        _relations = relations,
-        _errors = SubpackErrorCollector<AnalyzerError>(logger: logger);
 
   final RelationsModel _relations;
   final DependenciesSuccessModel _dependencies;

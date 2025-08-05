@@ -2,8 +2,8 @@ dartdoc:
   categories:
     Welcome:
       markdown: doc/welcome.md
-    Get Started:
-      markdown: doc/get_started.md
+    Getting Started:
+      markdown: doc/getting_started.md
     File Structure:
       markdown: doc/file_structure.md
     IDE Integration:
@@ -34,7 +34,7 @@ dartdoc:
       markdown: doc/search.md
   categoryOrder:
     - Welcome
-    - Get Started
+    - Getting Started
     - File Structure
     - IDE Integration
     - Writing Use Cases

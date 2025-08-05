@@ -6,6 +6,17 @@ import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 
 sealed class DependenciesError extends SubpackError {}
 
+class InvalidPackageNameError extends DependenciesError {
+  InvalidPackageNameError({required this.invalidPackageName});
+
+  final String invalidPackageName;
+
+  @override
+  String get errorMessage {
+    return '\nThe package name $invalidPackageName is invalid!';
+  }
+}
+
 class DirectoryIsNotPartOfPathError extends DependenciesError {
   DirectoryIsNotPartOfPathError({
     required this.packageRoot,
@@ -26,9 +37,9 @@ class DirectoryIsNotPartOfPathError extends DependenciesError {
       ),
       message: targetDirectory,
     );
-    return '\nTarget directory $targetDirectoryLink'
-        ' is not part of the sourcePath $sourcePath,'
-        ' so no parallel path could be constructed.';
+    return '\nTarget directory $targetDirectoryLink '
+        'is not part of the sourcePath $sourcePath, '
+        'so no parallel path could be constructed.';
   }
 }
 
@@ -51,8 +62,8 @@ class SubpackFromPathDoesNotExistError extends DependenciesError {
       ),
       message: falsePath,
     );
-    return '\nThe path $falsePathLink does not lead to a subpack directory and should not'
-        'be used as a subpack dependency.';
+    return '\nThe path $falsePathLink does not lead to a subpack directory and '
+        'should not be used as a subpack dependency.';
   }
 }
 
@@ -74,7 +85,7 @@ class DependencyOnOwnPackageError extends DependenciesError {
       ),
       message: dependency,
     );
-    return '\nThe dependency $dependencyLink '
-        'should not be referencing the package it\'s being used in, which is ${packageRoot.name}.';
+    return '\nThe dependency $dependencyLink should not be referencing the '
+        "package it's being used in, which is ${packageRoot.name}.";
   }
 }

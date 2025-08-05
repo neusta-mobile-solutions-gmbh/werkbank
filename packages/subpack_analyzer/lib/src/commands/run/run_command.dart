@@ -13,15 +13,19 @@ class RunCommand extends Command<void> {
         'root',
         abbr: 'r',
         help:
-            'Specifies the root directory where the subpack analysis begins. All paths used during the analysis will be resolved relative to this directory.',
+            'Specifies the root directory where the subpack analysis begins. '
+            'All paths used during the analysis will be resolved relative to'
+            ' this directory.',
         valueHelp: './path/to/project',
       )
       ..addMultiOption(
         'analysisDirs',
         abbr: 'o',
         help:
-            'Adds optional directories to the analysis. "lib" and "bin" are included by default.',
-        valueHelp: '["tool", "assets"]',
+            'Adds optional directories to the analysis. "lib" and "bin" are'
+            ' included by default.',
+        valueHelp: '["lib", "bin"]',
+        defaultsTo: ['lib', 'bin'],
       )
       ..addFlag(
         'verbose',
@@ -41,7 +45,7 @@ class RunCommand extends Command<void> {
   Future<void> run() async {
     final argResults = this.argResults!;
     final rootPath = argResults.option('root');
-    final optionalDirectories = argResults.multiOption('analysisDirs');
+    final analysisDirs = argResults.multiOption('analysisDirs');
     final verbose = argResults.flag('verbose');
     final useAnsi = (Platform.environment['MELOS_ROOT_PATH'] != null);
 
@@ -51,7 +55,7 @@ class RunCommand extends Command<void> {
           rootDirectory: rootPath == null
               ? Directory.current
               : Directory(rootPath),
-          optionalDirectories: optionalDirectories.toSet(),
+          analysisDirectories: analysisDirs.toSet(),
         );
         exit(exitCode);
       },

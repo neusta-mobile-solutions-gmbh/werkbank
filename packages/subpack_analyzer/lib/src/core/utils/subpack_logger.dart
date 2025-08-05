@@ -6,7 +6,6 @@ mixin SubpackLogger {
   final console = Console();
   final logger = Logger(
     level: SubpackUtils.isVerbose ? Level.verbose : Level.info,
-    theme: LogTheme(),
   );
   String defaultIndentation = '  ';
 
@@ -62,7 +61,8 @@ mixin SubpackLogger {
   ///
   /// The function:
   /// - Prepends a configurable indentation based on the `level`.
-  /// - Wraps the line across multiple lines if it exceeds the current terminal width.
+  /// - Wraps the line across multiple lines if it exceeds the current terminal
+  ///   width.
   /// - Attempts to wrap cleanly at word boundaries.
   ///
   /// Returns:
@@ -81,7 +81,7 @@ mixin SubpackLogger {
     final lines = <String>[];
     while (words.isNotEmpty) {
       final line = StringBuffer()..write(indentation);
-      int currentWidth = indentationLength;
+      var currentWidth = indentationLength;
 
       while (words.isNotEmpty) {
         final word = words.first;
@@ -119,7 +119,7 @@ mixin SubpackLogger {
   }) {
     final inputLines = message.split('\n');
     final outputLines = <String>[];
-    int skipped = 0;
+    var skipped = 0;
 
     for (final line in inputLines) {
       // We intentionally check lines == '' because .isEmpty

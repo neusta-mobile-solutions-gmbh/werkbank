@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_controller_provider/use_case_controller_provider.dart';
 
 /// Displays the use case defined controller in
 /// [UseCaseControllerProvider].

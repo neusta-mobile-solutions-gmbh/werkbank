@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/filter/filter.dart';
+import 'package:werkbank/src/_internal/src/filter/src/filter_result.dart';
+import 'package:werkbank/src/_internal/src/filter/src/root_descriptor_filter.dart';
 import 'package:werkbank/src/filter/filter.dart';
 import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/tree/tree.dart';

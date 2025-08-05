@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_background.dart';
-import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/panels/configuration_panel/configuration_panel.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/panels/navigation_panel/navigation_panel.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/use_case_controller_manager.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/werkbank_shortcuts.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/notifications/notifications.dart';

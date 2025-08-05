@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/use_case_viewport_scale.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/use_case_viewport_size.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
 class UseCaseViewport extends StatelessWidget {

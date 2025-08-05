@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/filter/src/_internal/filter_executor.dart';
+import 'package:werkbank/src/_internal/src/filter/src/filter_result.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/widgets/widgets.dart';

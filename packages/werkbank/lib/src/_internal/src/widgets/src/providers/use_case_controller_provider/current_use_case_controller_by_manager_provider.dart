@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/use_case/use_case.dart';
-import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/providers/descriptor_provider.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_controller_provider/use_case_controller_provider.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/use_case_controller_manager.dart';
 
 /// Provides the current [UseCaseController] using the
 /// [UseCaseControllerManager].

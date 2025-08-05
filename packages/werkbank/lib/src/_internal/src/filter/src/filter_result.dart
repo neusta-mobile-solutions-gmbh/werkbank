@@ -1,5 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:werkbank/src/_internal/src/filter/filter.dart';
+import 'package:werkbank/src/_internal/src/filter/src/search_cluster_result.dart';
+import 'package:werkbank/src/_internal/src/filter/src/search_result.dart';
 import 'package:werkbank/src/tree/tree.dart';
 
 class FilterResult {

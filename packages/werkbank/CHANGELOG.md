@@ -6,8 +6,8 @@
   - The `BackgroundOption.builder(...)` constructor is now `BackgroundOption.widgetBuilder(...)`. **(BREAKING CHANGE)**
   - Some parameter names have also been renamed.
 
-# 0.16.2 (unreleased)
-- Increase maximum `go_router` version to 16.0.0 and lower minimum version to 13.1.0.
+# 0.16.2
+- Increase maximum `go_router` version to 16.x.x and lower minimum version to 13.1.0.
   This should lower the risk of dependency conflicts.
 
 # 0.16.1

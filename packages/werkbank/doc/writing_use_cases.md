@@ -244,7 +244,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
 
 The **description** is a text that describes the use case is some way.
 You can use it to:
-- Describe the widget and its purpose.
+- Explain the widget and its purpose.
 - Provide context about where the widget should be used.
 - Or anything else you want.
 
@@ -258,7 +258,80 @@ Clicking on a tag will paste `tag:"TAG_NAME"` into the search field,
 filtering the use cases by that tag.
 To add tags, use the [`c.tags(['tag1', 'tag2'])`](../werkbank/TagsComposerExtension/tags.html) method.
 
+The **URLs** are a list of strings that link to documentation, issues or other resources related to the use case.
+You can view the URLs in the "INSPECT" tab under the "External Links" section.
+To add URLs, use the [`c.urls(['https://example.com'])`](../werkbank/UrlsComposerExtension/urls.html) method.
+
 ## Background
+
+The [BackgroundAddon](../werkbank/BackgroundAddon-class.html) allows you to configure the backgrounds of your use cases.
+
+There are two ways to change the background of use cases:
+- Set the **default background of a use case** using one of the methods on [`c.background`](../werkbank/BackgroundComposerExtension/background.html).
+  - Each use case can have its own background.
+- Set the background for **all use cases** by choosing from a dropdown in the "SETTINGS" tab under the "Background" section.
+  - The "Use Case Default" is one of those options.
+  - The backgrounds "White", "Black", "None", and "Checkerboard" are included by default.
+  - New selectable backgrounds can be added in the [AddonConfig](../werkbank/AddonConfig-class.html).
+
+```dart
+AddonConfig get addonConftig => AddonConfig(
+  addons: [
+    /* ... */
+    BackgroundAddon(
+      backgroundOptions: [
+        // Add a custom background
+        BackgroundOption.color(
+          name: 'Surface',
+          colorBuilder: (context) => Theme.of(context).colorScheme.surface,
+        ),
+      ],
+    ),
+  ],
+);
+```
+
+```dart
+WidgetBuilder sliderUseCase(UseCaseComposer c) {
+  // SETTING BACKGROUND MULTIPLE TIMES IS JUST FOR THE DEMO.
+  // Later calls overwrite previous ones.
+  
+  // Set the background of the use case to a named color.
+  c.background.named('Surface');
+  
+  // Set the background to a color.
+  c.background.color(Colors.white);
+
+  // Set a widget as the background.
+  c.background.widget(
+    Image.asset(
+      'assets/background_image.jpg',
+      fit: BoxFit.cover,
+    ),
+  );
+  
+  // Set the background to a color with a BuildContext.
+  c.background.colorBuilder(
+      (context) => Theme.of(context).colorScheme.surfaceContainer,
+  );
+
+  // Set the background to a widget using a WidgetBuilder.
+  c.background.widgetBuilder((context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [colorScheme.primary, colorScheme.secondary],
+        ),
+      ),
+    );
+  });
+  
+  return (context) {
+    return Slider(/* ... */);
+  };
+}
+```
 
 ## Inheritance
 

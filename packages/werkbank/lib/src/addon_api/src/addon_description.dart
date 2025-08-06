@@ -66,6 +66,10 @@ class KeyOrText {
     return KeyOrText._(text: text);
   }
 
+  factory KeyOrText.empty() {
+    return KeyOrText._(text: '');
+  }
+
   final LogicalKeyboardKey? key;
 
   // For example if you want to represent a shortcut with a mouse click

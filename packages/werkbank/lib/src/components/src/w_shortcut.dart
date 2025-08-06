@@ -15,6 +15,27 @@ class WShortcut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.werkbankTextTheme;
+    if (keyStrokes.length == 1 && keyStrokes.first == '') {
+      return Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 8,
+              bottom: 8,
+            ),
+            child: Text(
+              description,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              style: textTheme.defaultText,
+            ),
+          ),
+        ],
+      );
+    }
     return Wrap(
       spacing: 8,
       runSpacing: 8,

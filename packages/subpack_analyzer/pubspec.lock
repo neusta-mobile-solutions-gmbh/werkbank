@@ -436,8 +436,8 @@ packages:
   werkbank_lints:
     dependency: "direct dev"
     description:
-      path: "/Users/jacobwolyniec/Developer/nms/werkbank/packages/werkbank_lints"
-      relative: false
+      path: "../werkbank_lints"
+      relative: true
     source: path
     version: "1.0.0"
   win32:
@@ -457,4 +457,4 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.8.0 <4.0.0"
+  dart: ">=3.8.1 <4.0.0"

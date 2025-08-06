@@ -114,6 +114,13 @@ class ConstraintsAddon extends Addon {
                 sL10n.addons.constraints.shortcuts.descriptionMinSize,
             {KeyOrText.key(LogicalKeyboardKey.alt)}:
                 sL10n.addons.constraints.shortcuts.descriptionMaxSize,
+            {KeyOrText.text('Right Mouse Button click on Ruler')}:
+                'Reset the ruler',
+            {
+              KeyOrText.text(
+                'Double Left Mouse Button click on Ruler Origin',
+              ),
+            }: 'Reset both rulers',
           },
         ),
       ],

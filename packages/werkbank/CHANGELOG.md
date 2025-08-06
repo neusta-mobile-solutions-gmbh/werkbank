@@ -1,3 +1,11 @@
+# 0.17.0 (unreleased)
+- Make changes to `BackgroundOption` constructors to be more consistent with `c.background.<...>` functions in the `BackgroundComposer`.
+  - The unnamed `BackgroundOption(...)` constructor is now `BackgroundOption.widget(...)`. **(BREAKING CHANGE)**
+  - Changed `BackgroundOption.color(...)` constructor to allow specifying a color directly. **(BREAKING CHANGE)**
+  - The old `BackgroundOption.color(...)` constructor is now `BackgroundOption.colorBuilder(...)`. **(BREAKING CHANGE)**
+  - The `BackgroundOption.builder(...)` constructor is now `BackgroundOption.widgetBuilder(...)`. **(BREAKING CHANGE)**
+  - Some parameter names have also been renamed.
+
 # 0.16.2
 - Increase maximum `go_router` version to 16.x.x and lower minimum version to 13.1.0.
   This should lower the risk of dependency conflicts.

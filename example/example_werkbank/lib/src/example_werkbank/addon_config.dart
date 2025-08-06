@@ -38,7 +38,7 @@ AddonConfig get addonConfig => AddonConfig(
     ),
     BackgroundAddon(
       backgroundOptions: [
-        BackgroundOption.color(
+        BackgroundOption.colorBuilder(
           name: 'Surface',
           colorBuilder: (context) => Theme.of(context).colorScheme.surface,
         ),

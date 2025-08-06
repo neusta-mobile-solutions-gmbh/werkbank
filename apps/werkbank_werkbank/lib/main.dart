@@ -62,11 +62,11 @@ AddonConfig get addons => AddonConfig(
     ),
     BackgroundAddon(
       backgroundOptions: [
-        BackgroundOption.color(
+        BackgroundOption.colorBuilder(
           name: 'T: Surface',
           colorBuilder: (context) => context.werkbankColorScheme.surface,
         ),
-        BackgroundOption.color(
+        BackgroundOption.colorBuilder(
           name: 'T: Background',
           colorBuilder: (context) => context.werkbankColorScheme.background,
         ),

@@ -125,6 +125,10 @@ To learn more about knobs, read the [Knobs](Knobs-topic.html) topic.
 
 ## Constraints
 
+The [ConstraintsAddon](../werkbank/ConstraintsAddon-class.html) allows you to modify the
+[`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
+passed to your use case, enabling you to test how your widget behaves under different size restrictions.
+
 Flutter passes [`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
 to your widget during its layout phase.
 Based on these, your widget layouts itself and determines own size.
@@ -132,12 +136,7 @@ Learn more about how Flutter's layout system works in their
 ["Understanding constraints"](https://docs.flutter.dev/ui/layout/constraints)
 documentation.
 
-The [ConstraintsAddon](../werkbank/ConstraintsAddon-class.html) allows you to modify the
-[`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
-passed to your use case, enabling you to test how your widget behaves under different size restrictions.
-
 You can set constraints in two ways:
-
 - In the Werkbank UI by dragging the rulers, using shortcuts, or entering values in the text fields.
   - Learn more about this in the [Constraints](Constraints-topic.html) topic
     or by viewing the shortcuts in the home page of your Werkbank by tapping the name or logo in the top left corner.
@@ -268,20 +267,27 @@ The [BackgroundAddon](../werkbank/BackgroundAddon-class.html) allows you to conf
 
 There are two ways to change the background of use cases:
 - Set the **default background of a use case** using one of the methods on [`c.background`](../werkbank/BackgroundComposerExtension/background.html).
-  - Each use case can have its own background.
+  - Each use case can have a different default background.
 - Set the background for **all use cases** by choosing from a dropdown in the "SETTINGS" tab under the "Background" section.
   - The "Use Case Default" is one of those options.
   - The backgrounds "White", "Black", "None", and "Checkerboard" are included by default.
-  - New selectable backgrounds can be added in the [AddonConfig](../werkbank/AddonConfig-class.html).
+  - New selectable [BackgroundOption](../werkbank/BackgroundOption-class.html)s can be added in the [AddonConfig](../werkbank/AddonConfig-class.html).
+
+Like most other addons, the [BackgroundAddon](../werkbank/BackgroundAddon-class.html) is enabled by default.
+But if you want add additional background options, you need to add
+the [BackgroundAddon](../werkbank/BackgroundAddon-class.html) to your
+[AddonConfig](../werkbank/AddonConfig-class.html) to overwrite the one added by default.
 
 ```dart
 AddonConfig get addonConftig => AddonConfig(
   addons: [
     /* ... */
+    // If you don't need to add additional background options,
+    // you can omit the BackgroundAddon, since it is enabled by default.
     BackgroundAddon(
       backgroundOptions: [
-        // Add a custom background
-        BackgroundOption.color(
+        // Add a custom background option.
+        BackgroundOption.colorBuilder(
           name: 'Surface',
           colorBuilder: (context) => Theme.of(context).colorScheme.surface,
         ),
@@ -290,6 +296,10 @@ AddonConfig get addonConftig => AddonConfig(
   ],
 );
 ```
+
+> [!TIP]
+> Read the next section about [Inheritance](#inheritance) to learn how to
+> set the default background for multiple use cases at once.
 
 ```dart
 WidgetBuilder sliderUseCase(UseCaseComposer c) {

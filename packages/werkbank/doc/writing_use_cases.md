@@ -366,7 +366,7 @@ They each have two variants:
 
 Similar to [WerkbankUseCase](../werkbank/WerkbankUseCase-class.html)s,
 parent nodes of the use case tree have an optional
-[builder](../werkbank/latest/werkbank/WerkbankParentNode/builder.html).
+[builder](../werkbank/WerkbankParentNode/builder.html).
 It allows you to configure all the use cases in the respective parent node using a
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
 
@@ -376,7 +376,7 @@ The parent nodes are:
   use cases that display the same component/widget.
 - [WerkbankFolder](../werkbank/WerkbankFolder-class.html) - A folder grouping multiple use cases, components, or other folders.
 
-Here is an example of how to use the [builder](../werkbank/latest/werkbank/WerkbankParentNode/builder.html)s
+Here is an example of how to use the [builder](../werkbank/WerkbankParentNode/builder.html)s
 on the parent nodes to configure multiple use cases at once:
 ```dart
 WerkbankRoot get root => WerkbankRoot(
@@ -414,7 +414,7 @@ WerkbankRoot get root => WerkbankRoot(
 );
 ```
 
-Using the [builder](../werkbank/latest/werkbank/WerkbankParentNode/builder.html)s on parent nodes
+Using the [builder](../werkbank/WerkbankParentNode/builder.html)s on parent nodes
 allows you to avoid code duplication in your use cases.
 Even when a few use cases need a different configuration,
 you can still define the common configuration in the parent node
@@ -425,6 +425,56 @@ Depending in the method, the configuration may be either overridden or merged in
 The respective methods document this behavior.
 
 ## Wrapping
+
+The [WrappingAddon](../werkbank/WrappingAddon-class.html) allows you to wrap your use case widget
+using the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
+
+This ist mostly useful when combined with the [Inheritance](#inheritance) feature described above.
+That way you can wrap all use cases in a parent node with a common widget.
+It also allows you to use knobs from within the [builder](../werkbank/WerkbankParentNode/builder.html)s
+of the parent nodes.
+
+This example adds two knobs to all page use cases, which control the horizontal and vertical safe area.
+```dart
+WerkbankRoot get root => WerkbankRoot(
+  children: [
+    /* ... */
+    WerkbankFolder(
+      name: 'Pages',
+      builder: (c) {
+        final horizontalSafeAreaKnob = c.knobs.doubleSlider(
+          'Horizontal Safe Area',
+          max: 250,
+          initialValue: 0,
+        );
+
+        final verticalSafeAreaKnob = c.knobs.doubleSlider(
+          'Vertical Safe Area',
+          max: 250,
+          initialValue: 0,
+        );
+
+        c.wrapUseCase(
+          (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                padding:
+                MediaQuery.paddingOf(context) +
+                  EdgeInsets.symmetric(
+                    horizontal: horizontalSafeAreaKnob.value,
+                    vertical: verticalSafeAreaKnob.value,
+                  ),
+              ),
+              child: child,
+            );
+          },
+        );
+      },
+      children: [/* ... use cases ... */],
+    ),
+  ],
+);
+```
 
 ## Overview
 

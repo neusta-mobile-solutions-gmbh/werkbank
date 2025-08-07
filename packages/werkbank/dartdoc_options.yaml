@@ -18,6 +18,8 @@ dartdoc:
       markdown: doc/knobs.md
     Constraints:
       markdown: doc/constraints.md
+    Backgrounds:
+      markdown: doc/backgrounds.md
     Overview:
       markdown: doc/overview.md
     Custom Use Case Metadata:
@@ -42,6 +44,7 @@ dartdoc:
     - Customizing the AppConfig
     - Knobs
     - Constraints
+    - Backgrounds
     - Overview
     - Custom Use Case Metadata
     - Display

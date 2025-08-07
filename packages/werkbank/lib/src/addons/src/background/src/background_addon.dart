@@ -5,6 +5,7 @@ import 'package:werkbank/src/addons/src/background/src/_internal/background_drop
 import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
+/// {@category Backgrounds}
 class BackgroundAddon extends Addon {
   /// Creates a [BackgroundAddon] that allows you to select
   /// the background of the use case.

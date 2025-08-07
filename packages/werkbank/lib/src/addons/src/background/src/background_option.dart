@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// {@category Backgrounds}
 class BackgroundOption {
   const BackgroundOption({
     required this.name,

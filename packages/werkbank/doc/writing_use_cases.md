@@ -46,6 +46,14 @@ They can be used in the use case before returning the
 > }
 > ```
 
+Most of the methods and getters on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
+are introduced by [Addon](../werkbank/Addons-topic.html)s.
+For them to work, the respective addon must be active.
+However, unless you have explicitly set `includeDefaultAddons: false` in your
+[AddonConfig](../werkbank/AddonConfig-class.html), all these addons are included by default.
+So **you don't need to do anything to enable the addons**.
+Read more about default addons in the [Customizing The AppConfig](Customizing%20The%20AppConfig-topic.html) topic.
+
 ## Knobs
 
 Knobs allow you to interactively control the values and parameters of your widget from within the Werkbank UI.
@@ -265,49 +273,24 @@ To add URLs, use the [`c.urls(['https://example.com'])`](../werkbank/UrlsCompose
 
 The [BackgroundAddon](../werkbank/BackgroundAddon-class.html) allows you to configure the backgrounds of your use cases.
 
-There are two ways to change the background of use cases:
-- Set the **default background of a use case** using one of the methods on [`c.background`](../werkbank/BackgroundComposerExtension/background.html).
-  - Each use case can have a different default background.
-- Set the background for **all use cases** by choosing from a dropdown in the "SETTINGS" tab under the "Background" section.
-  - The "Use Case Default" is one of those options.
-  - The backgrounds "White", "Black", "None", and "Checkerboard" are included by default.
-  - New selectable [BackgroundOption](../werkbank/BackgroundOption-class.html)s can be added in the [AddonConfig](../werkbank/AddonConfig-class.html).
+You have two ways to set the backgrounds of use cases:
+- In the Code, define a default background for **individual use cases**.
+- In the UI, override the background for **all use cases**.
 
-Like most other addons, the [BackgroundAddon](../werkbank/BackgroundAddon-class.html) is enabled by default.
-But if you want add additional background options, you need to add
-the [BackgroundAddon](../werkbank/BackgroundAddon-class.html) to your
-[AddonConfig](../werkbank/AddonConfig-class.html) to overwrite the one added by default.
+Here, we only cover how to set the background in the code.
+To learn how to configure the backgrounds in the Werkbank UI,
+visit the [Backgrounds](Backgrounds-topic.html) topic.
 
+Set the default background for a use case using one of the methods on
+[`c.background`](../werkbank/BackgroundComposerExtension/background.html):
 ```dart
-AddonConfig get addonConftig => AddonConfig(
-  addons: [
-    /* ... */
-    // If you don't need to add additional background options,
-    // you can omit the BackgroundAddon, since it is enabled by default.
-    BackgroundAddon(
-      backgroundOptions: [
-        // Add a custom background option.
-        BackgroundOption.colorBuilder(
-          name: 'Surface',
-          colorBuilder: (context) => Theme.of(context).colorScheme.surface,
-        ),
-      ],
-    ),
-  ],
-);
-```
-
-> [!TIP]
-> Read the next section about [Inheritance](#inheritance) to learn how to
-> set the default background for multiple use cases at once.
-
-```dart
-WidgetBuilder sliderUseCase(UseCaseComposer c) {
+WidgetBuilder exampleUseCase(UseCaseComposer c) {
   // SETTING BACKGROUND MULTIPLE TIMES IS JUST FOR THE DEMO.
   // Later calls overwrite previous ones.
   
-  // Set the background of the use case to a named color.
-  c.background.named('Surface');
+  // Set the background to one of the named BackgroundOptions.
+  // Some are included by default. Add custom ones in the BackgroundAddon.
+  c.background.named('Checkerboard');
   
   // Set the background to a color.
   c.background.color(Colors.white);
@@ -338,10 +321,46 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
   });
   
   return (context) {
-    return Slider(/* ... */);
+    return ExampleWidget(/* ... */);
   };
 }
 ```
+
+The [`c.background.named(...)`](../werkbank/BackgroundComposer/named.html) method refers to the name of one of the
+[BackgroundOption](../werkbank/BackgroundOption-class.html)s defined in the [BackgroundAddon](../werkbank/BackgroundAddon-class.html).
+By default you can choose one of the following options:
+- `White` - Pure white background.
+- `Black` - Pure black background.
+- `None` - Transparent background, which reveals the Werkbank UI color behind it.
+- `Checkerboard` - A checkerboard pattern background, useful for testing transparency.
+
+You can also add custom named [BackgroundOption](../werkbank/BackgroundOption-class.html)s.
+Learn more about that in the [Backgrounds](Backgrounds-topic.html) topic.
+
+The other methods allow you to set the background to a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html),
+or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html).
+They each have two variants:
+- [`c.background.color(...)`](../werkbank/BackgroundComposerExtension/color.html) and
+  [`c.background.widget(...)`](../werkbank/BackgroundComposerExtension/widget.html)
+  accept a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+  directly.
+- [`c.background.colorBuilder(...)`](../werkbank/BackgroundComposerExtension/colorBuilder.html) and
+  [`c.background.widgetBuilder(...)`](../werkbank/BackgroundComposerExtension/widgetBuilder.html)
+  accept a builder function that provides a [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html),
+  which allows you to access for example the current theme.
+
+> [!TIP]
+> To learn how to set the **default background for multiple use cases at once**,
+> read the next section about [Inheritance](#inheritance).
+
+> [!TIP]
+> If you have a larger function call to set the background, and plan on using it multiple times,
+> consider extracting it into an extension on the [BackgroundComposer](../werkbank/BackgroundComposer-class.html).
+> Learn more about this in the [Custom Composer calls](#custom-composer-calls) section below.
+> Alternatively, add it as a custom [BackgroundOption](../werkbank/BackgroundOption-class.html)
+> to the [BackgroundAddon](../werkbank/BackgroundAddon-class.html) and use
+> [`c.background.named(...)`](../werkbank/BackgroundComposer/named.html).
+> Learn more about that in the [Backgrounds](Backgrounds-topic.html) topic.
 
 ## Inheritance
 

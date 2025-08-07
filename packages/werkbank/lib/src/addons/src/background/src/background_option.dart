@@ -4,6 +4,8 @@ import 'package:werkbank/src/addons/src/background/src/background_composer.dart'
 
 /// A selectable background option for uses cases, which can be added to the
 /// [BackgroundAddon].
+///
+/// {@category Backgrounds}
 class BackgroundOption {
   /// Creates a [BackgroundOption] from a [Widget].
   ///

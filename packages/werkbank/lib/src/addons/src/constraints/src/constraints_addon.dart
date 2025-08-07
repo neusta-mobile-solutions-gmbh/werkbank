@@ -10,7 +10,7 @@ import 'package:werkbank/src/addons/src/constraints/src/_internal/view_constrain
 import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
-/// {@category Constraints & Sizing}
+/// {@category Constraints}
 /// {@category Overview}
 class ConstraintsAddon extends Addon {
   const ConstraintsAddon() : super(id: addonId);

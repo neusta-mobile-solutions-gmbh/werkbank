@@ -20,13 +20,13 @@ class BackgroundApplier extends StatelessWidget {
     final metadata = UseCaseLayerEntry.access.metadataOf(context);
     final Widget? backgroundBox;
     if (selectedBackgroundOption != null) {
-      backgroundBox = selectedBackgroundOption.backgroundBox;
+      backgroundBox = selectedBackgroundOption.backgroundWidget;
     } else {
       switch (metadata.backgroundOption) {
         case null:
           backgroundBox = null;
         case NamedBackgroundOption(:final name):
-          backgroundBox = backgroundOptionsByName[name]?.backgroundBox;
+          backgroundBox = backgroundOptionsByName[name]?.backgroundWidget;
         case CustomBackgroundOption(backgroundBox: final useCaseBackgroundBox):
           backgroundBox = useCaseBackgroundBox;
       }

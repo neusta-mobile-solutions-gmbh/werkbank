@@ -236,7 +236,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
       'You can even use **Markdown** syntax here!',
   );
   // Add tags to categorize your use case.
-  c.tags(['input', 'slider']);
+  c.tags(['INPUT', 'SLIDER']);
   // Add URLs to link to documentation or other resources.
   c.urls([
     'https://api.flutter.dev/flutter/material/Slider-class.html',
@@ -286,7 +286,7 @@ Set the default background for a use case using one of the methods on
 ```dart
 WidgetBuilder exampleUseCase(UseCaseComposer c) {
   // SETTING BACKGROUND MULTIPLE TIMES IS JUST FOR THE DEMO.
-  // Later calls overwrite previous ones.
+  // Later calls override previous ones.
   
   // Set the background to one of the named BackgroundOptions.
   // Some are included by default. Add custom ones in the BackgroundAddon.
@@ -305,7 +305,7 @@ WidgetBuilder exampleUseCase(UseCaseComposer c) {
   
   // Set the background to a color with a BuildContext.
   c.background.colorBuilder(
-      (context) => Theme.of(context).colorScheme.surfaceContainer,
+      (context) => Theme.of(context).colorScheme.surface,
   );
 
   // Set the background to a widget using a WidgetBuilder.
@@ -332,12 +332,12 @@ By default you can choose one of the following options:
 - `White` - Pure white background.
 - `Black` - Pure black background.
 - `None` - Transparent background, which reveals the Werkbank UI color behind it.
-- `Checkerboard` - A checkerboard pattern background, useful for testing transparency.
+- `Checkerboard` - A checkerboard pattern background. Useful for testing transparency.
 
 You can also add custom named [BackgroundOption](../werkbank/BackgroundOption-class.html)s.
 Learn more about that in the [Backgrounds](Backgrounds-topic.html) topic.
 
-The other methods allow you to set the background to a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html),
+The other methods shown in the example allow you to set the background to a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html),
 or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html).
 They each have two variants:
 - [`c.background.color(...)`](../werkbank/BackgroundComposerExtension/color.html) and
@@ -363,6 +363,66 @@ They each have two variants:
 > Learn more about that in the [Backgrounds](Backgrounds-topic.html) topic.
 
 ## Inheritance
+
+Similar to [WerkbankUseCase](../werkbank/WerkbankUseCase-class.html)s,
+parent nodes of the use case tree have an optional
+[builder](../werkbank/latest/werkbank/WerkbankParentNode/builder.html).
+It allows you to configure all the use cases in the respective parent node using a
+[UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
+
+The parent nodes are:
+- [WerkbankRoot](../werkbank/WerkbankRoot-class.html) - The root of the use case tree.
+- [WerkbankComponent](../werkbank/WerkbankComponent-class.html) - A node intended to group multiple
+  use cases that display the same component/widget.
+- [WerkbankFolder](../werkbank/WerkbankFolder-class.html) - A folder grouping multiple use cases, components, or other folders.
+
+Here is an example of how to use the [builder](../werkbank/latest/werkbank/WerkbankParentNode/builder.html)s
+on the parent nodes to configure multiple use cases at once:
+```dart
+WerkbankRoot get root => WerkbankRoot(
+  builder: (c) {
+    // Set the default background for all use cases.
+    // (The "Pages" folder overrides this.)
+    c.background.colorBuilder(
+        (context) => Theme.of(context).colorScheme.surface,
+    );
+  },
+  children: [
+    WerkbankFolder(
+      name: 'Components',
+      builder: (c) {
+        // Add "COMPONENT" tag to all components.
+        c.tags(['COMPONENT']);
+      },
+      children: [/* ... use cases ... */],
+    ),
+    WerkbankFolder(
+      name: 'Pages',
+      builder: (c) {
+        // Add device constraints presets for all pages.
+        c.constraints.devicePresets();
+        // Add a simple description to all pages.
+        c.description('A page.');
+        // Override the default background for all pages,
+        // so that we can easily see the edges when zooming out.
+        c.background.named('Checkerboard');
+      },
+      children: [/* ... use cases ... */],
+    ),
+    /* ... */
+  ],
+);
+```
+
+Using the [builder](../werkbank/latest/werkbank/WerkbankParentNode/builder.html)s on parent nodes
+allows you to avoid code duplication in your use cases.
+Even when a few use cases need a different configuration,
+you can still define the common configuration in the parent node
+and modify it in the use case or nested parent nodes by calling the
+same methods again.
+
+Depending in the method, the configuration may be either overridden or merged in some way.
+The respective methods document this behavior.
 
 ## Wrapping
 

@@ -120,7 +120,7 @@ WerkbankRoot get root => WerkbankRoot(
     );
 ```
 
-The [WerkbankRoot](../werkbank/WerkbankRoot-class.html) forms the root of a tree
+The [WerkbankRoot](../werkbank/WerkbankRoot-class.html) defines the root of a tree
 with all your use cases.
 Use cases are defined in the tree using [WerkbankUseCase](../werkbank/WerkbankUseCase-class.html).
 You can nest use cases inside [WerkbankFolder](../werkbank/WerkbankFolder-class.html) or

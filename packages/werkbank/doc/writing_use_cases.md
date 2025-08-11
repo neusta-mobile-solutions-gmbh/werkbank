@@ -1,10 +1,19 @@
-> [!CAUTION]
-> This topic is under construction.
-
 This topic provides an overview of the techniques that can be used to customize your use cases.
 You can find more detailed information for some of the features in their respective topics.
 We recommend reading [Get Started](Get%20Started-topic.html) and [File Structure](File%20Structure-topic.html) before this topic to
 learn how to create basic use cases and how to structure them in your project.
+
+## Table of Contents
+- [UseCaseComposer Basics](#usecasecomposer-basics)
+- [Knobs](#knobs)
+- [Constraints](#constraints)
+- [Descriptions, Tags & URLs](#descriptions-tags--urls)
+- [Background](#background)
+- [Inheritance](#inheritance)
+- [Wrapping](#wrapping)
+- [Overview](#overview)
+- [Custom Composer Extensions](#custom-composer-extensions)
+- [Advanced Composer Usage](#advanced-composer-usage)
 
 ## UseCaseComposer Basics
 
@@ -47,7 +56,7 @@ They can be used in the use case before returning the
 > ```
 
 Most of the methods and getters on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
-are introduced by [Addon](../werkbank/Addons-topic.html)s.
+are introduced by [Addon](../werkbank/Addon-class.html)s.
 For them to work, the respective addon must be active.
 However, unless you have explicitly set `includeDefaultAddons: false` in your
 [AddonConfig](../werkbank/AddonConfig-class.html), all these addons are included by default.
@@ -92,9 +101,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
 }
 ```
 
-### Knob Presets
-
-Knob presets are a way to quickly set the values of multiple knobs to predefined values.
+**Knob presets** are a way to quickly set the values of multiple knobs to predefined values.
 
 Define knob presets using the [`c.knobPreset(...)`](../werkbank/KnobsComposerExtension/knobPreset.html) method
 and provide a label and a callback that sets the desired knob values:
@@ -162,7 +169,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
   c.constraints.preset('Narrow', width: 100);
   c.constraints.preset('Wide', width: 400);
   // Add predefined presets for common device sizes for use cases showcasing whole pages.
-  // (Technically wrong here, since a slider is not a page.)
+  // (Technically inappropriate here.)
   c.constraints.devicePresets();
 
   // Set constraints for overview thumbnails.
@@ -292,32 +299,19 @@ WidgetBuilder exampleUseCase(UseCaseComposer c) {
   c.background.named('Checkerboard');
   
   // Set the background to a color.
-  c.background.color(Colors.white);
+  // If you don't need the BuildContext, use `c.background.color(...)`.
+  c.background.colorBuilder(
+      (context) => Theme.of(context).colorScheme.surface,
+  );
 
   // Set a widget as the background.
+  // If you need a BuildContext, use `c.background.widgetBuilder(...)`.
   c.background.widget(
     Image.asset(
       'assets/background_image.jpg',
       fit: BoxFit.cover,
     ),
   );
-  
-  // Set the background to a color with a BuildContext.
-  c.background.colorBuilder(
-      (context) => Theme.of(context).colorScheme.surface,
-  );
-
-  // Set the background to a widget using a WidgetBuilder.
-  c.background.widgetBuilder((context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [colorScheme.primary, colorScheme.secondary],
-        ),
-      ),
-    );
-  });
   
   return (context) {
     return ExampleWidget(/* ... */);
@@ -339,12 +333,12 @@ Learn more about that in the [Backgrounds](Backgrounds-topic.html) topic.
 The other methods shown in the example allow you to set the background to a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
 or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html).
 They each have two variants:
-- [`c.background.color(...)`](../werkbank/BackgroundComposerExtension/color.html) and
-  [`c.background.widget(...)`](../werkbank/BackgroundComposerExtension/widget.html)
+- [`c.background.color(...)`](../werkbank/BackgroundComposer/color.html) and
+  [`c.background.widget(...)`](../werkbank/BackgroundComposer/widget.html)
   accept a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
   directly.
-- [`c.background.colorBuilder(...)`](../werkbank/BackgroundComposerExtension/colorBuilder.html) and
-  [`c.background.widgetBuilder(...)`](../werkbank/BackgroundComposerExtension/widgetBuilder.html)
+- [`c.background.colorBuilder(...)`](../werkbank/BackgroundComposer/colorBuilder.html) and
+  [`c.background.widgetBuilder(...)`](../werkbank/BackgroundComposer/widgetBuilder.html)
   accept a builder function that provides a [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html),
   which allows you to access, for example, the current theme.
 
@@ -354,7 +348,7 @@ They each have two variants:
 
 > [!TIP]
 > If you have a larger function call to set the background and plan on using it multiple times,
-> consider extracting it into an extension on the [BackgroundComposer](../werkbank/BackgroundComposer-class.html).
+> consider extracting it into an extension on the [BackgroundComposer](../werkbank/BackgroundComposer-extension-type.html).
 > Learn more about this in the [Custom Composer calls](#custom-composer-calls) section below.
 > Alternatively, add it as a custom [BackgroundOption](../werkbank/BackgroundOption-class.html)
 > to the [BackgroundAddon](../werkbank/BackgroundAddon-class.html) and use
@@ -422,7 +416,7 @@ same methods again.
 
 Depending on the method, the configuration may be either overridden or merged in some way.
 The respective methods document this behavior.
-If you want parents to override the configuration of their children,
+If you want the calls in the parents to be merged after the configuration of their children,
 you can use [`c.addLateExecutionCallback(() { ... })`](../werkbank/UseCaseComposer/addLateExecutionCallback.html)
 to call the methods after the methods of the children have been executed.
 
@@ -528,10 +522,10 @@ To prevent this code duplication, you should first check if the calls can be mov
 [Inheritance](#inheritance) feature described above.
 If that is not possible, we recommend extracting the calls into an extension on the
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c` or one of the more specific composers:
-- `c.knobs` ([KnobsComposer](../werkbank/KnobsComposer-class.html))
-- `c.constraints` ([ConstraintsComposer](../werkbank/ConstraintsComposer-class.html))
-- `c.background` ([BackgroundComposer](../werkbank/BackgroundComposer-class.html))
-- `c.overview` ([OverviewComposer](../werkbank/OverviewComposer-class.html))
+- `c.knobs` ([KnobsComposer](../werkbank/KnobsComposer-extension-type.html))
+- `c.constraints` ([ViewConstraintsComposer](../werkbank/ViewConstraintsComposer-extension-type.html))
+- `c.background` ([BackgroundComposer](../werkbank/BackgroundComposer-extension-type.html))
+- `c.overview` ([OverviewComposer](../werkbank/OverviewComposer-extension-type.html))
 
 Here are two examples of how this could look like:
 ```dart
@@ -570,7 +564,7 @@ Here are some of the more advanced uses:
 - Store your own information about a use case by using custom metadata.
   - Learn more about this in the
     [Custom Use Case Metadata](Custom%20Use%20Case%20Metadata-topic.html) topic.
-- Write an [Addon](../werkbank/Addons-topic.html) that adds custom functionality to the
+- Write an [Addon](../werkbank/Addon-class.html) that adds custom functionality to the
   [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
   - Learn more about this in the [Writing Your Own Addons](Writing%20Your%20Own%20Addons-topic.html) topic.
 - Write custom knobs that integrate into the [KnobsAddon](../werkbank/KnobsAddon-class.html).

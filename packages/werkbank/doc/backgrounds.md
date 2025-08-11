@@ -22,7 +22,7 @@ the [BackgroundAddon](../werkbank/BackgroundAddon-class.html) to your
 [AddonConfig](../werkbank/AddonConfig-class.html) to overwrite the one added by default.
 
 ```dart
-AddonConfig get addonConftig => AddonConfig(
+AddonConfig get addonConfig => AddonConfig(
   addons: [
     /* ... */
     // If you don't need to add additional background options,
@@ -38,4 +38,49 @@ AddonConfig get addonConftig => AddonConfig(
     ),
   ],
 );
+```
+
+Set the default background for a use case using one of the methods on
+[`c.background`](../werkbank/BackgroundComposerExtension/background.html):
+```dart
+WidgetBuilder exampleUseCase(UseCaseComposer c) {
+  // SETTING BACKGROUND MULTIPLE TIMES IS JUST FOR THE DEMO.
+  // Later calls override previous ones.
+  
+  // Set the background to one of the named BackgroundOptions.
+  // Some are included by default. Add custom ones in the BackgroundAddon.
+  c.background.named('Checkerboard');
+  
+  // Set the background to a color.
+  c.background.color(Colors.white);
+
+  // Set a widget as the background.
+  c.background.widget(
+    Image.asset(
+      'assets/background_image.jpg',
+      fit: BoxFit.cover,
+    ),
+  );
+  
+  // Set the background to a color with a BuildContext.
+  c.background.colorBuilder(
+      (context) => Theme.of(context).colorScheme.surface,
+  );
+
+  // Set the background to a widget using a WidgetBuilder.
+  c.background.widgetBuilder((context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [colorScheme.primary, colorScheme.secondary],
+        ),
+      ),
+    );
+  });
+  
+  return (context) {
+    return ExampleWidget(/* ... */);
+  };
+}
 ```

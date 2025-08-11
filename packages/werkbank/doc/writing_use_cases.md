@@ -318,26 +318,15 @@ WidgetBuilder exampleUseCase(UseCaseComposer c) {
 
 The [`c.background.named(...)`](../werkbank/BackgroundComposer/named.html) method refers to the name of one of the
 [BackgroundOption](../werkbank/BackgroundOption-class.html)s defined in the [BackgroundAddon](../werkbank/BackgroundAddon-class.html).
-By default, you can choose one of the following options:
+By default, you can choose from the following options:
 - `White` - Pure white background.
 - `Black` - Pure black background.
 - `None` - Transparent background that reveals the Werkbank UI color behind it.
 - `Checkerboard` - A checkerboard pattern background. Useful for testing transparency.
 
 You can also add custom named [BackgroundOption](../werkbank/BackgroundOption-class.html)s.
-Learn more about that in the [Backgrounds](Backgrounds-topic.html) topic.
-
-The other methods shown in the example allow you to set the background to a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
-or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html).
-Each method has two variants:
-- [`c.background.color(...)`](../werkbank/BackgroundComposer/color.html) and
-  [`c.background.widget(...)`](../werkbank/BackgroundComposer/widget.html)
-  accept a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
-  directly.
-- [`c.background.colorBuilder(...)`](../werkbank/BackgroundComposer/colorBuilder.html) and
-  [`c.background.widgetBuilder(...)`](../werkbank/BackgroundComposer/widgetBuilder.html)
-  accept a builder function that provides a [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html),
-  which allows you to access, for example, the current theme.
+These also display as options in the UI.
+Learn more about background options in the [Backgrounds](Backgrounds-topic.html) topic.
 
 > [!TIP]
 > To learn how to set the **default background for multiple use cases at once**,

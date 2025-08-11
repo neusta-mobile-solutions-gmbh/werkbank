@@ -84,3 +84,15 @@ WidgetBuilder exampleUseCase(UseCaseComposer c) {
   };
 }
 ```
+
+The other methods shown in the example allow you to set the background to a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html).
+Each method has two variants:
+- [`c.background.color(...)`](../werkbank/BackgroundComposer/color.html) and
+  [`c.background.widget(...)`](../werkbank/BackgroundComposer/widget.html)
+  accept a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) or a [Widget](https://api.flutter.dev/flutter/widgets/Widget-class.html)
+  directly.
+- [`c.background.colorBuilder(...)`](../werkbank/BackgroundComposer/colorBuilder.html) and
+  [`c.background.widgetBuilder(...)`](../werkbank/BackgroundComposer/widgetBuilder.html)
+  accept a builder function that provides a [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html),
+  which allows you to access, for example, the current theme.

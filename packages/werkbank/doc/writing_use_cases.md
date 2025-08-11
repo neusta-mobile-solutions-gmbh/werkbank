@@ -1,4 +1,4 @@
-This topic provides an overview of the techniques that can be used to customize your use cases.
+This topic provides an overview of the techniques that you can use to customize your use cases.
 You can find more detailed information for some of the features in their respective topics.
 We recommend reading [Get Started](Get%20Started-topic.html) and [File Structure](File%20Structure-topic.html) before this topic to
 learn how to create basic use cases and how to structure them in your project.
@@ -37,8 +37,8 @@ However, most customizations are worth the time and effort to implement, since t
 improve your development experience, make testing and design review easier,
 and help to impress your customers.
 
-There are many functions and getters defined on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
-They can be used in the use case before returning the
+The [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c` defines many functions and getters.
+You can use these functions in the use case before returning the
 [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html) to customize the use case.
 
 > [!IMPORTANT]
@@ -55,9 +55,8 @@ They can be used in the use case before returning the
 > }
 > ```
 
-Most of the methods and getters on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
-are introduced by [Addon](../werkbank/Addon-class.html)s.
-For them to work, the respective addon must be active.
+[Addon](../werkbank/Addon-class.html)s introduce most of the methods and getters on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
+For these methods to work, the respective addon must be active.
 However, unless you have explicitly set `includeDefaultAddons: false` in your
 [AddonConfig](../werkbank/AddonConfig-class.html), all these addons are included by default.
 So **you do not need to do anything to enable the addons**.
@@ -66,7 +65,7 @@ Read more about default addons in the [Customizing The AppConfig](Customizing%20
 ## Knobs
 
 Knobs allow you to interactively control the values and parameters of your widget from within the Werkbank UI.
-They are provided by the [KnobsAddon](../werkbank/KnobsAddon-class.html).
+The [KnobsAddon](../werkbank/KnobsAddon-class.html) provides this functionality.
 
 To create a knob in your use case, call `c.knobs.<knobType>` on the
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c` and choose from one of the many
@@ -80,7 +79,7 @@ You can change the knob value in two ways:
 - Interactively, in the Werkbank UI.
   - You can find the controls in the "CONFIGURE" tab under the "Knobs" section.
 - Programmatically, by using the [`knob.value = ...`](../werkbank/WritableKnob/value.html) setter.
-  - Use this, for example, in `onChanged` callbacks.
+  - Use this setter, for example, in `onChanged` callbacks.
 
 Here is an example of a use case that uses a double slider knob to control the value of a slider:
 
@@ -101,7 +100,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
 }
 ```
 
-**Knob presets** are a way to quickly set the values of multiple knobs to predefined values.
+**Knob presets** provide a way to quickly set the values of multiple knobs to predefined values.
 
 Define knob presets using the [`c.knobPreset(...)`](../werkbank/KnobsComposerExtension/knobPreset.html) method
 and provide a label and a callback that sets the desired knob values:
@@ -127,11 +126,11 @@ WidgetBuilder filledButtonUseCase(UseCaseComposer c) {
 ```
 
 Load a knob preset using the "Preset" dropdown above the knobs controls in the Werkbank UI.
-You can find both in the "CONFIGURE" tab under the "Knobs" section.
+You can find both of them in the "CONFIGURE" tab under the "Knobs" section.
 
 > [!TIP]
-> Beside the dropdown to load knob presets is a small button to open an [Overview](Overview-topic.html) of all available presets.
-> Use this to quickly find the preset you want to load in a visual way.
+> Beside the dropdown to load knob presets is a small button that opens an [Overview](Overview-topic.html) of all available presets.
+> Use this feature to quickly find the preset you want to load in a visual way.
 > You can also keep the overview open while developing your widget to see the effects of code changes in multiple states.
 
 To learn more about knobs, read the [Knobs](Knobs-topic.html) topic.
@@ -144,7 +143,7 @@ passed to your use case, enabling you to test how your widget behaves under diff
 
 Flutter passes [`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
 to your widget during its layout phase.
-Based on these, your widget computes its layout and determines its own size.
+Based on these constraints, your widget computes its layout and determines its own size.
 Learn more about how Flutter's layout system works in their
 ["Understanding constraints"](https://docs.flutter.dev/ui/layout/constraints)
 documentation.

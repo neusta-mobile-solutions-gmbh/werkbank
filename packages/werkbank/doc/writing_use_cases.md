@@ -424,6 +424,9 @@ same methods again.
 
 Depending in the method, the configuration may be either overridden or merged in some way.
 The respective methods document this behavior.
+If you want parents to override the configuration of their children,
+you can use [`c.addLateExecutionCallback(() { ... })`](../werkbank/UseCaseComposer/addLateExecutionCallback.html)
+to call the methods after the methods of the children have been executed.
 
 ## Wrapping
 
@@ -563,3 +566,21 @@ extension SurfaceBackgroundComposerExtension on BackgroundComposer {
 ```
 
 ## Advanced Composer Usage
+
+The [UseCaseComposer](../werkbank/UseCaseComposer-class.html) can be used in many more ways that we can't cover in this topic.
+Here are some of the more advanced uses:
+- Store you own information about a use case by using custom metadata.
+  - Learn more about this in the
+    [Custom Use Case Metadata](Custom%20Use%20Case%20Metadata-topic.html) topic.
+- Write an [Addon](../werkbank/Addons-topic.html) that adds custom functionality to the
+  [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
+  - Learn more about this in the [Writing Your Own Addons](Writing%20Your%20Own%20Addons-topic.html) topic.
+- Write custom knobs that integrate into the [KnobsAddon](../werkbank/KnobsAddon-class.html).
+  - Learn more about this in the [Knobs](Knobs-topic.html) topic.
+- Add keywords or texts to the use case that are searched when filtering the use cases.
+  - Learn more about this in the [Search](Search-topic.html) topic.
+
+> [!TIP]
+> Autocomplete the `c.` in your IDE to see all available methods and getters on the
+> [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
+> You may find some more useful things that are not covered in this topic.

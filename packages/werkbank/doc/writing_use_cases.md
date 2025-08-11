@@ -194,7 +194,8 @@ which automatically adds presets for common device sizes.
 **Overview constraints** are used for the [Overview](Overview-topic.html) thumbnails of the use case.
 If not specified, they default to the initial constraints of the use case.
 Set this to the smallest constraints that still make your widget look good.
-Visit the [Overview](Overview-topic.html) topic for more information on how to customize the overview thumbnails.
+Read on to the [Overview](#overview) section below
+or visit the [Overview](Overview-topic.html) topic for more information on how to customize the overview thumbnails.
 
 The methods to define these types of constraints come in sets of three:
 
@@ -478,4 +479,46 @@ WerkbankRoot get root => WerkbankRoot(
 
 ## Overview
 
+The overview is a screen that displays preview thumbnails of use cases in a grid layout.
+You can access it for example by tapping a folder or component in the navigation tree or via the "Overview" button above the tree.
+
+If you have already added some use cases to your project, you may have noticed that the thumbnails don't always represent your widget well by default.
+Ideally, the thumbnail should display the widget differently depending on how big it is, whether it fills the whole screen, or other factors.
+But Werkbank can't know these things about the use case unless you tell it.
+If you don't, you may get problems like:
+- Widgets that are too small to see
+- Large widgets crammed into a small space
+- Overflows in the thumbnail
+- Widgets with much more content that you would need for a minimal example
+
+Here some examples of how to customize the overview thumbnails of your use cases:
+```dart
+WidgetBuilder myPageUseCase(UseCaseComposer c) {
+  // Set the minimum size that the thumbnail should give the widget.
+  // If the thumbnail is smaller, it will scale the widget down to fit.
+  c.overview.minimumSize(height: 400);
+  // Remove the padding that the thumbnail adds around the widget.
+  c.overview.withoutPadding();
+  
+  return (context) => MyPage();
+}
+
+WidgetBuilder myTinyWidgetUseCase(UseCaseComposer c) {
+  // Set the constraints used in the thumbnail.
+  c.constraints.overview(width: 40);
+  // Set the minimum size that the thumbnail should give the widget.
+  // If the thumbnail is smaller, it will scale the widget down to fit.
+  c.overview.minimumSize(width: 50, height: 50);
+  // Allow the thumbnail to scale the widget up.
+  c.overview.maximumScale(3.0);
+
+  return (context) => MyTinyWidget();
+}
+```
+
+For a more detailed guide on how to optimize your use case thumbnails, and the overview feature in general,
+visit the [Overview](Overview-topic.html) topic.
+
 ## Custom Composer calls
+
+## Advanced Composer Usage

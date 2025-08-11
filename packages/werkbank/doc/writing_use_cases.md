@@ -519,6 +519,47 @@ WidgetBuilder myTinyWidgetUseCase(UseCaseComposer c) {
 For a more detailed guide on how to optimize your use case thumbnails, and the overview feature in general,
 visit the [Overview](Overview-topic.html) topic.
 
-## Custom Composer calls
+## Custom Composer Extensions
+
+Sometimes you may end up repeating the same or similar calls to the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
+in multiple use cases.
+To prevent this code duplication, you should first check if the calls can be moved to a parent node using the
+[Inheritance](#inheritance) feature described above.
+If that is not possible, we recommend extracting the calls into an extension on the
+[UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c` or one of the more specific composers:
+- `c.knobs` ([KnobsComposer](../werkbank/KnobsComposer-class.html))
+- `c.constraints` ([ConstraintsComposer](../werkbank/ConstraintsComposer-class.html))
+- `c.background` ([BackgroundComposer](../werkbank/BackgroundComposer-class.html))
+- `c.overview` ([OverviewComposer](../werkbank/OverviewComposer-class.html))
+
+Here are two examples of how this could look like:
+```dart
+extension SafeAreaComposerExtension on UseCaseComposer {
+  void withSafeArea() {
+    final horizontalSafeAreaKnob = knobs.doubleSlider(/* ... */);
+
+    final verticalSafeAreaKnob = knobs.doubleSlider(/* ... */);
+
+    wrapUseCase(
+      (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            padding: /* ... */,
+          ),
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+extension SurfaceBackgroundComposerExtension on BackgroundComposer {
+  void surface() {
+    colorBuilder(
+      (context) => Theme.of(context).colorScheme.surface,
+    );
+  }
+}
+```
 
 ## Advanced Composer Usage

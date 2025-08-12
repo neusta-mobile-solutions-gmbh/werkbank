@@ -26,3 +26,4 @@ We impose some additional guidelines on top of that:
   - For example do not use `> [!NOTE]` for an unimportant side note that is less relevant than the main content.
 - Topics should not explain function parameters, return values, etc. in detail. This is what the code documentation is for.
   Giving an example and mentioning the core concepts may be sufficient.
+- Topics have a table of contents at the top.

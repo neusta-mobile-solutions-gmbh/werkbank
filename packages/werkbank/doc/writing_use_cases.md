@@ -428,14 +428,14 @@ WerkbankRoot get root => WerkbankRoot(
       name: 'Pages',
       builder: (c) {
         // Create a slider knob to control the safe area.
-        final safeAreaKnob = knobs.doubleSlider(
+        final safeAreaKnob = c.knobs.doubleSlider(
           'Safe Area',
           max: 250,
           initialValue: 0,
         );
 
         // Wrap use cases in a MediaQuery that sets the padding used by the SafeArea widget.
-        wrapUseCase(
+        c.wrapUseCase(
           (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(

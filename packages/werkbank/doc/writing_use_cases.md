@@ -32,11 +32,11 @@ WidgetBuilder exampleUseCase(UseCaseComposer c) {
 
 All customizations with the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) are **optional**.
 Your use case will work even when minimal, such as in the example above.
-However, most customizations are worth the time and effort to implement, since they
+However, most customizations are worth the time to implement, since they
 improve your development experience, make testing and design review easier,
-and help impress your customers.
+and help you create better widgets.
 
-The [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c` defines many functions and getters.
+The [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c` provides many functions and getters.
 Use these functions in the use case before returning the
 [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html) to customize the use case.
 
@@ -54,7 +54,8 @@ Use these functions in the use case before returning the
 > }
 > ```
 
-[Addon](../werkbank/Addon-class.html)s introduce most methods and getters on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
+[Addon](../werkbank/Addon-class.html)s introduce most methods and getters on the
+[UseCaseComposer](../werkbank/UseCaseComposer-class.html), using extensions.
 The respective addon must be active for these methods to work.
 However, unless you have explicitly set `includeDefaultAddons: false` in your
 [AddonConfig](../werkbank/AddonConfig-class.html), all these addons are included by default.
@@ -166,7 +167,8 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
   // Define constraints presets.
   c.constraints.preset('Narrow', width: 100);
   c.constraints.preset('Wide', width: 400);
-  // Add predefined presets for common device sizes for use cases showcasing whole pages.
+  // Add predefined presets for common device sizes.
+  // This is usually intended for use cases showcasing whole pages.
   c.constraints.devicePresets();
 
   // Set constraints for overview thumbnails.
@@ -189,7 +191,7 @@ Set this to a value that makes your widget look like it is in its "natural" or b
 **Constraints presets** are predefined sets of constraints that you can quickly apply to the use case.
 Load presets using the "Preset" dropdown in the "CONFIGURE" tab under the "Constraints" section.
 Adding presets is useful when your widget changes its appearance significantly depending on the constraints.
-This way you can cover, for example, multiple layouts of your widget in one use case.
+This way you can cover multiple layouts of your widget in one use case.
 For pages, [`c.constraints.devicePresets()`](../werkbank/DevicePresetComposerExtension/devicePresets.html) provides a convenience method
 that automatically adds presets for common device sizes.
 
@@ -201,21 +203,22 @@ or visit the [Overview](Overview-topic.html) topic for more information on how t
 
 The methods to define these types of constraints come in sets of three:
 
-| Parameters → | `width` and `height`                                           | `Size`                                                                 | `BoxConstraints`                                                                     |
-|--------------|----------------------------------------------------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| Initial      | [initial](../werkbank/ViewConstraintsExtension/initial.html)   | [initialSize](../werkbank/ViewConstraintsExtension/initialSize.html)   | [initialConstraints](../werkbank/ViewConstraintsExtension/initialConstraints.html)   |
-| Presets      | [preset](../werkbank/ViewConstraintsExtension/preset.html)     | [presetSize](../werkbank/ViewConstraintsExtension/presetSize.html)     | [presetConstraints](../werkbank/ViewConstraintsExtension/presetConstraints.html)     |
-| Overview     | [overview](../werkbank/ViewConstraintsExtension/overview.html) | [overviewSize](../werkbank/ViewConstraintsExtension/overviewSize.html) | [overviewConstraints](../werkbank/ViewConstraintsExtension/overviewConstraints.html) |
+| ↓ Type \ Parameters → | `width` and `height`                                           | `Size`                                                                 | `BoxConstraints`                                                                     |
+|-----------------------|----------------------------------------------------------------|------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **Initial**           | [initial](../werkbank/ViewConstraintsExtension/initial.html)   | [initialSize](../werkbank/ViewConstraintsExtension/initialSize.html)   | [initialConstraints](../werkbank/ViewConstraintsExtension/initialConstraints.html)   |
+| **Presets**           | [preset](../werkbank/ViewConstraintsExtension/preset.html)     | [presetSize](../werkbank/ViewConstraintsExtension/presetSize.html)     | [presetConstraints](../werkbank/ViewConstraintsExtension/presetConstraints.html)     |
+| **Overview**          | [overview](../werkbank/ViewConstraintsExtension/overview.html) | [overviewSize](../werkbank/ViewConstraintsExtension/overviewSize.html) | [overviewConstraints](../werkbank/ViewConstraintsExtension/overviewConstraints.html) |
 
-The three variants define the same constraints but use different parameters.
-For example:
+The three variants define the same constraints for a given type but use different parameters.
+The following example shows how to use all three variants:
 ```dart
 c.constraints.initial(width: 200, height: 100);
 c.constraints.presetSize('Preset Name', const Size(400, 200));
 c.constraints.overviewConstraints(const BoxConstraints(minWidth: 100, minHeight: 100));
 ```
 Each of the nine methods also has optional `bool viewLimitedMaxWidth` and `bool viewLimitedMaxHeight` parameters.
-They convert infinite maximum constraints to the size of the main view when `true` (the default).
+They convert infinite ([`double.infinity`](https://api.flutter.dev/flutter/dart-core/double/infinity-constant.html))
+maximum constraints to the size of the main view when `true` (the default).
 This allows use cases to fill the available space in the Werkbank UI.
 Set these to `false` if you want to use infinite maximum constraints instead.
 
@@ -266,7 +269,7 @@ You can view the tags of a use case in the "INSPECT" tab.
 In addition, the home page shows a list of all tags used in your project.
 Clicking on a tag will paste `tag:"TAG_NAME"` into the search field,
 filtering the use cases by that tag.
-To add tags, use the [`c.tags(['tag1', 'tag2'])`](../werkbank/TagsComposerExtension/tags.html) method.
+To add tags, use the [`c.tags(['TAG_1', 'TAG_2'])`](../werkbank/TagsComposerExtension/tags.html) method.
 
 **URLs** are a list of strings that link to documentation, issues, or other resources related to the use case.
 You can view the URLs in the "INSPECT" tab under the "External Links" section.
@@ -424,28 +427,19 @@ WerkbankRoot get root => WerkbankRoot(
     WerkbankFolder(
       name: 'Pages',
       builder: (c) {
-        final horizontalSafeAreaKnob = c.knobs.doubleSlider(
-          'Horizontal Safe Area',
+        // Create a slider knob to control the safe area.
+        final safeAreaKnob = knobs.doubleSlider(
+          'Safe Area',
           max: 250,
           initialValue: 0,
         );
 
-        final verticalSafeAreaKnob = c.knobs.doubleSlider(
-          'Vertical Safe Area',
-          max: 250,
-          initialValue: 0,
-        );
-
-        c.wrapUseCase(
+        // Wrap use cases in a MediaQuery that sets the padding used by the SafeArea widget.
+        wrapUseCase(
           (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(
-                padding:
-                MediaQuery.paddingOf(context) +
-                  EdgeInsets.symmetric(
-                    horizontal: horizontalSafeAreaKnob.value,
-                    vertical: verticalSafeAreaKnob.value,
-                  ),
+                padding: EdgeInsets.all(safeAreaKnob.value),
               ),
               child: child,
             );
@@ -481,7 +475,13 @@ WidgetBuilder myPageUseCase(UseCaseComposer c) {
   // Remove the padding that the thumbnail adds around the widget.
   c.overview.withoutPadding();
   
-  return (context) => MyPage();
+  return (context) {
+    return MyPage(
+      // Change the widget depending on if used as thumbnail.
+      // You could swap it out completely for a custom thumbnail too.
+      hasALotOfContent: !UseCase.isInOverviewOf(context)
+    );
+  };
 }
 
 WidgetBuilder myTinyWidgetUseCase(UseCaseComposer c) {
@@ -507,7 +507,7 @@ in multiple use cases.
 To prevent this code duplication, you should first check if the calls can be moved to a parent node using the
 [Inheritance](#inheritance) feature described above.
 If that is not possible, we recommend extracting the calls into an extension on the
-[UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c` or one of the more specific composers:
+[UseCaseComposer](../werkbank/UseCaseComposer-class.html) or one of the more specific composers:
 - `c.knobs` ([KnobsComposer](../werkbank/KnobsComposer-extension-type.html))
 - `c.constraints` ([ViewConstraintsComposer](../werkbank/ViewConstraintsComposer-extension-type.html))
 - `c.background` ([BackgroundComposer](../werkbank/BackgroundComposer-extension-type.html))
@@ -515,17 +515,20 @@ If that is not possible, we recommend extracting the calls into an extension on 
 
 Here are two examples of how this could look:
 ```dart
+// An extension used on `c`, adding a knob to control safe areas.
 extension SafeAreaComposerExtension on UseCaseComposer {
   void withSafeArea() {
-    final horizontalSafeAreaKnob = knobs.doubleSlider(/* ... */);
-
-    final verticalSafeAreaKnob = knobs.doubleSlider(/* ... */);
+    final safeAreaKnob = knobs.doubleSlider(
+      'Safe Area',
+      max: 250,
+      initialValue: 0,
+    );
 
     wrapUseCase(
-      (context, child) {
+        (context, child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(
-            padding: /* ... */,
+            padding: EdgeInsets.all(safeAreaKnob.value),
           ),
           child: child,
         );
@@ -534,6 +537,7 @@ extension SafeAreaComposerExtension on UseCaseComposer {
   }
 }
 
+// An extension on `c.background`, adding a method to set the surface color as background.
 extension SurfaceBackgroundComposerExtension on BackgroundComposer {
   void surface() {
     colorBuilder(
@@ -543,15 +547,28 @@ extension SurfaceBackgroundComposerExtension on BackgroundComposer {
 }
 ```
 
+Use these extensions in your use cases like this:
+```dart
+WidgetBuilder listTileUseCase(UseCaseComposer c) {
+  // Add knob for safe area, since ListTiles use safe areas internally.
+  c.withSafeArea();
+
+  // Use the surface background.
+  c.background.surface();
+
+  return (context) => ListTile(/* ... */);
+}
+```
+
 ## Advanced Composer Usage
 
-You can use the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) in many more ways than we can cover in this topic.
+You can use the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) in many more ways than are covered in this topic.
 Here are some of the more advanced uses:
 - Store your own information about a use case by using custom metadata.
   - Learn more about this in the
     [Custom Use Case Metadata](Custom%20Use%20Case%20Metadata-topic.html) topic.
 - Write an [Addon](../werkbank/Addon-class.html) that adds custom functionality to the
-  [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
+  [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
   - Learn more about this in the [Writing Your Own Addons](Writing%20Your%20Own%20Addons-topic.html) topic.
 - Write custom knobs that integrate into the [KnobsAddon](../werkbank/KnobsAddon-class.html).
   - Learn more about this in the [Knobs](Knobs-topic.html) topic.

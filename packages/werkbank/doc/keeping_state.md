@@ -1,4 +1,4 @@
-The States addon provides a simple solution for managing state that doesn't need visual controls like knobs do. Think of it as "headless knobs" - you get the same reactive state management capabilities as knobs, but without the UI controls. This is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
+The [StateAddon](../werkbank/StateAddon-class.html) provides a simple solution for managing state that doesn't need visual controls like knobs do. Think of it as "headless knobs" - you get the same reactive state management capabilities as knobs, but without the UI controls. This is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
 
 States behave similarly to knobs: they preserve their values during hot reloads, provide reactive updates through `ValueNotifier`, and integrate seamlessly with your use cases. The key difference is that states don't appear as controllable elements in the right panel.
 
@@ -54,6 +54,7 @@ final scrollController = c.states.mutable(
   create: () => ScrollController(),
   dispose: (controller) => controller.dispose(),
 );
+
 
 // ...
 

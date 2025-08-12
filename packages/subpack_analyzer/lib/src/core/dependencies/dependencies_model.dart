@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-
-import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/dependencies/dependencies_error_model.dart';
+import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 
 sealed class DependenciesModel {}
 

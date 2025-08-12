@@ -2,35 +2,31 @@ import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as p;
-
+import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/utils/emotes.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
-import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 
-/// Creates a file structure tree of all directories and files contained in the [_rootPackage] for the analysis.
+/// Creates a file structure tree of all directories and files contained
+/// in the Directory rootDirectory for the analysis.
 class FileStructureTreeBuilder with SubpackLogger {
+  FileStructureTreeBuilder._fileStructureTreeBuilder({
+    required Directory rootDirectory,
+    required Set<String> rootDirectories,
+  }) : _rootDirectories = rootDirectories,
+       _rootDirectory = rootDirectory;
+
   static Future<PackageRoot> buildFileStructureTree({
-    required rootDirectory,
-    required rootDirectories,
+    required Directory rootDirectory,
+    required Set<String> rootDirectories,
     required Logger logger,
   }) {
     final fileStructureBuilder =
         FileStructureTreeBuilder._fileStructureTreeBuilder(
           rootDirectory: rootDirectory,
           rootDirectories: rootDirectories,
-          logger: logger,
         );
     return fileStructureBuilder._buildFileStructureTree();
-  }
-
-  FileStructureTreeBuilder._fileStructureTreeBuilder({
-    required Directory rootDirectory,
-    required Set<String> rootDirectories,
-    required Logger logger,
-  }) : _rootDirectories = rootDirectories,
-       _rootDirectory = rootDirectory {
-    logger = logger;
   }
 
   final String _dartExtension = '.dart';
@@ -43,7 +39,6 @@ class FileStructureTreeBuilder with SubpackLogger {
     final directories = <Directory>[];
 
     for (final dirPath in _rootDirectories) {
-      // ignore: avoid_slow_async_io
       final dirExists = await Directory(
         p.join(_rootDirectory.path, dirPath),
       ).exists();
@@ -161,7 +156,8 @@ class FileStructureTreeBuilder with SubpackLogger {
       levelIndent.write('  ');
     }
     logVerbose(
-      '$levelIndent${Emotes.folder} ${SubpackUtils.getFileUriFromPath(filetree.directory.path)}:',
+      '$levelIndent${Emotes.folder} '
+      '${SubpackUtils.getFileUriFromPath(filetree.directory.path)}:',
     );
     levelIndent.write('  ');
     for (final file in filetree.dartFiles) {

@@ -4,16 +4,17 @@ import 'dart:io';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as p;
-import 'package:yaml/yaml.dart';
-
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/usages/usages_model.dart';
+import 'package:yaml/yaml.dart';
 
 const String subpackFileName = 'subpack.yaml';
 const String src = 'src';
 
 class SubpackUtils {
   SubpackUtils._();
+
+  static RegExp validPackageNamePattern = RegExp(r'^[a-z_][a-z0-9_]*$');
 
   /// Returns the content read from a yaml file.
   static Future<YamlMap?> readYaml(String filePath) async {
@@ -40,8 +41,9 @@ class SubpackUtils {
   }
 
   /// Returns an Uri with an absolute file path build from the relative path.
-  /// Optional: Creates the Uri with the vscode-scheme if isRunningInVSCodeTerminal is true,
-  /// which enables links that are using this uri to open files in the same vscode editor window.
+  /// Optional: Creates the Uri with the vscode-scheme if
+  /// isRunningInVSCodeTerminal is true, which enables links that are using
+  /// this uri to open files in the same vscode editor window.
   static Uri getFileUri({
     required Directory rootDirectory,
     required String relativePath,
@@ -77,10 +79,10 @@ class SubpackUtils {
   /// Creates a string listing all relative subpack paths in subpacks.
   static String createSubpackLinks(
     Directory rootDirectory,
-    ISet subpacks,
+    ISet<SubpackDirectory> subpacks,
   ) {
     final subpackLinks = StringBuffer();
-    for (SubpackDirectory subpackDir in subpacks) {
+    for (final subpackDir in subpacks) {
       final relativePath = subpackDir.directory.path;
 
       if (subpackDir.subpackFile == null) {
@@ -99,6 +101,12 @@ class SubpackUtils {
       }
     }
     return subpackLinks.toString();
+  }
+
+  /// Returns whether packageName is valid by [this definition](https://dart.dev/tools/linter-rules/package_names).
+  /// Does not check for reserved words!
+  static bool isValidPackageName(String packageName) {
+    return validPackageNamePattern.hasMatch(packageName);
   }
 
   static bool get isVerbose => Zone.current[#verbose] == true;

@@ -22,6 +22,8 @@ abstract class Addon {
   // TODO: Document
   List<PersistentController> createPersistentControllers() => [];
 
+  void registerPersistentControllers(PersistentControllerRegistry registry) {}
+
   /// Creates [TransientUseCaseStateEntry]s which are attached to the
   /// [UseCaseComposer] at the beginning of the use case setup.
   /// The created transient state entries can be retrieved via the

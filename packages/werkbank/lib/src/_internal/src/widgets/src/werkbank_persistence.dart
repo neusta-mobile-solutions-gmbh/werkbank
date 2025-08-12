@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:werkbank/src/persistence/src/persistent_controller_registry.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
 typedef ControllerMapFactory =
@@ -62,7 +63,8 @@ class WerkbankPersistence extends StatefulWidget {
   static T? maybeControllerOf<T extends PersistentController<T>>(
     BuildContext context,
   ) {
-    return _InheritedWerkbankPersistence.of(context)?.controllers[T] as T?;
+    return _InheritedWerkbankPersistence.of(context)?.controllersByType[T]
+        as T?;
   }
 
   @override
@@ -70,8 +72,7 @@ class WerkbankPersistence extends StatefulWidget {
 }
 
 class _WerkbankPersistenceState extends State<WerkbankPersistence> {
-  late final SharedPreferencesWithCache _prefsWithCache;
-  Map<Type, PersistentController>? _controllers;
+  Map<Type, PersistentController>? _controllersByType;
 
   bool _initialized = false;
 
@@ -88,13 +89,13 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
 
   void _updateControllers() {
     void update() {
-      _controllers = {
+      _controllersByType = {
         for (final controller in widget.persistentControllers)
           controller.type: controller,
       };
     }
 
-    final controllers = _controllers;
+    final controllers = _controllersByType;
     if (controllers != null) {
       final jsonSnapshots = {
         for (final controller in controllers.values)
@@ -104,7 +105,7 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
         controller.dispose();
       }
       update();
-      for (final controller in _controllers!.values) {
+      for (final controller in _controllersByType!.values) {
         final json = jsonSnapshots[controller.type];
         controller.tryLoadFromJson(json);
       }
@@ -129,12 +130,12 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   }
 
   Future<void> _initControllers() async {
-    _controllers = widget.persistentControllers(_prefsWithCache);
+    _controllersByType = widget.persistentControllers(_prefsWithCache);
   }
 
   @override
   void dispose() {
-    for (final controller in _controllers.values) {
+    for (final controller in _controllersByType.values) {
       controller.dispose();
     }
     super.dispose();
@@ -147,7 +148,7 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
     }
 
     return _InheritedWerkbankPersistence(
-      controllers: _controllers,
+      controllersByType: _controllersByType,
       child: widget.child,
     );
   }
@@ -155,11 +156,11 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
 
 class _InheritedWerkbankPersistence extends InheritedWidget {
   const _InheritedWerkbankPersistence({
-    required this.controllers,
+    required this.controllersByType,
     required super.child,
   });
 
-  final Map<Type, PersistentController> controllers;
+  final Map<Type, PersistentController> controllersByType;
 
   static _InheritedWerkbankPersistence? of(BuildContext context) {
     return context
@@ -168,6 +169,29 @@ class _InheritedWerkbankPersistence extends InheritedWidget {
 
   @override
   bool updateShouldNotify(_InheritedWerkbankPersistence oldWidget) {
-    return controllers != oldWidget.controllers;
+    return controllersByType != oldWidget.controllersByType;
   }
+}
+
+class _PersistentControllerRegistryImpl
+    implements PersistentControllerRegistry {
+  final Map<Type, _Registration> _registrationsByType = {};
+
+  @override
+  void register<T extends PersistentController<T>>(
+    String id,
+    T Function() createController,
+  ) {
+    // TODO: Implement
+  }
+}
+
+class _Registration {
+  _Registration({
+    required this.id,
+    required this.createController,
+  });
+
+  final String id;
+  final PersistentController Function() createController;
 }

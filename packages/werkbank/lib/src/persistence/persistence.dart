@@ -15,6 +15,7 @@ export 'src/json_store.dart';
 export 'src/persistence_config.dart';
 export 'src/persistent_controller.dart';
 export 'src/persistent_controller_initialization.dart';
+export 'src/persistent_controller_registry.dart';
 export 'src/search_query/search_query_controller.dart';
 export 'src/search_query/search_query_persistant_data.dart';
 export 'src/sections/panel_tabs_controller.dart';

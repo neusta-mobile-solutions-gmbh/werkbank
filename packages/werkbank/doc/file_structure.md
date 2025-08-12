@@ -1,11 +1,17 @@
 There are many different ways to structure your project files.
-We will go through the advantages and disadvantages of different approaches and make some
+This topic presents the advantages and disadvantages of different approaches and makes some
 recommendations.
 However, in the end, it is up to you to decide what works best for your project.
+You should be familiar with a basic Werkbank setup, as described in the
+[Getting Started](Getting%20Started-topic.html) topic,
+before reading this topic.
+
+**Table of Contents**
+- [Where to put the UseCases?](#where-to-put-the-usecases)
+- [Where to put the Configurations?](#where-to-put-the-configurations)
 
 ## Where to put the UseCases?
 
-<!-- TODO: Check link. This topic doesn't exist yet. -->
 While use cases may start small at first,
 they can grow quite large once you start augmenting them, for example, with the techniques described in the
 [Writing Use Cases](Writing%20Use%20Cases-topic.html) topic.
@@ -103,7 +109,7 @@ and to mirror the folder structure of your components.
 > This components package would then be depended on by your app package and the Werkbank app project.
 > Dart's [workspaces](https://dart.dev/tools/pub/workspaces) feature makes this quite convenient.
 
-## Where to put the configurations?
+## Where to put the Configurations?
 
 We also recommend putting your
 [AppConfig](../werkbank/AppConfig-class.html)

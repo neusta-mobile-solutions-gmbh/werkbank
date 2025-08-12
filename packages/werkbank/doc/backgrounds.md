@@ -1,6 +1,8 @@
 > [!CAUTION]
 > This topic is under construction.
 
+<!--
+Recycle this?
 The [BackgroundAddon](../werkbank/BackgroundAddon-class.html) allows you to configure the backgrounds of your use cases.
 
 You have two ways to set the backgrounds of use cases:
@@ -96,3 +98,5 @@ Each method has two variants:
   [`c.background.widgetBuilder(...)`](../werkbank/BackgroundComposer/widgetBuilder.html)
   accept a builder function that provides a [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html),
   which allows you to access, for example, the current theme.
+
+-->

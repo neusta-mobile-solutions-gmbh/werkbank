@@ -3,7 +3,7 @@ You can find more detailed information for some of the features in their respect
 We recommend reading [Getting Started](Getting%20Started-topic.html) and [File Structure](File%20Structure-topic.html) before this topic to
 learn how to create basic use cases and how to structure them in your project.
 
-## Table of Contents
+**Table of Contents**
 - [UseCaseComposer Basics](#usecasecomposer-basics)
 - [Knobs](#knobs)
 - [Constraints](#constraints)

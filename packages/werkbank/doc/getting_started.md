@@ -1,3 +1,16 @@
+This topic will guide you through the process of setting up Werkbank for your Flutter project.
+You should already be familiar what Werkbank is and the purpose of use cases from the
+[Welcome](Welcome-topic.html) topic.
+
+**Table of Contents**
+- [Creating the Werkbank Flutter Project](#creating-the-werkbank-flutter-project)
+- [WerkbankApp Setup](#werkbankapp-setup)
+  - [Defining the Use Case Tree](#defining-the-use-case-tree)
+- [Creating UseCases](#creating-usecases)
+- [Next Steps](#next-steps)
+
+## Creating the Werkbank Flutter Project
+
 To create a Werkbank for your project, start by creating a new Flutter app.
 A good place to put this app would be next to the folder of your project.
 For example, you can do this by running
@@ -189,7 +202,6 @@ Now you should have everything set up to run your Werkbank app.
 
 ## Next Steps
 
-<!-- TODO: Check these links. Some topics don't exist yet. -->
 Take a look at these topics next to advance your Werkbank setup further:
 - [File Structure](File%20Structure-topic.html) - Learn how to organize the files and use cases in your project.
 - [Configuring Addons](Configuring%20Addons-topic.html) - Further configure the addons you are using.

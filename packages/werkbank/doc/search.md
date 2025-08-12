@@ -1,6 +1,14 @@
-Werkbank provides a search feature in the navigation panel, helping to find specific Use Cases, Components, or Folders ([WerkbankNode](../werkbank/WerkbankNode-class.html)'s) within your [WerkbankRoot](../werkbank/WerkbankRoot-class.html). It does more than a simple text search and keeps the familiar tree structure, only hiding nodes that do not match your query. The search is designed to be flexible and extensible.
+This topic describes how Werkbanks search works, advanced search syntax, and how to add custom search entries.
+
+**Table of Contents**
+- [How Search Works](#how-search-works)
+- [Advanced Search](#advanced-search)
+  - [Supported Fields](#supported-fields)
+- [Adding Custom Search Entries](#adding-custom-search-entries)
+  - [Debugging search matches](#debugging-search-matches)
 
 ## How Search Works
+Werkbank provides a search feature in the navigation panel, helping to find specific Use Cases, Components, or Folders ([WerkbankNode](../werkbank/WerkbankNode-class.html)'s) within your [WerkbankRoot](../werkbank/WerkbankRoot-class.html). It does more than a simple text search and keeps the familiar tree structure, only hiding nodes that do not match your query. The search is designed to be flexible and extensible.
 
 By default, search is fuzzy and case-insensitive. You can search for:
 

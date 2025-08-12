@@ -1,6 +1,16 @@
 > [!CAUTION]
 > This topic is under construction.
 
+This topic explains how to use knobs, their technical details,
+as well as more advanced subjects like creating custom knobs.
+
+**Table of Contents:**
+- *TODO*
+- [Creating Custom Knobs](#creating-custom-knobs)
+  - [Approach 1: Using Existing Knobs](#approach-1-using-existing-knobs)
+  - [Approach 2: Using `makeRegularKnob` and `makeNullableKnob`](#approach-2-using-makeregularknob-and-makenullableknob) (*TODO*)
+  - [Approach 3: Using `registerKnob`](#approach-3-using-registerknob) (*TODO*)
+
 <!--
 TODO: Integrate this?
 

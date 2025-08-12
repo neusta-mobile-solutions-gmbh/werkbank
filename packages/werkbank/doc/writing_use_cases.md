@@ -537,7 +537,8 @@ extension SafeAreaComposerExtension on UseCaseComposer {
   }
 }
 
-// An extension on `c.background`, adding a method to set the surface color as background.
+// An extension on `c.background`, adding a method to set
+// the surface color as background.
 extension SurfaceBackgroundComposerExtension on BackgroundComposer {
   void surface() {
     colorBuilder(

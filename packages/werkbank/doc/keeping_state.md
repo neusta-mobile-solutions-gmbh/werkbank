@@ -76,15 +76,10 @@ For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](.
 
 ## Complete Example
 
-Here's a comprehensive example showing how states and knobs work together:
+Here's a comprehensive example showing how to use states:
 
 ```dart
 WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
-  final messageKnob = c.knobs.string(
-    'Message',
-    initialValue: 'Hello, World!',
-  );
-
   // Immutable state for custom data model
   final customModel = c.states.immutable(
     'UI Model',
@@ -97,29 +92,13 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
   // Mutable state for controller
   final textController = c.states.mutable(
     'Text Controller',
-    create: () {
-      final controller = TextEditingController();
-
-      // This serves no purpose other than to demonstrate
-      // that some mutable state is able to update some other state
-      // and a knob.
-      controller.addListener(() {
-        messageKnob.value = controller.text;
-        customModel.value = CustomModel(
-          isLoading: controller.text.hashCode.isEven,
-          itemCount: controller.text.length,
-        );
-      });
-      // End of example
-      return controller;
-    },
+    create: TextEditingController.new,
     dispose: (controller) => controller.dispose(),
   );
 
   return (context) {
     return Column(
       children: [
-        Text(messageKnob.value),
         _CustomComponent(
           model: customModel.value,
           onModelChanged: (newModel) {
@@ -132,3 +111,70 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
   };
 }
 ```
+
+
+<details>
+<summary><b>Example</b> of how you would do this <b>without <a href="../werkbank/CustomFieldKnobExtension/customField.html">StateAddon</a></b></summary>
+
+This illustrates what issue the StateAddon solves for you, since **you don't have to do this**:
+
+```dart
+WidgetBuilder exampleWithoutStatesUseCase(UseCaseComposer c) {
+  return (context) {
+    return _StateProvider(
+      builder: (context, model, controller) => Column(
+        children: [
+          _CustomComponent(
+            model: model.value,
+            onModelChanged: (newModel) {
+              model.value = newModel;
+            },
+          ),
+          TextField(controller: controller),
+        ],
+      ),
+    );
+  };
+}
+
+class _StateProvider extends StatefulWidget {
+  const _StateProvider({
+    required this.builder,
+  });
+
+  final Widget Function(
+    BuildContext context,
+    ValueNotifier<CustomModel> model,
+    TextEditingController controller,
+  )
+  builder;
+
+  @override
+  State<_StateProvider> createState() => _StateProviderState();
+}
+
+class _StateProviderState extends State<_StateProvider> {
+  late final ValueNotifier<CustomModel> _model;
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _model = ValueNotifier(CustomModel());
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.builder(context, _model, _controller);
+  }
+}
+```
+</details>

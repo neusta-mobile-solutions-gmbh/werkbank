@@ -1,6 +1,6 @@
-This topic provides an overview of the techniques you can use to customize your use cases.
+This topic provides an overview of techniques you can use to customize your use cases.
 You can find more detailed information for some of the features in their respective topics.
-We recommend reading [Get Started](Get%20Started-topic.html) and [File Structure](File%20Structure-topic.html) before this topic to
+We recommend reading [Getting Started](Getting%20Started-topic.html) and [File Structure](File%20Structure-topic.html) before this topic to
 learn how to create basic use cases and how to structure them in your project.
 
 ## Table of Contents
@@ -18,7 +18,7 @@ learn how to create basic use cases and how to structure them in your project.
 ## UseCaseComposer Basics
 
 The [UseCaseComposer](../werkbank/UseCaseComposer-class.html) forms the core of customizing your use cases.
-To define a use case, you declare [UseCaseBuilder](../werkbank/UseCaseBuilder.html) function that takes this composer as a parameter.
+To define a use case, declare a [UseCaseBuilder](../werkbank/UseCaseBuilder.html) function that takes this composer as a parameter.
 
 ```dart
 WidgetBuilder exampleUseCase(UseCaseComposer c) {
@@ -55,7 +55,7 @@ Use these functions in the use case before returning the
 > ```
 
 [Addon](../werkbank/Addon-class.html)s introduce most methods and getters on the
-[UseCaseComposer](../werkbank/UseCaseComposer-class.html), using extensions.
+[UseCaseComposer](../werkbank/UseCaseComposer-class.html) using extensions.
 The respective addon must be active for these methods to work.
 However, unless you have explicitly set `includeDefaultAddons: false` in your
 [AddonConfig](../werkbank/AddonConfig-class.html), all these addons are included by default.
@@ -81,7 +81,7 @@ You can change the knob value in two ways:
 - Programmatically by using the [`knob.value = ...`](../werkbank/WritableKnob/value.html) setter.
   - Use this setter, for example, in `onChanged` callbacks.
 
-Here is an example of a use case that uses a double slider knob to control the value of a slider:
+This example shows a use case that uses a double slider knob to control the value of a slider:
 
 ```dart
 WidgetBuilder sliderUseCase(UseCaseComposer c) {
@@ -125,8 +125,7 @@ WidgetBuilder filledButtonUseCase(UseCaseComposer c) {
 }
 ```
 
-Load a knob preset using the "Preset" dropdown above the knobs controls in the Werkbank UI.
-Find both of them in the "CONFIGURE" tab under the "Knobs" section.
+Load a knob preset using the "Preset" dropdown in the "CONFIGURE" tab under the "Knobs" section.
 
 > [!TIP]
 > Beside the dropdown to load knob presets is a small button that opens an [Overview](Overview-topic.html) of all available presets.
@@ -157,7 +156,7 @@ You can set constraints in two ways:
 
 Even when setting constraints programmatically, you can always change them interactively in the Werkbank UI.
 
-Here is an example of a use case that customizes the constraints of a slider widget:
+This example shows a use case that customizes the constraints of a slider widget:
 
 ```dart
 WidgetBuilder sliderUseCase(UseCaseComposer c) {
@@ -259,7 +258,7 @@ WidgetBuilder sliderUseCase(UseCaseComposer c) {
 You can use it to:
 - Explain the widget and its purpose.
 - Provide context about where the widget should be used.
-- Or anything else you want.
+- Add any other information you want.
 
 Markdown syntax is also supported.
 To add a description, use the [`c.description('Description Text')`](../werkbank/DescriptionComposerExtension/description.html) method.
@@ -283,7 +282,7 @@ You have two ways to set the backgrounds of use cases:
 - In the code, define a default background for **individual use cases**.
 - In the UI, override the background for **all use cases**.
 
-Here, we only cover how to set the background in the code.
+This section covers only how to set the background in the code.
 To learn how to configure the backgrounds in the Werkbank UI,
 visit the [Backgrounds](Backgrounds-topic.html) topic.
 
@@ -358,7 +357,7 @@ The parent nodes are:
   use cases that display the same component/widget.
 - [WerkbankFolder](../werkbank/WerkbankFolder-class.html) - A folder grouping multiple use cases, components, or other folders.
 
-Here is an example of how to use the [builder](../werkbank/WerkbankParentNode/builder.html)s
+This example shows how to use the [builder](../werkbank/WerkbankParentNode/builder.html)s
 on the parent nodes to configure multiple use cases at once:
 ```dart
 WerkbankRoot get root => WerkbankRoot(
@@ -414,7 +413,7 @@ to call the methods after the methods of the children have been executed.
 The [WrappingAddon](../werkbank/WrappingAddon-class.html) allows you to wrap your use case widget
 using the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`.
 
-This is mostly useful when combined with the [Inheritance](#inheritance) feature described above.
+This feature is most useful when combined with the [Inheritance](#inheritance) feature described above.
 That way you can wrap all use cases in a parent node with a common widget.
 The wrapping feature also allows you to use knobs from within the [builder](../werkbank/WerkbankParentNode/builder.html)s
 of the parent nodes.
@@ -466,7 +465,7 @@ If you do not, you may get problems like:
 - Overflows in the thumbnail
 - Widgets with much more content than you would need for a minimal example
 
-Here are some examples of how to customize the overview thumbnails of your use cases:
+These examples show how to customize the overview thumbnails of your use cases:
 ```dart
 WidgetBuilder myPageUseCase(UseCaseComposer c) {
   // Set the minimum size that the thumbnail should give the widget.
@@ -504,7 +503,7 @@ visit the [Overview](Overview-topic.html) topic.
 
 Sometimes you may end up repeating the same or similar calls to the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
 in multiple use cases.
-To prevent this code duplication, you should first check if the calls can be moved to a parent node using the
+To prevent this code duplication, first check if the calls can be moved to a parent node using the
 [Inheritance](#inheritance) feature described above.
 If that is not possible, we recommend extracting the calls into an extension on the
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) or one of the more specific composers:
@@ -513,7 +512,7 @@ If that is not possible, we recommend extracting the calls into an extension on 
 - `c.background` ([BackgroundComposer](../werkbank/BackgroundComposer-extension-type.html))
 - `c.overview` ([OverviewComposer](../werkbank/OverviewComposer-extension-type.html))
 
-Here are two examples of how this could look:
+These two examples show how this could look:
 ```dart
 // An extension used on `c`, adding a knob to control safe areas.
 extension SafeAreaComposerExtension on UseCaseComposer {
@@ -563,7 +562,7 @@ WidgetBuilder listTileUseCase(UseCaseComposer c) {
 ## Advanced Composer Usage
 
 You can use the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) in many more ways than are covered in this topic.
-Here are some of the more advanced uses:
+Some of the more advanced uses include:
 - Store your own information about a use case by using custom metadata.
   - Learn more about this in the
     [Custom Use Case Metadata](Custom%20Use%20Case%20Metadata-topic.html) topic.

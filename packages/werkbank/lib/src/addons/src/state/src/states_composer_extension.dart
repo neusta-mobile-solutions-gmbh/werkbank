@@ -5,7 +5,7 @@ import 'package:werkbank/werkbank.dart';
 /// of how to provide commonly used controllers
 /// using the state addon.
 ///
-/// {@category Provide State Without Knobs}
+/// {@category Keeping State}
 extension StatesComposerControllersExtension on StatesComposer {
   ValueContainer<ScrollController> scrollController(
     String id, {

@@ -5,7 +5,7 @@ import 'package:werkbank/src/addons/src/state/src/_internal/mutable_state_ticker
 import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
-/// {@category Provide State Without Knobs}
+/// {@category Keeping State}
 class StateAddon extends Addon {
   const StateAddon() : super(id: addonId);
 

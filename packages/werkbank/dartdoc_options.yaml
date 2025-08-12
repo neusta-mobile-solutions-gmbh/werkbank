@@ -16,8 +16,8 @@ dartdoc:
       markdown: doc/customizing_the_appconfig.md
     Knobs:
       markdown: doc/knobs.md
-    Provide State Without Knobs:
-      markdown: doc/provide_state_without_knobs.md
+    Keeping State:
+      markdown: doc/keeping_state.md
     Overview:
       markdown: doc/overview.md
     Custom Use Case Metadata:

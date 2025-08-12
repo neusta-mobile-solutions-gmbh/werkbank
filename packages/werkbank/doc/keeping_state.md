@@ -20,7 +20,13 @@ If you need a control but no suitable knob exists, consider [implementing a cust
 
 ## Types of States
 
-There are three types of state containers available:
+There are two types of state you may want to keep for your use case:
+
+- **Immutable state**
+  - For example for a `Color`, a `Size`, `Offset`, or a custom data class
+- **Mutable state**
+  - For example for a `ScrollController`, `TextEditingController`, or another mutable object for managing state.
+
 
 ### Immutable States
 

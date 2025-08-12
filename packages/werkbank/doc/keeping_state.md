@@ -63,28 +63,7 @@ scrollController.value.animateTo(100);
 ```
 
 Mutable states are read-only containers. The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. You cannot reassign the value in your use case.
-
-### Mutable States with Ticker Provider
-
-Use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html) for objects that require a `TickerProvider`, such as animation controllers:
-
-```dart
-final tabController = c.states.mutableWithTickerProvider(
-  'Tab Controller',
-  create: (tickerProvider) => TabController(
-    length: 3,
-    vsync: tickerProvider,
-  ),
-  dispose: (controller) => controller.dispose(),
-);
-
-// ...
-
-// Read-only access: use the controller's methods to change state
-tabController.value.animateTo(1);
-```
-
-Like mutable states, these are read-only containers with lifecycle management.
+For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html).
 
 > [!NOTE]
 > All state values are preserved during hot reloads, just like knobs. This makes iterative development smooth and efficient.

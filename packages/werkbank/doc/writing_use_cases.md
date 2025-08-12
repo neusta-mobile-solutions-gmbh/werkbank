@@ -418,7 +418,8 @@ That way you can wrap all use cases in a parent node with a common widget.
 The wrapping feature also allows you to use knobs from within the [builder](../werkbank/WerkbankParentNode/builder.html)s
 of the parent nodes.
 
-This example adds two knobs to all page use cases that control the horizontal and vertical safe area:
+This example adds a knob to all page use cases that controls the padding
+used by [SafeArea](https://api.flutter.dev/flutter/widgets/SafeArea-class.html)s:
 ```dart
 WerkbankRoot get root => WerkbankRoot(
   children: [

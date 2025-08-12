@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:werkbank/src/persistence_config/src/persistent_controller_initialization.dart';
-import 'package:werkbank/src/persistence_config/src/store.dart';
+import 'package:werkbank/src/persistence/src/json_store.dart';
+import 'package:werkbank/src/persistence/src/persistent_controller_initialization.dart';
 
 interface class PersistenceConfig {
   const PersistenceConfig()

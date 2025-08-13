@@ -31,68 +31,148 @@ This use case demonstrates the various knobs supported by the knobs addon in the
 - **Focus Node Child Knob**: A knob for selecting a focus node for a child widget.
 ''')
     ..tags([Tags.knobs, Tags.useCase, Tags.addon])
-    ..constraints.initial(width: 500, viewLimitedMaxHeight: false)
+    ..constraints.initial(width: 500)
     ..overview.withoutThumbnail();
 
-  final knobs = [
-    // Regular
-    c.knobs.boolean('Boolean', initialValue: false),
-    c.knobs.intSlider('Int Slider', initialValue: 0),
-    c.knobs.doubleSlider('Double Slider', initialValue: 0),
-    c.knobs.list('List', options: ['A', 'B', 'C'], optionLabel: (e) => e),
-    c.knobs.string('String', initialValue: 'Hello'),
-    c.knobs.stringMultiLine(
-      'String Multi Line',
-      initialValue: 'Hello\nWorld',
-    ),
-    c.knobs.millis(
-      'Milliseconds',
-      initialValue: Durations.long1,
-    ),
-    c.knobs.date(
-      'Date',
-      initialValue: DateTime.now(),
-    ),
-    // Nullable
-    c.knobs.nullable.boolean(
-      'Nullable Boolean',
-      initialValue: false,
-    ),
-    c.knobs.nullable.intSlider(
-      'Nullable Int Slider',
-      initialValue: 0,
-    ),
-    c.knobs.nullable.doubleSlider(
-      'Nullable Double Slider',
-      initialValue: 0,
-    ),
-    c.knobs.nullable.list(
-      'Nullable List',
-      options: ['A', 'B', 'C'],
-      optionLabel: (e) => e,
-      initialOption: 'A',
-    ),
-    c.knobs.nullable.string(
-      'Nullable String',
-      initialValue: 'Hello',
-    ),
-    c.knobs.nullable.stringMultiLine(
-      'Nullable String Multi Line',
-      initialValue: 'Hello\nWorld',
-    ),
-    c.knobs.nullable.millis(
-      'Nullable Milliseconds',
-      initialValue: Durations.long1,
-    ),
-    c.knobs.nullable.date(
-      'Nullable Date',
-      initialValue: DateTime.now(),
-    ),
-  ];
+  final booleanKnob = c.knobs.boolean('Boolean', initialValue: false);
+  final nullableBooleanKnob = c.knobs.nullable.boolean(
+    'Nullable Boolean',
+    initialValue: false,
+  );
+
+  final intSliderKnob = c.knobs.intSlider('Int Slider', initialValue: 0);
+  final nullableIntSliderKnob = c.knobs.nullable.intSlider(
+    'Nullable Int Slider',
+    initialValue: 0,
+  );
+
+  final intFieldKnob = c.knobs.intField(
+    'Int Field',
+    initialValue: 0,
+  );
+
+  final nullableIntFieldKnob = c.knobs.nullable.intField(
+    'Nullable Int Field',
+    initialValue: 0,
+  );
+
+  final doubleSliderKnob = c.knobs.doubleSlider(
+    'Double Slider',
+    initialValue: 0,
+  );
+  final nullableDoubleSliderKnob = c.knobs.nullable.doubleSlider(
+    'Nullable Double Slider',
+    initialValue: 0,
+  );
+
+  final doubleFieldKnob = c.knobs.doubleField(
+    'Double Field',
+    initialValue: 0,
+  );
+  final nullableDoubleFieldKnob = c.knobs.nullable.doubleField(
+    'Nullable Double Field',
+    initialValue: 0,
+  );
+
+  final dropdownKnob = c.knobs.customDropdown(
+    'Dropdown',
+    initialValue: 'A',
+    values: ['A', 'B', 'C'],
+    valueLabel: (e) => e,
+  );
+  final nullableDropdownKnob = c.knobs.nullable.customDropdown(
+    'Nullable Dropdown',
+    values: ['A', 'B', 'C'],
+    valueLabel: (e) => e,
+    initialValue: 'A',
+  );
+
+  final stringKnob = c.knobs.string('String', initialValue: 'Hello');
+  final nullableStringKnob = c.knobs.nullable.string(
+    'Nullable String',
+    initialValue: 'Hello',
+  );
+
+  final stringMultiLineKnob = c.knobs.stringMultiLine(
+    'String Multi Line',
+    initialValue: 'Hello\nWorld',
+  );
+  final nullableStringMultiLineKnob = c.knobs.nullable.stringMultiLine(
+    'Nullable String Multi Line',
+    initialValue: 'Hello\nWorld',
+  );
+
+  final millisKnob = c.knobs.millis(
+    'Milliseconds',
+    initialValue: Durations.long1,
+  );
+  final nullableMillisKnob = c.knobs.nullable.millis(
+    'Nullable Milliseconds',
+    initialValue: Durations.long1,
+  );
+
+  final dateKnob = c.knobs.date('Date', initialValue: DateTime.now());
+  final nullableDateKnob = c.knobs.nullable.date(
+    'Nullable Date',
+    initialValue: DateTime.now(),
+  );
+
+  final bigIntKnob = c.knobs.bigInt('BigInt Input', initialValue: BigInt.zero);
+  final nullableBigIntKnob = c.knobs.nullable.bigInt(
+    'Nullable BigInt Input',
+    initialValue: BigInt.zero,
+  );
+
+  final hexColorKnob = c.knobs.hexColor('Hex Color', initialValue: Colors.red);
+  final nullableHexColorKnob = c.knobs.nullable.hexColor(
+    'Nullable Hex Color',
+    initialValue: Colors.red,
+  );
+
+  final stringListKnob = c.knobs.stringList(
+    'String List Input',
+    initialValue: const ['Line 1', 'Line 2', 'Line 3'],
+  );
+  final nullableStringListKnob = c.knobs.nullable.stringList(
+    'Nullable String List Input',
+    initialValue: const ['Line 1', 'Line 2', 'Line 3'],
+  );
+
+  final timeOfDayKnob = c.knobs.timeOfDay(
+    'Time Of Day',
+    initialValue: const TimeOfDay(hour: 0, minute: 0),
+  );
+  final nullableTimeOfDayKnob = c.knobs.nullable.timeOfDay(
+    'Nullable Time Of Day',
+    initialValue: const TimeOfDay(hour: 0, minute: 0),
+  );
+
+  final brightnessKnob = c.knobs.brightness(
+    'Brightness',
+    initialValue: Brightness.dark,
+  );
+  final nullableBrightnessKnob = c.knobs.nullable.brightness(
+    'Nullable Brightness',
+    initialValue: Brightness.dark,
+  );
+
+  final percentageKnob = c.knobs.percentage('Percentage', initialValue: 0.5);
+  final nullablePercentageKnob = c.knobs.nullable.percentage(
+    'Nullable Percentage',
+    initialValue: 0.5,
+  );
+
+  final axisDirectionKnob = c.knobs.axisDirection(
+    'Axis Direction',
+    initialValue: AxisDirection.up,
+  );
+  final nullableAxisDirectionKnob = c.knobs.nullable.axisDirection(
+    'Nullable Axis Direction',
+    initialValue: AxisDirection.up,
+  );
 
   final animationControllerKnob = c.knobs.animationController(
     'Animation Controller',
-    // initialValue: 0,
     initialDuration: const Duration(seconds: 2),
   );
 
@@ -100,28 +180,15 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     'Interval',
     initialValue: const Interval(0, .5),
   );
-
-  final curveKnob = c.knobs.curve(
-    'Curve',
-    initialValue: Curves.ease,
-  );
-
+  final curveKnob = c.knobs.curve('Curve', initialValue: Curves.ease);
   final curvedIntervalKnob = c.knobs.curvedInterval(
     'CurvedInterval',
     initialValue: const Interval(0, 1, curve: Curves.ease),
   );
 
-  final focusNodeKnob = c.knobs.focusNode(
-    'FocusNode',
-  );
-
-  final focusNodeParentKnob = c.knobs.focusNode(
-    'FocusNode Parent',
-  );
-
-  final focusNodeChildKnob = c.knobs.focusNode(
-    'FocusNode Child',
-  );
+  final focusNodeKnob = c.knobs.focusNode('FocusNode');
+  final focusNodeParentKnob = c.knobs.focusNode('FocusNode Parent');
+  final focusNodeChildKnob = c.knobs.focusNode('FocusNode Child');
 
   c
     ..knobPreset('Focus Single Widget', () {
@@ -145,17 +212,75 @@ This use case demonstrates the various knobs supported by the knobs addon in the
       CurveTween(curve: curvedIntervalKnob.value),
     );
 
-    final text = [
-      for (final knob in knobs)
-        '${knob.label}: ${knob.value.toString().replaceAll('\n', r'\n')}',
-    ].join('\n');
+    TextSpan knobSpan<T extends Object>(
+      Knob<T> knob,
+      Knob<T?> nullableKnob, [
+      InlineSpan Function(T value)? valueSpan,
+    ]) {
+      final effectiveValueSpan =
+          valueSpan ??
+          (v) => TextSpan(
+            text: v.toString(),
+          );
+      return TextSpan(
+        children: [
+          TextSpan(text: '${knob.label}: '),
+          effectiveValueSpan(knob.value),
+          const TextSpan(text: '\n'),
+          TextSpan(text: '${nullableKnob.label}: '),
+          if (nullableKnob.value != null)
+            effectiveValueSpan(nullableKnob.value!)
+          else
+            const TextSpan(text: 'null'),
+          const TextSpan(text: '\n'),
+        ],
+      );
+    }
+
+    final textSpans = [
+      knobSpan(booleanKnob, nullableBooleanKnob),
+      knobSpan(intSliderKnob, nullableIntSliderKnob),
+      knobSpan(intFieldKnob, nullableIntFieldKnob),
+      knobSpan(doubleSliderKnob, nullableDoubleSliderKnob),
+      knobSpan(doubleFieldKnob, nullableDoubleFieldKnob),
+      knobSpan(dropdownKnob, nullableDropdownKnob),
+      knobSpan(stringKnob, nullableStringKnob),
+      knobSpan(stringMultiLineKnob, nullableStringMultiLineKnob),
+      knobSpan(millisKnob, nullableMillisKnob),
+      knobSpan(dateKnob, nullableDateKnob),
+      knobSpan(bigIntKnob, nullableBigIntKnob),
+      knobSpan(
+        hexColorKnob,
+        nullableHexColorKnob,
+        (v) => WidgetSpan(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: v,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: const SizedBox(width: 16, height: 16),
+          ),
+        ),
+      ),
+      knobSpan(
+        stringListKnob,
+        nullableStringListKnob,
+        (v) => TextSpan(
+          text: v.map((e) => "'$e'").toList().toString(),
+        ),
+      ),
+      knobSpan(timeOfDayKnob, nullableTimeOfDayKnob),
+      knobSpan(brightnessKnob, nullableBrightnessKnob),
+      knobSpan(percentageKnob, nullablePercentageKnob),
+      knobSpan(axisDirectionKnob, nullableAxisDirectionKnob),
+    ];
 
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          WTextArea(
-            text: text,
+          WTextArea.textSpan(
+            textSpan: TextSpan(children: textSpans),
           ),
           const SizedBox(height: 16),
           RotationTransition(
@@ -201,3 +326,302 @@ This use case demonstrates the various knobs supported by the knobs addon in the
     );
   };
 }
+
+extension PercentageKnobExtension on KnobsComposer {
+  WritableKnob<double> percentage(
+    String label, {
+    required double initialValue,
+  }) {
+    return doubleSlider(
+      label,
+      initialValue: initialValue,
+      divisions: 100,
+      valueLabel: (value) => '${(value * 100).toInt()}%',
+    );
+  }
+}
+
+extension NullablePercentageKnobExtension on NullableKnobsComposer {
+  WritableKnob<double?> percentage(
+    String label, {
+    required double initialValue,
+    bool initiallyNull = false,
+  }) {
+    return doubleSlider(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      divisions: 100,
+      valueLabel: (value) => '${(value * 100).toInt()}%',
+    );
+  }
+}
+
+extension BrightnessKnobExtension on KnobsComposer {
+  WritableKnob<Brightness> brightness(
+    String label, {
+    required Brightness initialValue,
+  }) {
+    return customSwitch(
+      label,
+      initialValue: initialValue,
+      leftValue: Brightness.dark,
+      rightValue: Brightness.light,
+      leftLabel: 'DARK',
+      rightLabel: 'LIGHT',
+    );
+  }
+}
+
+extension NullableBrightnessKnobExtension on NullableKnobsComposer {
+  WritableKnob<Brightness?> brightness(
+    String label, {
+    required Brightness initialValue,
+    bool initiallyNull = false,
+  }) {
+    return customSwitch(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      leftValue: Brightness.dark,
+      rightValue: Brightness.light,
+      leftLabel: 'DARK',
+      rightLabel: 'LIGHT',
+    );
+  }
+}
+
+extension BigIntKnobExtension on KnobsComposer {
+  WritableKnob<BigInt> bigInt(
+    String label, {
+    required BigInt initialValue,
+  }) {
+    return customField(
+      label,
+      initialValue: initialValue,
+      parser: _bigIntInputParser,
+      formatter: _bigIntInputFormatter,
+    );
+  }
+}
+
+extension NullableBigIntKnobExtension on NullableKnobsComposer {
+  WritableKnob<BigInt?> bigInt(
+    String label, {
+    required BigInt initialValue,
+    bool initiallyNull = false,
+  }) {
+    return customField(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      parser: _bigIntInputParser,
+      formatter: _bigIntInputFormatter,
+    );
+  }
+}
+
+InputParseResult<BigInt> _bigIntInputParser(String input) {
+  final trimmedInput = input.trim();
+  if (trimmedInput.isEmpty) {
+    return InputParseSuccess(BigInt.zero);
+  }
+  final parsedValue = BigInt.tryParse(trimmedInput);
+  return parsedValue != null
+      ? InputParseSuccess(parsedValue)
+      : InputParseError('Invalid BigInt format');
+}
+
+String _bigIntInputFormatter(BigInt value) => value.toString();
+
+extension HexColorKnobExtension on KnobsComposer {
+  WritableKnob<Color> hexColor(
+    String label, {
+    required Color initialValue,
+  }) {
+    return customField(
+      label,
+      initialValue: initialValue,
+      parser: _hexColorInputParser,
+      formatter: _hexColorInputFormatter,
+    );
+  }
+}
+
+extension NullableHexColorKnobExtension on NullableKnobsComposer {
+  WritableKnob<Color?> hexColor(
+    String label, {
+    required Color initialValue,
+    bool initiallyNull = false,
+  }) {
+    return customField(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      parser: _hexColorInputParser,
+      formatter: _hexColorInputFormatter,
+    );
+  }
+}
+
+final RegExp _hexColorRegExp = RegExp(
+  r'^(#|0x)?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$',
+);
+
+InputParseResult<Color> _hexColorInputParser(String input) {
+  final trimmedInput = input.trim();
+  final match = _hexColorRegExp.firstMatch(trimmedInput);
+  if (match == null) {
+    return InputParseError('Invalid hex color format');
+  }
+  final hex = match.group(2)!;
+  final effectiveHex = hex.length == 6 ? 'FF$hex' : hex;
+  return InputParseSuccess(Color(int.parse(effectiveHex, radix: 16)));
+}
+
+String _hexColorInputFormatter(Color value) {
+  final argb32 = value.toARGB32();
+  final String hex;
+  if (argb32 >> 24 == 0xFF) {
+    hex = argb32.toRadixString(16).substring(2);
+  } else {
+    hex = argb32.toRadixString(16).padLeft(8, '0');
+  }
+  return '#${hex.toUpperCase()}';
+}
+
+extension TimeOfDayKnobExtension on KnobsComposer {
+  WritableKnob<TimeOfDay> timeOfDay(
+    String label, {
+    required TimeOfDay initialValue,
+    TimeOfDay min = const TimeOfDay(hour: 0, minute: 0),
+    TimeOfDay max = const TimeOfDay(hour: 23, minute: 59),
+  }) {
+    return customSlider(
+      label,
+      initialValue: initialValue,
+      min: min,
+      max: max,
+      divisions: 24 * 60 - 1,
+      encoder: _timeOfDayEncoder,
+      decoder: _timeOfDayDecoder,
+      valueLabel: _timeOfDayFormatter,
+    );
+  }
+}
+
+extension NullableTimeOfDayKnobExtension on NullableKnobsComposer {
+  WritableKnob<TimeOfDay?> timeOfDay(
+    String label, {
+    required TimeOfDay initialValue,
+    bool initiallyNull = false,
+    TimeOfDay min = const TimeOfDay(hour: 0, minute: 0),
+    TimeOfDay max = const TimeOfDay(hour: 23, minute: 59),
+  }) {
+    return customSlider(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      min: min,
+      max: max,
+      divisions: 24 * 60 - 1,
+      encoder: _timeOfDayEncoder,
+      decoder: _timeOfDayDecoder,
+      valueLabel: _timeOfDayFormatter,
+    );
+  }
+}
+
+TimeOfDay _timeOfDayDecoder(double value) {
+  final hours = value ~/ 60;
+  final minutes = (value % 60).toInt();
+  return TimeOfDay(hour: hours, minute: minutes);
+}
+
+double _timeOfDayEncoder(TimeOfDay time) {
+  return (time.hour * 60 + time.minute).toDouble();
+}
+
+String _timeOfDayFormatter(TimeOfDay time) {
+  final hours = time.hour.toString().padLeft(2, '0');
+  final minutes = time.minute.toString().padLeft(2, '0');
+  return '$hours:$minutes';
+}
+
+extension StringListKnobExtension on KnobsComposer {
+  WritableKnob<List<String>> stringList(
+    String label, {
+    required List<String> initialValue,
+  }) {
+    return customFieldMultiLine(
+      label,
+      initialValue: initialValue,
+      parser: _stringListInputParser,
+      formatter: _stringListInputFormatter,
+    );
+  }
+}
+
+extension NullableStringListKnobExtension on NullableKnobsComposer {
+  WritableKnob<List<String>?> stringList(
+    String label, {
+    required List<String> initialValue,
+    bool initiallyNull = false,
+  }) {
+    return customFieldMultiLine(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      parser: _stringListInputParser,
+      formatter: _stringListInputFormatter,
+    );
+  }
+}
+
+InputParseResult<List<String>> _stringListInputParser(String input) {
+  var lines = input.split('\n');
+  if (lines.isNotEmpty && lines.last.isEmpty) {
+    lines = lines.sublist(0, lines.length - 1);
+  }
+  return InputParseSuccess(lines);
+}
+
+String _stringListInputFormatter(List<String> value) =>
+    value.join('\n') + (value.lastOrNull?.isEmpty ?? false ? '\n' : '');
+
+extension AxisDirectionKnobExtension on KnobsComposer {
+  WritableKnob<AxisDirection> axisDirection(
+    String label, {
+    required AxisDirection initialValue,
+  }) {
+    return customDropdown(
+      label,
+      initialValue: initialValue,
+      values: AxisDirection.values,
+      valueLabel: _axisDirectionLabel,
+    );
+  }
+}
+
+extension NullableAxisDirectionKnobExtension on NullableKnobsComposer {
+  WritableKnob<AxisDirection?> axisDirection(
+    String label, {
+    required AxisDirection initialValue,
+    bool initiallyNull = false,
+  }) {
+    return customDropdown(
+      label,
+      initialValue: initialValue,
+      initiallyNull: initiallyNull,
+      values: AxisDirection.values,
+      valueLabel: _axisDirectionLabel,
+    );
+  }
+}
+
+String _axisDirectionLabel(AxisDirection direction) => switch (direction) {
+  AxisDirection.up => 'Up',
+  AxisDirection.down => 'Down',
+  AxisDirection.left => 'Left',
+  AxisDirection.right => 'Right',
+};

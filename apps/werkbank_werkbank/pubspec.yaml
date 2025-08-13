@@ -17,7 +17,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^7.0.0
+  werkbank_lints:
+    path: ../../packages/werkbank_lints
 
 flutter:
   uses-material-design: true

@@ -4,7 +4,7 @@ index_generator:
       name: werkbank_internal
       docs: |
         Generated using index_generator package.
-      library: werkbank_internal
+      library: ""
       # Include Pfad beginnt bei path, also lib/src/
       include:
         - "**"

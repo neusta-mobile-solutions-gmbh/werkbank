@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
-// Ignored for clarity
-// ignore_for_file: cascade_invocations
-
 // --------------------------------
 // THIS IS A VERY MINIMAL EXAMPLE.
 // Check out
@@ -34,7 +31,7 @@ class MinimalExample extends StatelessWidget {
       // The addons used.
       addonConfig: addonConfig,
       // The root node defining the tree of use cases.
-      sections: sections,
+      root: root,
     );
   }
 }
@@ -64,7 +61,7 @@ AddonConfig get addonConfig => AddonConfig(
       // Some background options are implicitly included.
       backgroundOptions: [
         // We add the theme's surface color as a background option.
-        BackgroundOption.color(
+        BackgroundOption.colorBuilder(
           name: 'Surface',
           colorBuilder: (context) => Theme.of(context).colorScheme.surface,
         ),
@@ -74,8 +71,8 @@ AddonConfig get addonConfig => AddonConfig(
 );
 
 // The root node of the use case tree.
-WerkbankSections get sections => WerkbankSections(
-  // All parent nodes such as WerkbankSections or WerkbankFolder can define
+WerkbankRoot get root => WerkbankRoot(
+  // All parent nodes such as WerkbankRoot or WerkbankFolder can define
   // builders that apply properties to all children.
   builder: (c) {
     // Set the default background for all use cases.

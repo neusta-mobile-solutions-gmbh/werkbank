@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library internal;
+library;
 
 export 'src/filter/filter.dart';
 export 'src/localizations/localizations.dart';

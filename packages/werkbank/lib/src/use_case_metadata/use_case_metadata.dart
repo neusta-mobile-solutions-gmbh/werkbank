@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library use_case_metadata;
+library;
 
 export 'src/overview.dart';
 export 'src/search.dart';

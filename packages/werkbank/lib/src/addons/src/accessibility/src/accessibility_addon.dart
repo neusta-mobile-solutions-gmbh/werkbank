@@ -70,11 +70,11 @@ class AccessibilityAddon extends Addon {
   ];
 
   @override
-  List<InfoControlSection> buildInspectTabControlSections(
+  List<InspectControlSection> buildInspectTabControlSections(
     BuildContext context,
   ) {
     return [
-      InfoControlSection(
+      InspectControlSection(
         id: 'semantics_inspector',
         title: Text(context.sL10n.addons.accessibility.inspector.name),
         sortHint: SortHint.beforeMost,

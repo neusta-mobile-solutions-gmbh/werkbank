@@ -33,7 +33,7 @@ abstract interface class UseCaseComposer {
   bool get active;
 
   /// The [WerkbankNode] for which its [UseCaseBuilder] or
-  /// [UseCaseMetadataBuilder] is currently
+  /// [UseCaseParentBuilder] is currently
   /// being executed using this [UseCaseComposer].
   WerkbankNode get node;
 

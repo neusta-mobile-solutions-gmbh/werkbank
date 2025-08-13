@@ -12,7 +12,8 @@ WidgetBuilder _useCase(UseCaseComposer c) {
     '- The **default background** is **different** for the icon button '
     'than for the other uses cases in the "Components" folder. '
     'While the background **can always be overridden** for all use cases '
-    'in the **"Settings" tab**, Each use case can define a **default background**. '
+    'in the **"Settings" tab**, Each use case can define '
+    'a **default background**. '
     'This can also be done for an **entire folder** and **overridden '
     'by a single use case** in it.',
   );

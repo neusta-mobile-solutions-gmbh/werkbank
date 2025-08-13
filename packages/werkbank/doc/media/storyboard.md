@@ -21,11 +21,11 @@ runApp(
 
 ### Preparations
 - Have Constraints section collapsed at top and knobs below
-- Configue tab is initially selected
+- Configure tab is initially selected
 - Order in settings
   - Theming
   - Background
-  - Accessiblity
+  - Accessibility
   - Debugging (Collapsed)
   - Localization
   - Werkbank theme
@@ -143,3 +143,87 @@ runApp(
 - Toggle Werkbank theme to dark
 - Move Werkbank theme to top
 - Collapse Accessibility
+
+## Short Format Readme
+
+### Use Cases
+- Prepare
+  - Go to Inspect tab
+    - Sort sections:
+      - Description
+      - Tags
+      - External Links
+      - Color Picker
+      - Semantics Inspector
+  - Start tree scrolled with slider almost at top
+- Start scrolled to bottom at overview
+- Scroll up
+- Click on "Slider" use case in overview
+- Click on "Switch" use case in tree
+- Click on "TextField" use case in tree
+- Scroll up and select "Material" Folder
+- Type "butn" into the search to showcase fuzzy search
+
+### Knobs
+- Prepare
+  - Go to Configure tab
+    - Collapse Constraints but leave at top
+  - Make right panel small enough to use spacious layout
+- Start on slider use case
+- Change slider value on slider
+- Change slider value in knobs
+- Switch to checkbox use case
+- Zoom into checkbox
+- Select knob preset "Enabled, false"
+- Select knob preset "Enabled, null"
+- Go to knob preset overview
+- Select "Enabled, true"
+
+### Constraints
+- Prepare
+  - Go to Configure tab
+    - Collapse Knobs
+- Start on "RelaxationCard"
+- Circle the Constraints in right panel with mouse
+- Change width via ruler back and forth
+- Move min constraints on both axes
+- Go to "Profile Page"
+- Move size (both min and max) on both axes
+- Switch to "Mobile Small" preset
+- Switch to "Tablet Medium" preset
+- Zoom out
+
+### Accessibility
+- Prepare
+  - Go to Inspect tab
+    - Move Semantics Inspector to top
+  - Move Accessibility tab in settings to top
+- Start on "MainPage" in "fidgets" route
+- Set semantics mode to "Inspection"
+- Scroll down to "Active semantics node"
+- Switch selection between multiple nodes
+- Disable semantics inspector
+- Go to "Pages" overview
+- Go to settings and scroll to "Accessibility"
+- Play around with text scaling
+
+### Theme, Background and Localization
+- Prepare
+  - Go to Settings tab
+- Start on Overview
+- Switch through to "Amber Dark" and then to "Blue"
+- Switch through backgrounds in order:
+  - "Black"
+  - "Checkerboard"
+- Go to "DatePickerDialog" via overview
+- Switch Locale to "de" and then back to "en"
+
+### Customize Werkbank
+- Prepare
+  - Go to Settings tab
+  - Use dark theme
+- Start in Overview
+- Resize Right Panel such that the layout switches
+- Move Localization up
+- Collapse Accessibility
+- Go to focus mode

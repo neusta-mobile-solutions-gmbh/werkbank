@@ -58,10 +58,10 @@ class WDraggableConstrainedBox extends StatefulWidget {
 
   @override
   State<WDraggableConstrainedBox> createState() =>
-      _SDraggableConstrainedBoxState();
+      _WDraggableConstrainedBoxState();
 }
 
-class _SDraggableConstrainedBoxState extends State<WDraggableConstrainedBox> {
+class _WDraggableConstrainedBoxState extends State<WDraggableConstrainedBox> {
   late double maxWidth;
   late double maxHeight;
 

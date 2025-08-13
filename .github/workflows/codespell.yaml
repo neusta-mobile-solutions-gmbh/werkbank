@@ -1,0 +1,19 @@
+name: codespell
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '48 20 * * 4'
+  workflow_dispatch:
+
+jobs:
+  codespell:
+    name: codespell
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install codespell
+      - run: codespell

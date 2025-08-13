@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library knobs;
+library;
 
 export 'src/buildable_knob.dart';
 export 'src/knob.dart';
@@ -14,6 +14,10 @@ export 'src/knob_types/regular_knob.dart';
 export 'src/knobs/animation_controller/animation_controller_knob.dart';
 export 'src/knobs/animation_controller/named_duration.dart';
 export 'src/knobs/boolean_knob.dart';
+export 'src/knobs/custom_dropdown_knob.dart';
+export 'src/knobs/custom_field_knob.dart';
+export 'src/knobs/custom_slider_knob.dart';
+export 'src/knobs/custom_switch_knob.dart';
 export 'src/knobs/date_knob.dart';
 export 'src/knobs/double_knob.dart';
 export 'src/knobs/focus_node_knob.dart';

@@ -25,7 +25,7 @@ class BackgroundAddon extends Addon {
   /// [BackgroundComposer] while composing the use case.
   /// Consider keeping this `null` and setting the default background
   /// using one of the methods on the [BackgroundComposer] inside of the
-  /// [WerkbankSections.builder]. This way, nested use cases can still override
+  /// [WerkbankRoot.builder]. This way, nested use cases can still override
   /// this with a different default background.
   BackgroundAddon({
     bool includeDefaultBackgrounds = true,
@@ -39,28 +39,28 @@ class BackgroundAddon extends Addon {
 
   static const addonId = 'background';
 
-  static const _defaultBackgroundOptions = [
-    BackgroundOption(
+  static final _defaultBackgroundOptions = [
+    BackgroundOption.color(
       name: 'White',
-      backgroundBox: ColoredBox(color: Colors.white),
+      color: Colors.white,
     ),
-    BackgroundOption(
+    BackgroundOption.color(
       name: 'Black',
-      backgroundBox: ColoredBox(color: Colors.black),
+      color: Colors.black,
     ),
-    BackgroundOption(
+    const BackgroundOption.widget(
       name: 'None',
-      backgroundBox: SizedBox.expand(),
+      widget: SizedBox.expand(),
     ),
-    BackgroundOption(
+    const BackgroundOption.widget(
       name: 'Checkerboard',
-      backgroundBox: WCheckerboardBackground(),
+      widget: WCheckerboardBackground(),
     ),
   ];
 
   /// A list of background options which can be selected.
   ///
-  /// The [BackgroundOption.backgroundBox] can assume that theming,
+  /// The [BackgroundOption.backgroundWidget] can assume that theming,
   /// localization etc. is already applied within their [BuildContext].
   final List<BackgroundOption> backgroundOptions;
 

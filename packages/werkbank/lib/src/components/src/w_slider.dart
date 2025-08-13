@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/werkbank_internal.dart';
 
-typedef DoubleFormatter = String Function(double value);
-
 /* TODO(lzuttermeister): This needs to be focusable,
      have hover states, a disabled state, semantics, shortcuts etc. */
 /// {@category Werkbank Components}

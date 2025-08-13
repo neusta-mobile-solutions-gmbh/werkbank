@@ -14,7 +14,7 @@ import 'package:flutter/rendering.dart';
 /// but for the above example, the child-widget will be
 /// re-created every time the pinned property changes.
 ///
-/// This widget is more efficient because it re-uses the child-widget
+/// This widget is more efficient because it reuses the child-widget
 /// and only changes the layout behavior.
 class SliverPinnedHeader extends SingleChildRenderObjectWidget {
   const SliverPinnedHeader({

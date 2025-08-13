@@ -46,7 +46,8 @@ abstract class AddonAccessor {
       return function();
       /* TODO(lzuttermeister): Can we do this better? Ideally by including the
            original error with its stack trace. */
-    } catch (_) {
+      // ignore: avoid_catching_errors
+    } on TypeError catch (_) {
       _throw();
     }
   }

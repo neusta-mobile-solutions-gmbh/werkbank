@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
-// ignore_for_file: avoid_print, avoid_slow_async_io, lines_longer_than_80_chars
+// ignore_for_file: avoid_print, lines_longer_than_80_chars
 
 /// Generates the ffmpeg command for video conversion
 (String, String) command(String input, String output) {
@@ -9,10 +9,10 @@ import 'package:path/path.dart' as p;
   //   'ffmpeg -i $input -vf "scale=960:540:force_original_aspect_ratio=decrease" -pix_fmt rgb8 -r 10 $output',
   //   'gif',
   // );
-  return (
-    'ffmpeg -i $input -vcodec h264 -acodec aac $output',
-    'mp4',
-  );
+  // return (
+  //   'ffmpeg -i $input -vcodec h264 -acodec aac $output',
+  //   'mp4',
+  // );
   // return (
   //   'ffmpeg -i $input -vcodec libwebp -lossless 0  -compression_level 4 -loop 0 -an -vf fps=fps=30 $output',
   //   'webp',
@@ -23,10 +23,10 @@ import 'package:path/path.dart' as p;
   //   'webp',
   // );
   // Blurry but acceptable quality. Relatively large but not huge size.
-  // return (
-  //   'ffmpeg -i $input -vcodec libwebp -quality 50 -lossless 0 -loop 0 -an -vf fps=fps=10 -s 1280:720 $output',
-  //   'webp',
-  // );
+  return (
+    'ffmpeg -i $input -vcodec libwebp -quality 30 -lossless 0 -loop 0 -an -vf "fps=fps=24,setpts=PTS/1.125" -s 1280:720 $output',
+    'webp',
+  );
 }
 
 void main() async {
@@ -54,6 +54,8 @@ void main() async {
 
   print('Found ${movFiles.length} .mov files to convert:');
 
+  var totalFileSize = 0;
+
   // Convert each file
   for (final movFile in movFiles) {
     final fileName = p.basename(movFile.path);
@@ -66,6 +68,7 @@ void main() async {
     final outFile = File(outputPath);
     if (await outFile.exists()) {
       print('Output file already exists: $outputPath');
+      totalFileSize += await outFile.length();
       continue; // Skip if output file already exists
     }
 
@@ -75,6 +78,7 @@ void main() async {
       print('Executing: $cmd');
 
       final result = await Process.run('sh', ['-c', cmd]);
+      totalFileSize += await outFile.length();
 
       if (result.exitCode != 0) {
         print('Error: ${result.stderr}');
@@ -82,9 +86,16 @@ void main() async {
         print('Successfully converted $fileName');
         print(result.stdout);
       }
-    } catch (e) {
+    } on Object catch (e) {
       print('Exception while converting $fileName: $e');
     }
+  }
+  if (totalFileSize > 0) {
+    print(
+      'Total size of converted files: ${(totalFileSize / (1024 * 1024)).toStringAsFixed(3)} MiB',
+    );
+  } else {
+    print('No .mov files were converted.');
   }
 
   print('Conversion process complete.');

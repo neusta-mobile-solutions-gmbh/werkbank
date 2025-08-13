@@ -37,9 +37,9 @@ The opposite could also be the case, where a small widget is barely visible in t
 > you can add the following to the
 > [`builder`](../werkbank/WerkbankParentNode/builder.html)
 > of your
-> [WerkbankSections](../werkbank/WerkbankSections-class.html):
+> [WerkbankRoot](../werkbank/WerkbankRoot-class.html):
 > ```dart
-> WerkbankSections(
+> WerkbankRoot(
 > ​  builder: (c) {
 > ​    // This is a "hack".
 > ​    c.overview.minimumSize(width: 500, height: 500);
@@ -54,7 +54,7 @@ The opposite could also be the case, where a small widget is barely visible in t
 > Just like in the tip above,
 > all of the following method calls on the [UseCaseComposer `c`](../werkbank/UseCaseComposer-class.html)
 > can be made inside the builder of a
-> [WerkbankSections](../werkbank/WerkbankSections-class.html),
+> [WerkbankRoot](../werkbank/WerkbankRoot-class.html),
 > [WerkbankFolder](../werkbank/WerkbankFolder-class.html), or
 > [WerkbankComponent](../werkbank/WerkbankComponent-class.html)
 > in order to apply to all use cases within.

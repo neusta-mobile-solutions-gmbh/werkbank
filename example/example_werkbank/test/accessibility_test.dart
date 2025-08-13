@@ -1,14 +1,14 @@
 import 'package:example_werkbank/src/example_werkbank/addon_config.dart';
 import 'package:example_werkbank/src/example_werkbank/app_config.dart';
 import 'package:example_werkbank/src/example_werkbank/custom_metadata/testing_metadata.dart';
-import 'package:example_werkbank/src/example_werkbank/use_cases/sections.dart';
+import 'package:example_werkbank/src/example_werkbank/use_cases/root.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:werkbank/werkbank.dart';
 
 void main() {
   group('Accessibility Tests', () {
-    final rootDescriptor = RootDescriptor.fromWerkbankSections(sections);
+    final rootDescriptor = RootDescriptor.fromWerkbankRoot(root);
     final useCases = rootDescriptor.useCases;
     const repaintBoundaryKey = Key('repaint-boundary');
 
@@ -31,7 +31,7 @@ void main() {
           if (presetName != null) presetName,
         ].join(' ');
         // Test the use case with the respective knob preset
-        testWidgets(testName, (WidgetTester tester) async {
+        testWidgets(testName, (tester) async {
           await tester.pumpWidget(
             RepaintBoundary(
               key: repaintBoundaryKey,

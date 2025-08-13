@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
 
 /// {@category Werkbank Components}
 class WAnimatedVisibility extends ImplicitlyAnimatedWidget {

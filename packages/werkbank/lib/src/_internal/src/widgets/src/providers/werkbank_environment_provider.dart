@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/environment/environment.dart';
 
 class WerkbankEnvironmentProvider extends InheritedWidget {
   const WerkbankEnvironmentProvider({

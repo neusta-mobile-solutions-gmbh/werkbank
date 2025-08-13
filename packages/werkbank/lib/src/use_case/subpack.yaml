@@ -1,0 +1,7 @@
+dependencies:
+  - /lib/src/notifications
+  - /lib/src/environment
+  - /lib/src/_internal/src/widgets
+  - /lib/src/tree
+  - /lib/src/addon_api
+

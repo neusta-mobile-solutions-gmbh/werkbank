@@ -1,4 +1,5 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 class ApplicationOverlayLayerEntry extends AddonLayerEntry {
   const ApplicationOverlayLayerEntry({

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 class UseCaseThumbnail extends StatelessWidget {
   const UseCaseThumbnail({

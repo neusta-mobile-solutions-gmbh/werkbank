@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantic_data_summary.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_nodes_display.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class SemanticsBoxDisplay extends StatelessWidget {
   const SemanticsBoxDisplay({

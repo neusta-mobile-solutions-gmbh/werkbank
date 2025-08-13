@@ -1,4 +1,9 @@
-import 'package:werkbank/werkbank.dart';
+/// @docImport 'package:werkbank/src/use_case/use_case.dart';
+/// @docImport 'package:werkbank/src/widgets/widgets.dart';
+library;
+
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/addons.dart';
 
 /// {@category Getting Started}
 /// {@category File Structure}

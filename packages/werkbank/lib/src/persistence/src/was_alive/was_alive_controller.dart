@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 
 class WasAliveController extends PersistentController<WasAliveController> {
   WasAliveController() : super(id: 'was_alive');

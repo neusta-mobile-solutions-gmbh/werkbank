@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/named_curve.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 
 const predefinedCurves = <NamedCurve>[
   // Flutter predefined curves

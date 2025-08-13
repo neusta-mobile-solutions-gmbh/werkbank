@@ -12,9 +12,8 @@ import 'package:subpack_analyzer/src/core/utils/subpack_logger.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 
 class DirectiveExtractor with SubpackLogger {
-  DirectiveExtractor._directiveExtractor({
-    required PackageRoot packageRoot,
-  }) : _packageRoot = packageRoot;
+  DirectiveExtractor._directiveExtractor({required PackageRoot packageRoot})
+    : _packageRoot = packageRoot;
 
   static ISet<Usage> extractDirectives({
     required PackageRoot packageRoot,
@@ -96,13 +95,16 @@ class DirectiveExtractor with SubpackLogger {
       ExportDirective() => LocalUsageType.export,
       ImportDirective() => LocalUsageType.import,
     };
-    if (treeNode is DartFile) {
-      return LocalUsage(dartFile: treeNode, usageType: localUsageType);
-    } else {
-      throw const FileSystemException(
-        'If this exception is thrown '
-        'somehing must be terribly wrong ☕🔥',
-      );
+    switch (treeNode) {
+      case null:
+        return null;
+      case DartFile():
+        return LocalUsage(dartFile: treeNode, usageType: localUsageType);
+      case TreeNode():
+        throw const FileSystemException(
+          'If this exception is thrown '
+          'somehing must be terribly wrong ☕🔥',
+        );
     }
   }
 }

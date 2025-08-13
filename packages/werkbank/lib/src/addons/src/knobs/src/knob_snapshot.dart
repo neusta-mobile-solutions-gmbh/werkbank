@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
+import 'package:werkbank/src/tree/tree.dart';
 
 /// The base class for an immutable snapshot of the `value` of a [Knob].
 /// Since knobs in a use case may completely change after a hot reload,

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 
 class WasAliveTracker extends StatefulWidget {
   const WasAliveTracker({

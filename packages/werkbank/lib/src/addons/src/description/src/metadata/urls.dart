@@ -1,5 +1,5 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 class _UrlsMetadataEntry extends UseCaseMetadataEntry<_UrlsMetadataEntry> {
   const _UrlsMetadataEntry(this.urls);

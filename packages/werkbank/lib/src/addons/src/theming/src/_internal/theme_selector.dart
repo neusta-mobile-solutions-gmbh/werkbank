@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/theming/theming.dart';
+import 'package:werkbank/src/components/components.dart';
 
 class ThemeSelector extends StatelessWidget {
   const ThemeSelector({

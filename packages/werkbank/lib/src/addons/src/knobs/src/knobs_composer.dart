@@ -1,8 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/knobs_state_entry.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 extension type KnobsComposer(UseCaseComposer _c) {
   void registerKnob(BuildableKnob<Object?> knob) {

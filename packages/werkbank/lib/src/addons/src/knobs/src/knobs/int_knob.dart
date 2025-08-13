@@ -1,4 +1,5 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Knobs}
 extension IntKnobExtension on KnobsComposer {

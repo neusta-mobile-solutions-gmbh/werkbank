@@ -1,2 +1,2 @@
 index:
-  name: internal
+  enabled: false

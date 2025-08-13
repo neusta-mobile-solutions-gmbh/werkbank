@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/_internal/src/routing/routing.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addon_config/addon_config.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// An [Addon] that enables control over page transitions
 ///

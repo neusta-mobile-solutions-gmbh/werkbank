@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/constraints_gestures.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/constraints_shortcuts.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/constraints_state_entry.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/guide_lines.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/ruler.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/ruler_corner.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/environment/environment.dart';
 
 class RulerOverlay extends StatefulWidget {
   const RulerOverlay({

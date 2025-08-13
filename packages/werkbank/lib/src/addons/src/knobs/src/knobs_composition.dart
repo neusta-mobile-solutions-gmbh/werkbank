@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/knobs_state_entry.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 extension KnobsCompositionExtension on UseCaseComposition {
   KnobsComposition get knobs => KnobsComposition(this);

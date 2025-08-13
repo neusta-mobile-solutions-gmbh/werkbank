@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/interval_knob_widget.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/update_interval_knob_state.dart';
-import 'package:werkbank/werkbank.dart';
 
 /// {@category Knobs}
 extension IntervalKnobExtension on KnobsComposer {

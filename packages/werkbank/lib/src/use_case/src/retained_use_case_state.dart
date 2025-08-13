@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 /// A typedef for any [RetainedUseCaseStateEntry] regardless of its generic
 /// type.

@@ -1,5 +1,7 @@
 import 'package:werkbank/src/_internal/src/use_case/src/_internal/use_case_composer_lifecycle_manager.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addon_config/addon_config.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 // TODO(lzuttermeister): Do not expose publicly.
 class UseCaseMetadataCollector {

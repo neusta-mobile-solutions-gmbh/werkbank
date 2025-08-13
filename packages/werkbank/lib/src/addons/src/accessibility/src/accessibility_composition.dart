@@ -1,6 +1,6 @@
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/accessibility_state_entry.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_controller.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 extension AccessibilityCompositionExtension on UseCaseComposition {
   AccessibilityComposition get accessibility => AccessibilityComposition(this);

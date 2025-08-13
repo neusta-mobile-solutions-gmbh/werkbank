@@ -1,0 +1,9 @@
+dependencies:
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/_internal/src/widgets
+  - /lib/src/theme
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/notifications
+  - flutter_markdown_plus
+  - /lib/src/_internal/src/localizations
+  - /lib/src/_internal/src/package_copies/dropdown_button2

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/notifications/notifications.dart';
 
 class WerkbankNotificationsDisplay extends StatefulWidget {
   const WerkbankNotificationsDisplay({

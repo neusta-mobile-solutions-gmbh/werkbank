@@ -10,9 +10,8 @@ import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
 /// Tracks which Dart files are contained in or exposed by each subpackage,
 /// and records the deepest source directory for each file.
 class RelationsBuilder {
-  RelationsBuilder._relationsBuilder({
-    required PackageRoot packageRoot,
-  }) : _packageRoot = packageRoot;
+  RelationsBuilder._relationsBuilder({required PackageRoot packageRoot})
+    : _packageRoot = packageRoot;
 
   /// Builds and returns a [RelationsModel] for the given [packageRoot].
   /// This function analyzes the package structure to determine
@@ -29,24 +28,30 @@ class RelationsBuilder {
 
   final PackageRoot _packageRoot;
 
+  final _selfExposedFiles = <SubpackDirectory, Set<DartFile>>{};
   final _exposedFiles = <SubpackDirectory, Set<DartFile>>{};
   final _containedFiles = <SubpackDirectory, Set<DartFile>>{};
+  final _selfExposingSubpackages = <DartFile, ISet<SubpackDirectory>>{};
   final _exposingSubpackages = <DartFile, ISet<SubpackDirectory>>{};
   final _containingSubpackages = <DartFile, ISet<SubpackDirectory>>{};
-  final _deepestSrcDirectory = <DartFile, TreeDirectory>{};
 
   Future<RelationsModel> _buildRelations() async {
     for (final directory in _packageRoot.subpackDirectories) {
+      final directorySet = {directory}.lockUnsafe;
       await _handleDirectory(
         directory: directory,
-        containingSubpacks: {directory}.lockUnsafe,
-        exposingSubpacks: {directory}.lockUnsafe,
-        isDirInSubpack: true,
-        srcDirectory: null,
+        containingSubpacks: directorySet,
+        selfExposingSubpacks: directorySet,
+        exposingSubpacks: directorySet,
+        isDirectlyInSubpack: true,
       );
     }
 
     return RelationsModel(
+      selfExposedFiles: {
+        for (final MapEntry(:key, :value) in _selfExposedFiles.entries)
+          key: value.lock,
+      }.lockUnsafe,
       exposedFiles: {
         for (final MapEntry(:key, :value) in _exposedFiles.entries)
           key: value.lock,
@@ -55,37 +60,37 @@ class RelationsBuilder {
         for (final MapEntry(:key, :value) in _containedFiles.entries)
           key: value.lock,
       }.lockUnsafe,
+      selfExposingSubpackages: _selfExposingSubpackages.lock,
       exposingSubpackages: _exposingSubpackages.lock,
       containingSubpackages: _containingSubpackages.lock,
-      deepestSrcDirectory: _deepestSrcDirectory.lock,
     );
   }
 
   Future<void> _handleDirectory({
     required TreeDirectory directory,
     required ISet<SubpackDirectory> containingSubpacks,
+    required ISet<SubpackDirectory> selfExposingSubpacks,
     required ISet<SubpackDirectory> exposingSubpacks,
-    required bool isDirInSubpack,
-    required TreeDirectory? srcDirectory,
+    required bool isDirectlyInSubpack,
   }) async {
     final newContainingSubpacks = directory is SubpackDirectory
         ? containingSubpacks.add(directory)
         : containingSubpacks;
 
-    final splitPath = p.split(directory.directory.path);
-    final currentIsSrcDirectory = isDirInSubpack && splitPath.last == src;
+    final dirName = p.basename(directory.directory.path);
+    final currentIsSrcDirectory = isDirectlyInSubpack && dirName == src;
 
+    final ISet<SubpackDirectory> newSelfExposingSubpacks;
     final ISet<SubpackDirectory> newExposingSubpacks;
 
-    final TreeDirectory? newSrcDirectory;
     if (currentIsSrcDirectory) {
-      newSrcDirectory = directory;
-      newExposingSubpacks = <SubpackDirectory>{}.lockUnsafe;
+      newSelfExposingSubpacks = {newContainingSubpacks.last}.lockUnsafe;
+      newExposingSubpacks = const ISet.empty();
     } else if (directory is SubpackDirectory) {
-      newSrcDirectory = null;
+      newSelfExposingSubpacks = selfExposingSubpacks.add(directory);
       newExposingSubpacks = exposingSubpacks.add(directory);
     } else {
-      newSrcDirectory = srcDirectory;
+      newSelfExposingSubpacks = selfExposingSubpacks;
       newExposingSubpacks = exposingSubpacks;
     }
 
@@ -93,8 +98,8 @@ class RelationsBuilder {
       _handleDartFile(
         file: file,
         containingSubpacks: newContainingSubpacks,
+        selfExposingSubpacks: newSelfExposingSubpacks,
         exposingSubpacks: newExposingSubpacks,
-        srcDirectory: newSrcDirectory,
       );
     }
 
@@ -102,33 +107,32 @@ class RelationsBuilder {
       await _handleDirectory(
         directory: child,
         containingSubpacks: newContainingSubpacks,
+        selfExposingSubpacks: newSelfExposingSubpacks,
         exposingSubpacks: newExposingSubpacks,
-        isDirInSubpack: directory is SubpackDirectory,
-        srcDirectory: newSrcDirectory,
+        isDirectlyInSubpack: directory is SubpackDirectory,
       );
     }
   }
 
-  /// Adds entries for `file` in `_containedFiles`, `_exposedFiles` and
-  /// `_deepestSrcDirectory` if conditions are met.
   void _handleDartFile({
     required DartFile file,
     required ISet<SubpackDirectory> containingSubpacks,
+    required ISet<SubpackDirectory> selfExposingSubpacks,
     required ISet<SubpackDirectory> exposingSubpacks,
-    required TreeDirectory? srcDirectory,
   }) {
     for (final containingSubpack in containingSubpacks) {
       (_containedFiles[containingSubpack] ??= {}).add(file);
     }
     _containingSubpackages[file] = containingSubpacks;
 
+    for (final selfExposingSubpack in selfExposingSubpacks) {
+      (_selfExposedFiles[selfExposingSubpack] ??= {}).add(file);
+    }
+    _selfExposingSubpackages[file] = selfExposingSubpacks;
+
     for (final exposingSubpack in exposingSubpacks) {
       (_exposedFiles[exposingSubpack] ??= {}).add(file);
     }
     _exposingSubpackages[file] = exposingSubpacks;
-
-    if (srcDirectory != null) {
-      _deepestSrcDirectory[file] = srcDirectory;
-    }
   }
 }

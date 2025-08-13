@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/werkbank.dart';
 
 void main() {
   group('PanelTabsPersistentData', () {

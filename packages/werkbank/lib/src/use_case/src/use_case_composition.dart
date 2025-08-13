@@ -1,5 +1,11 @@
+/// @docImport 'package:werkbank/src/addon_api/addon_api.dart';
+/// @docImport 'package:werkbank/src/addons/src/knobs/knobs.dart';
+/// @docImport 'package:werkbank/src/widgets/widgets.dart';
+library;
+
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 /// A function that mutates the state of a use case using the provided
 /// [UseCaseComposition].

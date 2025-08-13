@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 class HomePageComponent {
   const HomePageComponent({

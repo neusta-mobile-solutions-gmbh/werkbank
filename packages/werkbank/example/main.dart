@@ -61,7 +61,7 @@ AddonConfig get addonConfig => AddonConfig(
       // Some background options are implicitly included.
       backgroundOptions: [
         // We add the theme's surface color as a background option.
-        BackgroundOption.color(
+        BackgroundOption.colorBuilder(
           name: 'Surface',
           colorBuilder: (context) => Theme.of(context).colorScheme.surface,
         ),

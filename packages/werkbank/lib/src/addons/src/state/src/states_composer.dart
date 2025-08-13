@@ -6,6 +6,15 @@ import 'package:werkbank/werkbank.dart';
 
 /// {@category Keeping State}
 extension type StatesComposer(UseCaseComposer _c) {
+  /// Creates a [ValueNotifier] of an immutable object.
+  ///
+  /// {@template werkbank.states.id}
+  /// The [id] uniquely identifies the state, ensuring it persists across
+  /// hot reloads.
+  /// {@endtemplate}
+  ///
+  /// The [initialValue] defines the value of the [ValueNotifier]
+  /// when first created.
   ValueNotifier<T> immutable<T>(String id, {required T initialValue}) {
     // Ensure that the initial value is actually immutable.
     assert(
@@ -43,6 +52,18 @@ For mutable objects, use c.states.mutable() instead.''',
     return stateHolder;
   }
 
+  /// Creates a [ValueContainer] of a mutable object.
+  ///
+  /// {@macro werkbank.states.id}
+  ///
+  /// {@template werkbank.states.mutable.lifecycle}
+  /// The [create] function will be executed before you use the
+  /// value of [ValueContainer] in your UseCase's [WidgetBuilder].
+  ///
+  /// The mutable object will persist through hot reloads.
+  ///
+  /// [dispose] will be called when the UseCase is disposed.
+  /// {@endtemplate}
   ValueContainer<T> mutable<T extends Object>(
     String id, {
     required T Function() create,
@@ -55,6 +76,12 @@ For mutable objects, use c.states.mutable() instead.''',
     );
   }
 
+  /// Creates a [ValueContainer] of a mutable object
+  /// and provides a [TickerProvider] for it.
+  ///
+  /// {@macro werkbank.states.id}
+  ///
+  /// {@macro werkbank.states.mutable.lifecycle}
   ValueContainer<T> mutableWithTickerProvider<T extends Object>(
     String id, {
     required T Function(TickerProvider tickerProvider) create,

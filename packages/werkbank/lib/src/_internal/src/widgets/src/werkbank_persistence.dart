@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
 typedef ControllerMapFactory =
@@ -13,14 +14,17 @@ typedef ControllerMapFactory =
 class WerkbankPersistence extends StatefulWidget {
   const WerkbankPersistence({
     required this.persistenceConfig,
-    required this.persistentControllers,
+    required this.registerWerkbankPersistentControllers,
     required this.placeholder,
     required this.child,
     super.key,
   });
 
   final PersistenceConfig persistenceConfig;
-  final List<PersistentController> persistentControllers;
+  final void Function(
+    PersistentControllerRegistry registry,
+  )
+  registerWerkbankPersistentControllers;
   final Widget placeholder;
   final Widget child;
 
@@ -71,65 +75,67 @@ class WerkbankPersistence extends StatefulWidget {
 }
 
 class _WerkbankPersistenceState extends State<WerkbankPersistence> {
-  Map<Type, PersistentController>? _controllersByType;
+  Map<Type, PersistentController> _controllersByType = {};
+  Map<Type, String> _idsByType = {};
+  late final JsonStore _jsonStore;
 
   bool _initialized = false;
 
   @override
   void initState() {
     super.initState();
-    // WerkbankPersistence defers the first frame
-    // until the Persistence is ready.
-    // This way we avoid a jumping color effect when building the first
-    // frames.
+    // We defer the first frame
+    // until the persistence is ready.
+    // This way we avoid an empty first frame.
     RendererBinding.instance.deferFirstFrame();
     unawaited(_init());
   }
 
-  void _updateControllers() {
-    void update() {
-      _controllersByType = {
-        for (final controller in widget.persistentControllers)
-          controller.type: controller,
-      };
-    }
-
-    final controllers = _controllersByType;
-    if (controllers != null) {
-      final jsonSnapshots = {
-        for (final controller in controllers.values)
-          controller.type: controller.toJson(),
-      };
-      for (final controller in controllers.values) {
-        controller.dispose();
-      }
-      update();
-      for (final controller in _controllersByType!.values) {
-        final json = jsonSnapshots[controller.type];
-        controller.tryLoadFromJson(json);
-      }
-    } else {
-      update();
-    }
-  }
-
   Future<void> _init() async {
-    await _initCache();
-    await _initControllers();
+    // We deliberately do not update the store when the widget is rebuilt.
+    _jsonStore = await widget.persistenceConfig.createJsonStore();
+    _updateControllers();
     setState(() {
       _initialized = true;
       RendererBinding.instance.allowFirstFrame();
     });
   }
 
-  Future<void> _initCache() async {
-    _prefsWithCache = await SharedPreferencesWithCache.create(
-      cacheOptions: const SharedPreferencesWithCacheOptions(),
-    );
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
   }
 
-  Future<void> _initControllers() async {
-    _controllersByType = widget.persistentControllers(_prefsWithCache);
+  void _updateControllers() {
+    final registry = _PersistentControllerRegistryImpl();
+    registry.idPrefix = 'werkbank';
+    widget.registerWerkbankPersistentControllers(registry);
+    final addons = AddonConfigProvider.addonsOf(context);
+    for (final addon in addons) {
+      registry.idPrefix = addon.id;
+      addon.registerPersistentControllers(registry);
+    }
+    final registrations = registry._registrations;
+    final registrationsById = <String, _Registration>{};
+    for (final registration in registrations) {
+      try {
+        if (registrationsById.containsKey(registration.id)) {
+          throw AssertionError(
+            'Cannot register multiple persistent controllers with '
+            'the same id: ${registration.id}',
+          );
+        }
+        registrationsById[registration.id] = registration;
+      } on Object catch (e, stackTrace) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: stackTrace);
+      }
+    }
+    final oldIds = _idsByType.values.toSet();
+    final newIds = registrationsById.keys.toSet();
+    final addedIds = newIds.difference(oldIds);
+    final removedIds = oldIds.difference(newIds);
   }
 
   @override
@@ -174,14 +180,21 @@ class _InheritedWerkbankPersistence extends InheritedWidget {
 
 class _PersistentControllerRegistryImpl
     implements PersistentControllerRegistry {
-  final Map<Type, _Registration> _registrationsByType = {};
+  final List<_Registration> _registrations = [];
+
+  late String idPrefix;
 
   @override
-  void register<T extends PersistentController<T>>(
+  void register(
     String id,
-    T Function() createController,
+    AnyPersistentController Function() createController,
   ) {
-    // TODO: Implement
+    _registrations.add(
+      _Registration(
+        id: '$idPrefix:$id',
+        createController: createController,
+      ),
+    );
   }
 }
 
@@ -192,5 +205,5 @@ class _Registration {
   });
 
   final String id;
-  final PersistentController Function() createController;
+  final AnyPersistentController Function() createController;
 }

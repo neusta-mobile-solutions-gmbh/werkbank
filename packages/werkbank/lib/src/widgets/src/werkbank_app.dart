@@ -283,7 +283,7 @@ class _WerkbankPersistance extends StatelessWidget {
     ).descendants.map((e) => e.path).toSet();
     return WerkbankPersistence(
       persistenceConfig: persistenceConfig,
-      persistentControllers: (prefsWithCache) {
+      registerWerkbankPersistentControllers: (prefsWithCache) {
         final wasAliveController = WasAliveController();
         return {
           for (final addon in addonConfig.addons)

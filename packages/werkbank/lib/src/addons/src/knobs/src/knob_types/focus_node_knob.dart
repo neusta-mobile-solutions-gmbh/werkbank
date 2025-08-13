@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/src/addons/src/knobs/src/buildable_knob.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knob_snapshot.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
 
 // We can't merge this with [FocusNodeKnob], since

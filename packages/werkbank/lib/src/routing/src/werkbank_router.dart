@@ -4,7 +4,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
-import 'package:werkbank/src/routing/src/nav_state.dart';
+import 'package:werkbank/src/routing/routing.dart';
 
 //
 /// A Proxy Router for the [WerkbankApp] since we don't want to

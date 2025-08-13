@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/panels/navigation_panel/order_executor.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/persistence/persistence.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:werkbank/src/addons/src/knobs/src/buildable_knob.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 
 /// A unique identifier for a knob.
 extension type KnobId(String _label) {}

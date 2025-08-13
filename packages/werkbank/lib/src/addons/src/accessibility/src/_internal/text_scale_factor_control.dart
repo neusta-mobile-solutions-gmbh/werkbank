@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/src/addons/src/accessibility/src/accessibility_manager.dart';
+import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 

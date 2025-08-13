@@ -1,4 +1,4 @@
-import 'package:werkbank/src/addons/src/report/src/report.dart';
+import 'package:werkbank/src/addons/src/report/report.dart';
 
 /// This file contains copy-pasted changelog.
 /// Keep changelog.md up-to-date and then copy-paste it here.

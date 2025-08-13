@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knob.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knob_types/animation_controller_knob.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knobs/animation_controller/named_duration.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knobs_composer.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 
 /// {@category Knobs}
 extension AnimationControllerKnobsExtension on KnobsComposer {

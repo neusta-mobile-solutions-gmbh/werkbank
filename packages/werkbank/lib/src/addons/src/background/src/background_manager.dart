@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/background/src/background_option.dart';
+import 'package:werkbank/src/addons/src/background/background.dart';
 
 class BackgroundManager extends StatefulWidget {
   const BackgroundManager({

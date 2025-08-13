@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knob.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knob_types/focus_node_knob.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knobs_composer.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 
 /// {@category Knobs}
 extension FocusNodeKnobsExtension on KnobsComposer {

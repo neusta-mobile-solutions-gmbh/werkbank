@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphs/graphs.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
-import 'package:werkbank/src/addon_api/src/addon_config_provider.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entries.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entry.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/environment/environment.dart';
 
 class AddonLayerBuilder extends StatefulWidget {

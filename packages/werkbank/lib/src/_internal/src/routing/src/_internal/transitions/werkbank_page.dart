@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/routing/src/page_transition_options.dart';
-import 'package:werkbank/src/_internal/src/routing/src/transition_transitions.dart';
+import 'package:werkbank/src/_internal/src/routing/routing.dart';
 
 class WerkbankPage<R> extends Page<R> {
   const WerkbankPage({

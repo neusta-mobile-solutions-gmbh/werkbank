@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 
 class ViewConstraintsPreset with EquatableMixin {
   const ViewConstraintsPreset({

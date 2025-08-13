@@ -1,4 +1,4 @@
-import 'package:werkbank/src/addons/src/wrapping/src/wrapping_composer.dart';
+import 'package:werkbank/src/addons/src/wrapping/wrapping.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/utils/utils.dart';
 

@@ -1,6 +1,4 @@
-import 'package:werkbank/src/addon_api/src/accessor/addon_layer_accessor.dart';
-import 'package:werkbank/src/addon_api/src/accessor/werkbank_app_only_accessor.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entry.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 class MainViewOverlayLayerEntry extends AddonLayerEntry {

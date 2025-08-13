@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/src/addons/src/localization/src/localization_manager.dart';
+import 'package:werkbank/src/addons/src/localization/localization.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class LocaleSelector extends StatelessWidget {

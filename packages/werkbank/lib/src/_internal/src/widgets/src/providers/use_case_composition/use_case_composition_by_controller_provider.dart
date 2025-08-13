@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_composition/use_case_composition_provider.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_controller_provider/use_case_controller_provider.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 
 class UseCaseCompositionByControllerProvider extends StatelessWidget {
   const UseCaseCompositionByControllerProvider({

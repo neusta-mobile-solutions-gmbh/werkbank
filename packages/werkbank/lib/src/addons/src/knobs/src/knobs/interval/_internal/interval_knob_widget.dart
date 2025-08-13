@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/named_interval.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class IntervalKnobWidget extends StatelessWidget {

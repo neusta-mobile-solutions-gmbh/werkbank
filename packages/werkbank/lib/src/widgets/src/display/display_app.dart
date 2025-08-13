@@ -7,8 +7,7 @@ import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/utils/utils.dart';
-import 'package:werkbank/src/widgets/src/display/use_case_display.dart';
-import 'package:werkbank/src/widgets/src/werkbank_app.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 /// A widget that sets up the app for displaying use cases without the UI of a
 /// [WerkbankApp]. Usually one or more [UseCaseDisplay] widgets as

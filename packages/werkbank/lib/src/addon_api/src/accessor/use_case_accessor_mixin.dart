@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
-import 'package:werkbank/src/addon_api/src/accessor/addon_accessor.dart';
-import 'package:werkbank/src/addon_api/src/addon_control_sections/tabs/configure_control_section.dart';
-import 'package:werkbank/src/addon_api/src/addon_control_sections/tabs/inspect_control_section.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/use_case_fitted_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/use_case_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/use_case_layout_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/use_case_overlay_layer_entry.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';

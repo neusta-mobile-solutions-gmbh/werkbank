@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:werkbank/src/components/src/w_layout_changed_notifier/w_layout_reference.dart';
+import 'package:werkbank/src/components/components.dart';
 
 class LayoutInfo {
   LayoutInfo(this.size, this.transform);

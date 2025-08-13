@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
-import 'package:werkbank/src/addon_api/src/accessor/addon_accessor.dart';
-import 'package:werkbank/src/addon_api/src/accessor/werkbank_app_only_accessor.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/tree/tree.dart';

@@ -3,12 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:werkbank/src/persistence/src/acknowledged/acknowledged_controller.dart';
-import 'package:werkbank/src/persistence/src/history/history_controller.dart';
-import 'package:werkbank/src/persistence/src/persistent_controller.dart';
-import 'package:werkbank/src/persistence/src/search_query/search_query_controller.dart';
-import 'package:werkbank/src/persistence/src/sections/panel_tabs_controller.dart';
-import 'package:werkbank/src/persistence/src/was_alive/was_alive_controller.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 
 typedef PersistencePhaseWidgetBuilder =
     Widget Function(

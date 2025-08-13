@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/components/src/w_resizable_panels/_internal/draggable_divider.dart';
-import 'package:werkbank/src/components/src/w_resizable_panels/panel_controller_provider.dart';
-import 'package:werkbank/src/components/src/w_resizable_panels/panel_layout_handler.dart';
 
 /// {@category Werkbank Components}
 class WResizablePanels extends StatelessWidget {

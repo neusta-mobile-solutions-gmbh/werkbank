@@ -1,5 +1,4 @@
-import 'package:werkbank/src/addon_api/src/accessor/addon_control_section_accessor.dart';
-import 'package:werkbank/src/addon_api/src/addon_control_sections/addon_control_section.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 class SettingsControlSection extends AddonControlSection {

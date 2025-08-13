@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/addons/src/constraints/src/constraints_composition.dart';
-import 'package:werkbank/src/addons/src/constraints/src/selectable_view_constraints_presets.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints_extension.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 

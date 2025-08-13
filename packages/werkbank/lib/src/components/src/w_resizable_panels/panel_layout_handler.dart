@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/components/src/w_resizable_panels/panel_controller.dart';
-import 'package:werkbank/src/components/src/w_resizable_panels/panel_controller_provider.dart';
-import 'package:werkbank/src/components/src/w_resizable_panels/panel_utils.dart';
+import 'package:werkbank/src/components/components.dart';
 
 typedef WidgetLayoutBuilder =
     Widget Function(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/addons/src/werkbank_theme/src/werkbank_theme_addon.dart';
+import 'package:werkbank/src/addons/src/werkbank_theme/werkbank_theme.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/widgets/widgets.dart';

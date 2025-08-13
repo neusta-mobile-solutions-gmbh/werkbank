@@ -1,7 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:werkbank/src/_internal/src/use_case/src/_internal/use_case_composition_impl.dart';
-import 'package:werkbank/src/_internal/src/use_case/src/use_case_controller.dart';
+import 'package:werkbank/src/_internal/src/use_case/use_case.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 

@@ -3,8 +3,7 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
-import 'package:werkbank/src/addon_api/src/accessor/addon_accessor.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entry.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/environment/environment.dart';
 
 /// A class that provides access to data in the [BuildContext] that is

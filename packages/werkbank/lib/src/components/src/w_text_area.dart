@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/components/src/w_field_box.dart';
+import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
 const _defaultContentPadding = EdgeInsets.symmetric(

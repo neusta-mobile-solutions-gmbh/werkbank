@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantic_mode_control.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_inspector_node_info.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_tree.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
-import 'package:werkbank/src/addons/src/accessibility/src/accessibility_composition.dart';
-import 'package:werkbank/src/addons/src/accessibility/src/accessibility_manager.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class SemanticsInspector extends StatelessWidget {

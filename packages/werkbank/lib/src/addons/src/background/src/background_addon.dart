@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/background/background.dart';
 import 'package:werkbank/src/addons/src/background/src/_internal/background_applier.dart';
 import 'package:werkbank/src/addons/src/background/src/_internal/background_dropdown.dart';
-import 'package:werkbank/src/addons/src/background/src/background_composer.dart';
-import 'package:werkbank/src/addons/src/background/src/background_manager.dart';
-import 'package:werkbank/src/addons/src/background/src/background_option.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';

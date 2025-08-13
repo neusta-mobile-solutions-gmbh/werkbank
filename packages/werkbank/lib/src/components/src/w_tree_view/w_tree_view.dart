@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/components/src/_internal/w_animated_tree_segment.dart';
-import 'package:werkbank/src/components/src/w_tree_view/w_tree_model.dart';
 
 /// {@category Werkbank Components}
 class WTreeView extends StatelessWidget {

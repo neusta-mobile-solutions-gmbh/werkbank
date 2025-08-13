@@ -2,18 +2,7 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addon_api/src/accessor/addon_accessor.dart';
-import 'package:werkbank/src/addon_api/src/accessor/addon_layer_accessor.dart';
-import 'package:werkbank/src/addon_api/src/accessor/use_case_accessor_mixin.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/affiliation_transition_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/application_overlay_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/main_view_overlay_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/management_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/use_case_fitted_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/use_case_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/use_case_layout_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/layers/use_case_overlay_layer_entry.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/app_config/app_config.dart';
 import 'package:werkbank/src/tree/tree.dart';
 

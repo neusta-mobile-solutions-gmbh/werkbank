@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/src/addons/src/constraints/src/constraints_composition.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class ViewConstraintsSelector extends StatefulWidget {

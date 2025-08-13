@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/hot_reload_effect/hot_reload_effect.dart';
 import 'package:werkbank/src/addons/src/hot_reload_effect/src/_internal/hot_reload_effect_handler.dart';
 import 'package:werkbank/src/addons/src/hot_reload_effect/src/_internal/restart_effect_handler.dart';
-import 'package:werkbank/src/addons/src/hot_reload_effect/src/hot_reload_effect_manager.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/utils/utils.dart';
 

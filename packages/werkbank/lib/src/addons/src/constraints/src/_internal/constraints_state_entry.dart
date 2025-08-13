@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/constraints/src/selectable_view_constraints_presets.dart';
-import 'package:werkbank/src/addons/src/constraints/src/supported_sizes_metadata.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints_preset.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 class ConstraintsStateEntry

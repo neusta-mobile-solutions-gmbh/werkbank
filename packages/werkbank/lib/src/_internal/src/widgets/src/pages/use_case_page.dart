@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_background.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/descriptor_provider.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_composition/use_case_composition_by_controller_provider.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_composition/use_case_composition_provider.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_controller_provider/current_use_case_controller_by_manager_provider.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_environment_provider.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/use_case_app.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/use_case_layout.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/use_case_widget_display.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/routing/routing.dart';

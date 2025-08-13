@@ -1,9 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/constraints_state_entry.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints_composer.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints_preset.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 

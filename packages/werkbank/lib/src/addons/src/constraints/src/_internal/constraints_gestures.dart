@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/axis_drag_gesture_detector.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/constraints_layout.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/ruler_overlay.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class ConstraintsGestures extends StatelessWidget {

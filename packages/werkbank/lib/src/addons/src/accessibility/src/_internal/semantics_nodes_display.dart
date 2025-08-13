@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
-import 'package:werkbank/src/addons/src/accessibility/src/accessibility_composition.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class SemanticsNodesDisplay extends StatefulWidget {

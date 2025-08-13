@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/addons/src/background/src/background_manager.dart';
-import 'package:werkbank/src/addons/src/background/src/background_metadata.dart';
+import 'package:werkbank/src/addons/src/background/background.dart';
 
 class BackgroundApplier extends StatelessWidget {
   const BackgroundApplier({

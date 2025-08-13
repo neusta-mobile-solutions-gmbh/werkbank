@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knob.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knob_types/regular_knob.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/curve_knob_widget.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/curves_info_button.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/interval_knob_widget.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/predefined_curves.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/update_curve_knob_state.dart';
 import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/_internal/update_interval_knob_state.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knobs/interval/named_curve.dart';
-import 'package:werkbank/src/addons/src/knobs/src/knobs_composer.dart';
 
 /// {@category Knobs}
 extension CurvedIntervalKnobExtension on KnobsComposer {

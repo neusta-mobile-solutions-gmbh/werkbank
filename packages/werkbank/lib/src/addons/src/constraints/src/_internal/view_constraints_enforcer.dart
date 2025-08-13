@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/addons/src/constraints/src/constraints_composition.dart';
-import 'package:werkbank/src/addons/src/constraints/src/supported_sizes_metadata.dart';
-import 'package:werkbank/src/addons/src/constraints/src/view_constraints_extension.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/environment/environment.dart';
 
 class ViewConstraintsEnforcer extends StatelessWidget {

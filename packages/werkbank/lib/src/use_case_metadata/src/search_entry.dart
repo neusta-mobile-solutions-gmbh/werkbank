@@ -1,7 +1,7 @@
 import 'package:fuzzy/bitap/bitap.dart';
 import 'package:fuzzy/data/fuzzy_options.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
-import 'package:werkbank/src/use_case_metadata/src/search_cluster.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 /// {@category Search for Use Cases}
 abstract class SearchEntry {

@@ -1,8 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/filter/src/filter_command.dart';
-import 'package:werkbank/src/_internal/src/filter/src/filter_result.dart';
-import 'package:werkbank/src/_internal/src/filter/src/search_cluster_result.dart';
+import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';

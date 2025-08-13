@@ -1,7 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/filter/filter.dart';
-import 'package:werkbank/src/use_case_metadata/src/search_entry.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 abstract class SearchClusterFoundation {
   SearchClusterFoundation({

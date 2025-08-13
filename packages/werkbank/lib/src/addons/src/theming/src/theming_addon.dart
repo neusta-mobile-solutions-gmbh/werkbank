@@ -4,7 +4,7 @@ import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/theming/src/_internal/theme_option_applier.dart';
 import 'package:werkbank/src/addons/src/theming/src/_internal/theme_selector.dart';
-import 'package:werkbank/src/addons/src/theming/src/theming_manager.dart';
+import 'package:werkbank/src/addons/src/theming/theming.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}

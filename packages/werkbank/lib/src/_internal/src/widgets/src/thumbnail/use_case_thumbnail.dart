@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/descriptor_provider.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/providers/use_case_metadata_provider.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/thumbnail/thumbnail_scaler.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/use_case_app.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/use_case_layout.dart';
-import 'package:werkbank/src/_internal/src/widgets/src/use_case_widget_display.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 import 'package:werkbank/src/widgets/widgets.dart';

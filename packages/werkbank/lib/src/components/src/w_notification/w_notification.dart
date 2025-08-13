@@ -1,8 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/components/src/w_bordered_box.dart';
-import 'package:werkbank/src/components/src/w_icon_button.dart';
+import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/theme/theme.dart';
 

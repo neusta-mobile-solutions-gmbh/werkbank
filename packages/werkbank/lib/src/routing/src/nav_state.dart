@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:werkbank/src/routing/src/use_case_overview_config.dart';
+import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 

@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addon_api/src/accessor/addon_layer_accessor.dart';
-import 'package:werkbank/src/addon_api/src/accessor/use_case_accessor_mixin.dart';
-import 'package:werkbank/src/addon_api/src/addon.dart';
-import 'package:werkbank/src/addon_api/src/addon_control_sections/addon_control_section.dart';
-import 'package:werkbank/src/addon_api/src/addon_description.dart';
-import 'package:werkbank/src/addon_api/src/addon_layer_entries/addon_layer_entry.dart';
-import 'package:werkbank/src/addon_api/src/addon_specification.dart';
-import 'package:werkbank/src/addon_api/src/addon_specifications_provider.dart';
-import 'package:werkbank/src/addon_api/src/home_page_component.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 
 /// A class that provides access to data in the [BuildContext] that is
 /// available from every place where the [Addon] API gives access to a

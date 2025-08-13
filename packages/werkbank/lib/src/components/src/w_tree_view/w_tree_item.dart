@@ -1,8 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/components/src/w_button_base.dart';
-import 'package:werkbank/src/components/src/w_tree_view/w_expanded_indicator.dart';
+import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}

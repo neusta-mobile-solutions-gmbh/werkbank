@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/components/src/w_button_base.dart';
-import 'package:werkbank/src/components/src/w_delayed_reveal.dart';
-import 'package:werkbank/src/components/src/w_path_text.dart';
+import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}

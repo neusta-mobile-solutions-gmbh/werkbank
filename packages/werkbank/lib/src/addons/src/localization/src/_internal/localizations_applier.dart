@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/localization/src/localization_manager.dart';
+import 'package:werkbank/src/addons/src/localization/localization.dart';
 
 class LocalizationsApplier extends StatelessWidget {
   const LocalizationsApplier({

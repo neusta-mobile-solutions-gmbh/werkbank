@@ -7,6 +7,8 @@ import 'package:werkbank/werkbank.dart';
 ///
 /// {@category Keeping State}
 extension StatesComposerControllersExtension on StatesComposer {
+  /// Creates a [ValueContainer] of a [ScrollController] using
+  /// the [mutable] method.
   ValueContainer<ScrollController> scrollController(
     String id, {
     double initialScrollOffset = 0.0,
@@ -22,6 +24,8 @@ extension StatesComposerControllersExtension on StatesComposer {
     );
   }
 
+  /// Creates a [ValueContainer] of a [TextEditingController] using
+  /// the [mutable] method.
   ValueContainer<TextEditingController> textEditingController(
     String id, {
     String? text,
@@ -33,6 +37,8 @@ extension StatesComposerControllersExtension on StatesComposer {
     );
   }
 
+  /// Creates a [ValueContainer] of a [FocusNode] using
+  /// the [mutable] method.
   ValueContainer<FocusNode> focusNode(
     String id, {
     FocusOnKeyEventCallback? onKeyEvent,

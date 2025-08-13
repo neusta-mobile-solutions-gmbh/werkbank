@@ -85,7 +85,7 @@ class SubpackUtils {
     for (final subpackDir in subpacks) {
       final relativePath = subpackDir.directory.path;
 
-      if (subpackDir.subpackFile == null) {
+      if (subpackDir.subpackFile == null || !ansiOutputEnabled) {
         subpackLinks.writeln('- $relativePath');
       } else {
         subpackLinks.writeln(

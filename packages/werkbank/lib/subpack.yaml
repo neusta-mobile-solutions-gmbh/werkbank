@@ -16,4 +16,4 @@ dependencies:
   - vector_math
   - graphs
   - equatable
-  - /lib/src/utils
+  # - /lib/src/utils

@@ -72,11 +72,11 @@ class Analyzer {
     };
 
     switch (usage) {
-      case LocalUsage(dartFile: final usageFile):
-        if (_isAllowedSelfUsage(file, usageFile)) {
+      case LocalUsage(dartFile: final usedFile):
+        if (_isAllowedSelfUsage(file, usedFile)) {
           return true;
         }
-        final exposing = _relations.exposingSubpackages(usageFile);
+        final exposing = _relations.exposingSubpackages(usedFile);
         final subpackageDependencyDirectories = dependenciesOfSubpacks
             .whereType<SubpackageDependency>()
             .map((subpackDependency) => subpackDependency.subpackDirectory)
@@ -119,20 +119,9 @@ class Analyzer {
     return true;
   }
 
-  bool _isAllowedSelfUsage(DartFile file, DartFile usageFile) {
-    final deepestFileSubpack = _relations.deepestContainingSubpack(file);
-    final deepestUsageSubpack = _relations.deepestContainingSubpack(usageFile);
-    if (deepestFileSubpack != deepestUsageSubpack) {
-      return false;
-    }
-
-    final isFileExposed = _relations
-        .exposingSubpackages(file)
-        .contains(deepestFileSubpack);
-    final isUsageExposed = _relations
-        .exposingSubpackages(usageFile)
-        .contains(deepestUsageSubpack);
-
-    return isFileExposed || !isUsageExposed;
+  bool _isAllowedSelfUsage(DartFile file, DartFile usedFile) {
+    return _relations
+        .selfExposingSubpackages(usedFile)
+        .contains(_relations.owningSubpackage(file));
   }
 }

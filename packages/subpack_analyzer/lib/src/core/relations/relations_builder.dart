@@ -28,22 +28,30 @@ class RelationsBuilder {
 
   final PackageRoot _packageRoot;
 
+  final _selfExposedFiles = <SubpackDirectory, Set<DartFile>>{};
   final _exposedFiles = <SubpackDirectory, Set<DartFile>>{};
   final _containedFiles = <SubpackDirectory, Set<DartFile>>{};
+  final _selfExposingSubpackages = <DartFile, ISet<SubpackDirectory>>{};
   final _exposingSubpackages = <DartFile, ISet<SubpackDirectory>>{};
   final _containingSubpackages = <DartFile, ISet<SubpackDirectory>>{};
 
   Future<RelationsModel> _buildRelations() async {
     for (final directory in _packageRoot.subpackDirectories) {
+      final directorySet = {directory}.lockUnsafe;
       await _handleDirectory(
         directory: directory,
-        containingSubpacks: {directory}.lockUnsafe,
-        exposingSubpacks: {directory}.lockUnsafe,
-        isDirInSubpack: true,
+        containingSubpacks: directorySet,
+        selfExposingSubpacks: directorySet,
+        exposingSubpacks: directorySet,
+        isDirectlyInSubpack: true,
       );
     }
 
     return RelationsModel(
+      selfExposedFiles: {
+        for (final MapEntry(:key, :value) in _selfExposedFiles.entries)
+          key: value.lock,
+      }.lockUnsafe,
       exposedFiles: {
         for (final MapEntry(:key, :value) in _exposedFiles.entries)
           key: value.lock,
@@ -52,6 +60,7 @@ class RelationsBuilder {
         for (final MapEntry(:key, :value) in _containedFiles.entries)
           key: value.lock,
       }.lockUnsafe,
+      selfExposingSubpackages: _selfExposingSubpackages.lock,
       exposingSubpackages: _exposingSubpackages.lock,
       containingSubpackages: _containingSubpackages.lock,
     );
@@ -60,23 +69,28 @@ class RelationsBuilder {
   Future<void> _handleDirectory({
     required TreeDirectory directory,
     required ISet<SubpackDirectory> containingSubpacks,
+    required ISet<SubpackDirectory> selfExposingSubpacks,
     required ISet<SubpackDirectory> exposingSubpacks,
-    required bool isDirInSubpack,
+    required bool isDirectlyInSubpack,
   }) async {
     final newContainingSubpacks = directory is SubpackDirectory
         ? containingSubpacks.add(directory)
         : containingSubpacks;
 
-    final splitPath = p.split(directory.directory.path);
-    final currentIsSrcDirectory = isDirInSubpack && splitPath.last == src;
+    final dirName = p.basename(directory.directory.path);
+    final currentIsSrcDirectory = isDirectlyInSubpack && dirName == src;
 
+    final ISet<SubpackDirectory> newSelfExposingSubpacks;
     final ISet<SubpackDirectory> newExposingSubpacks;
 
     if (currentIsSrcDirectory) {
-      newExposingSubpacks = <SubpackDirectory>{}.lockUnsafe;
+      newSelfExposingSubpacks = {newContainingSubpacks.last}.lockUnsafe;
+      newExposingSubpacks = const ISet.empty();
     } else if (directory is SubpackDirectory) {
+      newSelfExposingSubpacks = selfExposingSubpacks.add(directory);
       newExposingSubpacks = exposingSubpacks.add(directory);
     } else {
+      newSelfExposingSubpacks = selfExposingSubpacks;
       newExposingSubpacks = exposingSubpacks;
     }
 
@@ -84,6 +98,7 @@ class RelationsBuilder {
       _handleDartFile(
         file: file,
         containingSubpacks: newContainingSubpacks,
+        selfExposingSubpacks: newSelfExposingSubpacks,
         exposingSubpacks: newExposingSubpacks,
       );
     }
@@ -92,23 +107,28 @@ class RelationsBuilder {
       await _handleDirectory(
         directory: child,
         containingSubpacks: newContainingSubpacks,
+        selfExposingSubpacks: newSelfExposingSubpacks,
         exposingSubpacks: newExposingSubpacks,
-        isDirInSubpack: directory is SubpackDirectory,
+        isDirectlyInSubpack: directory is SubpackDirectory,
       );
     }
   }
 
-  /// Adds entries for `file` in `_containedFiles`, `_exposedFiles` and
-  /// `_deepestSrcDirectory` if conditions are met.
   void _handleDartFile({
     required DartFile file,
     required ISet<SubpackDirectory> containingSubpacks,
+    required ISet<SubpackDirectory> selfExposingSubpacks,
     required ISet<SubpackDirectory> exposingSubpacks,
   }) {
     for (final containingSubpack in containingSubpacks) {
       (_containedFiles[containingSubpack] ??= {}).add(file);
     }
     _containingSubpackages[file] = containingSubpacks;
+
+    for (final selfExposingSubpack in selfExposingSubpacks) {
+      (_selfExposedFiles[selfExposingSubpack] ??= {}).add(file);
+    }
+    _selfExposingSubpackages[file] = selfExposingSubpacks;
 
     for (final exposingSubpack in exposingSubpacks) {
       (_exposedFiles[exposingSubpack] ??= {}).add(file);

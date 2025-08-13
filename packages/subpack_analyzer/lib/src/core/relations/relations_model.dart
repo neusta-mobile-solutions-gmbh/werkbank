@@ -7,19 +7,30 @@ import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_mod
 
 class RelationsModel {
   RelationsModel({
+    required IMap<SubpackDirectory, ISet<DartFile>> selfExposedFiles,
     required IMap<SubpackDirectory, ISet<DartFile>> exposedFiles,
     required IMap<SubpackDirectory, ISet<DartFile>> containedFiles,
+    required IMap<DartFile, ISet<SubpackDirectory>> selfExposingSubpackages,
     required IMap<DartFile, ISet<SubpackDirectory>> exposingSubpackages,
     required IMap<DartFile, ISet<SubpackDirectory>> containingSubpackages,
-  }) : _containedFiles = containedFiles,
+  }) : _selfExposedFiles = selfExposedFiles,
        _exposedFiles = exposedFiles,
+       _containedFiles = containedFiles,
+       _selfExposingSubpackages = selfExposingSubpackages,
        _exposingSubpackages = exposingSubpackages,
        _containingSubpackages = containingSubpackages;
 
+  final IMap<SubpackDirectory, ISet<DartFile>> _selfExposedFiles;
   final IMap<SubpackDirectory, ISet<DartFile>> _exposedFiles;
   final IMap<SubpackDirectory, ISet<DartFile>> _containedFiles;
+  final IMap<DartFile, ISet<SubpackDirectory>> _selfExposingSubpackages;
   final IMap<DartFile, ISet<SubpackDirectory>> _exposingSubpackages;
   final IMap<DartFile, ISet<SubpackDirectory>> _containingSubpackages;
+
+  /// Dart files that are self-exposed by these subpackages
+  ISet<DartFile> selfExposedFiles(SubpackDirectory subpackDirectory) {
+    return _selfExposedFiles[subpackDirectory]!;
+  }
 
   /// Dart files that are exposed by these subpackages
   ISet<DartFile> exposedFiles(SubpackDirectory subpackDirectory) {
@@ -29,6 +40,11 @@ class RelationsModel {
   /// Dart files that are contained in these subpackages
   ISet<DartFile> containedFiles(SubpackDirectory subpackDirectory) {
     return _containedFiles[subpackDirectory]!;
+  }
+
+  /// Subpackages that self-expose these dart files
+  ISet<SubpackDirectory> selfExposingSubpackages(DartFile dartFile) {
+    return _selfExposingSubpackages[dartFile]!;
   }
 
   /// Subpackages that expose these dart files
@@ -41,8 +57,10 @@ class RelationsModel {
     return _containingSubpackages[dartFile]!;
   }
 
-  /// The deepest subpack directory that contains the Dart file.
-  SubpackDirectory deepestContainingSubpack(DartFile dartFile) {
+  /// The subpackage owning the given [dartFile].
+  ///
+  /// That is most deeply nested subpackage that contains the file.
+  SubpackDirectory owningSubpackage(DartFile dartFile) {
     final directories = containingSubpackages(dartFile);
     assert(
       directories.isNotEmpty,

@@ -47,8 +47,15 @@ class RunCommand extends Command<void> {
     final rootPath = argResults.option('root');
     final analysisDirs = argResults.multiOption('analysisDirs');
     final verbose = argResults.flag('verbose');
-    final isRunningFromMelos =
-        (Platform.environment['MELOS_ROOT_PATH'] != null);
+    bool? supportAnsi;
+    if (Platform.environment['MELOS_ROOT_PATH'] != null) {
+      // Melos seems to disable Ansi support even though it is supported.
+      supportAnsi = true;
+    }
+    if (Platform.environment['CI'] == 'true') {
+      // CI environments usually do not support Ansi codes.
+      supportAnsi = false;
+    }
 
     return await runZoned(
       () async {
@@ -62,9 +69,7 @@ class RunCommand extends Command<void> {
       },
       zoneValues: {
         #verbose: verbose,
-        // Melos seems to disable Ansi support even though it is supported.
-        // We override this here.
-        if (isRunningFromMelos) AnsiCode: true,
+        if (supportAnsi != null) AnsiCode: supportAnsi,
       },
     );
   }

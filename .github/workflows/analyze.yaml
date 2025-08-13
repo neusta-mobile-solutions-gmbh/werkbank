@@ -15,6 +15,7 @@ jobs:
           - "apps/werkbank_werkbank"
           - "example/example_werkbank"
           - "packages/werkbank"
+          - "packages/subpack_analyzer"
 
     name: flutter analyze
     runs-on: ubuntu-latest

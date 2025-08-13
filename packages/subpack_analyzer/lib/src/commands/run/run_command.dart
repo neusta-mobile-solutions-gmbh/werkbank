@@ -47,7 +47,8 @@ class RunCommand extends Command<void> {
     final rootPath = argResults.option('root');
     final analysisDirs = argResults.multiOption('analysisDirs');
     final verbose = argResults.flag('verbose');
-    final useAnsi = (Platform.environment['MELOS_ROOT_PATH'] != null);
+    final isRunningFromMelos =
+        (Platform.environment['MELOS_ROOT_PATH'] != null);
 
     return await runZoned(
       () async {
@@ -61,8 +62,9 @@ class RunCommand extends Command<void> {
       },
       zoneValues: {
         #verbose: verbose,
-        AnsiCode: useAnsi, // Make this true by default?
-        // Also pass rootDirectory in here for 'global' access?
+        // Melos seems to disable Ansi support even though it is supported.
+        // We override this here.
+        if (isRunningFromMelos) AnsiCode: true,
       },
     );
   }

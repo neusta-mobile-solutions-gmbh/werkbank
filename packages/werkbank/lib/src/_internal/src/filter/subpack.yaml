@@ -1,0 +1,8 @@
+dependencies:
+  - /lib/src/use_case_metadata
+  - /lib/src/tree
+  - /lib/src/_internal/src/widgets
+  - /lib/src/persistence
+  - /lib/src/theme
+  - /lib/src/filter
+  - /lib/src/widgets

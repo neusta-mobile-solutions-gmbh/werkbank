@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 typedef WMarkdownTapLinkCallback =
     void Function(

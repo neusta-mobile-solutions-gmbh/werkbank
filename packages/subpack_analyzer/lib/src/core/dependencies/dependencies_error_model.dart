@@ -1,5 +1,3 @@
-import 'package:mason_logger/mason_logger.dart';
-
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_error.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';
@@ -30,7 +28,7 @@ class DirectoryIsNotPartOfPathError extends DependenciesError {
 
   @override
   String get errorMessage {
-    final targetDirectoryLink = link(
+    final targetDirectoryLink = SubpackUtils.createLink(
       uri: SubpackUtils.getFileUri(
         rootDirectory: packageRoot.rootDirectory,
         relativePath: targetDirectory,
@@ -54,7 +52,7 @@ class SubpackFromPathDoesNotExistError extends DependenciesError {
 
   @override
   String get errorMessage {
-    final falsePathLink = link(
+    final falsePathLink = SubpackUtils.createLink(
       uri: SubpackUtils.getFileUri(
         rootDirectory: packageRoot.rootDirectory,
         relativePath: falsePath,
@@ -78,7 +76,7 @@ class DependencyOnOwnPackageError extends DependenciesError {
 
   @override
   String get errorMessage {
-    final dependencyLink = link(
+    final dependencyLink = SubpackUtils.createLink(
       uri: SubpackUtils.getFileUri(
         rootDirectory: packageRoot.rootDirectory,
         relativePath: dependency,

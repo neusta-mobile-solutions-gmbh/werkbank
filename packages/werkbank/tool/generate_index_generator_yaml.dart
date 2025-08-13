@@ -30,6 +30,10 @@ Future<void> main() async {
     final subpackYaml =
         loadYaml(await subpackFile.readAsString()) ?? <String, dynamic>{};
     final index = subpackYaml['index'] ?? <String, dynamic>{};
+    final enabled = (index['enabled'] as bool?) ?? true;
+    if (!enabled) {
+      continue;
+    }
     final subpackageName = index['name'] ?? p.basename(subpackagePath);
     final docs = index['docs'] ?? 'Generated using index_generator package.\n';
     final exclude =

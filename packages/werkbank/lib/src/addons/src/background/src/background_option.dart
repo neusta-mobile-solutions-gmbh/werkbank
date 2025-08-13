@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/background/src/background_addon.dart';
-import 'package:werkbank/src/addons/src/background/src/background_composer.dart';
+import 'package:werkbank/src/addons/src/background/background.dart';
 
 /// A selectable background option for uses cases, which can be added to the
 /// [BackgroundAddon].

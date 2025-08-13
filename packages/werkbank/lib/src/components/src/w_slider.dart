@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /* TODO(lzuttermeister): This needs to be focusable,
      have hover states, a disabled state, semantics, shortcuts etc. */

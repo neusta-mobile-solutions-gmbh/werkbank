@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 
 class AddonSpecificationsProvider extends StatelessWidget {
   const AddonSpecificationsProvider({

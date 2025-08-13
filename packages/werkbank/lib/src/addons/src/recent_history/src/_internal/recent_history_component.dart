@@ -2,8 +2,13 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/routing/routing.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/recent_history/src/_internal/recent_history_manager.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/tree/tree.dart';
 
 class RecentHistoryComponent extends StatefulWidget {
   const RecentHistoryComponent({this.maxCount = 10, super.key});

@@ -1,4 +1,4 @@
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 typedef Score = double;
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 class UseCaseCompositionProvider extends InheritedWidget {
   const UseCaseCompositionProvider({

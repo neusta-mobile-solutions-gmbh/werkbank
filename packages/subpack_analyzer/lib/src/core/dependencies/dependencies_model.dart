@@ -33,7 +33,7 @@ class SubpackageDependency extends Dependency with EquatableMixin {
 
   @override
   String toString() {
-    return subpackDirectory.directory.path;
+    return 'SubpackageDependency(subpackDirectory: $subpackDirectory)';
   }
 
   @override
@@ -47,6 +47,6 @@ class DartPackageDependency extends Dependency {
 
   @override
   String toString() {
-    return name;
+    return 'DartPackageDependency(name: $name)';
   }
 }

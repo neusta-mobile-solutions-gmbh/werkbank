@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 typedef ToggleVisibilityCallback = void Function(int index);
 typedef ControlSectionId = String;

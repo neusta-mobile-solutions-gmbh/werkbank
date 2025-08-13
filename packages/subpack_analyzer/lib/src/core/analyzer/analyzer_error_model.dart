@@ -1,6 +1,4 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:mason_logger/mason_logger.dart';
-
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/usages/usages_model.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_error.dart';
@@ -22,7 +20,10 @@ class SubpackageIsReferencingOwnPackageError implements AnalyzerError {
     final subpackUri = SubpackUtils.getFileUriFromPath(
       subpackDirectory.directory.path,
     );
-    final subpackLink = link(uri: subpackUri, message: 'subpackage');
+    final subpackLink = SubpackUtils.createLink(
+      uri: subpackUri,
+      message: 'subpackage',
+    );
 
     return '\nThe $subpackLink references the containing package $packageName'
         " in it's dependencies.";
@@ -46,7 +47,7 @@ class UndependedPackageUsageError extends AnalyzerError {
   String get errorMessage {
     final relativePath = dartFile.file.path;
 
-    final dartFileLink = link(
+    final dartFileLink = SubpackUtils.createLink(
       message: relativePath,
       uri: SubpackUtils.getFileUri(
         rootDirectory: packageRoot.rootDirectory,
@@ -88,7 +89,7 @@ class UndependedLocalUsageError implements AnalyzerError {
   String get errorMessage {
     final relativePath = dartFile.file.path;
 
-    final dartFileLink = link(
+    final dartFileLink = SubpackUtils.createLink(
       message: relativePath,
       uri: SubpackUtils.getFileUri(
         rootDirectory: packageRoot.rootDirectory,
@@ -102,7 +103,10 @@ class UndependedLocalUsageError implements AnalyzerError {
       usage: usage,
     );
 
-    final usageLink = link(uri: usageUri, message: usage.dartFile.file.path);
+    final usageLink = SubpackUtils.createLink(
+      uri: usageUri,
+      message: usage.dartFile.file.path,
+    );
 
     final containingSubpacks = SubpackUtils.createSubpackLinks(
       packageRoot.rootDirectory,

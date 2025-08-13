@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:werkbank/src/addons/src/accessibility/src/accessibility_manager.dart';
+import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 
 class ColorBlindnessSimulationOverlay extends StatefulWidget {
   const ColorBlindnessSimulationOverlay({

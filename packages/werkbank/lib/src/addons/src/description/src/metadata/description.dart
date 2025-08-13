@@ -1,4 +1,6 @@
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 class Descriptions extends UseCaseMetadataEntry<Descriptions> {
   const Descriptions({

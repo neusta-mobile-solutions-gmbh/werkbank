@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/environment/environment.dart';
 
 class UseCaseEnvironmentProvider extends InheritedWidget {
   const UseCaseEnvironmentProvider({

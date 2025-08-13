@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/debugging/src/_internal/debugging_performance_overlay.dart';
 import 'package:werkbank/src/addons/src/debugging/src/_internal/debugging_repaint_children.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
 
 class PerformanceOverlaySwitch extends StatefulWidget {
   const PerformanceOverlaySwitch({super.key});

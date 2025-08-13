@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/notifications/notifications.dart';
 
 abstract class NotificationSubscription implements Listenable {
   NotificationStatus get status;

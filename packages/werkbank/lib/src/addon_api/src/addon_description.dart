@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 
 class AddonDescription {
   AddonDescription({

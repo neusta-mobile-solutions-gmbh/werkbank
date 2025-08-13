@@ -32,10 +32,20 @@ sealed class TreeFile extends TreeNode {
 /// A tree node holding a dart file
 class DartFile extends TreeFile {
   DartFile({required super.file});
+
+  @override
+  String toString() {
+    return 'DartFile(file: $file)';
+  }
 }
 
 class SubpackFile extends TreeFile {
   SubpackFile({required super.file});
+
+  @override
+  String toString() {
+    return 'SubpackFile(file: $file)';
+  }
 }
 
 /// Generic directory in the tree
@@ -66,6 +76,11 @@ sealed class TreeDirectory extends TreeNode {
 
   @override
   FileSystemEntity get _fileSystemEntity => directory;
+
+  @override
+  String toString() {
+    return 'TreeDirectory(directory: $directory)';
+  }
 }
 
 /// A normal directory in the tree
@@ -75,6 +90,11 @@ class DirectoryNode extends TreeDirectory {
     required super.dartFiles,
     required super.directory,
   });
+
+  @override
+  String toString() {
+    return 'DirectoryNode(directory: $directory)';
+  }
 }
 
 /// A subpack directory in the tree
@@ -89,6 +109,12 @@ class SubpackDirectory extends TreeDirectory {
   /// Nullable because directories like lib, bin, and test do not have a subpack
   /// file, but are still considered subpack directories by default.
   final SubpackFile? subpackFile;
+
+  @override
+  String toString() {
+    return 'SubpackDirectory(directory: $directory, '
+        '${subpackFile != null ? 'hasSubpackFile' : 'noSubpackFile'})';
+  }
 }
 
 /// The root directory of the tree
@@ -131,4 +157,9 @@ class PackageRoot {
     }
     return subpackDirectoriesList.lockUnsafe;
   }();
+
+  @override
+  String toString() {
+    return 'PackageRoot(name: $name, rootDirectory: $rootDirectory)';
+  }
 }

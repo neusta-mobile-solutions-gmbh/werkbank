@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/_internal/src/package_copies/dropdown_button2/dropdown_button2.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// A dropdown button with a custom design.
 ///

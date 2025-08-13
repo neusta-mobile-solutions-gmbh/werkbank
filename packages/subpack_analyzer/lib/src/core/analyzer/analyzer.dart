@@ -65,18 +65,18 @@ class Analyzer {
   }
 
   bool _checkUndependedUsage(DartFile file, Usage usage) {
-    final subpacksContainingFile = _relations.containingSubpackages[file]!;
+    final subpacksContainingFile = _relations.containingSubpackages(file);
     final dependenciesOfSubpacks = {
       for (final containingSubpack in subpacksContainingFile)
         ..._dependencies.getSubpackDependencies(containingSubpack),
     };
 
     switch (usage) {
-      case LocalUsage(dartFile: final usageFile):
-        if (_isInSameSrcDir(file, usageFile)) {
+      case LocalUsage(dartFile: final usedFile):
+        if (_isAllowedSelfUsage(file, usedFile)) {
           return true;
         }
-        final exposing = _relations.exposingSubpackages[usageFile]!;
+        final exposing = _relations.exposingSubpackages(usedFile);
         final subpackageDependencyDirectories = dependenciesOfSubpacks
             .whereType<SubpackageDependency>()
             .map((subpackDependency) => subpackDependency.subpackDirectory)
@@ -119,12 +119,9 @@ class Analyzer {
     return true;
   }
 
-  bool _isInSameSrcDir(DartFile a, DartFile b) {
-    final deepesrSrcA = _relations.deepestSrcDirectory[a];
-    final deepestSrcB = _relations.deepestSrcDirectory[b];
-    if (deepesrSrcA == null || deepestSrcB == null) {
-      return false;
-    }
-    return deepesrSrcA == deepestSrcB;
+  bool _isAllowedSelfUsage(DartFile file, DartFile usedFile) {
+    return _relations
+        .selfExposingSubpackages(usedFile)
+        .contains(_relations.owningSubpackage(file));
   }
 }

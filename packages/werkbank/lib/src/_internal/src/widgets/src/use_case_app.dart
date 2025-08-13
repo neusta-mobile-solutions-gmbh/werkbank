@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/internal.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/app_config/app_config.dart';
+import 'package:werkbank/src/environment/environment.dart';
 
 class UseCaseApp extends StatelessWidget {
   const UseCaseApp({

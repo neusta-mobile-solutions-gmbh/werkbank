@@ -4,14 +4,10 @@ import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_mod
 enum LocalUsageType { import, export }
 
 class UsagesModel {
-  UsagesModel({
-    required this.usingDirectives,
-    required this.deepestSrcDirectory,
-  });
+  UsagesModel({required this.usingDirectives});
 
   /// Imports of dart files
   final IMap<DartFile, ISet<Usage>> usingDirectives;
-  final IMap<DartFile, TreeDirectory?> deepestSrcDirectory;
 }
 
 /// Import/Export classes
@@ -21,10 +17,7 @@ sealed class Usage {}
 /// Represents an import to a path within the same package.
 /// Ignores all Dart SDK and external package usages.
 class LocalUsage extends Usage {
-  LocalUsage({
-    required this.dartFile,
-    required this.usageType,
-  });
+  LocalUsage({required this.dartFile, required this.usageType});
 
   final DartFile dartFile;
   final LocalUsageType usageType;

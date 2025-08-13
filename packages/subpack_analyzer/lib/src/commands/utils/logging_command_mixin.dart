@@ -20,14 +20,21 @@ mixin LoggingCommandMixin on SubpackCommand {
   Future<SubpackExitCode> run() async {
     final argResults = this.argResults!;
     final verbose = argResults.flag('verbose');
-    final useAnsi = (Platform.environment['MELOS_ROOT_PATH'] != null);
+    bool? supportAnsi;
+    if (Platform.environment['MELOS_ROOT_PATH'] != null) {
+      // Melos seems to disable Ansi support even though it is supported.
+      supportAnsi = true;
+    }
+    if (Platform.environment['CI'] == 'true') {
+      // CI environments usually do not support Ansi codes.
+      supportAnsi = false;
+    }
 
     return await runZoned(
       () => super.run(),
       zoneValues: {
         #verbose: verbose,
-        AnsiCode: useAnsi, // Make this true by default?
-        // Also pass rootDirectory in here for 'global' access?
+        if (supportAnsi != null) AnsiCode: supportAnsi,
       },
     );
   }

@@ -1,6 +1,4 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:mason_logger/mason_logger.dart';
-
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/usages/usages_model.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_error.dart';

@@ -1,5 +1,3 @@
-import 'package:mason_logger/mason_logger.dart';
-
 import 'package:subpack_analyzer/src/core/tree_structure/file_structure_tree_model.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_error.dart';
 import 'package:subpack_analyzer/src/core/utils/subpack_utils.dart';

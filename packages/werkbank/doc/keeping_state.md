@@ -1,82 +1,8 @@
 The [StateAddon](../werkbank/StateAddon-class.html) provides a simple solution for managing state that doesn't need visual controls like knobs do. Think of it as "headless knobs" - you get the same reactive state management capabilities as knobs, but without the UI controls. This is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
 
-States behave similarly to knobs: they preserve their values during hot reloads, provide reactive updates through `ValueNotifier`, and integrate seamlessly with your use cases. The key difference is that states don't appear as controllable elements in the right panel.
+States behave similarly to knobs: they **preserve their values during hot reloads**, provide reactive updates through `ValueNotifier`, and integrate seamlessly with your use cases. The key difference is that states don't appear as controllable elements in the right panel.
 
-## When to Use States vs. Knobs
-
-**Always prefer knobs when a suitable one exists.** Knobs provide interactive controls that make testing and experimentation much easier.
-
-Use **knobs** (first choice):
-- When there's an existing knob for your data type
-- When you need interactive controls for testing different values
-
-Use **states** when:
-- No suitable knob exists for your data type and you don't need user controls
-- Working with Flutter controllers (`TextEditingController`, `ScrollController`, `TabController`) or custom controllers
-- Managing custom data models that don't require interactive manipulation
-- Quick prototyping where implementing a custom knob would be overkill
-
-If you need a control but no suitable knob exists, consider [implementing a custom knob](Knobs-topic.html) instead of using states.
-
-## Types of States
-
-There are two types of state you may want to keep for your use case:
-
-- **Immutable state**
-  - For example for a `Color`, a `Size`, `Offset`, or a custom data class
-- **Mutable state**
-  - For example for a `ScrollController`, `TextEditingController`, or another mutable object for managing state.
-
-
-### Immutable States
-
-Use [`immutable`](../werkbank/StatesComposer/immutable.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
-
-```dart
-final componentModel = c.states.immutable(
-  'Component Model',
-  initialValue: MyComponentModel(
-    title: 'Hello',
-    count: 0,
-    isEnabled: true,
-  ),
-);
-
-// ...
-
-// Read and write just like with knobs
-componentModel.value = componentModel.value.copyWith(count: 1);
-```
-
-Immutable states behave exactly like knobs: you can read and write their values through the `ValueNotifier` interface.
-
-### Mutable States
-
-Use [`mutable`](../werkbank/StatesComposer/mutable.html) for objects that have internal state and need lifecycle management:
-
-```dart
-final scrollController = c.states.mutable(
-  'Scroll Controller', 
-  create: () => ScrollController(),
-  dispose: (controller) => controller.dispose(),
-);
-
-
-// ...
-
-// Read-only access: the object is created once and managed internally
-scrollController.value.animateTo(100);
-```
-
-Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Other than immutable states, you cannot reassign the value in your use case.
-For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html).
-
-> [!NOTE]
-> All state values are preserved during hot reloads, just like knobs. This makes iterative development smooth and efficient.
-
-## Complete Example
-
-Here's a comprehensive example showing how to use states:
+Here's a minimal example showing how to use states:
 
 ```dart
 WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
@@ -111,7 +37,6 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
   };
 }
 ```
-
 
 <details>
 <summary><b>Example</b> of how you would do this <b>without <a href="../werkbank/CustomFieldKnobExtension/customField.html">StateAddon</a></b></summary>
@@ -178,3 +103,77 @@ class _StateProviderState extends State<_StateProvider> {
 }
 ```
 </details>
+
+---
+
+## When to Use States vs. Knobs
+
+**Always prefer knobs when a suitable one exists.** Knobs provide interactive controls that make testing and experimentation much easier.
+
+Use **knobs** (first choice):
+- When there's an existing knob for your data type
+- When you need interactive controls for testing different values
+
+Use **states** when:
+- No suitable knob exists for your data type and you don't need user controls
+- Working with Flutter controllers (`TextEditingController`, `ScrollController`, `TabController`) or custom controllers
+- Managing custom data models that don't require interactive manipulation
+- Quick prototyping where implementing a custom knob would be overkill
+
+If you need a control but no suitable knob exists, consider [implementing a custom knob](Knobs-topic.html) instead of using states.
+
+## Types of State
+
+There are two types of state you may want to keep for your use case:
+
+- **Immutable state**
+  - For example for a `Color`, a `Size`, `Offset`, or a custom data class
+- **Mutable state**
+  - For example for a `ScrollController`, `TextEditingController`, or another mutable object for managing state.
+
+
+### Immutable State
+
+Use [`immutable`](../werkbank/StatesComposer/immutable.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
+
+```dart
+final componentModel = c.states.immutable(
+  'Component Model',
+  initialValue: MyComponentModel(
+    title: 'Hello',
+    count: 0,
+    isEnabled: true,
+  ),
+);
+
+// ...
+
+// Read and write just like with knobs
+componentModel.value = componentModel.value.copyWith(count: 1);
+```
+
+Immutable states behave exactly like knobs: you can read and write their values through the `ValueNotifier` interface.
+
+### Mutable State
+
+Use [`mutable`](../werkbank/StatesComposer/mutable.html) for objects that have internal state and need lifecycle management:
+
+```dart
+final scrollController = c.states.mutable(
+  'Scroll Controller', 
+  create: () => ScrollController(),
+  dispose: (controller) => controller.dispose(),
+);
+
+
+// ...
+
+// Read-only access: the object is created once and managed internally
+scrollController.value.animateTo(100);
+```
+
+Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Other than immutable states, you cannot reassign the value in your use case.
+For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html).
+
+> [!NOTE]
+> All state values are preserved during hot reloads, just like knobs. This makes iterative development smooth and efficient.

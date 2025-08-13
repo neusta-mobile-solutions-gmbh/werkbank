@@ -68,7 +68,7 @@ final scrollController = c.states.mutable(
 scrollController.value.animateTo(100);
 ```
 
-Mutable states are read-only containers. The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. You cannot reassign the value in your use case.
+Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Other than immutable states, you cannot reassign the value in your use case.
 For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html).
 
 > [!NOTE]

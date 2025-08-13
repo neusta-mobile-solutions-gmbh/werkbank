@@ -3,6 +3,8 @@ import 'package:werkbank/src/addons/src/background/background.dart';
 
 /// A selectable background option for uses cases, which can be added to the
 /// [BackgroundAddon].
+///
+/// {@category Backgrounds}
 class BackgroundOption {
   /// Creates a [BackgroundOption] from a [Widget].
   ///

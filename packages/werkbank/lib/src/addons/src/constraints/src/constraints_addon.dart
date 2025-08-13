@@ -14,7 +14,7 @@ import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
-/// {@category Constraints & Sizing}
+/// {@category Constraints}
 /// {@category Overview}
 class ConstraintsAddon extends Addon {
   const ConstraintsAddon() : super(id: addonId);

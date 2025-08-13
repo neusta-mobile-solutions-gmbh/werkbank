@@ -1,3 +1,16 @@
+This topic will guide you through the process of setting up Werkbank for your Flutter project.
+You should already be familiar what Werkbank is and the purpose of use cases from the
+[Welcome](Welcome-topic.html) topic.
+
+**Table of Contents**
+- [Creating the Werkbank Flutter Project](#creating-the-werkbank-flutter-project)
+- [WerkbankApp Setup](#werkbankapp-setup)
+  - [Defining the Use Case Tree](#defining-the-use-case-tree)
+- [Creating UseCases](#creating-usecases)
+- [Next Steps](#next-steps)
+
+## Creating the Werkbank Flutter Project
+
 To create a Werkbank for your project, start by creating a new Flutter app.
 A good place to put this app would be next to the folder of your project.
 For example, you can do this by running
@@ -92,8 +105,7 @@ For example, you should consider adding the
 [ThemingAddon](../werkbank/ThemingAddon-class.html) and the
 [LocalizationAddon](../werkbank/LocalizationAddon-class.html), since almost every app uses theming, and it is also good practice to use a localization framework
 even if your app only supports one language.
-<!-- TODO: Rename to "Configuring Addons"? -->
-To learn more about configuring your addons, visit the [Addons](Addons-topic.html) documentation.
+To learn more about addons, visit the [Configuring Addons](Configuring%20Addons-topic.html) topic.
 
 ### Defining the Use Case Tree
 The **[root](../werkbank/WerkbankApp/root.html)** parameter
@@ -121,7 +133,7 @@ WerkbankRoot get root => WerkbankRoot(
     );
 ```
 
-The [WerkbankRoot](../werkbank/WerkbankRoot-class.html) forms the root of a tree
+The [WerkbankRoot](../werkbank/WerkbankRoot-class.html) defines the root of a tree
 with all your use cases.
 Use cases are defined in the tree using [WerkbankUseCase](../werkbank/WerkbankUseCase-class.html).
 You can nest use cases inside [WerkbankFolder](../werkbank/WerkbankFolder-class.html) or
@@ -179,7 +191,7 @@ then returns the widget that the use case is supposed to showcase.
 <!-- TODO: Check link. This topic doesn't exist yet. -->
 The [UseCaseComposer](../werkbank/UseCaseComposer-class.html) can be used
 in many different ways to configure and augment the use case.
-Visit the [Writing Use Cases](Use%20Cases-topic.html) topic to learn more about
+Visit the [Writing Use Cases](Writing%20Use%20Cases-topic.html) topic to learn more about
 how to expertly write use cases and utilize the
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) to its full potential.
 
@@ -190,8 +202,7 @@ Now you should have everything set up to run your Werkbank app.
 
 ## Next Steps
 
-<!-- TODO: Check these links. Some topics don't exist yet. -->
 Take a look at these topics next to advance your Werkbank setup further:
 - [File Structure](File%20Structure-topic.html) - Learn how to organize the files and use cases in your project.
-- [Addon Configuration](Configuring%20Addons-topic.html) - Further configure the addons you are using.
-- [Writing Use Cases](Writing%Use%20Cases-topic.html) - Explore how to augment your use cases by utilizing the [UseCaseComposer](../werkbank/UseCaseComposer-class.html).
+- [Configuring Addons](Configuring%20Addons-topic.html) - Further configure the addons you are using.
+- [Writing Use Cases](Writing%20Use%20Cases-topic.html) - Explore how to augment your use cases by utilizing the [UseCaseComposer](../werkbank/UseCaseComposer-class.html).

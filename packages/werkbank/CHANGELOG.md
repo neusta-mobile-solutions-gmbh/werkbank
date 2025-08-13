@@ -1,4 +1,6 @@
 # 0.17.0 (unreleased)
+- Add "Writing Use Cases" documentation topic that provides an overview of techniques you can use to customize your use cases.
+  - Give it a read at https://pub.dev/documentation/werkbank/latest/topics/Writing%20Use%20Cases-topic.html
 - Make changes to `BackgroundOption` constructors to be more consistent with `c.background.<...>` functions in the `BackgroundComposer`.
   - The unnamed `BackgroundOption(...)` constructor is now `BackgroundOption.widget(...)`. **(BREAKING CHANGE)**
   - Changed `BackgroundOption.color(...)` constructor to allow specifying a color directly. **(BREAKING CHANGE)**

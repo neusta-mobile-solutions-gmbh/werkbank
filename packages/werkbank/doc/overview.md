@@ -1,3 +1,19 @@
+This topic describes the overview feature and how to optimize the thumbnails
+of use cases in the overview.
+You should be familiar with the basics of using
+the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) to customize your use cases
+from the [Writing Use Cases](Writing%20Use%20Cases-topic.html) topic.
+
+**Table of Contents**
+- [Overview in the UI](#overview-in-the-ui)
+- [Optimizing Thumbnails](#optimizing-thumbnails)
+  - [Adjusting the Constraints](#adjusting-the-constraints)
+  - [Adjusting the Scale](#adjusting-the-scale)
+  - [Adjusting the Padding](#adjusting-the-padding)
+  - [Adjusting the Use Case Widget](#adjusting-the-use-case-widget)
+  - [Disabling the Thumbnail](#disabling-the-thumbnail)
+
+## Overview in the UI
 The overview is a screen that displays preview thumbnails of use cases in a grid layout,
 allowing you to quickly navigate through your use cases by their visual appearance.
 This may be easier than finding their name in the tree structure in the left navigation panel.
@@ -59,7 +75,7 @@ The opposite could also be the case, where a small widget is barely visible in t
 > [WerkbankComponent](../werkbank/WerkbankComponent-class.html)
 > in order to apply to all use cases within.
 > 
-> See [Structure and Overview](Structure-topic.html) for more documentation on that.
+> See [Writing Use Cases](Writing%20Use%20Cases-topic.html) for more documentation on that.
 
 ### Adjusting the Constraints
 

@@ -59,6 +59,10 @@ jobs:
 
           assert fvmrc_version == sdk_version
 
+      - name: Install dependencies of subpack analyzer
+        working-directory: packages/subpack_analyzer
+        run: dart pub get
+
       - name: Run subpack analyzer
         working-directory: packages/werkbank
         run: dart run ../subpack_analyzer/bin/subpack_analyzer.dart run

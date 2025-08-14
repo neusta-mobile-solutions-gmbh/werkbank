@@ -1,15 +1,13 @@
-The [StateAddon](../werkbank/StateAddon-class.html) provides a general, simple solution for managing state. It's an alternative to using the [KnobsAddon](Knobs-topic.html) or the [WrappingAddon](../werkbank/WrappingAddon-class.html). 
+The [StateAddon](../werkbank/StateAddon-class.html) provides a general, simple solution for managing any state. It's an alternative to using the [KnobsAddon](Knobs-topic.html) or the [WrappingAddon](../werkbank/WrappingAddon-class.html). 
 
-This is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
+It is is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
 
-- In comparision to the **KnobsAddon**
-  - it doesn't offer visual controls.
-  - There is no need to implement a new type for each different object you want to use with the StateAddon
-- In comparision to the **WrappingAddon**
-  - It offers watching and manipulating your object out of the box, without implementing for instance a custom widget, like in the following example, that serves this purpose.
-  - It doesn't work by introducing new widgets to the widget tree 
-
-States behave similarly to knobs: they **preserve their values during hot reloads**, provide reactive updates through `ValueNotifier`, and integrate seamlessly with your use cases. The key difference is that states don't appear as controllable elements in the right panel.
+Using the [StateAddon](../werkbank/StateAddon-class.html)
+- your state **preserves its values during hot reloads**
+- for **immutable objects**, you can update the state through `ValueNotifier`
+- for **mutale object**, the lifecycle will be handled for you.
+  
+---
 
 Here's a minimal example showing how to use states:
 
@@ -141,11 +139,10 @@ final componentModel = c.states.immutable(
 
 // ...
 
-// Read and write just like with knobs
 componentModel.value = componentModel.value.copyWith(count: 1);
 ```
 
-Immutable states behave exactly like knobs: you can read and write their values through the `ValueNotifier` interface.
+You can read and write immutable states through the `ValueNotifier` interface. When the `value` of an immutable state was changed, the Use Case will rebuild.
 
 ### Mutable State
 
@@ -168,10 +165,16 @@ scrollController.value.animateTo(100);
 Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer-class.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Other than immutable states, you cannot reassign the value in your use case.
 For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer-class.html).
 
-> [!NOTE]
-> All state values are preserved during hot reloads, just like knobs. This makes iterative development smooth and efficient.
+## When to use the StateAddon, KnobsAddon or the WrappingAddon
 
-## When to use States, Knobs or the WrappingAddon
+- In comparision to the **KnobsAddon**
+  - There is no need to implement something for each type, like a Knob of type String
+  - it doesn't offer visual controls.
+- In comparision to the **WrappingAddon**
+  - It offers watching and manipulating your object out of the box, without implementing something instance a custom widget, like in the following example, that serves this purpose.
+  - It doesn't work by introducing new widgets to the widget tree 
+  
+---
 
 Use **knobs** (first choice):
 - When you need interactive controls in your Werkbank UI for testing different values.

@@ -338,13 +338,17 @@ WerkbankRoot get root => WerkbankRoot(
 WerkbankChildNode get descriptionSection => WerkbankFolder(
   name: 'Description Folder 1',
   builder: (c) {
-    c.description('# folder 1 description');
+    c
+      ..description('# folder 1 description')
+      ..tags(['merged tag']);
   },
   children: [
     WerkbankFolder(
       name: 'Description Folder 2',
       builder: (c) {
-        c.description('## folder 2 description');
+        c
+          ..description('## folder 2 description')
+          ..tags(['merged tag']);
       },
       children: [
         WerkbankComponent(

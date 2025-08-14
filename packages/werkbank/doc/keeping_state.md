@@ -1,4 +1,13 @@
-The [StateAddon](../werkbank/StateAddon-class.html) provides a simple solution for managing state that doesn't need visual controls like knobs do. Think of it as "headless knobs" - you get the same reactive state management capabilities as knobs, but without the UI controls. This is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
+The [StateAddon](../werkbank/StateAddon-class.html) provides a general, simple solution for managing state. It's an alternative to using the [KnobsAddon](Knobs-topic.html) or the [WrappingAddon](../werkbank/WrappingAddon-class.html). 
+
+This is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
+
+- In comparision to the **KnobsAddon**
+  - it doesn't offer visual controls.
+  - There is no need to implement a new type for each different object you want to use with the StateAddon
+- In comparision to the **WrappingAddon**
+  - It offers watching and manipulating your object out of the box, without implementing for instance a custom widget, like in the following example, that serves this purpose.
+  - It doesn't work by introducing new widgets to the widget tree 
 
 States behave similarly to knobs: they **preserve their values during hot reloads**, provide reactive updates through `ValueNotifier`, and integrate seamlessly with your use cases. The key difference is that states don't appear as controllable elements in the right panel.
 
@@ -39,7 +48,7 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
 ```
 
 <details>
-<summary><b>Example</b> of how you would do this <b>without <a href="../werkbank/CustomFieldKnobExtension/customField.html">StateAddon</a></b></summary>
+<summary><b>Example</b> of how you could archive this <b>without the <a href="../werkbank/CustomFieldKnobExtension/customField.html">StateAddon</a></b></summary>
 
 This illustrates what issue the StateAddon solves for you, since **you don't have to do this**:
 
@@ -106,22 +115,6 @@ class _StateProviderState extends State<_StateProvider> {
 
 ---
 
-## When to Use States vs. Knobs
-
-**Always prefer knobs when a suitable one exists.** Knobs provide interactive controls that make testing and experimentation much easier.
-
-Use **knobs** (first choice):
-- When there's an existing knob for your data type
-- When you need interactive controls for testing different values
-
-Use **states** when:
-- No suitable knob exists for your data type and you don't need user controls
-- Working with Flutter controllers (`TextEditingController`, `ScrollController`, `TabController`) or custom controllers
-- Managing custom data models that don't require interactive manipulation
-- Quick prototyping where implementing a custom knob would be overkill
-
-If you need a control but no suitable knob exists, consider [implementing a custom knob](Knobs-topic.html) instead of using states.
-
 ## Types of State
 
 There are two types of state you may want to keep for your use case:
@@ -134,7 +127,7 @@ There are two types of state you may want to keep for your use case:
 
 ### Immutable State
 
-Use [`immutable`](../werkbank/StatesComposer/immutable.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
+Use [`immutable`](../werkbank/StatesComposer-class.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
 
 ```dart
 final componentModel = c.states.immutable(
@@ -156,7 +149,7 @@ Immutable states behave exactly like knobs: you can read and write their values 
 
 ### Mutable State
 
-Use [`mutable`](../werkbank/StatesComposer/mutable.html) for objects that have internal state and need lifecycle management:
+Use [`mutable`](../werkbank/StatesComposer-class.html) for objects that have internal state and need lifecycle management:
 
 ```dart
 final scrollController = c.states.mutable(
@@ -172,8 +165,24 @@ final scrollController = c.states.mutable(
 scrollController.value.animateTo(100);
 ```
 
-Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Other than immutable states, you cannot reassign the value in your use case.
-For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html).
+Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer-class.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Other than immutable states, you cannot reassign the value in your use case.
+For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer-class.html).
 
 > [!NOTE]
 > All state values are preserved during hot reloads, just like knobs. This makes iterative development smooth and efficient.
+
+## When to use States, Knobs or the WrappingAddon
+
+Use **knobs** (first choice):
+- When you need interactive controls in your Werkbank UI for testing different values.
+- When there's an existing knob for your data type
+  - If you need a knob, but no suitable exists, consider [implementing a custom knob](Knobs-topic.html) instead of using states.
+
+Use the **WrappingAddon** when:
+- You want to introduce a widget to the widget-tree, like a `DefaultTextStyle`, `MediaQuery`, or some custom `InheritedWidget`.
+
+Else use **states**. It is particularly useful when:
+- Working with Flutter controllers (`TextEditingController`, `ScrollController`, `TabController`) or **custom mutable objects** like controllers
+- Managing immutable data models
+- You don't need interactive controls in your Werkbank UI
+- Quick prototyping where implementing a custom knob would be overkill

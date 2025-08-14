@@ -2,10 +2,10 @@ The [StateAddon](../werkbank/StateAddon-class.html) provides a general, simple s
 
 It is is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
 
-Using the [StateAddon](../werkbank/StateAddon-class.html)
-- your state **preserves its values during hot reloads**
-- for **immutable objects**, you can update the state through `ValueNotifier`
-- for **mutale object**, the lifecycle will be handled for you.
+Using the [StateAddon](../werkbank/StateAddon-class.html):
+- Your state **preserves its values during hot reloads**
+- For **immutable objects**, you can update the state through `ValueNotifier`
+- For **mutable objects**, the lifecycle will be handled for you
   
 ---
 
@@ -46,7 +46,7 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
 ```
 
 <details>
-<summary><b>Example</b> of how you could archive this <b>without the <a href="../werkbank/CustomFieldKnobExtension/customField.html">StateAddon</a></b></summary>
+<summary><b>Example</b> of how you could achieve this <b>without the StateAddon</b></summary>
 
 This illustrates what issue the StateAddon solves for you, since **you don't have to do this**:
 
@@ -78,8 +78,7 @@ class _StateProvider extends StatefulWidget {
     BuildContext context,
     ValueNotifier<CustomModel> model,
     TextEditingController controller,
-  )
-  builder;
+  ) builder;
 
   @override
   State<_StateProvider> createState() => _StateProviderState();
@@ -142,7 +141,7 @@ final componentModel = c.states.immutable(
 componentModel.value = componentModel.value.copyWith(count: 1);
 ```
 
-You can read and write immutable states through the `ValueNotifier` interface. When the `value` of an immutable state was changed, the Use Case will rebuild.
+You can read and write immutable states through the `ValueNotifier` interface. When the `value` of an immutable state changes, the Use Case will rebuild.
 
 ### Mutable State
 
@@ -150,7 +149,7 @@ Use [`mutable`](../werkbank/StatesComposer-class.html) for objects that have int
 
 ```dart
 final scrollController = c.states.mutable(
-  'Scroll Controller', 
+  'Scroll Controller',
   create: () => ScrollController(),
   dispose: (controller) => controller.dispose(),
 );
@@ -162,10 +161,10 @@ final scrollController = c.states.mutable(
 scrollController.value.animateTo(100);
 ```
 
-Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer-class.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Other than immutable states, you cannot reassign the value in your use case.
+Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer-class.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Unlike immutable states, you cannot reassign the value in your use case.
 For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer-class.html).
 
-## When to use the StateAddon, KnobsAddon or the WrappingAddon
+## When to use the StateAddon, KnobsAddon, or the WrappingAddon
 
 - In comparision to the **KnobsAddon**
   - There is no need to implement something for each type, like a Knob of type String
@@ -184,8 +183,8 @@ Use **knobs** (first choice):
 Use the **WrappingAddon** when:
 - You want to introduce a widget to the widget-tree, like a `DefaultTextStyle`, `MediaQuery`, or some custom `InheritedWidget`.
 
-Else use **states**. It is particularly useful when:
-- Working with Flutter controllers (`TextEditingController`, `ScrollController`, `TabController`) or **custom mutable objects** like controllers
-- Managing immutable data models
-- You don't need interactive controls in your Werkbank UI
-- Quick prototyping where implementing a custom knob would be overkill
+Else, use **states**. It is particularly useful when:
+- Working with Flutter controllers (`TextEditingController`, `ScrollController`, `TabController`), or **custom mutable objects** like controllers.
+- Managing immutable data models.
+- You don't need interactive controls in your Werkbank UI.
+- Quick prototyping where implementing a custom knob would be overkill.

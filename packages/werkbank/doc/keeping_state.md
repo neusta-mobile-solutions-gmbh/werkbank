@@ -4,9 +4,9 @@ It is is particularly useful for custom data models, controllers, or any state t
 
 Using the [StateAddon](../werkbank/StateAddon-class.html):
 - Your state **preserves its values during hot reloads**
-- For **immutable objects**, you can update the state through `ValueNotifier`
-- For **mutable objects**, the lifecycle will be handled for you
-  
+- For **immutable objects**, you can update the state through [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html)
+- For **mutable objects**, the object's lifecycle will be handled for you
+
 ---
 
 Here's a minimal example showing how to use states:
@@ -46,9 +46,9 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
 ```
 
 <details>
-<summary><b>Example</b> of how you could achieve this <b>without the StateAddon</b></summary>
+<summary><b>Example</b> of how you could achieve this <b>without the <a href="../werkbank/StateAddon-class.html">StateAddon</a></b></summary>
 
-This illustrates what issue the StateAddon solves for you, since **you don't have to do this**:
+This illustrates what issue the [StateAddon](../werkbank/StateAddon-class.html) solves for you, since **you don't have to do this**:
 
 ```dart
 WidgetBuilder exampleWithoutStatesUseCase(UseCaseComposer c) {
@@ -114,17 +114,17 @@ class _StateProviderState extends State<_StateProvider> {
 
 ## Types of State
 
-There are two types of state you may want to keep for your use case:
+There are two types of state you may want to use with your use case:
 
 - **Immutable state**
-  - For example for a `Color`, a `Size`, `Offset`, or a custom data class
+  - For example for a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html), a [Size](https://api.flutter.dev/flutter/dart-ui/Size-class.html), [Offset](https://api.flutter.dev/flutter/dart-ui/Offset-class.html), or a custom data class
 - **Mutable state**
-  - For example for a `ScrollController`, `TextEditingController`, or another mutable object for managing state.
+  - For example for a [ScrollController](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), or another mutable object for managing state.
 
 
 ### Immutable State
 
-Use [`immutable`](../werkbank/StatesComposer-class.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
+Use [`immutable`](../werkbank/StatesComposer/immutable.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
 
 ```dart
 final componentModel = c.states.immutable(
@@ -141,11 +141,11 @@ final componentModel = c.states.immutable(
 componentModel.value = componentModel.value.copyWith(count: 1);
 ```
 
-You can read and write immutable states through the `ValueNotifier` interface. When the `value` of an immutable state changes, the Use Case will rebuild.
+You can read and write *immutable states* through the [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html) interface. When the `value` of an *immutable state* changes, the use case will rebuild.
 
 ### Mutable State
 
-Use [`mutable`](../werkbank/StatesComposer-class.html) for objects that have internal state and need lifecycle management:
+Use [`mutable`](../werkbank/StatesComposer/mutable.html) for objects that have internal state and need lifecycle management:
 
 ```dart
 final scrollController = c.states.mutable(
@@ -161,29 +161,31 @@ final scrollController = c.states.mutable(
 scrollController.value.animateTo(100);
 ```
 
-Mutable states are provided by [`ValueContainer`](../werkbank/ValueContainer-class.html). The object is created once via `create`, survives hot reloads, and is properly disposed when no longer needed. Unlike immutable states, you cannot reassign the value in your use case.
-For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer-class.html).
+*Mutable states* are provided by [`ValueContainer`](../werkbank/ValueContainer-class.html). The object is created once, survives hot reloads, and is properly disposed when no longer needed. Unlike *immutable states*, you cannot reassign the value in your use case.
+For objects that require a `TickerProvider`, use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html).
 
-## When to use the StateAddon, KnobsAddon, or the WrappingAddon
+## When to use the [StateAddon](../werkbank/StateAddon-class.html), [KnobsAddon](Knobs-topic.html), or the [WrappingAddon](../werkbank/WrappingAddon-class.html)
 
-- In comparision to the **KnobsAddon**
+
+
+- In comparision to the [KnobsAddon](Knobs-topic.html)
   - There is no need to implement something for each type, like a Knob of type String
   - it doesn't offer visual controls.
-- In comparision to the **WrappingAddon**
-  - It offers watching and manipulating your object out of the box, without implementing something instance a custom widget, like in the following example, that serves this purpose.
+- In comparision to the [WrappingAddon](../werkbank/WrappingAddon-class.html)
+  - It offers watching and manipulating your object out of the box, without implementing something like a custom widget, that serves this purpose.
   - It doesn't work by introducing new widgets to the widget tree 
   
 ---
 
-Use **knobs** (first choice):
+Use the **[KnobsAddon](Knobs-topic.html)** (first choice):
 - When you need interactive controls in your Werkbank UI for testing different values.
 - When there's an existing knob for your data type
   - If you need a knob, but no suitable exists, consider [implementing a custom knob](Knobs-topic.html) instead of using states.
 
-Use the **WrappingAddon** when:
-- You want to introduce a widget to the widget-tree, like a `DefaultTextStyle`, `MediaQuery`, or some custom `InheritedWidget`.
+Use the **[WrappingAddon](../werkbank/WrappingAddon-class.html)** when:
+- You want to introduce a widget to the widget-tree, like a [DefaultTextStyle](https://api.flutter.dev/flutter/widgets/DefaultTextStyle-class.html), [MediaQuery](https://api.flutter.dev/flutter/widgets/MediaQuery-class.html), or some custom [InheritedWidget](https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html).
 
-Else, use **states**. It is particularly useful when:
+Else, use the **[StateAddon](../werkbank/StateAddon-class.html)**. It is particularly useful when:
 - Working with Flutter controllers (`TextEditingController`, `ScrollController`, `TabController`), or **custom mutable objects** like controllers.
 - Managing immutable data models.
 - You don't need interactive controls in your Werkbank UI.

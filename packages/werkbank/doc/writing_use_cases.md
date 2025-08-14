@@ -54,6 +54,16 @@ Use these functions in the use case before returning the
 > }
 > ```
 
+> [!TIP]
+> You can apply customizations to multiple use cases at once by
+> placing calls on the [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
+> in the [builder](../werkbank/WerkbankParentNode/builder.html) of parent nodes
+> like [WerkbankRoot](../werkbank/WerkbankRoot-class.html),
+> [WerkbankComponent](../werkbank/WerkbankComponent-class.html),
+> or [WerkbankFolder](../werkbank/WerkbankFolder-class.html).
+> These affect all the descendant use cases.
+> Read more about this in the [Inheritance](#inheritance) section below.
+
 [Addon](../werkbank/Addon-class.html)s introduce most methods and getters on the
 [UseCaseComposer](../werkbank/UseCaseComposer-class.html) using extensions.
 The respective addon must be active for these methods to work.

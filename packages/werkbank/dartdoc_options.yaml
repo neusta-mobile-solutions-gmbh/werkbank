@@ -41,7 +41,7 @@ dartdoc:
     - Configuring Addons
     - Customizing the AppConfig
     - Knobs
-    - Provide State Without Knobs
+    - Keeping State
     - Overview
     - Custom Use Case Metadata
     - Display

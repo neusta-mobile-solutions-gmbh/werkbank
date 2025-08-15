@@ -1,0 +1,5 @@
+name: state
+docs: State;
+dependencies:
+  - /lib/src/use_case
+  - /lib/src/addon_api

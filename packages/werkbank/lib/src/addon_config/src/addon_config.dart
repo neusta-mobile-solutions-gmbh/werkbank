@@ -79,6 +79,7 @@ class AddonConfig {
       const ConstraintsAddon(),
       const ViewerAddon(),
       const AccessibilityAddon(),
+      const StateAddon(),
       BackgroundAddon(),
       const WrappingAddon(),
       const ColorPickerAddon(),

@@ -7,6 +7,9 @@
   - The old `BackgroundOption.color(...)` constructor is now `BackgroundOption.colorBuilder(...)`. **(BREAKING CHANGE)**
   - The `BackgroundOption.builder(...)` constructor is now `BackgroundOption.widgetBuilder(...)`. **(BREAKING CHANGE)**
   - Some parameter names have also been renamed.
+- Add `state addon` to provide states without knobs.
+  - Immutable state, for instance data models, can be added by calling `c.states.immutable(...)`
+  - Mutable state, like controllers, can be added by calling `c.states.mutable(...)`. Its lifecycle will be managed by Werkbank.
 
 # 0.16.2
 - Increase maximum `go_router` version to 16.x.x and lower minimum version to 13.1.0.

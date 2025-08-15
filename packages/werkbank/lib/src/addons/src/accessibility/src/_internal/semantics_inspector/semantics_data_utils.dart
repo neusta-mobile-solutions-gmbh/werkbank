@@ -70,25 +70,26 @@ final class SemanticsDataUtils {
         ),
       );
     }
+    final flags = data.flagsCollection;
 
-    if (data.flagsCollection.isHeader) {
+    if (flags.isHeader) {
       annotations.add(_TagSemanticsAnnotation(label: 'header'));
     }
 
-    if (data.flagsCollection.isImage) {
+    if (flags.isImage) {
       annotations.add(_TagSemanticsAnnotation(label: 'image'));
     }
 
-    if (data.flagsCollection.isLiveRegion) {
+    if (flags.isLiveRegion) {
       annotations.add(_TagSemanticsAnnotation(label: 'live region'));
     }
 
-    if (data.flagsCollection.hasCheckedState) {
+    if (flags.hasCheckedState) {
       bool? value = false;
-      if (data.flagsCollection.isChecked) {
+      if (flags.isChecked) {
         value = true;
       }
-      if (data.flagsCollection.isCheckStateMixed) {
+      if (flags.isCheckStateMixed) {
         value = null;
       }
       annotations.add(
@@ -103,40 +104,40 @@ final class SemanticsDataUtils {
       );
     }
 
-    if (data.flagsCollection.hasToggledState) {
+    if (flags.hasToggledState) {
       annotations.add(
         _ValueSemanticsAnnotation(
           label: 'toggled',
-          value: data.flagsCollection.isToggled ? 'yes' : 'no',
+          value: flags.isToggled ? 'yes' : 'no',
         ),
       );
     }
 
-    if (data.flagsCollection.hasExpandedState) {
+    if (flags.hasExpandedState) {
       annotations.add(
         _ValueSemanticsAnnotation(
           label: 'expanded',
-          value: data.flagsCollection.isExpanded ? 'yes' : 'no',
+          value: flags.isExpanded ? 'yes' : 'no',
         ),
       );
     }
 
     var wantsTap = false;
-    if (data.flagsCollection.isTextField) {
+    if (flags.isTextField) {
       final textFieldLabel = [
-        if (data.flagsCollection.isReadOnly) 'read-only',
-        if (data.flagsCollection.isMultiline) 'multi-line',
+        if (flags.isReadOnly) 'read-only',
+        if (flags.isMultiline) 'multi-line',
         'text field',
       ];
       annotations.add(_TagSemanticsAnnotation(label: textFieldLabel.join(' ')));
       wantsTap = true;
     }
-    if (data.flagsCollection.isButton) {
+    if (flags.isButton) {
       annotations.add(_TagSemanticsAnnotation(label: 'button'));
       wantsTap = true;
     }
     var isSlider = false;
-    if (data.flagsCollection.isSlider) {
+    if (flags.isSlider) {
       annotations.add(_TagSemanticsAnnotation(label: 'slider'));
       wantsTap = true;
       isSlider = true;
@@ -154,8 +155,7 @@ final class SemanticsDataUtils {
       // }
     }
 
-    if (data.flagsCollection.hasEnabledState &&
-        !data.flagsCollection.isEnabled) {
+    if (flags.hasEnabledState && !flags.isEnabled) {
       annotations.add(_TagSemanticsAnnotation(label: 'disabled'));
     }
 

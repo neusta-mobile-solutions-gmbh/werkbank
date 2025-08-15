@@ -39,7 +39,7 @@ class ViewTransform {
   Matrix4 toMatrix() {
     return Matrix4.identity()
       ..translateByVector3(Vector3(offset.dx, offset.dy, 0))
-      ..scaleByVector3(Vector3(scale, 1, 1));
+      ..scaleByDouble(scale, scale, 1, 1);
   }
 
   @override

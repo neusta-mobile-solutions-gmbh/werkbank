@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:vector_math/vector_math_64.dart';
 
 /// {@category Werkbank Components}
 class WScaledBox extends SingleChildRenderObjectWidget {
@@ -156,7 +155,7 @@ class RenderSScaledBox extends RenderProxyBox {
 
   @override
   void applyPaintTransform(RenderBox child, Matrix4 transform) {
-    transform.scaleByVector3(Vector3(scaleX, scaleY, 1));
+    transform.scaleByDouble(scaleX, scaleY, 1, 1);
   }
 }
 

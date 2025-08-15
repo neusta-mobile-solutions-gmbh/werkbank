@@ -136,17 +136,13 @@ class AnimationControllerKnob extends _AnimationControllerKnobBase
                 builder: (context, child) {
                   final isAnimating = _animationController.isAnimating;
                   return WIconButton(
-                    onPressed: () async {
-                      if (_animationController.value == 1) {
-                        await _animationController.forward(from: 0);
-                      }
-                      if (!context.mounted) {
-                        return;
-                      }
+                    onPressed: () {
                       if (isAnimating) {
                         _animationController.stop();
+                      } else if (_animationController.value == 1) {
+                        unawaited(_animationController.forward(from: 0));
                       } else {
-                        await _animationController.forward();
+                        unawaited(_animationController.forward());
                       }
                     },
                     icon: Icon(

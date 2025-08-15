@@ -42,17 +42,19 @@ class _FidgetSpinnerSimulationState extends State<FidgetSpinnerSimulation>
     );
   }
 
-  Future<void> _updateSimulation() async {
-    await _spinnerAnimationController.animateWith(
-      SpringSimulation(
-        SpringDescription.withDampingRatio(
-          mass: widget.mass,
-          stiffness: widget.stiffness,
-          ratio: widget.dampingRatio,
+  void _updateSimulation() {
+    unawaited(
+      _spinnerAnimationController.animateWith(
+        SpringSimulation(
+          SpringDescription.withDampingRatio(
+            mass: widget.mass,
+            stiffness: widget.stiffness,
+            ratio: widget.dampingRatio,
+          ),
+          _spinnerAnimationController.value,
+          widget.targetTurns,
+          _spinnerAnimationController.velocity,
         ),
-        _spinnerAnimationController.value,
-        widget.targetTurns,
-        _spinnerAnimationController.velocity,
       ),
     );
   }
@@ -62,7 +64,7 @@ class _FidgetSpinnerSimulationState extends State<FidgetSpinnerSimulation>
     covariant FidgetSpinnerSimulation oldWidget,
   ) {
     super.didUpdateWidget(oldWidget);
-    unawaited(_updateSimulation());
+    _updateSimulation();
   }
 
   @override

@@ -135,9 +135,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
 
     addRawStringField(
       'flags',
-      [
-        ...data.flagsCollection.toStrings(),
-      ].join(', '),
+      data.flagsCollection.toStrings().join(', '),
     );
 
     addRawStringField(

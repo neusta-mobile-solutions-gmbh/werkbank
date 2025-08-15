@@ -1,4 +1,4 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 class UseCaseOverviewConfig {
   UseCaseOverviewConfig({required this.entryBuilder});

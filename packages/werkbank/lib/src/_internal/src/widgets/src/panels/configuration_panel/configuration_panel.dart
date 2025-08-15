@@ -1,6 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/_internal/src/routing/routing.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/environment/environment.dart';
+import 'package:werkbank/src/notifications/notifications.dart';
+import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class ConfigurationPanel extends StatelessWidget {
   const ConfigurationPanel({super.key});
@@ -25,8 +34,10 @@ class ConfigurationPanel extends StatelessWidget {
                 ? null
                 : () {
                     final copyText = nameSegments.last;
-                    Clipboard.setData(
-                      ClipboardData(text: copyText),
+                    unawaited(
+                      Clipboard.setData(
+                        ClipboardData(text: copyText),
+                      ),
                     );
                     WerkbankNotifications.controllerOf(context).dispatch(
                       WerkbankNotification.text(

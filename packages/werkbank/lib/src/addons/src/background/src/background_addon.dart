@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/background/background.dart';
 import 'package:werkbank/src/addons/src/background/src/_internal/background_applier.dart';
 import 'package:werkbank/src/addons/src/background/src/_internal/background_dropdown.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
+/// {@category Backgrounds}
 class BackgroundAddon extends Addon {
   /// Creates a [BackgroundAddon] that allows you to select
   /// the background of the use case.
@@ -39,28 +44,28 @@ class BackgroundAddon extends Addon {
 
   static const addonId = 'background';
 
-  static const _defaultBackgroundOptions = [
-    BackgroundOption(
+  static final _defaultBackgroundOptions = [
+    BackgroundOption.color(
       name: 'White',
-      backgroundBox: ColoredBox(color: Colors.white),
+      color: Colors.white,
     ),
-    BackgroundOption(
+    BackgroundOption.color(
       name: 'Black',
-      backgroundBox: ColoredBox(color: Colors.black),
+      color: Colors.black,
     ),
-    BackgroundOption(
+    const BackgroundOption.widget(
       name: 'None',
-      backgroundBox: SizedBox.expand(),
+      widget: SizedBox.expand(),
     ),
-    BackgroundOption(
+    const BackgroundOption.widget(
       name: 'Checkerboard',
-      backgroundBox: WCheckerboardBackground(),
+      widget: WCheckerboardBackground(),
     ),
   ];
 
   /// A list of background options which can be selected.
   ///
-  /// The [BackgroundOption.backgroundBox] can assume that theming,
+  /// The [BackgroundOption.backgroundWidget] can assume that theming,
   /// localization etc. is already applied within their [BuildContext].
   final List<BackgroundOption> backgroundOptions;
 

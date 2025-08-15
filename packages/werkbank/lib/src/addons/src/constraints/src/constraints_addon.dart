@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/constraints_state_entry.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/ruler_overlay.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/size_selector.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/view_constraints_enforcer.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/view_constraints_preset_selector.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/view_constraints_selector.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
-/// {@category Constraints & Sizing}
+/// {@category Constraints}
 /// {@category Overview}
 class ConstraintsAddon extends Addon {
   const ConstraintsAddon() : super(id: addonId);

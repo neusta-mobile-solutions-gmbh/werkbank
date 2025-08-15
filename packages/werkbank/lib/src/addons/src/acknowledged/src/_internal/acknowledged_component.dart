@@ -1,8 +1,15 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/routing/routing.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_manager.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/theme/theme.dart';
+import 'package:werkbank/src/tree/tree.dart';
 
 class AcknowledgedComponent extends StatefulWidget {
   const AcknowledgedComponent({this.maxCount = 10, super.key});
@@ -35,11 +42,13 @@ class _AcknowledgedComponentState extends State<AcknowledgedComponent> {
     } else {
       // To prevent the UI
       // from flickering while changing the page.
-      Future<void>.delayed(pageTransitionDuration).then((_) {
-        if (mounted) {
-          _update(newEntriesCapped);
-        }
-      });
+      unawaited(
+        Future<void>.delayed(pageTransitionDuration).then((_) {
+          if (mounted) {
+            _update(newEntriesCapped);
+          }
+        }),
+      );
     }
   }
 

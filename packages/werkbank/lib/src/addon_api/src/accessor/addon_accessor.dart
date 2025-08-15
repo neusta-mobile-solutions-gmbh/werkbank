@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 
 /// A class that provides access to data in the [BuildContext] that is
 /// available from every place where the [Addon] API gives access to a
@@ -46,7 +46,8 @@ abstract class AddonAccessor {
       return function();
       /* TODO(lzuttermeister): Can we do this better? Ideally by including the
            original error with its stack trace. */
-    } catch (_) {
+      // ignore: avoid_catching_errors
+    } on TypeError catch (_) {
       _throw();
     }
   }

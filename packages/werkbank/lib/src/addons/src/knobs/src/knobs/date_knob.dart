@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Knobs}
 extension DateKnobExtension on KnobsComposer {
@@ -56,7 +58,9 @@ class _DateKnob extends StatelessWidget {
 
   final ValueNotifier<DateTime> valueNotifier;
   final bool enabled;
+
   DateTime get effectiveFirstDate => DateTime(2000);
+
   DateTime get effectiveLastDate => DateTime(2050);
 
   @override

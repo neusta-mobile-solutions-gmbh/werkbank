@@ -2,8 +2,8 @@ dartdoc:
   categories:
     Welcome:
       markdown: doc/welcome.md
-    Get Started:
-      markdown: doc/get_started.md
+    Getting Started:
+      markdown: doc/getting_started.md
     File Structure:
       markdown: doc/file_structure.md
     IDE Integration:
@@ -16,8 +16,12 @@ dartdoc:
       markdown: doc/customizing_the_appconfig.md
     Knobs:
       markdown: doc/knobs.md
+    Constraints:
+      markdown: doc/constraints.md
     Keeping State:
       markdown: doc/keeping_state.md
+    Backgrounds:
+      markdown: doc/backgrounds.md
     Overview:
       markdown: doc/overview.md
     Custom Use Case Metadata:
@@ -34,14 +38,16 @@ dartdoc:
       markdown: doc/search.md
   categoryOrder:
     - Welcome
-    - Get Started
+    - Getting Started
     - File Structure
     - IDE Integration
     - Writing Use Cases
     - Configuring Addons
     - Customizing the AppConfig
     - Knobs
+    - Constraints
     - Keeping State
+    - Backgrounds
     - Overview
     - Custom Use Case Metadata
     - Display

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/theming/theming.dart';
 
 class ThemeOptionApplier extends StatelessWidget {
   const ThemeOptionApplier({

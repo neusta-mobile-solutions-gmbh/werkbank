@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 
 class SearchQueryController extends PersistentController {
   SearchQueryController({

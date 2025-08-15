@@ -2,10 +2,25 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/_internal/src/filter/filter.dart';
+import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/_internal/src/routing/routing.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addon_config/addon_config.dart';
+import 'package:werkbank/src/app_config/app_config.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/environment/environment.dart';
+import 'package:werkbank/src/notifications/notifications.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/theme/theme.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/utils/utils.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 /// {@category Welcome}
-/// {@category Get Started}
+/// {@category Getting Started}
 /// The main entry point for a Werkbank.
 ///
 /// Minimal example:
@@ -36,7 +51,7 @@ class WerkbankApp extends StatelessWidget {
   /// The logo of your project that this [WerkbankApp] is for.
   final Widget? logo;
 
-  /// {@category Get Started}
+  /// {@category Getting Started}
   /// The date when the data was last updated.
   ///
   /// If you are deploying the werkbank with a CI, you can set this

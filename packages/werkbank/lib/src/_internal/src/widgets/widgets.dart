@@ -1,8 +1,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library widgets;
+library;
 
+export 'src/accessor_scope.dart';
 export 'src/flutter_error_provider.dart';
 export 'src/pages/home_page/home_page.dart';
 export 'src/pages/main_page.dart';

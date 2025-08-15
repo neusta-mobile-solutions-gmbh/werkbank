@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 class PanelTabsController extends PersistentController {
   PanelTabsController({required super.prefsWithCache});
@@ -21,7 +22,7 @@ class PanelTabsController extends PersistentController {
       _unsafePersistentData = unsafeJson != null
           ? PanelTabsPersistentData.fromJson(jsonDecode(unsafeJson))
           : emptyDataObj;
-    } catch (_) {
+    } on FormatException catch (_) {
       debugPrint(
         'Restoring PanelTabsPersistentData failed. Throwing it away. '
         'This can happen if changes to werkbank were made. '

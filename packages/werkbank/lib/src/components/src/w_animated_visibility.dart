@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
 
 /// {@category Werkbank Components}
 class WAnimatedVisibility extends ImplicitlyAnimatedWidget {
@@ -26,10 +26,10 @@ class WAnimatedVisibility extends ImplicitlyAnimatedWidget {
 
   @override
   ImplicitlyAnimatedWidgetState<WAnimatedVisibility> createState() =>
-      _SAnimatedVisibilityState();
+      _WAnimatedVisibilityState();
 }
 
-class _SAnimatedVisibilityState
+class _WAnimatedVisibilityState
     extends ImplicitlyAnimatedWidgetState<WAnimatedVisibility> {
   Tween<double>? _sizeFactorTween;
   late Animation<double> _sizeFactorAnimation;

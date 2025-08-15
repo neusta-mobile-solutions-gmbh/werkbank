@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 class TabAddonControlSectionList extends StatelessWidget {
   const TabAddonControlSectionList({

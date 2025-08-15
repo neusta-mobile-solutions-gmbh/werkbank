@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}
 class WTextField extends StatefulWidget {
@@ -31,10 +32,10 @@ class WTextField extends StatefulWidget {
   final int? maxLength;
 
   @override
-  State<WTextField> createState() => _STextFieldState();
+  State<WTextField> createState() => _WTextFieldState();
 }
 
-class _STextFieldState extends State<WTextField> {
+class _WTextFieldState extends State<WTextField> {
   static const _textFieldRadius = 4.0;
 
   bool isHovering = false;

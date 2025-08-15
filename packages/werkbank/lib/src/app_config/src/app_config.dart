@@ -1,6 +1,10 @@
+/// @docImport 'package:werkbank/src/addon_api/addon_api.dart';
+/// @docImport 'package:werkbank/src/widgets/widgets.dart';
+library;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 typedef AppBuilder =
     Widget Function(
@@ -9,7 +13,7 @@ typedef AppBuilder =
       Widget home,
     );
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category File Structure}
 /// A class that defines how to build the app widget, which is typically one of
 /// [MaterialApp], [CupertinoApp], or [WidgetsApp].

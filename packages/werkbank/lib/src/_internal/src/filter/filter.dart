@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library filter;
+library;
 
 export 'src/debug_display_filter.dart';
 export 'src/filter_command.dart';

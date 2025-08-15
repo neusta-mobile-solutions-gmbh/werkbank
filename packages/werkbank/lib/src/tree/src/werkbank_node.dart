@@ -1,7 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+/// @docImport 'package:werkbank/src/addon_api/addon_api.dart';
+/// @docImport 'package:werkbank/src/widgets/widgets.dart';
+library;
 
-/// {@category Get Started}
+import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_config/addon_config.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+
+/// {@category Getting Started}
 /// {@category Structure}
 /// {@category Writing Use Cases}
 /// {@category File Structure}
@@ -33,7 +38,7 @@ import 'package:werkbank/src/werkbank_internal.dart';
 /// See [UseCaseBuilder] for more information.
 typedef UseCaseParentBuilder = void Function(UseCaseComposer c);
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category Structure}
 /// {@category Writing Use Cases}
 /// {@category File Structure}
@@ -102,7 +107,7 @@ sealed class WerkbankChildNode extends WerkbankNode {
   final String name;
 }
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category Structure}
 ///
 /// A [WerkbankNode] that defines a collection of [WerkbankChildNode]s.
@@ -119,7 +124,7 @@ class WerkbankRoot extends WerkbankParentNode<WerkbankChildNode> {
   });
 }
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category Structure}
 /// {@category File Structure}
 /// A [WerkbankNode] that defines a collection of [WerkbankUseCase]s.
@@ -143,7 +148,7 @@ class WerkbankComponent extends WerkbankParentNode<WerkbankUseCase>
   final bool isInitiallyCollapsed;
 }
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category Structure}
 /// A [WerkbankNode] that defines a collection of [WerkbankNode]s.
 ///
@@ -164,7 +169,7 @@ class WerkbankFolder extends WerkbankParentNode<WerkbankChildNode>
   final bool isInitiallyCollapsed;
 }
 
-/// {@category Get Started}
+/// {@category Getting Started}
 /// {@category Structure}
 /// {@category Writing Use Cases}
 /// {@category File Structure}

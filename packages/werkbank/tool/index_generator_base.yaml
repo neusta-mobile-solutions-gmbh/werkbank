@@ -1,18 +1,2 @@
 index_generator:
-  indexes:
-    - path: lib/src/
-      name: werkbank_internal
-      docs: |
-        Generated using index_generator package.
-      library: werkbank_internal
-      # Include Pfad beginnt bei path, also lib/src/
-      include:
-        - "**"
-      exclude:
-        - "**.g.dart"
-        - "**.part.dart"
-        - "**/_*/**"
-        - "**/src/**"
-        - "components/**"
-        - "addons/**"
-        - "package_copies/**"
+  indexes: []

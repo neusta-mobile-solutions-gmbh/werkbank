@@ -126,6 +126,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_lints:
+    dependency: transitive
+    description:
+      name: flutter_lints
+      sha256: "3105dc8492f6183fb076ccf1f351ac3d60564bff92e20bfc4af9cc1651f4e7e1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
   flutter_markdown_plus:
     dependency: transitive
     description:
@@ -200,6 +208,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      sha256: a5e2b223cb7c9c8efdc663ef484fdd95bb243bff242ef5b13e26883547fce9a0
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
   logging:
     dependency: transitive
     description:
@@ -509,14 +525,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  very_good_analysis:
-    dependency: "direct dev"
-    description:
-      name: very_good_analysis
-      sha256: "62d2b86d183fb81b2edc22913d9f155d26eb5cf3855173adb1f59fac85035c63"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.0"
   vm_service:
     dependency: transitive
     description:
@@ -547,7 +555,14 @@ packages:
       path: "../../packages/werkbank"
       relative: true
     source: path
-    version: "0.16.0"
+    version: "0.16.2"
+  werkbank_lints:
+    dependency: "direct dev"
+    description:
+      path: "../../packages/werkbank_lints"
+      relative: true
+    source: path
+    version: "1.0.0"
   xdg_directories:
     dependency: transitive
     description:

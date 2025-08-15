@@ -1,3 +1,3 @@
-library dropdown_button2;
+library;
 
 export 'src/dropdown_button2.dart';

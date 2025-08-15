@@ -38,7 +38,7 @@ AddonConfig get addonConfig => AddonConfig(
     ),
     BackgroundAddon(
       backgroundOptions: [
-        BackgroundOption.color(
+        BackgroundOption.colorBuilder(
           name: 'Surface',
           colorBuilder: (context) => Theme.of(context).colorScheme.surface,
         ),
@@ -64,9 +64,11 @@ AddonConfig get addonConfig => AddonConfig(
             children: [
               WMarkdown(
                 data:
-                    'This is a an example Werkbank showcasing many of the features.\n'
+                    'This is a an example Werkbank showcasing many of the '
+                    'features.\n'
                     '\n'
-                    'The use cases have **descriptions** in the **"INSPECT" tab** which highlight '
+                    'The use cases have **descriptions** in the **"INSPECT" '
+                    'tab** which highlight '
                     'some of the noteworthy **Werkbank features** utilized '
                     'by the use case.',
               ),

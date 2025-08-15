@@ -7,3 +7,13 @@ index:
     - src/werkbank_addons.dart
     - src/werkbank_components.dart
     - src/werkbank_internal.dart
+
+dependencies:
+  - flutter
+  - meta
+  - fast_immutable_collections
+  - collection
+  - vector_math
+  - graphs
+  - equatable
+  - /lib/src/utils

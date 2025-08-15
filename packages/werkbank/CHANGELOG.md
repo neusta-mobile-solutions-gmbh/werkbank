@@ -1,11 +1,23 @@
-# Unreleased
-
+# 0.17.0 (unreleased)
+- Add "Writing Use Cases" documentation topic that provides an overview of techniques you can use to customize your use cases.
+  - Give it a read at https://pub.dev/documentation/werkbank/latest/topics/Writing%20Use%20Cases-topic.html
+- Make changes to `BackgroundOption` constructors to be more consistent with `c.background.<...>` functions in the `BackgroundComposer`.
+  - The unnamed `BackgroundOption(...)` constructor is now `BackgroundOption.widget(...)`. **(BREAKING CHANGE)**
+  - Changed `BackgroundOption.color(...)` constructor to allow specifying a color directly. **(BREAKING CHANGE)**
+  - The old `BackgroundOption.color(...)` constructor is now `BackgroundOption.colorBuilder(...)`. **(BREAKING CHANGE)**
+  - The `BackgroundOption.builder(...)` constructor is now `BackgroundOption.widgetBuilder(...)`. **(BREAKING CHANGE)**
+  - Some parameter names have also been renamed.
 - Add `state addon` to provide states without knobs.
   - Immutable state, for instance data models, can be added by calling `c.states.immutable(...)`
   - Mutable state, like controllers, can be added by calling `c.states.mutable(...)`. Its lifecycle will be managed by Werkbank.
-  
+
+# 0.16.2
+- Increase maximum `go_router` version to 16.x.x and lower minimum version to 13.1.0.
+  This should lower the risk of dependency conflicts.
+
 # 0.16.1
 - Added a `Werkbank System` theme, which will always match your system. It's also default now.
+- Add a "Knobs" documentation topic which explains how to create your own knobs.
 - Deprecate `list` knob. Use `customDropdown` instead.
 - Rename `valueFormatter` parameters in `doubleSlider` and `intSlider` knobs to `valueLabel`.
   The old parameter names are still available but deprecated.
@@ -19,6 +31,7 @@
 - Add `intField` and `doubleField` knobs.
 - Add `falseLabel` and `trueLabel` parameters to `c.knobs.boolean(...)` to allow customizing the labels of the switch.
 - Rename `NullableKnobs` to `NullableKnobsComposer`. The old type is still available but deprecated.
+- Improve code documentation of knobs.
 
 # 0.16.0
 - Add `c.background.colorBuilder(...)` and `c.background.widgetBuilder(...)` to allow easier use of theme colors in backgrounds.

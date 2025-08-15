@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class Ruler extends StatelessWidget {
   const Ruler({
@@ -105,7 +106,7 @@ class _RulerPainter extends CustomPainter {
         useCaseExtent = useCaseSize.width;
         minConstraintsExtent = constraints.minWidth;
         maxConstraintsExtent = constraints.maxWidth;
-        posToMarkPoint = (double pos) => MatrixUtils.transformPoint(
+        posToMarkPoint = (pos) => MatrixUtils.transformPoint(
           inverseTransform,
           Offset(pos, 0),
         );
@@ -115,7 +116,7 @@ class _RulerPainter extends CustomPainter {
         useCaseExtent = useCaseSize.height;
         minConstraintsExtent = constraints.minHeight;
         maxConstraintsExtent = constraints.maxHeight;
-        posToMarkPoint = (double pos) {
+        posToMarkPoint = (pos) {
           return MatrixUtils.transformPoint(
             inverseTransform,
             Offset(0, extent - pos),

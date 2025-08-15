@@ -1,0 +1,7 @@
+# Test Subpack
+
+dependencies:
+  # - subpack_analyzer
+  # - goofy Mc-goofyson
+  - ./src/nested_subpackage
+  - "."

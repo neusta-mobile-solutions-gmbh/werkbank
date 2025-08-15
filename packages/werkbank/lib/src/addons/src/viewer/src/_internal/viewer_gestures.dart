@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:werkbank/src/addons/src/viewer/src/_internal/view_transform.dart';
 import 'package:werkbank/src/addons/src/viewer/src/_internal/viewport_reference.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/utils/utils.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 class ViewerGestures extends StatefulWidget {
   const ViewerGestures({
@@ -150,7 +152,7 @@ class _ViewerGesturesState extends State<ViewerGestures> {
     if (event is PointerScrollEvent || event is PointerScaleEvent) {
       GestureBinding.instance.pointerSignalResolver.register(
         event,
-        (PointerSignalEvent event) {
+        (event) {
           final double scale;
           if (event is PointerScrollEvent) {
             final delta = event.scrollDelta;

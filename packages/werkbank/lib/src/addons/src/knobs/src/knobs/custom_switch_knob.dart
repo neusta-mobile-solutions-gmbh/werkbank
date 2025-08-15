@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
+import 'package:werkbank/src/components/components.dart';
 
 /// {@category Knobs}
 extension CustomSwitchKnobExtension on KnobsComposer {
@@ -151,7 +152,8 @@ class _CustomSwitchKnob<T> extends StatelessWidget {
           'leftValue $leftValue or rightValue $rightValue',
         );
       }
-    } catch (e, stackTrace) {
+      // ignore: avoid_catching_errors
+    } on ArgumentError catch (e, stackTrace) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: stackTrace);
       isRight = false;

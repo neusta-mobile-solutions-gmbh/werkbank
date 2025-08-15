@@ -1,5 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/hot_reload_effect/hot_reload_effect.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/environment/environment.dart';
 
 class HotReloadEffectHandler extends StatefulWidget {
   const HotReloadEffectHandler({
@@ -26,15 +31,17 @@ class _HotReloadEffectHandlerState extends State<HotReloadEffectHandler>
   void initState() {
     super.initState();
 
-    Future<void>.delayed(
-      // Through testing on different devices, this seems to
-      // be a good tradeoff between a short cooldown and a time
-      // that is long enough for devices to prevent a second
-      // build from triggering the animation.
-      const Duration(seconds: 7),
-    ).then((_) {
-      if (mounted) _appStartupDone = true;
-    });
+    unawaited(
+      Future<void>.delayed(
+        // Through testing on different devices, this seems to
+        // be a good tradeoff between a short cooldown and a time
+        // that is long enough for devices to prevent a second
+        // build from triggering the animation.
+        const Duration(seconds: 7),
+      ).then((_) {
+        if (mounted) _appStartupDone = true;
+      }),
+    );
   }
 
   @override

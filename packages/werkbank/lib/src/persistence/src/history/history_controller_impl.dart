@@ -1,6 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 
 const _cappedHistorySize = 100;
 

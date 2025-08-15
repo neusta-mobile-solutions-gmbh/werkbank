@@ -1,6 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:meta/meta.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 /// An immutable snapshot of the [TransientUseCaseStateEntry]s of a use case.
 /// This can be obtained using [UseCaseComposition.saveSnapshot] and restored

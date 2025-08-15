@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 typedef ToggleVisibilityCallback = void Function(int index);
 typedef ControlSectionId = String;
@@ -38,17 +39,17 @@ class WControlSectionList extends StatefulWidget {
   final ToggleVisibilityCallback onToggleVisibility;
 
   @override
-  State<WControlSectionList> createState() => _SControlSectionListState();
+  State<WControlSectionList> createState() => _WControlSectionListState();
 }
 
-class _SControlSectionListState extends State<WControlSectionList> {
+class _WControlSectionListState extends State<WControlSectionList> {
   @override
   Widget build(BuildContext context) {
     return Overlay.wrap(
       child: ReorderableListView.builder(
         itemCount: widget.sections.length,
         onReorder: widget.onReorder,
-        proxyDecorator: (Widget child, int index, Animation<double> animation) {
+        proxyDecorator: (child, index, animation) {
           return _ProxyDecorator(
             animation: animation,
             child: child,
@@ -102,7 +103,7 @@ class _ProxyDecorator extends StatelessWidget {
           Positioned.fill(
             child: AnimatedBuilder(
               animation: borderColor,
-              builder: (BuildContext context, Widget? child) {
+              builder: (context, child) {
                 return Padding(
                   padding: const EdgeInsets.all(4),
                   child: DecoratedBox(

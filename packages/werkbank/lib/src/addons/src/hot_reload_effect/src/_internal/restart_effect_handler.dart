@@ -25,9 +25,9 @@ class _RestartEffectHandlerState extends State<RestartEffectHandler>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (mounted) {
-        controller?.forward(from: 0);
+        await controller?.forward(from: 0);
       }
     });
   }

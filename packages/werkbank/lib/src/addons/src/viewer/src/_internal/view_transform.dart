@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vector_math/vector_math_64.dart';
 
 @immutable
 class ViewTransform {
@@ -37,8 +38,8 @@ class ViewTransform {
 
   Matrix4 toMatrix() {
     return Matrix4.identity()
-      ..translate(offset.dx, offset.dy)
-      ..scale(scale);
+      ..translateByVector3(Vector3(offset.dx, offset.dy, 0))
+      ..scaleByVector3(Vector3(scale, 1, 1));
   }
 
   @override

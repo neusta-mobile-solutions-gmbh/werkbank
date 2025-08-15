@@ -31,16 +31,16 @@ class _WCollapsibleHeightState extends State<WCollapsibleHeight>
   final GlobalKey _sizeKey = GlobalKey();
   double? recentHeight;
 
-  void toggleExpand() {
+  Future<void> toggleExpand() async {
     recentHeight = _sizeKey.currentContext?.size?.height;
     switch (controller.status) {
       case AnimationStatus.dismissed:
       case AnimationStatus.reverse:
-        controller.forward();
+        await controller.forward();
 
       case AnimationStatus.forward:
       case AnimationStatus.completed:
-        controller.reverse();
+        await controller.reverse();
     }
   }
 

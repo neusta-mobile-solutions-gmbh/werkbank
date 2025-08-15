@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:vector_math/vector_math_64.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
@@ -83,7 +84,7 @@ class _SemanticsNodesDisplayState extends State<SemanticsNodesDisplay> {
       final nodeTransform = transform.clone()..multiply(node.transform);
       final rect = node.rect;
       final boxTransform = nodeTransform.clone()
-        ..translate(rect.topLeft.dx, rect.topLeft.dy);
+        ..translateByVector3(Vector3(rect.topLeft.dx, rect.topLeft.dy, 0));
       final centerScale = _estimatePointScale(rect.center, boxTransform);
       widgets.add(
         Transform(

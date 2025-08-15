@@ -1,1 +1,2 @@
-index: none
+index:
+  enabled: false

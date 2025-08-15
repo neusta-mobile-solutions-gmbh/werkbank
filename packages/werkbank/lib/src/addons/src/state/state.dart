@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 /// Generated using index_generator package.
-library state;
+library;
 
 export 'src/immutable_state_id.dart';
 export 'src/mutable_state_id.dart';

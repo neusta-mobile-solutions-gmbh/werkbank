@@ -22,7 +22,6 @@ class MutableStateManagementStateEntry
     super.prepareForBuild(composition, context);
     final retainmentStateEntry = composition
         .getRetainedStateEntry<MutableStateRetainmentStateEntry>();
-    // ignore: cascade_invocations
     retainmentStateEntry.clean(
       (id) => !_stateBundlesById.containsKey(id),
     );

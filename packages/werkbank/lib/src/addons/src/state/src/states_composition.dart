@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holders_state_entry.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_management_state_entry.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/state/state.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 extension StatesCompositionExtension on UseCaseComposition {
   StatesComposition get states => StatesComposition(this);

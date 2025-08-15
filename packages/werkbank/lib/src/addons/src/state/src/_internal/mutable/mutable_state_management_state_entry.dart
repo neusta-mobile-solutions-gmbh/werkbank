@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_holder.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable/mutable_state_retainment_state_entry.dart';
 import 'package:werkbank/src/addons/src/state/src/_internal/mutable_state_ticker_provider_provider.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/state/state.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 class MutableStateManagementStateEntry
     extends

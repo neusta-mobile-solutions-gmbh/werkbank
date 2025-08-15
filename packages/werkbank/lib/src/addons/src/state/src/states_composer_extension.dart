@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/state/state.dart';
 
 /// Those extension methods serve as an example
 /// of how to provide commonly used controllers

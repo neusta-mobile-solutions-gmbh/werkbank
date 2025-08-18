@@ -111,8 +111,6 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
     addAttributedStringField('hint', data.attributedHint);
     addStringField('tooltip', data.tooltip);
     intField('headingLevel', data.headingLevel, hiddenValue: 0);
-    doubleField('elevation', data.elevation, hiddenValue: 0);
-    doubleField('thickness', data.thickness, hiddenValue: 0);
 
     final textDirection = data.textDirection;
     if (textDirection != null) {

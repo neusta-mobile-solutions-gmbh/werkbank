@@ -168,9 +168,6 @@ class _NavigationPanelHeader extends StatelessWidget {
               title: Text(WerkbankAppInfo.nameOf(context)),
               lastUpdated: WerkbankAppInfo.lastUpdatedOf(context),
               onTap: () {
-                WerkbankPersistence.maybeSearchQueryController(
-                  context,
-                )?.reset();
                 WerkbankRouter.of(context).goTo(HomeNavState());
               },
             ),

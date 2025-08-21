@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holder.dart';
-import 'package:werkbank/src/addons/src/state/src/_internal/immutable/immutable_state_holders_snapshot.dart';
-import 'package:werkbank/src/addons/src/state/state.dart';
+import 'package:werkbank/src/addons/src/state_keeping/src/_internal/immutable/immutable_state_holder.dart';
+import 'package:werkbank/src/addons/src/state_keeping/src/_internal/immutable/immutable_state_holders_snapshot.dart';
+import 'package:werkbank/src/addons/src/state_keeping/state_keeping.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 class ImmutableStateHoldersStateEntry

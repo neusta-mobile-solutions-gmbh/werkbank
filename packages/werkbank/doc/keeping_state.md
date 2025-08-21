@@ -1,8 +1,8 @@
-The [StateAddon](../werkbank/StateAddon-class.html) provides a generic, simple solution for managing any state. It's an alternative to using the [KnobsAddon](Knobs-topic.html) or the [WrappingAddon](../werkbank/WrappingAddon-class.html).
+The [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) provides a generic, simple solution for managing any state. It's an alternative to using the [KnobsAddon](Knobs-topic.html) or the [WrappingAddon](../werkbank/WrappingAddon-class.html).
 
 It is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
 
-Using the [StateAddon](../werkbank/StateAddon-class.html):
+Using the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html):
 - Your state **preserves its value during hot reload**
 - For **immutable objects**, you can update the state through [`ValueNotifier`](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html)
 - For **mutable objects**, the object's lifecycle will be handled for you
@@ -46,9 +46,9 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
 ```
 
 <details>
-<summary><b>Example</b> of how you could achieve this <b>without the <a href="../werkbank/StateAddon-class.html">StateAddon</a></b></summary>
+<summary><b>Example</b> of how you could achieve this <b>without the <a href="../werkbank/StateKeepingAddon-class.html">StateKeepingAddon</a></b></summary>
 
-This illustrates what issue the [StateAddon](../werkbank/StateAddon-class.html) solves for you, since **you don't have to do this**:
+This illustrates what issue the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) solves for you, since **you don't have to do this**:
 
 ```dart
 WidgetBuilder exampleWithoutStatesUseCase(UseCaseComposer c) {
@@ -164,7 +164,7 @@ scrollController.value.animateTo(100);
 *Mutable states* are provided by [`ValueContainer`](../werkbank/ValueContainer-class.html). The object is created once, survives hot reload, and is properly disposed when no longer needed. Unlike *immutable states*, you cannot reassign the value in your use case.
 For objects that require a [`TickerProvider`](https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html), use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html).
 
-## When to use the [StateAddon](../werkbank/StateAddon-class.html), [KnobsAddon](Knobs-topic.html), or the [WrappingAddon](../werkbank/WrappingAddon-class.html)
+## When to use the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html), [KnobsAddon](Knobs-topic.html), or the [WrappingAddon](../werkbank/WrappingAddon-class.html)
 
 - In comparison to the [KnobsAddon](Knobs-topic.html):
   - There is no need to implement something for each type, like a Knob of type String.
@@ -183,7 +183,7 @@ Use the **[KnobsAddon](Knobs-topic.html)** (first choice):
 Use the **[WrappingAddon](../werkbank/WrappingAddon-class.html)** when:
 - You want to introduce a widget to the widget tree, like a [`DefaultTextStyle`](https://api.flutter.dev/flutter/widgets/DefaultTextStyle-class.html), [`MediaQuery`](https://api.flutter.dev/flutter/widgets/MediaQuery-class.html), or some custom [`InheritedWidget`](https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html).
 
-Else, use the **[StateAddon](../werkbank/StateAddon-class.html)**. It is particularly useful when:
+Else, use the **[StateKeepingAddon](../werkbank/StateKeepingAddon-class.html)**. It is particularly useful when:
 - Working with Flutter controllers ([`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), [`ScrollController`](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [`TabController`](https://api.flutter.dev/flutter/material/TabController-class.html)), or **custom mutable objects** like controllers.
 - Managing immutable data models.
 - You don't need interactive controls in your Werkbank UI.

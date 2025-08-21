@@ -1,4 +1,4 @@
-import 'package:werkbank/src/addons/src/state/src/value_container.dart';
+import 'package:werkbank/src/addons/src/state_keeping/src/value_container.dart';
 
 class MutableStateHolder<T extends Object> extends ValueContainer<T> {
   MutableStateHolder();

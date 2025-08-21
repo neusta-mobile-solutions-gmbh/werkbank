@@ -48,3 +48,61 @@ WidgetBuilder _useCase(UseCaseComposer c) {
     );
   };
 }
+
+WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
+  return (context) {
+    return _MyColorPickerStateProvider(
+      builder: (context, color, setColor, controller) {
+        return MyColorPicker(
+          color: color,
+          onColorChanged: setColor,
+          controller: controller,
+        );
+      },
+    );
+  };
+}
+
+class _MyColorPickerStateProvider extends StatefulWidget {
+  const _MyColorPickerStateProvider({
+    required this.builder,
+  });
+
+  final Widget Function(
+    BuildContext context,
+    Color color,
+    ValueChanged<Color> setColor,
+    TextEditingController controller,
+  )
+  builder;
+
+  @override
+  State<_MyColorPickerStateProvider> createState() =>
+      _MyColorPickerStateProviderState();
+}
+
+class _MyColorPickerStateProviderState
+    extends State<_MyColorPickerStateProvider> {
+  Color _color = Colors.red;
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.builder(
+      context,
+      _color,
+      (newColor) {
+        setState(() {
+          _color = newColor;
+        });
+      },
+      _controller,
+    );
+  }
+}

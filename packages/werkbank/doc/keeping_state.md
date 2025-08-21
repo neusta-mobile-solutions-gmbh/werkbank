@@ -12,34 +12,27 @@ Using the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html):
 Here's a minimal example showing how to use *states*:
 
 ```dart
-WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
-  // Immutable state for custom data model
-  final customModel = c.states.immutable(
-    'UI Model',
-    initialValue: CustomModel(
-      isLoading: false,
-      itemCount: 5,
-    ),
+WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
+  // Keep immutable state in a ValueNotifier
+  final colorNotifier = c.states.immutable(
+    'Color',
+    initialValue: Colors.red,
   );
 
-  // Mutable state for controller
-  final textController = c.states.mutable(
-    'Text Controller',
+  // Keep mutable state and provide functions to create and dispose it.
+  final hexControllerContainer = c.states.mutable(
+    'Hex Controller',
     create: TextEditingController.new,
     dispose: (controller) => controller.dispose(),
   );
 
   return (context) {
-    return Column(
-      children: [
-        _CustomComponent(
-          model: customModel.value,
-          onModelChanged: (newModel) {
-            customModel.value = newModel;
-          },
-        ),
-        TextField(controller: textController.value),
-      ],
+    return MyColorPicker(
+      // Get and set the color using the ValueNotifier
+      color: colorNotifier.value,
+      onColorChanged: (newColor) => colorNotifier.value = newColor,
+      // Unpack the returned ValueContainer to get the TextEditingController
+      hexColorController: hexControllerContainer.value,
     );
   };
 }
@@ -51,60 +44,61 @@ WidgetBuilder statesExampleUseCase(UseCaseComposer c) {
 This illustrates what issue the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) solves for you, since **you don't have to do this**:
 
 ```dart
-WidgetBuilder exampleWithoutStatesUseCase(UseCaseComposer c) {
+WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
   return (context) {
-    return _StateProvider(
-      builder: (context, model, controller) => Column(
-        children: [
-          _CustomComponent(
-            model: model.value,
-            onModelChanged: (newModel) {
-              model.value = newModel;
-            },
-          ),
-          TextField(controller: controller),
-        ],
-      ),
+    return _MyColorPickerStateProvider(
+      builder: (context, color, setColor, hexColorController) {
+        return MyColorPicker(
+          color: color,
+          onColorChanged: setColor,
+          hexColorController: hexColorController,
+        );
+      },
     );
   };
 }
 
-class _StateProvider extends StatefulWidget {
-  const _StateProvider({
+class _MyColorPickerStateProvider extends StatefulWidget {
+  const _MyColorPickerStateProvider({
     required this.builder,
   });
 
   final Widget Function(
     BuildContext context,
-    ValueNotifier<CustomModel> model,
-    TextEditingController controller,
-  ) builder;
+    Color color,
+    ValueChanged<Color> setColor,
+    TextEditingController hexColorController,
+    )
+  builder;
 
   @override
-  State<_StateProvider> createState() => _StateProviderState();
+  State<_MyColorPickerStateProvider> createState() =>
+    _MyColorPickerStateProviderState();
 }
 
-class _StateProviderState extends State<_StateProvider> {
-  late final ValueNotifier<CustomModel> _model;
-  late final TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _model = ValueNotifier(CustomModel());
-    _controller = TextEditingController();
-  }
+class _MyColorPickerStateProviderState
+  extends State<_MyColorPickerStateProvider> {
+  Color _color = Colors.red;
+  final TextEditingController _hexColorController = TextEditingController();
 
   @override
   void dispose() {
-    _model.dispose();
-    _controller.dispose();
+    _hexColorController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.builder(context, _model, _controller);
+    return widget.builder(
+      context,
+      _color,
+        (newColor) {
+        setState(() {
+          _color = newColor;
+        });
+      },
+      _hexColorController,
+    );
   }
 }
 ```

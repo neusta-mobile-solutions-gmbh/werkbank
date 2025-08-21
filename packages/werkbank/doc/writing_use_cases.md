@@ -353,6 +353,62 @@ Learn more about background options in the [Backgrounds](Backgrounds-topic.html)
 > [`c.background.named(...)`](../werkbank/BackgroundComposer/named.html).
 > Learn more about that in the [Backgrounds](Backgrounds-topic.html) topic.
 
+## State Keeping
+
+The [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) allows you to keep state in your use cases
+where you would normally need to wrap the use case widget in a
+[`StatefulWidget`](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
+
+This example keeps a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) and a
+[`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html)
+for the use case.
+
+```dart
+WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
+  // Keep immutable state in a ValueNotifier
+  final colorNotifier = c.states.immutable(
+    'Color',
+    initialValue: Colors.red,
+  );
+
+  // Keep mutable state and provide functions to create and dispose it.
+  final hexControllerContainer = c.states.mutable(
+    'Hex Controller',
+    create: TextEditingController.new,
+    dispose: (controller) => controller.dispose(),
+  );
+
+  return (context) {
+    return MyColorPicker(
+      // Get and set the color using the ValueNotifier
+      color: colorNotifier.value,
+      onColorChanged: (newColor) => colorNotifier.value = newColor,
+      // Unpack the returned ValueContainer to get the TextEditingController
+      hexColorController: hexControllerContainer.value,
+    );
+  };
+}
+```
+
+The method [`c.states.immutable(...)`](../werkbank/StatesComposerExtension/immutable.html)
+provides you with a [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html)
+that holds an immutable value.
+You can get and set the value in the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
+
+The method [`c.states.mutable(...)`](../werkbank/StatesComposerExtension/mutable.html)
+returns a [ValueContainer](../werkbank/ValueContainer-class.html) that holds a mutable value.
+You can unpack the value in the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html)
+using the [value](../werkbank/ValueContainer/value.html) getter.
+Unlike with immutable state, you cannot change the value of the [ValueContainer](../werkbank/ValueContainer-class.html)
+though.
+
+> [!TIP]
+> Most knobs also keep immutable state, similar to [`c.states.immutable(...)`](../werkbank/StatesComposerExtension/immutable.html).
+> Unless you explicitly don't want to control the state, in the Werkbank UI,
+> consider using a knob instead.
+
+Learn more about state keeping in the [Keeping State](Keeping%20State-topic.html) topic.
+
 ## Inheritance
 
 Similar to [WerkbankUseCase](../werkbank/WerkbankUseCase-class.html)s,

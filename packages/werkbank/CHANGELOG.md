@@ -7,6 +7,7 @@
   - The old `BackgroundOption.color(...)` constructor is now `BackgroundOption.colorBuilder(...)`. **(BREAKING CHANGE)**
   - The `BackgroundOption.builder(...)` constructor is now `BackgroundOption.widgetBuilder(...)`. **(BREAKING CHANGE)**
   - Some parameter names have also been renamed.
+- Fix merging behavior of tags.
 
 # 0.16.2
 - Increase maximum `go_router` version to 16.x.x and lower minimum version to 13.1.0.

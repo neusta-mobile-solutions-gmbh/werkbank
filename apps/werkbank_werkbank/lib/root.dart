@@ -338,19 +338,25 @@ WerkbankRoot get root => WerkbankRoot(
 WerkbankChildNode get descriptionSection => WerkbankFolder(
   name: 'Description Folder 1',
   builder: (c) {
-    c.description('# folder 1 description');
+    c
+      ..description('# folder 1 description')
+      ..tags(['folder 1 tag', 'merged tag']);
   },
   children: [
     WerkbankFolder(
       name: 'Description Folder 2',
       builder: (c) {
-        c.description('## folder 2 description');
+        c
+          ..description('## folder 2 description')
+          ..tags(['folder 2 tag', 'merged tag']);
       },
       children: [
         WerkbankComponent(
           name: 'Description Component',
           builder: (c) {
-            c.description('### component description');
+            c
+              ..description('### component description')
+              ..tags(['component tag', 'merged tag']);
           },
           useCases: [
             WerkbankUseCase(
@@ -365,7 +371,9 @@ WerkbankChildNode get descriptionSection => WerkbankFolder(
 );
 
 WidgetBuilder descriptionUseCase(UseCaseComposer c) {
-  c.description('description, supporting *markdown.*');
+  c
+    ..description('description, supporting *markdown.*')
+    ..tags(['usecase tag', 'merged tag']);
   return (context) {
     return Text(
       'See Inspect-Tab',

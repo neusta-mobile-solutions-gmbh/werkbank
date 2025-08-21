@@ -1,15 +1,50 @@
-The [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) provides a generic, simple solution for managing any state. It's an alternative to using the [KnobsAddon](Knobs-topic.html) or the [WrappingAddon](../werkbank/WrappingAddon-class.html).
+This topic shows you multiple ways to keep state in your use cases.
 
-It is particularly useful for custom data models, controllers, or any state that doesn't have a corresponding knob implementation.
+**Table of Contents:**
+- [Ways to Keep State](#ways-to-keep-state)
+- [Knobs](#knobs)
+- [StateKeepingAddon](#statekeepingaddon)
+  - [Keeping Immutable State](#keeping-immutable-state)
+  - [Keeping Mutable State](#keeping-mutable-state)
 
-Using the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html):
-- Your state **preserves its value during hot reload**
-- For **immutable objects**, you can update the state through [`ValueNotifier`](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html)
-- For **mutable objects**, the object's lifecycle will be handled for you
+## Ways to Keep State
 
----
+When writing a use case, you may come across widgets that require you to keep some changing state outside of the widget.
+This state usually comes in one of two forms:
+- **Immutable state**: Often passed as a pair of a `value` and `onValueChanged` callback into the widget.
+- **Mutable state**: Often a controller or another object that has its own lifecycle and needs to be created and disposed of.
 
-Here's a minimal example showing how to use *states*:
+A naive way to keep this state to wrap your returned use case widget in a [`StatefulWidget`](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html)
+and manage the state there.
+However, this requires a lot of boilerplate code.
+*Do not do this!*
+
+Instead, Werkbank provides better alternatives to keep state in your use case:
+- [Knobs](Knobs-topic.html) keep state in a way that allows you to interactively change it in the Werkbank UI.
+  - This is the first choice if the type of your state has a corresponding knob.
+- The [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) allows you to store any immutable or mutable state in your use case.
+  - This is particularly useful for custom data models, controllers, or any type that doesn't have a corresponding knob.
+
+## Knobs
+
+Learn all about knobs in the [Knobs topic](../werkbank/Knobs-topic.html) or read a summary in the Knobs section of the [Writing Use Cases](../werkbank/Writing%20Use%20Cases-topic.html#knobs) topic.
+
+Prefer using knobs to keep state:
+- When you need interactive controls in your Werkbank UI for testing different values.
+- When there's an existing knob for your data type.
+  - If you need a knob, but no suitable one exists, consider [implementing a custom knob](Knobs-topic.html#creating-custom-knobs).
+
+## StateKeepingAddon
+
+The [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) should be used to keep state when:
+- Working with Flutter controllers ([`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), [`ScrollController`](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [`TabController`](https://api.flutter.dev/flutter/material/TabController-class.html)), or **custom mutable objects** like controllers.
+- Managing immutable data models.
+- You don't need interactive controls in your Werkbank UI.
+- Doing quick prototyping where implementing a custom knob would be overkill.
+
+This example keeps a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) and a
+[`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html)
+for the use case:
 
 ```dart
 WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
@@ -39,7 +74,7 @@ WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
 ```
 
 <details>
-<summary><b>Example</b> of how you could achieve this <b>without the <a href="../werkbank/StateKeepingAddon-class.html">StateKeepingAddon</a></b></summary>
+<summary><b>Equivalent example</b> without using the <a href="../werkbank/StateKeepingAddon-class.html">StateKeepingAddon</a>.</summary>
 
 This illustrates what issue the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) solves for you, since **you don't have to do this**:
 
@@ -104,21 +139,22 @@ class _MyColorPickerStateProviderState
 ```
 </details>
 
----
-
-## Types of State
-
-There are two types of state you can use with your use case:
-
+There are two types of state you can can store in your use case:
 - **Immutable state**
-  - For example, a [`Color`](https://api.flutter.dev/flutter/dart-ui/Color-class.html), a [`Size`](https://api.flutter.dev/flutter/dart-ui/Size-class.html), [`Offset`](https://api.flutter.dev/flutter/dart-ui/Offset-class.html), or a custom data class
+  - For example, an
+    [`int`](https://api.flutter.dev/flutter/dart-core/int-class.html),
+    [`String`](https://api.flutter.dev/flutter/dart-core/String-class.html),
+    [`Color`](https://api.flutter.dev/flutter/dart-ui/Color-class.html),
+    or a custom data class
 - **Mutable state**
-  - For example, a [`ScrollController`](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), or another mutable object for managing state
+  - For example, a [`ScrollController`](https://api.flutter.dev/flutter/widgets/ScrollController-class.html),
+    [`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html),
+    [`FocusNode`](https://api.flutter.dev/flutter/widgets/FocusNode-class.html),
+    or another mutable object that manges its own state.
 
+### Keeping Immutable State
 
-### Immutable State
-
-Use [`immutable`](../werkbank/StatesComposer/immutable.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
+Use [`c.immutable(...)`](../werkbank/StatesComposer/immutable.html) for values that are replaced entirely when changed, such as custom data classes or primitive values:
 
 ```dart
 final componentModel = c.states.immutable(
@@ -130,16 +166,16 @@ final componentModel = c.states.immutable(
   ),
 );
 
-// ...
+// Within the WidgetBuilder of your use case:
 
 componentModel.value = componentModel.value.copyWith(count: 1);
 ```
 
 You can read and write *immutable states* through the [`ValueNotifier`](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html) interface. When the `value` of an *immutable state* changes, the use case will rebuild.
 
-### Mutable State
+### Keeping Mutable State
 
-Use [`mutable`](../werkbank/StatesComposer/mutable.html) for objects that have internal state and need lifecycle management:
+Use [`c.mutable(...)`](../werkbank/StatesComposer/mutable.html) for objects that have internal state and need lifecycle management:
 
 ```dart
 final scrollController = c.states.mutable(
@@ -148,8 +184,7 @@ final scrollController = c.states.mutable(
   dispose: (controller) => controller.dispose(),
 );
 
-
-// ...
+// Within the WidgetBuilder of your use case:
 
 // Read-only access: the object is created once and managed internally
 scrollController.value.animateTo(100);
@@ -158,27 +193,4 @@ scrollController.value.animateTo(100);
 *Mutable states* are provided by [`ValueContainer`](../werkbank/ValueContainer-class.html). The object is created once, survives hot reload, and is properly disposed when no longer needed. Unlike *immutable states*, you cannot reassign the value in your use case.
 For objects that require a [`TickerProvider`](https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html), use [`mutableWithTickerProvider`](../werkbank/StatesComposer/mutableWithTickerProvider.html).
 
-## When to use the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html), [KnobsAddon](Knobs-topic.html), or the [WrappingAddon](../werkbank/WrappingAddon-class.html)
 
-- In comparison to the [KnobsAddon](Knobs-topic.html):
-  - There is no need to implement something for each type, like a Knob of type String.
-  - It doesn't offer visual controls.
-- In comparison to the [WrappingAddon](../werkbank/WrappingAddon-class.html):
-  - It offers watching and manipulating your object out of the box, without implementing something like a custom widget that serves this purpose.
-  - It doesn't work by introducing new widgets to the widget tree. 
-  
----
-
-Use the **[KnobsAddon](Knobs-topic.html)** (first choice):
-- When you need interactive controls in your Werkbank UI for testing different values.
-- When there's an existing knob for your data type.
-  - If you need a knob, but no suitable one exists, consider [implementing a custom knob](Knobs-topic.html) instead of using *states*.
-
-Use the **[WrappingAddon](../werkbank/WrappingAddon-class.html)** when:
-- You want to introduce a widget to the widget tree, like a [`DefaultTextStyle`](https://api.flutter.dev/flutter/widgets/DefaultTextStyle-class.html), [`MediaQuery`](https://api.flutter.dev/flutter/widgets/MediaQuery-class.html), or some custom [`InheritedWidget`](https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html).
-
-Else, use the **[StateKeepingAddon](../werkbank/StateKeepingAddon-class.html)**. It is particularly useful when:
-- Working with Flutter controllers ([`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), [`ScrollController`](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [`TabController`](https://api.flutter.dev/flutter/material/TabController-class.html)), or **custom mutable objects** like controllers.
-- Managing immutable data models.
-- You don't need interactive controls in your Werkbank UI.
-- Quick prototyping where implementing a custom knob would be overkill.

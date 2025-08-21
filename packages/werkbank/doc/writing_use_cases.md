@@ -9,6 +9,7 @@ learn how to create basic use cases and how to structure them in your project.
 - [Constraints](#constraints)
 - [Descriptions, Tags & URLs](#descriptions-tags--urls)
 - [Background](#background)
+- [State Keeping](#state-keeping)
 - [Inheritance](#inheritance)
 - [Wrapping](#wrapping)
 - [Overview](#overview)
@@ -361,7 +362,7 @@ where you would normally need to wrap the use case widget in a
 
 This example keeps a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) and a
 [`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html)
-for the use case.
+for the use case:
 
 ```dart
 WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {

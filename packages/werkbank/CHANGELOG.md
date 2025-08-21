@@ -8,6 +8,7 @@
   - The `BackgroundOption.builder(...)` constructor is now `BackgroundOption.widgetBuilder(...)`. **(BREAKING CHANGE)**
   - Some parameter names have also been renamed.
 - Fix merging behavior of tags.
+- Navigating back to home using "ESC" or the top-left project info area no longer clears the search text field
 
 # 0.16.2
 - Increase maximum `go_router` version to 16.x.x and lower minimum version to 13.1.0.

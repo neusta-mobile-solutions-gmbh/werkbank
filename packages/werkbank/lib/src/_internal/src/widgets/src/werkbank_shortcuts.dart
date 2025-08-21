@@ -129,7 +129,6 @@ class WerkbankShortcuts extends StatelessWidget with OrderExecutor {
         )?.focusNode.requestFocus();
       },
       onOverview: () {
-        WerkbankPersistence.maybeSearchQueryController(context)?.reset();
         WerkbankRouter.of(context).goTo(HomeNavState());
       },
       onNext: () {

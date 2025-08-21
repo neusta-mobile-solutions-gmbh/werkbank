@@ -7,6 +7,8 @@
   - The old `BackgroundOption.color(...)` constructor is now `BackgroundOption.colorBuilder(...)`. **(BREAKING CHANGE)**
   - The `BackgroundOption.builder(...)` constructor is now `BackgroundOption.widgetBuilder(...)`. **(BREAKING CHANGE)**
   - Some parameter names have also been renamed.
+- Fix merging behavior of tags.
+- Navigating back to home using "ESC" or the top-left project info area no longer clears the search text field
 - Add `state addon` to provide states without knobs.
   - Immutable state, for instance data models, can be added by calling `c.states.immutable(...)`
   - Mutable state, like controllers, can be added by calling `c.states.mutable(...)`. Its lifecycle will be managed by Werkbank.

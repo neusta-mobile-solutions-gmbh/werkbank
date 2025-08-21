@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:example_werkbank/src/example_app/components/animated_fidget_spinner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
@@ -41,22 +43,26 @@ class _FidgetSpinnerSimulationState extends State<FidgetSpinnerSimulation>
   }
 
   void _updateSimulation() {
-    _spinnerAnimationController.animateWith(
-      SpringSimulation(
-        SpringDescription.withDampingRatio(
-          mass: widget.mass,
-          stiffness: widget.stiffness,
-          ratio: widget.dampingRatio,
+    unawaited(
+      _spinnerAnimationController.animateWith(
+        SpringSimulation(
+          SpringDescription.withDampingRatio(
+            mass: widget.mass,
+            stiffness: widget.stiffness,
+            ratio: widget.dampingRatio,
+          ),
+          _spinnerAnimationController.value,
+          widget.targetTurns,
+          _spinnerAnimationController.velocity,
         ),
-        _spinnerAnimationController.value,
-        widget.targetTurns,
-        _spinnerAnimationController.velocity,
       ),
     );
   }
 
   @override
-  void didUpdateWidget(covariant FidgetSpinnerSimulation oldWidget) {
+  void didUpdateWidget(
+    covariant FidgetSpinnerSimulation oldWidget,
+  ) {
     super.didUpdateWidget(oldWidget);
     _updateSimulation();
   }

@@ -358,10 +358,10 @@ Learn more about background options in the [Backgrounds](Backgrounds-topic.html)
 
 The [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) allows you to keep state in your use cases
 where you would normally need to wrap the use case widget in a
-[`StatefulWidget`](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
+[StatefulWidget](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
 
 This example keeps a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) and a
-[`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html)
+[TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html)
 for the use case:
 
 ```dart

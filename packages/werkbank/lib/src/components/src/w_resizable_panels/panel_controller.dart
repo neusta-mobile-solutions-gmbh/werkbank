@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -145,7 +147,7 @@ class PanelController {
 
     final proposalVerySmall = width < verySmallWidth;
     if (proposalVerySmall && !currentlyInvisible) {
-      controller.animateTo(0, duration: Duration.zero);
+      unawaited(controller.animateTo(0, duration: Duration.zero));
 
       return true;
     }
@@ -157,7 +159,7 @@ class PanelController {
     }
 
     if (currentlyInvisible) {
-      controller.animateTo(1, duration: Duration.zero);
+      unawaited(controller.animateTo(1, duration: Duration.zero));
     }
     preferredWidth.value = width;
     return true;

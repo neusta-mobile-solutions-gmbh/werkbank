@@ -1,4 +1,6 @@
 # 0.17.0 (unreleased)
+- Update to Flutter 3.35.x. **(BREAKING CHANGE)**
+  - Since we now use the new APIs, you will need to update your Flutter SDK to at least 3.35.0.
 - Add "Writing Use Cases" documentation topic that provides an overview of techniques you can use to customize your use cases.
   - Give it a read at https://pub.dev/documentation/werkbank/latest/topics/Writing%20Use%20Cases-topic.html
 - Make changes to `BackgroundOption` constructors to be more consistent with `c.background.<...>` functions in the `BackgroundComposer`.

@@ -148,10 +148,10 @@ To learn more about knobs, read the [Knobs](Knobs-topic.html) topic.
 ## Constraints
 
 The [ConstraintsAddon](../werkbank/ConstraintsAddon-class.html) allows you to modify the
-[`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
+[BoxConstraints](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
 passed to your use case, enabling you to test how your widget behaves under different size restrictions.
 
-Flutter passes [`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
+Flutter passes [BoxConstraints](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
 to your widget during its layout phase.
 Based on these constraints, your widget computes its layout and determines its own size.
 Learn more about how Flutter's layout system works in their
@@ -405,7 +405,7 @@ though.
 
 > [!TIP]
 > Most knobs also keep immutable state, similar to [`c.states.immutable(...)`](../werkbank/StatesComposer/immutable.html).
-> Unless you explicitly don't want to control the state, in the Werkbank UI,
+> If having a way control the state from the Werkbank UI is beneficial in your case,
 > consider using a knob instead.
 
 Learn more about state keeping in the [Keeping State](Keeping%20State-topic.html) topic.

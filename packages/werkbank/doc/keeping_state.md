@@ -13,45 +13,43 @@ When writing a use case, you may encounter widgets that require you to keep chan
 This state usually comes in one of two forms:
 - **Immutable state**: Often passed as a pair of a `value` and `onValueChanged` callback into the widget.
   - Example types include:
-    [`int`](https://api.flutter.dev/flutter/dart-core/int-class.html),
-    [`String`](https://api.flutter.dev/flutter/dart-core/String-class.html),
-    [`Color`](https://api.flutter.dev/flutter/dart-ui/Color-class.html),
+    [int](https://api.flutter.dev/flutter/dart-core/int-class.html),
+    [String](https://api.flutter.dev/flutter/dart-core/String-class.html),
+    [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html),
     and custom data classes.
 - **Mutable state**: Often a controller or another object that has its own lifecycle and needs creation and disposal.
   - Example types include:
-    [`ScrollController`](https://api.flutter.dev/flutter/widgets/ScrollController-class.html),
-    [`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html),
-    [`FocusNode`](https://api.flutter.dev/flutter/widgets/FocusNode-class.html),
+    [ScrollController](https://api.flutter.dev/flutter/widgets/ScrollController-class.html),
+    [TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html),
+    [FocusNode](https://api.flutter.dev/flutter/widgets/FocusNode-class.html),
     and other objects that manage their own state.
 
-You could wrap your returned use case widget in a [`StatefulWidget`](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html)
+You could wrap your returned use case widget in a [StatefulWidget](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html)
 and manage the state within it.
 However, this approach requires significant boilerplate code.
 *Do not do this!*
 
 Instead, Werkbank provides better alternatives to keep state in your use case:
 - [Knobs](Knobs-topic.html) keep state in a way that allows you to interactively change values in the Werkbank UI.
-  - Consider using knobs first if the type of your state has a corresponding knob.
 - The [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) allows you to store any immutable or mutable state in your use case.
-  - Use this addon for custom data models, controllers, or any type that doesn't have a corresponding knob.
 
 ## Knobs
 
 Learn all about knobs in the [Knobs topic](Knobs-topic.html)
 or read a summary in the Knobs section of the [Writing Use Cases](../werkbank/Writing%20Use%20Cases-topic.html#knobs) topic.
 
-Prefer using knobs to keep state:
-- When you need interactive controls in your Werkbank UI for testing different values.
-- When there is an existing knob for your data type.
+Prefer using knobs to keep state when:
+- You benefit from interactive controls in your Werkbank UI for testing different values.
+- There is an existing knob for your data type.
   - If you need a knob but no suitable one exists, consider [implementing a custom knob](Knobs-topic.html#creating-custom-knobs).
 
 ## StateKeepingAddon
 
 Use the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) to keep state when:
-- Working with Flutter controllers ([TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), [ScrollController](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [TabController](https://api.flutter.dev/flutter/material/TabController-class.html)) or **custom mutable objects** like controllers.
+- Working with Flutter controllers ([TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), [ScrollController](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [TabController](https://api.flutter.dev/flutter/material/TabController-class.html)) or **other mutable objects** like controllers.
 - Managing immutable data models.
-- You don't need interactive controls in your Werkbank UI.
-- Doing quick prototyping where implementing a custom knob would be overkill.
+- You don't want interactive controls in your Werkbank UI.
+- Your data type in not easily represented using a knob and a [writing a custom knob](Knobs-topic.html#creating-custom-knobs) would be overkill.
 
 This example keeps a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) and a
 [TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html)
@@ -85,7 +83,7 @@ WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
 ```
 
 <details>
-<summary><b>Equivalent example</b> without using the <a href="../werkbank/StateKeepingAddon-class.html">StateKeepingAddon</a>.</summary>
+<summary><b>Equivalent example</b> using only a <a href="https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html">StatefulWidget</a>.</summary>
 
 This illustrates the issue that the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) solves for you, since **you don't have to do this**:
 
@@ -169,7 +167,7 @@ WidgetBuilder myCounterUseCase(UseCaseComposer c) {
 }
 ```
 
-You can read and write the value of the [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html) only inside the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
+You can read and write the value of the [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html) inside the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
 When the `value` of an *immutable state* changes, the use case will rebuild.
 
 ### Keeping Mutable State
@@ -198,7 +196,7 @@ WidgetBuilder myTextFieldUseCase(UseCaseComposer c) {
 }
 ```
 
-You can read the [value](../werkbank/ValueContainer/value.html) of the [ValueContainer](../werkbank/ValueContainer-class.html) only inside the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
+You can read the [value](../werkbank/ValueContainer/value.html) of the [ValueContainer](../werkbank/ValueContainer-class.html) inside the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
 Unlike with immutable states, you cannot reassign the value of a [ValueContainer](../werkbank/ValueContainer-class.html) later.
 You can only mutate the contained value.
 Mutating the contained value will not trigger a rebuild of the use case.

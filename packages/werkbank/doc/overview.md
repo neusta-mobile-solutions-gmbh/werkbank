@@ -51,7 +51,7 @@ The opposite could also be the case, where a small widget is barely visible in t
 > [!TIP]
 > If you are just looking for a **quick and dirty** way to prevent your use cases from overflowing in the thumbnail,
 > you can add the following to the
-> [`builder`](../werkbank/WerkbankParentNode/builder.html)
+> [builder](../werkbank/WerkbankParentNode/builder.html)
 > of your
 > [WerkbankRoot](../werkbank/WerkbankRoot-class.html):
 > ```dart
@@ -199,7 +199,7 @@ In that case, you can call
 to remove the padding around the thumbnail.
 
 If the padding was disabled, for example, in a
-[`builder`](../werkbank/WerkbankParentNode/builder.html)
+[builder](../werkbank/WerkbankParentNode/builder.html)
 of a
 [WerkbankFolder](../werkbank/WerkbankFolder-class.html),
 you can use

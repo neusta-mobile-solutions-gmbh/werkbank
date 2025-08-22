@@ -75,7 +75,7 @@ The opposite could also be the case, where a small widget is barely visible in t
 > [WerkbankComponent](../werkbank/WerkbankComponent-class.html)
 > in order to apply to all use cases within.
 > 
-> See [Writing Use Cases](Writing%20Use%20Cases-topic.html) for more documentation on that.
+> See [Writing Use Cases](Writing%20Use%20Cases-topic.html#inheritance) for more documentation on that.
 
 ### Adjusting the Constraints
 

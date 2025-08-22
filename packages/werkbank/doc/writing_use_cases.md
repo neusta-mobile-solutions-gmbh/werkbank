@@ -13,6 +13,7 @@ learn how to create basic use cases and how to structure them in your project.
 - [Inheritance](#inheritance)
 - [Wrapping](#wrapping)
 - [Overview](#overview)
+- [Notifications](#notifications)
 - [Custom Composer Extensions](#custom-composer-extensions)
 - [Advanced Composer Usage](#advanced-composer-usage)
 
@@ -566,6 +567,32 @@ WidgetBuilder myTinyWidgetUseCase(UseCaseComposer c) {
 
 For a more detailed guide on how to optimize your use case thumbnails and the overview feature in general,
 visit the [Overview](Overview-topic.html) topic.
+
+## Notifications
+
+Sometimes widgets in your use case expect callbacks like `onPressed` or `onTap`.
+If you want to make sure that these callbacks are called correctly, you can dispatch a notification
+to the Werkbank UI:
+
+```dart
+WidgetBuilder elevatedButtonUseCase(UseCaseComposer c) {
+  return (context) {
+    return ElevatedButton(
+      onPressed: () {
+        // Dispatch a notification when the button is pressed.
+        UseCase.dispatchTextNotification(context, 'onPressed');
+      },
+      child: const Text('Press Me'),
+    );
+  };
+}
+```
+
+Use [`UseCase.dispatchTextNotification(...)`](../werkbank/UseCase/dispatchTextNotification.html) to send a simple
+[String](https://api.flutter.dev/flutter/dart-core/String-class.html) as notification.
+You can also dispatch more elaborate notifications using
+[`UseCase.dispatchNotification(...)`](../werkbank/UseCase/dispatchNotification.html) and a
+[WerkbankNotification](../werkbank/WerkbankNotification-class.html) object.
 
 ## Custom Composer Extensions
 

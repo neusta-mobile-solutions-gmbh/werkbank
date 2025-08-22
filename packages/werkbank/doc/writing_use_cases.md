@@ -391,12 +391,12 @@ WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
 }
 ```
 
-The method [`c.states.immutable(...)`](../werkbank/StatesComposerExtension/immutable.html)
+The method [`c.states.immutable(...)`](../werkbank/StatesComposer/immutable.html)
 provides you with a [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html)
 that holds an immutable value.
 You can get and set the value in the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
 
-The method [`c.states.mutable(...)`](../werkbank/StatesComposerExtension/mutable.html)
+The method [`c.states.mutable(...)`](../werkbank/StatesComposer/mutable.html)
 returns a [ValueContainer](../werkbank/ValueContainer-class.html) that holds a mutable value.
 You can unpack the value in the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html)
 using the [value](../werkbank/ValueContainer/value.html) getter.
@@ -404,7 +404,7 @@ Unlike with immutable state, you cannot change the value of the [ValueContainer]
 though.
 
 > [!TIP]
-> Most knobs also keep immutable state, similar to [`c.states.immutable(...)`](../werkbank/StatesComposerExtension/immutable.html).
+> Most knobs also keep immutable state, similar to [`c.states.immutable(...)`](../werkbank/StatesComposer/immutable.html).
 > Unless you explicitly don't want to control the state, in the Werkbank UI,
 > consider using a knob instead.
 

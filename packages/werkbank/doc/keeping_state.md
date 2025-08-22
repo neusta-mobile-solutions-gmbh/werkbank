@@ -9,12 +9,12 @@ This topic shows you multiple ways to keep state in your use cases.
 
 ## Ways to Keep State
 
-When writing a use case, you may come across widgets that require you to keep some changing state outside of the widget.
+When writing a use case, you may come across widgets that require you to keep some changing state outside the widget.
 This state usually comes in one of two forms:
 - **Immutable state**: Often passed as a pair of a `value` and `onValueChanged` callback into the widget.
 - **Mutable state**: Often a controller or another object that has its own lifecycle and needs to be created and disposed of.
 
-A naive way to keep this state to wrap your returned use case widget in a [`StatefulWidget`](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html)
+A naive way to keep this state is to wrap your returned use case widget in a [`StatefulWidget`](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html)
 and manage the state there.
 However, this requires a lot of boilerplate code.
 *Do not do this!*
@@ -27,7 +27,8 @@ Instead, Werkbank provides better alternatives to keep state in your use case:
 
 ## Knobs
 
-Learn all about knobs in the [Knobs topic](../werkbank/Knobs-topic.html) or read a summary in the Knobs section of the [Writing Use Cases](../werkbank/Writing%20Use%20Cases-topic.html#knobs) topic.
+Learn all about knobs in the [Knobs topic](Knobs-topic.html)
+or read a summary in the Knobs section of the [Writing Use Cases](../werkbank/Writing%20Use%20Cases-topic.html#knobs) topic.
 
 Prefer using knobs to keep state:
 - When you need interactive controls in your Werkbank UI for testing different values.

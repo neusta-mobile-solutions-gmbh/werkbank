@@ -27,7 +27,6 @@ export 'src/knobs/interval/curved_interval_knob.dart';
 export 'src/knobs/interval/interval_knob.dart';
 export 'src/knobs/interval/named_curve.dart';
 export 'src/knobs/interval/named_interval.dart';
-export 'src/knobs/list_knob.dart';
 export 'src/knobs/millis_knob.dart';
 export 'src/knobs/string_knob.dart';
 export 'src/knobs_addon.dart';

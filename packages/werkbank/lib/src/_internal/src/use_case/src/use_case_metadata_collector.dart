@@ -3,7 +3,6 @@ import 'package:werkbank/src/addon_config/addon_config.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
-// TODO(lzuttermeister): Do not expose publicly.
 class UseCaseMetadataCollector {
   UseCaseMetadataCollector._();
 

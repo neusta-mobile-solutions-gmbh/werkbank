@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:werkbank/src/addons/src/state_keeping/state_keeping.dart';
 
-/// Those extension methods serve as an example
-/// of how to provide commonly used controllers
-/// using the state addon.
+/// This extension provides some convenience methods for common
+/// state types.
 ///
 /// {@category Keeping State}
-extension StatesComposerControllersExtension on StatesComposer {
+extension CommonStatesComposerExtension on StatesComposer {
   /// Creates a [ValueContainer] of a [ScrollController] using
   /// the [mutable] method.
   ValueContainer<ScrollController> scrollController(

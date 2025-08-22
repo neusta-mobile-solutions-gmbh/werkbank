@@ -36,7 +36,7 @@ Instead, Werkbank provides better alternatives to keep state in your use case:
 ## Knobs
 
 Learn all about knobs in the [Knobs topic](Knobs-topic.html)
-or read a summary in the Knobs section of the [Writing Use Cases](../werkbank/Writing%20Use%20Cases-topic.html#knobs) topic.
+or read a summary in the Knobs section of the [Writing Use Cases](Writing%20Use%20Cases-topic.html#knobs) topic.
 
 Prefer using knobs to keep state when:
 - You benefit from interactive controls in your Werkbank UI for testing different values.
@@ -202,3 +202,8 @@ You can only mutate the contained value.
 Mutating the contained value will not trigger a rebuild of the use case.
 
 Use [`c.states.mutableWithTickerProvider(...)`](../werkbank/StatesComposer/mutableWithTickerProvider.html) for objects that require a [TickerProvider](https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html).
+
+An extension also offers some convenience methods for common mutable objects:
+- [`c.states.scrollController(...)`](../werkbank/CommonStatesComposerExtension/scrollController.html) for a [ScrollController](https://api.flutter.dev/flutter/widgets/ScrollController-class.html).
+- [`c.states.textEditingController(...)`](../werkbank/CommonStatesComposerExtension/textEditingController.html) for a [TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html).
+- [`c.states.focusNode(...)`](../werkbank/CommonStatesComposerExtension/focusNode.html) for a [FocusNode](https://api.flutter.dev/flutter/widgets/FocusNode-class.html).

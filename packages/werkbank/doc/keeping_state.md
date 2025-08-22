@@ -12,22 +12,21 @@ This topic shows you multiple ways to keep state in your use cases.
 When writing a use case, you may encounter widgets that require you to keep changing state outside the widget.
 This state usually comes in one of two forms:
 - **Immutable state**: Often passed as a pair of a `value` and `onValueChanged` callback into the widget.
-  - Example types are:
+  - Example types include:
     [`int`](https://api.flutter.dev/flutter/dart-core/int-class.html),
     [`String`](https://api.flutter.dev/flutter/dart-core/String-class.html),
     [`Color`](https://api.flutter.dev/flutter/dart-ui/Color-class.html),
-    or a custom data classes.
-- **Mutable state**: Often a controller or another object that has its own lifecycle and needs to be created and disposed of.
-  - Example types are:
+    and custom data classes.
+- **Mutable state**: Often a controller or another object that has its own lifecycle and needs creation and disposal.
+  - Example types include:
     [`ScrollController`](https://api.flutter.dev/flutter/widgets/ScrollController-class.html),
     [`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html),
     [`FocusNode`](https://api.flutter.dev/flutter/widgets/FocusNode-class.html),
-    or other objects that mange their own state.
+    and other objects that manage their own state.
 
-
-A naive way to keep this state is to wrap your returned use case widget in a [`StatefulWidget`](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html)
-and manage the state there.
-However, this approach requires a lot of boilerplate code.
+You could wrap your returned use case widget in a [`StatefulWidget`](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html)
+and manage the state within it.
+However, this approach requires significant boilerplate code.
 *Do not do this!*
 
 Instead, Werkbank provides better alternatives to keep state in your use case:
@@ -49,7 +48,7 @@ Prefer using knobs to keep state:
 ## StateKeepingAddon
 
 Use the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) to keep state when:
-- Working with Flutter controllers ([`TextEditingController`](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), [`ScrollController`](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [`TabController`](https://api.flutter.dev/flutter/material/TabController-class.html)), or **custom mutable objects** like controllers.
+- Working with Flutter controllers ([TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html), [ScrollController](https://api.flutter.dev/flutter/widgets/ScrollController-class.html), [TabController](https://api.flutter.dev/flutter/material/TabController-class.html)) or **custom mutable objects** like controllers.
 - Managing immutable data models.
 - You don't need interactive controls in your Werkbank UI.
 - Doing quick prototyping where implementing a custom knob would be overkill.
@@ -88,7 +87,7 @@ WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
 <details>
 <summary><b>Equivalent example</b> without using the <a href="../werkbank/StateKeepingAddon-class.html">StateKeepingAddon</a>.</summary>
 
-This illustrates what issue the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) solves for you, since **you don't have to do this**:
+This illustrates the issue that the [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) solves for you, since **you don't have to do this**:
 
 ```dart
 WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
@@ -139,7 +138,7 @@ class _MyColorPickerStateProviderState
     return widget.builder(
       context,
       _color,
-      (newColor) => setState(() => color = newColor),
+      (newColor) => setState(() => _color = newColor),
       _hexColorController,
     );
   }
@@ -150,7 +149,7 @@ class _MyColorPickerStateProviderState
 
 ### Keeping Immutable State
 
-Use [`c.immutable(...)`](../werkbank/StatesComposer/immutable.html) to store immutable state.
+Use [`c.states.immutable(...)`](../werkbank/StatesComposer/immutable.html) to store immutable state.
 This method returns a [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html) that you can read from and write to.
 
 ```dart
@@ -170,13 +169,13 @@ WidgetBuilder myCounterUseCase(UseCaseComposer c) {
 }
 ```
 
-You can read and write the value of the [`ValueNotifier`](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html) only inside the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
+You can read and write the value of the [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html) only inside the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
 When the `value` of an *immutable state* changes, the use case will rebuild.
 
 ### Keeping Mutable State
 
-Use [`c.mutable(...)`](../werkbank/StatesComposer/mutable.html) to store mutable state.
-This method returns a [`ValueContainer`](../werkbank/ValueContainer-class.html) that holds your mutable object.
+Use [`c.states.mutable(...)`](../werkbank/StatesComposer/mutable.html) to store mutable state.
+This method returns a [ValueContainer](../werkbank/ValueContainer-class.html) that holds your mutable object.
 
 The [mutable](../werkbank/StatesComposer/mutable.html) method requires:
 - A `create` callback that creates the object.
@@ -199,8 +198,9 @@ WidgetBuilder myTextFieldUseCase(UseCaseComposer c) {
 }
 ```
 
-You can read the [value](../werkbank/ValueContainer/value.html) of the [`ValueContainer`](../werkbank/ValueContainer-class.html) only inside the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
-Unlike with immutable states, you cannot reassign the value of a [`ValueContainer`](../werkbank/ValueContainer-class.html) later. You can only mutate the contained value.
-Doing so will not trigger a rebuild of the use case.
+You can read the [value](../werkbank/ValueContainer/value.html) of the [ValueContainer](../werkbank/ValueContainer-class.html) only inside the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
+Unlike with immutable states, you cannot reassign the value of a [ValueContainer](../werkbank/ValueContainer-class.html) later.
+You can only mutate the contained value.
+Mutating the contained value will not trigger a rebuild of the use case.
 
-Use [`c.mutableWithTickerProvider(...)`](../werkbank/StatesComposer/mutableWithTickerProvider.html) for objects that require a [`TickerProvider`](https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html).
+Use [`c.states.mutableWithTickerProvider(...)`](../werkbank/StatesComposer/mutableWithTickerProvider.html) for objects that require a [TickerProvider](https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html).

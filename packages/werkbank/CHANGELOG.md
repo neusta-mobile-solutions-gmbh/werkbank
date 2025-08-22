@@ -18,6 +18,7 @@
 - Navigating back to home using "ESC" or the top-left project info area no longer clears the search text field
 - Fix that Markdown link did not work in some places such as in reports.
 - Remove some things related to knobs that were deprecated in 0.16.1. **(BREAKING CHANGE)**
+- Fix that the semantics of backgrounds were not excluded. (For example the checkered background was showing up as an image in the semantics inspector.)
 
 # 0.16.2
 - Increase maximum `go_router` version to 16.x.x and lower minimum version to 13.1.0.

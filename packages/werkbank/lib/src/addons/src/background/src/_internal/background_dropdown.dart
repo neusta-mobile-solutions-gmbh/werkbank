@@ -57,7 +57,7 @@ class BackgroundDropdown extends StatelessWidget {
               //     SizedBox(
               //       width: 16,
               //       height: 16,
-              //       child: ClipOval(child: themeOption.backgroundBox),
+              //       child: ClipOval(child: themeOption.backgroundWidget),
               //     ),
               //   ],
               // ),

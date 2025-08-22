@@ -16,7 +16,7 @@ class NamedBackgroundOption extends DefaultBackgroundOption {
 }
 
 class CustomBackgroundOption extends DefaultBackgroundOption {
-  CustomBackgroundOption({required this.backgroundBox});
+  CustomBackgroundOption({required this.backgroundWidget});
 
-  final Widget backgroundBox;
+  final Widget backgroundWidget;
 }

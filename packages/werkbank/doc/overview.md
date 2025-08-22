@@ -51,7 +51,7 @@ The opposite could also be the case, where a small widget is barely visible in t
 > [!TIP]
 > If you are just looking for a **quick and dirty** way to prevent your use cases from overflowing in the thumbnail,
 > you can add the following to the
-> [`builder`](../werkbank/WerkbankParentNode/builder.html)
+> [builder](../werkbank/WerkbankParentNode/builder.html)
 > of your
 > [WerkbankRoot](../werkbank/WerkbankRoot-class.html):
 > ```dart
@@ -120,9 +120,9 @@ WidgetBuilder exampleUseCase(UseCaseComposer c) {
 If the constraints are bigger than the thumbnail (ignoring some padding covered later),
 the use case will simply draw outside the bounds of the thumbnail without causing an overflow.
 
-However, for larger widgets, we may want to scale them down so that their constraints
+However, for larger widgets, you may want to scale them down so that their constraints
 and therefore also their size fit inside the bounds of the thumbnail.
-Inversely, we may want to scale up smaller widgets so that they are more visible in the thumbnail.
+Inversely, you may want to scale up smaller widgets so that they are more visible in the thumbnail.
 
 To control the scaling of the thumbnail, there are two methods available on the `UseCaseComposer`:
 - [`c.overview.minimumSize(width: ..., height: ...)`](../werkbank/OverviewComposer/minimumSize.html)
@@ -199,7 +199,7 @@ In that case, you can call
 to remove the padding around the thumbnail.
 
 If the padding was disabled, for example, in a
-[`builder`](../werkbank/WerkbankParentNode/builder.html)
+[builder](../werkbank/WerkbankParentNode/builder.html)
 of a
 [WerkbankFolder](../werkbank/WerkbankFolder-class.html),
 you can use

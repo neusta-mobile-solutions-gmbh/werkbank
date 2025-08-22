@@ -9,6 +9,7 @@ learn how to create basic use cases and how to structure them in your project.
 - [Constraints](#constraints)
 - [Descriptions, Tags & URLs](#descriptions-tags--urls)
 - [Background](#background)
+- [State Keeping](#state-keeping)
 - [Inheritance](#inheritance)
 - [Wrapping](#wrapping)
 - [Overview](#overview)
@@ -147,10 +148,10 @@ To learn more about knobs, read the [Knobs](Knobs-topic.html) topic.
 ## Constraints
 
 The [ConstraintsAddon](../werkbank/ConstraintsAddon-class.html) allows you to modify the
-[`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
+[BoxConstraints](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
 passed to your use case, enabling you to test how your widget behaves under different size restrictions.
 
-Flutter passes [`BoxConstraints`](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
+Flutter passes [BoxConstraints](https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html)
 to your widget during its layout phase.
 Based on these constraints, your widget computes its layout and determines its own size.
 Learn more about how Flutter's layout system works in their
@@ -352,6 +353,62 @@ Learn more about background options in the [Backgrounds](Backgrounds-topic.html)
 > to the [BackgroundAddon](../werkbank/BackgroundAddon-class.html) and use
 > [`c.background.named(...)`](../werkbank/BackgroundComposer/named.html).
 > Learn more about that in the [Backgrounds](Backgrounds-topic.html) topic.
+
+## State Keeping
+
+The [StateKeepingAddon](../werkbank/StateKeepingAddon-class.html) allows you to keep state in your use cases
+where you would normally need to wrap the use case widget in a
+[StatefulWidget](https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html).
+
+This example keeps a [Color](https://api.flutter.dev/flutter/dart-ui/Color-class.html) and a
+[TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html)
+for the use case:
+
+```dart
+WidgetBuilder myColorPickerUseCase(UseCaseComposer c) {
+  // Keep immutable state in a ValueNotifier
+  final colorNotifier = c.states.immutable(
+    'Color',
+    initialValue: Colors.red,
+  );
+
+  // Keep mutable state and provide functions to create and dispose it.
+  final hexControllerContainer = c.states.mutable(
+    'Hex Controller',
+    create: TextEditingController.new,
+    dispose: (controller) => controller.dispose(),
+  );
+
+  return (context) {
+    return MyColorPicker(
+      // Get and set the color using the ValueNotifier
+      color: colorNotifier.value,
+      onColorChanged: (newColor) => colorNotifier.value = newColor,
+      // Unpack the returned ValueContainer to get the TextEditingController
+      hexColorController: hexControllerContainer.value,
+    );
+  };
+}
+```
+
+The method [`c.states.immutable(...)`](../werkbank/StatesComposer/immutable.html)
+provides you with a [ValueNotifier](https://api.flutter.dev/flutter/foundation/ValueNotifier-class.html)
+that holds an immutable value.
+You can get and set the value in the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
+
+The method [`c.states.mutable(...)`](../werkbank/StatesComposer/mutable.html)
+returns a [ValueContainer](../werkbank/ValueContainer-class.html) that holds a mutable value.
+You can unpack the value in the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html)
+using the [value](../werkbank/ValueContainer/value.html) getter.
+Unlike with immutable state, you cannot change the value of the [ValueContainer](../werkbank/ValueContainer-class.html)
+though.
+
+> [!TIP]
+> Most knobs also keep immutable state, similar to [`c.states.immutable(...)`](../werkbank/StatesComposer/immutable.html).
+> If having a way control the state from the Werkbank UI is beneficial in your case,
+> consider using a knob instead.
+
+Learn more about state keeping in the [Keeping State](Keeping%20State-topic.html) topic.
 
 ## Inheritance
 

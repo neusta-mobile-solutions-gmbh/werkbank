@@ -38,6 +38,7 @@ import 'package:werkbank_werkbank/feature_use_cases/notification_use_case.dart';
 import 'package:werkbank_werkbank/feature_use_cases/search_use_cases.dart';
 import 'package:werkbank_werkbank/feature_use_cases/semantics_use_cases.dart';
 import 'package:werkbank_werkbank/feature_use_cases/sizing_use_case.dart';
+import 'package:werkbank_werkbank/feature_use_cases/states_use_case.dart';
 import 'package:werkbank_werkbank/feature_use_cases/werkbank_logo_use_case.dart';
 import 'package:werkbank_werkbank/feature_use_cases/wrapping_use_cases.dart';
 
@@ -261,6 +262,10 @@ WerkbankRoot get root => WerkbankRoot(
     WerkbankFolder(
       name: 'Features',
       children: [
+        WerkbankUseCase(
+          name: 'States',
+          builder: statesUseCase,
+        ),
         WerkbankUseCase(
           name: 'Knobs',
           builder: knobsUseCase,

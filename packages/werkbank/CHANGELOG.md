@@ -1,8 +1,13 @@
 # 0.17.0 (unreleased)
-- Update to Flutter 3.35.x. **(BREAKING CHANGE)**
-  - Since we now use the new APIs, you will need to update your Flutter SDK to at least 3.35.0.
+- Add `StateKeepingAddon` to keep states in the use case.
+  - The feature is similar to knobs, just without controls in the UI and with a support for a wider range of types.
+  - Immutable state, like primitive values or data classes, can be added by calling `c.states.immutable(...)`.
+  - Mutable state, like controllers, can be added by calling `c.states.mutable(...)`.
+  - Read the documentation topic at https://pub.dev/documentation/werkbank/latest/topics/Keeping%20State-topic.html
 - Add "Writing Use Cases" documentation topic that provides an overview of techniques you can use to customize your use cases.
   - Give it a read at https://pub.dev/documentation/werkbank/latest/topics/Writing%20Use%20Cases-topic.html
+- Update to Flutter 3.35.x. **(BREAKING CHANGE)**
+  - Since we now use the new APIs, you will need to update your Flutter SDK to at least 3.35.0.
 - Make changes to `BackgroundOption` constructors to be more consistent with `c.background.<...>` functions in the `BackgroundComposer`.
   - The unnamed `BackgroundOption(...)` constructor is now `BackgroundOption.widget(...)`. **(BREAKING CHANGE)**
   - Changed `BackgroundOption.color(...)` constructor to allow specifying a color directly. **(BREAKING CHANGE)**

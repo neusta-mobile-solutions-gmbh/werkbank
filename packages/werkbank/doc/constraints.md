@@ -1,21 +1,20 @@
-When it comes to sizing, Flutter has its own smart technique for that: the constraints model. This way widgets can decide on what size they will become bounded by a minimum and maximum size defined by their parent. This topic is about what Werkbank offers you to work with Flutters constraints, to ensure that your component behaves as you intend for all constraints that matter to you.
+Flutter uses a constraints model for widget sizing, where parent widgets pass constraints (minimum and maximum width and height) down to their children, and each child decides on its size within those bounds. This topic covers how Werkbank helps you work with Flutter's constraints to ensure your components behave as intended across different constraints.
 Before reading this, we recommend [understanding constraints](https://docs.flutter.dev/ui/layout/constraints) first and reading [Writing Use Cases](Getting%20Started-topic.html), or being familiar with Werkbank.
 
 **Table of Contents**
 
-## ConstraintsAddon
+## Key Features ConstraintsAddon
 
-By default, Werkbank comes with the ConstraintsAddon, which aims to provide support for using and understanding Flutter's constraints system. It offers a variety of features, such as
+By default, Werkbank comes with the ConstraintsAddon, which provides support for using and understanding Flutter's constraints system. It offers a variety of features, such as:
 
 - changing the constraints applied to the component at runtime
   - freely by hand using the pointer
-  - precise using text fields
-  - checking the size that the component actually has after its layout phase
-  - setting the initial constraints applied to a component
-  - defining presets ...
-  <!-- - limiting the applied constraints to a supported range to avoid confusion  (Too much, too specific) -->
-
-We will go through them one at a time.
+  - precisely using text fields
+- checking the size that the component actually has after its layout phase
+- setting the initial constraints applied to a component
+- defining presets
+- and much more
+<!-- - limiting the applied constraints to a supported range to avoid confusion  (Too much, too specific) -->
 
 > [!Note]
 > If you disable the ConstraintsAddon for your project, the applied constraints are infinite by default.

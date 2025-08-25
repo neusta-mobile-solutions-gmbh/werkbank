@@ -1,4 +1,4 @@
-# 0.17.0 (unreleased)
+# 0.17.0
 - Add `StateKeepingAddon` to keep states in the use case.
   - The feature is similar to knobs, just without controls in the UI and with a support for a wider range of types.
   - Immutable state, like primitive values or data classes, can be added by calling `c.states.immutable(...)`.

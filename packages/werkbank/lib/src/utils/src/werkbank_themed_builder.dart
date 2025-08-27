@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/widgets/werkbank_store_theme.dart';
 import 'package:werkbank/werkbank.dart';
 
 /// A widget that applies a [werkbankTheme] to a specific part of the widget

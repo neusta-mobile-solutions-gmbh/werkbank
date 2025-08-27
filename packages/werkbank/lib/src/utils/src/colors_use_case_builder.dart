@@ -69,7 +69,7 @@ class _ColorsShowCase extends StatelessWidget {
                     border: Border.all(),
                   ),
                   child: IntrinsicWidth(
-                    child: UseCaseThemed(
+                    child: WerkbankThemed(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [

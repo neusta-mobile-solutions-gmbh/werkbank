@@ -41,8 +41,8 @@ class WerkbankThemedBuilder extends StatelessWidget {
   }
 }
 
-class UseCaseThemed extends StatelessWidget {
-  const UseCaseThemed({
+class WerkbankThemed extends StatelessWidget {
+  const WerkbankThemed({
     required this.child,
     super.key,
   });
@@ -51,7 +51,7 @@ class UseCaseThemed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storedWerkbankTheme = WerkbankThemed.of(context);
+    final storedWerkbankTheme = StoreWerkbankTheme.of(context);
     final werkbankDefaultTextStyle = storedWerkbankTheme.defaultTextStyle;
     final usecaseTheme = Theme.of(context);
     final useCaseDefaultTextStyle = DefaultTextStyle.of(context);

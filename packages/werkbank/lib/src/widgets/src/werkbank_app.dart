@@ -17,7 +17,6 @@ import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/utils/utils.dart';
-import 'package:werkbank/src/widgets/werkbank_store_theme.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
 /// {@category Welcome}
@@ -205,8 +204,12 @@ class WerkbankApp extends StatelessWidget {
                                       _MaterialApp(
                                         goRouter: goRouter,
                                         builder: (context, child) {
-                                          return AddonSpecificationsProvider(
+                                          return
+                                          //WerkbankThemed(
+                                          //child:
+                                          AddonSpecificationsProvider(
                                             child: child,
+                                            //),
                                           );
                                         },
                                       ),
@@ -342,32 +345,30 @@ class _MaterialApp extends StatelessWidget {
     return _ThemeBuilder(
       werkbankTheme: werkbankTheme,
       builder: (context, theme) {
-        return WerkbankThemed(
-          child: MaterialApp.router(
-            theme: theme.copyWith(
-              // on a hot restart, goRouter will use this TransitionsTheme
-              // to restore the current page. I dont what this to use the
-              // default transitions, therefore I use
-              pageTransitionsTheme: PageTransitionsTheme(
-                builders: {
-                  for (final p in TargetPlatform.values)
-                    p: const FadeThroughPageTransitionsBuilder(),
-                },
-              ),
+        return MaterialApp.router(
+          theme: theme.copyWith(
+            // on a hot restart, goRouter will use this TransitionsTheme
+            // to restore the current page. I dont what this to use the
+            // default transitions, therefore I use
+            pageTransitionsTheme: PageTransitionsTheme(
+              builders: {
+                for (final p in TargetPlatform.values)
+                  p: const FadeThroughPageTransitionsBuilder(),
+              },
             ),
-            localizationsDelegates: [
-              WerkbankLocalizations.delegate,
-              for (final addon in AddonConfigProvider.addonsOf(context))
-                ...addon.buildLocalizationsDelegates(context),
-            ],
-            title: WerkbankAppInfo.nameOf(context),
-            debugShowCheckedModeBanner: false,
-            builder: (context, child) => builder(
-              context,
-              child ?? const SizedBox.expand(),
-            ),
-            routerConfig: goRouter,
           ),
+          localizationsDelegates: [
+            WerkbankLocalizations.delegate,
+            for (final addon in AddonConfigProvider.addonsOf(context))
+              ...addon.buildLocalizationsDelegates(context),
+          ],
+          title: WerkbankAppInfo.nameOf(context),
+          debugShowCheckedModeBanner: false,
+          builder: (context, child) => builder(
+            context,
+            child ?? const SizedBox.expand(),
+          ),
+          routerConfig: goRouter,
         );
       },
     );

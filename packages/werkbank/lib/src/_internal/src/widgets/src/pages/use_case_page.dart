@@ -6,6 +6,7 @@ import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/widgets/werkbank_store_theme.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
 class UseCasePage extends StatelessWidget {
@@ -31,14 +32,16 @@ class UseCasePage extends StatelessWidget {
                   initialMutation: navState.initialMutation,
                   child: AddonLayerBuilder(
                     layer: AddonLayer.useCaseOverlay,
-                    child: UseCaseApp(
-                      appConfig: WerkbankAppInfo.appConfigOf(context),
-                      child: const AddonLayerBuilder(
-                        layer: AddonLayer.useCase,
-                        child: UseCaseLayout(
-                          child: AddonLayerBuilder(
-                            layer: AddonLayer.useCaseFitted,
-                            child: UseCaseWidgetDisplay(),
+                    child: StoreWerkbankTheme(
+                      child: UseCaseApp(
+                        appConfig: WerkbankAppInfo.appConfigOf(context),
+                        child: const AddonLayerBuilder(
+                          layer: AddonLayer.useCase,
+                          child: UseCaseLayout(
+                            child: AddonLayerBuilder(
+                              layer: AddonLayer.useCaseFitted,
+                              child: UseCaseWidgetDisplay(),
+                            ),
                           ),
                         ),
                       ),

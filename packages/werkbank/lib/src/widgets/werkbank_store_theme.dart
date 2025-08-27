@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 
-class WerkbankThemed extends StatelessWidget {
-  const WerkbankThemed({
+class StoreWerkbankTheme extends StatelessWidget {
+  const StoreWerkbankTheme({
     required this.child,
     super.key,
   });
@@ -28,19 +28,7 @@ class WerkbankThemed extends StatelessWidget {
     return _WerkbankStoreTheme(
       werkbankTheme: werkbankTheme,
       werkbankDefaultTextStyle: werkbankDefaultTextStyle,
-      child: Theme(
-        data: werkbankTheme,
-        child: DefaultTextStyle(
-          style: werkbankDefaultTextStyle.style,
-          maxLines: werkbankDefaultTextStyle.maxLines,
-          overflow: werkbankDefaultTextStyle.overflow,
-          textAlign: werkbankDefaultTextStyle.textAlign,
-          softWrap: werkbankDefaultTextStyle.softWrap,
-          textHeightBehavior: werkbankDefaultTextStyle.textHeightBehavior,
-          textWidthBasis: werkbankDefaultTextStyle.textWidthBasis,
-          child: child,
-        ),
-      ),
+      child: child,
     );
   }
 }

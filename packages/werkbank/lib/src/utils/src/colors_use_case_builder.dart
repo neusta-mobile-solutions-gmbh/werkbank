@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/addons.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 UseCaseBuilder colorsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
@@ -48,7 +49,6 @@ class _ColorsShowCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = WerkbankSettings.werkbankThemeOf(context);
     return Padding(
       padding: const EdgeInsets.all(32),
       child: Wrap(
@@ -69,43 +69,36 @@ class _ColorsShowCase extends StatelessWidget {
                     border: Border.all(),
                   ),
                   child: IntrinsicWidth(
-                    child:
-                        /*WerkbankThemedBuilder(
-                      werkbankTheme: theme,
-                      themedBuilder: (context) => */
-                        UseCaseThemed(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                color: color.value,
-                                height: size,
-                              ),
-                              const SizedBox(height: 16),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
-                                child: Text(
-                                  color.key,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
-                                child: RestoreUseCaseTheme(
-                                  child: Text(
-                                    colorHexText,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                            ],
+                    child: UseCaseThemed(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            color: color.value,
+                            height: size,
                           ),
-                        ),
-                    //child:
+                          const SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                            ),
+                            child: Text(
+                              color.key,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                            ),
+                            child: Text(
+                              colorHexText,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
                   ),
                 );
               },

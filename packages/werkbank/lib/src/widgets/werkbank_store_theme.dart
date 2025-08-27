@@ -16,8 +16,8 @@ class WerkbankThemed extends StatelessWidget {
       throw Exception('WerkbankStoreTheme not found in context');
     }
     return ThemeSnapshot(
-      usecaseTheme: werkbankStoredTheme.werkbankTheme,
-      defaultTextStyle: werkbankStoredTheme.defaultTextStyle,
+      themeData: werkbankStoredTheme.werkbankTheme,
+      defaultTextStyle: werkbankStoredTheme.werkbankDefaultTextStyle,
     );
   }
 
@@ -27,7 +27,7 @@ class WerkbankThemed extends StatelessWidget {
     final werkbankDefaultTextStyle = DefaultTextStyle.of(context);
     return _WerkbankStoreTheme(
       werkbankTheme: werkbankTheme,
-      defaultTextStyle: werkbankDefaultTextStyle,
+      werkbankDefaultTextStyle: werkbankDefaultTextStyle,
       child: Theme(
         data: werkbankTheme,
         child: DefaultTextStyle(
@@ -48,16 +48,16 @@ class WerkbankThemed extends StatelessWidget {
 class _WerkbankStoreTheme extends InheritedWidget {
   const _WerkbankStoreTheme({
     required this.werkbankTheme,
-    required this.defaultTextStyle,
+    required this.werkbankDefaultTextStyle,
     required super.child,
   });
 
   final ThemeData werkbankTheme;
-  final DefaultTextStyle defaultTextStyle;
+  final DefaultTextStyle werkbankDefaultTextStyle;
 
   @override
   bool updateShouldNotify(_WerkbankStoreTheme oldWidget) {
     return oldWidget.werkbankTheme != werkbankTheme ||
-        oldWidget.defaultTextStyle != defaultTextStyle;
+        oldWidget.werkbankDefaultTextStyle != werkbankDefaultTextStyle;
   }
 }

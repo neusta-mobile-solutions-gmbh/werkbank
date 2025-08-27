@@ -53,15 +53,14 @@ class UseCaseThemed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final storedWerkbankTheme = WerkbankThemed.of(context);
-
-    final werkbankDefaultTextStyle = DefaultTextStyle.of(context);
+    final werkbankDefaultTextStyle = storedWerkbankTheme.defaultTextStyle;
     final usecaseTheme = Theme.of(context);
-
+    final useCaseDefaultTextStyle = DefaultTextStyle.of(context);
     return _UseCaseStoreTheme(
       usecaseTheme: usecaseTheme,
-      defaultTextStyle: DefaultTextStyle.of(context),
+      defaultTextStyle: useCaseDefaultTextStyle,
       child: Theme(
-        data: storedWerkbankTheme.usecaseTheme,
+        data: storedWerkbankTheme.themeData,
         child: DefaultTextStyle(
           style: werkbankDefaultTextStyle.style,
           maxLines: werkbankDefaultTextStyle.maxLines,
@@ -114,17 +113,19 @@ class RestoreUseCaseTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final useCaseStoredTheme = _UseCaseStoreTheme.of(context).usecaseTheme;
-    final defaultTextStyle = _UseCaseStoreTheme.of(context).defaultTextStyle;
+    final useCaseDefaultTextStyle = _UseCaseStoreTheme.of(
+      context,
+    ).defaultTextStyle;
     return Theme(
       data: useCaseStoredTheme,
       child: DefaultTextStyle(
-        style: defaultTextStyle.style,
-        maxLines: defaultTextStyle.maxLines,
-        overflow: defaultTextStyle.overflow,
-        textAlign: defaultTextStyle.textAlign,
-        softWrap: defaultTextStyle.softWrap,
-        textHeightBehavior: defaultTextStyle.textHeightBehavior,
-        textWidthBasis: defaultTextStyle.textWidthBasis,
+        style: useCaseDefaultTextStyle.style,
+        maxLines: useCaseDefaultTextStyle.maxLines,
+        overflow: useCaseDefaultTextStyle.overflow,
+        textAlign: useCaseDefaultTextStyle.textAlign,
+        softWrap: useCaseDefaultTextStyle.softWrap,
+        textHeightBehavior: useCaseDefaultTextStyle.textHeightBehavior,
+        textWidthBasis: useCaseDefaultTextStyle.textWidthBasis,
         child: child,
       ),
     );
@@ -133,10 +134,10 @@ class RestoreUseCaseTheme extends StatelessWidget {
 
 class ThemeSnapshot {
   const ThemeSnapshot({
-    required this.usecaseTheme,
+    required this.themeData,
     required this.defaultTextStyle,
   });
 
-  final ThemeData usecaseTheme;
+  final ThemeData themeData;
   final DefaultTextStyle defaultTextStyle;
 }

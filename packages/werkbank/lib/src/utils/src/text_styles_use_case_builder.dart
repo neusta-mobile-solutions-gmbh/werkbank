@@ -43,6 +43,10 @@ class _TextStylesShowCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = MediaQuery.platformBrightnessOf(context);
+    final onSurfaceColor = brightness == Brightness.dark
+        ? Colors.white
+        : Colors.black;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 32),
       child: ListView.builder(
@@ -64,10 +68,10 @@ class _TextStylesShowCase extends StatelessWidget {
                   const SizedBox(height: 16),
                   Text(text, style: style.value),
                   const SizedBox(height: 16),
-                  const WDivider.horizontal(
+                  WDivider.horizontal(
                     // To avoid using a theme-color outside of
                     // the werkbank-theme-scoped context
-                    color: Colors.black,
+                    color: onSurfaceColor,
                   ),
                   const SizedBox(height: 16),
                 ],

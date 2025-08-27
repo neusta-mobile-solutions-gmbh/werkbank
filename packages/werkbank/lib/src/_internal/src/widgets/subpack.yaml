@@ -1,0 +1,19 @@
+dependencies:
+  - /lib/src/_internal/src/filter
+  - /lib/src/_internal/src/localizations
+  - /lib/src/_internal/src/routing
+  - /lib/src/_internal/src/use_case
+  - /lib/src/addon_api
+  - /lib/src/addons/src/constraints
+  - /lib/src/app_config
+  - /lib/src/components
+  - /lib/src/environment
+  - /lib/src/notifications
+  - /lib/src/persistence
+  - /lib/src/routing
+  - /lib/src/theme
+  - /lib/src/tree
+  - /lib/src/use_case
+  - /lib/src/use_case_metadata
+  - /lib/src/widgets
+  - web

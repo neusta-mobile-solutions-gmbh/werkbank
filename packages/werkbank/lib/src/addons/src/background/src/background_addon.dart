@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/background/background.dart';
 import 'package:werkbank/src/addons/src/background/src/_internal/background_applier.dart';
 import 'package:werkbank/src/addons/src/background/src/_internal/background_dropdown.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
+/// {@category Backgrounds}
 class BackgroundAddon extends Addon {
   /// Creates a [BackgroundAddon] that allows you to select
   /// the background of the use case.

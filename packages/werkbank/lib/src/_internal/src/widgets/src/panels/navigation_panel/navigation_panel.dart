@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/_internal/src/filter/filter.dart';
+import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/_internal/src/routing/routing.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/theme/theme.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 class NavigationPanel extends StatelessWidget with OrderExecutor {
   const NavigationPanel({super.key});
@@ -159,9 +167,6 @@ class _NavigationPanelHeader extends StatelessWidget {
               title: Text(WerkbankAppInfo.nameOf(context)),
               lastUpdated: WerkbankAppInfo.lastUpdatedOf(context),
               onTap: () {
-                WerkbankPersistence.maybeSearchQueryController(
-                  context,
-                )?.reset();
                 WerkbankRouter.of(context).goTo(HomeNavState());
               },
             ),

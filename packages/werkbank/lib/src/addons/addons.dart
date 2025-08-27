@@ -17,6 +17,7 @@ export 'src/ordering/ordering.dart';
 export 'src/page_transition/page_transition.dart';
 export 'src/recent_history/recent_history.dart';
 export 'src/report/report.dart';
+export 'src/state_keeping/state_keeping.dart';
 export 'src/theming/theming.dart';
 export 'src/viewer/viewer.dart';
 export 'src/werkbank_theme/werkbank_theme.dart';

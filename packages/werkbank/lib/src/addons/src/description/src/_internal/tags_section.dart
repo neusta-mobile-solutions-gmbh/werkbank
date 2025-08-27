@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/addons/src/description/description.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 
 class TagsSection extends StatelessWidget {
   const TagsSection({
@@ -7,7 +9,7 @@ class TagsSection extends StatelessWidget {
     super.key,
   });
 
-  final List<String> tags;
+  final Set<String> tags;
 
   @override
   Widget build(BuildContext context) {

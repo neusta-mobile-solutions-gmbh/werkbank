@@ -89,7 +89,7 @@ class SubpackUtils {
         subpackLinks.writeln('- $relativePath');
       } else {
         subpackLinks.writeln(
-          '- ${link(
+          '- ${createLink(
             message: relativePath,
             uri: SubpackUtils.getFileUri(
               rootDirectory: rootDirectory,
@@ -101,6 +101,13 @@ class SubpackUtils {
       }
     }
     return subpackLinks.toString();
+  }
+
+  static String createLink({required String message, required Uri uri}) {
+    if (!ansiOutputEnabled) {
+      return message;
+    }
+    return link(uri: uri, message: message);
   }
 
   /// Returns whether packageName is valid by [this definition](https://dart.dev/tools/linter-rules/package_names).

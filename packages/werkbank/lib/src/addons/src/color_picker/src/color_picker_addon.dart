@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_manager.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_mouse_handler.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_section.dart';
-import 'package:werkbank/werkbank.dart';
 
 /// {@category Configuring Addons}
 class ColorPickerAddon extends Addon {

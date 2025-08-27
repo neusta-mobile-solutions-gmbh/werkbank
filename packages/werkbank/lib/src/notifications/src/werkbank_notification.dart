@@ -19,7 +19,7 @@ abstract class WerkbankNotification with EquatableMixin {
   /// gets dispatched multiple times,
   /// the notification will be updated instead of creating new ones.
   /// {@endtemplate}
-  static WerkbankNotification text({
+  factory WerkbankNotification.text({
     required String title,
     String? content,
     LocalKey? key,
@@ -39,7 +39,7 @@ abstract class WerkbankNotification with EquatableMixin {
   /// {@macro werkbank.notification_id}
   /// If you dont care about the notification being identified,
   /// use a [UniqueKey].
-  static WerkbankNotification widgets({
+  factory WerkbankNotification.widgets({
     required WidgetBuilder buildHead,
     WidgetBuilder? buildBody,
     required LocalKey key,

@@ -1,6 +1,13 @@
 > [!CAUTION]
 > This topic is under construction.
 
+This topic describes how to improve the integration of Werkbank with your IDE, making development easier and more efficient.
+
+**Table of Contents**
+- [Live Templates/Snippets](#live-templatessnippets)
+  - [Android Studio](#android-studio)
+  - [Visual Studio Code](#visual-studio-code)
+
 ## Live Templates/Snippets
 To make it easier to write a new use case, you can create a live template/snippet in your IDE.
 
@@ -19,7 +26,7 @@ WidgetBuilder $NAME$UseCase(UseCaseComposer c) {
 Finally click on "Define" and select "Dart -> Toplevel" as applicable context.
 Save the settings and you are good to go.
 
-#### Visual Studio Code
+### Visual Studio Code
 Go to Code -> Preferences -> Configure Snippets and select "dart".
 This should open a json file.
 Add the following snippet between the curly braces:

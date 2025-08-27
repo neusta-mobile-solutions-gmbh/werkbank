@@ -1,4 +1,5 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Knobs}
 extension DoubleKnobExtension on KnobsComposer {
@@ -23,7 +24,6 @@ extension DoubleKnobExtension on KnobsComposer {
     double min = 0,
     double max = 1,
     int? divisions,
-    @Deprecated('Use valueLabel instead') DoubleFormatter? valueFormatter,
     DoubleFormatter valueLabel = _defaultLabel,
   }) {
     return customSlider(
@@ -34,7 +34,7 @@ extension DoubleKnobExtension on KnobsComposer {
       divisions: divisions,
       encoder: (v) => v,
       decoder: (d) => d,
-      valueLabel: valueFormatter ?? valueLabel,
+      valueLabel: valueLabel,
     );
   }
 
@@ -94,7 +94,6 @@ extension NullableDoubleKnobExtension on NullableKnobsComposer {
     double min = 0,
     double max = 1,
     int? divisions,
-    @Deprecated('Use valueLabel instead') DoubleFormatter? valueFormatter,
     DoubleFormatter valueLabel = _defaultLabel,
   }) {
     return customSlider(
@@ -106,7 +105,7 @@ extension NullableDoubleKnobExtension on NullableKnobsComposer {
       divisions: divisions,
       encoder: (v) => v,
       decoder: (d) => d,
-      valueLabel: valueFormatter ?? valueLabel,
+      valueLabel: valueLabel,
     );
   }
 

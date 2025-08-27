@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_background.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/environment/environment.dart';
+import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 class UseCasePage extends StatelessWidget {
   const UseCasePage({
@@ -48,7 +54,6 @@ class UseCasePage extends StatelessWidget {
   }
 }
 
-// TODO(lzuttermeister): Can we improve this approach?
 class _InitialMutationLoader extends StatefulWidget {
   const _InitialMutationLoader({
     required this.initialMutation,

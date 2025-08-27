@@ -1,14 +1,20 @@
 There are many different ways to structure your project files.
-We will go through the advantages and disadvantages of different approaches and make some
+This topic presents the advantages and disadvantages of different approaches and makes some
 recommendations.
 However, in the end, it is up to you to decide what works best for your project.
+You should be familiar with a basic Werkbank setup, as described in the
+[Getting Started](Getting%20Started-topic.html) topic,
+before reading this topic.
+
+**Table of Contents**
+- [Where to put the UseCases?](#where-to-put-the-usecases)
+- [Where to put the Configurations?](#where-to-put-the-configurations)
 
 ## Where to put the UseCases?
 
-<!-- TODO: Check link. This topic doesn't exist yet. -->
 While use cases may start small at first,
 they can grow quite large once you start augmenting them, for example, with the techniques described in the
-[Writing Use Cases](Use%20Cases-topic.html) topic.
+[Writing Use Cases](Writing%20Use%20Cases-topic.html) topic.
 
 Because of this, we recommend creating a separate file for each component/widget you want to showcase.
 If your component has multiple use cases, it is likely sufficient to put them in the same file.
@@ -17,7 +23,7 @@ This file should contain a getter for the
 or
 [WerkbankComponent](../werkbank/WerkbankComponent-class.html),
 as well as the
-[UseCaseBuilder](../werkbank/UseCaseBuilder-class.html)
+[UseCaseBuilder](../werkbank/UseCaseBuilder.html)
 functions for the use cases.
 
 For example, such a file with multiple use cases could look like this:
@@ -61,7 +67,7 @@ Since the getter already publicly exposes the
 or
 [WerkbankComponent](../werkbank/WerkbankComponent-class.html),
 you can make the
-[UseCaseBuilder](../werkbank/UseCaseBuilder-class.html)s
+[UseCaseBuilder](../werkbank/UseCaseBuilder.html)s
 private, and if you have only one of them, you can even just call it `_useCase`.
 
 When creating a file for a component,
@@ -103,7 +109,7 @@ and to mirror the folder structure of your components.
 > This components package would then be depended on by your app package and the Werkbank app project.
 > Dart's [workspaces](https://dart.dev/tools/pub/workspaces) feature makes this quite convenient.
 
-## Where to put the configurations?
+## Where to put the Configurations?
 
 We also recommend putting your
 [AppConfig](../werkbank/AppConfig-class.html)
@@ -115,4 +121,3 @@ for example, when writing golden tests
 using a [DisplayApp](../werkbank/DisplayApp-class.html),
 as described in the
 [Testing with Use Cases](Testing%20with%20Use%20Cases-topic.html) topic.
-<!-- TODO: Check link. This topic doesn't exist yet. -->

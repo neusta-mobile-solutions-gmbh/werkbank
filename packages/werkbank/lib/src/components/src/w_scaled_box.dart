@@ -155,7 +155,7 @@ class RenderSScaledBox extends RenderProxyBox {
 
   @override
   void applyPaintTransform(RenderBox child, Matrix4 transform) {
-    transform.scale(scaleX, scaleY, 1);
+    transform.scaleByDouble(scaleX, scaleY, 1, 1);
   }
 }
 

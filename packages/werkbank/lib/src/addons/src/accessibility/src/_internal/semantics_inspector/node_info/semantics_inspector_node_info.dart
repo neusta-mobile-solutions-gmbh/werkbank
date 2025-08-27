@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_data_fields/attributed_string_semantics_data_field.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_data_fields/string_semantics_data_field.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_data_fields/text_span_semantics_data_field.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
 
 class SemanticsInspectorNodeInfo extends StatelessWidget {
   const SemanticsInspectorNodeInfo({super.key, required this.subscription});
@@ -109,8 +111,6 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
     addAttributedStringField('hint', data.attributedHint);
     addStringField('tooltip', data.tooltip);
     intField('headingLevel', data.headingLevel, hiddenValue: 0);
-    doubleField('elevation', data.elevation, hiddenValue: 0);
-    doubleField('thickness', data.thickness, hiddenValue: 0);
 
     final textDirection = data.textDirection;
     if (textDirection != null) {
@@ -135,10 +135,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
 
     addRawStringField(
       'flags',
-      [
-        for (final flag in SemanticsFlag.values)
-          if (data.hasFlag(flag)) flag.name,
-      ].join(', '),
+      data.flagsCollection.toStrings().join(', '),
     );
 
     addRawStringField(

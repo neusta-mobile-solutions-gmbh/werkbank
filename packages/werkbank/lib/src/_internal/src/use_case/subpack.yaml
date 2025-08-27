@@ -1,0 +1,6 @@
+dependencies:
+  - /lib/src/use_case
+  - /lib/src/tree
+  - /lib/src/addon_config
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/addon_api

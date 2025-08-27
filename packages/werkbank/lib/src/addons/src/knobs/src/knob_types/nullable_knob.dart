@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 typedef NullableKnobBuilder<T extends Object> =
     Widget Function(
@@ -8,9 +10,6 @@ typedef NullableKnobBuilder<T extends Object> =
       bool enabled,
       ValueNotifier<T> valueNotifier,
     );
-
-@Deprecated('Use NullableKnobsComposer instead')
-typedef NullableKnobs = NullableKnobsComposer;
 
 extension type NullableKnobsComposer(KnobsComposer _knobs) {
   WritableKnob<T?> makeNullableKnob<T extends Object>(

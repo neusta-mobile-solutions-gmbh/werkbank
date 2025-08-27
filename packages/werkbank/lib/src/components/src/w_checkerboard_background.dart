@@ -39,15 +39,17 @@ rkJggg==
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: color1,
-      child: Image.memory(
-        _checkerboardImageData,
-        repeat: ImageRepeat.repeat,
-        filterQuality: FilterQuality.none,
-        scale: 1 / squareSize,
-        color: color2,
-        colorBlendMode: BlendMode.srcATop,
+    return ExcludeSemantics(
+      child: ColoredBox(
+        color: color1,
+        child: Image.memory(
+          _checkerboardImageData,
+          repeat: ImageRepeat.repeat,
+          filterQuality: FilterQuality.none,
+          scale: 1 / squareSize,
+          color: color2,
+          colorBlendMode: BlendMode.srcATop,
+        ),
       ),
     );
   }

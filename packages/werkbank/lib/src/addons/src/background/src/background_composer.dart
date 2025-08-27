@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/background/background.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 extension BackgroundComposerExtension on UseCaseComposer {
   /// Provides a [BackgroundComposer] with methods to set the default background
@@ -51,7 +52,7 @@ extension type BackgroundComposer(UseCaseComposer _c) {
   void widget(Widget widget) {
     _c.setMetadata<DefaultBackgroundOption>(
       CustomBackgroundOption(
-        backgroundBox: widget,
+        backgroundWidget: widget,
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}
 class WCollapsibleHeight extends StatefulWidget {
@@ -31,16 +31,16 @@ class _WCollapsibleHeightState extends State<WCollapsibleHeight>
   final GlobalKey _sizeKey = GlobalKey();
   double? recentHeight;
 
-  void toggleExpand() {
+  Future<void> toggleExpand() async {
     recentHeight = _sizeKey.currentContext?.size?.height;
     switch (controller.status) {
       case AnimationStatus.dismissed:
       case AnimationStatus.reverse:
-        controller.forward();
+        await controller.forward();
 
       case AnimationStatus.forward:
       case AnimationStatus.completed:
-        controller.reverse();
+        await controller.reverse();
     }
   }
 

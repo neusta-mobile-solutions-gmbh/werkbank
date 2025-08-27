@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
-
-typedef WMarkdownTapLinkCallback =
-    void Function(
-      String text,
-      String? href,
-      String title,
-    );
+import 'package:url_launcher/url_launcher.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}
 class WMarkdown extends StatelessWidget {
   const WMarkdown({
     required this.data,
-    this.onTapLink,
     super.key,
   });
 
   final String data;
-  final WMarkdownTapLinkCallback? onTapLink;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +45,12 @@ class WMarkdown extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
           ),
-      onTapLink: onTapLink,
+      onTapLink: (text, href, title) async {
+        if (href == null) return;
+        final uri = Uri.tryParse(href);
+        if (uri == null) return;
+        await launchUrl(uri);
+      },
     );
   }
 }

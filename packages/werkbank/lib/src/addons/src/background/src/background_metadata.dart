@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 extension BackgroundMetadataExtension on UseCaseMetadata {
   DefaultBackgroundOption? get backgroundOption =>
@@ -16,7 +16,7 @@ class NamedBackgroundOption extends DefaultBackgroundOption {
 }
 
 class CustomBackgroundOption extends DefaultBackgroundOption {
-  CustomBackgroundOption({required this.backgroundBox});
+  CustomBackgroundOption({required this.backgroundWidget});
 
-  final Widget backgroundBox;
+  final Widget backgroundWidget;
 }

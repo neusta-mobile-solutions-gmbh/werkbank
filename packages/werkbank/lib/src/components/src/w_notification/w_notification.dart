@@ -1,7 +1,10 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/notifications/notifications.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}
 class WNotification extends StatefulWidget {
@@ -90,13 +93,15 @@ class _WNotificationState extends State<WNotification>
       cachedCounter = widget.counter;
     }
     if (counterChanged) {
-      _counterVisibilityController.animateTo(
-        widget.counter != null ? 1 : 0,
+      unawaited(
+        _counterVisibilityController.animateTo(
+          widget.counter != null ? 1 : 0,
+        ),
       );
     }
   }
 
-  void _toggleExpansion() {
+  Future<void> _toggleExpansion() async {
     final goForward = switch (_expandedController.status) {
       AnimationStatus.dismissed => true,
       AnimationStatus.forward => false,
@@ -104,9 +109,9 @@ class _WNotificationState extends State<WNotification>
       AnimationStatus.completed => false,
     };
     if (goForward) {
-      _expandedController.forward();
+      await _expandedController.forward();
     } else {
-      _expandedController.reverse();
+      await _expandedController.reverse();
     }
   }
 

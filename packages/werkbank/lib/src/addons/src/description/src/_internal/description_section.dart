@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class DescriptionSection extends StatelessWidget {
   const DescriptionSection({
@@ -17,12 +17,6 @@ class DescriptionSection extends StatelessWidget {
     final widget = WFieldBox(
       child: WMarkdown(
         data: data,
-        onTapLink: (text, href, title) async {
-          if (href == null) return;
-          final uri = Uri.tryParse(href);
-          if (uri == null) return;
-          await _launchUrl(uri);
-        },
       ),
     );
 
@@ -42,11 +36,5 @@ class DescriptionSection extends StatelessWidget {
         widget,
       ],
     );
-  }
-
-  Future<void> _launchUrl(Uri uri) async {
-    if (!await launchUrl(uri)) {
-      throw Exception('Could not launch $uri');
-    }
   }
 }

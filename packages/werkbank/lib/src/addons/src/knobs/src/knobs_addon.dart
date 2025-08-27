@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/knob_preset_selector.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/knobs_state_entry.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 /// {@category Configuring Addons}
 /// {@category Knobs}

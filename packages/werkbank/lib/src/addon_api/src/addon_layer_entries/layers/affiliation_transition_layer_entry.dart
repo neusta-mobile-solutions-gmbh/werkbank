@@ -1,4 +1,5 @@
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 class AffiliationTransitionLayerEntry extends AddonLayerEntry {
   const AffiliationTransitionLayerEntry({
@@ -14,8 +15,6 @@ class AffiliationTransitionLayerEntry extends AddonLayerEntry {
   static const access = AffiliationTransitionLayerEntryAccessor();
 }
 
-/* TODO(lzuttermeister): We likely want to remove the
-     UseCaseSpecificAccessorMixin here. */
 class AffiliationTransitionLayerEntryAccessor extends AddonLayerAccessor
     with MaybeWerkbankAppAccessor {
   const AffiliationTransitionLayerEntryAccessor();

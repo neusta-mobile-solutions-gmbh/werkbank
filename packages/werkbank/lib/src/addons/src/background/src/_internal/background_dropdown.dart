@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/src/background/background.dart';
+import 'package:werkbank/src/components/components.dart';
 
 class BackgroundDropdown extends StatelessWidget {
   const BackgroundDropdown({super.key});
@@ -56,7 +57,7 @@ class BackgroundDropdown extends StatelessWidget {
               //     SizedBox(
               //       width: 16,
               //       height: 16,
-              //       child: ClipOval(child: themeOption.backgroundBox),
+              //       child: ClipOval(child: themeOption.backgroundWidget),
               //     ),
               //   ],
               // ),

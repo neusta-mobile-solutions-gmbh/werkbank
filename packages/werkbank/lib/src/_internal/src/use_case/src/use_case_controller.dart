@@ -1,9 +1,10 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/use_case/src/_internal/use_case_composer_lifecycle_manager.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
-// TODO(lzuttermeister): Do not expose publicly.
 class UseCaseController extends ChangeNotifier {
   UseCaseController();
 

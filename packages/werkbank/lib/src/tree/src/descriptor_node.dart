@@ -1,5 +1,8 @@
 import 'package:collection/collection.dart';
-import 'package:werkbank/src/werkbank_internal.dart';
+import 'package:werkbank/src/_internal/src/use_case/use_case.dart';
+import 'package:werkbank/src/addon_config/addon_config.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
 
 sealed class Descriptor {
   Descriptor._({

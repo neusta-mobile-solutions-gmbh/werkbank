@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 /// {@category Werkbank Components}
@@ -25,7 +27,8 @@ class _WNotificationInAndOutState extends State<WNotificationInAndOut>
     primary = AnimationController(
       vsync: this,
       duration: Durations.short2,
-    )..forward();
+    );
+    unawaited(primary.forward());
   }
 
   @override

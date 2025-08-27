@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_hexcode.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_info.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_manager.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class ColorPicker extends StatelessWidget {
   const ColorPicker({super.key});

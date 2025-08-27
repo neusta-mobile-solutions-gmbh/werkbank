@@ -7,7 +7,7 @@ learn how to create basic use cases and how to structure them in your project.
 - [UseCaseComposer Basics](#usecasecomposer-basics)
 - [Knobs](#knobs)
 - [Constraints](#constraints)
-- [Descriptions, Tags & URLs](#descriptions-tags--urls)
+- [Descriptions, Tags \& URLs](#descriptions-tags--urls)
 - [Background](#background)
 - [State Keeping](#state-keeping)
 - [Inheritance](#inheritance)
@@ -668,7 +668,7 @@ Some of the more advanced uses include:
 - Write custom knobs that integrate into the [KnobsAddon](../werkbank/KnobsAddon-class.html).
   - Learn more about this in the [Knobs](Knobs-topic.html) topic.
 - Add keywords or texts to the use case that are searched when filtering the use cases.
-  - Learn more about this in the [Search](Search-topic.html) topic.
+  - Learn more about this in the [Search](Search%20for%20Use%20Cases-topic.html) topic.
 
 > [!TIP]
 > Autocomplete the `c.` in your IDE to see all available methods and getters on the

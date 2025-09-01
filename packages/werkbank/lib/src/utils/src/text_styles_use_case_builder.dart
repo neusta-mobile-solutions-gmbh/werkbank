@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/addons.dart';
-import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/tree/tree.dart';
-import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/werkbank.dart';
 
 UseCaseBuilder textStylesUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
@@ -10,8 +7,9 @@ UseCaseBuilder textStylesUseCaseBuilder({
   String? initialValue,
 }) {
   return (c) {
-    final textKnob = c.knobs.string(
+    final textKnob = c.knobs.nullable.string(
       'Text',
+      initiallyNull: true,
       initialValue:
           initialValue ??
           'Lorem ipsum dolor sit amet consectetur adipiscing elit',
@@ -39,7 +37,7 @@ class _TextStylesShowCase extends StatelessWidget {
   });
 
   final Map<String, TextStyle> styles;
-  final String text;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -60,18 +58,27 @@ class _TextStylesShowCase extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    style.key,
-                    style: style.value,
-                    maxLines: 1,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(text, style: style.value),
-                  const SizedBox(height: 16),
-                  WDivider.horizontal(
-                    // To avoid using a theme-color outside of
-                    // the werkbank-theme-scoped context
-                    color: onSurfaceColor,
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: onSurfaceColor,
+                      ),
+                    ),
+                    child: TextStyleDisplayRowItem(
+                      label: style.key,
+                      fontSize: style.value.fontSize ?? 14,
+                      fontHeight:
+                          ((style.value.fontSize ?? 14) *
+                                  (style.value.height ?? 1.2))
+                              .ceil(),
+                      fontWeight:
+                          style.value.fontWeight?.displayName ??
+                          'FontWeight.w400',
+                      letterSpacing: style.value.letterSpacing ?? 0,
+                      textStyle: style.value,
+                      text: text,
+                      color: onSurfaceColor,
+                    ),
                   ),
                   const SizedBox(height: 16),
                 ],
@@ -79,6 +86,115 @@ class _TextStylesShowCase extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class TextStyleDisplayRowItem extends StatelessWidget {
+  const TextStyleDisplayRowItem({
+    required this.label,
+    required this.fontSize,
+    required this.fontHeight,
+    required this.fontWeight,
+    required this.letterSpacing,
+    required this.textStyle,
+    required this.color,
+    this.text,
+    super.key,
+  });
+
+  final String label;
+  final double fontSize;
+  final int fontHeight;
+  final String fontWeight;
+  final double letterSpacing;
+  final TextStyle textStyle;
+  final String? text;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            TextStyleDisplayItem(
+              label: fontWeight,
+              icon: const Icon(Icons.font_download),
+              color: color,
+            ),
+            const SizedBox(width: 16),
+            TextStyleDisplayItem(
+              label: fontSize.toInt().toString(),
+              icon: const Icon(Icons.text_fields),
+              color: color,
+            ),
+            const SizedBox(width: 16),
+            TextStyleDisplayItem(
+              label: fontHeight.toString(),
+              icon: const Icon(Icons.height),
+              color: color,
+            ),
+            const SizedBox(width: 16),
+            TextStyleDisplayItem(
+              label: letterSpacing.toString(),
+              icon: const Icon(Icons.space_bar),
+              color: color,
+              // TODO(lzuttermeister): run werkbank icon_font_generator
+              // icon: const Icon(WerkbankIcons.horizontal),
+            ),
+            const SizedBox(width: 16),
+            Text(label),
+            const SizedBox(width: 16),
+          ],
+        ),
+        const SizedBox(height: 16),
+        if (text != null) ...[
+          WDivider.horizontal(
+            thickness: 1,
+            color: color,
+          ),
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Text(text!, style: textStyle),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ],
+    );
+  }
+}
+
+class TextStyleDisplayItem extends StatelessWidget {
+  const TextStyleDisplayItem({
+    required this.label,
+    required this.icon,
+    required this.color,
+    super.key,
+  });
+
+  final String label;
+  final Icon icon;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 16,
+        right: 16,
+      ),
+      child: Row(
+        children: [
+          icon,
+          const SizedBox(width: 8),
+          Text(label),
+        ],
       ),
     );
   }

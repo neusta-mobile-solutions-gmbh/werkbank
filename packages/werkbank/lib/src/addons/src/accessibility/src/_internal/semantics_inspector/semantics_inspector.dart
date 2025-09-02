@@ -114,6 +114,19 @@ class _SemanticsInspectorPanelContentState
             trueLabel: Text(sl10n.generic.showHideSwitch.show),
           ),
         ),
+        WControlItem(
+          title: Text(sl10n.addons.accessibility.controls.hiddenSemanticsNodes),
+          control: WSwitch(
+            value: AccessibilityManager.showHiddenSemanticsNodesOf(context),
+            onChanged: (value) =>
+                AccessibilityManager.setShowHiddenSemanticsNodes(
+                  context,
+                  showHiddenSemanticsNodes: value,
+                ),
+            falseLabel: Text(sl10n.generic.showHideSwitch.hide),
+            trueLabel: Text(sl10n.generic.showHideSwitch.show),
+          ),
+        ),
       ],
     );
   }

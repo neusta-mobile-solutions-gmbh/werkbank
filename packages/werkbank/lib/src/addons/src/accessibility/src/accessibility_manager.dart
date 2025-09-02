@@ -66,6 +66,23 @@ class AccessibilityManager extends StatefulWidget {
         );
   }
 
+  static bool showHiddenSemanticsNodesOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
+        .showHiddenSemanticsNodes;
+  }
+
+  static void setShowHiddenSemanticsNodes(
+    BuildContext context, {
+    required bool showHiddenSemanticsNodes,
+  }) {
+    context
+        .findAncestorStateOfType<_AccessibilityManagerState>()!
+        .setShowHiddenSemanticsNodes(
+          showHiddenSemanticsNodes: showHiddenSemanticsNodes,
+        );
+  }
+
   static ColorBlindnessType? simulatedColorBlindnessTypeOf(
     BuildContext context,
   ) {
@@ -96,6 +113,7 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
   bool boldText = false;
   SemanticMode semanticMode = SemanticMode.none;
   bool showMergedSemanticsNodes = false;
+  bool showHiddenSemanticsNodes = true;
   ColorBlindnessType? simulatedColorBlindnessType;
 
   void setTextScaleFactor({required double textScaleFactor}) =>
@@ -110,6 +128,9 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
   void setShowMergedSemanticsNodes({required bool showMergedSemanticsNodes}) =>
       setState(() => this.showMergedSemanticsNodes = showMergedSemanticsNodes);
 
+  void setShowHiddenSemanticsNodes({required bool showHiddenSemanticsNodes}) =>
+      setState(() => this.showHiddenSemanticsNodes = showHiddenSemanticsNodes);
+
   void setSimulatedColorBlindnessType({
     required ColorBlindnessType? simulatedColorBlindnessType,
   }) => setState(
@@ -123,6 +144,7 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
       textScaleFactor: textScaleFactor,
       semanticMode: semanticMode,
       showMergedSemanticsNodes: showMergedSemanticsNodes,
+      showHiddenSemanticsNodes: showHiddenSemanticsNodes,
       simulatedColorBlindnessType: simulatedColorBlindnessType,
       child: widget.child,
     );
@@ -135,6 +157,7 @@ class _AccessibilityState extends InheritedWidget {
     required this.boldText,
     required this.semanticMode,
     required this.showMergedSemanticsNodes,
+    required this.showHiddenSemanticsNodes,
     required this.simulatedColorBlindnessType,
     required super.child,
   });
@@ -143,6 +166,7 @@ class _AccessibilityState extends InheritedWidget {
   final bool boldText;
   final SemanticMode semanticMode;
   final bool showMergedSemanticsNodes;
+  final bool showHiddenSemanticsNodes;
   final ColorBlindnessType? simulatedColorBlindnessType;
 
   @override
@@ -151,6 +175,7 @@ class _AccessibilityState extends InheritedWidget {
         boldText != oldWidget.boldText ||
         semanticMode != oldWidget.semanticMode ||
         showMergedSemanticsNodes != oldWidget.showMergedSemanticsNodes ||
+        showHiddenSemanticsNodes != oldWidget.showHiddenSemanticsNodes ||
         simulatedColorBlindnessType != oldWidget.simulatedColorBlindnessType;
   }
 }

@@ -491,6 +491,7 @@ class TranslationsAddonsAccessibilityControlsEn {
   String get semanticsTree => 'Semantics Tree';
   String get activeSemanticsNode => 'Active Semantics Node';
   String get mergedSemanticsNodes => 'Merged Semantics Nodes';
+  String get hiddenSemanticsNodes => 'Hidden Semantics Nodes';
   late final TranslationsAddonsAccessibilityControlsColorModeEn colorMode =
       TranslationsAddonsAccessibilityControlsColorModeEn._(_root);
 }
@@ -955,6 +956,8 @@ extension on Translations {
         return 'Active Semantics Node';
       case 'addons.accessibility.controls.mergedSemanticsNodes':
         return 'Merged Semantics Nodes';
+      case 'addons.accessibility.controls.hiddenSemanticsNodes':
+        return 'Hidden Semantics Nodes';
       case 'addons.accessibility.controls.colorMode.name':
         return 'Simulated Color Blindness';
       case 'addons.accessibility.controls.colorMode.values.none':

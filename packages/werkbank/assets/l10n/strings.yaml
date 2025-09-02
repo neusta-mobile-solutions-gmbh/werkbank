@@ -26,6 +26,7 @@ addons:
       semanticsTree: Semantics Tree
       activeSemanticsNode: Active Semantics Node
       mergedSemanticsNodes: Merged Semantics Nodes
+      hiddenSemanticsNodes: Hidden Semantics Nodes
       colorMode:
         name: Simulated Color Blindness
         values:

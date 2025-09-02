@@ -33,6 +33,10 @@ class SemanticsInspectorTree extends StatelessWidget {
           : colorScheme.textLight.withValues(alpha: 0.5),
       fontWeight: FontWeight.w100,
     );
+    final annotations = <String>[
+      if (node.isMergedIntoAncestor) 'merged',
+      if (node.data.flagsCollection.isHidden) 'hidden',
+    ];
     return Text.rich(
       TextSpan(
         style: textTheme.input.copyWith(
@@ -52,9 +56,9 @@ class SemanticsInspectorTree extends StatelessWidget {
               text: '<No Label>',
               style: lightStyle,
             ),
-          if (node.isMergedIntoAncestor)
+          if (annotations.isNotEmpty)
             TextSpan(
-              text: ' (merged)',
+              text: ' (${annotations.join(', ')})',
               style: faintStyle,
             ),
         ],
@@ -81,6 +85,10 @@ class SemanticsInspectorTree extends StatelessWidget {
       if (!showMergeSemanticsNodes && node.isMergedIntoAncestor) {
         return null;
       }
+      // We cannot exclude hidden nodes in the tree, because they might have
+      // non hidden children.
+      // We could move their children up a level, but that would erase
+      // information about the tree structure.
       final isSelected = node.id == activeNodeId;
       return WTreeNode(
         key: ValueKey(node.id),

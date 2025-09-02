@@ -7,6 +7,9 @@ generic:
   onOffSwitch:
     off: OFF
     on: ON
+  showHideSwitch:
+    hide: HIDE
+    show: SHOW
 
 addons:
   accessibility:
@@ -22,6 +25,7 @@ addons:
           inspection: Inspection
       semanticsTree: Semantics Tree
       activeSemanticsNode: Active Semantics Node
+      mergedSemanticsNodes: Merged Semantics Nodes
       colorMode:
         name: Simulated Color Blindness
         values:

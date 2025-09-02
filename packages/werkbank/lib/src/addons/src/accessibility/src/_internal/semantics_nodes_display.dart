@@ -13,11 +13,13 @@ class SemanticsNodesDisplay extends StatefulWidget {
   const SemanticsNodesDisplay({
     super.key,
     required this.controller,
+    required this.includeNodePredicate,
     required this.semanticsBoxBuilder,
   });
 
   final SemanticsMonitorController controller;
 
+  final bool Function(SemanticsNodeSnapshot node) includeNodePredicate;
   final Widget Function(BuildContext context, SemanticsDisplayData data)
   semanticsBoxBuilder;
 
@@ -82,8 +84,14 @@ class _SemanticsNodesDisplayState extends State<SemanticsNodesDisplay> {
     final widgets = <Widget>[];
     void addWidgets(SemanticsNodeSnapshot node, Matrix4 transform) {
       final nodeTransform = transform.clone()..multiply(node.transform);
-      final rect = node.rect;
-      if (rect.width > 0 && rect.height > 0) {
+      void addNodeWidget() {
+        if (!widget.includeNodePredicate(node)) {
+          return;
+        }
+        final rect = node.rect;
+        if (rect.width <= 0 || rect.height <= 0) {
+          return;
+        }
         final boxTransform = nodeTransform.clone()
           ..translateByVector3(Vector3(rect.topLeft.dx, rect.topLeft.dy, 0));
         final centerScale = _estimatePointScale(rect.center, boxTransform);
@@ -117,6 +125,7 @@ class _SemanticsNodesDisplayState extends State<SemanticsNodesDisplay> {
         );
       }
 
+      addNodeWidget();
       for (final child in node.children) {
         addWidgets(child, nodeTransform);
       }

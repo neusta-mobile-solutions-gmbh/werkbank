@@ -49,6 +49,23 @@ class AccessibilityManager extends StatefulWidget {
         .setSemanticMode(semanticMode: semanticMode);
   }
 
+  static bool showMergedSemanticsNodesOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
+        .showMergedSemanticsNodes;
+  }
+
+  static void setShowMergedSemanticsNodes(
+    BuildContext context, {
+    required bool showMergedSemanticsNodes,
+  }) {
+    context
+        .findAncestorStateOfType<_AccessibilityManagerState>()!
+        .setShowMergedSemanticsNodes(
+          showMergedSemanticsNodes: showMergedSemanticsNodes,
+        );
+  }
+
   static ColorBlindnessType? simulatedColorBlindnessTypeOf(
     BuildContext context,
   ) {
@@ -78,32 +95,26 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
   double textScaleFactor = 1;
   bool boldText = false;
   SemanticMode semanticMode = SemanticMode.none;
+  bool showMergedSemanticsNodes = false;
   ColorBlindnessType? simulatedColorBlindnessType;
-  void setTextScaleFactor({required double textScaleFactor}) {
-    setState(() {
-      this.textScaleFactor = textScaleFactor;
-    });
-  }
 
-  void setBoldText({required bool boldText}) {
-    setState(() {
-      this.boldText = boldText;
-    });
-  }
+  void setTextScaleFactor({required double textScaleFactor}) =>
+      setState(() => this.textScaleFactor = textScaleFactor);
 
-  void setSemanticMode({required SemanticMode semanticMode}) {
-    setState(() {
-      this.semanticMode = semanticMode;
-    });
-  }
+  void setBoldText({required bool boldText}) =>
+      setState(() => this.boldText = boldText);
+
+  void setSemanticMode({required SemanticMode semanticMode}) =>
+      setState(() => this.semanticMode = semanticMode);
+
+  void setShowMergedSemanticsNodes({required bool showMergedSemanticsNodes}) =>
+      setState(() => this.showMergedSemanticsNodes = showMergedSemanticsNodes);
 
   void setSimulatedColorBlindnessType({
     required ColorBlindnessType? simulatedColorBlindnessType,
-  }) {
-    setState(() {
-      this.simulatedColorBlindnessType = simulatedColorBlindnessType;
-    });
-  }
+  }) => setState(
+    () => this.simulatedColorBlindnessType = simulatedColorBlindnessType,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +122,7 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
       boldText: boldText,
       textScaleFactor: textScaleFactor,
       semanticMode: semanticMode,
+      showMergedSemanticsNodes: showMergedSemanticsNodes,
       simulatedColorBlindnessType: simulatedColorBlindnessType,
       child: widget.child,
     );
@@ -122,6 +134,7 @@ class _AccessibilityState extends InheritedWidget {
     required this.textScaleFactor,
     required this.boldText,
     required this.semanticMode,
+    required this.showMergedSemanticsNodes,
     required this.simulatedColorBlindnessType,
     required super.child,
   });
@@ -129,6 +142,7 @@ class _AccessibilityState extends InheritedWidget {
   final double textScaleFactor;
   final bool boldText;
   final SemanticMode semanticMode;
+  final bool showMergedSemanticsNodes;
   final ColorBlindnessType? simulatedColorBlindnessType;
 
   @override
@@ -136,6 +150,7 @@ class _AccessibilityState extends InheritedWidget {
     return textScaleFactor != oldWidget.textScaleFactor ||
         boldText != oldWidget.boldText ||
         semanticMode != oldWidget.semanticMode ||
+        showMergedSemanticsNodes != oldWidget.showMergedSemanticsNodes ||
         simulatedColorBlindnessType != oldWidget.simulatedColorBlindnessType;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantic_mode_control.dart';
@@ -91,14 +92,28 @@ class _SemanticsInspectorPanelContentState
 
   @override
   Widget build(BuildContext context) {
+    final sl10n = context.sL10n;
     return Column(
       mainAxisSize: MainAxisSize.min,
+      spacing: 16,
       children: [
         SemanticsInspectorTree(
           subscription: subscription,
         ),
-        const SizedBox(height: 16),
         SemanticsInspectorNodeInfo(subscription: subscription),
+        WControlItem(
+          title: Text(sl10n.addons.accessibility.controls.mergedSemanticsNodes),
+          control: WSwitch(
+            value: AccessibilityManager.showMergedSemanticsNodesOf(context),
+            onChanged: (value) =>
+                AccessibilityManager.setShowMergedSemanticsNodes(
+                  context,
+                  showMergedSemanticsNodes: value,
+                ),
+            falseLabel: Text(sl10n.generic.showHideSwitch.hide),
+            trueLabel: Text(sl10n.generic.showHideSwitch.show),
+          ),
+        ),
       ],
     );
   }

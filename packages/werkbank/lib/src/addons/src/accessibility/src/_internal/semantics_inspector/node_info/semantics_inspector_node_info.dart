@@ -94,6 +94,9 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       }
     }
 
+    if (snapshot.isMergedIntoAncestor) {
+      addRawStringField('mergedIntoAncestor', 'true');
+    }
     addAttributedStringField('label', data.attributedLabel);
     intField('id', snapshot.id);
     addStringField('identifier', data.identifier);

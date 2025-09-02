@@ -156,11 +156,18 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
       }
       SemanticsNodeSnapshot toNodeSnapshot(
         SemanticsNode node, {
+        required bool isMergedIntoAncestor,
         Matrix4? transformOverride,
       }) {
         final children = <SemanticsNodeSnapshot>[];
-        bool addChildrenVisitor(SemanticsNode node) {
-          children.add(toNodeSnapshot(node));
+        bool addChildrenVisitor(SemanticsNode childNode) {
+          children.add(
+            toNodeSnapshot(
+              childNode,
+              isMergedIntoAncestor:
+                  isMergedIntoAncestor || node.mergeAllDescendantsIntoThisNode,
+            ),
+          );
           return true;
         }
 
@@ -170,12 +177,17 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
           id: node.id,
           transform: transformOverride ?? node.transform ?? Matrix4.identity(),
           data: node.getSemanticsData(),
+          isMergedIntoAncestor: isMergedIntoAncestor,
           children: children.lockUnsafe,
         );
       }
 
       newNodeSnapshots.add(
-        toNodeSnapshot(node, transformOverride: transform),
+        toNodeSnapshot(
+          node,
+          isMergedIntoAncestor: false,
+          transformOverride: transform,
+        ),
       );
     }
 
@@ -284,12 +296,14 @@ class SemanticsNodeSnapshot with EquatableMixin {
     required this.id,
     required this.transform,
     required this.data,
+    required this.isMergedIntoAncestor,
     required this.children,
   });
 
   final int id;
   final Matrix4 transform;
   final SemanticsData data;
+  final bool isMergedIntoAncestor;
   final IList<SemanticsNodeSnapshot> children;
 
   Rect get rect => data.rect;

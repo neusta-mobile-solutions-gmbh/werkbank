@@ -70,6 +70,8 @@ class TranslationsGenericEn {
       TranslationsGenericYesNoSwitchEn._(_root);
   late final TranslationsGenericOnOffSwitchEn onOffSwitch =
       TranslationsGenericOnOffSwitchEn._(_root);
+  late final TranslationsGenericShowHideSwitchEn showHideSwitch =
+      TranslationsGenericShowHideSwitchEn._(_root);
 }
 
 // Path: addons
@@ -200,6 +202,17 @@ class TranslationsGenericOnOffSwitchEn {
   // Translations
   String get off => 'OFF';
   String get on => 'ON';
+}
+
+// Path: generic.showHideSwitch
+class TranslationsGenericShowHideSwitchEn {
+  TranslationsGenericShowHideSwitchEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get hide => 'HIDE';
+  String get show => 'SHOW';
 }
 
 // Path: addons.accessibility
@@ -477,6 +490,7 @@ class TranslationsAddonsAccessibilityControlsEn {
   );
   String get semanticsTree => 'Semantics Tree';
   String get activeSemanticsNode => 'Active Semantics Node';
+  String get mergedSemanticsNodes => 'Merged Semantics Nodes';
   late final TranslationsAddonsAccessibilityControlsColorModeEn colorMode =
       TranslationsAddonsAccessibilityControlsColorModeEn._(_root);
 }
@@ -917,6 +931,10 @@ extension on Translations {
         return 'OFF';
       case 'generic.onOffSwitch.on':
         return 'ON';
+      case 'generic.showHideSwitch.hide':
+        return 'HIDE';
+      case 'generic.showHideSwitch.show':
+        return 'SHOW';
       case 'addons.accessibility.name':
         return 'Accessibility';
       case 'addons.accessibility.controls.textScaleFactor':
@@ -935,6 +953,8 @@ extension on Translations {
         return 'Semantics Tree';
       case 'addons.accessibility.controls.activeSemanticsNode':
         return 'Active Semantics Node';
+      case 'addons.accessibility.controls.mergedSemanticsNodes':
+        return 'Merged Semantics Nodes';
       case 'addons.accessibility.controls.colorMode.name':
         return 'Simulated Color Blindness';
       case 'addons.accessibility.controls.colorMode.values.none':

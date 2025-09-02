@@ -310,6 +310,10 @@ WerkbankRoot get root => WerkbankRoot(
               name: 'Material Components',
               builder: materialComponentsUseCase,
             ),
+            WerkbankUseCase(
+              name: 'Merge Semantics',
+              builder: mergeSemanticsUseCase,
+            ),
           ],
         ),
         WerkbankUseCase(

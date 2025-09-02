@@ -102,6 +102,35 @@ class _SemanticsInspectorPanelContentState
         ),
         SemanticsInspectorNodeInfo(subscription: subscription),
         WControlItem(
+          title: Text(sl10n.addons.accessibility.controls.semanticsScope.name),
+          control: WDropdown<SemanticsScope>(
+            value: AccessibilityManager.semanticsScopeOf(context),
+            onChanged: (value) {
+              AccessibilityManager.setSemanticsScope(context, value);
+            },
+            items: [
+              WDropdownMenuItem(
+                value: SemanticsScope.useCase,
+                child: Text(
+                  sl10n
+                      .addons
+                      .accessibility
+                      .controls
+                      .semanticsScope
+                      .values
+                      .useCase,
+                ),
+              ),
+              WDropdownMenuItem(
+                value: SemanticsScope.app,
+                child: Text(
+                  sl10n.addons.accessibility.controls.semanticsScope.values.app,
+                ),
+              ),
+            ],
+          ),
+        ),
+        WControlItem(
           title: Text(sl10n.addons.accessibility.controls.mergedSemanticsNodes),
           control: WSwitch(
             value: AccessibilityManager.showMergedSemanticsNodesOf(context),

@@ -490,6 +490,10 @@ class TranslationsAddonsAccessibilityControlsEn {
   );
   String get semanticsTree => 'Semantics Tree';
   String get activeSemanticsNode => 'Active Semantics Node';
+  late final TranslationsAddonsAccessibilityControlsSemanticsScopeEn
+  semanticsScope = TranslationsAddonsAccessibilityControlsSemanticsScopeEn._(
+    _root,
+  );
   String get mergedSemanticsNodes => 'Merged Semantics Nodes';
   String get hiddenSemanticsNodes => 'Hidden Semantics Nodes';
   late final TranslationsAddonsAccessibilityControlsColorModeEn colorMode =
@@ -691,6 +695,20 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeEn {
   );
 }
 
+// Path: addons.accessibility.controls.semanticsScope
+class TranslationsAddonsAccessibilityControlsSemanticsScopeEn {
+  TranslationsAddonsAccessibilityControlsSemanticsScopeEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get name => 'Semantics Scope';
+  late final TranslationsAddonsAccessibilityControlsSemanticsScopeValuesEn
+  values = TranslationsAddonsAccessibilityControlsSemanticsScopeValuesEn._(
+    _root,
+  );
+}
+
 // Path: addons.accessibility.controls.colorMode
 class TranslationsAddonsAccessibilityControlsColorModeEn {
   TranslationsAddonsAccessibilityControlsColorModeEn._(this._root);
@@ -819,6 +837,17 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn {
   String get none => 'None';
   String get overlay => 'Overlay';
   String get inspection => 'Inspection';
+}
+
+// Path: addons.accessibility.controls.semanticsScope.values
+class TranslationsAddonsAccessibilityControlsSemanticsScopeValuesEn {
+  TranslationsAddonsAccessibilityControlsSemanticsScopeValuesEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get useCase => 'Use Case';
+  String get app => 'App';
 }
 
 // Path: addons.accessibility.controls.colorMode.values
@@ -954,6 +983,12 @@ extension on Translations {
         return 'Semantics Tree';
       case 'addons.accessibility.controls.activeSemanticsNode':
         return 'Active Semantics Node';
+      case 'addons.accessibility.controls.semanticsScope.name':
+        return 'Semantics Scope';
+      case 'addons.accessibility.controls.semanticsScope.values.useCase':
+        return 'Use Case';
+      case 'addons.accessibility.controls.semanticsScope.values.app':
+        return 'App';
       case 'addons.accessibility.controls.mergedSemanticsNodes':
         return 'Merged Semantics Nodes';
       case 'addons.accessibility.controls.hiddenSemanticsNodes':

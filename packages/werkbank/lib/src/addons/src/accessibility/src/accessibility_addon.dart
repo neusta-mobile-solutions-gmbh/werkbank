@@ -61,7 +61,28 @@ class AccessibilityAddon extends Addon {
           appOnly: true,
           sortHint: const SortHint(1000000000000),
           builder: (context, child) {
-            return IncludeInSemanticsMonitor(child: child);
+            return IncludeInSemanticsMonitor(
+              include:
+                  AccessibilityManager.semanticsScopeOf(context) ==
+                  SemanticsScope.app,
+              child: child,
+            );
+          },
+        ),
+      ],
+      useCase: [
+        UseCaseLayerEntry(
+          id: 'include_in_semantics_inspector',
+          includeInOverlay: false,
+          appOnly: true,
+          sortHint: const SortHint(-1000000000000),
+          builder: (context, child) {
+            return IncludeInSemanticsMonitor(
+              include:
+                  AccessibilityManager.semanticsScopeOf(context) ==
+                  SemanticsScope.useCase,
+              child: child,
+            );
           },
         ),
       ],

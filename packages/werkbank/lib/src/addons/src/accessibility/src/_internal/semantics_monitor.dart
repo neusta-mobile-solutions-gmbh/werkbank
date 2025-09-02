@@ -315,15 +315,20 @@ class SemanticsNodeSnapshot with EquatableMixin {
 class IncludeInSemanticsMonitor extends StatelessWidget {
   const IncludeInSemanticsMonitor({
     super.key,
+    this.include = true,
     required this.child,
   });
 
   static const String _semanticsNodeIdentifier = 'include_in_semantics_monitor';
 
+  final bool include;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
+    if (!include) {
+      return Semantics(child: child);
+    }
     return Semantics(
       container: true,
       explicitChildNodes: true,

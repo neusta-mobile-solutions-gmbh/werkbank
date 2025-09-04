@@ -3,8 +3,10 @@
   - Fix that merged semantics nodes were shown by default.
   - Make showing merged nodes an option. (Hidden by default.)
   - Make showing hidden nodes an option. (Shown by default.)
+    - They are always shown in the tree though, because hierarchy information would be lost otherwise.
   - Merged and hidden nodes are now clearly marked as such in the tree.
   - Add the properties `isMergedIntoParent`, `mergeAllDescendantsIntoThisNode` and `areUserActionsBlocked` to the "Active Semantics Node" section.
+  - Make background of semantics node visualization boxes slightly more transparent.
   - Add option to change the inspection scope. The choices are:
     - "Use Case" (new default)
       - Only the semantics of the use case itself is shown.
@@ -12,7 +14,6 @@
       - The semantics of the whole use case-app (so the app as defined by the `AppConfig`, not the whole `WerkbankApp`) is shown.
       - This scope allows you to see the semantics of routes or other overlays introduced by the use case.
       - However it usually shows two additional semantics nodes as parents of your use case semantics that are introduced by the app and routing. Most of the time these nodes are not interesting.
-
 
 # 0.17.0
 - Add `StateKeepingAddon` to keep states in the use case.

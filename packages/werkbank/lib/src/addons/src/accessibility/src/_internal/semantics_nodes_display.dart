@@ -89,7 +89,7 @@ class _SemanticsNodesDisplayState extends State<SemanticsNodesDisplay> {
           return;
         }
         final rect = node.rect;
-        if (rect.width <= 0 || rect.height <= 0) {
+        if (rect.isEmpty) {
           return;
         }
         final boxTransform = nodeTransform.clone()

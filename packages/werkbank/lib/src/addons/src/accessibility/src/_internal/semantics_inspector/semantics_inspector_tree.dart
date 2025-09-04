@@ -34,7 +34,7 @@ class SemanticsInspectorTree extends StatelessWidget {
       fontWeight: FontWeight.w100,
     );
     final annotations = <String>[
-      if (node.isMergedIntoAncestor) 'merged',
+      if (node.isMergedIntoParent) 'merged',
       if (node.data.flagsCollection.isHidden) 'hidden',
     ];
     return Text.rich(
@@ -82,7 +82,7 @@ class SemanticsInspectorTree extends StatelessWidget {
       int? activeNodeId,
       SemanticsInspectorController controller,
     ) {
-      if (!showMergeSemanticsNodes && node.isMergedIntoAncestor) {
+      if (!showMergeSemanticsNodes && node.isMergedIntoParent) {
         return null;
       }
       // We cannot exclude hidden nodes in the tree, because they might have

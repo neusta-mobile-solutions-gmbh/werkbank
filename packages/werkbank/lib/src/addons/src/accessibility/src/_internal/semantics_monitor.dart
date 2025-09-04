@@ -156,7 +156,6 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
       }
       SemanticsNodeSnapshot toNodeSnapshot(
         SemanticsNode node, {
-        required bool isMergedIntoAncestor,
         Matrix4? transformOverride,
       }) {
         final children = <SemanticsNodeSnapshot>[];
@@ -164,8 +163,6 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
           children.add(
             toNodeSnapshot(
               childNode,
-              isMergedIntoAncestor:
-                  isMergedIntoAncestor || node.mergeAllDescendantsIntoThisNode,
             ),
           );
           return true;
@@ -177,7 +174,9 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
           id: node.id,
           transform: transformOverride ?? node.transform ?? Matrix4.identity(),
           data: node.getSemanticsData(),
-          isMergedIntoAncestor: isMergedIntoAncestor,
+          isMergedIntoParent: node.isMergedIntoParent,
+          mergeAllDescendantsIntoThisNode: node.mergeAllDescendantsIntoThisNode,
+          areUserActionsBlocked: node.areUserActionsBlocked,
           children: children.lockUnsafe,
         );
       }
@@ -185,7 +184,6 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
       newNodeSnapshots.add(
         toNodeSnapshot(
           node,
-          isMergedIntoAncestor: false,
           transformOverride: transform,
         ),
       );
@@ -296,14 +294,18 @@ class SemanticsNodeSnapshot with EquatableMixin {
     required this.id,
     required this.transform,
     required this.data,
-    required this.isMergedIntoAncestor,
+    required this.isMergedIntoParent,
+    required this.mergeAllDescendantsIntoThisNode,
+    required this.areUserActionsBlocked,
     required this.children,
   });
 
   final int id;
   final Matrix4 transform;
   final SemanticsData data;
-  final bool isMergedIntoAncestor;
+  final bool isMergedIntoParent;
+  final bool mergeAllDescendantsIntoThisNode;
+  final bool areUserActionsBlocked;
   final IList<SemanticsNodeSnapshot> children;
 
   Rect get rect => data.rect;

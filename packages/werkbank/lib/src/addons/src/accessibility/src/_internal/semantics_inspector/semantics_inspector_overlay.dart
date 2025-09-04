@@ -115,8 +115,7 @@ class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
                 child: SemanticsNodesDisplay(
                   controller: controller,
                   includeNodePredicate: (node) {
-                    if (!showMergedSemanticsNodes &&
-                        node.isMergedIntoAncestor) {
+                    if (!showMergedSemanticsNodes && node.isMergedIntoParent) {
                       return false;
                     }
                     if (!showHiddenSemanticsNodes &&

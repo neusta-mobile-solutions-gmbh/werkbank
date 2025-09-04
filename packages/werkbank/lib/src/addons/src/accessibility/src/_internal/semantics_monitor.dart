@@ -311,7 +311,15 @@ class SemanticsNodeSnapshot with EquatableMixin {
   Rect get rect => data.rect;
 
   @override
-  List<Object?> get props => [id, transform, data, children];
+  List<Object?> get props => [
+    id,
+    transform,
+    data,
+    isMergedIntoParent,
+    mergeAllDescendantsIntoThisNode,
+    areUserActionsBlocked,
+    children,
+  ];
 }
 
 class IncludeInSemanticsMonitor extends StatelessWidget {

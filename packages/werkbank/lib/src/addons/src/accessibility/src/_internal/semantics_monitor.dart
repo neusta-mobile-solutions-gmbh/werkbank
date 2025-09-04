@@ -159,8 +159,12 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
         Matrix4? transformOverride,
       }) {
         final children = <SemanticsNodeSnapshot>[];
-        bool addChildrenVisitor(SemanticsNode node) {
-          children.add(toNodeSnapshot(node));
+        bool addChildrenVisitor(SemanticsNode childNode) {
+          children.add(
+            toNodeSnapshot(
+              childNode,
+            ),
+          );
           return true;
         }
 
@@ -170,12 +174,18 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
           id: node.id,
           transform: transformOverride ?? node.transform ?? Matrix4.identity(),
           data: node.getSemanticsData(),
+          isMergedIntoParent: node.isMergedIntoParent,
+          mergeAllDescendantsIntoThisNode: node.mergeAllDescendantsIntoThisNode,
+          areUserActionsBlocked: node.areUserActionsBlocked,
           children: children.lockUnsafe,
         );
       }
 
       newNodeSnapshots.add(
-        toNodeSnapshot(node, transformOverride: transform),
+        toNodeSnapshot(
+          node,
+          transformOverride: transform,
+        ),
       );
     }
 
@@ -284,32 +294,51 @@ class SemanticsNodeSnapshot with EquatableMixin {
     required this.id,
     required this.transform,
     required this.data,
+    required this.isMergedIntoParent,
+    required this.mergeAllDescendantsIntoThisNode,
+    required this.areUserActionsBlocked,
     required this.children,
   });
 
   final int id;
   final Matrix4 transform;
   final SemanticsData data;
+  final bool isMergedIntoParent;
+  final bool mergeAllDescendantsIntoThisNode;
+  final bool areUserActionsBlocked;
   final IList<SemanticsNodeSnapshot> children;
 
   Rect get rect => data.rect;
 
   @override
-  List<Object?> get props => [id, transform, data, children];
+  List<Object?> get props => [
+    id,
+    transform,
+    data,
+    isMergedIntoParent,
+    mergeAllDescendantsIntoThisNode,
+    areUserActionsBlocked,
+    children,
+  ];
 }
 
 class IncludeInSemanticsMonitor extends StatelessWidget {
   const IncludeInSemanticsMonitor({
     super.key,
+    this.include = true,
     required this.child,
   });
 
   static const String _semanticsNodeIdentifier = 'include_in_semantics_monitor';
 
+  final bool include;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
+    if (!include) {
+      return Semantics(child: child);
+    }
     return Semantics(
       container: true,
       explicitChildNodes: true,

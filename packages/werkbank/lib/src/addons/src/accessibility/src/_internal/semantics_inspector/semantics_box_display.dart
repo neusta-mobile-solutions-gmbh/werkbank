@@ -45,7 +45,7 @@ class SemanticsBoxDisplay extends StatelessWidget {
               ),
               width: displayData.isActive ? 3 : 1,
             ),
-            color: Colors.white.withValues(alpha: 0.25),
+            color: Colors.white.withValues(alpha: 0.15),
           ),
           // To counteract the inset of the border.
           padding: displayData.isActive

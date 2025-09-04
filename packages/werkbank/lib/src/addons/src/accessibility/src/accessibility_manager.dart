@@ -49,19 +49,23 @@ class AccessibilityManager extends StatefulWidget {
         .setSemanticMode(semanticMode: semanticMode);
   }
 
-  static SemanticsScope semanticsScopeOf(BuildContext context) {
+  static SemanticsInspectionScope semanticsInspectionScopeOf(
+    BuildContext context,
+  ) {
     return context
         .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
-        .semanticsScope;
+        .semanticsInspectionScope;
   }
 
-  static void setSemanticsScope(
+  static void setSemanticsInspectionScope(
     BuildContext context,
-    SemanticsScope semanticsScope,
+    SemanticsInspectionScope semanticsInspectionScope,
   ) {
     context
         .findAncestorStateOfType<_AccessibilityManagerState>()!
-        .setSemanticsScope(semanticsScope: semanticsScope);
+        .setSemanticsInspectionScope(
+          semanticsInspectionScope: semanticsInspectionScope,
+        );
   }
 
   static bool showMergedSemanticsNodesOf(BuildContext context) {
@@ -127,7 +131,8 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
   double textScaleFactor = 1;
   bool boldText = false;
   SemanticMode semanticMode = SemanticMode.none;
-  SemanticsScope semanticsScope = SemanticsScope.useCase;
+  SemanticsInspectionScope semanticsInspectionScope =
+      SemanticsInspectionScope.useCase;
   bool showMergedSemanticsNodes = false;
   bool showHiddenSemanticsNodes = true;
   ColorBlindnessType? simulatedColorBlindnessType;
@@ -141,8 +146,10 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
   void setSemanticMode({required SemanticMode semanticMode}) =>
       setState(() => this.semanticMode = semanticMode);
 
-  void setSemanticsScope({required SemanticsScope semanticsScope}) =>
-      setState(() => this.semanticsScope = semanticsScope);
+  void setSemanticsInspectionScope({
+    required SemanticsInspectionScope semanticsInspectionScope,
+  }) =>
+      setState(() => this.semanticsInspectionScope = semanticsInspectionScope);
 
   void setShowMergedSemanticsNodes({required bool showMergedSemanticsNodes}) =>
       setState(() => this.showMergedSemanticsNodes = showMergedSemanticsNodes);
@@ -162,7 +169,7 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
       boldText: boldText,
       textScaleFactor: textScaleFactor,
       semanticMode: semanticMode,
-      semanticsScope: semanticsScope,
+      semanticsInspectionScope: semanticsInspectionScope,
       showMergedSemanticsNodes: showMergedSemanticsNodes,
       showHiddenSemanticsNodes: showHiddenSemanticsNodes,
       simulatedColorBlindnessType: simulatedColorBlindnessType,
@@ -176,7 +183,7 @@ class _AccessibilityState extends InheritedWidget {
     required this.textScaleFactor,
     required this.boldText,
     required this.semanticMode,
-    required this.semanticsScope,
+    required this.semanticsInspectionScope,
     required this.showMergedSemanticsNodes,
     required this.showHiddenSemanticsNodes,
     required this.simulatedColorBlindnessType,
@@ -186,7 +193,7 @@ class _AccessibilityState extends InheritedWidget {
   final double textScaleFactor;
   final bool boldText;
   final SemanticMode semanticMode;
-  final SemanticsScope semanticsScope;
+  final SemanticsInspectionScope semanticsInspectionScope;
   final bool showMergedSemanticsNodes;
   final bool showHiddenSemanticsNodes;
   final ColorBlindnessType? simulatedColorBlindnessType;
@@ -196,7 +203,7 @@ class _AccessibilityState extends InheritedWidget {
     return textScaleFactor != oldWidget.textScaleFactor ||
         boldText != oldWidget.boldText ||
         semanticMode != oldWidget.semanticMode ||
-        semanticsScope != oldWidget.semanticsScope ||
+        semanticsInspectionScope != oldWidget.semanticsInspectionScope ||
         showMergedSemanticsNodes != oldWidget.showMergedSemanticsNodes ||
         showHiddenSemanticsNodes != oldWidget.showHiddenSemanticsNodes ||
         simulatedColorBlindnessType != oldWidget.simulatedColorBlindnessType;
@@ -209,7 +216,7 @@ enum SemanticMode {
   inspection,
 }
 
-enum SemanticsScope {
+enum SemanticsInspectionScope {
   useCase,
   app,
 }

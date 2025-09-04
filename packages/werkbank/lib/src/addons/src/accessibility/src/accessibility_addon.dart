@@ -63,8 +63,8 @@ class AccessibilityAddon extends Addon {
           builder: (context, child) {
             return IncludeInSemanticsMonitor(
               include:
-                  AccessibilityManager.semanticsScopeOf(context) ==
-                  SemanticsScope.app,
+                  AccessibilityManager.semanticsInspectionScopeOf(context) ==
+                  SemanticsInspectionScope.app,
               child: child,
             );
           },
@@ -79,8 +79,8 @@ class AccessibilityAddon extends Addon {
           builder: (context, child) {
             return IncludeInSemanticsMonitor(
               include:
-                  AccessibilityManager.semanticsScopeOf(context) ==
-                  SemanticsScope.useCase,
+                  AccessibilityManager.semanticsInspectionScopeOf(context) ==
+                  SemanticsInspectionScope.useCase,
               child: child,
             );
           },

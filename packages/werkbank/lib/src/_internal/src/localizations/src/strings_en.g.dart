@@ -490,12 +490,13 @@ class TranslationsAddonsAccessibilityControlsEn {
   );
   String get semanticsTree => 'Semantics Tree';
   String get activeSemanticsNode => 'Active Semantics Node';
-  late final TranslationsAddonsAccessibilityControlsSemanticsScopeEn
-  semanticsScope = TranslationsAddonsAccessibilityControlsSemanticsScopeEn._(
-    _root,
-  );
-  String get mergedSemanticsNodes => 'Merged Semantics Nodes';
-  String get hiddenSemanticsNodes => 'Hidden Semantics Nodes';
+  late final TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn
+  semanticsInspectionScope =
+      TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(
+        _root,
+      );
+  String get mergedSemanticsNodes => 'Merged Nodes';
+  String get hiddenSemanticsNodes => 'Hidden Nodes';
   late final TranslationsAddonsAccessibilityControlsColorModeEn colorMode =
       TranslationsAddonsAccessibilityControlsColorModeEn._(_root);
 }
@@ -695,18 +696,21 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeEn {
   );
 }
 
-// Path: addons.accessibility.controls.semanticsScope
-class TranslationsAddonsAccessibilityControlsSemanticsScopeEn {
-  TranslationsAddonsAccessibilityControlsSemanticsScopeEn._(this._root);
+// Path: addons.accessibility.controls.semanticsInspectionScope
+class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn {
+  TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(
+    this._root,
+  );
 
   final Translations _root; // ignore: unused_field
 
   // Translations
-  String get name => 'Semantics Scope';
-  late final TranslationsAddonsAccessibilityControlsSemanticsScopeValuesEn
-  values = TranslationsAddonsAccessibilityControlsSemanticsScopeValuesEn._(
-    _root,
-  );
+  String get name => 'Inspection Scope';
+  late final TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn
+  values =
+      TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn._(
+        _root,
+      );
 }
 
 // Path: addons.accessibility.controls.colorMode
@@ -839,9 +843,11 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn {
   String get inspection => 'Inspection';
 }
 
-// Path: addons.accessibility.controls.semanticsScope.values
-class TranslationsAddonsAccessibilityControlsSemanticsScopeValuesEn {
-  TranslationsAddonsAccessibilityControlsSemanticsScopeValuesEn._(this._root);
+// Path: addons.accessibility.controls.semanticsInspectionScope.values
+class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn {
+  TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn._(
+    this._root,
+  );
 
   final Translations _root; // ignore: unused_field
 
@@ -983,16 +989,16 @@ extension on Translations {
         return 'Semantics Tree';
       case 'addons.accessibility.controls.activeSemanticsNode':
         return 'Active Semantics Node';
-      case 'addons.accessibility.controls.semanticsScope.name':
-        return 'Semantics Scope';
-      case 'addons.accessibility.controls.semanticsScope.values.useCase':
+      case 'addons.accessibility.controls.semanticsInspectionScope.name':
+        return 'Inspection Scope';
+      case 'addons.accessibility.controls.semanticsInspectionScope.values.useCase':
         return 'Use Case';
-      case 'addons.accessibility.controls.semanticsScope.values.app':
+      case 'addons.accessibility.controls.semanticsInspectionScope.values.app':
         return 'App';
       case 'addons.accessibility.controls.mergedSemanticsNodes':
-        return 'Merged Semantics Nodes';
+        return 'Merged Nodes';
       case 'addons.accessibility.controls.hiddenSemanticsNodes':
-        return 'Hidden Semantics Nodes';
+        return 'Hidden Nodes';
       case 'addons.accessibility.controls.colorMode.name':
         return 'Simulated Color Blindness';
       case 'addons.accessibility.controls.colorMode.values.none':

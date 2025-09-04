@@ -102,29 +102,37 @@ class _SemanticsInspectorPanelContentState
         ),
         SemanticsInspectorNodeInfo(subscription: subscription),
         WControlItem(
-          title: Text(sl10n.addons.accessibility.controls.semanticsScope.name),
-          control: WDropdown<SemanticsScope>(
-            value: AccessibilityManager.semanticsScopeOf(context),
+          title: Text(
+            sl10n.addons.accessibility.controls.semanticsInspectionScope.name,
+          ),
+          control: WDropdown<SemanticsInspectionScope>(
+            value: AccessibilityManager.semanticsInspectionScopeOf(context),
             onChanged: (value) {
-              AccessibilityManager.setSemanticsScope(context, value);
+              AccessibilityManager.setSemanticsInspectionScope(context, value);
             },
             items: [
               WDropdownMenuItem(
-                value: SemanticsScope.useCase,
+                value: SemanticsInspectionScope.useCase,
                 child: Text(
                   sl10n
                       .addons
                       .accessibility
                       .controls
-                      .semanticsScope
+                      .semanticsInspectionScope
                       .values
                       .useCase,
                 ),
               ),
               WDropdownMenuItem(
-                value: SemanticsScope.app,
+                value: SemanticsInspectionScope.app,
                 child: Text(
-                  sl10n.addons.accessibility.controls.semanticsScope.values.app,
+                  sl10n
+                      .addons
+                      .accessibility
+                      .controls
+                      .semanticsInspectionScope
+                      .values
+                      .app,
                 ),
               ),
             ],

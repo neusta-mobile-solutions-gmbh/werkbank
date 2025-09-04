@@ -25,13 +25,13 @@ addons:
           inspection: Inspection
       semanticsTree: Semantics Tree
       activeSemanticsNode: Active Semantics Node
-      semanticsScope:
-        name: Semantics Scope
+      semanticsInspectionScope:
+        name: Inspection Scope
         values:
           useCase: Use Case
           app: App
-      mergedSemanticsNodes: Merged Semantics Nodes
-      hiddenSemanticsNodes: Hidden Semantics Nodes
+      mergedSemanticsNodes: Merged Nodes
+      hiddenSemanticsNodes: Hidden Nodes
       colorMode:
         name: Simulated Color Blindness
         values:

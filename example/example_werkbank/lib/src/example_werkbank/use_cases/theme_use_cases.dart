@@ -51,5 +51,24 @@ WerkbankFolder get themeFolder => WerkbankFolder(
         },
       ),
     ),
+    WerkbankUseCase(
+      name: 'Icons Scheme',
+      builder: iconsUseCaseBuilder(
+        builder: (c) {
+          c.overview
+            ..minimumSize(width: 500, height: 500)
+            ..withoutPadding();
+        },
+        icons: (context) {
+          return {
+            'WerkbankIcons Arrow Square Out': WerkbankIcons.arrowSquareOut,
+            'WerkbankIcons Folder Simple': WerkbankIcons.folderSimple,
+            'WerkbankIcons Big Dots': WerkbankIcons.bigDots,
+            'Icons Account Circle': Icons.account_circle,
+            'Icons Panorama': Icons.panorama,
+          };
+        },
+      ),
+    ),
   ],
 );

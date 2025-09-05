@@ -204,8 +204,12 @@ class WerkbankApp extends StatelessWidget {
                                       _MaterialApp(
                                         goRouter: goRouter,
                                         builder: (context, child) {
-                                          return AddonSpecificationsProvider(
+                                          return
+                                          //WerkbankThemed(
+                                          //child:
+                                          AddonSpecificationsProvider(
                                             child: child,
+                                            //),
                                           );
                                         },
                                       ),

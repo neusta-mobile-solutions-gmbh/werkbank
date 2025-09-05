@@ -83,9 +83,8 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
   }
 }
 
-class WerkbankThemePersistentController
-    extends PersistentController<WerkbankThemePersistentController> {
-  WerkbankThemePersistentController() : super(id: 'werkbank_theme');
+class WerkbankThemePersistentController extends PersistentController {
+  WerkbankThemePersistentController();
 
   @override
   void tryLoadFromJson(Object? json) {

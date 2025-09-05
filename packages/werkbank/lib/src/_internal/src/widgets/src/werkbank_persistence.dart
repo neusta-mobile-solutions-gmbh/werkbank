@@ -63,7 +63,7 @@ class WerkbankPersistence extends StatefulWidget {
     return maybeControllerOf<WasAliveController>(context);
   }
 
-  static T? maybeControllerOf<T extends PersistentController<T>>(
+  static T? maybeControllerOf<T extends PersistentController>(
     BuildContext context,
   ) {
     return _InheritedWerkbankPersistence.of(context)?.controllersByType[T]
@@ -185,9 +185,9 @@ class _PersistentControllerRegistryImpl
   late String idPrefix;
 
   @override
-  void register(
+  void register<T extends PersistentController>(
     String id,
-    AnyPersistentController Function() createController,
+    T Function() createController,
   ) {
     _registrations.add(
       _Registration(
@@ -205,5 +205,5 @@ class _Registration {
   });
 
   final String id;
-  final AnyPersistentController Function() createController;
+  final PersistentController Function() createController;
 }

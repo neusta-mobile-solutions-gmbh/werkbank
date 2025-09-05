@@ -139,7 +139,7 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
   /// context of a [WerkbankApp].
   ///
   /// {@macro werkbank.null_in_use_case_display}
-  T? maybePersistentControllerOf<T extends PersistentController<T>>(
+  T? maybePersistentControllerOf<T extends PersistentController>(
     BuildContext context,
   ) {
     return ensureReturns(

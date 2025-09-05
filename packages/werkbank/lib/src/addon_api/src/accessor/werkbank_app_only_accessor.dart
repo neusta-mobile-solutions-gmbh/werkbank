@@ -82,7 +82,7 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
   }
 
   /// Gets the [PersistentController] of the given type.
-  T persistentControllerOf<T extends PersistentController<T>>(
+  T persistentControllerOf<T extends PersistentController>(
     BuildContext context,
   ) {
     return ensureNotNull(_maybeAccess.maybePersistentControllerOf<T>(context));

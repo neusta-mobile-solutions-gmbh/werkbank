@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
-class WasAliveController extends PersistentController<WasAliveController> {
-  WasAliveController() : super(id: 'was_alive');
-
+class WasAliveController extends PersistentController {
   @override
   void tryLoadFromJson(Object? json) {
     try {

@@ -2,13 +2,11 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
-class AcknowledgedControllerImpl
-    extends PersistentController<AcknowledgedController>
+class AcknowledgedControllerImpl extends PersistentController
     implements AcknowledgedController {
   AcknowledgedControllerImpl({
     required Set<String> descendantsPaths,
-  }) : _descendantsPaths = descendantsPaths,
-       super(id: 'acknowledged');
+  }) : _descendantsPaths = descendantsPaths;
 
   final Set<String> _descendantsPaths;
 

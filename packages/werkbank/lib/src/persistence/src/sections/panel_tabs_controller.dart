@@ -3,9 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
-class PanelTabsController extends PersistentController<PanelTabsController> {
-  PanelTabsController() : super(id: 'panel_tabs');
-
+class PanelTabsController extends PersistentController {
   @override
   void tryLoadFromJson(Object? json) {
     // TODO: Rework this

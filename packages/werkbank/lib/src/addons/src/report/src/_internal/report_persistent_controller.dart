@@ -4,10 +4,7 @@ import 'package:werkbank/src/addons/src/report/report.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_data.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
-class ReportPersistentController
-    extends PersistentController<ReportPersistentController> {
-  ReportPersistentController() : super(id: 'report');
-
+class ReportPersistentController extends PersistentController {
   @override
   void tryLoadFromJson(Object? json) {
     try {

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
-class SearchQueryController
-    extends PersistentController<SearchQueryController> {
+class SearchQueryController extends PersistentController {
   SearchQueryController({
     required WasAliveController wasAliveController,
-  }) : _wasAliveController = wasAliveController,
-       super(id: 'search_query');
+  }) : _wasAliveController = wasAliveController;
 
   final WasAliveController _wasAliveController;
 

@@ -6,21 +6,14 @@ const _cappedHistorySize = 100;
 
 class HistoryControllerImpl extends PersistentController
     implements HistoryController {
-  HistoryControllerImpl({
-    required super.prefsWithCache,
-  });
-
   @override
-  String get id => 'history';
-
-  @override
-  void init(String? unsafeJson) {
+  void tryLoadFromJson(Object? json) {
+    // TODO: Rework this
     try {
-      _unsafeHistory = unsafeJson != null
-          ? WerkbankHistory.fromJson(unsafeJson)
-          : WerkbankHistory(
-              entries: const IList<WerkbankHistoryEntry>.empty(),
-            );
+      _unsafeHistory = WerkbankHistory(
+        entries: const IList<WerkbankHistoryEntry>.empty(),
+      );
+      notifyListeners();
     } on FormatException {
       debugPrint(
         'Restoring WerkbankHistory failed. Throwing it away. '
@@ -30,7 +23,13 @@ class HistoryControllerImpl extends PersistentController
       _unsafeHistory = WerkbankHistory(
         entries: const IList<WerkbankHistoryEntry>.empty(),
       );
+      notifyListeners();
     }
+  }
+
+  @override
+  Object? toJson() {
+    return _unsafeHistory.toJson();
   }
 
   late WerkbankHistory _unsafeHistory;
@@ -63,11 +62,6 @@ class HistoryControllerImpl extends PersistentController
         ].lockUnsafe,
       );
     }
-
-    setJson(
-      _unsafeHistory.toJson(),
-    );
-
     notifyListeners();
   }
 }

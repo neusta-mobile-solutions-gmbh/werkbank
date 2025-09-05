@@ -7,6 +7,9 @@ generic:
   onOffSwitch:
     off: OFF
     on: ON
+  showHideSwitch:
+    hide: HIDE
+    show: SHOW
 
 addons:
   accessibility:
@@ -22,6 +25,13 @@ addons:
           inspection: Inspection
       semanticsTree: Semantics Tree
       activeSemanticsNode: Active Semantics Node
+      semanticsInspectionScope:
+        name: Inspection Scope
+        values:
+          useCase: Use Case
+          app: App
+      mergedSemanticsNodes: Merged Nodes
+      hiddenSemanticsNodes: Hidden Nodes
       colorMode:
         name: Simulated Color Blindness
         values:
@@ -197,7 +207,6 @@ shortcuts:
 overview:
   overflow_notification:
     title: Fix Overflows in the Overview
-    # TODO(lzuttermeister): Also add link to docs?
     contentMarkdown: |-
       You seem to be having issues with overflows in the overview.
       This may be because the thumbnails provide to little space for the widget being displayed.
@@ -205,10 +214,13 @@ overview:
       There are several ways in which you can control the presentation of the thumbnail,
       including setting the scale, which can effectively give the widget more space.
 
-      Explore these methods by typing `c.overview.` in your use case
+      To learn about these, read the
+      [Overview](https://pub.dev/documentation/werkbank/latest/topics/Overview-topic.html)
+      topic in the API docs.
+
+      Alternatively, explore the methods yourself by typing `c.overview.` in your use case
       and autocompleting the methods that are available.
 
-      Take a look at the "Overview" topic in the API docs, which explains these methods in detail.
     contentWithConstraintsAddonMarkdown: |-
       @:overview.overflow_notification.contentMarkdown
 

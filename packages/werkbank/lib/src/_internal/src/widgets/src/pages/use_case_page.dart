@@ -54,7 +54,6 @@ class UseCasePage extends StatelessWidget {
   }
 }
 
-// TODO(lzuttermeister): Can we improve this approach?
 class _InitialMutationLoader extends StatefulWidget {
   const _InitialMutationLoader({
     required this.initialMutation,

@@ -9,6 +9,7 @@ import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
+/// {@category Backgrounds}
 class BackgroundAddon extends Addon {
   /// Creates a [BackgroundAddon] that allows you to select
   /// the background of the use case.

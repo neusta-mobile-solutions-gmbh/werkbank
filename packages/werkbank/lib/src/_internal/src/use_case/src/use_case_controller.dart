@@ -5,7 +5,6 @@ import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
-// TODO(lzuttermeister): Do not expose publicly.
 class UseCaseController extends ChangeNotifier {
   UseCaseController();
 

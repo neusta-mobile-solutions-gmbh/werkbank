@@ -85,6 +85,10 @@ class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
       SemanticMode.none || SemanticMode.overlay => false,
       SemanticMode.inspection => true,
     };
+    final showMergedSemanticsNodes =
+        AccessibilityManager.showMergedSemanticsNodesOf(context);
+    final showHiddenSemanticsNodes =
+        AccessibilityManager.showHiddenSemanticsNodesOf(context);
     final controller = inspectorController.semanticsMonitorController;
     return Stack(
       children: [
@@ -110,6 +114,16 @@ class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
                 behavior: HitTestBehavior.opaque,
                 child: SemanticsNodesDisplay(
                   controller: controller,
+                  includeNodePredicate: (node) {
+                    if (!showMergedSemanticsNodes && node.isMergedIntoParent) {
+                      return false;
+                    }
+                    if (!showHiddenSemanticsNodes &&
+                        node.data.flagsCollection.isHidden) {
+                      return false;
+                    }
+                    return true;
+                  },
                   semanticsBoxBuilder: (context, data) {
                     return SemanticsBoxDisplay(
                       displayData: data,

@@ -52,7 +52,7 @@ extension type BackgroundComposer(UseCaseComposer _c) {
   void widget(Widget widget) {
     _c.setMetadata<DefaultBackgroundOption>(
       CustomBackgroundOption(
-        backgroundBox: widget,
+        backgroundWidget: widget,
       ),
     );
   }

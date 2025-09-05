@@ -70,6 +70,8 @@ class TranslationsGenericEn {
       TranslationsGenericYesNoSwitchEn._(_root);
   late final TranslationsGenericOnOffSwitchEn onOffSwitch =
       TranslationsGenericOnOffSwitchEn._(_root);
+  late final TranslationsGenericShowHideSwitchEn showHideSwitch =
+      TranslationsGenericShowHideSwitchEn._(_root);
 }
 
 // Path: addons
@@ -200,6 +202,17 @@ class TranslationsGenericOnOffSwitchEn {
   // Translations
   String get off => 'OFF';
   String get on => 'ON';
+}
+
+// Path: generic.showHideSwitch
+class TranslationsGenericShowHideSwitchEn {
+  TranslationsGenericShowHideSwitchEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get hide => 'HIDE';
+  String get show => 'SHOW';
 }
 
 // Path: addons.accessibility
@@ -457,7 +470,7 @@ class TranslationsOverviewOverflowNotificationEn {
   // Translations
   String get title => 'Fix Overflows in the Overview';
   String get contentMarkdown =>
-      'You seem to be having issues with overflows in the overview.\nThis may be because the thumbnails provide to little space for the widget being displayed.\n\nThere are several ways in which you can control the presentation of the thumbnail,\nincluding setting the scale, which can effectively give the widget more space.\n\nExplore these methods by typing `c.overview.` in your use case\nand autocompleting the methods that are available.\n\nTake a look at the "Overview" topic in the API docs, which explains these methods in detail.';
+      'You seem to be having issues with overflows in the overview.\nThis may be because the thumbnails provide to little space for the widget being displayed.\n\nThere are several ways in which you can control the presentation of the thumbnail,\nincluding setting the scale, which can effectively give the widget more space.\n\nTo learn about these, read the\n[Overview](https://pub.dev/documentation/werkbank/latest/topics/Overview-topic.html)\ntopic in the API docs.\n\nAlternatively, explore the methods yourself by typing `c.overview.` in your use case\nand autocompleting the methods that are available.';
   String get contentWithConstraintsAddonMarkdown =>
       '${_root.overview.overflow_notification.contentMarkdown}\n\nAdditionally, since you are using the `ConstraintsAddon`, note that the lower bounds given to\n`c.constraints.supported(...)` also set the minimum size that is used for the thumbnail\nunless `limitOverviewSize` is set to `false`.\nAlso by using for example `c.constraints.overview(...)` you can set the view constraints\nthat are used in the overview. If this is not set, the view constraints used in the\noverview falls back to the initial view constraints that are also used when\nviewing the use case.';
 }
@@ -477,6 +490,13 @@ class TranslationsAddonsAccessibilityControlsEn {
   );
   String get semanticsTree => 'Semantics Tree';
   String get activeSemanticsNode => 'Active Semantics Node';
+  late final TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn
+  semanticsInspectionScope =
+      TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(
+        _root,
+      );
+  String get mergedSemanticsNodes => 'Merged Nodes';
+  String get hiddenSemanticsNodes => 'Hidden Nodes';
   late final TranslationsAddonsAccessibilityControlsColorModeEn colorMode =
       TranslationsAddonsAccessibilityControlsColorModeEn._(_root);
 }
@@ -676,6 +696,23 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeEn {
   );
 }
 
+// Path: addons.accessibility.controls.semanticsInspectionScope
+class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn {
+  TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(
+    this._root,
+  );
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get name => 'Inspection Scope';
+  late final TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn
+  values =
+      TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn._(
+        _root,
+      );
+}
+
 // Path: addons.accessibility.controls.colorMode
 class TranslationsAddonsAccessibilityControlsColorModeEn {
   TranslationsAddonsAccessibilityControlsColorModeEn._(this._root);
@@ -806,6 +843,19 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn {
   String get inspection => 'Inspection';
 }
 
+// Path: addons.accessibility.controls.semanticsInspectionScope.values
+class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn {
+  TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn._(
+    this._root,
+  );
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get useCase => 'Use Case';
+  String get app => 'App';
+}
+
 // Path: addons.accessibility.controls.colorMode.values
 class TranslationsAddonsAccessibilityControlsColorModeValuesEn {
   TranslationsAddonsAccessibilityControlsColorModeValuesEn._(this._root);
@@ -917,6 +967,10 @@ extension on Translations {
         return 'OFF';
       case 'generic.onOffSwitch.on':
         return 'ON';
+      case 'generic.showHideSwitch.hide':
+        return 'HIDE';
+      case 'generic.showHideSwitch.show':
+        return 'SHOW';
       case 'addons.accessibility.name':
         return 'Accessibility';
       case 'addons.accessibility.controls.textScaleFactor':
@@ -935,6 +989,16 @@ extension on Translations {
         return 'Semantics Tree';
       case 'addons.accessibility.controls.activeSemanticsNode':
         return 'Active Semantics Node';
+      case 'addons.accessibility.controls.semanticsInspectionScope.name':
+        return 'Inspection Scope';
+      case 'addons.accessibility.controls.semanticsInspectionScope.values.useCase':
+        return 'Use Case';
+      case 'addons.accessibility.controls.semanticsInspectionScope.values.app':
+        return 'App';
+      case 'addons.accessibility.controls.mergedSemanticsNodes':
+        return 'Merged Nodes';
+      case 'addons.accessibility.controls.hiddenSemanticsNodes':
+        return 'Hidden Nodes';
       case 'addons.accessibility.controls.colorMode.name':
         return 'Simulated Color Blindness';
       case 'addons.accessibility.controls.colorMode.values.none':
@@ -1151,7 +1215,7 @@ extension on Translations {
       case 'overview.overflow_notification.title':
         return 'Fix Overflows in the Overview';
       case 'overview.overflow_notification.contentMarkdown':
-        return 'You seem to be having issues with overflows in the overview.\nThis may be because the thumbnails provide to little space for the widget being displayed.\n\nThere are several ways in which you can control the presentation of the thumbnail,\nincluding setting the scale, which can effectively give the widget more space.\n\nExplore these methods by typing `c.overview.` in your use case\nand autocompleting the methods that are available.\n\nTake a look at the "Overview" topic in the API docs, which explains these methods in detail.';
+        return 'You seem to be having issues with overflows in the overview.\nThis may be because the thumbnails provide to little space for the widget being displayed.\n\nThere are several ways in which you can control the presentation of the thumbnail,\nincluding setting the scale, which can effectively give the widget more space.\n\nTo learn about these, read the\n[Overview](https://pub.dev/documentation/werkbank/latest/topics/Overview-topic.html)\ntopic in the API docs.\n\nAlternatively, explore the methods yourself by typing `c.overview.` in your use case\nand autocompleting the methods that are available.';
       case 'overview.overflow_notification.contentWithConstraintsAddonMarkdown':
         return '${_root.overview.overflow_notification.contentMarkdown}\n\nAdditionally, since you are using the `ConstraintsAddon`, note that the lower bounds given to\n`c.constraints.supported(...)` also set the minimum size that is used for the thumbnail\nunless `limitOverviewSize` is set to `false`.\nAlso by using for example `c.constraints.overview(...)` you can set the view constraints\nthat are used in the overview. If this is not set, the view constraints used in the\noverview falls back to the initial view constraints that are also used when\nviewing the use case.';
       default:

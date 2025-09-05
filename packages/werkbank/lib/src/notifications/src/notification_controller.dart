@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 
@@ -22,7 +24,7 @@ class NotificationController extends ChangeNotifier
          duration: NotificationSubscription.dismissDuration,
          vsync: vsync,
        ) {
-    _visibilityController?.forward();
+    unawaited(_visibilityController?.forward());
     _visibilityController?.addListener(_onVisibilityChanged);
   }
 
@@ -88,9 +90,8 @@ class NotificationController extends ChangeNotifier
       return;
     }
 
-    _dismissController
-      ..forward()
-      ..addListener(_onDismissControllerChange);
+    unawaited(_dismissController.forward());
+    _dismissController.addListener(_onDismissControllerChange);
     _status = NotificationStatus.dismissed;
     if (notify) {
       notifyListeners();
@@ -124,7 +125,7 @@ class NotificationController extends ChangeNotifier
       return;
     }
 
-    _visibilityController?.forward();
+    unawaited(_visibilityController?.forward());
   }
 
   @override
@@ -143,7 +144,7 @@ class NotificationController extends ChangeNotifier
     }
     _visibilityController?.stop();
     _visibilityController?.duration = Durations.medium1;
-    _visibilityController?.reverse();
+    unawaited(_visibilityController?.reverse());
     _visibilityController?.addListener(_onReverseDone);
   }
 

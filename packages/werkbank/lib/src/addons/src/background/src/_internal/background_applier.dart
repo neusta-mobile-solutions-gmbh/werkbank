@@ -19,25 +19,29 @@ class BackgroundApplier extends StatelessWidget {
       context,
     );
     final metadata = UseCaseLayerEntry.access.metadataOf(context);
-    final Widget? backgroundBox;
+    final Widget? backgroundWidget;
     if (selectedBackgroundOption != null) {
-      backgroundBox = selectedBackgroundOption.backgroundWidget;
+      backgroundWidget = selectedBackgroundOption.backgroundWidget;
     } else {
       switch (metadata.backgroundOption) {
         case null:
-          backgroundBox = null;
+          backgroundWidget = null;
         case NamedBackgroundOption(:final name):
-          backgroundBox = backgroundOptionsByName[name]?.backgroundWidget;
-        case CustomBackgroundOption(backgroundBox: final useCaseBackgroundBox):
-          backgroundBox = useCaseBackgroundBox;
+          backgroundWidget = backgroundOptionsByName[name]?.backgroundWidget;
+        case CustomBackgroundOption(
+          backgroundWidget: final useCaseBackgroundWidget,
+        ):
+          backgroundWidget = useCaseBackgroundWidget;
       }
     }
     return Stack(
       fit: StackFit.passthrough,
       children: [
-        if (backgroundBox != null)
+        if (backgroundWidget != null)
           Positioned.fill(
-            child: backgroundBox,
+            child: ExcludeSemantics(
+              child: backgroundWidget,
+            ),
           ),
         KeyedSubtree(
           key: const Key('child'),

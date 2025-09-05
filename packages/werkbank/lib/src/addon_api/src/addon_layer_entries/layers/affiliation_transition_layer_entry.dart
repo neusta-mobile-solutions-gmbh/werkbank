@@ -15,8 +15,6 @@ class AffiliationTransitionLayerEntry extends AddonLayerEntry {
   static const access = AffiliationTransitionLayerEntryAccessor();
 }
 
-/* TODO(lzuttermeister): We likely want to remove the
-     UseCaseSpecificAccessorMixin here. */
 class AffiliationTransitionLayerEntryAccessor extends AddonLayerAccessor
     with MaybeWerkbankAppAccessor {
   const AffiliationTransitionLayerEntryAccessor();

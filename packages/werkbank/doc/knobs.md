@@ -1,6 +1,38 @@
 > [!CAUTION]
 > This topic is under construction.
 
+This topic explains how to use knobs, their technical details,
+as well as more advanced subjects like creating custom knobs.
+
+**Table of Contents:**
+- *TODO*
+- [Creating Custom Knobs](#creating-custom-knobs)
+  - [Approach 1: Using Existing Knobs](#approach-1-using-existing-knobs)
+  - [Approach 2: Using `makeRegularKnob` and `makeNullableKnob`](#approach-2-using-makeregularknob-and-makenullableknob) (*TODO*)
+  - [Approach 3: Using `registerKnob`](#approach-3-using-registerknob) (*TODO*)
+
+<!--
+TODO: Integrate this?
+
+Knobs returned by `c.knobs.<knobType>` are of the type [Knob<T>](../werkbank/Knob-class.html).
+The value of a knob can be read using the [`knob.value`](../werkbank/Knob/value.html) getter from
+within the returned [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html).
+If the knob value changes the [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html)
+will be rebuilt automatically.
+
+Knobs which control immutable values (such as `double` in this case) also implement
+[WritableKnob<T>](../werkbank/WritableKnob-class.html), which allows
+their value to be set using [`knob.value = ...`](../werkbank/WritableKnob/value.html) setter.
+
+> [!IMPORTANT]
+> Knob values cannot be read or modified above the returned
+> [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html)
+> and can therefore not influence anything done with the
+> [UseCaseComposer](../werkbank/UseCaseComposer-class.html) `c`
+> including the existence or label of other knobs.
+> ```
+-->
+
 ## Creating Custom Knobs
 
 There are three ways to create your own knobs.
@@ -10,7 +42,7 @@ In increasing order, they become more complex, but also more powerful.
    - Easy
    - Sufficient in most cases.
 2. Use [makeRegularKnob](../werkbank/RegularKnobsExtension/makeRegularKnob.html) and
-   [makeNullableKnob](../werkbank/NullableKnobsExtension/makeNullableKnob.html) to create a knob with a custom control widget.
+   [makeNullableKnob](../werkbank/NullableKnobsComposer/makeNullableKnob.html) to create a knob with a custom control widget.
    - Medium Difficulty
    - Only for knobs with **immutable** value type.
 3. Use [registerKnob](../werkbank/KnobsComposer/registerKnob.html) to register a custom [Knob](../werkbank/Knob-class.html) implementation.
@@ -74,7 +106,7 @@ Especially versatile are knobs that can return any type `T`:
 - [customSwitch](../werkbank/CustomSwitchKnobExtension/customSwitch.html)
 - [customSlider](../werkbank/CustomSliderKnobExtension/customSlider.html)
 - [customField](../werkbank/CustomFieldKnobExtension/customField.html)
-- [customFieldMultiLine](../werkbank/CustomFieldMultiLineKnobExtension/customFieldMultiLine.html)
+- [customFieldMultiLine](../werkbank/CustomFieldKnobExtension/customFieldMultiLine.html)
 - [customDropdown](../werkbank/CustomDropdownKnobExtension/customDropdown.html)
 
 These are intended to be used for writing custom knobs using extensions.
@@ -339,7 +371,7 @@ String _hexColorInputFormatter(Color value) {
 </details>
 
 <details>
-<summary><b>Example:</b> <code>List&lt;String&gt;</code> knob. (Uses <a href="../werkbank/CustomFieldKnobExtension/customFieldMultiline.html">customFieldMultiline</a>)</summary>
+<summary><b>Example:</b> <code>List&lt;String&gt;</code> knob. (Uses <a href="../werkbank/CustomFieldKnobExtension/customFieldMultiLine.html">customFieldMultiline</a>)</summary>
 
 ```dart
 extension StringListKnobExtension on KnobsComposer {

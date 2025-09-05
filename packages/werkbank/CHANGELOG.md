@@ -1,10 +1,41 @@
-# 0.17.0 (unreleased)
+# 0.17.1
+- Improve semantics inspector
+  - Fix that merged semantics nodes were shown by default.
+  - Make showing merged nodes an option. (Hidden by default.)
+  - Make showing hidden nodes an option. (Shown by default.)
+    - They are always shown in the tree though, because hierarchy information would be lost otherwise.
+  - Merged and hidden nodes are now clearly marked as such in the tree.
+  - Add the properties `isMergedIntoParent`, `mergeAllDescendantsIntoThisNode` and `areUserActionsBlocked` to the "Active Semantics Node" section.
+  - Make background of semantics node visualization boxes slightly more transparent.
+  - Add option to change the inspection scope. The choices are:
+    - "Use Case" (new default)
+      - Only the semantics of the use case itself is shown.
+    - "App" (previous implicit behavior)
+      - The semantics of the whole use case-app (so the app as defined by the `AppConfig`, not the whole `WerkbankApp`) is shown.
+      - This scope allows you to see the semantics of routes or other overlays introduced by the use case.
+      - However it usually shows two additional semantics nodes as parents of your use case semantics that are introduced by the app and routing. Most of the time these nodes are not interesting.
+
+# 0.17.0
+- Add `StateKeepingAddon` to keep states in the use case.
+  - The feature is similar to knobs, just without controls in the UI and with a support for a wider range of types.
+  - Immutable state, like primitive values or data classes, can be added by calling `c.states.immutable(...)`.
+  - Mutable state, like controllers, can be added by calling `c.states.mutable(...)`.
+  - Read the documentation topic at https://pub.dev/documentation/werkbank/latest/topics/Keeping%20State-topic.html
+- Add "Writing Use Cases" documentation topic that provides an overview of techniques you can use to customize your use cases.
+  - Give it a read at https://pub.dev/documentation/werkbank/latest/topics/Writing%20Use%20Cases-topic.html
+- Update to Flutter 3.35.x. **(BREAKING CHANGE)**
+  - Since we now use the new APIs, you will need to update your Flutter SDK to at least 3.35.0.
 - Make changes to `BackgroundOption` constructors to be more consistent with `c.background.<...>` functions in the `BackgroundComposer`.
   - The unnamed `BackgroundOption(...)` constructor is now `BackgroundOption.widget(...)`. **(BREAKING CHANGE)**
   - Changed `BackgroundOption.color(...)` constructor to allow specifying a color directly. **(BREAKING CHANGE)**
   - The old `BackgroundOption.color(...)` constructor is now `BackgroundOption.colorBuilder(...)`. **(BREAKING CHANGE)**
   - The `BackgroundOption.builder(...)` constructor is now `BackgroundOption.widgetBuilder(...)`. **(BREAKING CHANGE)**
   - Some parameter names have also been renamed.
+- Fix merging behavior of tags.
+- Navigating back to home using "ESC" or the top-left project info area no longer clears the search text field
+- Fix that Markdown link did not work in some places such as in reports.
+- Remove some things related to knobs that were deprecated in 0.16.1. **(BREAKING CHANGE)**
+- Fix that the semantics of backgrounds were not excluded. (For example the checkered background was showing up as an image in the semantics inspector.)
 
 # 0.16.2
 - Increase maximum `go_router` version to 16.x.x and lower minimum version to 13.1.0.

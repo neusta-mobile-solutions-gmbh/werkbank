@@ -9,7 +9,7 @@ class TagsSection extends StatelessWidget {
     super.key,
   });
 
-  final List<String> tags;
+  final Set<String> tags;
 
   @override
   Widget build(BuildContext context) {

@@ -6,18 +6,18 @@ import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 class _TagsMetadataEntry extends UseCaseMetadataEntry<_TagsMetadataEntry> {
   const _TagsMetadataEntry(this.tags);
 
-  final IList<String> tags;
+  final ISet<String> tags;
 }
 
 extension TagsMetadataExtension on UseCaseMetadata {
-  List<String> get tags =>
-      (get<_TagsMetadataEntry>()?.tags ?? const IList.empty()).unlockView;
+  Set<String> get tags =>
+      (get<_TagsMetadataEntry>()?.tags ?? const ISet.empty()).unlockView;
 }
 
 extension TagsComposerExtension on UseCaseComposer {
   void tags(List<String> tags) {
     final currentTags =
-        getMetadata<_TagsMetadataEntry>()?.tags ?? const IList.empty();
+        getMetadata<_TagsMetadataEntry>()?.tags ?? const ISet.empty();
     setMetadata(
       _TagsMetadataEntry(
         currentTags.addAll(tags.map((tag) => tag.toUpperCase())),

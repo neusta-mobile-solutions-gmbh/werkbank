@@ -49,6 +49,59 @@ class AccessibilityManager extends StatefulWidget {
         .setSemanticMode(semanticMode: semanticMode);
   }
 
+  static SemanticsInspectionScope semanticsInspectionScopeOf(
+    BuildContext context,
+  ) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
+        .semanticsInspectionScope;
+  }
+
+  static void setSemanticsInspectionScope(
+    BuildContext context,
+    SemanticsInspectionScope semanticsInspectionScope,
+  ) {
+    context
+        .findAncestorStateOfType<_AccessibilityManagerState>()!
+        .setSemanticsInspectionScope(
+          semanticsInspectionScope: semanticsInspectionScope,
+        );
+  }
+
+  static bool showMergedSemanticsNodesOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
+        .showMergedSemanticsNodes;
+  }
+
+  static void setShowMergedSemanticsNodes(
+    BuildContext context, {
+    required bool showMergedSemanticsNodes,
+  }) {
+    context
+        .findAncestorStateOfType<_AccessibilityManagerState>()!
+        .setShowMergedSemanticsNodes(
+          showMergedSemanticsNodes: showMergedSemanticsNodes,
+        );
+  }
+
+  static bool showHiddenSemanticsNodesOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
+        .showHiddenSemanticsNodes;
+  }
+
+  static void setShowHiddenSemanticsNodes(
+    BuildContext context, {
+    required bool showHiddenSemanticsNodes,
+  }) {
+    context
+        .findAncestorStateOfType<_AccessibilityManagerState>()!
+        .setShowHiddenSemanticsNodes(
+          showHiddenSemanticsNodes: showHiddenSemanticsNodes,
+        );
+  }
+
   static ColorBlindnessType? simulatedColorBlindnessTypeOf(
     BuildContext context,
   ) {
@@ -78,32 +131,37 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
   double textScaleFactor = 1;
   bool boldText = false;
   SemanticMode semanticMode = SemanticMode.none;
+  SemanticsInspectionScope semanticsInspectionScope =
+      SemanticsInspectionScope.useCase;
+  bool showMergedSemanticsNodes = false;
+  bool showHiddenSemanticsNodes = true;
   ColorBlindnessType? simulatedColorBlindnessType;
-  void setTextScaleFactor({required double textScaleFactor}) {
-    setState(() {
-      this.textScaleFactor = textScaleFactor;
-    });
-  }
 
-  void setBoldText({required bool boldText}) {
-    setState(() {
-      this.boldText = boldText;
-    });
-  }
+  void setTextScaleFactor({required double textScaleFactor}) =>
+      setState(() => this.textScaleFactor = textScaleFactor);
 
-  void setSemanticMode({required SemanticMode semanticMode}) {
-    setState(() {
-      this.semanticMode = semanticMode;
-    });
-  }
+  void setBoldText({required bool boldText}) =>
+      setState(() => this.boldText = boldText);
+
+  void setSemanticMode({required SemanticMode semanticMode}) =>
+      setState(() => this.semanticMode = semanticMode);
+
+  void setSemanticsInspectionScope({
+    required SemanticsInspectionScope semanticsInspectionScope,
+  }) =>
+      setState(() => this.semanticsInspectionScope = semanticsInspectionScope);
+
+  void setShowMergedSemanticsNodes({required bool showMergedSemanticsNodes}) =>
+      setState(() => this.showMergedSemanticsNodes = showMergedSemanticsNodes);
+
+  void setShowHiddenSemanticsNodes({required bool showHiddenSemanticsNodes}) =>
+      setState(() => this.showHiddenSemanticsNodes = showHiddenSemanticsNodes);
 
   void setSimulatedColorBlindnessType({
     required ColorBlindnessType? simulatedColorBlindnessType,
-  }) {
-    setState(() {
-      this.simulatedColorBlindnessType = simulatedColorBlindnessType;
-    });
-  }
+  }) => setState(
+    () => this.simulatedColorBlindnessType = simulatedColorBlindnessType,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +169,9 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
       boldText: boldText,
       textScaleFactor: textScaleFactor,
       semanticMode: semanticMode,
+      semanticsInspectionScope: semanticsInspectionScope,
+      showMergedSemanticsNodes: showMergedSemanticsNodes,
+      showHiddenSemanticsNodes: showHiddenSemanticsNodes,
       simulatedColorBlindnessType: simulatedColorBlindnessType,
       child: widget.child,
     );
@@ -122,6 +183,9 @@ class _AccessibilityState extends InheritedWidget {
     required this.textScaleFactor,
     required this.boldText,
     required this.semanticMode,
+    required this.semanticsInspectionScope,
+    required this.showMergedSemanticsNodes,
+    required this.showHiddenSemanticsNodes,
     required this.simulatedColorBlindnessType,
     required super.child,
   });
@@ -129,6 +193,9 @@ class _AccessibilityState extends InheritedWidget {
   final double textScaleFactor;
   final bool boldText;
   final SemanticMode semanticMode;
+  final SemanticsInspectionScope semanticsInspectionScope;
+  final bool showMergedSemanticsNodes;
+  final bool showHiddenSemanticsNodes;
   final ColorBlindnessType? simulatedColorBlindnessType;
 
   @override
@@ -136,6 +203,9 @@ class _AccessibilityState extends InheritedWidget {
     return textScaleFactor != oldWidget.textScaleFactor ||
         boldText != oldWidget.boldText ||
         semanticMode != oldWidget.semanticMode ||
+        semanticsInspectionScope != oldWidget.semanticsInspectionScope ||
+        showMergedSemanticsNodes != oldWidget.showMergedSemanticsNodes ||
+        showHiddenSemanticsNodes != oldWidget.showHiddenSemanticsNodes ||
         simulatedColorBlindnessType != oldWidget.simulatedColorBlindnessType;
   }
 }
@@ -144,4 +214,9 @@ enum SemanticMode {
   none,
   overlay,
   inspection,
+}
+
+enum SemanticsInspectionScope {
+  useCase,
+  app,
 }

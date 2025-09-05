@@ -11,9 +11,6 @@ typedef NullableKnobBuilder<T extends Object> =
       ValueNotifier<T> valueNotifier,
     );
 
-@Deprecated('Use NullableKnobsComposer instead')
-typedef NullableKnobs = NullableKnobsComposer;
-
 extension type NullableKnobsComposer(KnobsComposer _knobs) {
   WritableKnob<T?> makeNullableKnob<T extends Object>(
     String label, {

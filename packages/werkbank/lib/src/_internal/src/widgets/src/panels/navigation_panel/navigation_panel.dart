@@ -4,7 +4,6 @@ import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/tree/tree.dart';
@@ -168,9 +167,6 @@ class _NavigationPanelHeader extends StatelessWidget {
               title: Text(WerkbankAppInfo.nameOf(context)),
               lastUpdated: WerkbankAppInfo.lastUpdatedOf(context),
               onTap: () {
-                WerkbankPersistence.maybeSearchQueryController(
-                  context,
-                )?.reset();
                 WerkbankRouter.of(context).goTo(HomeNavState());
               },
             ),

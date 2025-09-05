@@ -5,5 +5,6 @@ dependencies:
   # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
   - /lib/src/notifications
   - flutter_markdown_plus
+  - url_launcher
   - /lib/src/_internal/src/localizations
   - /lib/src/_internal/src/package_copies/dropdown_button2

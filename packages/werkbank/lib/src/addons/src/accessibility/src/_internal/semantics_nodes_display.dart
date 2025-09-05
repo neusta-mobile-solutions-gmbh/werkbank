@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:vector_math/vector_math_64.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
@@ -12,11 +13,13 @@ class SemanticsNodesDisplay extends StatefulWidget {
   const SemanticsNodesDisplay({
     super.key,
     required this.controller,
+    required this.includeNodePredicate,
     required this.semanticsBoxBuilder,
   });
 
   final SemanticsMonitorController controller;
 
+  final bool Function(SemanticsNodeSnapshot node) includeNodePredicate;
   final Widget Function(BuildContext context, SemanticsDisplayData data)
   semanticsBoxBuilder;
 
@@ -81,38 +84,48 @@ class _SemanticsNodesDisplayState extends State<SemanticsNodesDisplay> {
     final widgets = <Widget>[];
     void addWidgets(SemanticsNodeSnapshot node, Matrix4 transform) {
       final nodeTransform = transform.clone()..multiply(node.transform);
-      final rect = node.rect;
-      final boxTransform = nodeTransform.clone()
-        ..translate(rect.topLeft.dx, rect.topLeft.dy);
-      final centerScale = _estimatePointScale(rect.center, boxTransform);
-      widgets.add(
-        Transform(
-          key: ValueKey(node.id),
-          transform: boxTransform,
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: SizedBox.fromSize(
-              size: node.rect.size,
-              child: WScaledBox(
-                scale: 1 / (centerScale ?? 1),
-                child: MappingValueListenableBuilder(
-                  valueListenable: activeNodeId,
-                  mapper: (value) => value == node.id,
-                  builder: (context, isActive, _) {
-                    final displayData = SemanticsDisplayData(
-                      id: node.id,
-                      isActive: isActive,
-                      size: node.rect.size,
-                      data: node.data,
-                    );
-                    return widget.semanticsBoxBuilder(context, displayData);
-                  },
+      void addNodeWidget() {
+        if (!widget.includeNodePredicate(node)) {
+          return;
+        }
+        final rect = node.rect;
+        if (rect.isEmpty) {
+          return;
+        }
+        final boxTransform = nodeTransform.clone()
+          ..translateByVector3(Vector3(rect.topLeft.dx, rect.topLeft.dy, 0));
+        final centerScale = _estimatePointScale(rect.center, boxTransform);
+        widgets.add(
+          Transform(
+            key: ValueKey(node.id),
+            transform: boxTransform,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: SizedBox.fromSize(
+                size: node.rect.size,
+                child: WScaledBox(
+                  scale: 1 / (centerScale ?? 1),
+                  child: MappingValueListenableBuilder(
+                    valueListenable: activeNodeId,
+                    mapper: (value) => value == node.id,
+                    builder: (context, isActive, _) {
+                      final displayData = SemanticsDisplayData(
+                        id: node.id,
+                        isActive: isActive,
+                        size: node.rect.size,
+                        data: node.data,
+                      );
+                      return widget.semanticsBoxBuilder(context, displayData);
+                    },
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      );
+        );
+      }
+
+      addNodeWidget();
       for (final child in node.children) {
         addWidgets(child, nodeTransform);
       }

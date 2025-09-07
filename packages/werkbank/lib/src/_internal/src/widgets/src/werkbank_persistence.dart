@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 typedef ControllerMapFactory =
     Map<Type, PersistentController> Function(
@@ -77,6 +78,7 @@ class WerkbankPersistence extends StatefulWidget {
 class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   Map<Type, PersistentController> _controllersByType = {};
   Map<Type, String> _idsByType = {};
+  Map<Type, ListenableSubscription> _subscriptionsByType = {};
   late final JsonStore _jsonStore;
 
   bool _initialized = false;
@@ -107,6 +109,16 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
     super.didChangeDependencies();
   }
 
+  void _updateSubscription(Type type) {
+    _subscriptionsByType[type]!.cancel();
+    final controller = _controllersByType[type]!;
+    _subscriptionsByType[type] = controller.listen(() {
+      final id = _idsByType[type]!;
+      final json = controller.toJson();
+      _jsonStore.set(id, json);
+    });
+  }
+
   void _updateControllers() {
     final registry = _PersistentControllerRegistryImpl();
     registry.idPrefix = 'werkbank';
@@ -117,9 +129,17 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
       addon.registerPersistentControllers(registry);
     }
     final registrations = registry._registrations;
+    final registrationsByType = <Type, _Registration>{};
     final registrationsById = <String, _Registration>{};
     for (final registration in registrations) {
       try {
+        if (registrationsByType.containsKey(registration.type)) {
+          throw AssertionError(
+            'Cannot register multiple persistent controllers with '
+            'the same type: ${registration.type}',
+          );
+        }
+        registrationsByType[registration.type] = registration;
         if (registrationsById.containsKey(registration.id)) {
           throw AssertionError(
             'Cannot register multiple persistent controllers with '
@@ -132,10 +152,10 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
         debugPrintStack(stackTrace: stackTrace);
       }
     }
-    final oldIds = _idsByType.values.toSet();
-    final newIds = registrationsById.keys.toSet();
-    final addedIds = newIds.difference(oldIds);
-    final removedIds = oldIds.difference(newIds);
+    final oldTypes = _idsByType.keys.toSet();
+    final newTypes = registrationsByType.keys.toSet();
+    final addedTypes = newTypes.difference(oldTypes);
+    final removedTypes = oldTypes.difference(newTypes);
   }
 
   @override
@@ -192,6 +212,7 @@ class _PersistentControllerRegistryImpl
     _registrations.add(
       _Registration(
         id: '$idPrefix:$id',
+        type: T,
         createController: createController,
       ),
     );
@@ -201,9 +222,11 @@ class _PersistentControllerRegistryImpl
 class _Registration {
   _Registration({
     required this.id,
+    required this.type,
     required this.createController,
   });
 
   final String id;
+  final Type type;
   final PersistentController Function() createController;
 }

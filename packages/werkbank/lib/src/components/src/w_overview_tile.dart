@@ -79,8 +79,7 @@ class _WOverviewTileState extends State<WOverviewTile> {
         ),
       );
     }
-    /* TODO: sometimes we get an error that metadata cannot be found.
-         Is this because of the AnimatedSwitcher? */
+    // TODO: sometimes we get an error that metadata cannot be found. Is this because of the AnimatedSwitcher?
     effectiveThumbnail = AnimatedSwitcher(
       duration: Durations.medium1,
       child: KeyedSubtree(

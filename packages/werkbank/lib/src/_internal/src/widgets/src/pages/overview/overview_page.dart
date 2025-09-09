@@ -54,7 +54,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                     delegate = SliverChildBuilderDelegate(
                       (context, index) {
                         final child = useCaseDescriptor[index];
-                        return _OverviewTile(
+                        return _UseCaseOverviewTile(
                           key: ValueKey(child.path),
                           useCaseDescriptor: child,
                           onPressed: (_) {
@@ -81,7 +81,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                     delegate = SliverChildBuilderDelegate(
                       (context, index) {
                         final entry = entries[index];
-                        return _OverviewTile(
+                        return _UseCaseOverviewTile(
                           key: ValueKey(entry.name),
                           useCaseDescriptor: descriptor,
                           initialMutation: entry.initialMutation,
@@ -143,8 +143,8 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
   }
 }
 
-class _OverviewTile extends StatelessWidget {
-  const _OverviewTile({
+class _UseCaseOverviewTile extends StatelessWidget {
+  const _UseCaseOverviewTile({
     super.key,
     required this.useCaseDescriptor,
     this.initialMutation,
@@ -183,6 +183,43 @@ class _OverviewTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ComponentOverviewTile extends StatelessWidget {
+  const _ComponentOverviewTile({
+    super.key,
+    required this.componentDescriptor,
+    required this.hasThumbnail,
+    required this.nameSegments,
+    required this.onPressed,
+  });
+
+  final ComponentDescriptor componentDescriptor;
+  final bool Function(UseCaseDescriptor descriptor) hasThumbnail;
+  final List<String> nameSegments;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return WOverviewTile.multi(
+      onPressed: onPressed,
+      nameSegments: nameSegments,
+      thumbnailBuilders: [
+        for (final useCaseDescriptor in componentDescriptor.children)
+          if (hasThumbnail(useCaseDescriptor))
+            (context) => DescriptorProvider(
+              descriptor: useCaseDescriptor,
+              child: const LocalUseCaseControllerProvider(
+                child: UseCaseCompositionByControllerProvider(
+                  child: UseCaseThumbnail(),
+                ),
+              ),
+            )
+          else
+            null,
+      ],
     );
   }
 }

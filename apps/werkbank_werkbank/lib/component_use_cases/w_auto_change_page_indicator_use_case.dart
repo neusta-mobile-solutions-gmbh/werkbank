@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
-import 'package:werkbank_werkbank/tags.dart';
 
 WidgetBuilder wAutoChangePageIndicatorUseCase(UseCaseComposer c) {
   final pageCount = c.knobs.intSlider(

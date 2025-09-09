@@ -39,10 +39,11 @@ class _WAutoChangePageIndicatorState extends State<WAutoChangePageIndicator> {
   void _startTimer({bool updateImmediately = false}) {
     _timer?.cancel();
     void update() {
+      if (!mounted) {
+        return;
+      }
       if (_dragStartPage == null) {
-        widget.onSelectedPageChanged(
-          (widget.selectedPage + 1) % widget.pageCount,
-        );
+        _changePage(widget.selectedPage + 1);
       }
     }
 
@@ -50,6 +51,16 @@ class _WAutoChangePageIndicatorState extends State<WAutoChangePageIndicator> {
       update();
     }
     _timer = Timer.periodic(widget.changeInterval, (timer) => update());
+  }
+
+  void _changePage(int newPage) {
+    if (widget.pageCount <= 0) {
+      return;
+    }
+    final effectiveNewPage = newPage % widget.pageCount;
+    if (effectiveNewPage != widget.selectedPage) {
+      widget.onSelectedPageChanged(effectiveNewPage);
+    }
   }
 
   @override
@@ -82,8 +93,8 @@ class _WAutoChangePageIndicatorState extends State<WAutoChangePageIndicator> {
         },
         onHorizontalDragUpdate: (e) {
           final delta = (e.localPosition - _dragStartPosition!).dx;
-          widget.onSelectedPageChanged(
-            (_dragStartPage! + delta / 16.0).round() % widget.pageCount,
+          _changePage(
+            (_dragStartPage! + delta / 16.0).round(),
           );
         },
         onHorizontalDragEnd: (e) {
@@ -95,7 +106,7 @@ class _WAutoChangePageIndicatorState extends State<WAutoChangePageIndicator> {
         },
         child: AbsorbPointer(
           child: SizedBox(
-            height: 8,
+            height: 16,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,

@@ -160,10 +160,7 @@ WerkbankRoot get root => WerkbankRoot(
           name: 'WShortcut',
           builder: wShortcutUseCase,
         ),
-        WerkbankUseCase(
-          name: 'WOverviewTile',
-          builder: wOverviewTileUseChase,
-        ),
+        wOverviewTileUseCaseComponent,
         WerkbankUseCase(
           name: 'WAutoChangePageIndicator',
           builder: wAutoChangePageIndicatorUseCase,

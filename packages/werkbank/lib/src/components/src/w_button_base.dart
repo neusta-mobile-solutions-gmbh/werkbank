@@ -67,18 +67,23 @@ class _WButtonBaseState extends State<WButtonBase> {
     return Semantics(
       toggled: widget.semanticActiveState ? widget.isActive : null,
       enabled: widget.onPressed != null,
-      child: GestureDetector(
-        onTap: widget.onPressed,
-        child: FocusableActionDetector(
-          enabled: widget.onPressed != null,
-          actions: _actionMap,
-          onShowFocusHighlight: _handleFocusHighlight,
-          onShowHoverHighlight: _handleHoverHighlight,
-          child: WBorderedBox(
-            borderRadius: widget.borderRadius,
-            borderColor: widget.showBorder ? borderColor : null,
-            backgroundColor: backgroundColor,
-            child: widget.child,
+      child: MouseRegion(
+        cursor: widget.onPressed != null
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic,
+        child: GestureDetector(
+          onTap: widget.onPressed,
+          child: FocusableActionDetector(
+            enabled: widget.onPressed != null,
+            actions: _actionMap,
+            onShowFocusHighlight: _handleFocusHighlight,
+            onShowHoverHighlight: _handleHoverHighlight,
+            child: WBorderedBox(
+              borderRadius: widget.borderRadius,
+              borderColor: widget.showBorder ? borderColor : null,
+              backgroundColor: backgroundColor,
+              child: widget.child,
+            ),
           ),
         ),
       ),

@@ -49,10 +49,6 @@ class _WOverviewTileState extends State<WOverviewTile> {
 
   @override
   Widget build(BuildContext context) {
-    final hasMultipleThumbnails = switch (widget._thumbnailDelegate) {
-      _MultiThumbnailDelegate() => true,
-      _SingleThumbnailDelegate() => false,
-    };
     Widget effectiveThumbnail;
     final thumbnail = switch (widget._thumbnailDelegate) {
       _MultiThumbnailDelegate(
@@ -83,6 +79,8 @@ class _WOverviewTileState extends State<WOverviewTile> {
         ),
       );
     }
+    /* TODO: sometimes we get an error that metadata cannot be found.
+         Is this because of the AnimatedSwitcher? */
     effectiveThumbnail = AnimatedSwitcher(
       duration: Durations.medium1,
       child: KeyedSubtree(

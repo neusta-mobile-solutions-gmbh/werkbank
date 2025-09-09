@@ -45,31 +45,59 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                         descriptor,
                         orderOption,
                         includeParents: false,
+                        includeComponentChildren:
+                            descriptor is ComponentDescriptor,
                       ),
                     );
-                    final useCaseDescriptor = filteredDescriptors
-                        .cast<UseCaseDescriptor>()
-                        .toList();
+                    final useCaseOrComponentDescriptors = filteredDescriptors
+                        .cast<ChildDescriptor>();
 
                     delegate = SliverChildBuilderDelegate(
                       (context, index) {
-                        final child = useCaseDescriptor[index];
-                        return _UseCaseOverviewTile(
-                          key: ValueKey(child.path),
-                          useCaseDescriptor: child,
-                          onPressed: (_) {
-                            WerkbankRouter.of(
-                              context,
-                            ).goTo(DescriptorNavState.overviewOrView(child));
-                          },
-                          nameSegments: child.nameSegments
-                              .skip(descriptor.nameSegments.length)
-                              .toList(),
-                          hasThumbnail:
-                              metadataMap[child]!.overviewSettings.hasThumbnail,
-                        );
+                        final child = useCaseOrComponentDescriptors[index];
+                        switch (child) {
+                          case UseCaseDescriptor():
+                            return _UseCaseOverviewTile(
+                              key: ValueKey(child.path),
+                              useCaseDescriptor: child,
+                              onPressed: (_) {
+                                WerkbankRouter.of(context).goTo(
+                                  DescriptorNavState.overviewOrView(child),
+                                );
+                              },
+                              nameSegments: child.nameSegments
+                                  .skip(descriptor.nameSegments.length)
+                                  .toList(),
+                              hasThumbnail: metadataMap[child]!
+                                  .overviewSettings
+                                  .hasThumbnail,
+                            );
+                          case ComponentDescriptor():
+                            return _ComponentOverviewTile(
+                              key: ValueKey(child.path),
+                              useCaseDescriptors: filter.filteredDescriptors(
+                                child.useCases,
+                              ),
+                              hasThumbnail: (useCaseDescriptor) =>
+                                  metadataMap[useCaseDescriptor]!
+                                      .overviewSettings
+                                      .hasThumbnail,
+                              onPressed: () {
+                                WerkbankRouter.of(
+                                  context,
+                                ).goTo(
+                                  DescriptorNavState.overviewOrView(child),
+                                );
+                              },
+                              nameSegments: child.nameSegments
+                                  .skip(descriptor.nameSegments.length)
+                                  .toList(),
+                            );
+                          case FolderDescriptor():
+                            throw Exception('Unexpected FolderDescriptor');
+                        }
                       },
-                      childCount: useCaseDescriptor.length,
+                      childCount: useCaseOrComponentDescriptors.length,
                     );
                   case UseCaseOverviewNavState(
                     :final descriptor,
@@ -190,13 +218,13 @@ class _UseCaseOverviewTile extends StatelessWidget {
 class _ComponentOverviewTile extends StatelessWidget {
   const _ComponentOverviewTile({
     super.key,
-    required this.componentDescriptor,
+    required this.useCaseDescriptors,
     required this.hasThumbnail,
     required this.nameSegments,
     required this.onPressed,
   });
 
-  final ComponentDescriptor componentDescriptor;
+  final List<UseCaseDescriptor> useCaseDescriptors;
   final bool Function(UseCaseDescriptor descriptor) hasThumbnail;
   final List<String> nameSegments;
   final VoidCallback onPressed;
@@ -207,7 +235,7 @@ class _ComponentOverviewTile extends StatelessWidget {
       onPressed: onPressed,
       nameSegments: nameSegments,
       thumbnailBuilders: [
-        for (final useCaseDescriptor in componentDescriptor.children)
+        for (final useCaseDescriptor in useCaseDescriptors)
           if (hasThumbnail(useCaseDescriptor))
             (context) => DescriptorProvider(
               descriptor: useCaseDescriptor,

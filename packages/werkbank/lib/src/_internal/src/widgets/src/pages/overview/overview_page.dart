@@ -154,7 +154,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                                 mainAxisSpacing: 24,
                                 crossAxisSpacing: 24,
                                 maxCrossAxisExtent: 256,
-                                childAspectRatio: 0.85,
+                                childAspectRatio: 0.8,
                               ),
                           delegate: delegate,
                         ),

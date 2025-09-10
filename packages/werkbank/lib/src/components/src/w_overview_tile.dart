@@ -48,7 +48,7 @@ class _WOverviewTileState extends State<WOverviewTile> {
 
   @override
   Widget build(BuildContext context) {
-    final Widget effectiveThumbnail;
+    Widget effectiveThumbnail;
     final thumbnail = switch (widget._thumbnailDelegate) {
       _MultiThumbnailDelegate(
         thumbnailBuilders: final builders,
@@ -60,14 +60,9 @@ class _WOverviewTileState extends State<WOverviewTile> {
         singleThumbnail,
     };
     if (thumbnail != null) {
-      effectiveThumbnail = WDelayedReveal.randomDelay(
-        minDelay: Durations.short1,
-        delayCurve: Curves.easeInCirc,
-        placeholder: const SizedBox.expand(),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(2),
-          child: thumbnail,
-        ),
+      effectiveThumbnail = ClipRRect(
+        borderRadius: BorderRadius.circular(2),
+        child: thumbnail,
       );
     } else {
       effectiveThumbnail = const Center(
@@ -77,6 +72,12 @@ class _WOverviewTileState extends State<WOverviewTile> {
         ),
       );
     }
+    effectiveThumbnail = WDelayedReveal.randomDelay(
+      minDelay: Durations.short1,
+      delayCurve: Curves.easeInCirc,
+      placeholder: const SizedBox.expand(),
+      child: effectiveThumbnail,
+    );
     return WButtonBase(
       onPressed: widget.onPressed,
       child: Padding(

@@ -65,9 +65,12 @@ WidgetBuilder wOverviewTileMultiUseChase(UseCaseComposer c) {
       nameSegments: path.value.split('/'),
       thumbnailBuilders: [
         for (var i = 0; i < thumbnailCount.value; i++)
-          (context) => ColoredBox(
-            color: Colors.primaries[i % Colors.primaries.length],
-          ),
+          if (i != 3)
+            (context) => ColoredBox(
+              color: Colors.primaries[i % Colors.primaries.length],
+            )
+          else
+            null,
       ],
     );
   };

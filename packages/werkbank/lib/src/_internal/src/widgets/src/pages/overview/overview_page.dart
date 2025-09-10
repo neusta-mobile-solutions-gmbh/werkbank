@@ -95,7 +95,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                                   .toList(),
                             );
                           case FolderDescriptor():
-                            throw Exception('Unexpected FolderDescriptor');
+                            throw AssertionError('Unexpected FolderDescriptor');
                         }
                       },
                       childCount: useCaseOrComponentDescriptors.length,

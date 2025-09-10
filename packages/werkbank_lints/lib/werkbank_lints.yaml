@@ -21,7 +21,6 @@ linter:
     - avoid_dynamic_calls
     - avoid_equals_and_hash_code_on_mutable_classes
     - avoid_escaping_inner_quotes
-    - avoid_field_initializers_in_const_classes
     - avoid_final_parameters
     - avoid_futureor_void
     - avoid_implementing_value_types

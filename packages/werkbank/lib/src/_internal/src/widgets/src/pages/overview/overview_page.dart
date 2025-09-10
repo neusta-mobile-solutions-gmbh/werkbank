@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_background.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/pages/overview/_internal/component_overview_tile.dart';
+import 'package:werkbank/src/_internal/src/widgets/src/pages/overview/_internal/use_case_overview_tile.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/tree/tree.dart';
-import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
@@ -57,7 +58,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                         final child = useCaseOrComponentDescriptors[index];
                         switch (child) {
                           case UseCaseDescriptor():
-                            return _UseCaseOverviewTile(
+                            return UseCaseOverviewTile(
                               key: ValueKey(child.path),
                               useCaseDescriptor: child,
                               onPressed: (_) {
@@ -73,7 +74,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                                   .hasThumbnail,
                             );
                           case ComponentDescriptor():
-                            return _ComponentOverviewTile(
+                            return ComponentOverviewTile(
                               key: ValueKey(child.path),
                               useCaseDescriptors: filter.filteredDescriptors(
                                 child.useCases,
@@ -109,7 +110,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                     delegate = SliverChildBuilderDelegate(
                       (context, index) {
                         final entry = entries[index];
-                        return _UseCaseOverviewTile(
+                        return UseCaseOverviewTile(
                           key: ValueKey(entry.name),
                           useCaseDescriptor: descriptor,
                           initialMutation: entry.initialMutation,
@@ -167,87 +168,6 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _UseCaseOverviewTile extends StatelessWidget {
-  const _UseCaseOverviewTile({
-    super.key,
-    required this.useCaseDescriptor,
-    this.initialMutation,
-    required this.nameSegments,
-    required this.onPressed,
-    required this.hasThumbnail,
-  });
-
-  final UseCaseDescriptor useCaseDescriptor;
-  final UseCaseStateMutation? initialMutation;
-  final List<String> nameSegments;
-  final void Function(UseCaseComposition composition) onPressed;
-  final bool hasThumbnail;
-
-  @override
-  Widget build(BuildContext context) {
-    return DescriptorProvider(
-      descriptor: useCaseDescriptor,
-      child: LocalUseCaseControllerProvider(
-        initialMutation: initialMutation,
-        child: UseCaseCompositionByControllerProvider(
-          child: Builder(
-            builder: (context) {
-              return WOverviewTile(
-                onPressed: () {
-                  onPressed(
-                    UseCaseCompositionProvider.compositionOf(
-                      context,
-                    ),
-                  );
-                },
-                nameSegments: nameSegments,
-                thumbnail: hasThumbnail ? const UseCaseThumbnail() : null,
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ComponentOverviewTile extends StatelessWidget {
-  const _ComponentOverviewTile({
-    super.key,
-    required this.useCaseDescriptors,
-    required this.hasThumbnail,
-    required this.nameSegments,
-    required this.onPressed,
-  });
-
-  final List<UseCaseDescriptor> useCaseDescriptors;
-  final bool Function(UseCaseDescriptor descriptor) hasThumbnail;
-  final List<String> nameSegments;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return WOverviewTile.multi(
-      onPressed: onPressed,
-      nameSegments: nameSegments,
-      thumbnailBuilders: [
-        for (final useCaseDescriptor in useCaseDescriptors)
-          if (hasThumbnail(useCaseDescriptor))
-            (context) => DescriptorProvider(
-              descriptor: useCaseDescriptor,
-              child: const LocalUseCaseControllerProvider(
-                child: UseCaseCompositionByControllerProvider(
-                  child: UseCaseThumbnail(),
-                ),
-              ),
-            )
-          else
-            null,
-      ],
     );
   }
 }

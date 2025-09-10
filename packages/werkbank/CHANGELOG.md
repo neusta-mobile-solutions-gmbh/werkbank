@@ -1,3 +1,6 @@
+# 0.17.2+1
+- Fix that switching between the use case thumbnails in a component overview tile was not resetting the state of the use case.
+
 # 0.17.2
 - Components now combine their use cases into a single tile in a folder or root overview.
   - The tile will periodically switch between the thumbnails of the contained use cases.

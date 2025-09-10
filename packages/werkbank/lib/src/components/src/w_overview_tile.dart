@@ -62,7 +62,10 @@ class _WOverviewTileState extends State<WOverviewTile> {
     if (thumbnail != null) {
       effectiveThumbnail = ClipRRect(
         borderRadius: BorderRadius.circular(2),
-        child: thumbnail,
+        child: KeyedSubtree(
+          key: ValueKey(_currentThumbnailIndex),
+          child: thumbnail,
+        ),
       );
     } else {
       effectiveThumbnail = const Center(

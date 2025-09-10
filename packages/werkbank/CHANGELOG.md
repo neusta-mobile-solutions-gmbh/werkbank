@@ -1,3 +1,9 @@
+# 0.17.2
+- Components now combine their use cases into a single tile in a folder or root overview.
+  - The tile will periodically switch between the thumbnails of the contained use cases.
+  - Dragging on the pagination dots will switch the thumbnails manually.
+  - When overviewing a component itself, the use cases are still shown separately.
+
 # 0.17.1
 - Improve semantics inspector
   - Fix that merged semantics nodes were shown by default.

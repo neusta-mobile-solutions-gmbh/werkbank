@@ -28,7 +28,6 @@ class WOverviewTile extends StatefulWidget {
 
 class _WOverviewTileState extends State<WOverviewTile> {
   int _currentThumbnailIndex = 0;
-  int _changeCount = 0;
 
   @override
   void didUpdateWidget(WOverviewTile oldWidget) {
@@ -49,7 +48,7 @@ class _WOverviewTileState extends State<WOverviewTile> {
 
   @override
   Widget build(BuildContext context) {
-    Widget effectiveThumbnail;
+    final Widget effectiveThumbnail;
     final thumbnail = switch (widget._thumbnailDelegate) {
       _MultiThumbnailDelegate(
         thumbnailBuilders: final builders,
@@ -62,7 +61,6 @@ class _WOverviewTileState extends State<WOverviewTile> {
     };
     if (thumbnail != null) {
       effectiveThumbnail = WDelayedReveal.randomDelay(
-        key: ValueKey(_currentThumbnailIndex),
         minDelay: Durations.short1,
         delayCurve: Curves.easeInCirc,
         placeholder: const SizedBox.expand(),
@@ -79,14 +77,6 @@ class _WOverviewTileState extends State<WOverviewTile> {
         ),
       );
     }
-    // TODO: sometimes we get an error that metadata cannot be found. Is this because of the AnimatedSwitcher?
-    effectiveThumbnail = AnimatedSwitcher(
-      duration: Durations.medium1,
-      child: KeyedSubtree(
-        key: ValueKey(_changeCount),
-        child: SizedBox.expand(child: effectiveThumbnail),
-      ),
-    );
     return WButtonBase(
       onPressed: widget.onPressed,
       child: Padding(
@@ -116,7 +106,6 @@ class _WOverviewTileState extends State<WOverviewTile> {
                   }
                   setState(() {
                     _currentThumbnailIndex = value;
-                    _changeCount++;
                   });
                 },
               )

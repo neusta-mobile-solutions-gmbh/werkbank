@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/addons.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/utils/utils.dart';
 
 UseCaseBuilder colorsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
@@ -20,7 +21,12 @@ UseCaseBuilder colorsUseCaseBuilder({
         'A default UseCase of Werkbank to display '
         'all colors of a theme.',
       );
+
     builder(c);
+
+    if (c.isAddonActive(BackgroundAddon.addonId)) {
+      c.background.color(Colors.transparent);
+    }
     return (context) {
       return SingleChildScrollView(
         child: _ColorsShowCase(
@@ -63,25 +69,35 @@ class _ColorsShowCase extends StatelessWidget {
                     border: Border.all(),
                   ),
                   child: IntrinsicWidth(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          color: color.value,
-                          height: size,
-                        ),
-                        const SizedBox(height: 16),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(color.key),
-                        ),
-                        const SizedBox(height: 4),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(colorHexText),
-                        ),
-                        const SizedBox(height: 16),
-                      ],
+                    child: WerkbankThemed(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            color: color.value,
+                            height: size,
+                          ),
+                          const SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                            ),
+                            child: Text(
+                              color.key,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                            ),
+                            child: Text(
+                              colorHexText,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
                     ),
                   ),
                 );

@@ -11,29 +11,38 @@ This topic describes how to improve the integration of Werkbank with your IDE, m
   - [Android Studio](#android-studio-1)
   - [Visual Studio Code](#visual-studio-code-1)
 
+## Adding Live Templates/Snippets to your IDE
+
+### Android Studio
+1. Copy the XML from of the live templates below into your clipboard.
+2. Go to File -> Settings -> Editor -> Live Templates.
+3. Right-click on the "Flutter" group.
+4. Press "Paste".
+
+### Visual Studio Code
+1. Copy the JSON from of the snippets below into your clipboard.
+2. Go to Code -> Preferences -> Configure Snippets and select "dart".
+3. Paste the JSON into the opened file between the curly braces.
+
 ## Live Templates/Snippets for a use case
 To make it easier to write a new use case, you can create a live template/snippet in your IDE.
 
-### Android Studio
-Go to Settings -> Editor -> Live Templates and click on the "Flutter" group.
-Click the Add (+) button in the top left corner and select "Live Template".
-As abbreviation, use for example "useCase".
-As "Template text" set the following:
-```
-WidgetBuilder $NAME$UseCase(UseCaseComposer c) {
-  return (context) {
-    return $END$;
-  };
-}
-```
-Finally click on "Define" and select "Dart -> Toplevel" as applicable context.
-Save the settings and you are good to go.
+<details>
+<summary><b>Android Studio</b> Live Template XML</summary>
 
-### Visual Studio Code
-Go to Code -> Preferences -> Configure Snippets and select "dart".
-This should open a json file.
+```xml
+<template name="wusecase" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankUseCase get $NAME$UseCase =&gt; WerkbankUseCase(&#10;    name: '$CAP_NAME$',&#10;    builder: _useCase,&#10;  );&#10;&#10;WidgetBuilder _useCase(UseCaseComposer c) {&#10;  return (context) {&#10;    return $END$;&#10;  };&#10;}" description="" toReformat="false" toShortenFQNames="true">
+  <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  <variable name="CAP_NAME" expression="capitalize(NAME)" defaultValue="" alwaysStopAt="false" />
+  <context>
+    <option name="DART_TOPLEVEL" value="true" />
+  </context>
+</template>
+```
+</details>
 
-Add the following snippet between the curly braces:
+<details>
+<summary><b>Visual Studio Code</b> Snippet JSON</summary>
 
 ```json
 "Create a UseCase": {
@@ -56,6 +65,25 @@ Add the following snippet between the curly braces:
     "description": "Creates a Werkbank use case."
 },
 ```
+</details>
+
+**Example usage:**
+
+```dart
+import 'package:flutter/widgets.dart';
+import 'package:werkbank/werkbank.dart';
+
+WerkbankUseCase get sliderUseCase => WerkbankUseCase(
+    name: 'Slider',
+    builder: _useCase,
+  );
+
+WidgetBuilder _useCase(UseCaseComposer c) {
+  return (context) {
+    return Slider(/* ... */);
+  };
+}
+```
 
 
 ## Live Templates/Snippets for multiple use cases
@@ -64,11 +92,22 @@ Sometimes you may find yourself in a position where you want to write multiple u
 like a shared composition with the same knobs or something similar. This may happen when you have different variants of
 the same UI Component. Various approaches are possible, but starting with a snippet can be helpful.
 
-### Android Studio
+<details>
+<summary><b>Android Studio</b> Live Template XML</summary>
 
+```xml
+<template name="wvariantscomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;enum _Variant {&#10;  one$END$('One'),&#10;  two('Two');&#10;&#10;  const _Variant(this.name);&#10;&#10;  final String name;&#10;}&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    for (final variant in _Variant.values)&#10;      WerkbankUseCase(&#10;        name: variant.name,&#10;        builder: (c) =&gt; _multiUseCase(c, variant),&#10;      ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _multiUseCase(&#10;  UseCaseComposer c,&#10;  _Variant variant,&#10;) {&#10;  return (context) {&#10;    return switch (variant) {&#10;      _Variant.one =&gt; const Placeholder(),&#10;      _Variant.two =&gt; const Placeholder(),&#10;    };&#10;  };&#10;}" description="" toReformat="false" toShortenFQNames="true">
+  <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  <variable name="CAP_NAME" expression="capitalize(NAME)" defaultValue="" alwaysStopAt="false" />
+  <context>
+    <option name="DART_TOPLEVEL" value="true" />
+  </context>
+</template>
+```
+</details>
 
-### Visual Studio Code
-
+<details>
+<summary><b>Visual Studio Code</b> Snippet JSON</summary>
 
 ```json
 "Create a Component for similar UseCases": {
@@ -112,6 +151,49 @@ the same UI Component. Various approaches are possible, but starting with a snip
     "description": "Creates a Werkbank component with multiple similar use cases."
 },
 ```
+</details>
 
+**Example usage:**
 
+```dart
+import 'package:flutter/material.dart';
+import 'package:werkbank/werkbank.dart';
 
+enum _Variant {
+  filled('FilledButton'),
+  filledTonal('FilledButton.tonal'),
+  outlined('OutlinedButton'),
+  text('TextButton'),
+  elevated('ElevatedButton');
+
+  const _Variant(this.name);
+
+  final String name;
+}
+
+WerkbankComponent get buttonComponent => WerkbankComponent(
+  name: 'Button',
+  useCases: [
+    for (final variant in _Variant.values)
+      WerkbankUseCase(
+        name: variant.name,
+        builder: (c) => _multiUseCase(c, variant),
+      ),
+  ],
+);
+
+WidgetBuilder _multiUseCase(
+  UseCaseComposer c,
+  _Variant variant,
+) {
+  return (context) {
+    return switch (variant) {
+      _Variant.filled => FilledButton(/* ... */),
+      _Variant.filledTonal => FilledButton.tonal(/* ... */),
+      _Variant.outlined => OutlinedButton(/* ... */),
+      _Variant.text => TextButton(/* ... */),
+      _Variant.elevated => ElevatedButton(/* ... */),
+    };
+  };
+}
+```

@@ -51,7 +51,7 @@ To make it easier to write a new use case, you can create a live template/snippe
 "Create a UseCase": {
     "prefix": "usecase",
     "body": [
-        "import 'package:flutter/material.dart';",
+        "import 'package:flutter/widgets.dart';",
         "import 'package:werkbank/werkbank.dart';",
         "",
         "WerkbankUseCase get ${1:name}UseCase => WerkbankUseCase(",
@@ -178,7 +178,7 @@ the same UI Component. Various approaches are possible, but starting with a snip
 "Create a Component for similar UseCases": {
     "prefix": "multiusecase",
     "body": [
-        "import 'package:flutter/material.dart';",
+        "import 'package:flutter/widgets.dart';",
         "import 'package:werkbank/werkbank.dart';",
         "",
         "enum _Variant {",

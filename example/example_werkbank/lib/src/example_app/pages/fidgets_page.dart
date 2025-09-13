@@ -67,7 +67,7 @@ class FidgetsPage extends StatelessWidget {
           );
         },
       ),
-      FilledButton(
+      FilledButton.tonal(
         onPressed: () {
           _showSnackbar(context, 'Button Pressed');
         },

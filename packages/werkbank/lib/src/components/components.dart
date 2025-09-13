@@ -6,6 +6,7 @@ library;
 export 'src/utility_widgets/global_callback_shortcuts.dart';
 export 'src/utility_widgets/mapping_value_listenable_builder.dart';
 export 'src/w_animated_visibility.dart';
+export 'src/w_auto_change_page_indicator.dart';
 export 'src/w_bordered_box.dart';
 export 'src/w_button_base.dart';
 export 'src/w_checkerboard_background.dart';

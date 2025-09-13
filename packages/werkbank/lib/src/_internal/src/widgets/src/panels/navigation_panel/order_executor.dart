@@ -6,8 +6,10 @@ mixin OrderExecutor {
     Descriptor descriptor,
     OrderOption orderOption, {
     required bool includeParents,
+    bool includeComponentChildren = true,
   }) {
     final orderedChilden = switch (descriptor) {
+      ComponentDescriptor() when !includeComponentChildren => null,
       ParentDescriptor(:final children) => orderChildren(children, orderOption),
       UseCaseDescriptor() => null,
     };
@@ -19,6 +21,7 @@ mixin OrderExecutor {
             child,
             orderOption,
             includeParents: includeParents,
+            includeComponentChildren: includeComponentChildren,
           ),
     ];
   }

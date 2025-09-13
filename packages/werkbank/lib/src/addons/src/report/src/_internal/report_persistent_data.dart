@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 
@@ -14,9 +12,8 @@ class ReportPersistentData {
   final IMap<ReportId, ReportEntry> entries;
   final DateTime firstTimeReportAddonWasExecuted;
 
-  static ReportPersistentData fromJson(String json) {
-    final map = jsonDecode(json) as Map<String, dynamic>;
-    if (map case {
+  static ReportPersistentData fromJson(Object? json) {
+    if (json case {
       'entries': final Map<String, dynamic> entries,
       'firstTimeReportAddonWasExecuted':
           final String firstTimeReportAddonWasExecuted,
@@ -43,8 +40,8 @@ class ReportPersistentData {
     }
   }
 
-  String toJson() {
-    final map = <String, dynamic>{
+  Object? toJson() {
+    return <String, dynamic>{
       'entries': {
         ...entries.unlock.map(
           (key, value) => MapEntry(key, value.toMap()),
@@ -53,7 +50,6 @@ class ReportPersistentData {
       'firstTimeReportAddonWasExecuted': firstTimeReportAddonWasExecuted
           .toIso8601String(),
     };
-    return jsonEncode(map);
   }
 
   ReportPersistentData copyWith({

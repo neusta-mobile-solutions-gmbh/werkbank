@@ -5,34 +5,29 @@ import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_d
 import 'package:werkbank/src/persistence/persistence.dart';
 
 class ReportPersistentController extends PersistentController {
-  ReportPersistentController({required super.prefsWithCache});
-
   @override
-  String get id => 'report';
-
-  @override
-  void init(String? unsafeJson) {
+  void tryLoadFromJson(Object? json) {
     try {
-      _persistentData = unsafeJson != null
-          ? ReportPersistentData.fromJson(unsafeJson)
-          : ReportPersistentData(
-              entries: <ReportId, ReportEntry>{}.lockUnsafe,
-              firstTimeReportAddonWasExecuted: DateTime.now(),
-            );
+      _persistentData = ReportPersistentData.fromJson(json);
+      notifyListeners();
     } on FormatException {
       debugPrint(
         'Restoring ReportPersistentData failed. Throwing it away. '
         'This can happen if changes to werkbank were made. '
         "It's not backwards compatible on purpose.",
       );
-      _persistentData = ReportPersistentData(
-        entries: <ReportId, ReportEntry>{}.lockUnsafe,
-        firstTimeReportAddonWasExecuted: DateTime.now(),
-      );
     }
   }
 
-  late ReportPersistentData _persistentData;
+  @override
+  Object? toJson() {
+    return _persistentData.toJson();
+  }
+
+  ReportPersistentData _persistentData = ReportPersistentData(
+    entries: <ReportId, ReportEntry>{}.lockUnsafe,
+    firstTimeReportAddonWasExecuted: DateTime.now(),
+  );
 
   ReportPersistentData get persistentData => _persistentData;
 
@@ -51,10 +46,6 @@ class ReportPersistentController extends PersistentController {
         report.id: reportEntry,
       }.lockUnsafe,
     );
-    setJson(
-      _persistentData.toJson(),
-    );
-
     notifyListeners();
   }
 }

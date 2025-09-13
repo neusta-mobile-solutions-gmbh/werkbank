@@ -5,21 +5,18 @@ import 'package:werkbank/src/persistence/persistence.dart';
 class AcknowledgedControllerImpl extends PersistentController
     implements AcknowledgedController {
   AcknowledgedControllerImpl({
-    required super.prefsWithCache,
     required Set<String> descendantsPaths,
   }) : _descendantsPaths = descendantsPaths;
-
-  @override
-  String get id => 'acknowledged';
 
   final Set<String> _descendantsPaths;
 
   @override
-  void init(String? unsafeJson) {
+  void tryLoadFromJson(Object? json) {
+    // TODO: Rework this
     try {
       AcknowledgedDescriptors oldAcknowledgedDescriptors;
-      oldAcknowledgedDescriptors = unsafeJson != null
-          ? AcknowledgedDescriptors.fromJson(unsafeJson)
+      oldAcknowledgedDescriptors = json != null
+          ? AcknowledgedDescriptors.fromJson(json)
           : AcknowledgedDescriptors.fromPaths(
               _descendantsPaths,
             );
@@ -47,6 +44,7 @@ class AcknowledgedControllerImpl extends PersistentController
       _descriptors = AcknowledgedDescriptors(
         entries: entries.lockUnsafe,
       );
+      notifyListeners();
     } on FormatException {
       debugPrint(
         'Restoring AcknowledgedDescriptors failed. Throwing it away. '
@@ -57,11 +55,15 @@ class AcknowledgedControllerImpl extends PersistentController
       _descriptors = AcknowledgedDescriptors.fromPaths(
         _descendantsPaths,
       );
+      notifyListeners();
     }
 
-    setJson(
-      _descriptors.toJson(),
-    );
+    notifyListeners();
+  }
+
+  @override
+  Object? toJson() {
+    return _descriptors.toJson();
   }
 
   late AcknowledgedDescriptors _descriptors;
@@ -98,11 +100,6 @@ class AcknowledgedControllerImpl extends PersistentController
     _descriptors = AcknowledgedDescriptors(
       entries: entries.lockUnsafe,
     );
-
-    setJson(
-      _descriptors.toJson(),
-    );
-
     notifyListeners();
   }
 
@@ -110,9 +107,6 @@ class AcknowledgedControllerImpl extends PersistentController
   void clear() {
     _descriptors = AcknowledgedDescriptors.fromPaths(
       _descendantsPaths,
-    );
-    setJson(
-      _descriptors.toJson(),
     );
     notifyListeners();
   }

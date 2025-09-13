@@ -1,27 +1,22 @@
-import 'dart:convert';
-
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 class PanelTabsController extends PersistentController {
-  PanelTabsController({required super.prefsWithCache});
-
   @override
-  String get id => 'panel_tabs';
-
-  @override
-  void init(String? unsafeJson) {
+  void tryLoadFromJson(Object? json) {
+    // TODO: Rework this
     late final emptyDataObj = PanelTabsPersistentData(
       tabs: {
         for (final tab in PanelTab.values) tab: TabSectionData.empty,
       }.lockUnsafe,
     );
     try {
-      _unsafePersistentData = unsafeJson != null
-          ? PanelTabsPersistentData.fromJson(jsonDecode(unsafeJson))
+      _unsafePersistentData = json != null
+          ? PanelTabsPersistentData.fromJson(json)
           : emptyDataObj;
+      notifyListeners();
     } on FormatException catch (_) {
       debugPrint(
         'Restoring PanelTabsPersistentData failed. Throwing it away. '
@@ -29,7 +24,13 @@ class PanelTabsController extends PersistentController {
         "It's not backwards compatible on purpose.",
       );
       _unsafePersistentData = emptyDataObj;
+      notifyListeners();
     }
+  }
+
+  @override
+  Object? toJson() {
+    return _unsafePersistentData.toJson();
   }
 
   late PanelTabsPersistentData _unsafePersistentData;
@@ -52,7 +53,7 @@ class PanelTabsController extends PersistentController {
     _unsafePersistentData = _unsafePersistentData.copyWith(
       tabs: _unsafePersistentData.tabs.add(tab, newSectionData),
     );
-    _update();
+    notifyListeners();
     final orderedSections = <T>[];
     final sectionsById = {
       for (final section in sections) getId(section): section,
@@ -77,7 +78,7 @@ class PanelTabsController extends PersistentController {
     _unsafePersistentData = _unsafePersistentData.copyWith(
       tabs: _unsafePersistentData.tabs.add(tab, newSectionData),
     );
-    _update();
+    notifyListeners();
   }
 
   bool isVisible(PanelTab tab, String sectionId) {
@@ -99,11 +100,6 @@ class PanelTabsController extends PersistentController {
     _unsafePersistentData = _unsafePersistentData.copyWith(
       tabs: _unsafePersistentData.tabs.add(tab, newSectionData),
     );
-    _update();
-  }
-
-  void _update() {
-    setJson(jsonEncode(_unsafePersistentData.toJson()));
     notifyListeners();
   }
 }

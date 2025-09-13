@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 
 class AcknowledgedDescriptors {
@@ -20,9 +18,8 @@ class AcknowledgedDescriptors {
       );
 
   // Throws FormatException if the JSON is invalid or contains invalid data.
-  static AcknowledgedDescriptors fromJson(String json) {
-    final map = jsonDecode(json) as Map<String, dynamic>;
-    if (map case {'entries': final List<dynamic> entries}) {
+  static AcknowledgedDescriptors fromJson(Object? json) {
+    if (json case {'entries': final List<dynamic> entries}) {
       return AcknowledgedDescriptors(
         entries: IList<AcknowledgedDescriptorEntry>(
           entries.map((dynamic entry) {
@@ -51,10 +48,12 @@ class AcknowledgedDescriptors {
     }
   }
 
-  String toJson() {
-    return jsonEncode(<String, dynamic>{
-      'entries': entries.map((e) => e.toMap()).toList(),
-    });
+  Object? toJson() {
+    return {
+      'entries': [
+        for (final entry in entries) entry.toJson(),
+      ],
+    };
   }
 
   final IList<AcknowledgedDescriptorEntry> entries;
@@ -68,8 +67,8 @@ class AcknowledgedDescriptorEntry {
     required this.availableSinceFirstStart,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+  Object? toJson() {
+    return {
       'path': path,
       'firstSeen': firstSeen.toIso8601String(),
       'visitedCount': visitedCount,

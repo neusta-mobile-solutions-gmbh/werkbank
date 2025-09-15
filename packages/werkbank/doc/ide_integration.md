@@ -10,7 +10,7 @@ This topic describes how to improve the integration of Werkbank with your IDE, m
 - [Use Case and Component Live Templates/Snippets](#use-case-and-component-live-templatessnippets)
   - [Simple Use Case (`wusecase`)](#simple-use-case-wusecase)
   - [Component with Multiple Use Cases (`wcomponent`)](#component-with-multiple-use-cases-wcomponent)
-  - [Component with Variant Use Cases (`wvariantscomponent`)](#component-with-variant-use-cases-wvariantscomponent)
+- [Component with Variant Use Cases (`wvariantscomponent`)](#component-with-variant-use-cases-wvariantscomponent)
 
 ## Adding Live Templates/Snippets to your IDE
 
@@ -49,7 +49,7 @@ To make it easier to write a new use case, you can create a live template/snippe
 
 ```json
 "Create a UseCase": {
-    "prefix": "usecase",
+    "prefix": "wusecase",
     "body": [
         "import 'package:flutter/widgets.dart';",
         "import 'package:werkbank/werkbank.dart';",
@@ -61,7 +61,7 @@ To make it easier to write a new use case, you can create a live template/snippe
         "",
         "WidgetBuilder _useCase(UseCaseComposer c) {",
         "  return (context) {",
-        "    return ${0:widget};",
+        "    return ${0:Placeholder();}",
         "  };",
         "}",
     ],
@@ -110,9 +110,41 @@ This generates a component with two use cases.
 <details>
 <summary><b>Visual Studio Code</b> Snippet JSON:</summary>
 
-<!-- TODO -->
 ```json
-TODO
+"Create a Component": {
+    "prefix": "wcomponent",
+    "body": [
+        "import 'package:flutter/widgets.dart';",
+        "import 'package:werkbank/werkbank.dart';",
+        "",
+        "WerkbankComponent get ${1:name}Component => WerkbankComponent(",
+        "  name: '${1/(.*)/${1:/capitalize}/}',",
+        "  useCases: [",
+        "    WerkbankUseCase(",
+        "      name: 'One',",
+        "      builder: _one,",
+        "    ),",
+        "    WerkbankUseCase(",
+        "      name: 'Two',",
+        "      builder: _two,",
+        "    ),",
+        "  ],",
+        ");",
+        "",
+        "WidgetBuilder _one(UseCaseComposer c) {",
+        "  return (context) {",
+        "    return const ${0:Placeholder();}",
+        "  };",
+        "}",
+        "",
+        "WidgetBuilder _two(UseCaseComposer c) {",
+        "  return (context) {",
+        "    return const Placeholder();",
+        "  };",
+        "}",
+    ],
+    "description": "Creates a Werkbank component with two use cases."
+},
 ```
 </details>
 
@@ -176,7 +208,7 @@ the same UI Component. Various approaches are possible, but starting with a snip
 
 ```json
 "Create a Component for similar UseCases": {
-    "prefix": "multiusecase",
+    "prefix": "wvariantscomponent",
     "body": [
         "import 'package:flutter/widgets.dart';",
         "import 'package:werkbank/werkbank.dart';",

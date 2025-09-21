@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/werkbank.dart';
 
 /// Displays the use case defined controller in
 /// [UseCaseControllerProvider].
@@ -11,15 +12,18 @@ class UseCaseWidgetDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UseCaseControllerProvider.of(context);
-    return ListenableBuilder(
-      listenable: controller,
-      builder: (context, _) {
-        return controller.useCaseWidget(
-          errorBuilder: (context, error, _) {
-            return ErrorWidget(error);
-          },
-        );
-      },
+    return KeyedSubtree(
+      key: UseCase.key,
+      child: ListenableBuilder(
+        listenable: controller,
+        builder: (context, _) {
+          return controller.useCaseWidget(
+            errorBuilder: (context, error, _) {
+              return ErrorWidget(error);
+            },
+          );
+        },
+      ),
     );
   }
 }

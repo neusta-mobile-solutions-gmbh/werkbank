@@ -19,6 +19,8 @@ void main() {
             useCase: useCases,
           ),
         );
+
+        expect(find.byKey(UseCase.key), findsOneWidget);
       });
     }
   });

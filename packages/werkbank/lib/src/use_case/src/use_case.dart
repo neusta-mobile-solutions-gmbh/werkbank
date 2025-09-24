@@ -6,6 +6,8 @@ import 'package:werkbank/src/use_case/use_case.dart';
 
 // TODO(lzuttermeister): Change this to a widget?
 class UseCase {
+  static Key key = UniqueKey();
+
   /// Gets the [UseCaseMetadata] of the current use case.
   static UseCaseMetadata metaDataOf(BuildContext context) {
     return UseCaseCompositionProvider.metadataOf(context);

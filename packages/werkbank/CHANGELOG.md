@@ -1,3 +1,6 @@
+# Unreleased
+- Add static key `UseCase.key` that can be used in widget tests to verify that the use case widget has been built.
+
 # 0.17.2+1
 - Fix that switching between the use case thumbnails in a component overview tile was not resetting the state of the use case.
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,10 +77,11 @@ class WerkbankPersistence extends StatefulWidget {
 }
 
 class _WerkbankPersistenceState extends State<WerkbankPersistence> {
-  Map<Type, PersistentController> _controllersByType = {};
-  Map<Type, String> _idsByType = {};
-  Map<Type, ListenableSubscription> _subscriptionsByType = {};
+  final Map<Type, PersistentController> _controllersByType = {};
+  final Map<Type, String> _idsByType = {};
+  final Map<Type, ListenableSubscription> _subscriptionsByType = {};
   late final JsonStore _jsonStore;
+  bool _updatedControllersThisFrame = false;
 
   bool _initialized = false;
 
@@ -96,30 +98,43 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   Future<void> _init() async {
     // We deliberately do not update the store when the widget is rebuilt.
     _jsonStore = await widget.persistenceConfig.createJsonStore();
-    _updateControllers();
     setState(() {
       _initialized = true;
-      RendererBinding.instance.allowFirstFrame();
     });
+    _updateControllers();
+    RendererBinding.instance.allowFirstFrame();
   }
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
+    _updateControllers();
+  }
+
+  @override
+  void didUpdateWidget(WerkbankPersistence oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _updateControllers();
   }
 
   void _updateSubscription(Type type) {
-    _subscriptionsByType[type]!.cancel();
+    _subscriptionsByType[type]?.cancel();
     final controller = _controllersByType[type]!;
-    _subscriptionsByType[type] = controller.listen(() {
-      final id = _idsByType[type]!;
+    final id = _idsByType[type]!;
+
+    void listener() {
       final json = controller.toJson();
       _jsonStore.set(id, json);
-    });
+    }
+
+    _subscriptionsByType[type] = controller.listen(listener);
+    listener();
   }
 
   void _updateControllers() {
+    if (!_initialized || _updatedControllersThisFrame) {
+      return;
+    }
     final registry = _PersistentControllerRegistryImpl();
     registry.idPrefix = 'werkbank';
     widget.registerWerkbankPersistentControllers(registry);
@@ -152,10 +167,71 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
         debugPrintStack(stackTrace: stackTrace);
       }
     }
-    final oldTypes = _idsByType.keys.toSet();
-    final newTypes = registrationsByType.keys.toSet();
-    final addedTypes = newTypes.difference(oldTypes);
-    final removedTypes = oldTypes.difference(newTypes);
+    final oldTypes = _idsByType.keys;
+    final newTypes = registrationsByType.keys;
+
+    final removedTypes = oldTypes
+        .whereNot(newTypes.contains)
+        .toList(growable: false);
+
+    final addedTypes = newTypes
+        .whereNot(oldTypes.contains)
+        .toList(growable: false);
+
+    final changedIdTypes = newTypes
+        .where((type) {
+          if (!oldTypes.contains(type)) {
+            return false;
+          }
+          final oldId = _idsByType[type]!;
+          final newId = registrationsByType[type]!.id;
+          return oldId != newId;
+        })
+        .toList(growable: false);
+
+    for (final type in removedTypes) {
+      _subscriptionsByType[type]!.cancel();
+      _subscriptionsByType.remove(type);
+      _controllersByType[type]!.dispose();
+      _controllersByType.remove(type);
+      _idsByType.remove(type);
+    }
+
+    for (final type in addedTypes) {
+      try {
+        final registration = registrationsByType[type]!;
+        final controller = registration.createController();
+        try {
+          for (final initialization
+              in widget.persistenceConfig.initializations) {
+            initialization.tryInitialize(controller);
+          }
+          final json = _jsonStore.get(registration.id);
+          controller.tryLoadFromJson(json);
+        } on Object catch (e, stackTrace) {
+          controller.dispose();
+          debugPrint(e.toString());
+          debugPrintStack(stackTrace: stackTrace);
+        }
+        _controllersByType[type] = controller;
+        _idsByType[type] = registration.id;
+        _updateSubscription(type);
+      } on Object catch (e, stackTrace) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: stackTrace);
+      }
+    }
+
+    for (final type in changedIdTypes) {
+      final newId = registrationsByType[type]!.id;
+      _idsByType[type] = newId;
+      _updateSubscription(type);
+    }
+
+    _updatedControllersThisFrame = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _updatedControllersThisFrame = false;
+    });
   }
 
   @override

@@ -283,12 +283,12 @@ class _WerkbankPersistance extends StatelessWidget {
     return WerkbankPersistence(
       persistenceConfig: persistenceConfig,
       registerWerkbankPersistentControllers: (r) {
-        r.register('history', HistoryControllerImpl.new);
+        r.register<HistoryController>('history', HistoryControllerImpl.new);
         // TODO: Fix this
         // Since this only gets executed once per app start,
         // hot-reload does not lead to a new path being added.
         // But this is fine.
-        r.register(
+        r.register<AcknowledgedController>(
           'acknowledged',
           () => AcknowledgedControllerImpl(
             // TODO: Fix this
@@ -301,10 +301,10 @@ class _WerkbankPersistance extends StatelessWidget {
         r.register('pane_tabs', PanelTabsController.new);
         r.register('was_alive', WasAliveController.new);
         r.register(
-          'acknowledged',
+          'search_query',
           () => SearchQueryController(
             // TODO: Fix this dependency.
-            wasAliveController: throw UnimplementedError(),
+            wasAliveController: WasAliveController(),
           ),
         );
       },

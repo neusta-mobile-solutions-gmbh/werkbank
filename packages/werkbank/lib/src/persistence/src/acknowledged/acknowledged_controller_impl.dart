@@ -103,7 +103,6 @@ class AcknowledgedControllerImpl extends PersistentController
     notifyListeners();
   }
 
-  @override
   void clear() {
     _descriptors = AcknowledgedDescriptors.fromPaths(
       _descendantsPaths,

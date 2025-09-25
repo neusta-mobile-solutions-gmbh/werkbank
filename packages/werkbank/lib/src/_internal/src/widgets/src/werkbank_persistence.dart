@@ -247,9 +247,9 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
     if (!_initialized) {
       return widget.placeholder;
     }
-
     return _InheritedWerkbankPersistence(
-      controllersByType: _controllersByType,
+      // We need to create a copy of the map
+      controllersByType: Map.of(_controllersByType),
       child: widget.child,
     );
   }

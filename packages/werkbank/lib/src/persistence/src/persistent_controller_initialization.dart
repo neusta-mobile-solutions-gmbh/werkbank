@@ -5,10 +5,6 @@ import 'package:werkbank/src/persistence/persistence.dart';
 typedef AnyPersistentControllerInitialization =
     PersistentControllerInitialization<PersistentController>;
 
-// This is a workaround for a dart bug.
-// For some reason the type cannot be declared directly as a typedef.
-typedef _Self<T> = T;
-
 class PersistentControllerInitialization<T extends PersistentController> {
   PersistentControllerInitialization(this.initialize);
 

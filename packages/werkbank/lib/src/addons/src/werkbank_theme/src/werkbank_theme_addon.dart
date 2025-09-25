@@ -23,9 +23,9 @@ class WerkbankThemeAddon extends Addon {
   ];
 
   @override
-  List<PersistentController> createPersistentControllers() => [
-    WerkbankThemePersistentController(),
-  ];
+  void registerPersistentControllers(PersistentControllerRegistry registry) {
+    registry.register('werkbank_theme', WerkbankThemePersistentController.new);
+  }
 
   @override
   AddonLayerEntries get layers => AddonLayerEntries(

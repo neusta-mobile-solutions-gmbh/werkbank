@@ -22,8 +22,6 @@ abstract class Addon {
   ) => [];
 
   // TODO: Document
-  List<PersistentController> createPersistentControllers() => [];
-
   void registerPersistentControllers(PersistentControllerRegistry registry) {}
 
   /// Creates [TransientUseCaseStateEntry]s which are attached to the

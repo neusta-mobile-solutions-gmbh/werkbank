@@ -277,39 +277,36 @@ class _WerkbankPersistance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final addonConfig = AddonConfigProvider.of(context);
     final descendantsPaths = WerkbankAppInfo.rootDescriptorOf(
       context,
     ).descendants.map((e) => e.path).toSet();
     return WerkbankPersistence(
       persistenceConfig: persistenceConfig,
-      registerWerkbankPersistentControllers: (prefsWithCache) {
-        final wasAliveController = WasAliveController();
-        return {
-          for (final addon in addonConfig.addons)
-            ...addon.createPersistentControllers(),
-          HistoryController: HistoryControllerImpl(
-            prefsWithCache: prefsWithCache,
-          ),
-          // Since this only gets executed once per app start,
-          // hot-reload does not lead to a new path being added.
-          // But this is fine.
-          AcknowledgedController: AcknowledgedControllerImpl(
-            prefsWithCache: prefsWithCache,
+      registerWerkbankPersistentControllers: (r) {
+        r.register('history', HistoryControllerImpl.new);
+        // TODO: Fix this
+        // Since this only gets executed once per app start,
+        // hot-reload does not lead to a new path being added.
+        // But this is fine.
+        r.register(
+          'acknowledged',
+          () => AcknowledgedControllerImpl(
+            // TODO: Fix this
             /* TODO(lwiedekamp): Maybe improve this someday. Instead
                  add a method to update the descendantsPaths at runtime.
                  Maybe AcknowledgedTracker should call this method. */
             descendantsPaths: descendantsPaths,
           ),
-          PanelTabsController: PanelTabsController(
-            prefsWithCache: prefsWithCache,
+        );
+        r.register('pane_tabs', PanelTabsController.new);
+        r.register('was_alive', WasAliveController.new);
+        r.register(
+          'acknowledged',
+          () => SearchQueryController(
+            // TODO: Fix this dependency.
+            wasAliveController: throw UnimplementedError(),
           ),
-          WasAliveController: wasAliveController,
-          SearchQueryController: SearchQueryController(
-            prefsWithCache: prefsWithCache,
-            wasAliveController: wasAliveController,
-          ),
-        };
+        );
       },
       placeholder: const SizedBox.expand(),
       child: child,

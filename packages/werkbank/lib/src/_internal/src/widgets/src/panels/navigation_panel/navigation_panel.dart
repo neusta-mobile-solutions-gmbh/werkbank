@@ -56,6 +56,7 @@ class NavigationPanel extends StatelessWidget with OrderExecutor {
     return WTreeNode(
       key: ValueKey(descriptor.path),
       title: Text(descriptor.node.name),
+      pathSegments: descriptor.pathSegments,
       leading: leading,
       isInitiallyExpanded: switch (descriptor) {
         FolderDescriptor() => !descriptor.node.isInitiallyCollapsed,

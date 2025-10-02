@@ -4,6 +4,7 @@ class WTreeNode {
   WTreeNode({
     required this.key,
     required this.title,
+    this.pathSegments,
     this.leading,
     this.trailing,
     this.body,
@@ -16,6 +17,7 @@ class WTreeNode {
 
   final LocalKey key;
   final Widget title;
+  final List<String>? pathSegments;
   final Widget? leading;
   final Widget? trailing;
   final Widget? body;

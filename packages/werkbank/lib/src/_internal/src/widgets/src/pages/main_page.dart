@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
+import 'package:werkbank/src/_internal/src/routing/src/nav_event_provider.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_background.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
@@ -18,22 +19,24 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavStateProvider(
-      child: Historiographer(
-        child: WerkbankShortcuts(
-          child: WasAliveTracker(
-            child: AcknowledgedTracker(
-              child: Scaffold(
-                backgroundColor: PageBackground.colorOf(context),
-                body: AddonLayerBuilder(
-                  layer: AddonLayer.applicationOverlay,
-                  child: UseCaseControllerManager(
-                    child: WResizablePanels(
-                      leftPanel: const NavigationPanel(),
-                      rightPanel: const ConfigurationPanel(),
-                      child: WerkbankNotificationsDisplay(
-                        child: AddonLayerBuilder(
-                          layer: AddonLayer.mainViewOverlay,
-                          child: mainView,
+      child: NavEventProvider(
+        child: Historiographer(
+          child: WerkbankShortcuts(
+            child: WasAliveTracker(
+              child: AcknowledgedTracker(
+                child: Scaffold(
+                  backgroundColor: PageBackground.colorOf(context),
+                  body: AddonLayerBuilder(
+                    layer: AddonLayer.applicationOverlay,
+                    child: UseCaseControllerManager(
+                      child: WResizablePanels(
+                        leftPanel: const NavigationPanel(),
+                        rightPanel: const ConfigurationPanel(),
+                        child: WerkbankNotificationsDisplay(
+                          child: AddonLayerBuilder(
+                            layer: AddonLayer.mainViewOverlay,
+                            child: mainView,
+                          ),
                         ),
                       ),
                     ),

@@ -127,7 +127,9 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
       _jsonStore.set(id, json);
     }
 
-    _subscriptionsByType[type] = controller.listen(listener);
+    _subscriptionsByType[type] = controller.jsonChangedListenable.listen(
+      listener,
+    );
     listener();
   }
 

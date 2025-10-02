@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
@@ -37,12 +38,24 @@ class _JsonStoreProviderState extends State<JsonStoreProvider> {
   }
 
   Future<void> _initJsonStore() async {
+    // We deliberately do not update the store when the widget is rebuilt.
+    final jsonStoreFuture = widget.persistenceConfig.createJsonStore();
+    if (jsonStoreFuture is SynchronousFuture<JsonStore>) {
+      unawaited(
+        jsonStoreFuture.then((jsonStore) {
+          setState(() {
+            _jsonStore = jsonStore;
+          });
+        }),
+      );
+      return;
+    }
+
+    final jsonStore = await jsonStoreFuture;
     // We defer the first frame
     // until the persistence is ready.
     // This way we avoid an empty first frame.
     RendererBinding.instance.deferFirstFrame();
-    // We deliberately do not update the store when the widget is rebuilt.
-    final jsonStore = await widget.persistenceConfig.createJsonStore();
     setState(() {
       _jsonStore = jsonStore;
     });

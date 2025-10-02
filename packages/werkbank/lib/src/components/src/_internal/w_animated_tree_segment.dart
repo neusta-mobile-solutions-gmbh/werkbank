@@ -74,6 +74,9 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
 
       unawaited(
         Future<void>.delayed(
+          // Before maybe scrolling, we wait
+          // a bit to ensure the expansion animation
+          // to this node is done.
           Durations.short2,
         ).then(
           (_) {

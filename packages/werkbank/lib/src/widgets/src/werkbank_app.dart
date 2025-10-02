@@ -286,13 +286,16 @@ class _WerkbankPersistance extends StatelessWidget {
       child: IsWarmStartProvider(
         child: WerkbankPersistence(
           persistenceConfig: persistenceConfig,
-          registerWerkbankPersistentControllers: (r) {
-            r.register<HistoryController>('history', HistoryControllerImpl.new);
+          registerWerkbankPersistentControllers: (registry) {
+            registry.register<HistoryController>(
+              'history',
+              HistoryControllerImpl.new,
+            );
             // TODO: Fix this
             // Since this only gets executed once per app start,
             // hot-reload does not lead to a new path being added.
             // But this is fine.
-            r.register<AcknowledgedController>(
+            registry.register<AcknowledgedController>(
               'acknowledged',
               () => AcknowledgedControllerImpl(
                 // TODO: Fix this
@@ -302,8 +305,8 @@ class _WerkbankPersistance extends StatelessWidget {
                 descendantsPaths: descendantsPaths,
               ),
             );
-            r.register('pane_tabs', PanelTabsController.new);
-            r.register(
+            registry.register('pane_tabs', PanelTabsController.new);
+            registry.register(
               'search_query',
               SearchQueryController.new,
             );

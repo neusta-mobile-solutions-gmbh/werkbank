@@ -1,18 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/routing/src/nav_event_provider.dart';
 import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/components/src/w_tree_view/_internal/highlight_event_provider.dart';
 
 class WAnimatedTreeSegment extends StatefulWidget {
   const WAnimatedTreeSegment({
     super.key,
     required this.node,
+    required this.nodePath,
     required this.child,
     required this.nestingLevel,
   });
 
   final WTreeNode node;
+  final List<LocalKey> nodePath;
   final Widget? child;
   final int nestingLevel;
 
@@ -22,7 +24,7 @@ class WAnimatedTreeSegment extends StatefulWidget {
 
 class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
   late bool isExpanded;
-  late StreamSubscription<NavigationEvent> _navEventSubscription;
+  late StreamSubscription<List<LocalKey>>? _sub;
 
   @override
   void initState() {
@@ -33,51 +35,44 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _navEventSubscription = NavEventProvider.of(context).listen(_onNavEvent);
+
+    _sub = HighlightEventProvider.maybeOf(
+      context,
+    )?.listen(_onHighlightEvent);
   }
 
-  bool _isTarget(List<String> targetPathSegments) {
-    final myPathSegments = widget.node.pathSegments;
-    return myPathSegments != null &&
-        myPathSegments.isNotEmpty &&
+  bool _isTarget(List<LocalKey> targetPathSegments) {
+    final nodePath = widget.nodePath;
+    return nodePath.isNotEmpty &&
         targetPathSegments.isNotEmpty &&
-        myPathSegments.length == targetPathSegments.length &&
+        nodePath.length == targetPathSegments.length &&
         List.generate(
-          myPathSegments.length,
-          (index) => myPathSegments[index] == targetPathSegments[index],
+          nodePath.length,
+          (index) => nodePath[index] == targetPathSegments[index],
         ).every((element) => element);
   }
 
-  bool _isPartOfTarget(List<String> targetPathSegments) {
-    final myPathSegments = widget.node.pathSegments;
-    return myPathSegments != null &&
-        myPathSegments.isNotEmpty &&
+  bool _isPartOfTarget(List<LocalKey> targetPathSegments) {
+    final nodePath = widget.nodePath;
+    return nodePath.isNotEmpty &&
         targetPathSegments.isNotEmpty &&
-        myPathSegments.length <= targetPathSegments.length &&
+        nodePath.length <= targetPathSegments.length &&
         List.generate(
-          myPathSegments.length,
-          (index) => myPathSegments[index] == targetPathSegments[index],
+          nodePath.length,
+          (index) => nodePath[index] == targetPathSegments[index],
         ).every((element) => element);
   }
 
-  void _onNavEvent(NavigationEvent event) {
-    final targetPathSegments = event.pathSegments;
-
+  void _onHighlightEvent(List<LocalKey> targetPathSegments) {
     final isTarget = _isTarget(targetPathSegments);
 
     if (isTarget) {
-      if (!isExpanded) {
-        setState(() {
-          isExpanded = true;
-        });
-      }
-
       unawaited(
         Future<void>.delayed(
           // Before maybe scrolling, we wait
           // a bit to ensure the expansion animation
           // to this node is done.
-          Durations.short2,
+          Durations.medium2,
         ).then(
           (_) async {
             final context = this.context;
@@ -88,7 +83,6 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
             await Scrollable.ensureVisible(
               context,
               duration: Durations.medium2,
-              // alignment: 0.5,
               alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
             );
 
@@ -99,7 +93,6 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
             await Scrollable.ensureVisible(
               context,
               duration: Durations.medium2,
-              // alignment: 0.5,
               alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
             );
           },
@@ -121,7 +114,7 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
 
   @override
   Future<void> dispose() async {
-    unawaited(_navEventSubscription.cancel());
+    unawaited(_sub?.cancel());
     super.dispose();
   }
 

@@ -24,6 +24,10 @@ class NavigationPanel extends StatelessWidget with OrderExecutor {
     return _NavigationPanelLayout(
       header: const _NavigationPanelHeader(),
       body: WTreeView(
+        highlightStream: NavEventProvider.of(context).map(
+          (pathSegments) =>
+              pathSegments.map(ValueKey.new).toList(growable: false),
+        ),
         treeNodes: parseRootDescriptorToSTreeNodes(
           context: context,
           rootDescriptor: rootDescriptor,
@@ -54,9 +58,8 @@ class NavigationPanel extends StatelessWidget with OrderExecutor {
     };
 
     return WTreeNode(
-      key: ValueKey(descriptor.path),
+      key: ValueKey(descriptor.pathSegments.last),
       title: Text(descriptor.node.name),
-      pathSegments: descriptor.pathSegments,
       leading: leading,
       isInitiallyExpanded: switch (descriptor) {
         FolderDescriptor() => !descriptor.node.isInitiallyCollapsed,

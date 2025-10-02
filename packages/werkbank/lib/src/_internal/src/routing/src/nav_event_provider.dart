@@ -9,10 +9,11 @@ class NavEventProvider extends StatefulWidget {
 
   final Widget child;
 
-  static Stream<NavigationEvent> of(BuildContext context) {
+  /// Access the current path segments as a stream
+  static Stream<List<String>> of(BuildContext context) {
     final inherited = context.dependOnInheritedWidgetOfExactType<_Inherited>();
     assert(inherited != null, 'No NavEventProvider found in context');
-    return inherited!.controller.stream;
+    return inherited!.stream;
   }
 
   @override
@@ -20,12 +21,12 @@ class NavEventProvider extends StatefulWidget {
 }
 
 class _NavEventProviderState extends State<NavEventProvider> {
-  late final NavigationEventController controller;
+  late final StreamController<List<String>> _streamController;
 
   @override
   void initState() {
     super.initState();
-    controller = NavigationEventController();
+    _streamController = StreamController<List<String>>.broadcast();
   }
 
   @override
@@ -34,62 +35,36 @@ class _NavEventProviderState extends State<NavEventProvider> {
     final navState = NavStateProvider.of(context);
     switch (navState) {
       case HomeNavState():
-      case ParentOverviewNavState():
-      case UseCaseOverviewNavState():
         return;
-      case ViewUseCaseNavState(:final descriptor):
-        controller.notifyNavigationEvent(
-          NavigationEvent(descriptor.path, descriptor.pathSegments),
+      case DescriptorNavState(:final descriptor):
+        _streamController.add(
+          descriptor.pathSegments,
         );
     }
   }
 
   @override
-  Future<void> dispose() async {
-    await controller.dispose();
+  void dispose() {
+    unawaited(_streamController.close());
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _Inherited(controller: controller, child: widget.child);
+    return _Inherited(stream: _streamController.stream, child: widget.child);
   }
 }
 
 class _Inherited extends InheritedWidget {
   const _Inherited({
-    required this.controller,
+    required this.stream,
     required super.child,
   });
 
-  final NavigationEventController controller;
+  final Stream<List<String>> stream;
 
   @override
   bool updateShouldNotify(covariant _Inherited oldWidget) {
-    return controller != oldWidget.controller;
+    return stream != oldWidget.stream;
   }
-}
-
-class NavigationEventController {
-  NavigationEventController() {
-    _streamController = StreamController<NavigationEvent>.broadcast();
-  }
-
-  late final StreamController<NavigationEvent> _streamController;
-  Stream<NavigationEvent> get stream => _streamController.stream;
-
-  void notifyNavigationEvent(NavigationEvent event) {
-    _streamController.add(event);
-  }
-
-  Future<void> dispose() async {
-    await _streamController.close();
-  }
-}
-
-class NavigationEvent {
-  NavigationEvent(this.path, this.pathSegments);
-
-  final String path;
-  final List<String> pathSegments;
 }

@@ -81,21 +81,21 @@ class DisplayApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return WerkbankEnvironmentProvider(
       environment: WerkbankEnvironment.display,
-      child: JsonStoreProvider(
-        persistenceConfig: persistenceConfig,
-        placeholder: const SizedBox.expand(),
-        child: IsWarmStartProvider(
-          child: WerkbankPersistence(
-            persistenceConfig: persistenceConfig,
-            registerWerkbankPersistentControllers: (registry) {},
-            // Technically we currently don't need a DescriptorProvider with
-            // null descriptor here, but changes to what can be accessed in
-            // which layer may change this in the future, so we keep it as
-            // a safe guard.
-            child: DescriptorProvider(
-              descriptor: null,
-              child: AddonConfigProvider(
-                addonConfig: addonConfig,
+      child: AddonConfigProvider(
+        addonConfig: addonConfig,
+        child: JsonStoreProvider(
+          persistenceConfig: persistenceConfig,
+          placeholder: const SizedBox.expand(),
+          child: IsWarmStartProvider(
+            child: WerkbankPersistence(
+              persistenceConfig: persistenceConfig,
+              registerWerkbankPersistentControllers: (registry) {},
+              // Technically we currently don't need a DescriptorProvider with
+              // null descriptor here, but changes to what can be accessed in
+              // which layer may change this in the future, so we keep it as
+              // a safe guard.
+              child: DescriptorProvider(
+                descriptor: null,
                 child: AddonLayerBuilder(
                   layer: AddonLayer.management,
                   child: UseCaseApp(

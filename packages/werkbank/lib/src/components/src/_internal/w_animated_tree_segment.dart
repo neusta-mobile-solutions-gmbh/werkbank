@@ -79,16 +79,28 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
           // to this node is done.
           Durations.short2,
         ).then(
-          (_) {
+          (_) async {
             final context = this.context;
             if (!context.mounted) {
               return;
             }
-            unawaited(
-              Scrollable.ensureVisible(
-                context,
-                duration: Durations.medium2,
-              ),
+
+            await Scrollable.ensureVisible(
+              context,
+              duration: Durations.medium2,
+              // alignment: 0.5,
+              alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+            );
+
+            if (!context.mounted) {
+              return;
+            }
+
+            await Scrollable.ensureVisible(
+              context,
+              duration: Durations.medium2,
+              // alignment: 0.5,
+              alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
             );
           },
         ),

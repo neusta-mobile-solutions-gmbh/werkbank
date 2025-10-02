@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/utils/utils.dart';
@@ -17,7 +15,6 @@ class WerkbankPersistence extends StatefulWidget {
   const WerkbankPersistence({
     required this.persistenceConfig,
     required this.registerWerkbankPersistentControllers,
-    required this.placeholder,
     required this.child,
     super.key,
   });
@@ -27,7 +24,6 @@ class WerkbankPersistence extends StatefulWidget {
     PersistentControllerRegistry registry,
   )
   registerWerkbankPersistentControllers;
-  final Widget placeholder;
   final Widget child;
 
   /// {@template werkbank.controller_available_in_app}
@@ -83,26 +79,11 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   late final JsonStore _jsonStore;
   bool _updatedControllersThisFrame = false;
 
-  bool _initialized = false;
-
   @override
   void initState() {
     super.initState();
-    // We defer the first frame
-    // until the persistence is ready.
-    // This way we avoid an empty first frame.
-    RendererBinding.instance.deferFirstFrame();
-    unawaited(_init());
-  }
-
-  Future<void> _init() async {
-    // We deliberately do not update the store when the widget is rebuilt.
-    _jsonStore = await widget.persistenceConfig.createJsonStore();
-    setState(() {
-      _initialized = true;
-    });
+    _jsonStore = JsonStoreProvider.read(context);
     _updateControllers();
-    RendererBinding.instance.allowFirstFrame();
   }
 
   @override
@@ -134,7 +115,7 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   }
 
   void _updateControllers() {
-    if (!_initialized || _updatedControllersThisFrame) {
+    if (_updatedControllersThisFrame) {
       return;
     }
     final registry = _PersistentControllerRegistryImpl();
@@ -246,9 +227,6 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_initialized) {
-      return widget.placeholder;
-    }
     return _InheritedWerkbankPersistence(
       // We need to create a copy of the map
       controllersByType: Map.of(_controllersByType),

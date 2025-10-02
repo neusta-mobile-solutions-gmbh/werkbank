@@ -20,6 +20,7 @@ export 'src/panels/navigation_panel/order_executor.dart';
 export 'src/panels/navigation_panel/search_text_field.dart';
 export 'src/panels/navigation_panel/sliver_pinned_header.dart';
 export 'src/providers/descriptor_provider.dart';
+export 'src/providers/json_store_provider.dart';
 export 'src/providers/use_case_composition/use_case_composition_by_controller_provider.dart';
 export 'src/providers/use_case_composition/use_case_composition_provider.dart';
 export 'src/providers/use_case_controller_provider/current_use_case_controller_by_manager_provider.dart';

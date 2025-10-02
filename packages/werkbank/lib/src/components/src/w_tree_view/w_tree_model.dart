@@ -17,7 +17,10 @@ class WTreeNode {
 
   final LocalKey key;
   final Widget title;
+
+  // For automatic expansion and scrolling
   final List<String>? pathSegments;
+
   final Widget? leading;
   final Widget? trailing;
   final Widget? body;

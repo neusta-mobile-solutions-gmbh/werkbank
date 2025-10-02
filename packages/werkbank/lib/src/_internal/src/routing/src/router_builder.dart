@@ -109,14 +109,10 @@ class _RouterBuilderState extends State<RouterBuilder> {
       // goRouter will restore itself based on the previous routing-path.
       return null;
     }
-    // This is a appstart.
-    final appWasAliveRecently =
-        WerkbankPersistence.maybeWasAliveController(
-          context,
-        )?.appWasAliveRecently ??
-        false;
+    // This is a warm appstart.
+    final isWarmStart = IsWarmStartProvider.read(context);
 
-    if (!appWasAliveRecently) {
+    if (!isWarmStart) {
       // The app was not recently alive, we don't want to restore
       // history that is too old.
       return null;

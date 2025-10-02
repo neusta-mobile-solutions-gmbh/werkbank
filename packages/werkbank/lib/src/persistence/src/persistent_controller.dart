@@ -7,7 +7,7 @@ abstract class PersistentController extends ChangeNotifier {
   /// [toJson] has changed.
   Listenable get jsonChangedListenable => _jsonChangedNotifier;
 
-  void tryLoadFromJson(Object? json);
+  void tryLoadFromJson(Object? json, {required bool isWarmStart});
 
   Object? toJson();
 

@@ -54,13 +54,6 @@ class WerkbankPersistence extends StatefulWidget {
     return maybeControllerOf<SearchQueryController>(context);
   }
 
-  /// {@macro werkbank.controller_available_in_app}
-  static WasAliveController? maybeWasAliveController(
-    BuildContext context,
-  ) {
-    return maybeControllerOf<WasAliveController>(context);
-  }
-
   static T? maybeControllerOf<T extends PersistentController>(
     BuildContext context,
   ) {
@@ -83,7 +76,6 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   void initState() {
     super.initState();
     _jsonStore = JsonStoreProvider.read(context);
-    _updateControllers();
   }
 
   @override
@@ -180,6 +172,7 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
       _idsByType.remove(type);
     }
 
+    final isWarmStart = IsWarmStartProvider.read(context);
     for (final type in addedTypes) {
       try {
         final registration = registrationsByType[type]!;
@@ -190,7 +183,7 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
             initialization.tryInitialize(controller);
           }
           final json = _jsonStore.get(registration.id);
-          controller.tryLoadFromJson(json);
+          controller.tryLoadFromJson(json, isWarmStart: isWarmStart);
         } on Object catch (e, stackTrace) {
           controller.dispose();
           debugPrint(e.toString());

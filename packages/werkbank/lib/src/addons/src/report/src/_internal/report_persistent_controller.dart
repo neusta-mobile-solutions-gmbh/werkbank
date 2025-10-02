@@ -6,7 +6,7 @@ import 'package:werkbank/src/persistence/persistence.dart';
 
 class ReportPersistentController extends PersistentController {
   @override
-  void tryLoadFromJson(Object? json) {
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     try {
       _persistentData = ReportPersistentData.fromJson(json);
       notifyListeners();

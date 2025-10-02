@@ -87,7 +87,7 @@ class WerkbankThemePersistentController extends PersistentController {
   WerkbankThemePersistentController();
 
   @override
-  void tryLoadFromJson(Object? json) {
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     if (json is String) {
       themeName = json;
       notifyListeners();

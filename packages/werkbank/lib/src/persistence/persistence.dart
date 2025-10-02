@@ -20,6 +20,3 @@ export 'src/search_query/search_query_controller.dart';
 export 'src/search_query/search_query_persistant_data.dart';
 export 'src/sections/panel_tabs_controller.dart';
 export 'src/sections/panel_tabs_persistant_data.dart';
-export 'src/was_alive/was_alive_controller.dart';
-export 'src/was_alive/was_alive_persistant_data.dart';
-export 'src/was_alive/was_alive_tracker.dart';

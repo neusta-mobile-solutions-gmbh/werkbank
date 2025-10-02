@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
 class SearchQueryController extends PersistentController {
-  SearchQueryController({
-    required WasAliveController wasAliveController,
-  }) : _wasAliveController = wasAliveController;
-
-  final WasAliveController _wasAliveController;
+  SearchQueryController();
 
   // When the query hits around 50 characters, the bitap algorithm
   // leads to weird results. So we limit the query length.
   static const int maxQueryLength = 42;
 
   @override
-  void tryLoadFromJson(Object? json) {
-    if (_wasAliveController.isColdAppStart) {
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
+    if (!isWarmStart) {
       return;
     }
     try {

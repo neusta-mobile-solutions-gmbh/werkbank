@@ -11,7 +11,7 @@ class AcknowledgedControllerImpl extends PersistentController
   final Set<String> _descendantsPaths;
 
   @override
-  void tryLoadFromJson(Object? json) {
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     // TODO: Rework this
     try {
       AcknowledgedDescriptors oldAcknowledgedDescriptors;

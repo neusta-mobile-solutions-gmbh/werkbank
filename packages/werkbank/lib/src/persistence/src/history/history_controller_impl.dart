@@ -7,7 +7,7 @@ const _cappedHistorySize = 100;
 class HistoryControllerImpl extends PersistentController
     implements HistoryController {
   @override
-  void tryLoadFromJson(Object? json) {
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     // TODO: Rework this
     try {
       _unsafeHistory = WerkbankHistory(

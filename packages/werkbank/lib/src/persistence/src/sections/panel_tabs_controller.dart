@@ -5,7 +5,7 @@ import 'package:werkbank/src/utils/utils.dart';
 
 class PanelTabsController extends PersistentController {
   @override
-  void tryLoadFromJson(Object? json) {
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     // TODO: Rework this
     late final emptyDataObj = PanelTabsPersistentData(
       tabs: {

@@ -7,7 +7,7 @@ import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 typedef ControllerMapFactory =
-    Map<Type, PersistentController> Function(
+    Map<Type, GlobalStateController> Function(
       SharedPreferencesWithCache prefsWithCache,
     );
 
@@ -21,7 +21,7 @@ class WerkbankPersistence extends StatefulWidget {
 
   final PersistenceConfig persistenceConfig;
   final void Function(
-    PersistentControllerRegistry registry,
+    GlobalStateControllerRegistry registry,
   )
   registerWerkbankPersistentControllers;
   final Widget child;
@@ -54,7 +54,7 @@ class WerkbankPersistence extends StatefulWidget {
     return maybeControllerOf<SearchQueryController>(context);
   }
 
-  static T? maybeControllerOf<T extends PersistentController>(
+  static T? maybeControllerOf<T extends GlobalStateController>(
     BuildContext context,
   ) {
     return _InheritedWerkbankPersistence.of(context)?.controllersByType[T]
@@ -66,7 +66,7 @@ class WerkbankPersistence extends StatefulWidget {
 }
 
 class _WerkbankPersistenceState extends State<WerkbankPersistence> {
-  final Map<Type, PersistentController> _controllersByType = {};
+  final Map<Type, GlobalStateController> _controllersByType = {};
   final Map<Type, String> _idsByType = {};
   final Map<Type, ListenableSubscription> _subscriptionsByType = {};
   late final JsonStore _jsonStore;
@@ -234,7 +234,7 @@ class _InheritedWerkbankPersistence extends InheritedWidget {
     required super.child,
   });
 
-  final Map<Type, PersistentController> controllersByType;
+  final Map<Type, GlobalStateController> controllersByType;
 
   static _InheritedWerkbankPersistence? of(BuildContext context) {
     return context
@@ -248,13 +248,13 @@ class _InheritedWerkbankPersistence extends InheritedWidget {
 }
 
 class _PersistentControllerRegistryImpl
-    implements PersistentControllerRegistry {
+    implements GlobalStateControllerRegistry {
   final List<_Registration> _registrations = [];
 
   late String idPrefix;
 
   @override
-  void register<T extends PersistentController>(
+  void register<T extends GlobalStateController>(
     String id,
     T Function() createController,
   ) {
@@ -277,5 +277,5 @@ class _Registration {
 
   final String id;
   final Type type;
-  final PersistentController Function() createController;
+  final GlobalStateController Function() createController;
 }

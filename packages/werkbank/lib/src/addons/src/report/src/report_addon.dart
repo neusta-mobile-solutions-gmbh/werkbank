@@ -24,7 +24,7 @@ class ReportAddon extends Addon {
   final bool showFeatureIntroductions;
 
   @override
-  void registerPersistentControllers(PersistentControllerRegistry registry) {
+  void registerPersistentControllers(GlobalStateControllerRegistry registry) {
     registry.register('report', ReportPersistentController.new);
   }
 

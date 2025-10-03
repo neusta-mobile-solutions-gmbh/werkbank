@@ -1,17 +1,18 @@
 import 'package:werkbank/src/persistence/persistence.dart';
 
-/// A typedef for any [PersistentControllerInitialization] regardless of its
+/// A typedef for any [GlobalStateInitialization] regardless of its
 /// generic type.
-typedef AnyPersistentControllerInitialization =
-    PersistentControllerInitialization<PersistentController>;
+typedef AnyGlobalStateInitialization =
+    GlobalStateInitialization<GlobalStateController>;
 
-class PersistentControllerInitialization<T extends PersistentController> {
-  PersistentControllerInitialization(this.initialize);
+class GlobalStateInitialization<T extends GlobalStateController> {
+  GlobalStateInitialization(this.initialize);
 
   final void Function(T controller) initialize;
 
+  // TODO: improve this.
   bool tryInitialize(
-    PersistentController controller,
+    GlobalStateController controller,
   ) {
     if (controller is T) {
       initialize(controller);

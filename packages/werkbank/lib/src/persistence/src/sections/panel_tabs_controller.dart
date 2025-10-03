@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
-class PanelTabsController extends PersistentController {
+class PanelTabsController extends GlobalStateController {
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     // TODO: Rework this

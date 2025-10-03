@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
-class SearchQueryController extends PersistentController {
+class SearchQueryController extends GlobalStateController {
   SearchQueryController();
 
   // When the query hits around 50 characters, the bitap algorithm

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class PersistentController extends ChangeNotifier {
+abstract class GlobalStateController extends ChangeNotifier {
   final _jsonChangedNotifier = _JsonChangedNotifier();
 
   /// A listenable that notifies its listeners if the value returned by

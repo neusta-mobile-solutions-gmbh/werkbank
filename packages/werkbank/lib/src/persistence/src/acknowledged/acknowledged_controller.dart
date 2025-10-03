@@ -1,6 +1,6 @@
 import 'package:werkbank/src/persistence/persistence.dart';
 
-abstract class AcknowledgedController implements PersistentController {
+abstract class AcknowledgedController implements GlobalStateController {
   AcknowledgedDescriptors get descriptors;
 
   void log(String path);

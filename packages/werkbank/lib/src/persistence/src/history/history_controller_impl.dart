@@ -4,7 +4,7 @@ import 'package:werkbank/src/persistence/persistence.dart';
 
 const _cappedHistorySize = 100;
 
-class HistoryControllerImpl extends PersistentController
+class HistoryControllerImpl extends GlobalStateController
     implements HistoryController {
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {

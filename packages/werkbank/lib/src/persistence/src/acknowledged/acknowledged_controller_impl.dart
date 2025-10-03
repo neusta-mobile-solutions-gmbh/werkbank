@@ -2,7 +2,7 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
-class AcknowledgedControllerImpl extends PersistentController
+class AcknowledgedControllerImpl extends GlobalStateController
     implements AcknowledgedController {
   AcknowledgedControllerImpl({
     required Set<String> descendantsPaths,

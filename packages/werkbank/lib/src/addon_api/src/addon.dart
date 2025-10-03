@@ -22,7 +22,7 @@ abstract class Addon {
   ) => [];
 
   // TODO: Document
-  void registerPersistentControllers(PersistentControllerRegistry registry) {}
+  void registerPersistentControllers(GlobalStateControllerRegistry registry) {}
 
   /// Creates [TransientUseCaseStateEntry]s which are attached to the
   /// [UseCaseComposer] at the beginning of the use case setup.

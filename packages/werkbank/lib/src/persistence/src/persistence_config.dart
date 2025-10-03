@@ -13,7 +13,7 @@ interface class PersistenceConfig {
     : this._(createJsonStore: _createSharedPreferencesStore);
 
   const PersistenceConfig.memory({
-    List<AnyPersistentControllerInitialization> initializations = const [],
+    List<AnyGlobalStateInitialization> initializations = const [],
   }) : this._(
          createJsonStore: _createMemoryStore,
          initializations: initializations,
@@ -37,7 +37,7 @@ interface class PersistenceConfig {
   }
 
   final Future<JsonStore> Function() _createJsonStore;
-  final List<AnyPersistentControllerInitialization> initializations;
+  final List<AnyGlobalStateInitialization> initializations;
 
   Future<JsonStore> createJsonStore() => _createJsonStore();
 }

@@ -81,8 +81,8 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
     return ensureNotNull(_maybeAccess.maybeAcknowledgedController(context));
   }
 
-  /// Gets the [PersistentController] of the given type.
-  T persistentControllerOf<T extends PersistentController>(
+  /// Gets the [GlobalStateController] of the given type.
+  T persistentControllerOf<T extends GlobalStateController>(
     BuildContext context,
   ) {
     return ensureNotNull(_maybeAccess.maybePersistentControllerOf<T>(context));

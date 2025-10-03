@@ -83,7 +83,7 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
   }
 }
 
-class WerkbankThemePersistentController extends PersistentController {
+class WerkbankThemePersistentController extends GlobalStateController {
   WerkbankThemePersistentController();
 
   @override

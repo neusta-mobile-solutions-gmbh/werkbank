@@ -19,23 +19,24 @@ class WerkbankThemeManager extends StatefulWidget {
 
   static void setThemeNameOf(BuildContext context, String newThemeName) =>
       context
-          .findAncestorStateOfType<_WerkbankThemeManagerState>()!
-          ._werkbankThemeController
-          .setTheme(newThemeName);
+              .findAncestorStateOfType<_WerkbankThemeManagerState>()!
+              ._werkbankThemeController
+              .themeName =
+          newThemeName;
 
   @override
   State<WerkbankThemeManager> createState() => _WerkbankThemeManagerState();
 }
 
 class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
-  late WerkbankThemePersistentController _werkbankThemeController;
+  late WerkbankThemeController _werkbankThemeController;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     // TODO(cjaros): wrong layer used
     _werkbankThemeController = ApplicationOverlayLayerEntry.access
-        .persistentControllerOf<WerkbankThemePersistentController>(context);
+        .persistentControllerOf<WerkbankThemeController>(context);
   }
 
   @override
@@ -83,28 +84,31 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
   }
 }
 
-class WerkbankThemePersistentController extends GlobalStateController {
-  WerkbankThemePersistentController();
+// TODO: Move out of internal
+class WerkbankThemeController extends GlobalStateController {
+  WerkbankThemeController();
+
+  String _themeName = WerkbankThemeAddon.systemThemeName;
+
+  String get themeName => _themeName;
+
+  set themeName(String newThemeName) {
+    if (_themeName != newThemeName) {
+      _themeName = newThemeName;
+      notifyListeners();
+    }
+  }
 
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     if (json is String) {
       themeName = json;
-      notifyListeners();
     }
   }
 
   @override
   Object? toJson() {
     return themeName;
-  }
-
-  // TODO: private
-  String themeName = WerkbankThemeAddon.systemThemeName;
-
-  void setTheme(String newThemeName) {
-    themeName = newThemeName;
-    notifyListeners();
   }
 }
 

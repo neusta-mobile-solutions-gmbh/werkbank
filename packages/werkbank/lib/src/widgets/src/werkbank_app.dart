@@ -11,6 +11,7 @@ import 'package:werkbank/src/addon_config/addon_config.dart';
 import 'package:werkbank/src/app_config/app_config.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/environment/environment.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/theme/theme.dart';
@@ -41,6 +42,7 @@ class WerkbankApp extends StatelessWidget {
     this.lastUpdated,
     required this.appConfig,
     required this.addonConfig,
+    this.persistenceConfig = const PersistenceConfig(),
     required this.root,
     super.key,
   });
@@ -92,6 +94,9 @@ class WerkbankApp extends StatelessWidget {
   /// ),
   /// ```
   final AddonConfig addonConfig;
+
+  // TODO: Document
+  final PersistenceConfig persistenceConfig;
 
   /// The root of the use case tree.
   ///
@@ -182,19 +187,19 @@ class WerkbankApp extends StatelessWidget {
                   // That way the controller manager will reassemble the
                   // controllers.
                   rootDescriptor: _getRootDescriptor(context),
-                  child: _WerkbankPersistance(
+                  child: AddonConfigProvider(
                     addonConfig: addonConfig,
-                    child: WerkbankSettings.overwrite(
-                      orderOption: OrderOption.alphabetic,
-                      werkbankTheme: WerkbankTheme(
-                        colorScheme: WerkbankColorScheme.fromPalette(
-                          const WerkbankPalette.dark(),
+                    child: _WerkbankPersistance(
+                      persistenceConfig: persistenceConfig,
+                      child: WerkbankSettings.overwrite(
+                        orderOption: OrderOption.alphabetic,
+                        werkbankTheme: WerkbankTheme(
+                          colorScheme: WerkbankColorScheme.fromPalette(
+                            const WerkbankPalette.dark(),
+                          ),
+                          textTheme: WerkbankTextTheme.standard(),
                         ),
-                        textTheme: WerkbankTextTheme.standard(),
-                      ),
-                      child: PanelControllerProvider(
-                        child: AddonConfigProvider(
-                          addonConfig: addonConfig,
+                        child: PanelControllerProvider(
                           child: UseCaseMetadataProvider(
                             child: AddonLayerBuilder(
                               layer: AddonLayer.management,
@@ -264,11 +269,11 @@ class _ThemeBuilder extends StatelessWidget {
 
 class _WerkbankPersistance extends StatelessWidget {
   const _WerkbankPersistance({
-    required this.addonConfig,
+    required this.persistenceConfig,
     required this.child,
   });
 
-  final AddonConfig addonConfig;
+  final PersistenceConfig persistenceConfig;
   final Widget child;
 
   @override
@@ -276,52 +281,40 @@ class _WerkbankPersistance extends StatelessWidget {
     final descendantsPaths = WerkbankAppInfo.rootDescriptorOf(
       context,
     ).descendants.map((e) => e.path).toSet();
-    return WerkbankPersistence(
-      controllerMapFactory: (prefsWithCache) {
-        final wasAliveController = WasAliveController(
-          prefsWithCache: prefsWithCache,
-        );
-        return {
-          for (final addon in addonConfig.addons)
-            ...addon.controllerMapFactory(prefsWithCache),
-          HistoryController: HistoryControllerImpl(
-            prefsWithCache: prefsWithCache,
-          ),
-          // Since this only gets executed once per app start,
-          // hot-reload does not lead to a new path being added.
-          // But this is fine.
-          AcknowledgedController: AcknowledgedControllerImpl(
-            prefsWithCache: prefsWithCache,
-            /* TODO(lwiedekamp): Maybe improve this someday. Instead
-                 add a method to update the descendantsPaths at runtime.
-                 Maybe AcknowledgedTracker should call this method. */
-            descendantsPaths: descendantsPaths,
-          ),
-          PanelTabsController: PanelTabsController(
-            prefsWithCache: prefsWithCache,
-          ),
-          WasAliveController: wasAliveController,
-          SearchQueryController: SearchQueryController(
-            prefsWithCache: prefsWithCache,
-            wasAliveController: wasAliveController,
-          ),
-        };
-      },
-      builder: (context, phase) => switch (phase) {
-        PersistenceInitializing() =>
-          // While initializing the Persistence, almost the whole werkbank
-          // widget-tree will not be built and therefore there will be
-          // no conflicts regarding the missing Persistence.
-          //
-          // But this widget (SizedBox) is never visible either, since
-          // [WerkbankPersistence] defers the first frame until
-          // the persistence is ready.
-          // This way we avoid a jumping color effect when building the first
-          // frames.
-          const SizedBox.expand(),
-        PersistenceReady(:final child) => child,
-      },
-      child: child,
+    return JsonStoreProvider(
+      persistenceConfig: persistenceConfig,
+      placeholder: const SizedBox.expand(),
+      child: IsWarmStartProvider(
+        child: GlobalStateManager(
+          persistenceConfig: persistenceConfig,
+          registerWerkbankGlobalStateControllers: (registry) {
+            registry.register<HistoryController>(
+              'history',
+              HistoryControllerImpl.new,
+            );
+            // TODO: Fix this
+            // Since this only gets executed once per app start,
+            // hot-reload does not lead to a new path being added.
+            // But this is fine.
+            registry.register<AcknowledgedController>(
+              'acknowledged',
+              () => AcknowledgedControllerImpl(
+                // TODO: Fix this
+                /* TODO(lwiedekamp): Maybe improve this someday. Instead
+                     add a method to update the descendantsPaths at runtime.
+                     Maybe AcknowledgedTracker should call this method. */
+                descendantsPaths: descendantsPaths,
+              ),
+            );
+            registry.register('pane_tabs', PanelTabsController.new);
+            registry.register(
+              'search_query',
+              SearchQueryController.new,
+            );
+          },
+          child: child,
+        ),
+      ),
     );
   }
 }

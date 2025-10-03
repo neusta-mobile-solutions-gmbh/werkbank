@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/routing/routing.dart';
 
-class AcknowledgedTracker extends StatefulWidget {
-  const AcknowledgedTracker({
+class Historiographer extends StatefulWidget {
+  const Historiographer({
     required this.child,
     super.key,
   });
@@ -12,10 +13,10 @@ class AcknowledgedTracker extends StatefulWidget {
   final Widget child;
 
   @override
-  State<AcknowledgedTracker> createState() => _AcknowledgedTrackerState();
+  State<Historiographer> createState() => _HistoriographerState();
 }
 
-class _AcknowledgedTrackerState extends State<AcknowledgedTracker> {
+class _HistoriographerState extends State<Historiographer> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -24,8 +25,11 @@ class _AcknowledgedTrackerState extends State<AcknowledgedTracker> {
       DescriptorNavState(:final descriptor) => descriptor.path,
     };
     if (path != null) {
-      WerkbankPersistence.maybeAcknowledgedController(context)?.log(
-        path,
+      GlobalStateManager.maybeHistoryOf(context)?.log(
+        WerkbankHistoryEntry(
+          path: path,
+          timestamp: DateTime.now(),
+        ),
       );
     }
   }

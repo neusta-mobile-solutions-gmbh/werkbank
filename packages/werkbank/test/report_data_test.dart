@@ -1,9 +1,9 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_data.dart';
+import 'package:werkbank/src/addons/src/report/src/_internal/report_data.dart';
 
 void main() {
-  group('ReportPersistentData', () {
+  group('ReportData', () {
     test('Serialization', () {
       const reportEntry = ReportEntry(
         accepted: true,
@@ -12,7 +12,7 @@ void main() {
         'report1': reportEntry,
       });
 
-      final data = ReportPersistentData(
+      final data = ReportData(
         entries: entries,
         firstTimeReportAddonWasExecuted: DateTime(2020),
       );
@@ -24,7 +24,7 @@ void main() {
 
       expect(json, expectedJson, reason: 'Serialization failed');
 
-      final deserializedData = ReportPersistentData.fromJson(json);
+      final deserializedData = ReportData.fromJson(json);
 
       expect(
         deserializedData.entries.length,
@@ -43,24 +43,24 @@ void main() {
       );
 
       expect(
-        () => ReportPersistentData.fromJson(''),
+        () => ReportData.fromJson(''),
         throwsFormatException,
         reason: 'Deserialization failed',
       );
       expect(
-        () => ReportPersistentData.fromJson('{'),
+        () => ReportData.fromJson('{'),
         throwsFormatException,
         reason: 'Deserialization failed',
       );
       expect(
-        () => ReportPersistentData.fromJson('{"things":[]}'),
+        () => ReportData.fromJson('{"things":[]}'),
         throwsFormatException,
         reason: 'Deserialization failed',
       );
       const invalidJsonBrokenEntry =
           '{"entries":{"report1":{"accepted":"notABool"}}}';
       expect(
-        () => ReportPersistentData.fromJson(invalidJsonBrokenEntry),
+        () => ReportData.fromJson(invalidJsonBrokenEntry),
         throwsFormatException,
         reason: 'Deserialization failed',
       );

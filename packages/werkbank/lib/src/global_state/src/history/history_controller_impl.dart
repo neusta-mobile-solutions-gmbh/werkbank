@@ -1,26 +1,19 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 const _cappedHistorySize = 100;
 
-class HistoryControllerImpl extends PersistentController
+class HistoryControllerImpl extends GlobalStateController
     implements HistoryController {
-  HistoryControllerImpl({
-    required super.prefsWithCache,
-  });
-
   @override
-  String get id => 'history';
-
-  @override
-  void init(String? unsafeJson) {
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
+    // TODO: Rework this
     try {
-      _unsafeHistory = unsafeJson != null
-          ? WerkbankHistory.fromJson(unsafeJson)
-          : WerkbankHistory(
-              entries: const IList<WerkbankHistoryEntry>.empty(),
-            );
+      _unsafeHistory = WerkbankHistory(
+        entries: const IList<WerkbankHistoryEntry>.empty(),
+      );
+      notifyListeners();
     } on FormatException {
       debugPrint(
         'Restoring WerkbankHistory failed. Throwing it away. '
@@ -30,7 +23,13 @@ class HistoryControllerImpl extends PersistentController
       _unsafeHistory = WerkbankHistory(
         entries: const IList<WerkbankHistoryEntry>.empty(),
       );
+      notifyListeners();
     }
+  }
+
+  @override
+  Object? toJson() {
+    return _unsafeHistory.toJson();
   }
 
   late WerkbankHistory _unsafeHistory;
@@ -63,11 +62,6 @@ class HistoryControllerImpl extends PersistentController
         ].lockUnsafe,
       );
     }
-
-    setJson(
-      _unsafeHistory.toJson(),
-    );
-
     notifyListeners();
   }
 }

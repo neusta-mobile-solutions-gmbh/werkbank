@@ -12,6 +12,7 @@
 import 'package:intl/intl.dart';
 import 'package:slang/generated.dart';
 import 'package:slang/slang.dart';
+
 export 'package:slang/slang.dart';
 
 part 'strings_en.g.dart';

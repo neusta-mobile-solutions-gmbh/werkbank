@@ -1,6 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:werkbank/src/persistence/src/history/werkbank_history.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 void main() {
   group('WerkbankHistory', () {

@@ -8,9 +8,9 @@ This topic describes how to improve the integration of Werkbank with your IDE, m
   - [Android Studio](#android-studio)
   - [Visual Studio Code](#visual-studio-code)
 - [Use Case and Component Live Templates/Snippets](#use-case-and-component-live-templatessnippets)
-  - [Simple Use Case (`wusecase`)](#simple-use-case-wusecase)
-  - [Component with Multiple Use Cases (`wcomponent`)](#component-with-multiple-use-cases-wcomponent)
-- [Component with Variant Use Cases (`wvariantscomponent`)](#component-with-variant-use-cases-wvariantscomponent)
+  - [Simple Use Case (`wbusecase`)](#simple-use-case-wbusecase)
+  - [Component with Multiple Use Cases (`wbcomponent`)](#component-with-multiple-use-cases-wbcomponent)
+- [Component with Variant Use Cases (`wbvariantscomponent`)](#component-with-variant-use-cases-wbvariantscomponent)
 
 ## Adding Live Templates/Snippets to your IDE
 
@@ -27,14 +27,14 @@ This topic describes how to improve the integration of Werkbank with your IDE, m
 
 ## Use Case and Component Live Templates/Snippets
 
-### Simple Use Case (`wusecase`)
+### Simple Use Case (`wbusecase`)
 To make it easier to write a new use case, you can create a live template/snippet in your IDE.
 
 <details>
 <summary><b>Android Studio</b> Live Template XML</summary>
 
 ```xml
-<template name="wusecase" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankUseCase get $NAME$UseCase =&gt; WerkbankUseCase(&#10;    name: '$CAP_NAME$',&#10;    builder: _useCase,&#10;  );&#10;&#10;WidgetBuilder _useCase(UseCaseComposer c) {&#10;  return (context) {&#10;    return $END$;&#10;  };&#10;}" description="" toReformat="false" toShortenFQNames="true">
+<template name="wbusecase" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankUseCase get $NAME$UseCase =&gt; WerkbankUseCase(&#10;    name: '$CAP_NAME$',&#10;    builder: _useCase,&#10;  );&#10;&#10;WidgetBuilder _useCase(UseCaseComposer c) {&#10;  return (context) {&#10;    return $END$;&#10;  };&#10;}" description="" toReformat="false" toShortenFQNames="true">
   <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
   <variable name="CAP_NAME" expression="capitalize(NAME)" defaultValue="" alwaysStopAt="false" />
   <context>
@@ -49,7 +49,7 @@ To make it easier to write a new use case, you can create a live template/snippe
 
 ```json
 "Create a UseCase": {
-    "prefix": "wusecase",
+    "prefix": "wbusecase",
     "body": [
         "import 'package:flutter/widgets.dart';",
         "import 'package:werkbank/werkbank.dart';",
@@ -90,14 +90,14 @@ WidgetBuilder _useCase(UseCaseComposer c) {
 
 For an **Example usage** of this pattern, see [`slider_use_cases.dart`](https://github.com/neusta-mobile-solutions-gmbh/werkbank/blob/main/example/example_werkbank/lib/src/example_werkbank/use_cases/components/material/slider_use_cases.dart) from the example app.
 
-### Component with Multiple Use Cases (`wcomponent`)
+### Component with Multiple Use Cases (`wbcomponent`)
 This generates a component with two use cases.
 
 <details>
 <summary><b>Android Studio</b> Live Template XML</summary>
 
 ```xml
-<template name="wcomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    WerkbankUseCase(&#10;      name: 'One',&#10;      builder: _one,&#10;    ),&#10;    WerkbankUseCase(&#10;      name: 'Two',&#10;      builder: _two,&#10;    ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _one$END$(UseCaseComposer c) {&#10;  return (context) {&#10;    return const Placeholder();&#10;  };&#10;}&#10;&#10;WidgetBuilder _two(UseCaseComposer c) {&#10;  return (context) {&#10;    return const Placeholder();&#10;  };&#10;}" description="" toReformat="false" toShortenFQNames="true">
+<template name="wbcomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    WerkbankUseCase(&#10;      name: 'One',&#10;      builder: _one,&#10;    ),&#10;    WerkbankUseCase(&#10;      name: 'Two',&#10;      builder: _two,&#10;    ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _one$END$(UseCaseComposer c) {&#10;  return (context) {&#10;    return const Placeholder();&#10;  };&#10;}&#10;&#10;WidgetBuilder _two(UseCaseComposer c) {&#10;  return (context) {&#10;    return const Placeholder();&#10;  };&#10;}" description="" toReformat="false" toShortenFQNames="true">
   <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
   <variable name="CAP_NAME" expression="capitalize(NAME)" defaultValue="" alwaysStopAt="false" />
   <context>
@@ -112,7 +112,7 @@ This generates a component with two use cases.
 
 ```json
 "Create a Component": {
-    "prefix": "wcomponent",
+    "prefix": "wbcomponent",
     "body": [
         "import 'package:flutter/widgets.dart';",
         "import 'package:werkbank/werkbank.dart';",
@@ -183,7 +183,7 @@ WidgetBuilder _two(UseCaseComposer c) {
 
 For an **Example usage** of this pattern, see [`date_picker_use_cases.dart`](https://github.com/neusta-mobile-solutions-gmbh/werkbank/blob/main/example/example_werkbank/lib/src/example_werkbank/use_cases/components/material/date_picker_use_cases.dart) from the example app.
 
-## Component with Variant Use Cases (`wvariantscomponent`)
+## Component with Variant Use Cases (`wbvariantscomponent`)
 
 Sometimes you may find yourself in a position where you want to write multiple use cases that have things in common,
 like a shared composition with the same knobs or something similar. This may happen when you have different variants of
@@ -193,7 +193,7 @@ the same UI Component. Various approaches are possible, but starting with a snip
 <summary><b>Android Studio</b> Live Template XML:</summary>
 
 ```xml
-<template name="wvariantscomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;enum _Variant {&#10;  one$END$('One'),&#10;  two('Two');&#10;&#10;  const _Variant(this.name);&#10;&#10;  final String name;&#10;}&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    for (final variant in _Variant.values)&#10;      WerkbankUseCase(&#10;        name: variant.name,&#10;        builder: (c) =&gt; _multiUseCase(c, variant),&#10;      ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _multiUseCase(&#10;  UseCaseComposer c,&#10;  _Variant variant,&#10;) {&#10;  return (context) {&#10;    return switch (variant) {&#10;      _Variant.one =&gt; const Placeholder(),&#10;      _Variant.two =&gt; const Placeholder(),&#10;    };&#10;  };&#10;}" description="" toReformat="false" toShortenFQNames="true">
+<template name="wbvariantscomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;enum _Variant {&#10;  one$END$('One'),&#10;  two('Two');&#10;&#10;  const _Variant(this.name);&#10;&#10;  final String name;&#10;}&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    for (final variant in _Variant.values)&#10;      WerkbankUseCase(&#10;        name: variant.name,&#10;        builder: (c) =&gt; _multiUseCase(c, variant),&#10;      ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _multiUseCase(&#10;  UseCaseComposer c,&#10;  _Variant variant,&#10;) {&#10;  return (context) {&#10;    return switch (variant) {&#10;      _Variant.one =&gt; const Placeholder(),&#10;      _Variant.two =&gt; const Placeholder(),&#10;    };&#10;  };&#10;}" description="" toReformat="false" toShortenFQNames="true">
   <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
   <variable name="CAP_NAME" expression="capitalize(NAME)" defaultValue="" alwaysStopAt="false" />
   <context>
@@ -208,7 +208,7 @@ the same UI Component. Various approaches are possible, but starting with a snip
 
 ```json
 "Create a Component for similar UseCases": {
-    "prefix": "wvariantscomponent",
+    "prefix": "wbvariantscomponent",
     "body": [
         "import 'package:flutter/widgets.dart';",
         "import 'package:werkbank/werkbank.dart';",

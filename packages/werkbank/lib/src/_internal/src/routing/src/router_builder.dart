@@ -118,7 +118,7 @@ class _RouterBuilderState extends State<RouterBuilder> {
       return null;
     }
 
-    final mostRecentHistoryEntry = WerkbankPersistence.maybeHistoryOf(
+    final mostRecentHistoryEntry = GlobalStateManager.maybeHistoryOf(
       context,
     )?.unsafeHistory.currentEntry;
 

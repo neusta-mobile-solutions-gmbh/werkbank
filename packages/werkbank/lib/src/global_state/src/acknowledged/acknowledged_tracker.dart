@@ -24,7 +24,7 @@ class _AcknowledgedTrackerState extends State<AcknowledgedTracker> {
       DescriptorNavState(:final descriptor) => descriptor.path,
     };
     if (path != null) {
-      WerkbankPersistence.maybeAcknowledgedController(context)?.log(
+      GlobalStateManager.maybeAcknowledgedController(context)?.log(
         path,
       );
     }

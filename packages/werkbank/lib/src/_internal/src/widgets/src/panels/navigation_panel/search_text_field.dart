@@ -23,7 +23,7 @@ class SearchTextFieldState extends State<SearchTextField> {
     super.didChangeDependencies();
 
     _searchQueryController?.removeListener(_searchQueryControllerChanged);
-    _searchQueryController = WerkbankPersistence.maybeSearchQueryController(
+    _searchQueryController = GlobalStateManager.maybeSearchQueryController(
       context,
     );
     _searchQueryController!.addListener(_searchQueryControllerChanged);

@@ -83,7 +83,7 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _panelTabsController = WerkbankPersistence.maybePanelTabsController(
+    _panelTabsController = GlobalStateManager.maybePanelTabsController(
       context,
     )!;
     if (_orderedSections == null) {

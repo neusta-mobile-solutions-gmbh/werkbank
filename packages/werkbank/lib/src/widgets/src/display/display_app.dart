@@ -87,7 +87,7 @@ class DisplayApp extends StatelessWidget {
           persistenceConfig: persistenceConfig,
           placeholder: const SizedBox.expand(),
           child: IsWarmStartProvider(
-            child: WerkbankPersistence(
+            child: GlobalStateManager(
               persistenceConfig: persistenceConfig,
               registerWerkbankPersistentControllers: (registry) {},
               // Technically we currently don't need a DescriptorProvider with

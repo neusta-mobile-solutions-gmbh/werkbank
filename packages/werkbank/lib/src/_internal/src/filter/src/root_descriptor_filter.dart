@@ -30,7 +30,7 @@ class _RootDescriptorArrangerState extends State<RootDescriptorFilter>
     _rootDescriptor = WerkbankAppInfo.rootDescriptorOf(context);
 
     _controller?.removeListener(onChange);
-    _controller = WerkbankPersistence.maybeSearchQueryController(context);
+    _controller = GlobalStateManager.maybeSearchQueryController(context);
     _controller?.addListener(onChange);
 
     onChange();

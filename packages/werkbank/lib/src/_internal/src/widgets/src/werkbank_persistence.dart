@@ -1,19 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
-typedef ControllerMapFactory =
-    Map<Type, GlobalStateController> Function(
-      SharedPreferencesWithCache prefsWithCache,
-    );
-
-class WerkbankPersistence extends StatefulWidget {
-  const WerkbankPersistence({
+class GlobalStateManager extends StatefulWidget {
+  const GlobalStateManager({
     required this.persistenceConfig,
     required this.registerWerkbankPersistentControllers,
     required this.child,
@@ -63,10 +57,10 @@ class WerkbankPersistence extends StatefulWidget {
   }
 
   @override
-  State<WerkbankPersistence> createState() => _WerkbankPersistenceState();
+  State<GlobalStateManager> createState() => _GlobalStateManagerState();
 }
 
-class _WerkbankPersistenceState extends State<WerkbankPersistence> {
+class _GlobalStateManagerState extends State<GlobalStateManager> {
   final Map<Type, GlobalStateController> _controllersByType = {};
   final Map<Type, String> _idsByType = {};
   final Map<Type, ListenableSubscription> _subscriptionsByType = {};
@@ -86,8 +80,14 @@ class _WerkbankPersistenceState extends State<WerkbankPersistence> {
   }
 
   @override
-  void didUpdateWidget(WerkbankPersistence oldWidget) {
+  void didUpdateWidget(GlobalStateManager oldWidget) {
     super.didUpdateWidget(oldWidget);
+    _updateControllers();
+  }
+
+  @override
+  void reassemble() {
+    super.reassemble();
     _updateControllers();
   }
 

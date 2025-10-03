@@ -25,7 +25,7 @@ class _HistoriographerState extends State<Historiographer> {
       DescriptorNavState(:final descriptor) => descriptor.path,
     };
     if (path != null) {
-      WerkbankPersistence.maybeHistoryOf(context)?.log(
+      GlobalStateManager.maybeHistoryOf(context)?.log(
         WerkbankHistoryEntry(
           path: path,
           timestamp: DateTime.now(),

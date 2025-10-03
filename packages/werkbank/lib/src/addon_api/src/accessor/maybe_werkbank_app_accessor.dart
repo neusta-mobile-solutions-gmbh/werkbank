@@ -120,7 +120,7 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
   /// {@macro werkbank.controller_available_in_app}
   /// {@macro werkbank.null_in_use_case_display}
   HistoryController? maybeHistoryOf(BuildContext context) {
-    return ensureReturns(() => WerkbankPersistence.maybeHistoryOf(context));
+    return ensureReturns(() => GlobalStateManager.maybeHistoryOf(context));
   }
 
   /// Gets the [AcknowledgedController] of the current [WerkbankApp] if
@@ -130,7 +130,7 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
   /// {@macro werkbank.null_in_use_case_display}
   AcknowledgedController? maybeAcknowledgedController(BuildContext context) {
     return ensureReturns(
-      () => WerkbankPersistence.maybeAcknowledgedController(context),
+      () => GlobalStateManager.maybeAcknowledgedController(context),
     );
   }
 
@@ -143,7 +143,7 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
     BuildContext context,
   ) {
     return ensureReturns(
-      () => WerkbankPersistence.maybeControllerOf<T>(context),
+      () => GlobalStateManager.maybeControllerOf<T>(context),
     );
   }
 }

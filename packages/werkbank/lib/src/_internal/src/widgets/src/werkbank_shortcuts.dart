@@ -123,7 +123,7 @@ class WerkbankShortcuts extends StatelessWidget with OrderExecutor {
     return _Shortcuts(
       onToggelPanel: panelController.toggle,
       onSearch: () {
-        WerkbankPersistence.maybeSearchQueryController(
+        GlobalStateManager.maybeSearchQueryController(
           context,
         )?.focusNode.requestFocus();
       },

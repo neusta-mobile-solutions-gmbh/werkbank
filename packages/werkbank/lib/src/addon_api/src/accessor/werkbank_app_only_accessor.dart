@@ -81,6 +81,7 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
     return ensureNotNull(_maybeAccess.maybeAcknowledgedController(context));
   }
 
+  // TODO: Move out of "app only" accessor.
   /// Gets the [GlobalStateController] of the given type.
   T persistentControllerOf<T extends GlobalStateController>(
     BuildContext context,

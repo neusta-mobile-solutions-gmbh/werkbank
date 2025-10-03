@@ -36,7 +36,7 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
     super.didChangeDependencies();
     // TODO(cjaros): wrong layer used
     _werkbankThemeController = ApplicationOverlayLayerEntry.access
-        .persistentControllerOf<WerkbankThemeController>(context);
+        .globalStateControllerOf<WerkbankThemeController>(context);
   }
 
   @override

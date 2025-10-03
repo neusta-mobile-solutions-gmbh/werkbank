@@ -83,10 +83,10 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
 
   // TODO: Move out of "app only" accessor.
   /// Gets the [GlobalStateController] of the given type.
-  T persistentControllerOf<T extends GlobalStateController>(
+  T globalStateControllerOf<T extends GlobalStateController>(
     BuildContext context,
   ) {
-    return ensureNotNull(_maybeAccess.maybePersistentControllerOf<T>(context));
+    return ensureNotNull(_maybeAccess.maybeGlobalStateControllerOf<T>(context));
   }
 
   /* TODO(lzuttermeister): Should we also add this to

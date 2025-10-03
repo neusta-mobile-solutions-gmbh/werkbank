@@ -3,8 +3,8 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 
 typedef ReportId = String;
 
-class ReportPersistentData {
-  const ReportPersistentData({
+class ReportData {
+  const ReportData({
     required this.entries,
     required this.firstTimeReportAddonWasExecuted,
   });
@@ -12,13 +12,13 @@ class ReportPersistentData {
   final IMap<ReportId, ReportEntry> entries;
   final DateTime firstTimeReportAddonWasExecuted;
 
-  static ReportPersistentData fromJson(Object? json) {
+  static ReportData fromJson(Object? json) {
     if (json case {
       'entries': final Map<String, dynamic> entries,
       'firstTimeReportAddonWasExecuted':
           final String firstTimeReportAddonWasExecuted,
     }) {
-      return ReportPersistentData(
+      return ReportData(
         entries: IMap(
           entries.map((key, value) {
             if (value is Map<String, dynamic>) {
@@ -52,11 +52,11 @@ class ReportPersistentData {
     };
   }
 
-  ReportPersistentData copyWith({
+  ReportData copyWith({
     IMap<ReportId, ReportEntry>? entries,
     DateTime? firstTimeReportAddonWasExecuted,
   }) {
-    return ReportPersistentData(
+    return ReportData(
       entries: entries ?? this.entries,
       firstTimeReportAddonWasExecuted:
           firstTimeReportAddonWasExecuted ??

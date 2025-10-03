@@ -287,7 +287,7 @@ class _WerkbankPersistance extends StatelessWidget {
       child: IsWarmStartProvider(
         child: GlobalStateManager(
           persistenceConfig: persistenceConfig,
-          registerWerkbankPersistentControllers: (registry) {
+          registerWerkbankGlobalStateControllers: (registry) {
             registry.register<HistoryController>(
               'history',
               HistoryControllerImpl.new,

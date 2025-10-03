@@ -9,7 +9,7 @@ import 'package:werkbank/src/utils/utils.dart';
 class GlobalStateManager extends StatefulWidget {
   const GlobalStateManager({
     required this.persistenceConfig,
-    required this.registerWerkbankPersistentControllers,
+    required this.registerWerkbankGlobalStateControllers,
     required this.child,
     super.key,
   });
@@ -18,7 +18,7 @@ class GlobalStateManager extends StatefulWidget {
   final void Function(
     GlobalStateControllerRegistry registry,
   )
-  registerWerkbankPersistentControllers;
+  registerWerkbankGlobalStateControllers;
   final Widget child;
 
   /// {@template werkbank.controller_available_in_app}
@@ -111,13 +111,13 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
     if (_updatedControllersThisFrame) {
       return;
     }
-    final registry = _PersistentControllerRegistryImpl();
+    final registry = _GlobalStateControllerRegistryImpl();
     registry.idPrefix = 'werkbank';
-    widget.registerWerkbankPersistentControllers(registry);
+    widget.registerWerkbankGlobalStateControllers(registry);
     final addons = AddonConfigProvider.addonsOf(context);
     for (final addon in addons) {
       registry.idPrefix = addon.id;
-      addon.registerPersistentControllers(registry);
+      addon.registerGlobalStateControllers(registry);
     }
     final registrations = registry._registrations;
     final registrationsByType = <Type, _Registration>{};
@@ -126,14 +126,14 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
       try {
         if (registrationsByType.containsKey(registration.type)) {
           throw AssertionError(
-            'Cannot register multiple persistent controllers with '
+            'Cannot register multiple global state controllers with '
             'the same type: ${registration.type}',
           );
         }
         registrationsByType[registration.type] = registration;
         if (registrationsById.containsKey(registration.id)) {
           throw AssertionError(
-            'Cannot register multiple persistent controllers with '
+            'Cannot register multiple global state controllers with '
             'the same id: ${registration.id}',
           );
         }
@@ -248,7 +248,7 @@ class _InheritedWerkbankPersistence extends InheritedWidget {
   }
 }
 
-class _PersistentControllerRegistryImpl
+class _GlobalStateControllerRegistryImpl
     implements GlobalStateControllerRegistry {
   final List<_Registration> _registrations = [];
 

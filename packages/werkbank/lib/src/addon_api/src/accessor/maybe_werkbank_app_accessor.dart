@@ -134,12 +134,13 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
     );
   }
 
+  // TODO: Move out of this accessor.
   /// Gets the [GlobalStateController] of the given type
   /// if we are currently in the
   /// context of a [WerkbankApp].
   ///
   /// {@macro werkbank.null_in_use_case_display}
-  T? maybePersistentControllerOf<T extends GlobalStateController>(
+  T? maybeGlobalStateControllerOf<T extends GlobalStateController>(
     BuildContext context,
   ) {
     return ensureReturns(

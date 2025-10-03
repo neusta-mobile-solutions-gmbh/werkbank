@@ -1,14 +1,14 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/report/report.dart';
-import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_data.dart';
+import 'package:werkbank/src/addons/src/report/src/_internal/report_data.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
-class ReportPersistentController extends GlobalStateController {
+class ReportController extends GlobalStateController {
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     try {
-      _persistentData = ReportPersistentData.fromJson(json);
+      _persistentData = ReportData.fromJson(json);
       notifyListeners();
     } on FormatException {
       debugPrint(
@@ -24,12 +24,12 @@ class ReportPersistentController extends GlobalStateController {
     return _persistentData.toJson();
   }
 
-  ReportPersistentData _persistentData = ReportPersistentData(
+  ReportData _persistentData = ReportData(
     entries: <ReportId, ReportEntry>{}.lockUnsafe,
     firstTimeReportAddonWasExecuted: DateTime.now(),
   );
 
-  ReportPersistentData get persistentData => _persistentData;
+  ReportData get persistentData => _persistentData;
 
   void accept(Report report) {
     final reportEntry =

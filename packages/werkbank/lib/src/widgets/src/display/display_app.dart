@@ -89,7 +89,7 @@ class DisplayApp extends StatelessWidget {
           child: IsWarmStartProvider(
             child: GlobalStateManager(
               persistenceConfig: persistenceConfig,
-              registerWerkbankPersistentControllers: (registry) {},
+              registerWerkbankGlobalStateControllers: (registry) {},
               // Technically we currently don't need a DescriptorProvider with
               // null descriptor here, but changes to what can be accessed in
               // which layer may change this in the future, so we keep it as

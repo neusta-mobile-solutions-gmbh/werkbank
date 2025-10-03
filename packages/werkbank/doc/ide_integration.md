@@ -34,7 +34,7 @@ To make it easier to write a new use case, you can create a live template/snippe
 <summary><b>Android Studio</b> Live Template XML</summary>
 
 ```xml
-<template name="wbusecase" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankUseCase get $NAME$UseCase =&gt; WerkbankUseCase(&#10;    name: '$CAP_NAME$',&#10;    builder: _useCase,&#10;  );&#10;&#10;WidgetBuilder _useCase(UseCaseComposer c) {&#10;  return (context) {&#10;    return $END$;&#10;  };&#10;}" description="Creates a Werkbank use case." toReformat="false" toShortenFQNames="true">
+<template name="wbusecase" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankUseCase get $NAME$UseCase =&gt; WerkbankUseCase(&#10;    name: '$CAP_NAME$',&#10;    builder: _useCase,&#10;  );&#10;&#10;WidgetBuilder _useCase(UseCaseComposer c) {&#10;  return (context) {&#10;    return $END$const Placeholder();&#10;  };&#10;}" description="Creates a Werkbank use case." toReformat="false" toShortenFQNames="true">
   <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
   <variable name="CAP_NAME" expression="capitalize(NAME)" defaultValue="" alwaysStopAt="false" />
   <context>
@@ -61,7 +61,7 @@ To make it easier to write a new use case, you can create a live template/snippe
         "",
         "WidgetBuilder _useCase(UseCaseComposer c) {",
         "  return (context) {",
-        "    return ${0:Placeholder();}",
+        "    return ${0:const Placeholder()};",
         "  };",
         "}",
     ],
@@ -83,7 +83,7 @@ WerkbankUseCase get myWidgetUseCase => WerkbankUseCase(
 
 WidgetBuilder _useCase(UseCaseComposer c) {
   return (context) {
-    return ;
+    return const Placeholder();
   };
 }
 ```
@@ -97,7 +97,7 @@ This generates a component with two use cases.
 <summary><b>Android Studio</b> Live Template XML</summary>
 
 ```xml
-<template name="wbcomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    WerkbankUseCase(&#10;      name: 'One',&#10;      builder: _one,&#10;    ),&#10;    WerkbankUseCase(&#10;      name: 'Two',&#10;      builder: _two,&#10;    ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _one$END$(UseCaseComposer c) {&#10;  return (context) {&#10;    return const Placeholder();&#10;  };&#10;}&#10;&#10;WidgetBuilder _two(UseCaseComposer c) {&#10;  return (context) {&#10;    return const Placeholder();&#10;  };&#10;}" description="Creates a Werkbank component with two use cases." toReformat="false" toShortenFQNames="true">
+<template name="wbcomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    WerkbankUseCase(&#10;      name: 'One',&#10;      builder: _one,&#10;    ),&#10;    WerkbankUseCase(&#10;      name: 'Two',&#10;      builder: _two,&#10;    ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _one(UseCaseComposer c) {&#10;  return (context) {&#10;    return $END$const Placeholder();&#10;  };&#10;}&#10;&#10;WidgetBuilder _two(UseCaseComposer c) {&#10;  return (context) {&#10;    return const Placeholder();&#10;  };&#10;}" description="Creates a Werkbank component with two use cases." toReformat="false" toShortenFQNames="true">
   <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
   <variable name="CAP_NAME" expression="capitalize(NAME)" defaultValue="" alwaysStopAt="false" />
   <context>
@@ -133,7 +133,7 @@ This generates a component with two use cases.
         "",
         "WidgetBuilder _one(UseCaseComposer c) {",
         "  return (context) {",
-        "    return const ${0:Placeholder();}",
+        "    return ${0:const Placeholder()};",
         "  };",
         "}",
         "",
@@ -193,7 +193,7 @@ the same UI Component. Various approaches are possible, but starting with a snip
 <summary><b>Android Studio</b> Live Template XML:</summary>
 
 ```xml
-<template name="wbvariantscomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;enum _Variant {&#10;  one$END$('One'),&#10;  two('Two');&#10;&#10;  const _Variant(this.name);&#10;&#10;  final String name;&#10;}&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    for (final variant in _Variant.values)&#10;      WerkbankUseCase(&#10;        name: variant.name,&#10;        builder: (c) =&gt; _multiUseCase(c, variant),&#10;      ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _multiUseCase(&#10;  UseCaseComposer c,&#10;  _Variant variant,&#10;) {&#10;  return (context) {&#10;    return switch (variant) {&#10;      _Variant.one =&gt; const Placeholder(),&#10;      _Variant.two =&gt; const Placeholder(),&#10;    };&#10;  };&#10;}" description="Creates a Werkbank component with multiple similar use cases." toReformat="false" toShortenFQNames="true">
+<template name="wbvariantscomponent" value="import 'package:flutter/widgets.dart';&#10;import 'package:werkbank/werkbank.dart';&#10;&#10;enum _Variant {&#10;  one('One'),&#10;  two('Two');&#10;&#10;  const _Variant(this.name);&#10;&#10;  final String name;&#10;}&#10;&#10;WerkbankComponent get $NAME$Component =&gt; WerkbankComponent(&#10;  name: '$CAP_NAME$',&#10;  useCases: [&#10;    for (final variant in _Variant.values)&#10;      WerkbankUseCase(&#10;        name: variant.name,&#10;        builder: (c) =&gt; _multiUseCase(c, variant),&#10;      ),&#10;  ],&#10;);&#10;&#10;WidgetBuilder _multiUseCase(&#10;  UseCaseComposer c,&#10;  _Variant variant,&#10;) {&#10;  return (context) {&#10;    return switch (variant) {&#10;      _Variant.one =&gt; $END$const Placeholder(),&#10;      _Variant.two =&gt; const Placeholder(),&#10;    };&#10;  };&#10;}" description="Creates a Werkbank component with multiple similar use cases." toReformat="false" toShortenFQNames="true">
   <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
   <variable name="CAP_NAME" expression="capitalize(NAME)" defaultValue="" alwaysStopAt="false" />
   <context>
@@ -214,7 +214,7 @@ the same UI Component. Various approaches are possible, but starting with a snip
         "import 'package:werkbank/werkbank.dart';",
         "",
         "enum _Variant {",
-        "  ${0}one('One'),",
+        "  one('One'),",
         "  two('Two');",
         "",
         "  const _Variant(this.name);",
@@ -239,7 +239,7 @@ the same UI Component. Various approaches are possible, but starting with a snip
         ") {",
         "  return (context) {",
         "    return switch (variant) {",
-        "      _Variant.one => const Placeholder(),",
+        "      _Variant.one => ${0:const Placeholder()},",
         "      _Variant.two => const Placeholder(),",
         "    };",
         "  };",

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 class SearchQueryController extends GlobalStateController {
   SearchQueryController();

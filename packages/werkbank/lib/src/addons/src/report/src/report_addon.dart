@@ -4,7 +4,7 @@ import 'package:werkbank/src/addons/src/report/report.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_component.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_controller.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_provider.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 /// {@category Configuring Addons}
 class ReportAddon extends Addon {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 class AcknowledgedManager extends StatefulWidget {
   const AcknowledgedManager({

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/persistence/src/json_store.dart';
-import 'package:werkbank/src/persistence/src/persistent_controller_initialization.dart';
 
 interface class PersistenceConfig {
   const PersistenceConfig()

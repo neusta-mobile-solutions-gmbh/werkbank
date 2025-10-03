@@ -11,6 +11,7 @@ import 'package:werkbank/src/addon_config/addon_config.dart';
 import 'package:werkbank/src/app_config/app_config.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/environment/environment.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/theme/theme.dart';

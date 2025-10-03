@@ -1,4 +1,4 @@
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 /// A typedef for any [GlobalStateInitialization] regardless of its
 /// generic type.

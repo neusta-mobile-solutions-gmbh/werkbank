@@ -1,4 +1,4 @@
-import 'package:werkbank/src/persistence/src/persistent_controller.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 abstract class GlobalStateControllerRegistry {
   void register<T extends GlobalStateController>(

@@ -1,3 +1,8 @@
+# 0.17.4
+- Add new required `themeBrightnessBuilder` parameter to `AppConfig()` and `AppConfig.widget()` constructors. **(BREAKING CHANGE)**
+  - `AppConfig.material()` and `AppConfig.cupertino()` are not affected.
+  
+
 # 0.17.3
 - Add new IDE Live Templates/Snippets to the documentation.
   - Check them out at https://pub.dev/documentation/werkbank/latest/topics/IDE%20Integration-topic.html

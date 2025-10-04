@@ -29,7 +29,7 @@ class FilterResult {
     return resultFor(descriptor)!.isMatch;
   }
 
-  List<Descriptor> filteredDescriptors(List<Descriptor> descriptors) {
+  List<T> filteredDescriptors<T extends Descriptor>(List<T> descriptors) {
     return descriptors.where(descriptorVisibleInTree).toList();
   }
 }

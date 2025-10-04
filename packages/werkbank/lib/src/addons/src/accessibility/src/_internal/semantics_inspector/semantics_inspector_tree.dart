@@ -26,6 +26,17 @@ class SemanticsInspectorTree extends StatelessWidget {
     final lightStyle = TextStyle(
       color: isSelected ? colorScheme.textActive : colorScheme.textLight,
     );
+    final faintStyle = TextStyle(
+      color: isSelected
+          ? colorScheme.textActive
+          // TODO(lzuttermeister): Use theme color
+          : colorScheme.textLight.withValues(alpha: 0.5),
+      fontWeight: FontWeight.w100,
+    );
+    final annotations = <String>[
+      if (node.isMergedIntoParent) 'merged',
+      if (node.data.flagsCollection.isHidden) 'hidden',
+    ];
     return Text.rich(
       TextSpan(
         style: textTheme.input.copyWith(
@@ -45,38 +56,13 @@ class SemanticsInspectorTree extends StatelessWidget {
               text: '<No Label>',
               style: lightStyle,
             ),
+          if (annotations.isNotEmpty)
+            TextSpan(
+              text: ' (${annotations.join(', ')})',
+              style: faintStyle,
+            ),
         ],
       ),
-    );
-  }
-
-  WTreeNode _buildTreeNode(
-    WerkbankTheme theme,
-    SemanticsNodeSnapshot node,
-    int? activeNodeId,
-    SemanticsInspectorController controller,
-  ) {
-    final isSelected = node.id == activeNodeId;
-    return WTreeNode(
-      key: ValueKey(node.id),
-      title: _buildLabel(theme, node, isSelected),
-      leading: Icon(
-        Icons.rectangle_rounded,
-        color: SemanticsInspector.colorForSemanticsNodeId(node.id),
-      ),
-      onTap: () {
-        if (isSelected) {
-          controller.setActiveSemanticsNodeId(null);
-        } else {
-          controller.setActiveSemanticsNodeId(node.id);
-        }
-      },
-      isInitiallyExpanded: true,
-      isSelected: isSelected,
-      children: [
-        for (final child in node.children)
-          _buildTreeNode(theme, child, activeNodeId, controller),
-      ],
     );
   }
 
@@ -87,6 +73,46 @@ class SemanticsInspectorTree extends StatelessWidget {
         .compositionOf(context)
         .accessibility
         .semanticsInspectorController;
+    final showMergeSemanticsNodes =
+        AccessibilityManager.showMergedSemanticsNodesOf(context);
+
+    WTreeNode? buildTreeNode(
+      WerkbankTheme theme,
+      SemanticsNodeSnapshot node,
+      int? activeNodeId,
+      SemanticsInspectorController controller,
+    ) {
+      if (!showMergeSemanticsNodes && node.isMergedIntoParent) {
+        return null;
+      }
+      // We cannot exclude hidden nodes in the tree, because they might have
+      // non hidden children.
+      // We could move their children up a level, but that would erase
+      // information about the tree structure.
+      final isSelected = node.id == activeNodeId;
+      return WTreeNode(
+        key: ValueKey(node.id),
+        title: _buildLabel(theme, node, isSelected),
+        leading: Icon(
+          Icons.rectangle_rounded,
+          color: SemanticsInspector.colorForSemanticsNodeId(node.id),
+        ),
+        onTap: () {
+          if (isSelected) {
+            controller.setActiveSemanticsNodeId(null);
+          } else {
+            controller.setActiveSemanticsNodeId(node.id);
+          }
+        },
+        isInitiallyExpanded: true,
+        isSelected: isSelected,
+        children: [
+          for (final child in node.children)
+            ?buildTreeNode(theme, child, activeNodeId, controller),
+        ],
+      );
+    }
+
     return WControlItem(
       title: Text(context.sL10n.addons.accessibility.controls.semanticsTree),
       layout: ControlItemLayout.spacious,
@@ -109,7 +135,7 @@ class SemanticsInspectorTree extends StatelessWidget {
                         for (final node
                             in nodes ??
                                 const Iterable<SemanticsNodeSnapshot>.empty())
-                          _buildTreeNode(
+                          ?buildTreeNode(
                             theme,
                             node,
                             activeNodeId,

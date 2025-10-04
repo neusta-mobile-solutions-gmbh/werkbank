@@ -99,3 +99,34 @@ WidgetBuilder materialComponentsUseCase(UseCaseComposer c) {
     );
   };
 }
+
+WidgetBuilder mergeSemanticsUseCase(UseCaseComposer c) {
+  return (context) {
+    return MergeSemantics(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 16,
+        children: [
+          Semantics(
+            container: true,
+            child: Text(
+              'Hello',
+              style: context.werkbankTextTheme.detail.copyWith(
+                color: context.werkbankColorScheme.text,
+              ),
+            ),
+          ),
+          Semantics(
+            container: true,
+            child: Text(
+              'World',
+              style: context.werkbankTextTheme.detail.copyWith(
+                color: context.werkbankColorScheme.text,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  };
+}

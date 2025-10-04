@@ -30,6 +30,9 @@ class ThumbnailScaler extends StatelessWidget {
             size.height / minSize.height,
           ),
         );
+        if (!scale.isFinite || scale <= 0) {
+          return const SizedBox.expand();
+        }
         return SizedBox.expand(
           child: WScaledBox(
             scale: scale,

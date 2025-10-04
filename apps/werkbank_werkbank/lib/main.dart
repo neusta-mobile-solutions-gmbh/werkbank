@@ -110,6 +110,8 @@ class WerkbankWerkbank extends StatelessWidget {
         ? DateTime.now()
         : null;
 
+    // Do use this project as an example of how to set up your Werkbank project.
+    // Use the example_werkbank in the example directory instead.
     return WerkbankApp(
       name: 'Werkbank',
       logo: const WerkbankLogo(),

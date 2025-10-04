@@ -1,3 +1,7 @@
+# 0.17.3
+- Add new IDE Live Templates/Snippets to the documentation.
+  - Check them out at https://pub.dev/documentation/werkbank/latest/topics/IDE%20Integration-topic.html
+
 # 0.17.2+1
 - Fix that switching between the use case thumbnails in a component overview tile was not resetting the state of the use case.
 

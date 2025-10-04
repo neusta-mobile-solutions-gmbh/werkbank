@@ -61,7 +61,7 @@ class MyProjectWerkbankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return WerkbankApp(
       name: 'My Project Werkbank',
-      logo: const FlutterLogo(),
+      logo: const WerkbankLogo(),
       appConfig: AppConfig.material(),
       addonConfig: AddonConfig(
         addons: [
@@ -142,8 +142,9 @@ The difference between these two is:
 - [WerkbankComponent](../werkbank/WerkbankComponent-class.html)s are intended to be used to group multiple
   use cases that display the same component/widget, just in different ways.
 - [WerkbankComponent](../werkbank/WerkbankComponent-class.html) has a different icon in the navigation tree than folders.
-- [WerkbankFolder](../werkbank/WerkbankFolder-class.html) is sorted to the top among its siblings, unlike
-  [WerkbankComponent](../werkbank/WerkbankComponent-class.html)s, which are sorted exactly like use cases.
+- [WerkbankFolder](../werkbank/WerkbankFolder-class.html)s are always sorted above use cases among their siblings in the tree.
+- [WerkbankComponent](../werkbank/WerkbankComponent-class.html)s are sorted like use cases in the tree.
+- A [WerkbankComponent](../werkbank/WerkbankComponent-class.html) only has one tile in the [Overview](Overview-topic.html) that periodically switches its thumbnail between the contained use cases.
 <!-- TODO: Link to topic about use case tree? -->
 
 ## Creating UseCases

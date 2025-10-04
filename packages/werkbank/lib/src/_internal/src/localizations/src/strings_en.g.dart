@@ -70,6 +70,8 @@ class TranslationsGenericEn {
       TranslationsGenericYesNoSwitchEn._(_root);
   late final TranslationsGenericOnOffSwitchEn onOffSwitch =
       TranslationsGenericOnOffSwitchEn._(_root);
+  late final TranslationsGenericShowHideSwitchEn showHideSwitch =
+      TranslationsGenericShowHideSwitchEn._(_root);
 }
 
 // Path: addons
@@ -200,6 +202,17 @@ class TranslationsGenericOnOffSwitchEn {
   // Translations
   String get off => 'OFF';
   String get on => 'ON';
+}
+
+// Path: generic.showHideSwitch
+class TranslationsGenericShowHideSwitchEn {
+  TranslationsGenericShowHideSwitchEn._(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get hide => 'HIDE';
+  String get show => 'SHOW';
 }
 
 // Path: addons.accessibility
@@ -477,6 +490,13 @@ class TranslationsAddonsAccessibilityControlsEn {
   );
   String get semanticsTree => 'Semantics Tree';
   String get activeSemanticsNode => 'Active Semantics Node';
+  late final TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn
+  semanticsInspectionScope =
+      TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(
+        _root,
+      );
+  String get mergedSemanticsNodes => 'Merged Nodes';
+  String get hiddenSemanticsNodes => 'Hidden Nodes';
   late final TranslationsAddonsAccessibilityControlsColorModeEn colorMode =
       TranslationsAddonsAccessibilityControlsColorModeEn._(_root);
 }
@@ -676,6 +696,23 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeEn {
   );
 }
 
+// Path: addons.accessibility.controls.semanticsInspectionScope
+class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn {
+  TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(
+    this._root,
+  );
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get name => 'Inspection Scope';
+  late final TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn
+  values =
+      TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn._(
+        _root,
+      );
+}
+
 // Path: addons.accessibility.controls.colorMode
 class TranslationsAddonsAccessibilityControlsColorModeEn {
   TranslationsAddonsAccessibilityControlsColorModeEn._(this._root);
@@ -806,6 +843,19 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn {
   String get inspection => 'Inspection';
 }
 
+// Path: addons.accessibility.controls.semanticsInspectionScope.values
+class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn {
+  TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn._(
+    this._root,
+  );
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  String get useCase => 'Use Case';
+  String get app => 'App';
+}
+
 // Path: addons.accessibility.controls.colorMode.values
 class TranslationsAddonsAccessibilityControlsColorModeValuesEn {
   TranslationsAddonsAccessibilityControlsColorModeValuesEn._(this._root);
@@ -917,6 +967,10 @@ extension on Translations {
         return 'OFF';
       case 'generic.onOffSwitch.on':
         return 'ON';
+      case 'generic.showHideSwitch.hide':
+        return 'HIDE';
+      case 'generic.showHideSwitch.show':
+        return 'SHOW';
       case 'addons.accessibility.name':
         return 'Accessibility';
       case 'addons.accessibility.controls.textScaleFactor':
@@ -935,6 +989,16 @@ extension on Translations {
         return 'Semantics Tree';
       case 'addons.accessibility.controls.activeSemanticsNode':
         return 'Active Semantics Node';
+      case 'addons.accessibility.controls.semanticsInspectionScope.name':
+        return 'Inspection Scope';
+      case 'addons.accessibility.controls.semanticsInspectionScope.values.useCase':
+        return 'Use Case';
+      case 'addons.accessibility.controls.semanticsInspectionScope.values.app':
+        return 'App';
+      case 'addons.accessibility.controls.mergedSemanticsNodes':
+        return 'Merged Nodes';
+      case 'addons.accessibility.controls.hiddenSemanticsNodes':
+        return 'Hidden Nodes';
       case 'addons.accessibility.controls.colorMode.name':
         return 'Simulated Color Blindness';
       case 'addons.accessibility.controls.colorMode.values.none':

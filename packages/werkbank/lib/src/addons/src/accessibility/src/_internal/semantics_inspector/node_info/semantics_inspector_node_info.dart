@@ -94,6 +94,15 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       }
     }
 
+    if (snapshot.isMergedIntoParent) {
+      addRawStringField('isMergedIntoParent', 'true');
+    }
+    if (snapshot.mergeAllDescendantsIntoThisNode) {
+      addRawStringField('mergeAllDescendantsIntoThisNode', 'true');
+    }
+    if (snapshot.areUserActionsBlocked) {
+      addRawStringField('areUserActionsBlocked', 'true');
+    }
     addAttributedStringField('label', data.attributedLabel);
     intField('id', snapshot.id);
     addStringField('identifier', data.identifier);

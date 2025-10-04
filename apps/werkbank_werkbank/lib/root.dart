@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/werkbank.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_animated_visibility_use_case.dart';
+import 'package:werkbank_werkbank/component_use_cases/w_auto_change_page_indicator_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_bordered_box_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_button_base_use_case.dart';
 import 'package:werkbank_werkbank/component_use_cases/w_chip_use_case.dart';
@@ -159,9 +160,10 @@ WerkbankRoot get root => WerkbankRoot(
           name: 'WShortcut',
           builder: wShortcutUseCase,
         ),
+        wOverviewTileUseCaseComponent,
         WerkbankUseCase(
-          name: 'WOverviewTile',
-          builder: wOverviewTileUseChase,
+          name: 'WAutoChangePageIndicator',
+          builder: wAutoChangePageIndicatorUseCase,
         ),
       ],
     ),
@@ -309,6 +311,10 @@ WerkbankRoot get root => WerkbankRoot(
             WerkbankUseCase(
               name: 'Material Components',
               builder: materialComponentsUseCase,
+            ),
+            WerkbankUseCase(
+              name: 'Merge Semantics',
+              builder: mergeSemanticsUseCase,
             ),
           ],
         ),

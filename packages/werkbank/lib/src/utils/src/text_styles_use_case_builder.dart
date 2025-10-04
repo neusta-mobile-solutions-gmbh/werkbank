@@ -51,7 +51,8 @@ class _TextStylesShowCase extends StatelessWidget {
         itemCount: styles.length,
         itemBuilder: (context, index) => Builder(
           builder: (context) {
-            final style = styles.entries.elementAt(index);
+            final styleEntry = styles.entries.elementAt(index);
+            final style = styleEntry.value;
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Column(
@@ -65,17 +66,8 @@ class _TextStylesShowCase extends StatelessWidget {
                       ),
                     ),
                     child: TextStyleDisplayRowItem(
-                      label: style.key,
-                      fontSize: style.value.fontSize ?? 14,
-                      fontHeight:
-                          ((style.value.fontSize ?? 14) *
-                                  (style.value.height ?? 1.2))
-                              .ceil(),
-                      fontWeight:
-                          style.value.fontWeight?.displayName ??
-                          'FontWeight.w400',
-                      letterSpacing: style.value.letterSpacing ?? 0,
-                      textStyle: style.value,
+                      label: styleEntry.key,
+                      textStyle: style,
                       text: text,
                       color: onSurfaceColor,
                     ),
@@ -94,10 +86,6 @@ class _TextStylesShowCase extends StatelessWidget {
 class TextStyleDisplayRowItem extends StatelessWidget {
   const TextStyleDisplayRowItem({
     required this.label,
-    required this.fontSize,
-    required this.fontHeight,
-    required this.fontWeight,
-    required this.letterSpacing,
     required this.textStyle,
     required this.color,
     this.text,
@@ -105,10 +93,6 @@ class TextStyleDisplayRowItem extends StatelessWidget {
   });
 
   final String label;
-  final double fontSize;
-  final int fontHeight;
-  final String fontWeight;
-  final double letterSpacing;
   final TextStyle textStyle;
   final String? text;
   final Color color;
@@ -119,51 +103,54 @@ class TextStyleDisplayRowItem extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            TextStyleDisplayItem(
-              label: fontWeight,
-              icon: const Icon(Icons.font_download),
-              color: color,
-            ),
-            const SizedBox(width: 16),
-            TextStyleDisplayItem(
-              label: fontSize.toInt().toString(),
-              icon: const Icon(Icons.text_fields),
-              color: color,
-            ),
-            const SizedBox(width: 16),
-            TextStyleDisplayItem(
-              label: fontHeight.toString(),
-              icon: const Icon(Icons.height),
-              color: color,
-            ),
-            const SizedBox(width: 16),
-            TextStyleDisplayItem(
-              label: letterSpacing.toString(),
-              icon: const Icon(Icons.space_bar),
-              color: color,
-              // TODO(lzuttermeister): run werkbank icon_font_generator
-              // icon: const Icon(WerkbankIcons.horizontal),
-            ),
-            const SizedBox(width: 16),
-            Text(label),
-            const SizedBox(width: 16),
-          ],
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            spacing: 16,
+            children: [
+              TextStyleDisplayItem(
+                label: Text(textStyle.fontWeight?.displayName ?? 'null'),
+                icon: const Icon(Icons.font_download),
+                color: color,
+              ),
+              TextStyleDisplayItem(
+                label: Text(textStyle.fontSize?.toStringAsFixed(1) ?? 'null'),
+                icon: const Icon(Icons.text_fields),
+                color: color,
+              ),
+              TextStyleDisplayItem(
+                label: Text(textStyle.height?.toStringAsFixed(1) ?? 'null'),
+                icon: const Icon(Icons.height),
+                color: color,
+              ),
+              TextStyleDisplayItem(
+                label: Text(
+                  textStyle.letterSpacing?.toStringAsFixed(1) ?? 'null',
+                ),
+                icon: const Icon(Icons.space_bar),
+                color: color,
+                // TODO: run werkbank icon_font_generator
+                // icon: const Icon(WerkbankIcons.horizontal),
+              ),
+              Expanded(
+                child: Text(
+                  label,
+                  style: textStyle,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 16),
         if (text != null) ...[
           WDivider.horizontal(
             thickness: 1,
             color: color,
           ),
-          const SizedBox(height: 8),
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
+            padding: const EdgeInsets.all(16),
             child: Text(text!, style: textStyle),
           ),
-          const SizedBox(height: 16),
         ],
       ],
     );
@@ -178,24 +165,35 @@ class TextStyleDisplayItem extends StatelessWidget {
     super.key,
   });
 
-  final String label;
-  final Icon icon;
+  final Widget label;
+  final Widget icon;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
-      ),
-      child: Row(
-        children: [
-          icon,
-          const SizedBox(width: 8),
-          Text(label),
-        ],
-      ),
+    return Row(
+      spacing: 8,
+      children: [
+        icon,
+        label,
+      ],
     );
+  }
+}
+
+extension FontWeightExtension on FontWeight {
+  String get displayName {
+    return switch (this) {
+      FontWeight.w100 => 'Thin',
+      FontWeight.w200 => 'Extra Light',
+      FontWeight.w300 => 'Light',
+      FontWeight.w400 => 'Normal',
+      FontWeight.w500 => 'Medium',
+      FontWeight.w600 => 'Semi Bold',
+      FontWeight.w700 => 'Bold',
+      FontWeight.w800 => 'Extra Bold',
+      FontWeight.w900 => 'Black',
+      _ => throw AssertionError(),
+    };
   }
 }

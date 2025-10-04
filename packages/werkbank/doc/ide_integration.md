@@ -10,7 +10,7 @@ This topic describes how to improve the integration of Werkbank with your IDE, m
 - [Use Case and Component Live Templates/Snippets](#use-case-and-component-live-templatessnippets)
   - [Simple Use Case (`wbusecase`)](#simple-use-case-wbusecase)
   - [Component with Multiple Use Cases (`wbcomponent`)](#component-with-multiple-use-cases-wbcomponent)
-- [Component with Variant Use Cases (`wbvariantscomponent`)](#component-with-variant-use-cases-wbvariantscomponent)
+  - [Component with Variant Use Cases (`wbvariantscomponent`)](#component-with-variant-use-cases-wbvariantscomponent)
 
 ## Adding Live Templates/Snippets to your IDE
 
@@ -29,6 +29,10 @@ This topic describes how to improve the integration of Werkbank with your IDE, m
 
 ### Simple Use Case (`wbusecase`)
 To make it easier to write a new use case, you can create a live template/snippet in your IDE.
+This one generates a getter for a [WerkbankUseCase](../werkbank/WerkbankUseCase-class.html) and a corresponding
+[UseCaseBuilder](../werkbank/UseCaseBuilder.html) function.
+
+For an **Example usage** of this pattern, see [`slider_use_cases.dart`](https://github.com/neusta-mobile-solutions-gmbh/werkbank/blob/main/example/example_werkbank/lib/src/example_werkbank/use_cases/components/material/slider_use_cases.dart) from the example app.
 
 <details>
 <summary><b>Android Studio</b> Live Template XML</summary>
@@ -88,10 +92,12 @@ WidgetBuilder _useCase(UseCaseComposer c) {
 }
 ```
 
-For an **Example usage** of this pattern, see [`slider_use_cases.dart`](https://github.com/neusta-mobile-solutions-gmbh/werkbank/blob/main/example/example_werkbank/lib/src/example_werkbank/use_cases/components/material/slider_use_cases.dart) from the example app.
-
 ### Component with Multiple Use Cases (`wbcomponent`)
-This generates a component with two use cases.
+When you have a component that you want to showcase in multiple different ways, you should create multiple use cases and group them in a
+[WerkbankComponent](../werkbank/WerkbankComponent-class.html).
+This live template/snippet generates a getter for a component with two use cases.
+
+For an **Example usage** of this pattern, see [`date_picker_use_cases.dart`](https://github.com/neusta-mobile-solutions-gmbh/werkbank/blob/main/example/example_werkbank/lib/src/example_werkbank/use_cases/components/material/date_picker_use_cases.dart) from the example app.
 
 <details>
 <summary><b>Android Studio</b> Live Template XML</summary>
@@ -181,13 +187,15 @@ WidgetBuilder _two(UseCaseComposer c) {
 }
 ```
 
-For an **Example usage** of this pattern, see [`date_picker_use_cases.dart`](https://github.com/neusta-mobile-solutions-gmbh/werkbank/blob/main/example/example_werkbank/lib/src/example_werkbank/use_cases/components/material/date_picker_use_cases.dart) from the example app.
+### Component with Variant Use Cases (`wbvariantscomponent`)
 
-## Component with Variant Use Cases (`wbvariantscomponent`)
+Sometimes you may find yourself in a position where you want to write multiple use cases for a component that have things in common,
+like a shared composition with the same knobs or something similar. This may happen when you have different variants of a component.
+This live template/snippet generates a getter for a component with multiple use cases derived from a single function that takes a variant enum as parameter.
 
-Sometimes you may find yourself in a position where you want to write multiple use cases that have things in common,
-like a shared composition with the same knobs or something similar. This may happen when you have different variants of
-the same UI Component. Various approaches are possible, but starting with a snippet can be helpful.
+For an **Example usage** of this pattern, see [`button_use_cases.dart`](https://github.com/neusta-mobile-solutions-gmbh/werkbank/blob/main/example/example_werkbank/lib/src/example_werkbank/use_cases/components/material/button_use_cases.dart) from the example app.
+
+Before using this pattern, consider whether [knob presets](Writing%20Use%20Cases-topic.html#knobs) are a better fit for your scenario.
 
 <details>
 <summary><b>Android Studio</b> Live Template XML:</summary>
@@ -288,5 +296,3 @@ WidgetBuilder _multiUseCase(
   };
 }
 ```
-
-For an **Example usage** of this pattern, see [`button_use_cases.dart`](https://github.com/neusta-mobile-solutions-gmbh/werkbank/blob/main/example/example_werkbank/lib/src/example_werkbank/use_cases/components/material/button_use_cases.dart) from the example app.

@@ -4,7 +4,7 @@ import 'package:werkbank/src/components/src/_internal/w_animated_tree_segment.da
 import 'package:werkbank/src/components/src/w_tree_view/_internal/highlight_event_provider.dart';
 
 /// {@category Werkbank Components}
-class WTreeView extends StatelessWidget {
+class WTreeView extends StatefulWidget {
   WTreeView({
     super.key,
     required this.treeNodes,
@@ -15,14 +15,62 @@ class WTreeView extends StatelessWidget {
        );
 
   final List<WTreeNode> treeNodes;
-  final Stream<List<LocalKey>>? highlightStream;
+  final Stream<LocalKey>? highlightStream;
+
+  @override
+  State<WTreeView> createState() => _WTreeViewState();
+}
+
+class _WTreeViewState extends State<WTreeView> {
+  late Map<LocalKey, List<LocalKey>> _keyToPath;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateKeyToPath();
+  }
+
+  @override
+  void didUpdateWidget(WTreeView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.treeNodes != widget.treeNodes) {
+      _updateKeyToPath();
+    }
+  }
+
+  void _updateKeyToPath() {
+    _keyToPath = {};
+    void traverse(WTreeNode node, List<LocalKey> path) {
+      if (_keyToPath.containsKey(node.key)) {
+        throw ArgumentError(
+          'Duplicate key found in tree: ${node.key}',
+        );
+      }
+      _keyToPath[node.key] = path;
+      for (final child in node.children ?? const Iterable<WTreeNode>.empty()) {
+        traverse(child, [...path, child.key]);
+      }
+    }
+
+    for (final node in widget.treeNodes) {
+      traverse(node, [node.key]);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return HighlightEventProvider(
-      highlightStream: highlightStream,
+      highlightStream: widget.highlightStream?.map(
+        (key) =>
+            _keyToPath[key] ??
+            (throw ArgumentError(
+              'Key $key not found in tree',
+            )),
+      ),
       child: _Children(
-        nodesAndTheirPath: treeNodes.map((node) => (node, [node.key])).toList(),
+        nodesAndTheirPath: widget.treeNodes
+            .map((node) => (node, [node.key]))
+            .toList(),
         nestingLevel: 0,
       ),
     );

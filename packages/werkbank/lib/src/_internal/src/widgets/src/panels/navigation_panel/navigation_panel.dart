@@ -24,10 +24,7 @@ class NavigationPanel extends StatelessWidget with OrderExecutor {
     return _NavigationPanelLayout(
       header: const _NavigationPanelHeader(),
       body: WTreeView(
-        highlightStream: NavEventProvider.of(context).map(
-          (pathSegments) =>
-              pathSegments.map(ValueKey.new).toList(growable: false),
-        ),
+        highlightStream: NavEventProvider.of(context).map(ValueKey.new),
         treeNodes: parseRootDescriptorToSTreeNodes(
           context: context,
           rootDescriptor: rootDescriptor,
@@ -58,7 +55,7 @@ class NavigationPanel extends StatelessWidget with OrderExecutor {
     };
 
     return WTreeNode(
-      key: ValueKey(descriptor.pathSegments.last),
+      key: ValueKey(descriptor.path),
       title: Text(descriptor.node.name),
       leading: leading,
       isInitiallyExpanded: switch (descriptor) {

@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/tree/src/descriptor_node.dart';
 
 class NavEventProvider extends StatefulWidget {
   const NavEventProvider({super.key, required this.child});
 
   final Widget child;
 
-  /// Access the current path segments as a stream
-  static Stream<List<String>> of(BuildContext context) {
+  static Stream<String> of(BuildContext context) {
     final inherited = context.dependOnInheritedWidgetOfExactType<_Inherited>();
     assert(inherited != null, 'No NavEventProvider found in context');
     return inherited!.stream;
@@ -21,12 +21,12 @@ class NavEventProvider extends StatefulWidget {
 }
 
 class _NavEventProviderState extends State<NavEventProvider> {
-  late final StreamController<List<String>> _streamController;
+  late final StreamController<String> _streamController;
 
   @override
   void initState() {
     super.initState();
-    _streamController = StreamController<List<String>>.broadcast();
+    _streamController = StreamController<String>.broadcast();
   }
 
   @override
@@ -35,11 +35,10 @@ class _NavEventProviderState extends State<NavEventProvider> {
     final navState = NavStateProvider.of(context);
     switch (navState) {
       case HomeNavState():
+      case DescriptorNavState(descriptor: RootDescriptor()):
         return;
-      case DescriptorNavState(:final descriptor):
-        _streamController.add(
-          descriptor.pathSegments,
-        );
+      case DescriptorNavState(:final ChildDescriptor descriptor):
+        _streamController.add(descriptor.path);
     }
   }
 
@@ -61,7 +60,7 @@ class _Inherited extends InheritedWidget {
     required super.child,
   });
 
-  final Stream<List<String>> stream;
+  final Stream<String> stream;
 
   @override
   bool updateShouldNotify(covariant _Inherited oldWidget) {

@@ -75,10 +75,10 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
           Durations.medium2,
         ).then(
           (_) async {
-            final context = this.context;
-            if (!context.mounted) {
+            if (!mounted) {
               return;
             }
+            final context = this.context;
 
             await Scrollable.ensureVisible(
               context,

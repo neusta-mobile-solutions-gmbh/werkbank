@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
-import 'package:werkbank/src/routing/src/nav_state.dart';
+import 'package:werkbank/src/routing/routing.dart';
 
 class NavEventProvider extends StatefulWidget {
   const NavEventProvider({super.key, required this.child});

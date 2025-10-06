@@ -6,6 +6,8 @@ import 'package:werkbank/src/use_case/use_case.dart';
 UseCaseBuilder iconsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
   required Map<String, IconData> Function(BuildContext context) icons,
+  Color? surfaceColor,
+  Color? onSurfaceColor,
 }) {
   return (c) {
     final sizeKnob = c.knobs.doubleSlider(
@@ -14,69 +16,103 @@ UseCaseBuilder iconsUseCaseBuilder({
       max: 200,
       initialValue: 48,
     );
-    c
-      ..tags(['colors', 'theme'])
-      ..description(
-        'A default UseCase of Werkbank to display '
-        'all icons of a theme.',
-      );
+    if (c.isAddonActive(DescriptionAddon.addonId)) {
+      c
+        ..tags(['colors', 'theme'])
+        ..description(
+          'A default UseCase of Werkbank to display '
+          'all icons of a theme.',
+        );
+    }
     builder(c);
     return (context) {
-      return SingleChildScrollView(
-        child: _IconsShowCase(
-          icons: icons(context),
-          size: sizeKnob.value,
-        ),
+      late final brightness = UseCase.themeBrightnessOf(context);
+      final effectiveSurfaceColor =
+          surfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.black,
+            Brightness.light => Colors.white,
+          };
+      final effectiveOnSurfaceColor =
+          onSurfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.white,
+            Brightness.light => Colors.black,
+          };
+      return _IconsUseCase(
+        icons: icons(context),
+        size: sizeKnob.value,
+        surfaceColor: effectiveSurfaceColor,
+        onSurfaceColor: effectiveOnSurfaceColor,
       );
     };
   };
 }
 
-class _IconsShowCase extends StatelessWidget {
-  const _IconsShowCase({
+class _IconsUseCase extends StatelessWidget {
+  const _IconsUseCase({
     required this.icons,
     required this.size,
+    this.surfaceColor,
+    this.onSurfaceColor,
   });
 
   final Map<String, IconData> icons;
   final double size;
+  final Color? surfaceColor;
+  final Color? onSurfaceColor;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    final brightness = MediaQuery.platformBrightnessOf(context);
+    final surfaceColor =
+        this.surfaceColor ??
+        (brightness == Brightness.dark ? Colors.black : Colors.white);
+    final onSurfaceColor =
+        this.onSurfaceColor ??
+        (brightness == Brightness.dark ? Colors.white : Colors.black);
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(32),
       child: Wrap(
-        spacing: 32,
-        runSpacing: 32,
+        spacing: 16,
+        runSpacing: 16,
         children: [
           for (final icon in icons.entries)
-            Builder(
-              builder: (context) {
-                return Container(
-                  constraints: BoxConstraints(minWidth: size),
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                  ),
-                  child: IntrinsicWidth(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: surfaceColor,
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: onSurfaceColor),
+              ),
+              child: IntrinsicWidth(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: onSurfaceColor),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Icon(
                           icon.value,
                           size: size,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 16,
-                          ),
-                          child: Text(icon.key),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        icon.key,
+                        style: TextStyle(color: onSurfaceColor),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
         ],
       ),

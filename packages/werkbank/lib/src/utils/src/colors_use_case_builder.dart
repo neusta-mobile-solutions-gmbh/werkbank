@@ -6,6 +6,8 @@ import 'package:werkbank/src/use_case/use_case.dart';
 UseCaseBuilder colorsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
   required Map<String, Color> Function(BuildContext context) colors,
+  Color? surfaceColor,
+  Color? onSurfaceColor,
 }) {
   return (c) {
     final sizeKnob = c.knobs.doubleSlider(
@@ -14,40 +16,66 @@ UseCaseBuilder colorsUseCaseBuilder({
       max: 300,
       initialValue: 100,
     );
-    c
-      ..tags(['colors', 'theme'])
-      ..description(
-        'A default UseCase of Werkbank to display '
-        'all colors of a theme.',
-      );
+    if (c.isAddonActive(DescriptionAddon.addonId)) {
+      c
+        ..tags(['colors', 'theme'])
+        ..description(
+          'A default UseCase of Werkbank to display '
+          'all colors of a theme.',
+        );
+    }
     builder(c);
     return (context) {
-      return SingleChildScrollView(
-        child: _ColorsShowCase(
-          colors: colors(context),
-          size: sizeKnob.value,
-        ),
+      late final brightness = UseCase.themeBrightnessOf(context);
+      final effectiveSurfaceColor =
+          surfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.black,
+            Brightness.light => Colors.white,
+          };
+      final effectiveOnSurfaceColor =
+          onSurfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.white,
+            Brightness.light => Colors.black,
+          };
+      return _ColorsUseCase(
+        colors: colors(context),
+        size: sizeKnob.value,
+        surfaceColor: effectiveSurfaceColor,
+        onSurfaceColor: effectiveOnSurfaceColor,
       );
     };
   };
 }
 
-class _ColorsShowCase extends StatelessWidget {
-  const _ColorsShowCase({
+class _ColorsUseCase extends StatelessWidget {
+  const _ColorsUseCase({
     required this.colors,
     required this.size,
+    this.surfaceColor,
+    this.onSurfaceColor,
   });
 
   final Map<String, Color> colors;
   final double size;
+  final Color? surfaceColor;
+  final Color? onSurfaceColor;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    final brightness = MediaQuery.platformBrightnessOf(context);
+    final surfaceColor =
+        this.surfaceColor ??
+        (brightness == Brightness.dark ? Colors.black : Colors.white);
+    final onSurfaceColor =
+        this.onSurfaceColor ??
+        (brightness == Brightness.dark ? Colors.white : Colors.black);
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(32),
       child: Wrap(
-        spacing: 32,
-        runSpacing: 32,
+        spacing: 16,
+        runSpacing: 16,
         children: [
           for (final color in colors.entries)
             Builder(
@@ -57,31 +85,58 @@ class _ColorsShowCase extends StatelessWidget {
                     .toRadixString(16)
                     .padLeft(8, '0');
                 final colorHexText = '0x$colorHex';
-                return Container(
-                  constraints: BoxConstraints(minWidth: size),
+                return DecoratedBox(
+                  position: DecorationPosition.foreground,
                   decoration: BoxDecoration(
-                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: onSurfaceColor),
                   ),
-                  child: IntrinsicWidth(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          color: color.value,
-                          height: size,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: size),
+                      child: IntrinsicWidth(
+                        child: ColoredBox(
+                          color: surfaceColor,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              DecoratedBox(
+                                position: DecorationPosition.foreground,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(color: onSurfaceColor),
+                                  ),
+                                ),
+                                child: SizedBox(
+                                  height: size,
+                                  child: ColoredBox(
+                                    color: color.value,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Text(
+                                      color.key,
+                                      style: TextStyle(color: onSurfaceColor),
+                                    ),
+                                    Text(
+                                      colorHexText,
+                                      style: TextStyle(color: onSurfaceColor),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        const SizedBox(height: 16),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(color.key),
-                        ),
-                        const SizedBox(height: 4),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(colorHexText),
-                        ),
-                        const SizedBox(height: 16),
-                      ],
+                      ),
                     ),
                   ),
                 );

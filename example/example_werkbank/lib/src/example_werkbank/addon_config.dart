@@ -14,6 +14,14 @@ AddonConfig get addonConfig => AddonConfig(
               dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
             ),
           ),
+          wrapperBuilder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(
+                context,
+              ).copyWith(platformBrightness: Brightness.light),
+              child: child,
+            );
+          },
         ),
         ThemeOption.material(
           name: 'Blue',
@@ -23,6 +31,14 @@ AddonConfig get addonConfig => AddonConfig(
               dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
             ),
           ),
+          wrapperBuilder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(
+                context,
+              ).copyWith(platformBrightness: Brightness.light),
+              child: child,
+            );
+          },
         ),
         ThemeOption.material(
           name: 'Amber Dark',
@@ -33,6 +49,14 @@ AddonConfig get addonConfig => AddonConfig(
               dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
             ),
           ),
+          wrapperBuilder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(
+                context,
+              ).copyWith(platformBrightness: Brightness.dark),
+              child: child,
+            );
+          },
         ),
       ],
     ),

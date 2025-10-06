@@ -13,6 +13,8 @@ typedef AppBuilder =
       Widget home,
     );
 
+typedef ThemeBrightnessBuilder = Brightness Function(BuildContext context);
+
 /// {@category Getting Started}
 /// {@category File Structure}
 /// A class that defines how to build the app widget, which is typically one of
@@ -41,14 +43,19 @@ abstract interface class AppConfig {
   /// The widgets built inside the [additionalBuilder] can be assumed to be
   /// descendants of the widgets in the [AddonLayer.affiliationTransition]
   /// layer.
+  ///
+  /// The [themeBrightnessBuilder] parameter should return the current
+  /// [Brightness] for the app theme.
   factory AppConfig({
     required AppBuilder buildApp,
     TransitionBuilder? additionalBuilder,
     required WrapperBuilder defaultTextStyleBuilder,
+    required ThemeBrightnessBuilder themeBrightnessBuilder,
   }) => _CallbackAppConfig(
     buildApp: buildApp,
     additionalBuilder: additionalBuilder,
     defaultTextStyleBuilder: defaultTextStyleBuilder,
+    themeBrightnessBuilder: themeBrightnessBuilder,
   );
 
   /// A constructor which defines an [AppConfig] for a material app.
@@ -71,6 +78,7 @@ abstract interface class AppConfig {
             child: child,
           );
         },
+        themeBrightnessBuilder: Theme.brightnessOf,
       );
 
   /// A constructor which defines an [AppConfig] for a cupertino app.
@@ -93,15 +101,19 @@ abstract interface class AppConfig {
             child: child,
           );
         },
+        themeBrightnessBuilder: CupertinoTheme.brightnessOf,
       );
 
   /// A constructor which defines an [AppConfig] for a widgets app.
   ///
   /// The [additionalBuilder] parameter can be used like you normally would use
   /// the [WidgetsApp.builder] parameter.
+  /// The [themeBrightnessBuilder] function must be provided to return the
+  /// [Brightness] of the theme.
   factory AppConfig.widgets({
     TransitionBuilder? additionalBuilder,
     required WrapperBuilder defaultTextStyleBuilder,
+    required ThemeBrightnessBuilder themeBrightnessBuilder,
   }) => AppConfig(
     buildApp: (context, builder, home) {
       return WidgetsApp(
@@ -113,6 +125,7 @@ abstract interface class AppConfig {
     },
     additionalBuilder: additionalBuilder,
     defaultTextStyleBuilder: defaultTextStyleBuilder,
+    themeBrightnessBuilder: themeBrightnessBuilder,
   );
 
   /// Builds the app widget.
@@ -129,6 +142,10 @@ abstract interface class AppConfig {
   /// Wraps the child with a default text style widget, which defines the
   /// default text style for the use cases.
   Widget buildDefaultTextStyle(BuildContext context, Widget child);
+
+  /// Returns the current [Brightness] for the app theme, given a [context]
+  /// where the theme can be accessed.
+  Brightness themeBrightness(BuildContext context);
 }
 
 class _CallbackAppConfig implements AppConfig {
@@ -136,6 +153,7 @@ class _CallbackAppConfig implements AppConfig {
     required AppBuilder buildApp,
     this.additionalBuilder,
     required this.defaultTextStyleBuilder,
+    required this.themeBrightnessBuilder,
   }) : _buildApp = buildApp;
 
   final AppBuilder _buildApp;
@@ -143,6 +161,8 @@ class _CallbackAppConfig implements AppConfig {
   final TransitionBuilder? additionalBuilder;
 
   final WrapperBuilder defaultTextStyleBuilder;
+
+  final ThemeBrightnessBuilder themeBrightnessBuilder;
 
   @override
   Widget buildApp(
@@ -171,4 +191,8 @@ class _CallbackAppConfig implements AppConfig {
   Widget buildDefaultTextStyle(BuildContext context, Widget child) {
     return defaultTextStyleBuilder(context, child);
   }
+
+  @override
+  Brightness themeBrightness(BuildContext context) =>
+      themeBrightnessBuilder(context);
 }

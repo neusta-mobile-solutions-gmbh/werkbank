@@ -10,7 +10,7 @@ class NavEventProvider extends StatefulWidget {
 
   final Widget child;
 
-  static Stream<String> of(BuildContext context) {
+  static Stream<Descriptor> of(BuildContext context) {
     final inherited = context.dependOnInheritedWidgetOfExactType<_Inherited>();
     assert(inherited != null, 'No NavEventProvider found in context');
     return inherited!.stream;
@@ -21,12 +21,12 @@ class NavEventProvider extends StatefulWidget {
 }
 
 class _NavEventProviderState extends State<NavEventProvider> {
-  late final StreamController<String> _streamController;
+  late final StreamController<Descriptor> _streamController;
 
   @override
   void initState() {
     super.initState();
-    _streamController = StreamController<String>.broadcast();
+    _streamController = StreamController<Descriptor>.broadcast();
   }
 
   @override
@@ -38,7 +38,7 @@ class _NavEventProviderState extends State<NavEventProvider> {
       case DescriptorNavState(descriptor: RootDescriptor()):
         return;
       case DescriptorNavState(:final ChildDescriptor descriptor):
-        _streamController.add(descriptor.path);
+        _streamController.add(descriptor);
     }
   }
 
@@ -60,7 +60,7 @@ class _Inherited extends InheritedWidget {
     required super.child,
   });
 
-  final Stream<String> stream;
+  final Stream<Descriptor> stream;
 
   @override
   bool updateShouldNotify(covariant _Inherited oldWidget) {

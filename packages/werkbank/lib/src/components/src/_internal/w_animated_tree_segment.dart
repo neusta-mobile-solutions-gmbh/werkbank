@@ -78,7 +78,6 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
             if (!mounted) {
               return;
             }
-            final context = this.context;
 
             await Scrollable.ensureVisible(
               context,
@@ -86,7 +85,7 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
               alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
             );
 
-            if (!context.mounted) {
+            if (!mounted) {
               return;
             }
 

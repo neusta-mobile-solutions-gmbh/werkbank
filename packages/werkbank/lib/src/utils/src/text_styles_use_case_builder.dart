@@ -4,15 +4,16 @@ import 'package:werkbank/werkbank.dart';
 UseCaseBuilder textStylesUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
   required Map<String, TextStyle> Function(BuildContext context) styles,
-  String? initialValue,
+  Color? surfaceColor,
+  Color? onSurfaceColor,
+  String? initialText,
+  bool textInitiallyNull = true,
 }) {
   return (c) {
-    final textKnob = c.knobs.nullable.string(
+    final textKnob = c.knobs.nullable.stringMultiLine(
       'Text',
-      initiallyNull: true,
-      initialValue:
-          initialValue ??
-          'Lorem ipsum dolor sit amet consectetur adipiscing elit',
+      initiallyNull: textInitiallyNull,
+      initialValue: initialText ?? 'Sphinx of black quartz, judge my vow.',
     );
     c
       ..tags(['font', 'textStyle', 'theme'])
@@ -22,72 +23,72 @@ UseCaseBuilder textStylesUseCaseBuilder({
       );
     builder(c);
     return (context) {
-      return _TextStylesShowCase(
+      late final brightness = UseCase.themeBrightnessOf(context);
+      final effectiveSurfaceColor =
+          surfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.black,
+            Brightness.light => Colors.white,
+          };
+      final effectiveOnSurfaceColor =
+          onSurfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.white,
+            Brightness.light => Colors.black,
+          };
+      return _TextStylesUseCase(
         styles: styles(context),
         text: textKnob.value,
+        surfaceColor: effectiveSurfaceColor,
+        onSurfaceColor: effectiveOnSurfaceColor,
       );
     };
   };
 }
 
-class _TextStylesShowCase extends StatelessWidget {
-  const _TextStylesShowCase({
+class _TextStylesUseCase extends StatelessWidget {
+  const _TextStylesUseCase({
     required this.styles,
     required this.text,
+    required this.surfaceColor,
+    required this.onSurfaceColor,
   });
 
   final Map<String, TextStyle> styles;
   final String? text;
+  final Color surfaceColor;
+  final Color onSurfaceColor;
 
   @override
   Widget build(BuildContext context) {
-    final brightness = MediaQuery.platformBrightnessOf(context);
-    final onSurfaceColor = brightness == Brightness.dark
-        ? Colors.white
-        : Colors.black;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 32),
-      child: ListView.builder(
-        itemCount: styles.length,
-        itemBuilder: (context, index) => Builder(
-          builder: (context) {
-            final styleEntry = styles.entries.elementAt(index);
-            final style = styleEntry.value;
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: onSurfaceColor,
-                      ),
-                    ),
-                    child: TextStyleDisplayRowItem(
-                      label: styleEntry.key,
-                      textStyle: style,
-                      text: text,
-                      color: onSurfaceColor,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                ],
-              ),
-            );
-          },
-        ),
+    final styleEntries = styles.entries.toList();
+    return ListView.separated(
+      itemCount: styleEntries.length,
+      padding: const EdgeInsets.all(32),
+      separatorBuilder: (context, index) => const SizedBox(height: 16),
+      itemBuilder: (context, index) => Builder(
+        builder: (context) {
+          final styleEntry = styleEntries[index];
+          final style = styleEntry.value;
+          return _TextStyleDisplayRowItem(
+            label: styleEntry.key,
+            textStyle: style,
+            text: text,
+            surfaceColor: surfaceColor,
+            onSurfaceColor: onSurfaceColor,
+          );
+        },
       ),
     );
   }
 }
 
-class TextStyleDisplayRowItem extends StatelessWidget {
-  const TextStyleDisplayRowItem({
+class _TextStyleDisplayRowItem extends StatelessWidget {
+  const _TextStyleDisplayRowItem({
     required this.label,
     required this.textStyle,
-    required this.color,
+    required this.surfaceColor,
+    required this.onSurfaceColor,
     this.text,
     super.key,
   });
@@ -95,79 +96,92 @@ class TextStyleDisplayRowItem extends StatelessWidget {
   final String label;
   final TextStyle textStyle;
   final String? text;
-  final Color color;
+  final Color surfaceColor;
+  final Color onSurfaceColor;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            spacing: 16,
-            children: [
-              TextStyleDisplayItem(
-                label: Text(textStyle.fontWeight?.displayName ?? 'null'),
-                icon: const Icon(Icons.font_download),
-                color: color,
-              ),
-              TextStyleDisplayItem(
-                label: Text(textStyle.fontSize?.toStringAsFixed(1) ?? 'null'),
-                icon: const Icon(Icons.text_fields),
-                color: color,
-              ),
-              TextStyleDisplayItem(
-                label: Text(textStyle.height?.toStringAsFixed(1) ?? 'null'),
-                icon: const Icon(Icons.height),
-                color: color,
-              ),
-              TextStyleDisplayItem(
-                label: Text(
-                  textStyle.letterSpacing?.toStringAsFixed(1) ?? 'null',
-                ),
-                icon: const Icon(Icons.space_bar),
-                color: color,
-                // TODO: run werkbank icon_font_generator
-                // icon: const Icon(WerkbankIcons.horizontal),
-              ),
-              Expanded(
-                child: Text(
-                  label,
-                  style: textStyle,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: onSurfaceColor,
         ),
-        if (text != null) ...[
-          WDivider.horizontal(
-            thickness: 1,
-            color: color,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          DecoratedBox(
+            decoration: BoxDecoration(
+              border: text != null
+                  ? Border(bottom: BorderSide(color: onSurfaceColor))
+                  : null,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                spacing: 16,
+                children: [
+                  _TextStyleDisplayItem(
+                    label: Text(textStyle.fontWeight?.displayName ?? 'null'),
+                    icon: const Icon(Icons.font_download),
+                    onSurfaceColor: onSurfaceColor,
+                  ),
+                  _TextStyleDisplayItem(
+                    label: Text(
+                      textStyle.fontSize?.toStringAsFixed(1) ?? 'null',
+                    ),
+                    icon: const Icon(Icons.text_fields),
+                    onSurfaceColor: onSurfaceColor,
+                  ),
+                  _TextStyleDisplayItem(
+                    label: Text(textStyle.height?.toStringAsFixed(1) ?? 'null'),
+                    icon: const Icon(Icons.height),
+                    onSurfaceColor: onSurfaceColor,
+                  ),
+                  _TextStyleDisplayItem(
+                    label: Text(
+                      textStyle.letterSpacing?.toStringAsFixed(1) ?? 'null',
+                    ),
+                    icon: const Icon(Icons.space_bar),
+                    onSurfaceColor: onSurfaceColor,
+                    // TODO: run werkbank icon_font_generator
+                    // icon: const Icon(WerkbankIcons.horizontal),
+                  ),
+                  Expanded(
+                    child: Text(
+                      label,
+                      style: textStyle,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(text!, style: textStyle),
-          ),
+          if (text != null)
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(text!, style: textStyle),
+            ),
         ],
-      ],
+      ),
     );
   }
 }
 
-class TextStyleDisplayItem extends StatelessWidget {
-  const TextStyleDisplayItem({
+class _TextStyleDisplayItem extends StatelessWidget {
+  const _TextStyleDisplayItem({
     required this.label,
     required this.icon,
-    required this.color,
-    super.key,
+    required this.onSurfaceColor,
   });
 
   final Widget label;
   final Widget icon;
-  final Color color;
+  final Color onSurfaceColor;
 
   @override
   Widget build(BuildContext context) {
@@ -175,13 +189,16 @@ class TextStyleDisplayItem extends StatelessWidget {
       spacing: 8,
       children: [
         icon,
-        label,
+        DefaultTextStyle.merge(
+          style: TextStyle(color: onSurfaceColor),
+          child: label,
+        ),
       ],
     );
   }
 }
 
-extension FontWeightExtension on FontWeight {
+extension on FontWeight {
   String get displayName {
     return switch (this) {
       FontWeight.w100 => 'Thin',

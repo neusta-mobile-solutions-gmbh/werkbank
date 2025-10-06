@@ -24,20 +24,31 @@ UseCaseBuilder iconsUseCaseBuilder({
       );
     builder(c);
     return (context) {
-      return SingleChildScrollView(
-        child: _IconsShowCase(
-          icons: icons(context),
-          size: sizeKnob.value,
-          surfaceColor: surfaceColor,
-          onSurfaceColor: onSurfaceColor,
-        ),
+      late final brightness = UseCase.themeBrightnessOf(context);
+      final effectiveSurfaceColor =
+          surfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.black,
+            Brightness.light => Colors.white,
+          };
+      final effectiveOnSurfaceColor =
+          onSurfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.white,
+            Brightness.light => Colors.black,
+          };
+      return _IconsUseCase(
+        icons: icons(context),
+        size: sizeKnob.value,
+        surfaceColor: effectiveSurfaceColor,
+        onSurfaceColor: effectiveOnSurfaceColor,
       );
     };
   };
 }
 
-class _IconsShowCase extends StatelessWidget {
-  const _IconsShowCase({
+class _IconsUseCase extends StatelessWidget {
+  const _IconsUseCase({
     required this.icons,
     required this.size,
     this.surfaceColor,
@@ -58,49 +69,48 @@ class _IconsShowCase extends StatelessWidget {
     final onSurfaceColor =
         this.onSurfaceColor ??
         (brightness == Brightness.dark ? Colors.white : Colors.black);
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(32),
       child: Wrap(
-        spacing: 32,
-        runSpacing: 32,
+        spacing: 16,
+        runSpacing: 16,
         children: [
           for (final icon in icons.entries)
-            Builder(
-              builder: (context) {
-                return Container(
-                  constraints: BoxConstraints(minWidth: size),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: onSurfaceColor),
-                  ),
-                  child: IntrinsicWidth(
-                    child: ColoredBox(
-                      color: surfaceColor,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Icon(
-                              icon.value,
-                              size: size,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 16,
-                            ),
-                            child: Text(
-                              icon.key,
-                              style: TextStyle(color: onSurfaceColor),
-                            ),
-                          ),
-                        ],
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: surfaceColor,
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(color: onSurfaceColor),
+              ),
+              child: IntrinsicWidth(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: onSurfaceColor),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Icon(
+                          icon.value,
+                          size: size,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        icon.key,
+                        style: TextStyle(color: onSurfaceColor),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
         ],
       ),

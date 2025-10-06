@@ -24,20 +24,31 @@ UseCaseBuilder colorsUseCaseBuilder({
       );
     builder(c);
     return (context) {
-      return SingleChildScrollView(
-        child: _ColorsShowCase(
-          colors: colors(context),
-          size: sizeKnob.value,
-          surfaceColor: surfaceColor,
-          onSurfaceColor: onSurfaceColor,
-        ),
+      late final brightness = UseCase.themeBrightnessOf(context);
+      final effectiveSurfaceColor =
+          surfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.black,
+            Brightness.light => Colors.white,
+          };
+      final effectiveOnSurfaceColor =
+          onSurfaceColor ??
+          switch (brightness) {
+            Brightness.dark => Colors.white,
+            Brightness.light => Colors.black,
+          };
+      return _ColorsUseCase(
+        colors: colors(context),
+        size: sizeKnob.value,
+        surfaceColor: effectiveSurfaceColor,
+        onSurfaceColor: effectiveOnSurfaceColor,
       );
     };
   };
 }
 
-class _ColorsShowCase extends StatelessWidget {
-  const _ColorsShowCase({
+class _ColorsUseCase extends StatelessWidget {
+  const _ColorsUseCase({
     required this.colors,
     required this.size,
     this.surfaceColor,
@@ -58,11 +69,11 @@ class _ColorsShowCase extends StatelessWidget {
     final onSurfaceColor =
         this.onSurfaceColor ??
         (brightness == Brightness.dark ? Colors.white : Colors.black);
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(32),
       child: Wrap(
-        spacing: 32,
-        runSpacing: 32,
+        spacing: 16,
+        runSpacing: 16,
         children: [
           for (final color in colors.entries)
             Builder(
@@ -72,49 +83,58 @@ class _ColorsShowCase extends StatelessWidget {
                     .toRadixString(16)
                     .padLeft(8, '0');
                 final colorHexText = '0x$colorHex';
-                return Container(
-                  constraints: BoxConstraints(minWidth: size),
+                return DecoratedBox(
+                  position: DecorationPosition.foreground,
                   decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
                     border: Border.all(color: onSurfaceColor),
                   ),
-                  child: IntrinsicWidth(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          color: color.value,
-                          height: size,
-                        ),
-                        ColoredBox(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(minWidth: size),
+                      child: IntrinsicWidth(
+                        child: ColoredBox(
                           color: surfaceColor,
                           child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              const SizedBox(height: 16),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
+                              DecoratedBox(
+                                position: DecorationPosition.foreground,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(color: onSurfaceColor),
+                                  ),
                                 ),
-                                child: Text(
-                                  color.key,
-                                  style: TextStyle(color: onSurfaceColor),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
-                                child: Text(
-                                  colorHexText,
-                                  style: TextStyle(color: onSurfaceColor),
+                                child: SizedBox(
+                                  height: size,
+                                  child: ColoredBox(
+                                    color: color.value,
+                                  ),
                                 ),
                               ),
-                              const SizedBox(height: 16),
+                              Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Text(
+                                      color.key,
+                                      style: TextStyle(color: onSurfaceColor),
+                                    ),
+                                    Text(
+                                      colorHexText,
+                                      style: TextStyle(color: onSurfaceColor),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 );

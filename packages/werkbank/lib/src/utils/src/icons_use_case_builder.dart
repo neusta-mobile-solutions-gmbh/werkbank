@@ -16,12 +16,14 @@ UseCaseBuilder iconsUseCaseBuilder({
       max: 200,
       initialValue: 48,
     );
-    c
-      ..tags(['colors', 'theme'])
-      ..description(
-        'A default UseCase of Werkbank to display '
-        'all icons of a theme.',
-      );
+    if (c.isAddonActive(DescriptionAddon.addonId)) {
+      c
+        ..tags(['colors', 'theme'])
+        ..description(
+          'A default UseCase of Werkbank to display '
+          'all icons of a theme.',
+        );
+    }
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);

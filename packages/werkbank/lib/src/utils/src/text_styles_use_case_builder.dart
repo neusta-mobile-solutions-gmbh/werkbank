@@ -15,12 +15,14 @@ UseCaseBuilder textStylesUseCaseBuilder({
       initiallyNull: textInitiallyNull,
       initialValue: initialText ?? 'Sphinx of black quartz, judge my vow.',
     );
-    c
-      ..tags(['font', 'textStyle', 'theme'])
-      ..description(
-        'A default UseCase of Werkbank to display '
-        'all textStyles of a theme.',
-      );
+    if (c.isAddonActive(DescriptionAddon.addonId)) {
+      c
+        ..tags(['font', 'textStyle', 'theme'])
+        ..description(
+          'A default UseCase of Werkbank to display '
+          'all textStyles of a theme.',
+        );
+    }
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);
@@ -62,6 +64,26 @@ class _TextStylesUseCase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final styleEntries = styles.entries.toList();
+    final fontWeightTexts = [
+      for (final entry in styleEntries)
+        entry.value.fontWeight?.displayName ?? 'null',
+    ];
+    final fontSizeTexts = [
+      for (final entry in styleEntries)
+        entry.value.fontSize?.toStringAsFixed(1) ?? 'null',
+    ];
+    final heightTexts = [
+      for (final entry in styleEntries)
+        entry.value.height?.toStringAsFixed(1) ?? 'null',
+    ];
+    final letterSpacingTexts = [
+      for (final entry in styleEntries)
+        entry.value.letterSpacing?.toStringAsFixed(2) ?? 'null',
+    ];
+    final allFontWeightTexts = fontWeightTexts.toSet();
+    final allFontSizeTexts = fontSizeTexts.toSet();
+    final allHeightTexts = heightTexts.toSet();
+    final allLetterSpacingTexts = letterSpacingTexts.toSet();
     return ListView.separated(
       itemCount: styleEntries.length,
       padding: const EdgeInsets.all(32),
@@ -71,6 +93,22 @@ class _TextStylesUseCase extends StatelessWidget {
           final styleEntry = styleEntries[index];
           final style = styleEntry.value;
           return _TextStyleDisplayRowItem(
+            fontWeightLabel: _WidthFittingText(
+              text: fontWeightTexts[index],
+              widthTexts: allFontWeightTexts,
+            ),
+            fontSizeLabel: _WidthFittingText(
+              text: fontSizeTexts[index],
+              widthTexts: allFontSizeTexts,
+            ),
+            heightLabel: _WidthFittingText(
+              text: heightTexts[index],
+              widthTexts: allHeightTexts,
+            ),
+            letterSpacingLabel: _WidthFittingText(
+              text: letterSpacingTexts[index],
+              widthTexts: allLetterSpacingTexts,
+            ),
             label: styleEntry.key,
             textStyle: style,
             text: text,
@@ -85,14 +123,21 @@ class _TextStylesUseCase extends StatelessWidget {
 
 class _TextStyleDisplayRowItem extends StatelessWidget {
   const _TextStyleDisplayRowItem({
+    required this.fontWeightLabel,
+    required this.fontSizeLabel,
+    required this.heightLabel,
+    required this.letterSpacingLabel,
     required this.label,
     required this.textStyle,
     required this.surfaceColor,
     required this.onSurfaceColor,
     this.text,
-    super.key,
   });
 
+  final Widget fontWeightLabel;
+  final Widget fontSizeLabel;
+  final Widget heightLabel;
+  final Widget letterSpacingLabel;
   final String label;
   final TextStyle textStyle;
   final String? text;
@@ -125,26 +170,22 @@ class _TextStyleDisplayRowItem extends StatelessWidget {
                 spacing: 16,
                 children: [
                   _TextStyleDisplayItem(
-                    label: Text(textStyle.fontWeight?.displayName ?? 'null'),
+                    label: fontWeightLabel,
                     icon: const Icon(Icons.font_download),
                     onSurfaceColor: onSurfaceColor,
                   ),
                   _TextStyleDisplayItem(
-                    label: Text(
-                      textStyle.fontSize?.toStringAsFixed(1) ?? 'null',
-                    ),
+                    label: fontSizeLabel,
                     icon: const Icon(Icons.text_fields),
                     onSurfaceColor: onSurfaceColor,
                   ),
                   _TextStyleDisplayItem(
-                    label: Text(textStyle.height?.toStringAsFixed(1) ?? 'null'),
+                    label: heightLabel,
                     icon: const Icon(Icons.height),
                     onSurfaceColor: onSurfaceColor,
                   ),
                   _TextStyleDisplayItem(
-                    label: Text(
-                      textStyle.letterSpacing?.toStringAsFixed(1) ?? 'null',
-                    ),
+                    label: letterSpacingLabel,
                     icon: const Icon(Icons.space_bar),
                     onSurfaceColor: onSurfaceColor,
                     // TODO: run werkbank icon_font_generator
@@ -193,6 +234,43 @@ class _TextStyleDisplayItem extends StatelessWidget {
           style: TextStyle(color: onSurfaceColor),
           child: label,
         ),
+      ],
+    );
+  }
+}
+
+class _WidthFittingText extends StatelessWidget {
+  const _WidthFittingText({
+    required this.text,
+    required this.widthTexts,
+  });
+
+  final String text;
+  final Set<String> widthTexts;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.passthrough,
+      children: [
+        Text(
+          text,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        for (final widthText in widthTexts)
+          if (widthText != text)
+            Visibility(
+              visible: false,
+              maintainState: true,
+              maintainAnimation: true,
+              maintainSize: true,
+              child: Text(
+                widthText,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
       ],
     );
   }

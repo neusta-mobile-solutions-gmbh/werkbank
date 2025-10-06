@@ -16,12 +16,14 @@ UseCaseBuilder colorsUseCaseBuilder({
       max: 300,
       initialValue: 100,
     );
-    c
-      ..tags(['colors', 'theme'])
-      ..description(
-        'A default UseCase of Werkbank to display '
-        'all colors of a theme.',
-      );
+    if (c.isAddonActive(DescriptionAddon.addonId)) {
+      c
+        ..tags(['colors', 'theme'])
+        ..description(
+          'A default UseCase of Werkbank to display '
+          'all colors of a theme.',
+        );
+    }
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);

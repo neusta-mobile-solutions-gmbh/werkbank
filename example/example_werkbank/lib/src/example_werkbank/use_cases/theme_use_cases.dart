@@ -33,7 +33,7 @@ WerkbankFolder get themeFolder => WerkbankFolder(
       builder: textStylesUseCaseBuilder(
         builder: (c) {
           c.overview
-            ..minimumSize(width: 850, height: 850)
+            ..minimumSize(height: 830)
             ..withoutPadding();
         },
         styles: (context) {
@@ -51,6 +51,9 @@ WerkbankFolder get themeFolder => WerkbankFolder(
             'Body Large': textTheme.bodyLarge!,
             'Body Medium': textTheme.bodyMedium!,
             'Body Small': textTheme.bodySmall!,
+            'Label Large': textTheme.labelLarge!,
+            'Label Medium': textTheme.labelMedium!,
+            'Label Small': textTheme.labelSmall!,
           };
         },
       ),

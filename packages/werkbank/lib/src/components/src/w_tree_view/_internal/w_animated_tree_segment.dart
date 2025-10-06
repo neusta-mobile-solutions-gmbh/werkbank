@@ -24,7 +24,7 @@ class WAnimatedTreeSegment extends StatefulWidget {
 
 class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
   late bool isExpanded;
-  late StreamSubscription<List<LocalKey>>? _sub;
+  StreamSubscription<List<LocalKey>>? _sub;
 
   @override
   void initState() {
@@ -36,6 +36,8 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
+    // TODO: Uncomment once the stream no longer changes on every event.
+    // unawaited(_sub?.cancel());
     _sub = HighlightEventProvider.maybeOf(
       context,
     )?.listen(_onHighlightEvent);

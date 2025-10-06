@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/components/src/_internal/w_animated_tree_segment.dart';
 import 'package:werkbank/src/components/src/w_tree_view/_internal/highlight_event_provider.dart';
+import 'package:werkbank/src/components/src/w_tree_view/_internal/w_animated_tree_segment.dart';
 
 /// {@category Werkbank Components}
 class WTreeView extends StatefulWidget {
@@ -23,11 +23,13 @@ class WTreeView extends StatefulWidget {
 
 class _WTreeViewState extends State<WTreeView> {
   late Map<LocalKey, List<LocalKey>> _keyToPath;
+  Stream<List<LocalKey>>? _mappedHighlightStream;
 
   @override
   void initState() {
     super.initState();
     _updateKeyToPath();
+    _updateHighlightStream();
   }
 
   @override
@@ -36,6 +38,19 @@ class _WTreeViewState extends State<WTreeView> {
     if (oldWidget.treeNodes != widget.treeNodes) {
       _updateKeyToPath();
     }
+    if (oldWidget.highlightStream != widget.highlightStream) {
+      _updateHighlightStream();
+    }
+  }
+
+  void _updateHighlightStream() {
+    _mappedHighlightStream = widget.highlightStream?.map(
+      (key) =>
+          _keyToPath[key] ??
+          (throw ArgumentError(
+            'Key $key not found in tree',
+          )),
+    );
   }
 
   void _updateKeyToPath() {
@@ -60,13 +75,7 @@ class _WTreeViewState extends State<WTreeView> {
   @override
   Widget build(BuildContext context) {
     return HighlightEventProvider(
-      highlightStream: widget.highlightStream?.map(
-        (key) =>
-            _keyToPath[key] ??
-            (throw ArgumentError(
-              'Key $key not found in tree',
-            )),
-      ),
+      highlightStream: _mappedHighlightStream,
       child: _Children(
         nodesAndTheirPath: widget.treeNodes
             .map((node) => (node, [node.key]))

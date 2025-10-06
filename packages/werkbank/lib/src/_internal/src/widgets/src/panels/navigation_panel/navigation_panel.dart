@@ -12,38 +12,8 @@ import 'package:werkbank/src/widgets/widgets.dart';
 class NavigationPanel extends StatelessWidget with OrderExecutor {
   const NavigationPanel({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final rootDescriptor = WerkbankAppInfo.rootDescriptorOf(context);
-    final filterResultMap = FilterResultProvider.of(context);
-    final currentDescriptor = switch (NavStateProvider.of(context)) {
-      HomeNavState() => null,
-      DescriptorNavState(:final descriptor) => descriptor,
-    };
-    final orderOption = WerkbankSettings.orderOptionOf(context);
-    return _NavigationPanelLayout(
-      header: const _NavigationPanelHeader(),
-      body: WTreeView(
-        highlightStream: NavEventProvider.of(context)
-            .where(
-              (descriptor) => switch (descriptor) {
-                RootDescriptor() => false,
-                ChildDescriptor() => true,
-              },
-            )
-            .map((e) => ValueKey(e.path)),
-        treeNodes: parseRootDescriptorToSTreeNodes(
-          context: context,
-          rootDescriptor: rootDescriptor,
-          filterResultMap: filterResultMap,
-          currentDescriptor: switch (currentDescriptor) {
-            null || RootDescriptor() => null,
-            ChildDescriptor() => currentDescriptor,
-          },
-          orderOption: orderOption,
-        ),
-      ),
-    );
+  ValueKey<String> _keyForDescriptor(ChildDescriptor descriptor) {
+    return ValueKey(descriptor.path);
   }
 
   WTreeNode convertDescriptorToSTreeNode({
@@ -62,7 +32,7 @@ class NavigationPanel extends StatelessWidget with OrderExecutor {
     };
 
     return WTreeNode(
-      key: ValueKey(descriptor.path),
+      key: _keyForDescriptor(descriptor),
       title: Text(descriptor.node.name),
       leading: leading,
       isInitiallyExpanded: switch (descriptor) {
@@ -113,6 +83,45 @@ class NavigationPanel extends StatelessWidget with OrderExecutor {
           ),
         )
         .toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final rootDescriptor = WerkbankAppInfo.rootDescriptorOf(context);
+    final filterResultMap = FilterResultProvider.of(context);
+    final currentDescriptor = switch (NavStateProvider.of(context)) {
+      HomeNavState() => null,
+      DescriptorNavState(:final descriptor) => descriptor,
+    };
+    final orderOption = WerkbankSettings.orderOptionOf(context);
+    return _NavigationPanelLayout(
+      header: const _NavigationPanelHeader(),
+      body: WTreeView(
+        highlightStream: NavStateProvider.eventStreamOf(context)
+            .map(
+              (navState) => switch (navState) {
+                HomeNavState() ||
+                DescriptorNavState(
+                  descriptor: RootDescriptor(),
+                ) => null,
+                DescriptorNavState(:final ChildDescriptor descriptor) =>
+                  _keyForDescriptor(descriptor),
+              },
+            )
+            .where((event) => event != null)
+            .map((event) => event!),
+        treeNodes: parseRootDescriptorToSTreeNodes(
+          context: context,
+          rootDescriptor: rootDescriptor,
+          filterResultMap: filterResultMap,
+          currentDescriptor: switch (currentDescriptor) {
+            null || RootDescriptor() => null,
+            ChildDescriptor() => currentDescriptor,
+          },
+          orderOption: orderOption,
+        ),
+      ),
+    );
   }
 }
 

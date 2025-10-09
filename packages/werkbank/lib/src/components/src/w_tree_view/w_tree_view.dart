@@ -23,13 +23,11 @@ class WTreeView extends StatefulWidget {
 
 class _WTreeViewState extends State<WTreeView> {
   late Map<LocalKey, List<LocalKey>> _keyToPath;
-  Stream<List<LocalKey>>? _mappedHighlightStream;
 
   @override
   void initState() {
     super.initState();
     _updateKeyToPath();
-    _updateHighlightStream();
   }
 
   @override
@@ -38,19 +36,6 @@ class _WTreeViewState extends State<WTreeView> {
     if (oldWidget.treeNodes != widget.treeNodes) {
       _updateKeyToPath();
     }
-    if (oldWidget.highlightStream != widget.highlightStream) {
-      _updateHighlightStream();
-    }
-  }
-
-  void _updateHighlightStream() {
-    _mappedHighlightStream = widget.highlightStream?.map(
-      (key) =>
-          _keyToPath[key] ??
-          (throw ArgumentError(
-            'Key $key not found in tree',
-          )),
-    );
   }
 
   void _updateKeyToPath() {
@@ -75,7 +60,13 @@ class _WTreeViewState extends State<WTreeView> {
   @override
   Widget build(BuildContext context) {
     return HighlightEventProvider(
-      highlightStream: _mappedHighlightStream,
+      highlightStream: widget.highlightStream?.map(
+        (key) =>
+            _keyToPath[key] ??
+            (throw ArgumentError(
+              'Key $key not found in tree',
+            )),
+      ),
       child: _Children(
         nodesAndTheirPath: widget.treeNodes
             .map((node) => (node, [node.key]))

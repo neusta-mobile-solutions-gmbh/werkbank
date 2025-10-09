@@ -65,7 +65,25 @@ class _NavStateProviderState extends State<NavStateProvider> {
       setState(() {
         _navState = newNavState;
       });
-      _streamController.add(newNavState);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // We have to fire this event in a post frame callback.
+        // Other widgets may transform the stream using for example `.map`
+        // and also react to changes of the NavState because of a dependency
+        // from `NavStateProvider.of(context)`.
+        // When such a widget rebuilds, the `.map` method is executed again and
+        // a new stream is created.
+        // However, without this post frame callback, the event has already been
+        // fired, but the listeners have not yet triggered, because there was no
+        // async gap yet.
+        // The new mapped stream does not contain the event.
+        // If a widget subscribes to the mapped stream, it also has to cancel
+        // the old subscription when it changes and subscribe to the new one.
+        // But this happens before the listeners have fired.
+        // So the subscription would be closed before the listener has fired
+        // and the new subscription would be made on a new stream that does
+        // not contain the event.
+        _streamController.add(newNavState);
+      });
     }
   }
 

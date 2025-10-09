@@ -35,9 +35,7 @@ class _WAnimatedTreeSegmentState extends State<WAnimatedTreeSegment> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    // TODO: Uncomment once the stream no longer changes on every event.
-    // unawaited(_sub?.cancel());
+    unawaited(_sub?.cancel());
     _sub = HighlightEventProvider.maybeOf(
       context,
     )?.listen(_onHighlightEvent);

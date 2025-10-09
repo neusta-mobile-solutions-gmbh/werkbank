@@ -68,9 +68,8 @@ class _WTreeViewState extends State<WTreeView> {
             )),
       ),
       child: _Children(
-        nodesAndTheirPath: widget.treeNodes
-            .map((node) => (node, [node.key]))
-            .toList(),
+        nodes: widget.treeNodes,
+        path: const [],
         nestingLevel: 0,
       ),
     );
@@ -79,28 +78,28 @@ class _WTreeViewState extends State<WTreeView> {
 
 class _Tree extends StatelessWidget {
   const _Tree({
-    required this.nodeAndItsPath,
+    required this.node,
+    required this.path,
     required this.nestingLevel,
   });
 
-  final (WTreeNode, List<LocalKey>) nodeAndItsPath;
+  final WTreeNode node;
+  final List<LocalKey> path;
   final int nestingLevel;
 
   @override
   Widget build(BuildContext context) {
-    final children = nodeAndItsPath.$1.children ?? [];
+    final children = node.children ?? [];
     return WAnimatedTreeSegment(
-      node: nodeAndItsPath.$1,
-      nodePath: nodeAndItsPath.$2,
+      node: node,
+      nodePath: path,
       nestingLevel: nestingLevel,
       child: children.isEmpty
           ? null
           : _Children(
               nestingLevel: nestingLevel + 1,
-              nodesAndTheirPath: children.map((child) {
-                final childPath = [...nodeAndItsPath.$2, child.key];
-                return (child, childPath);
-              }).toList(),
+              nodes: children,
+              path: path,
             ),
     );
   }
@@ -109,29 +108,32 @@ class _Tree extends StatelessWidget {
 class _Children extends StatelessWidget {
   const _Children({
     required this.nestingLevel,
-    required this.nodesAndTheirPath,
+    required this.nodes,
+    required this.path,
   });
 
   final int nestingLevel;
-  final List<(WTreeNode, List<LocalKey>)> nodesAndTheirPath;
+  final List<WTreeNode> nodes;
+  final List<LocalKey> path;
 
   @override
   Widget build(BuildContext context) {
-    final visibleNodes = nodesAndTheirPath
-        .where((node) => node.$1.isVisible)
-        .toList();
+    final visibleNodes = nodes
+        .where((node) => node.isVisible)
+        .toList(growable: false);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (final (i, node) in visibleNodes.indexed)
           Padding(
-            key: node.$1.key,
+            key: node.key,
             padding: EdgeInsets.only(
               top: i == 0 ? 0 : 2,
             ),
             child: _Tree(
-              nodeAndItsPath: node,
+              node: node,
+              path: [...path, node.key],
               nestingLevel: nestingLevel,
             ),
           ),

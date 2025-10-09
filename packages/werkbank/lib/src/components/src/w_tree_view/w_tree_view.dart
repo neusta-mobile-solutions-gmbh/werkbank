@@ -90,16 +90,17 @@ class _Tree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final children = node.children ?? [];
+    final nodePath = [...path, node.key];
     return WAnimatedTreeSegment(
       node: node,
-      nodePath: path,
+      nodePath: nodePath,
       nestingLevel: nestingLevel,
       child: children.isEmpty
           ? null
           : _Children(
               nestingLevel: nestingLevel + 1,
               nodes: children,
-              path: path,
+              path: nodePath,
             ),
     );
   }
@@ -133,7 +134,7 @@ class _Children extends StatelessWidget {
             ),
             child: _Tree(
               node: node,
-              path: [...path, node.key],
+              path: path,
               nestingLevel: nestingLevel,
             ),
           ),

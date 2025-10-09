@@ -187,7 +187,7 @@ class _SemanticsInspectorTreeState extends State<SemanticsInspectorTree> {
                            to the ensureVisible call too.
                            This sometimes causes the tree to be
                            scrolled out of view. */
-                      highlightStream: _highlightStreamController.stream,
+                      // highlightStream: _highlightStreamController.stream,
                       treeNodes: [
                         for (final node
                             in nodes ??

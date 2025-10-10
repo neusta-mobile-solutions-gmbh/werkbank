@@ -1,4 +1,8 @@
 # 0.17.3
+- When nodes of a tree in the UI become selected, their parents now expand, and they now scroll into view. This applies to:
+  - Use cases, components and folders in the navigation panel, when they are selected, for example via the overview.
+  - Semantics nodes in the semantics inspector, when they are selected, for example via inspection.
+  - The `WTreeView` component, which now has support for this behavior.
 - Add new IDE Live Templates/Snippets to the documentation.
   - Check them out at https://pub.dev/documentation/werkbank/latest/topics/IDE%20Integration-topic.html
 

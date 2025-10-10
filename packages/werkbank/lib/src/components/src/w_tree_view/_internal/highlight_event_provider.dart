@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// {@category Werkbank Components}
 class HighlightEventProvider extends InheritedWidget {
   HighlightEventProvider({
     super.key,

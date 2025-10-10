@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/components/src/w_tree_view/_internal/ensure_visible_in_scrollable_ancestor.dart';
 import 'package:werkbank/src/components/src/w_tree_view/_internal/highlight_event_provider.dart';
 
 class WAnimatedTreeSegment extends StatefulWidget {
@@ -157,19 +158,8 @@ class _HighlighterState extends State<_Highlighter> {
     if (!mounted) {
       return;
     }
-    await Scrollable.ensureVisible(
+    await ensureVisibleInScrollableAncestor(
       context,
-      duration: Durations.medium2,
-      alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
-    );
-
-    if (!mounted) {
-      return;
-    }
-    await Scrollable.ensureVisible(
-      context,
-      duration: Durations.medium2,
-      alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
     );
   }
 

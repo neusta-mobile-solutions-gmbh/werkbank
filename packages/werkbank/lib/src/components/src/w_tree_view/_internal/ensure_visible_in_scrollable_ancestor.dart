@@ -7,7 +7,7 @@ Future<void> ensureVisibleInScrollableAncestor(
   BuildContext context, {
   Duration duration = Durations.medium2,
   Curve curve = Curves.ease,
-  double overScrollOffset = 104,
+  double overScrollOffset = 70,
 }) async {
   final position = Scrollable.maybeOf(context)?.position;
   if (position == null) {

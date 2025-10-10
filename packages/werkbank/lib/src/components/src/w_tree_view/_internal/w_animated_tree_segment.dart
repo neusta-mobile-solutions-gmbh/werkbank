@@ -153,7 +153,7 @@ class _HighlighterState extends State<_Highlighter> {
     // Before maybe scrolling, we wait
     // a bit to ensure the expansion animation
     // to this node is done.
-    await Future<void>.delayed(Durations.short4);
+    await Future<void>.delayed(Durations.medium1);
 
     if (!mounted) {
       return;

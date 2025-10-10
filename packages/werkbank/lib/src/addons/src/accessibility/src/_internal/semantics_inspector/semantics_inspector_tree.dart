@@ -182,12 +182,7 @@ class _SemanticsInspectorTreeState extends State<SemanticsInspectorTree> {
                   valueListenable: widget.subscription.nodes,
                   builder: (context, nodes, child) {
                     return WTreeView(
-                      /* TODO(lzuttermeister): This currently causes
-                           the problem that the outer scroll view reacts
-                           to the ensureVisible call too.
-                           This sometimes causes the tree to be
-                           scrolled out of view. */
-                      // highlightStream: _highlightStreamController.stream,
+                      highlightStream: _highlightStreamController.stream,
                       treeNodes: [
                         for (final node
                             in nodes ??

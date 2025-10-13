@@ -6,6 +6,7 @@ UseCaseBuilder textStylesUseCaseBuilder({
   required Map<String, TextStyle> Function(BuildContext context) styles,
   String? initialText,
   bool textInitiallyNull = true,
+  bool addTagsAndDescription = true,
   Color? surfaceColor,
   Color? onSurfaceColor,
 }) {
@@ -18,12 +19,11 @@ UseCaseBuilder textStylesUseCaseBuilder({
                 initialText ?? 'Sphinx of black quartz, judge my vow.',
           )
         : null;
-    if (c.isAddonActive(DescriptionAddon.addonId)) {
+    if (addTagsAndDescription && c.isAddonActive(DescriptionAddon.addonId)) {
       c
-        ..tags(['font', 'textStyle', 'theme'])
+        ..tags(['theme'])
         ..description(
-          'A default UseCase of Werkbank to display '
-          'all textStyles of a theme.',
+          'A use case that displays text styles of the theme.',
         );
     }
     if (c.isAddonActive(BackgroundAddon.addonId)) {

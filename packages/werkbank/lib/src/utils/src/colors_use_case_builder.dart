@@ -7,6 +7,7 @@ UseCaseBuilder colorsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
   required Map<String, Color> Function(BuildContext context) colors,
   double initialSize = 100,
+  bool addTagsAndDescription = true,
   Color? surfaceColor,
   Color? onSurfaceColor,
 }) {
@@ -19,12 +20,11 @@ UseCaseBuilder colorsUseCaseBuilder({
             initialValue: initialSize,
           )
         : null;
-    if (c.isAddonActive(DescriptionAddon.addonId)) {
+    if (addTagsAndDescription && c.isAddonActive(DescriptionAddon.addonId)) {
       c
-        ..tags(['colors', 'theme'])
+        ..tags(['theme'])
         ..description(
-          'A default UseCase of Werkbank to display '
-          'all colors of a theme.',
+          'A use case that displays color of the theme.',
         );
     }
     if (c.isAddonActive(BackgroundAddon.addonId)) {

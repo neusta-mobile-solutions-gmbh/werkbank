@@ -7,6 +7,7 @@ UseCaseBuilder iconsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
   required Map<String, IconData> Function(BuildContext context) icons,
   double initialSize = 48,
+  bool addTagsAndDescription = true,
   Color? surfaceColor,
   Color? onSurfaceColor,
 }) {
@@ -19,13 +20,10 @@ UseCaseBuilder iconsUseCaseBuilder({
             initialValue: initialSize,
           )
         : null;
-    if (c.isAddonActive(DescriptionAddon.addonId)) {
+    if (addTagsAndDescription && c.isAddonActive(DescriptionAddon.addonId)) {
       c
-        ..tags(['colors', 'theme'])
-        ..description(
-          'A default UseCase of Werkbank to display '
-          'all icons of a theme.',
-        );
+        ..tags(['theme'])
+        ..description('A use case that displays icons with their names.');
     }
     if (c.isAddonActive(BackgroundAddon.addonId)) {
       c.background.colorBuilder((context) {

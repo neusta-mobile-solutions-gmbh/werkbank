@@ -4,17 +4,20 @@ import 'package:werkbank/werkbank.dart';
 UseCaseBuilder textStylesUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
   required Map<String, TextStyle> Function(BuildContext context) styles,
-  Color? surfaceColor,
-  Color? onSurfaceColor,
   String? initialText,
   bool textInitiallyNull = true,
+  Color? surfaceColor,
+  Color? onSurfaceColor,
 }) {
   return (c) {
-    final textKnob = c.knobs.nullable.stringMultiLine(
-      'Text',
-      initiallyNull: textInitiallyNull,
-      initialValue: initialText ?? 'Sphinx of black quartz, judge my vow.',
-    );
+    final textKnob = c.isAddonActive(KnobsAddon.addonId)
+        ? c.knobs.nullable.stringMultiLine(
+            'Text',
+            initiallyNull: textInitiallyNull,
+            initialValue:
+                initialText ?? 'Sphinx of black quartz, judge my vow.',
+          )
+        : null;
     if (c.isAddonActive(DescriptionAddon.addonId)) {
       c
         ..tags(['font', 'textStyle', 'theme'])
@@ -23,13 +26,16 @@ UseCaseBuilder textStylesUseCaseBuilder({
           'all textStyles of a theme.',
         );
     }
-    c.background.colorBuilder((context) {
-      final brightness = UseCase.themeBrightnessOf(context);
-      return switch (brightness) {
-        Brightness.dark => Colors.black,
-        Brightness.light => Colors.white,
-      };
-    });
+    if (c.isAddonActive(BackgroundAddon.addonId)) {
+      c.background.colorBuilder((context) {
+        late final brightness = UseCase.themeBrightnessOf(context);
+        return surfaceColor ??
+            switch (brightness) {
+              Brightness.dark => Colors.black,
+              Brightness.light => Colors.white,
+            };
+      });
+    }
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);
@@ -47,7 +53,7 @@ UseCaseBuilder textStylesUseCaseBuilder({
           };
       return _TextStylesUseCase(
         styles: styles(context),
-        text: textKnob.value,
+        text: textKnob != null ? textKnob.value : initialText,
         surfaceColor: effectiveSurfaceColor,
         onSurfaceColor: effectiveOnSurfaceColor,
       );

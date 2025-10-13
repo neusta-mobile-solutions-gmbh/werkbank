@@ -6,16 +6,19 @@ import 'package:werkbank/src/use_case/use_case.dart';
 UseCaseBuilder colorsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
   required Map<String, Color> Function(BuildContext context) colors,
+  double initialSize = 100,
   Color? surfaceColor,
   Color? onSurfaceColor,
 }) {
   return (c) {
-    final sizeKnob = c.knobs.doubleSlider(
-      'Size',
-      min: 50,
-      max: 300,
-      initialValue: 100,
-    );
+    final sizeKnob = c.isAddonActive(KnobsAddon.addonId)
+        ? c.knobs.doubleSlider(
+            'Size',
+            min: 50,
+            max: 300,
+            initialValue: initialSize,
+          )
+        : null;
     if (c.isAddonActive(DescriptionAddon.addonId)) {
       c
         ..tags(['colors', 'theme'])
@@ -24,13 +27,16 @@ UseCaseBuilder colorsUseCaseBuilder({
           'all colors of a theme.',
         );
     }
-    c.background.colorBuilder((context) {
-      final brightness = UseCase.themeBrightnessOf(context);
-      return switch (brightness) {
-        Brightness.dark => Colors.black,
-        Brightness.light => Colors.white,
-      };
-    });
+    if (c.isAddonActive(BackgroundAddon.addonId)) {
+      c.background.colorBuilder((context) {
+        late final brightness = UseCase.themeBrightnessOf(context);
+        return surfaceColor ??
+            switch (brightness) {
+              Brightness.dark => Colors.black,
+              Brightness.light => Colors.white,
+            };
+      });
+    }
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);
@@ -48,7 +54,7 @@ UseCaseBuilder colorsUseCaseBuilder({
           };
       return _ColorsUseCase(
         colors: colors(context),
-        size: sizeKnob.value,
+        size: sizeKnob?.value ?? initialSize,
         surfaceColor: effectiveSurfaceColor,
         onSurfaceColor: effectiveOnSurfaceColor,
       );

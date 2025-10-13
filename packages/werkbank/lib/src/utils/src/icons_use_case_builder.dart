@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/addons.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 UseCaseBuilder iconsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
@@ -35,6 +36,9 @@ UseCaseBuilder iconsUseCaseBuilder({
             };
       });
     }
+    c.overview
+      ..withoutPadding()
+      ..minimumSize(width: 500);
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);
@@ -82,51 +86,55 @@ class _IconsUseCase extends StatelessWidget {
     final onSurfaceColor =
         this.onSurfaceColor ??
         (brightness == Brightness.dark ? Colors.white : Colors.black);
-    return SingleChildScrollView(
+    return ListView(
       padding: const EdgeInsets.all(32),
-      child: Wrap(
-        spacing: 16,
-        runSpacing: 16,
-        children: [
-          for (final icon in icons.entries)
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: surfaceColor,
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: onSurfaceColor),
-              ),
-              child: IntrinsicWidth(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: onSurfaceColor),
+      children: [
+        Center(
+          child: Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children: [
+              for (final icon in icons.entries)
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: surfaceColor,
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: onSurfaceColor),
+                  ),
+                  child: IntrinsicWidth(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: onSurfaceColor),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Icon(
+                              icon.value,
+                              size: size,
+                            ),
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Icon(
-                          icon.value,
-                          size: size,
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            icon.key,
+                            style: TextStyle(color: onSurfaceColor),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        icon.key,
-                        style: TextStyle(color: onSurfaceColor),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-        ],
-      ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

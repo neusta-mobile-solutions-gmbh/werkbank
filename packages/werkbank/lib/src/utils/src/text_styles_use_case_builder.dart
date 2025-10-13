@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/addons/addons.dart';
+import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 UseCaseBuilder textStylesUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
@@ -36,6 +39,9 @@ UseCaseBuilder textStylesUseCaseBuilder({
             };
       });
     }
+    c.overview
+      ..withoutPadding()
+      ..minimumSize(width: 500);
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);

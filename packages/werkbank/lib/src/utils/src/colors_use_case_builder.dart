@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/addons.dart';
+import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
-import 'package:werkbank/werkbank.dart';
+import 'package:werkbank/src/use_case_metadata/use_case_metadata.dart';
 
 UseCaseBuilder colorsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
@@ -38,6 +39,9 @@ UseCaseBuilder colorsUseCaseBuilder({
             };
       });
     }
+    c.overview
+      ..withoutPadding()
+      ..minimumSize(width: 500);
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);
@@ -85,87 +89,97 @@ class _ColorsUseCase extends StatelessWidget {
     final onSurfaceColor =
         this.onSurfaceColor ??
         (brightness == Brightness.dark ? Colors.white : Colors.black);
-    return SingleChildScrollView(
+    return ListView(
       padding: const EdgeInsets.all(32),
-      child: Wrap(
-        spacing: 16,
-        runSpacing: 16,
-        children: [
-          for (final color in colors.entries)
-            Builder(
-              builder: (context) {
-                final colorHex = color.value
-                    .toARGB32()
-                    .toRadixString(16)
-                    .padLeft(8, '0');
-                final colorHexText = '0x$colorHex';
-                return DecoratedBox(
-                  position: DecorationPosition.foreground,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: onSurfaceColor),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(minWidth: size),
-                      child: IntrinsicWidth(
-                        child: ColoredBox(
-                          color: surfaceColor,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              DecoratedBox(
-                                position: DecorationPosition.foreground,
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(color: onSurfaceColor),
-                                  ),
-                                ),
-                                child: SizedBox(
-                                  height: size,
-                                  child: Stack(
-                                    fit: StackFit.passthrough,
-                                    children: [
-                                      const Positioned.fill(
-                                        child: WCheckerboardBackground(),
+      children: [
+        Center(
+          child: Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children: [
+              for (final color in colors.entries)
+                Builder(
+                  builder: (context) {
+                    final colorHex = color.value
+                        .toARGB32()
+                        .toRadixString(16)
+                        .padLeft(8, '0');
+                    final colorHexText = '0x$colorHex';
+                    return DecoratedBox(
+                      position: DecorationPosition.foreground,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(color: onSurfaceColor),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(minWidth: size),
+                          child: IntrinsicWidth(
+                            child: ColoredBox(
+                              color: surfaceColor,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  DecoratedBox(
+                                    position: DecorationPosition.foreground,
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: onSurfaceColor,
+                                        ),
                                       ),
-                                      ColoredBox(
-                                        color: color.value,
+                                    ),
+                                    child: SizedBox(
+                                      height: size,
+                                      child: Stack(
+                                        fit: StackFit.passthrough,
+                                        children: [
+                                          const Positioned.fill(
+                                            child: WCheckerboardBackground(),
+                                          ),
+                                          ColoredBox(
+                                            color: color.value,
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Text(
-                                      color.key,
-                                      style: TextStyle(color: onSurfaceColor),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Text(
+                                          color.key,
+                                          style: TextStyle(
+                                            color: onSurfaceColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          colorHexText,
+                                          style: TextStyle(
+                                            color: onSurfaceColor,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      colorHexText,
-                                      style: TextStyle(color: onSurfaceColor),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                );
-              },
-            ),
-        ],
-      ),
+                    );
+                  },
+                ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

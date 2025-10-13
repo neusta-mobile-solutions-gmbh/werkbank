@@ -23,6 +23,13 @@ UseCaseBuilder textStylesUseCaseBuilder({
           'all textStyles of a theme.',
         );
     }
+    c.background.colorBuilder((context) {
+      final brightness = UseCase.themeBrightnessOf(context);
+      return switch (brightness) {
+        Brightness.dark => Colors.black,
+        Brightness.light => Colors.white,
+      };
+    });
     builder(c);
     return (context) {
       late final brightness = UseCase.themeBrightnessOf(context);

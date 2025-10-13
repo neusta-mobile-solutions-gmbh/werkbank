@@ -41,7 +41,7 @@ class WTreeItem extends StatelessWidget {
     return WButtonBase(
       onPressed: onTap,
       backgroundColor: Colors.transparent,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(4),
       showBorder: !isSelected,
       isActive: isSelected,
       activeBackgroundColor: colorScheme.backgroundActive,

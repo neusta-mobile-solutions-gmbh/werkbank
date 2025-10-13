@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/addons.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
+import 'package:werkbank/werkbank.dart';
 
 UseCaseBuilder colorsUseCaseBuilder({
   required void Function(UseCaseComposer c) builder,
@@ -124,8 +125,16 @@ class _ColorsUseCase extends StatelessWidget {
                                 ),
                                 child: SizedBox(
                                   height: size,
-                                  child: ColoredBox(
-                                    color: color.value,
+                                  child: Stack(
+                                    fit: StackFit.passthrough,
+                                    children: [
+                                      const Positioned.fill(
+                                        child: WCheckerboardBackground(),
+                                      ),
+                                      ColoredBox(
+                                        color: color.value,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

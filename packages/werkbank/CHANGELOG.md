@@ -4,6 +4,8 @@
 - Improve `colorsUseCaseBuilder`, `textStylesUseCaseBuilder` and `iconsUseCaseBuilder`.
   - They now adapt to the brightness of the use case theme.
   - The design has been improved.
+  - `colorsUseCaseBuilder` now shows a checkerboard pattern behind transparent colors.
+  - Add some more parameters for customizability.
   - `textStylesUseCaseBuilder` now shows properties like `fontSize`, `fontWeight` and `letterSpacing`.
 
 # 0.17.3

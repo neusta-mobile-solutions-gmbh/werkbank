@@ -5,7 +5,7 @@ import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
 /// {@category Werkbank Components}
-class WTreeItem extends StatefulWidget {
+class WTreeItem extends StatelessWidget {
   const WTreeItem({
     super.key,
     this.leading,
@@ -13,7 +13,7 @@ class WTreeItem extends StatefulWidget {
     this.trailing,
     this.nestingLevel = 0,
     this.isSelected = false,
-    this.initExpanded = false,
+    required this.isExpanded,
     this.onExpansionChanged,
     this.onTap,
   });
@@ -22,23 +22,10 @@ class WTreeItem extends StatefulWidget {
   final Widget label;
   final Widget? trailing;
   final int nestingLevel;
-  final bool initExpanded;
+  final bool isExpanded;
   final bool isSelected;
   final ValueChanged<bool>? onExpansionChanged;
   final VoidCallback? onTap;
-
-  @override
-  State<WTreeItem> createState() => _WTreeItemState();
-}
-
-class _WTreeItemState extends State<WTreeItem> {
-  late bool expanded;
-
-  @override
-  void initState() {
-    super.initState();
-    expanded = widget.initExpanded;
-  }
 
   double _calculateIndentation(double nestingLevel) {
     return (1 - (pow(2, -1.0 * nestingLevel / 4.0))) * 64.0;
@@ -48,15 +35,15 @@ class _WTreeItemState extends State<WTreeItem> {
   Widget build(BuildContext context) {
     final textTheme = context.werkbankTextTheme;
     final colorScheme = context.werkbankColorScheme;
-    final color = widget.isSelected
+    final color = isSelected
         ? context.werkbankColorScheme.textActive
         : context.werkbankColorScheme.text;
     return WButtonBase(
-      onPressed: widget.onTap,
+      onPressed: onTap,
       backgroundColor: Colors.transparent,
       borderRadius: BorderRadius.circular(8),
-      showBorder: !widget.isSelected,
-      isActive: widget.isSelected,
+      showBorder: !isSelected,
+      isActive: isSelected,
       activeBackgroundColor: colorScheme.backgroundActive,
       child: IconTheme.merge(
         data: IconThemeData(
@@ -67,29 +54,26 @@ class _WTreeItemState extends State<WTreeItem> {
           child: Row(
             children: [
               SizedBox(
-                width: _calculateIndentation(widget.nestingLevel.toDouble()),
+                width: _calculateIndentation(nestingLevel.toDouble()),
               ),
-              if (widget.onExpansionChanged != null)
+              if (onExpansionChanged != null)
                 WButtonBase(
                   backgroundColor: Colors.transparent,
                   onPressed: () {
-                    setState(() {
-                      expanded = !expanded;
-                    });
-                    widget.onExpansionChanged!(expanded);
+                    onExpansionChanged!(!isExpanded);
                   },
                   child: WExpandedIndicator(
-                    isExpanded: expanded,
+                    isExpanded: isExpanded,
                     iconColor: color,
                   ),
                 )
               else
                 const SizedBox(width: 16),
               const SizedBox(width: 4),
-              if (widget.leading != null)
+              if (leading != null)
                 SizedBox(
                   width: 16,
-                  child: widget.leading,
+                  child: leading,
                 ),
               const SizedBox(width: 8),
               Expanded(
@@ -99,10 +83,10 @@ class _WTreeItemState extends State<WTreeItem> {
                   ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  child: widget.label,
+                  child: label,
                 ),
               ),
-              if (widget.trailing != null) widget.trailing!,
+              if (trailing != null) trailing!,
             ],
           ),
         ),

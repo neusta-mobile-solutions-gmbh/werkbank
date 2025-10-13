@@ -40,9 +40,12 @@ class UseCaseApp extends StatelessWidget {
                     explicitChildNodes: true,
                     child: Builder(
                       builder: (context) {
-                        return appConfig.buildDefaultTextStyle(
-                          context,
-                          child ?? const SizedBox.shrink(),
+                        return ThemeBrightnessProvider(
+                          themeBrightness: appConfig.themeBrightness(context),
+                          child: appConfig.buildDefaultTextStyle(
+                            context,
+                            child ?? const SizedBox.shrink(),
+                          ),
                         );
                       },
                     ),

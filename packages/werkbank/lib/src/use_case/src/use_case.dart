@@ -72,4 +72,13 @@ class UseCase {
       null => false,
     };
   }
+
+  /// Returns the brightness of the current theme.
+  /// This can be useful for generic use cases where you don't know what
+  /// design system is used and therefore don't know whether to use
+  /// `Theme.brightnessOf(context)`, `CupertinoTheme.brightnessOf(context)`, or
+  /// something else.
+  static Brightness themeBrightnessOf(BuildContext context) {
+    return ThemeBrightnessProvider.of(context);
+  }
 }

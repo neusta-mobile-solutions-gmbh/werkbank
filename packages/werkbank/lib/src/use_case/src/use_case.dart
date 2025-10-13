@@ -5,9 +5,9 @@ import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 class UseCase {
-  /// A unique key for the use case widget,
-  /// primarily used in tests to locate it.
-  /// See display_test.dart
+  /// A key for widget tests to verify that
+  /// the UseCase widget has been built.
+  /// See display_test.dart for an example.
   static Key key = UniqueKey();
 
   /// Gets the [UseCaseMetadata] of the current use case.

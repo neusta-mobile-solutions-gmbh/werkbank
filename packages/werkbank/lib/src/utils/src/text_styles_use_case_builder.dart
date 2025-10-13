@@ -179,24 +179,30 @@ class _TextStyleDisplayRowItem extends StatelessWidget {
                   _TextStyleDisplayItem(
                     label: fontWeightLabel,
                     icon: const Icon(Icons.font_download),
+                    tooltipMessage: 'Font Weight',
+                    surfaceColor: surfaceColor,
                     onSurfaceColor: onSurfaceColor,
                   ),
                   _TextStyleDisplayItem(
                     label: fontSizeLabel,
                     icon: const Icon(Icons.text_fields),
+                    tooltipMessage: 'Font Size',
+                    surfaceColor: surfaceColor,
                     onSurfaceColor: onSurfaceColor,
                   ),
                   _TextStyleDisplayItem(
                     label: heightLabel,
                     icon: const Icon(Icons.height),
+                    tooltipMessage: 'Height',
+                    surfaceColor: surfaceColor,
                     onSurfaceColor: onSurfaceColor,
                   ),
                   _TextStyleDisplayItem(
                     label: letterSpacingLabel,
                     icon: const Icon(Icons.space_bar),
+                    tooltipMessage: 'Letter Spacing',
+                    surfaceColor: surfaceColor,
                     onSurfaceColor: onSurfaceColor,
-                    // TODO: run werkbank icon_font_generator
-                    // icon: const Icon(WerkbankIcons.horizontal),
                   ),
                   Expanded(
                     child: Text(
@@ -224,24 +230,48 @@ class _TextStyleDisplayItem extends StatelessWidget {
   const _TextStyleDisplayItem({
     required this.label,
     required this.icon,
+    required this.tooltipMessage,
+    required this.surfaceColor,
     required this.onSurfaceColor,
   });
 
   final Widget label;
   final Widget icon;
+  final String tooltipMessage;
+  final Color surfaceColor;
   final Color onSurfaceColor;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      spacing: 8,
-      children: [
-        icon,
-        DefaultTextStyle.merge(
-          style: TextStyle(color: onSurfaceColor),
-          child: label,
+    return Theme(
+      data: ThemeData(
+        tooltipTheme: TooltipThemeData(
+          decoration: BoxDecoration(
+            color: surfaceColor,
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(
+              color: onSurfaceColor,
+            ),
+          ),
+          textStyle: TextStyle(
+            color: onSurfaceColor,
+          ),
         ),
-      ],
+      ),
+      child: Tooltip(
+        message: tooltipMessage,
+        waitDuration: Durations.long4,
+        child: Row(
+          spacing: 8,
+          children: [
+            icon,
+            DefaultTextStyle.merge(
+              style: TextStyle(color: onSurfaceColor),
+              child: label,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

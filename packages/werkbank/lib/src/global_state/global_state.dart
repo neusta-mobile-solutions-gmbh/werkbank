@@ -15,6 +15,5 @@ export 'src/history/history_controller.dart';
 export 'src/history/history_controller_impl.dart';
 export 'src/history/werkbank_history.dart';
 export 'src/search_query/search_query_controller.dart';
-export 'src/search_query/search_query_persistant_data.dart';
 export 'src/sections/panel_tabs_controller.dart';
 export 'src/sections/panel_tabs_persistant_data.dart';

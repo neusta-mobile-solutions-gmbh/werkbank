@@ -37,8 +37,10 @@ class Tag extends StatelessWidget {
     return WChip(
       onPressed: () {
         InspectControlSection.access
-            .globalStateControllerOf<SearchQueryController>(context)
-            .updateSearchQuery('${DescriptionAddon.tagField}:"$tag"');
+                .globalStateControllerOf<SearchQueryController>(context)
+                .textEditingController
+                .text =
+            '${DescriptionAddon.tagField}:"$tag"';
       },
       label: Text(
         tag,

@@ -1,7 +1,7 @@
 name: werkbank
 description: >-
   A powerful tool that helps you develop, test, visualize, and organize your Flutter UI components.
-version: 0.17.2+1
+version: 0.17.3
 repository: https://github.com/neusta-mobile-solutions-gmbh/werkbank/
 homepage: https://neusta-ms.de/werkbank/
 

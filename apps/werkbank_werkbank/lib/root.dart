@@ -169,9 +169,6 @@ WerkbankRoot get root => WerkbankRoot(
     ),
     WerkbankFolder(
       name: 'Theme',
-      builder: (c) {
-        c.overview.minimumSize(width: 500);
-      },
       children: [
         WerkbankUseCase(
           name: 'Colors',

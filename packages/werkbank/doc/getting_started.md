@@ -61,7 +61,7 @@ class MyProjectWerkbankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return WerkbankApp(
       name: 'My Project Werkbank',
-      logo: const FlutterLogo(),
+      logo: const WerkbankLogo(),
       appConfig: AppConfig.material(),
       addonConfig: AddonConfig(
         addons: [

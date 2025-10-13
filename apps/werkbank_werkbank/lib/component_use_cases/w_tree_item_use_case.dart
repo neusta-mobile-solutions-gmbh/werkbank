@@ -48,16 +48,25 @@ WidgetBuilder wTreeItemUseCase(UseCaseComposer c) {
       showExpand.value = false;
     });
 
+  final isExpanded = c.states.immutable('isExpanded', initialValue: false);
+
   return (context) {
     return WTreeItem(
-      onTap: () {},
+      onTap: () {
+        UseCase.dispatchTextNotification(context, 'Item tapped');
+      },
+      isExpanded: isExpanded.value,
+      onExpansionChanged: showExpand.value
+          ? (_) {
+              isExpanded.value = !isExpanded.value;
+            }
+          : null,
       label: Text(label.value),
       leading: Icon(
         iconData.value,
         size: 16,
       ),
       nestingLevel: nestingLevel.value.toInt(),
-      onExpansionChanged: showExpand.value ? (_) {} : null,
       trailing: showTrailing.value
           ? const Icon(
               WerkbankIcons.pushPin,

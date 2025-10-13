@@ -9,3 +9,5 @@ dependencies:
   - /lib/src/use_case
   # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
   - /lib/src/components
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/use_case_metadata

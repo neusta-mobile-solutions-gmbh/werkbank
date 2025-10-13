@@ -1,3 +1,22 @@
+# 0.18.0
+- Add new required `themeBrightnessBuilder` parameter to `AppConfig()` and `AppConfig.widget()` constructors. **(BREAKING CHANGE)**
+  - `AppConfig.material()` and `AppConfig.cupertino()` are not affected.
+- Improve `colorsUseCaseBuilder`, `textStylesUseCaseBuilder` and `iconsUseCaseBuilder`.
+  - They now adapt to the brightness of the use case theme.
+  - The design has been improved.
+  - `colorsUseCaseBuilder` now shows a checkerboard pattern behind transparent colors.
+  - Add some more parameters for customizability.
+  - `textStylesUseCaseBuilder` now shows properties like `fontSize`, `fontWeight` and `letterSpacing`.
+
+# 0.17.3
+- When nodes of a tree in the UI become selected, their parents now expand, and they now scroll into view. This applies to:
+  - Use cases, components and folders in the navigation panel, when they are selected, for example via the overview.
+  - Semantics nodes in the semantics inspector, when they are selected, for example via inspection.
+  - The `WTreeView` component, which now has support for this behavior.
+- Add new IDE Live Templates/Snippets to the documentation.
+  - Check them out at https://pub.dev/documentation/werkbank/latest/topics/IDE%20Integration-topic.html
+- Add static key `UseCase.key` that can be used in widget tests to verify that the use case widget has been built.
+
 # 0.17.2+1
 - Fix that switching between the use case thumbnails in a component overview tile was not resetting the state of the use case.
 

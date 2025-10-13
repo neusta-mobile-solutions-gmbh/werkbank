@@ -4,8 +4,12 @@ import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
-// TODO(lzuttermeister): Change this to a widget?
 class UseCase {
+  /// A key for widget tests to verify that
+  /// the UseCase widget has been built.
+  /// See display_test.dart for an example.
+  static Key key = UniqueKey();
+
   /// Gets the [UseCaseMetadata] of the current use case.
   static UseCaseMetadata metaDataOf(BuildContext context) {
     return UseCaseCompositionProvider.metadataOf(context);
@@ -67,5 +71,14 @@ class UseCase {
       UseCaseEnvironment.regular => false,
       null => false,
     };
+  }
+
+  /// Returns the brightness of the current theme.
+  /// This can be useful for generic use cases where you don't know what
+  /// design system is used and therefore don't know whether to use
+  /// `Theme.brightnessOf(context)`, `CupertinoTheme.brightnessOf(context)`, or
+  /// something else.
+  static Brightness themeBrightnessOf(BuildContext context) {
+    return ThemeBrightnessProvider.of(context);
   }
 }

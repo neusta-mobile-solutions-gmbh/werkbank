@@ -12,18 +12,18 @@ class UseCaseWidgetDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UseCaseControllerProvider.of(context);
-    return KeyedSubtree(
-      key: UseCase.key,
-      child: ListenableBuilder(
-        listenable: controller,
-        builder: (context, _) {
-          return controller.useCaseWidget(
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (context, _) {
+        return KeyedSubtree(
+          key: UseCase.key,
+          child: controller.useCaseWidget(
             errorBuilder: (context, error, _) {
               return ErrorWidget(error);
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

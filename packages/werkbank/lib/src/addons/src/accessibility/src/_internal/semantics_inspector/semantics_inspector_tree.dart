@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
@@ -9,10 +11,62 @@ import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_mo
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
-class SemanticsInspectorTree extends StatelessWidget {
+class SemanticsInspectorTree extends StatefulWidget {
   const SemanticsInspectorTree({super.key, required this.subscription});
 
   final SemanticsMonitoringSubscription subscription;
+
+  @override
+  State<SemanticsInspectorTree> createState() => _SemanticsInspectorTreeState();
+}
+
+class _SemanticsInspectorTreeState extends State<SemanticsInspectorTree> {
+  final StreamController<ValueKey<int>> _highlightStreamController =
+      StreamController.broadcast();
+  SemanticsInspectorController? _semanticsInspectorController;
+  int? _previousActiveNodeId;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final oldSemanticsInspectorController = _semanticsInspectorController;
+    final newSemanticsInspectorController = InspectControlSection.access
+        .compositionOf(context)
+        .accessibility
+        .semanticsInspectorController;
+    if (newSemanticsInspectorController != oldSemanticsInspectorController) {
+      _semanticsInspectorController = newSemanticsInspectorController;
+      oldSemanticsInspectorController?.activeSemanticsNodeId.removeListener(
+        _onActiveSemanticsNodeIdChanged,
+      );
+      newSemanticsInspectorController.activeSemanticsNodeId.addListener(
+        _onActiveSemanticsNodeIdChanged,
+      );
+      _onActiveSemanticsNodeIdChanged();
+    }
+  }
+
+  ValueKey<int> _keyForNodeId(int nodeId) => ValueKey(nodeId);
+
+  void _onActiveSemanticsNodeIdChanged() {
+    final nodeId = _semanticsInspectorController?.activeSemanticsNodeId.value;
+    if (nodeId != null && nodeId != _previousActiveNodeId) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _highlightStreamController.add(_keyForNodeId(nodeId));
+      });
+    }
+    _previousActiveNodeId = nodeId;
+  }
+
+  @override
+  void dispose() {
+    unawaited(_highlightStreamController.close());
+    _semanticsInspectorController?.activeSemanticsNodeId.removeListener(
+      _onActiveSemanticsNodeIdChanged,
+    );
+    super.dispose();
+  }
 
   Widget _buildLabel(
     WerkbankTheme theme,
@@ -69,10 +123,7 @@ class SemanticsInspectorTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.werkbankTheme;
-    final semanticsInspectorController = InspectControlSection.access
-        .compositionOf(context)
-        .accessibility
-        .semanticsInspectorController;
+    final semanticsInspectorController = _semanticsInspectorController!;
     final showMergeSemanticsNodes =
         AccessibilityManager.showMergedSemanticsNodesOf(context);
 
@@ -91,7 +142,7 @@ class SemanticsInspectorTree extends StatelessWidget {
       // information about the tree structure.
       final isSelected = node.id == activeNodeId;
       return WTreeNode(
-        key: ValueKey(node.id),
+        key: _keyForNodeId(node.id),
         title: _buildLabel(theme, node, isSelected),
         leading: Icon(
           Icons.rectangle_rounded,
@@ -128,9 +179,10 @@ class SemanticsInspectorTree extends StatelessWidget {
                   semanticsInspectorController.activeSemanticsNodeId,
               builder: (context, activeNodeId, child) {
                 return ValueListenableBuilder(
-                  valueListenable: subscription.nodes,
+                  valueListenable: widget.subscription.nodes,
                   builder: (context, nodes, child) {
                     return WTreeView(
+                      highlightStream: _highlightStreamController.stream,
                       treeNodes: [
                         for (final node
                             in nodes ??

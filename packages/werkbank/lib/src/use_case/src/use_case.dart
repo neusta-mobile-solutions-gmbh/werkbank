@@ -4,8 +4,12 @@ import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
-// TODO(lzuttermeister): Change this to a widget?
 class UseCase {
+  /// A key for widget tests to verify that
+  /// the UseCase widget has been built.
+  /// See display_test.dart for an example.
+  static Key key = UniqueKey();
+
   /// Gets the [UseCaseMetadata] of the current use case.
   static UseCaseMetadata metaDataOf(BuildContext context) {
     return UseCaseCompositionProvider.metadataOf(context);

@@ -43,6 +43,7 @@ class WerkbankApp extends StatelessWidget {
     required this.appConfig,
     required this.addonConfig,
     this.persistenceConfig = const PersistenceConfig(),
+    this.globalStateConfig = const GlobalStateConfig(),
     required this.root,
     super.key,
   });
@@ -97,6 +98,9 @@ class WerkbankApp extends StatelessWidget {
 
   // TODO: Document
   final PersistenceConfig persistenceConfig;
+
+  // TODO: Document
+  final GlobalStateConfig globalStateConfig;
 
   /// The root of the use case tree.
   ///
@@ -189,8 +193,9 @@ class WerkbankApp extends StatelessWidget {
                   rootDescriptor: _getRootDescriptor(context),
                   child: AddonConfigProvider(
                     addonConfig: addonConfig,
-                    child: _WerkbankPersistance(
+                    child: _PersistenceAndGlobalState(
                       persistenceConfig: persistenceConfig,
+                      globalStateConfig: globalStateConfig,
                       child: WerkbankSettings.overwrite(
                         orderOption: OrderOption.alphabetic,
                         werkbankTheme: WerkbankTheme(
@@ -267,13 +272,15 @@ class _ThemeBuilder extends StatelessWidget {
   }
 }
 
-class _WerkbankPersistance extends StatelessWidget {
-  const _WerkbankPersistance({
+class _PersistenceAndGlobalState extends StatelessWidget {
+  const _PersistenceAndGlobalState({
     required this.persistenceConfig,
+    required this.globalStateConfig,
     required this.child,
   });
 
   final PersistenceConfig persistenceConfig;
+  final GlobalStateConfig globalStateConfig;
   final Widget child;
 
   @override
@@ -286,7 +293,7 @@ class _WerkbankPersistance extends StatelessWidget {
       placeholder: const SizedBox.expand(),
       child: IsWarmStartProvider(
         child: GlobalStateManager(
-          persistenceConfig: persistenceConfig,
+          globalStateConfig: globalStateConfig,
           registerWerkbankGlobalStateControllers: (registry) {
             registry.register<HistoryController>(
               'history',

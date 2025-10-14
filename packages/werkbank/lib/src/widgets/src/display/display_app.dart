@@ -4,6 +4,7 @@ import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addon_config/addon_config.dart';
 import 'package:werkbank/src/app_config/app_config.dart';
 import 'package:werkbank/src/environment/environment.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
@@ -23,6 +24,7 @@ class DisplayApp extends StatelessWidget {
     required this.appConfig,
     required this.addonConfig,
     this.persistenceConfig = const PersistenceConfig.memory(),
+    this.globalStateConfig = const GlobalStateConfig(),
     required this.child,
   });
 
@@ -75,6 +77,9 @@ class DisplayApp extends StatelessWidget {
   // TODO: Document
   final PersistenceConfig persistenceConfig;
 
+  // TODO: Document
+  final GlobalStateConfig globalStateConfig;
+
   final Widget child;
 
   @override
@@ -88,7 +93,7 @@ class DisplayApp extends StatelessWidget {
           placeholder: const SizedBox.expand(),
           child: IsWarmStartProvider(
             child: GlobalStateManager(
-              persistenceConfig: persistenceConfig,
+              globalStateConfig: globalStateConfig,
               registerWerkbankGlobalStateControllers: (registry) {},
               // Technically we currently don't need a DescriptorProvider with
               // null descriptor here, but changes to what can be accessed in

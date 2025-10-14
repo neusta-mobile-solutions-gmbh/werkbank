@@ -7,6 +7,7 @@ export 'src/acknowledged/acknowledged_controller.dart';
 export 'src/acknowledged/acknowledged_controller_impl.dart';
 export 'src/acknowledged/acknowledged_descriptors.dart';
 export 'src/acknowledged/acknowledged_tracker.dart';
+export 'src/global_state_config.dart';
 export 'src/global_state_controller.dart';
 export 'src/global_state_controller_registry.dart';
 export 'src/global_state_initialization.dart';

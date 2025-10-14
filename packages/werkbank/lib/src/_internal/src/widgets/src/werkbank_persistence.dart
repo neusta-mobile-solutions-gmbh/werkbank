@@ -8,13 +8,13 @@ import 'package:werkbank/src/utils/utils.dart';
 
 class GlobalStateManager extends StatefulWidget {
   const GlobalStateManager({
-    required this.persistenceConfig,
+    required this.globalStateConfig,
     required this.registerWerkbankGlobalStateControllers,
     required this.child,
     super.key,
   });
 
-  final PersistenceConfig persistenceConfig;
+  final GlobalStateConfig globalStateConfig;
   final void Function(
     GlobalStateControllerRegistry registry,
   )
@@ -180,7 +180,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
         final controller = registration.createController();
         try {
           for (final initialization
-              in widget.persistenceConfig.initializations) {
+              in widget.globalStateConfig.initializations) {
             initialization.tryInitialize(controller);
           }
           final json = _jsonStore.get(registration.id);

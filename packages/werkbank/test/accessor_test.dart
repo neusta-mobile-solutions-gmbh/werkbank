@@ -47,6 +47,7 @@ class _AccessorTestAddon extends Addon {
         id: 'management',
         builder: (context, child) {
           const access = ManagementLayerEntry.access;
+          access.accessAllFromAddonAccessor(context);
           access.accessAllFromAddonLayerAccessor(context);
           return child;
         },
@@ -167,9 +168,8 @@ class _AccessorTestAddon extends Addon {
   }
 }
 
-extension on AddonLayerAccessor {
-  void accessAllFromAddonLayerAccessor(BuildContext context) {
-    environmentOf(context);
+extension on AddonAccessor {
+  void accessAllFromAddonAccessor(BuildContext context) {
     addonsOf(context);
   }
 }
@@ -179,5 +179,29 @@ extension on WerkbankAppOnlyAccessor {
     rootDescriptorOf(context);
     metadataMapOf(context);
     // TODO: Add remaining.
+  }
+}
+
+extension on MaybeWerkbankAppAccessor {
+  void accessAllFromMaybeWerkbankAppAccessor(BuildContext context) {
+    // TODO
+  }
+}
+
+extension on UseCaseAccessor {
+  void accessAllFromUseCaseAccessor(BuildContext context) {
+    // TODO
+  }
+}
+
+extension on AddonLayerAccessor {
+  void accessAllFromAddonLayerAccessor(BuildContext context) {
+    // TODO
+  }
+}
+
+extension on AddonControlSectionAccessor {
+  void accessAllFromAddonControlSectionAccessor(BuildContext context) {
+    // TODO
   }
 }

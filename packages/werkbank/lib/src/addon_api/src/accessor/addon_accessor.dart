@@ -13,7 +13,7 @@ import 'package:werkbank/src/addon_api/addon_api.dart';
 /// [AddonDescription].
 ///
 /// Subclasses of this class such as [AddonLayerAccessor] and
-/// [UseCaseAccessorMixin] introduce
+/// [UseCaseAccessor] introduce
 /// additional data that can be accessed only in specific contexts.
 ///
 /// Make sure to use the `access` field on the class which actually builds

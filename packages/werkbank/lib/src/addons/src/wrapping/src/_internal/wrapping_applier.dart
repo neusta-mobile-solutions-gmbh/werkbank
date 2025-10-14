@@ -12,7 +12,7 @@ class WrappingApplier extends StatefulWidget {
   });
 
   final WrappingLayer layer;
-  final UseCaseAccessorMixin access;
+  final UseCaseAccessor access;
   final Widget child;
 
   @override

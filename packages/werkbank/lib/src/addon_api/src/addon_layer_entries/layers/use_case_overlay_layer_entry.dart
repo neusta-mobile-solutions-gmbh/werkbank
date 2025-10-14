@@ -15,7 +15,7 @@ class UseCaseOverlayLayerEntry extends AddonLayerEntry {
 }
 
 class UseCaseOverlayLayerEntryAccessor extends AddonLayerAccessor
-    with WerkbankAppOnlyAccessor, UseCaseAccessorMixin {
+    with WerkbankAppOnlyAccessor, UseCaseAccessor {
   const UseCaseOverlayLayerEntryAccessor();
 
   @override

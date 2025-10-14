@@ -80,6 +80,8 @@ class DisplayApp extends StatelessWidget {
         descriptor: null,
         child: AddonConfigProvider(
           addonConfig: addonConfig,
+          // TODO: Remove, since we don't have Werkbank localization.
+          // TODO: Add new provider that allows to test if addons are active here instead.
           child: AddonSpecificationsProvider(
             child: AddonLayerBuilder(
               layer: AddonLayer.management,

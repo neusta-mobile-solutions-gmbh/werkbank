@@ -61,6 +61,7 @@ class _AccessorTestAddon extends Addon {
         id: 'applicationOverlay',
         builder: (context, child) {
           const access = ApplicationOverlayLayerEntry.access;
+          access.accessAllFromAddonAccessor(context);
           access.accessAllFromAddonLayerAccessor(context);
           access.accessAllFromWerkbankAppOnlyAccessor(context);
           return child;
@@ -72,6 +73,7 @@ class _AccessorTestAddon extends Addon {
         id: 'mainViewOverlay',
         builder: (context, child) {
           const access = MainViewOverlayLayerEntry.access;
+          access.accessAllFromAddonAccessor(context);
           access.accessAllFromAddonLayerAccessor(context);
           access.accessAllFromWerkbankAppOnlyAccessor(context);
           return child;
@@ -83,6 +85,7 @@ class _AccessorTestAddon extends Addon {
         id: 'useCaseOverlay',
         builder: (context, child) {
           const access = UseCaseOverlayLayerEntry.access;
+          access.accessAllFromAddonAccessor(context);
           access.accessAllFromAddonLayerAccessor(context);
           access.accessAllFromWerkbankAppOnlyAccessor(context);
           access.accessAllFromUseCaseAccessor(context);
@@ -95,6 +98,7 @@ class _AccessorTestAddon extends Addon {
         id: 'affiliationTransition',
         builder: (context, child) {
           const access = AffiliationTransitionLayerEntry.access;
+          access.accessAllFromAddonAccessor(context);
           access.accessAllFromAddonLayerAccessor(context);
           access.accessAllFromMaybeWerkbankAppAccessor(context);
           return child;
@@ -106,6 +110,7 @@ class _AccessorTestAddon extends Addon {
         id: 'useCase',
         builder: (context, child) {
           const access = UseCaseLayerEntry.access;
+          access.accessAllFromAddonAccessor(context);
           access.accessAllFromAddonLayerAccessor(context);
           access.accessAllFromMaybeWerkbankAppAccessor(context);
           access.accessAllFromUseCaseAccessor(context);
@@ -118,6 +123,7 @@ class _AccessorTestAddon extends Addon {
         id: 'useCaseLayout',
         builder: (context, child) {
           const access = UseCaseLayoutLayerEntry.access;
+          access.accessAllFromAddonAccessor(context);
           access.accessAllFromAddonLayerAccessor(context);
           access.accessAllFromMaybeWerkbankAppAccessor(context);
           access.accessAllFromUseCaseAccessor(context);
@@ -131,6 +137,7 @@ class _AccessorTestAddon extends Addon {
         id: 'useCaseFitted',
         builder: (context, child) {
           const access = UseCaseFittedLayerEntry.access;
+          access.accessAllFromAddonAccessor(context);
           access.accessAllFromAddonLayerAccessor(context);
           access.accessAllFromMaybeWerkbankAppAccessor(context);
           access.accessAllFromUseCaseAccessor(context);
@@ -145,6 +152,7 @@ class _AccessorTestAddon extends Addon {
     BuildContext context,
   ) {
     const access = ConfigureControlSection.access;
+    access.accessAllFromAddonAccessor(context);
     access.accessAllFromAddonControlSectionAccessor(context);
     return [];
   }
@@ -154,6 +162,7 @@ class _AccessorTestAddon extends Addon {
     BuildContext context,
   ) {
     const access = InspectControlSection.access;
+    access.accessAllFromAddonAccessor(context);
     access.accessAllFromAddonControlSectionAccessor(context);
     return [];
   }
@@ -163,6 +172,7 @@ class _AccessorTestAddon extends Addon {
     BuildContext context,
   ) {
     const access = SettingsControlSection.access;
+    access.accessAllFromAddonAccessor(context);
     access.accessAllFromAddonControlSectionAccessor(context);
     return [];
   }
@@ -170,7 +180,7 @@ class _AccessorTestAddon extends Addon {
   @override
   AddonDescription? buildDescription(BuildContext context) {
     const access = AddonDescription.access;
-    access.accessAllFromWerkbankAppOnlyAccessor(context);
+    access.accessAllFromAddonAccessor(context);
     return null;
   }
 

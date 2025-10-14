@@ -80,11 +80,13 @@ class DisplayApp extends StatelessWidget {
         descriptor: null,
         child: AddonConfigProvider(
           addonConfig: addonConfig,
-          child: AddonLayerBuilder(
-            layer: AddonLayer.management,
-            child: UseCaseApp(
-              appConfig: appConfig,
-              child: child,
+          child: AddonSpecificationsProvider(
+            child: AddonLayerBuilder(
+              layer: AddonLayer.management,
+              child: UseCaseApp(
+                appConfig: appConfig,
+                child: child,
+              ),
             ),
           ),
         ),

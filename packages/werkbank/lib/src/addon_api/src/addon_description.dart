@@ -29,8 +29,7 @@ class AddonDescription {
   final DescriptionPriority priority;
 }
 
-class AddonDescriptionAccessor extends AddonAccessor
-    with WerkbankAppOnlyAccessor {
+class AddonDescriptionAccessor extends AddonAccessor {
   const AddonDescriptionAccessor();
 
   @override

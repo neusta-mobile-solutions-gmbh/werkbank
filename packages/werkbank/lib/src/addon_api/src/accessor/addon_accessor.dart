@@ -52,6 +52,7 @@ abstract class AddonAccessor {
     }
   }
 
+  // TODO: Descriptions do not have access to this. Move this.
   /// Get a map from [Addon.id]s to [AddonSpecification]s for all all addons
   /// that are currently used.
   Map<String, AddonSpecification> addonsOf(BuildContext context) {

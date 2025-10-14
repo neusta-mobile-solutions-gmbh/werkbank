@@ -195,25 +195,25 @@ class WerkbankApp extends StatelessWidget {
                       child: PanelControllerProvider(
                         child: AddonConfigProvider(
                           addonConfig: addonConfig,
-                          child: UseCaseMetadataProvider(
-                            child: AddonLayerBuilder(
-                              layer: AddonLayer.management,
-                              child: RootDescriptorFilter(
-                                child: RouterBuilder(
-                                  appBuilder: (context, goRouter) =>
-                                      _MaterialApp(
-                                        goRouter: goRouter,
-                                        builder: (context, child) {
-                                          return AddonSpecificationsProvider(
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                  mainPageBuilder: (context, child) {
-                                    return MainPage(
-                                      mainView: child,
-                                    );
-                                  },
+                          child: AddonSpecificationsProvider(
+                            child: UseCaseMetadataProvider(
+                              child: AddonLayerBuilder(
+                                layer: AddonLayer.management,
+                                child: RootDescriptorFilter(
+                                  child: RouterBuilder(
+                                    appBuilder: (context, goRouter) =>
+                                        _MaterialApp(
+                                          goRouter: goRouter,
+                                          builder: (context, child) {
+                                            return child;
+                                          },
+                                        ),
+                                    mainPageBuilder: (context, child) {
+                                      return MainPage(
+                                        mainView: child,
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),

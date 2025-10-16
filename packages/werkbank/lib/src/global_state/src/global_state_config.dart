@@ -24,5 +24,6 @@ class GlobalStateConfig {
     this.initializations = const [],
   });
 
+  // TODO: Check if this works with type inference.
   final List<AnyGlobalStateInitialization> initializations;
 }

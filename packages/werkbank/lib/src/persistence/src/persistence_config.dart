@@ -31,6 +31,7 @@ interface class PersistenceConfig {
     // why the initializations are not applied.
     : this._(createJsonStore: _createSharedPreferencesStore);
 
+  // TODO: Add "treatAsWarmStart" parameter?
   const PersistenceConfig.memory()
     : this._(
         createJsonStore: _createMemoryStore,

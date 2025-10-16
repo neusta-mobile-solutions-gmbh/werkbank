@@ -4,21 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:werkbank/werkbank.dart';
 
-// TODO: Partially AI generated. Check correctness.
 void main() {
   group('Accessors', () {
-    final rootDescriptor = RootDescriptor.fromWerkbankRoot(
-      WerkbankRoot(
-        children: [
-          WerkbankUseCase(
-            name: 'Empty',
-            builder: (c) {
-              return (context) => const SizedBox.shrink();
-            },
-          ),
-        ],
-      ),
+    final root = WerkbankRoot(
+      children: [
+        WerkbankUseCase(
+          name: 'Empty',
+          builder: (c) {
+            return (context) => const SizedBox.shrink();
+          },
+        ),
+      ],
     );
+    final rootDescriptor = RootDescriptor.fromWerkbankRoot(root);
     final useCase = rootDescriptor.useCases.first;
     final addonConfig = AddonConfig(
       addons: [
@@ -37,6 +35,19 @@ void main() {
       );
       expect(find.byKey(UseCase.key), findsOneWidget);
     });
+
+    // TODO(lzuttermeister): Re-enable when persistence is fixed.
+    // testWidgets('WerkbankApp', (tester) async {
+    //   await tester.pumpWidget(
+    //     WerkbankApp(
+    //       name: 'Test',
+    //       logo: null,
+    //       appConfig: appConfig,
+    //       addonConfig: addonConfig,
+    //       root: root,
+    //     ),
+    //   );
+    // });
   });
 }
 
@@ -154,6 +165,7 @@ class _AccessorTestAddon extends Addon {
     const access = ConfigureControlSection.access;
     access.accessAllFromAddonAccessor(context);
     access.accessAllFromAddonControlSectionAccessor(context);
+    access.accessAllFromUseCaseAccessor(context);
     return [];
   }
 
@@ -164,6 +176,7 @@ class _AccessorTestAddon extends Addon {
     const access = InspectControlSection.access;
     access.accessAllFromAddonAccessor(context);
     access.accessAllFromAddonControlSectionAccessor(context);
+    access.accessAllFromUseCaseAccessor(context);
     return [];
   }
 
@@ -180,7 +193,6 @@ class _AccessorTestAddon extends Addon {
   @override
   AddonDescription? buildDescription(BuildContext context) {
     const access = AddonDescription.access;
-    // TODO: enable again once fixed
     access.accessAllFromAddonAccessor(context);
     return null;
   }
@@ -189,6 +201,7 @@ class _AccessorTestAddon extends Addon {
   List<HomePageComponent> buildHomePageComponents(BuildContext context) {
     const access = HomePageComponent.access;
     access.accessAllFromAddonAccessor(context);
+    access.accessAllFromWerkbankAppOnlyAccessor(context);
     return [];
   }
 }
@@ -203,10 +216,9 @@ extension on AddonAccessor {
 
 extension on WerkbankAppOnlyAccessor {
   void accessAllFromWerkbankAppOnlyAccessor(BuildContext context) {
-    rootDescriptorOf(context);
+    final root = rootDescriptorOf(context);
     metadataMapOf(context);
-    final descriptor = rootDescriptorOf(context).useCases.first;
-    metadataForUseCaseOf(context, descriptor);
+    metadataForUseCaseOf(context, root.useCases.first);
     routerOf(context);
     navStateOf(context);
     readNavStateOf(context);
@@ -258,11 +270,5 @@ extension on AddonLayerAccessor {
 }
 
 extension on AddonControlSectionAccessor {
-  void accessAllFromAddonControlSectionAccessor(BuildContext context) {
-    addonsOf(context);
-    rootDescriptorOf(context);
-    metadataMapOf(context);
-    routerOf(context);
-    navStateOf(context);
-  }
+  void accessAllFromAddonControlSectionAccessor(BuildContext context) {}
 }

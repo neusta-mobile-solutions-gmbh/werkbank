@@ -88,7 +88,7 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
     return ensureNotNull(_maybeAccess.maybePersistentControllerOf<T>(context));
   }
 
-  /* TODO: Should we also add this to
+  /* TODO(lzuttermeister): Should we also add this to
        MaybeWerkbankAppAccessor? */
   /// Subscribes to errors that are reported to [FlutterError.reportError].
   StreamSubscription<FlutterErrorDetails> subscribeToErrors(

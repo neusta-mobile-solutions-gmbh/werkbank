@@ -13,7 +13,7 @@ import 'package:werkbank/src/addon_api/addon_api.dart';
 /// [AddonDescription].
 ///
 /// Subclasses of this class such as [AddonLayerAccessor] and
-/// [UseCaseAccessorMixin] introduce
+/// [UseCaseAccessor] introduce
 /// additional data that can be accessed only in specific contexts.
 ///
 /// Make sure to use the `access` field on the class which actually builds
@@ -52,9 +52,19 @@ abstract class AddonAccessor {
     }
   }
 
-  /// Get a map from [Addon.id]s to [AddonSpecification]s for all all addons
-  /// that are currently used.
-  Map<String, AddonSpecification> addonsOf(BuildContext context) {
-    return ensureReturns(() => AddonSpecificationsProvider.of(context));
+  /// Returns a list of all active [Addon]s.
+  List<Addon> addonsOf(BuildContext context) {
+    return AddonConfigProvider.addonsOf(context);
+  }
+
+  /// Returns the [Addon] by the given [addonId] if it is active,
+  /// or `null` if not.
+  Addon? addonByIdOf(BuildContext context, String addonId) {
+    return AddonConfigProvider.addonByIdOf(context, addonId);
+  }
+
+  /// Returns whether the [Addon] with the given [addonId] is active.
+  bool isAddonActiveOf(BuildContext context, String addonId) {
+    return AddonConfigProvider.isAddonActiveOf(context, addonId);
   }
 }

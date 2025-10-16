@@ -16,7 +16,7 @@ class UseCaseFittedLayerEntry extends AddonLayerEntry {
 }
 
 class UseCaseFittedLayerEntryAccessor extends AddonLayerAccessor
-    with MaybeWerkbankAppAccessor, UseCaseAccessorMixin {
+    with MaybeWerkbankAppAccessor, UseCaseAccessor {
   const UseCaseFittedLayerEntryAccessor();
 
   @override

@@ -15,7 +15,7 @@ import 'package:werkbank/src/tree/tree.dart';
 ///
 /// This is meant for internal use only.
 /// Implementers of addons should use
-/// [UseCaseAccessorMixin.useCaseOf] instead.
+/// [UseCaseAccessor.useCaseOf] instead.
 class DescriptorProvider extends InheritedWidget {
   const DescriptorProvider({
     required this.descriptor,

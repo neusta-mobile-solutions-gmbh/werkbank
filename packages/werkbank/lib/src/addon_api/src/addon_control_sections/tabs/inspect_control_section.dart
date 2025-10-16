@@ -13,7 +13,7 @@ class InspectControlSection extends AddonControlSection {
 }
 
 class InspectControlSectionAccessor extends AddonControlSectionAccessor
-    with UseCaseAccessorMixin {
+    with UseCaseAccessor {
   const InspectControlSectionAccessor();
 
   @override

@@ -26,8 +26,8 @@ abstract class Addon {
   /// [UseCaseComposer] at the beginning of the use case setup.
   /// The created transient state entries can be retrieved via the
   /// [UseCaseComposition] returned by
-  /// [UseCaseAccessorMixin.compositionOf].
-  /// See [UseCaseAccessorMixin] on how to obtain an instance.
+  /// [UseCaseAccessor.compositionOf].
+  /// See [UseCaseAccessor] on how to obtain an instance.
   List<AnyTransientUseCaseStateEntry> createTransientUseCaseStateEntries() =>
       [];
 
@@ -35,8 +35,8 @@ abstract class Addon {
   /// lifetime of the use case.
   /// The created retained state entries can be retrieved via the
   /// [UseCaseComposition] returned by
-  /// [UseCaseAccessorMixin.compositionOf].
-  /// See [UseCaseAccessorMixin] on how to obtain an instance.
+  /// [UseCaseAccessor.compositionOf].
+  /// See [UseCaseAccessor] on how to obtain an instance.
   List<AnyRetainedUseCaseStateEntry> createRetainedUseCaseStateEntries() => [];
 
   /// Builds the control sections to be added into the "CONFIGURE" tab.

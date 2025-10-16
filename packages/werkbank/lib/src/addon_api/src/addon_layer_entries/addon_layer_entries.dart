@@ -78,7 +78,7 @@ class AddonLayerEntries {
 ///   by the `access` field may have different methods depending on the layer.
 ///   Therefore different layers may have different methods available.
 ///   See also [AddonAccessor], [AddonLayerAccessor]
-///   and [UseCaseAccessorMixin].
+///   and [UseCaseAccessor].
 ///
 /// ## Requirements for all layers
 /// - The [AddonLayerEntry.builder] must preserve all assurances that it gets.

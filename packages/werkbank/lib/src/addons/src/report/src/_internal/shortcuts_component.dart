@@ -12,7 +12,7 @@ class ShortcutsComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addonsWithShortcuts = HomePageComponent.access
-        .addonsOf(context)
+        .addonSpecificationsOf(context)
         .values
         .where((addon) => addon.description != null)
         .where((addon) => addon.description!.shortcuts.isNotEmpty)

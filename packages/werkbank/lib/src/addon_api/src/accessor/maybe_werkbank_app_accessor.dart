@@ -147,4 +147,14 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
       () => GlobalStateManager.maybeControllerOf<T>(context),
     );
   }
+
+  /// Get a map from [Addon.id]s to [AddonSpecification]s for all all addons
+  /// that are currently used.
+  ///
+  /// {@macro werkbank.null_in_use_case_display}
+  Map<String, AddonSpecification>? maybeAddonSpecificationsOf(
+    BuildContext context,
+  ) {
+    return ensureReturns(() => AddonSpecificationsProvider.maybeOf(context));
+  }
 }

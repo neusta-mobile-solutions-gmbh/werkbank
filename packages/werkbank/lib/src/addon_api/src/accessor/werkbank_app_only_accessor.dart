@@ -98,6 +98,12 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
   ) {
     return FlutterErrorProvider.listen(context, onError);
   }
+
+  /// Get a map from [Addon.id]s to [AddonSpecification]s for all all addons
+  /// that are currently used.
+  Map<String, AddonSpecification> addonSpecificationsOf(BuildContext context) {
+    return ensureNotNull(_maybeAccess.maybeAddonSpecificationsOf(context));
+  }
 }
 
 class _MaybeWerkbankAppAccessor extends AddonAccessor

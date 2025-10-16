@@ -21,7 +21,7 @@ typedef UseCaseStateMutation =
 ///
 /// The [UseCaseComposition] can be accessed in a use case via
 /// [UseCase.compositionOf].
-/// Addons can use [UseCaseAccessorMixin.compositionOf] to access the
+/// Addons can use [UseCaseAccessor.compositionOf] to access the
 /// for some of the layers or panels.
 /// Additionally [UseCaseDisplay].
 ///

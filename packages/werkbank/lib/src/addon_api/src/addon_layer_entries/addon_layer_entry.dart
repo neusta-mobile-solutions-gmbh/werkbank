@@ -51,7 +51,7 @@ class AddonLayerEntry {
   ///
   /// For more fine grained control of how widgets are built depending on
   /// whether they are in the overview or not,
-  /// use [UseCaseAccessorMixin.maybeUseCaseEnvironmentOf] to get the
+  /// use [UseCaseAccessor.maybeUseCaseEnvironmentOf] to get the
   /// current [UseCaseEnvironment].
   final bool includeInOverlay;
 

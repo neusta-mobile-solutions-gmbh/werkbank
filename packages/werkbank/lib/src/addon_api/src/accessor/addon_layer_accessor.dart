@@ -16,6 +16,7 @@ import 'package:werkbank/src/environment/environment.dart';
 abstract class AddonLayerAccessor extends AddonAccessor {
   const AddonLayerAccessor();
 
+  // TODO(lzuttermeister): Move this into MaybeWerkbankAppAccessor?
   /// Gets the [WerkbankEnvironment] of the current addon.
   /// This is one of [WerkbankEnvironment.app] or
   /// [WerkbankEnvironment.display].

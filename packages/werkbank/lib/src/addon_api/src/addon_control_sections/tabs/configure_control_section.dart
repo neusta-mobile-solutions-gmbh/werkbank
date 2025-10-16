@@ -13,7 +13,7 @@ class ConfigureControlSection extends AddonControlSection {
 }
 
 class ConfigureControlSectionAccessor extends AddonControlSectionAccessor
-    with UseCaseAccessorMixin {
+    with UseCaseAccessor {
   const ConfigureControlSectionAccessor();
 
   @override

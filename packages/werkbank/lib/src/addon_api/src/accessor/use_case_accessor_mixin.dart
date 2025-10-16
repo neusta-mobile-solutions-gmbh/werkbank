@@ -20,7 +20,7 @@ import 'package:werkbank/src/use_case/use_case.dart';
 /// To obtain an instance of this mixin call the static `access` field on the
 /// class listed above from which the widgets you want to access the data
 /// in are built.
-mixin UseCaseAccessorMixin on AddonAccessor {
+mixin UseCaseAccessor on AddonAccessor {
   /// Gets the [UseCaseDescriptor] of the current use case.
   UseCaseDescriptor useCaseOf(BuildContext context) =>
       ensureNotNull(ensureReturns(() => DescriptorProvider.useCaseOf(context)));

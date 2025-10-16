@@ -181,7 +181,7 @@ class _AccessorTestAddon extends Addon {
   AddonDescription? buildDescription(BuildContext context) {
     const access = AddonDescription.access;
     // TODO: enable again once fixed
-    // access.accessAllFromAddonAccessor(context);
+    access.accessAllFromAddonAccessor(context);
     return null;
   }
 
@@ -195,7 +195,9 @@ class _AccessorTestAddon extends Addon {
 
 extension on AddonAccessor {
   void accessAllFromAddonAccessor(BuildContext context) {
-    addonsOf(context);
+    final addons = addonsOf(context);
+    addonByIdOf(context, addons.first.id);
+    isAddonActiveOf(context, addons.first.id);
   }
 }
 
@@ -216,6 +218,7 @@ extension on WerkbankAppOnlyAccessor {
     persistentControllerOf<HistoryController>(context);
     final sub = subscribeToErrors(context, (_) {});
     unawaited(sub.cancel());
+    addonSpecificationsOf(context);
   }
 }
 
@@ -235,6 +238,7 @@ extension on MaybeWerkbankAppAccessor {
     maybeHistoryOf(context);
     maybeAcknowledgedController(context);
     maybePersistentControllerOf<HistoryController>(context);
+    maybeAddonSpecificationsOf(context);
   }
 }
 

@@ -88,7 +88,7 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
     return ensureNotNull(_maybeAccess.maybePersistentControllerOf<T>(context));
   }
 
-  /* TODO(lzuttermeister): Should we also add this to
+  /* TODO: Should we also add this to
        MaybeWerkbankAppAccessor? */
   /// Subscribes to errors that are reported to [FlutterError.reportError].
   StreamSubscription<FlutterErrorDetails> subscribeToErrors(
@@ -96,6 +96,12 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
     void Function(FlutterErrorDetails errorDetails) onError,
   ) {
     return FlutterErrorProvider.listen(context, onError);
+  }
+
+  /// Get a map from [Addon.id]s to [AddonSpecification]s for all all addons
+  /// that are currently used.
+  Map<String, AddonSpecification> addonSpecificationsOf(BuildContext context) {
+    return ensureNotNull(_maybeAccess.maybeAddonSpecificationsOf(context));
   }
 }
 

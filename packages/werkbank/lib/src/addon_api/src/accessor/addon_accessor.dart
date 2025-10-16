@@ -52,10 +52,19 @@ abstract class AddonAccessor {
     }
   }
 
-  // TODO: Descriptions do not have access to this. Move this.
-  /// Get a map from [Addon.id]s to [AddonSpecification]s for all all addons
-  /// that are currently used.
-  Map<String, AddonSpecification> addonsOf(BuildContext context) {
-    return ensureReturns(() => AddonSpecificationsProvider.of(context));
+  /// Returns a list of all active [Addon]s.
+  List<Addon> addonsOf(BuildContext context) {
+    return AddonConfigProvider.addonsOf(context);
+  }
+
+  /// Returns the [Addon] by the given [addonId] if it is active,
+  /// or `null` if not.
+  Addon? addonByIdOf(BuildContext context, String addonId) {
+    return AddonConfigProvider.addonByIdOf(context, addonId);
+  }
+
+  /// Returns whether the [Addon] with the given [addonId] is active.
+  bool isAddonActiveOf(BuildContext context, String addonId) {
+    return AddonConfigProvider.isAddonActiveOf(context, addonId);
   }
 }

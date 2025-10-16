@@ -7,6 +7,8 @@
   - `colorsUseCaseBuilder` now shows a checkerboard pattern behind transparent colors.
   - Add some more parameters for customizability.
   - `textStylesUseCaseBuilder` now shows properties like `fontSize`, `fontWeight` and `letterSpacing`.
+- Make some changes to accessors
+  - `AddonAccessor.addonsOf(context)` has been moved to `MaybeWerkbankAppAccessor` and `WerkbankAppOnlyAccessor` and was renamed to `addonSpecificationsOf(context)`.
 
 # 0.17.3
 - When nodes of a tree in the UI become selected, their parents now expand, and they now scroll into view. This applies to:

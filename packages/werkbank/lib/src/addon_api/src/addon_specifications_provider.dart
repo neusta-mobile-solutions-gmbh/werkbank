@@ -7,11 +7,16 @@ class AddonSpecificationsProvider extends StatelessWidget {
     required this.child,
   });
 
+  static Map<String, AddonSpecification>? maybeOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_InheritedAddonSpecifications>()
+        ?.specifications;
+  }
+
   static Map<String, AddonSpecification> of(BuildContext context) {
-    final result = context
-        .dependOnInheritedWidgetOfExactType<_InheritedAddonSpecifications>();
+    final result = maybeOf(context);
     assert(result != null, 'No AddonSpecificationsProvider found in context');
-    return result!.specifications;
+    return result!;
   }
 
   final Widget child;

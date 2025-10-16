@@ -8,7 +8,9 @@
   - Add some more parameters for customizability.
   - `textStylesUseCaseBuilder` now shows properties like `fontSize`, `fontWeight` and `letterSpacing`.
 - Make some changes to accessors
+  - Rename `UseCaseAccessorMixin` to `UseCaseAccessor` in order to be more consistent with other accessor mixins. **(BREAKING CHANGE)**
   - `AddonAccessor.addonsOf(context)` has been moved to `MaybeWerkbankAppAccessor` and `WerkbankAppOnlyAccessor` and was renamed to `addonSpecificationsOf(context)`. **(BREAKING CHANGE)**
+  - The `AddonDescriptionAccessor` no longer has access to methods in the `WerkbankAppOnlyAccessor`. **(BREAKING CHANGE)**
   - Add new `AddonAccessor.addonsOf(context)` that returns a list of active addons. **(BREAKING CHANGE)**
   - Add `AddonAccessor.addonByIdOf(context, addonId)` to get an addon by its id.
   - Add `AddonAccessor.isAddonActive(context, addonId)` to check if an addon is active.

@@ -36,18 +36,27 @@ void main() {
       expect(find.byKey(UseCase.key), findsOneWidget);
     });
 
-    // TODO(lzuttermeister): Re-enable when persistence is fixed.
-    // testWidgets('WerkbankApp', (tester) async {
-    //   await tester.pumpWidget(
-    //     WerkbankApp(
-    //       name: 'Test',
-    //       logo: null,
-    //       appConfig: appConfig,
-    //       addonConfig: addonConfig,
-    //       root: root,
-    //     ),
-    //   );
-    // });
+    testWidgets('WerkbankApp', (tester) async {
+      await tester.pumpWidget(
+        WerkbankApp(
+          name: 'Test',
+          logo: null,
+          appConfig: appConfig,
+          addonConfig: addonConfig,
+          persistenceConfig: const PersistenceConfig.memory(),
+          globalStateConfig: GlobalStateConfig(
+            initializations: [
+              GlobalStateInitialization<HistoryController>((c) {
+                c.logDescriptorVisit(useCase);
+              }),
+            ],
+          ),
+          root: root,
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byKey(UseCase.key), findsOneWidget);
+    });
   });
 }
 
@@ -227,7 +236,7 @@ extension on WerkbankAppOnlyAccessor {
     lastUpdatedOf(context);
     historyOf(context);
     acknowledgedController(context);
-    persistentControllerOf<HistoryController>(context);
+    globalStateControllerOf<HistoryController>(context);
     final sub = subscribeToErrors(context, (_) {});
     unawaited(sub.cancel());
     addonSpecificationsOf(context);
@@ -249,7 +258,7 @@ extension on MaybeWerkbankAppAccessor {
     maybeLastUpdatedOf(context);
     maybeHistoryOf(context);
     maybeAcknowledgedController(context);
-    maybePersistentControllerOf<HistoryController>(context);
+    maybeGlobalStateControllerOf<HistoryController>(context);
     maybeAddonSpecificationsOf(context);
   }
 }

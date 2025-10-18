@@ -348,6 +348,7 @@ class TranslationsAddonsRecentHistoryEn {
 
   // Translations
   String get homePageComponentTitle => 'Recently Visited';
+  String get noUseCasesVisited => 'No use cases visited yet.';
 }
 
 // Path: addons.acknowledged
@@ -1101,6 +1102,8 @@ extension on Translations {
         return 'Page Transition';
       case 'addons.recentHistory.homePageComponentTitle':
         return 'Recently Visited';
+      case 'addons.recentHistory.noUseCasesVisited':
+        return 'No use cases visited yet.';
       case 'addons.acknowledged.homePageComponentTitle':
         return 'Recently Added';
       case 'addons.constraints.name':

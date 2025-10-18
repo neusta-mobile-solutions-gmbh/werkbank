@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/werkbank_theme/werkbank_theme.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
@@ -19,23 +19,24 @@ class WerkbankThemeManager extends StatefulWidget {
 
   static void setThemeNameOf(BuildContext context, String newThemeName) =>
       context
-          .findAncestorStateOfType<_WerkbankThemeManagerState>()!
-          ._werkbankThemeController
-          .setTheme(newThemeName);
+              .findAncestorStateOfType<_WerkbankThemeManagerState>()!
+              ._werkbankThemeController
+              .themeName =
+          newThemeName;
 
   @override
   State<WerkbankThemeManager> createState() => _WerkbankThemeManagerState();
 }
 
 class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
-  late WerkbankThemePersistentController _werkbankThemeController;
+  late WerkbankThemeController _werkbankThemeController;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     // TODO(cjaros): wrong layer used
     _werkbankThemeController = ApplicationOverlayLayerEntry.access
-        .persistentControllerOf<WerkbankThemePersistentController>(context);
+        .globalStateControllerOf<WerkbankThemeController>(context);
   }
 
   @override
@@ -83,25 +84,31 @@ class _WerkbankThemeManagerState extends State<WerkbankThemeManager> {
   }
 }
 
-class WerkbankThemePersistentController extends PersistentController {
-  WerkbankThemePersistentController({
-    required super.prefsWithCache,
-  });
+// TODO: Move out of internal
+class WerkbankThemeController extends GlobalStateController {
+  WerkbankThemeController();
 
-  @override
-  String get id => 'werkbank_theme';
+  String _themeName = WerkbankThemeAddon.systemThemeName;
 
-  @override
-  void init(String? unsafeJson) {
-    themeName = unsafeJson ?? WerkbankThemeAddon.systemThemeName;
+  String get themeName => _themeName;
+
+  set themeName(String newThemeName) {
+    if (_themeName != newThemeName) {
+      _themeName = newThemeName;
+      notifyListeners();
+    }
   }
 
-  late String themeName;
+  @override
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
+    if (json is String) {
+      themeName = json;
+    }
+  }
 
-  void setTheme(String newThemeName) {
-    themeName = newThemeName;
-    setJson(themeName);
-    notifyListeners();
+  @override
+  Object? toJson() {
+    return themeName;
   }
 }
 

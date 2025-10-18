@@ -1,17 +1,13 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/_internal/src/routing/routing.dart';
+import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/addons/src/recent_history/src/_internal/recent_history_manager.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/tree/tree.dart';
 
 class RecentHistoryComponent extends StatefulWidget {
-  const RecentHistoryComponent({this.maxCount = 10, super.key});
+  const RecentHistoryComponent({this.maxCount = 8, super.key});
 
   final int maxCount;
 
@@ -20,77 +16,64 @@ class RecentHistoryComponent extends StatefulWidget {
 }
 
 class _RecentHistoryComponentState extends State<RecentHistoryComponent> {
-  List<WerkbankHistoryEntry>? recentHistory;
-  List<Descriptor> descriptors = [];
+  late List<Descriptor> descriptors;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final fullRecentHistory = RecentHistoryManager.recentHistoryOf(context);
-    final pageTransitionDuration = PageTransitionOptions.durationOf(context);
-    final newRecentHistory = fullRecentHistory.sublist(
-      0,
-      min(
-        widget.maxCount,
-        fullRecentHistory.length,
-      ),
-    );
-
-    final onInit = recentHistory == null;
-    if (onInit) {
-      _update(newRecentHistory);
-    } else {
-      // To prevent the UI
-      // from flickering while changing the page.
-      unawaited(
-        Future<void>.delayed(pageTransitionDuration).then((_) {
-          if (mounted) {
-            _update(newRecentHistory);
-          }
-        }),
-      );
-    }
-  }
-
-  void _update(List<WerkbankHistoryEntry> newRecentHistory) {
-    final root = HomePageComponent.access.rootDescriptorOf(context);
-    final newDescriptors = newRecentHistory.map((e) {
-      return root.maybeFromPath(e.path)!;
-    }).toList();
-    setState(() {
-      recentHistory = newRecentHistory;
-      descriptors = newDescriptors;
-    });
+    final rootDescriptor = HomePageComponent.access.rootDescriptorOf(context);
+    // We don't want to listen to changes in the history here.
+    // Doing so would cause the list to immediately update when the user
+    // navigates to a use case, even though we are transitioning away
+    // from the home page. This would look janky.
+    descriptors = HomePageComponent.access
+        .historyOf(context)
+        .getRecentlyVisitedDescriptors(rootDescriptor)
+        .map((r) => r.$1)
+        .where(
+          (descriptor) => switch (descriptor) {
+            ParentDescriptor() => false,
+            UseCaseDescriptor() => true,
+          },
+        )
+        .take(widget.maxCount)
+        .toList(growable: false);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        for (final descriptor in descriptors)
-          Builder(
-            builder: (context) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: WButtonBase(
-                  onPressed: () {
-                    HomePageComponent.access
-                        .routerOf(context)
-                        .goTo(DescriptorNavState.overviewOrView(descriptor));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: WPathDisplay(
-                      nameSegments: descriptor.nameSegments,
-                    ),
-                  ),
+    if (descriptors.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 12),
+        child: Text(
+          context.sL10n.addons.recentHistory.noUseCasesVisited,
+          style: context.werkbankTextTheme.defaultText,
+        ),
+      );
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        spacing: 8,
+        children: [
+          for (final descriptor in descriptors)
+            WButtonBase(
+              onPressed: () {
+                HomePageComponent.access
+                    .routerOf(context)
+                    .goTo(DescriptorNavState.overviewOrView(descriptor));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: WPathDisplay(
+                  nameSegments: descriptor.nameSegments,
                 ),
-              );
-            },
-          ),
-      ],
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

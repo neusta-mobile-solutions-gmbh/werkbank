@@ -295,9 +295,9 @@ class _PersistenceAndGlobalState extends StatelessWidget {
         child: GlobalStateManager(
           globalStateConfig: globalStateConfig,
           registerWerkbankGlobalStateControllers: (registry) {
-            registry.register<HistoryController>(
+            registry.register(
               'history',
-              HistoryControllerImpl.new,
+              HistoryController.new,
             );
             // TODO: Fix this
             // Since this only gets executed once per app start,

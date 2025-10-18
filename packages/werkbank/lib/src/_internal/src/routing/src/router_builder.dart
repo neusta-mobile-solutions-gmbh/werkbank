@@ -118,16 +118,16 @@ class _RouterBuilderState extends State<RouterBuilder> {
       return null;
     }
 
-    final mostRecentHistoryEntry = GlobalStateManager.maybeHistoryOf(
+    final lastVisitedDescriptorPath = GlobalStateManager.maybeHistoryOf(
       context,
-    )?.unsafeHistory.currentEntry;
+    )?.lastVisitedPath;
 
-    if (mostRecentHistoryEntry == null) {
+    if (lastVisitedDescriptorPath == null) {
       // There is no history, we can't restore anything.
       return null;
     }
 
-    final entry = rootDescriptor.maybeFromPath(mostRecentHistoryEntry.path);
+    final entry = rootDescriptor.maybeFromPath(lastVisitedDescriptorPath);
     final entryNoLongerExists = entry == null;
 
     if (entryNoLongerExists) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
-import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/routing/routing.dart';
 
 class Historiographer extends StatefulWidget {
@@ -20,17 +19,14 @@ class _HistoriographerState extends State<Historiographer> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final path = switch (NavStateProvider.of(context)) {
+    final descriptor = switch (NavStateProvider.of(context)) {
       HomeNavState() => null,
-      DescriptorNavState(:final descriptor) => descriptor.path,
+      DescriptorNavState(:final descriptor) => descriptor,
     };
-    if (path != null) {
-      GlobalStateManager.maybeHistoryOf(context)?.log(
-        WerkbankHistoryEntry(
-          path: path,
-          timestamp: DateTime.now(),
-        ),
-      );
+    if (descriptor != null) {
+      GlobalStateManager.maybeHistoryOf(
+        context,
+      )?.logDescriptorVisit(descriptor);
     }
   }
 

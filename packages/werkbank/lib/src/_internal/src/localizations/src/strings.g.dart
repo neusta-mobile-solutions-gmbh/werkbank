@@ -4,7 +4,7 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 129
+/// Strings: 130
 
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
@@ -12,7 +12,6 @@
 import 'package:intl/intl.dart';
 import 'package:slang/generated.dart';
 import 'package:slang/slang.dart';
-
 export 'package:slang/slang.dart';
 
 part 'strings_en.g.dart';

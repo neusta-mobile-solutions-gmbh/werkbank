@@ -46,12 +46,16 @@ void main() {
           persistenceConfig: const PersistenceConfig.memory(),
           globalStateConfig: GlobalStateConfig(
             initializations: [
-              // TODO: Open use case initially
+              GlobalStateInitialization<HistoryController>((c) {
+                c.logDescriptorVisit(useCase);
+              }),
             ],
           ),
           root: root,
         ),
       );
+      await tester.pumpAndSettle();
+      expect(find.byKey(UseCase.key), findsOneWidget);
     });
   });
 }

@@ -292,6 +292,7 @@ class _PersistenceAndGlobalState extends StatelessWidget {
       persistenceConfig: persistenceConfig,
       placeholder: const SizedBox.expand(),
       child: IsWarmStartProvider(
+        alwaysTreatLikeWarmStart: globalStateConfig.alwaysTreatLikeWarmStart,
         child: GlobalStateManager(
           globalStateConfig: globalStateConfig,
           registerWerkbankGlobalStateControllers: (registry) {

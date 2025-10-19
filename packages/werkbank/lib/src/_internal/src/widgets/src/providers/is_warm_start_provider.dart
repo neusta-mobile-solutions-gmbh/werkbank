@@ -6,6 +6,7 @@ import 'package:werkbank/src/persistence/persistence.dart';
 
 class IsWarmStartProvider extends StatefulWidget {
   const IsWarmStartProvider({
+    required this.alwaysTreatLikeWarmStart,
     required this.child,
     super.key,
   });
@@ -17,6 +18,7 @@ class IsWarmStartProvider extends StatefulWidget {
     return result!.isWarmStart;
   }
 
+  final bool alwaysTreatLikeWarmStart;
   final Widget child;
 
   @override
@@ -34,24 +36,28 @@ class _IsWarmStartProviderState extends State<IsWarmStartProvider> {
   void initState() {
     super.initState();
     jsonStore = JsonStoreProvider.read(context);
-    final lastShutdownTimestamp = DateTime.tryParse(
-      jsonStore.get(_persistenceKey).toString(),
-    );
-    if (lastShutdownTimestamp != null) {
-      final now = DateTime.now().toUtc();
-      final difference = now.difference(lastShutdownTimestamp);
-      isWarmStart = difference < const Duration(seconds: 20);
-      if (isWarmStart) {
-        unawaited(
-          Future<void>.delayed(difference).then((_) {
-            setState(() {
-              isWarmStart = false;
-            });
-          }),
-        );
-      }
+    if (widget.alwaysTreatLikeWarmStart) {
+      isWarmStart = true;
     } else {
-      isWarmStart = false;
+      final lastShutdownTimestamp = DateTime.tryParse(
+        jsonStore.get(_persistenceKey).toString(),
+      );
+      if (lastShutdownTimestamp != null) {
+        final now = DateTime.now().toUtc();
+        final difference = now.difference(lastShutdownTimestamp);
+        isWarmStart = difference < const Duration(seconds: 20);
+        if (isWarmStart) {
+          unawaited(
+            Future<void>.delayed(difference).then((_) {
+              setState(() {
+                isWarmStart = false;
+              });
+            }),
+          );
+        }
+      } else {
+        isWarmStart = false;
+      }
     }
     timer = Timer.periodic(
       const Duration(seconds: 10),

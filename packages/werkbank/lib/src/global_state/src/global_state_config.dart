@@ -22,8 +22,23 @@ import 'package:werkbank/src/global_state/global_state.dart';
 class GlobalStateConfig {
   const GlobalStateConfig({
     this.initializations = const [],
+    this.alwaysTreatLikeWarmStart = false,
   });
 
   // TODO: Check if this works with type inference.
   final List<AnyGlobalStateInitialization> initializations;
+
+  /// If true, the [GlobalStateController] will always have their
+  /// [GlobalStateController.tryLoadFromJson] called with
+  /// `isWarmStart` set to `true` on startup.
+  ///
+  /// A warm start is when the app is restarted right after it was closed,
+  /// for example on a hot restart.
+  ///
+  /// Some [GlobalStateController]s may choose to not load some state on a cold
+  /// start.
+  /// An example of this is the [SearchQueryController], which does not load
+  /// the previous search query on a cold start, because the user likely
+  /// expects a fresh state then.
+  final bool alwaysTreatLikeWarmStart;
 }

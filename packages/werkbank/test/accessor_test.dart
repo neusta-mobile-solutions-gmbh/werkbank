@@ -47,15 +47,24 @@ void main() {
           globalStateConfig: GlobalStateConfig(
             initializations: [
               GlobalStateInitialization<HistoryController>((c) {
+                // Pretend like we have visited the use case
+                // so that it is opened on startup.
                 c.logDescriptorVisit(useCase);
               }),
             ],
+            // The last visited use case is only restored
+            // on warm starts.
+            alwaysTreatLikeWarmStart: true,
           ),
           root: root,
         ),
       );
       await tester.pumpAndSettle();
       expect(find.byKey(UseCase.key), findsOneWidget);
+      // There is a future in hot_reload_effect_handler.dart that takes
+      // a few seconds to complete. Not waiting here can lead to
+      // test failures.
+      await tester.pump(const Duration(seconds: 10));
     });
   });
 }

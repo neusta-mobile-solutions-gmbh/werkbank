@@ -115,6 +115,7 @@ addons:
     name: Page Transition
   recentHistory:
     homePageComponentTitle: Recently Visited
+    noUseCasesVisited: No use cases visited yet.
   acknowledged:
     homePageComponentTitle: Recently Added
   constraints:

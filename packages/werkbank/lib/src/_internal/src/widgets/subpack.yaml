@@ -10,6 +10,7 @@ dependencies:
   - /lib/src/environment
   - /lib/src/notifications
   - /lib/src/persistence
+  - /lib/src/global_state
   - /lib/src/routing
   - /lib/src/theme
   - /lib/src/tree

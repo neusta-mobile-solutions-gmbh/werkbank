@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
@@ -109,29 +109,25 @@ class _RouterBuilderState extends State<RouterBuilder> {
       // goRouter will restore itself based on the previous routing-path.
       return null;
     }
-    // This is a appstart.
-    final appWasAliveRecently =
-        WerkbankPersistence.maybeWasAliveController(
-          context,
-        )?.appWasAliveRecently ??
-        false;
+    // This is a warm appstart.
+    final isWarmStart = IsWarmStartProvider.read(context);
 
-    if (!appWasAliveRecently) {
+    if (!isWarmStart) {
       // The app was not recently alive, we don't want to restore
       // history that is too old.
       return null;
     }
 
-    final mostRecentHistoryEntry = WerkbankPersistence.maybeHistoryOf(
+    final lastVisitedDescriptorPath = GlobalStateManager.maybeHistoryOf(
       context,
-    )?.unsafeHistory.currentEntry;
+    )?.lastVisitedPath;
 
-    if (mostRecentHistoryEntry == null) {
+    if (lastVisitedDescriptorPath == null) {
       // There is no history, we can't restore anything.
       return null;
     }
 
-    final entry = rootDescriptor.maybeFromPath(mostRecentHistoryEntry.path);
+    final entry = rootDescriptor.maybeFromPath(lastVisitedDescriptorPath);
     final entryNoLongerExists = entry == null;
 
     if (entryNoLongerExists) {

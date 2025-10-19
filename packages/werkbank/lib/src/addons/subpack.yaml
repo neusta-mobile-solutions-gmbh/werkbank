@@ -9,7 +9,7 @@ dependencies:
   - /lib/src/theme
   - /lib/src/use_case
   - /lib/src/notifications
-  - /lib/src/persistence
+  - /lib/src/global_state
   # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
   - /lib/src/widgets
   - /lib/src/use_case_metadata

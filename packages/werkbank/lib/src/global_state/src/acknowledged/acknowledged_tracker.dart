@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/routing/routing.dart';
 
 class AcknowledgedTracker extends StatefulWidget {
@@ -24,7 +24,7 @@ class _AcknowledgedTrackerState extends State<AcknowledgedTracker> {
       DescriptorNavState(:final descriptor) => descriptor.path,
     };
     if (path != null) {
-      WerkbankPersistence.maybeAcknowledgedController(context)?.log(
+      GlobalStateManager.maybeAcknowledgedController(context)?.log(
         path,
       );
     }

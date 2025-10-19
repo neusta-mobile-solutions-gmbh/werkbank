@@ -5,6 +5,7 @@ library;
 
 export 'src/accessor_scope.dart';
 export 'src/flutter_error_provider.dart';
+export 'src/global_state_manager.dart';
 export 'src/pages/home_page/home_page.dart';
 export 'src/pages/main_page.dart';
 export 'src/pages/overview/overview_overflow_notifier.dart';
@@ -42,5 +43,4 @@ export 'src/use_case_viewport_size.dart';
 export 'src/use_case_widget_display.dart';
 export 'src/w_breakpoints.dart';
 export 'src/web_fixer/web_fixer.dart';
-export 'src/werkbank_persistence.dart';
 export 'src/werkbank_shortcuts.dart';

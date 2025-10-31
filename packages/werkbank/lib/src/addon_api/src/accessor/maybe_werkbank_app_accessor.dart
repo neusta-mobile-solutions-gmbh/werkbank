@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
@@ -120,30 +120,20 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
   /// {@macro werkbank.controller_available_in_app}
   /// {@macro werkbank.null_in_use_case_display}
   HistoryController? maybeHistoryOf(BuildContext context) {
-    return ensureReturns(() => WerkbankPersistence.maybeHistoryOf(context));
+    return ensureReturns(() => GlobalStateManager.maybeHistoryOf(context));
   }
 
-  /// Gets the [AcknowledgedController] of the current [WerkbankApp] if
-  /// we are currently in the context of a [WerkbankApp].
-  ///
-  /// {@macro werkbank.controller_available_in_app}
-  /// {@macro werkbank.null_in_use_case_display}
-  AcknowledgedController? maybeAcknowledgedController(BuildContext context) {
-    return ensureReturns(
-      () => WerkbankPersistence.maybeAcknowledgedController(context),
-    );
-  }
-
-  /// Gets the [PersistentController] of the given type
+  // TODO: Move out of this accessor.
+  /// Gets the [GlobalStateController] of the given type
   /// if we are currently in the
   /// context of a [WerkbankApp].
   ///
   /// {@macro werkbank.null_in_use_case_display}
-  T? maybePersistentControllerOf<T extends PersistentController>(
+  T? maybeGlobalStateControllerOf<T extends GlobalStateController>(
     BuildContext context,
   ) {
     return ensureReturns(
-      () => WerkbankPersistence.maybeControllerOf<T>(context),
+      () => GlobalStateManager.maybeControllerOf<T>(context),
     );
   }
 

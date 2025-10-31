@@ -1,3 +1,1 @@
-dependencies:
-  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
-  - /lib/src/_internal/src/routing
+

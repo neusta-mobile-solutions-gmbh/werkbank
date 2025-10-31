@@ -73,9 +73,9 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
 
     setState(() {
       _orderedSections = _panelTabsController.addAndOrderSections(
-        widget.tab,
-        orderedList,
-        (section) => section.id,
+        tab: widget.tab,
+        sections: orderedList,
+        getId: (section) => section.id,
       );
     });
   }
@@ -108,8 +108,9 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
       _orderedSections!.move(oldIndex, fixedNewIndex);
     });
     _panelTabsController.reorder(
-      widget.tab,
-      _orderedSections!.map((s) => s.id).toList(),
+      tab: widget.tab,
+      newSectionsOrder: _orderedSections!,
+      getId: (s) => s.id,
     );
   }
 

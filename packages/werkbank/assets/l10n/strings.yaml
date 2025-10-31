@@ -118,6 +118,7 @@ addons:
     noUseCasesVisited: No use cases visited yet.
   acknowledged:
     homePageComponentTitle: Recently Added
+    noNewUseCases: No new use cases added since your last visit.
   constraints:
     name: Constraints
     controls:

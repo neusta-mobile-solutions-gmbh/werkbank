@@ -14,6 +14,9 @@
   - Add new `AddonAccessor.addonsOf(context)` that returns a list of active addons. **(BREAKING CHANGE)**
   - Add `AddonAccessor.addonByIdOf(context, addonId)` to get an addon by its id.
   - Add `AddonAccessor.isAddonActive(context, addonId)` to check if an addon is active.
+- Make changes to persistence and holding global state
+  - Remove `WerkbankAppOnlyAccessor.acknowledgedController(context)` and `MaybeWerkbankAppAccessor.maybeAcknowledgedController(context)`. **(BREAKING CHANGE)**
+    - TODO: Mention replacement.
 
 # 0.17.3
 - When nodes of a tree in the UI become selected, their parents now expand, and they now scroll into view. This applies to:

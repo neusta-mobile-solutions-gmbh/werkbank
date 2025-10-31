@@ -11,9 +11,10 @@ class SearchTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchQueryController = GlobalStateManager.maybeSearchQueryController(
-      context,
-    )!;
+    final searchQueryController =
+        GlobalStateManager.maybeSearchQueryControllerOf(
+          context,
+        )!;
     return WTextField(
       maxLength: SearchQueryController.maxQueryLength,
       hintText: context.sL10n.navigationPanel.search.hint,

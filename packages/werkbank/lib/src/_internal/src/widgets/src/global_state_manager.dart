@@ -31,19 +31,12 @@ class GlobalStateManager extends StatefulWidget {
   }
 
   /// {@macro werkbank.controller_available_in_app}
-  static AcknowledgedController? maybeAcknowledgedController(
-    BuildContext context,
-  ) {
-    return maybeControllerOf<AcknowledgedController>(context);
-  }
-
-  /// {@macro werkbank.controller_available_in_app}
-  static PanelTabsController? maybePanelTabsController(BuildContext context) {
+  static PanelTabsController? maybePanelTabsControllerOf(BuildContext context) {
     return maybeControllerOf<PanelTabsController>(context);
   }
 
   /// {@macro werkbank.controller_available_in_app}
-  static SearchQueryController? maybeSearchQueryController(
+  static SearchQueryController? maybeSearchQueryControllerOf(
     BuildContext context,
   ) {
     return maybeControllerOf<SearchQueryController>(context);

@@ -285,9 +285,6 @@ class _PersistenceAndGlobalState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final descendantsPaths = WerkbankAppInfo.rootDescriptorOf(
-      context,
-    ).descendants.map((e) => e.path).toSet();
     return JsonStoreProvider(
       persistenceConfig: persistenceConfig,
       placeholder: const SizedBox.expand(),
@@ -299,20 +296,6 @@ class _PersistenceAndGlobalState extends StatelessWidget {
             registry.register(
               'history',
               HistoryController.new,
-            );
-            // TODO: Fix this
-            // Since this only gets executed once per app start,
-            // hot-reload does not lead to a new path being added.
-            // But this is fine.
-            registry.register<AcknowledgedController>(
-              'acknowledged',
-              () => AcknowledgedControllerImpl(
-                // TODO: Fix this
-                /* TODO(lwiedekamp): Maybe improve this someday. Instead
-                     add a method to update the descendantsPaths at runtime.
-                     Maybe AcknowledgedTracker should call this method. */
-                descendantsPaths: descendantsPaths,
-              ),
             );
             registry.register('pane_tabs', PanelTabsController.new);
             registry.register(

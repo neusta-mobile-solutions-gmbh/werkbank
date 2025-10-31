@@ -22,7 +22,7 @@ class _RecentHistoryComponentState extends State<RecentHistoryComponent> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final rootDescriptor = HomePageComponent.access.rootDescriptorOf(context);
-    // We don't want to listen to changes in the history here.
+    // We don't want to listen to changes here.
     // Doing so would cause the list to immediately update when the user
     // navigates to a use case, even though we are transitioning away
     // from the home page. This would look janky.

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_component.dart';
-import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_manager.dart';
+import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_controller.dart';
+import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_root_descriptor_tracker.dart';
+import 'package:werkbank/src/addons/src/acknowledged/src/_internal/acknowledged_visit_tracker.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
@@ -14,12 +17,27 @@ class AcknowledgedAddon extends Addon {
   static const addonId = 'acknowledged';
 
   @override
+  void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
+    registry.register<AcknowledgedController>(
+      'acknowledged',
+      AcknowledgedController.new,
+    );
+  }
+
+  @override
   AddonLayerEntries get layers {
     return AddonLayerEntries(
+      // TODO: Move to management layer?
       applicationOverlay: [
         ApplicationOverlayLayerEntry(
-          id: 'acknowledged_manager',
-          builder: (context, child) => AcknowledgedManager(
+          id: 'acknowledged_root_descriptor_tracker',
+          builder: (context, child) => AcknowledgedRootDescriptorTracker(
+            child: child,
+          ),
+        ),
+        ApplicationOverlayLayerEntry(
+          id: 'acknowledged_visit_tracker',
+          builder: (context, child) => AcknowledgedVisitTracker(
             child: child,
           ),
         ),
@@ -29,14 +47,12 @@ class AcknowledgedAddon extends Addon {
 
   @override
   List<HomePageComponent> buildHomePageComponents(BuildContext context) {
-    final entries = AcknowledgedManager.useCaseEntriesOf(context);
     return [
-      if (entries.isNotEmpty)
-        HomePageComponent(
-          sortHint: SortHint.beforeMost,
-          title: Text(context.sL10n.addons.acknowledged.homePageComponentTitle),
-          child: const AcknowledgedComponent(),
-        ),
+      HomePageComponent(
+        sortHint: SortHint.beforeMost,
+        title: Text(context.sL10n.addons.acknowledged.homePageComponentTitle),
+        child: const AcknowledgedComponent(),
+      ),
     ];
   }
 }

@@ -359,6 +359,7 @@ class TranslationsAddonsAcknowledgedEn {
 
   // Translations
   String get homePageComponentTitle => 'Recently Added';
+  String get noNewUseCases => 'No new use cases added since your last visit.';
 }
 
 // Path: addons.constraints
@@ -1106,6 +1107,8 @@ extension on Translations {
         return 'No use cases visited yet.';
       case 'addons.acknowledged.homePageComponentTitle':
         return 'Recently Added';
+      case 'addons.acknowledged.noNewUseCases':
+        return 'No new use cases added since your last visit.';
       case 'addons.constraints.name':
         return 'Constraints';
       case 'addons.constraints.controls.preset.name':

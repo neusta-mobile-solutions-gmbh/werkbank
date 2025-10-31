@@ -244,7 +244,6 @@ extension on WerkbankAppOnlyAccessor {
     logoOf(context);
     lastUpdatedOf(context);
     historyOf(context);
-    acknowledgedController(context);
     globalStateControllerOf<HistoryController>(context);
     final sub = subscribeToErrors(context, (_) {});
     unawaited(sub.cancel());
@@ -266,7 +265,6 @@ extension on MaybeWerkbankAppAccessor {
     maybeLogoOf(context);
     maybeLastUpdatedOf(context);
     maybeHistoryOf(context);
-    maybeAcknowledgedController(context);
     maybeGlobalStateControllerOf<HistoryController>(context);
     maybeAddonSpecificationsOf(context);
   }

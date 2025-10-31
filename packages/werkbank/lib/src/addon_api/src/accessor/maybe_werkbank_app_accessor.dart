@@ -123,17 +123,6 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
     return ensureReturns(() => GlobalStateManager.maybeHistoryOf(context));
   }
 
-  /// Gets the [AcknowledgedController] of the current [WerkbankApp] if
-  /// we are currently in the context of a [WerkbankApp].
-  ///
-  /// {@macro werkbank.controller_available_in_app}
-  /// {@macro werkbank.null_in_use_case_display}
-  AcknowledgedController? maybeAcknowledgedController(BuildContext context) {
-    return ensureReturns(
-      () => GlobalStateManager.maybeAcknowledgedController(context),
-    );
-  }
-
   // TODO: Move out of this accessor.
   /// Gets the [GlobalStateController] of the given type
   /// if we are currently in the

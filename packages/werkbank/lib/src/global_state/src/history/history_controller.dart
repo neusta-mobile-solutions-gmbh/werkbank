@@ -81,7 +81,7 @@ class HistoryController extends GlobalStateController {
 
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
-    if (json is Map<String, dynamic>) {
+    if (json is Map<String, Object?>) {
       _lastVisitTimeMap.clear();
       _sortedVisits.clear();
       for (final MapEntry(key: path, value: dateTimeString) in json.entries) {

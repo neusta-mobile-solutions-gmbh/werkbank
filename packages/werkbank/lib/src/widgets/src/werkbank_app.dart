@@ -297,7 +297,7 @@ class _PersistenceAndGlobalState extends StatelessWidget {
               'history',
               HistoryController.new,
             );
-            registry.register('pane_tabs', PanelTabsController.new);
+            registry.register('pane_tabs', SectionsController.new);
             registry.register(
               'search_query',
               SearchQueryController.new,

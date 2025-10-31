@@ -8,7 +8,7 @@ import 'package:werkbank/src/utils/utils.dart';
 enum PanelTab { configure, inspect, settings }
 
 // TODO: Move somewhere else.
-class PanelTabsController extends GlobalStateController {
+class SectionsController extends GlobalStateController {
   static const _legacyTopLevelKey = 'tabs';
   static const _sectionIdOrderKey = 'sectionIdOrder';
   static const _hiddenSectionIdsKey = 'hiddenSectionIds';

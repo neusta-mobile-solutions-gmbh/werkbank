@@ -10,4 +10,4 @@ export 'src/global_state_initialization.dart';
 export 'src/history/historiographer.dart';
 export 'src/history/history_controller.dart';
 export 'src/search_query/search_query_controller.dart';
-export 'src/sections/panel_tabs_controller.dart';
+export 'src/sections/sections_controller.dart';

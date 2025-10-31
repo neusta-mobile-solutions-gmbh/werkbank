@@ -17,6 +17,7 @@
 - Make changes to persistence and holding global state
   - Remove `WerkbankAppOnlyAccessor.acknowledgedController(context)` and `MaybeWerkbankAppAccessor.maybeAcknowledgedController(context)`. **(BREAKING CHANGE)**
     - TODO: Mention replacement.
+  - Rename PanelTabsController to Sections controller. TODO: even mention this?
 
 # 0.17.3
 - When nodes of a tree in the UI become selected, their parents now expand, and they now scroll into view. This applies to:

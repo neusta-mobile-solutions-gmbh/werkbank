@@ -31,8 +31,8 @@ class GlobalStateManager extends StatefulWidget {
   }
 
   /// {@macro werkbank.controller_available_in_app}
-  static PanelTabsController? maybePanelTabsControllerOf(BuildContext context) {
-    return maybeControllerOf<PanelTabsController>(context);
+  static SectionsController? maybeSectionsControllerOf(BuildContext context) {
+    return maybeControllerOf<SectionsController>(context);
   }
 
   /// {@macro werkbank.controller_available_in_app}

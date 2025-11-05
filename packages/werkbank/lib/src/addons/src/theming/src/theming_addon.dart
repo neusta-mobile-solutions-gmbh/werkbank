@@ -33,7 +33,6 @@ class ThemingAddon extends Addon {
         AffiliationTransitionLayerEntry(
           id: 'theme_option_applier',
           builder: (context, child) => ThemeOptionApplier(
-            themeOptions: themeOptions,
             child: child,
           ),
         ),

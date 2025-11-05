@@ -4,11 +4,9 @@ import 'package:werkbank/src/addons/src/theming/theming.dart';
 class ThemeOptionApplier extends StatelessWidget {
   const ThemeOptionApplier({
     super.key,
-    required this.themeOptions,
     required this.child,
   });
 
-  final List<ThemeOption> themeOptions;
   final Widget child;
 
   @override

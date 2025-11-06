@@ -198,6 +198,10 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
       _updateSubscription(type);
     }
 
+    for (final registration in registrations) {
+      registration.onUpdate(_controllersByType[registration.type]!);
+    }
+
     _updatedControllersThisFrame = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updatedControllersThisFrame = false;
@@ -250,13 +254,15 @@ class _GlobalStateControllerRegistryImpl
   @override
   void register<T extends GlobalStateController>(
     String id,
-    T Function() createController,
-  ) {
+    T Function() createController, {
+    void Function(T controller)? onUpdate,
+  }) {
     _registrations.add(
       _Registration(
         id: '$idPrefix:$id',
         type: T,
         createController: createController,
+        onUpdate: (controller) => onUpdate?.call(controller as T),
       ),
     );
   }
@@ -267,9 +273,11 @@ class _Registration {
     required this.id,
     required this.type,
     required this.createController,
+    required this.onUpdate,
   });
 
   final String id;
   final Type type;
   final GlobalStateController Function() createController;
+  final void Function(GlobalStateController controller) onUpdate;
 }

@@ -18,7 +18,7 @@ class AcknowledgedAddon extends Addon {
 
   @override
   void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
-    registry.register<AcknowledgedController>(
+    registry.register(
       'acknowledged',
       AcknowledgedController.new,
     );

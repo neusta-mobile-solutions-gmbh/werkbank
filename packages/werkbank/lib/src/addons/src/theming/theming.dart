@@ -3,5 +3,5 @@
 /// Generated using index_generator package.
 library;
 
+export 'src/theme_controller.dart';
 export 'src/theming_addon.dart';
-export 'src/theming_manager.dart';

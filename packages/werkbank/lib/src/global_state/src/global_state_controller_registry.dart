@@ -7,6 +7,7 @@ library;
 import 'package:werkbank/src/global_state/global_state.dart';
 
 abstract class GlobalStateControllerRegistry {
+  // TODO: Rename id to jsonKey?
   /// Registers a [GlobalStateController] for the given type [T].
   ///
   /// The [id] is use as a key to store the json produced by the controller's
@@ -30,6 +31,8 @@ abstract class GlobalStateControllerRegistry {
   /// to the [WerkbankApp] or [DisplayApp] changes.
   /// This means the [onUpdate] callback is a good place to inform
   /// the controller about changes to the [Addon] in which it was registered.
+  /// The [onUpdate] function will be called before
+  /// [GlobalStateController.tryLoadFromJson] is called.
   void register<T extends GlobalStateController>(
     String id,
     T Function() createController, {

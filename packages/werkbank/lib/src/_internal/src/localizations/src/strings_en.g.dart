@@ -652,6 +652,7 @@ class TranslationsAddonsThemingControlsEn {
 
   // Translations
   String get theme => 'Theme';
+  String get noTheme => '-';
 }
 
 // Path: addons.zoom.controls
@@ -1151,6 +1152,8 @@ extension on Translations {
         return 'Theming';
       case 'addons.theming.controls.theme':
         return 'Theme';
+      case 'addons.theming.controls.noTheme':
+        return '-';
       case 'addons.zoom.name':
         return 'Zoom';
       case 'addons.zoom.controls.enabled':

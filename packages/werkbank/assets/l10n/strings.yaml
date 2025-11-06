@@ -153,6 +153,7 @@ addons:
     name: Theming
     controls:
       theme: Theme
+      noTheme: "-"
   zoom:
     name: Zoom
     controls:

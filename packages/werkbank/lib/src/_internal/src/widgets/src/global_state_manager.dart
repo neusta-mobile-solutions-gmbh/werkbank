@@ -166,40 +166,51 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
       _idsByType.remove(type);
     }
 
-    final isWarmStart = IsWarmStartProvider.read(context);
-    for (final type in addedTypes) {
-      try {
-        final registration = registrationsByType[type]!;
-        final controller = registration.createController();
-        try {
-          for (final initialization
-              in widget.globalStateConfig.initializations) {
-            initialization.tryInitialize(controller);
-          }
-          final json = _jsonStore.get(registration.id);
-          controller.tryLoadFromJson(json, isWarmStart: isWarmStart);
-        } on Object catch (e, stackTrace) {
-          controller.dispose();
-          debugPrint(e.toString());
-          debugPrintStack(stackTrace: stackTrace);
-        }
-        _controllersByType[type] = controller;
-        _idsByType[type] = registration.id;
-        _updateSubscription(type);
-      } on Object catch (e, stackTrace) {
-        debugPrint(e.toString());
-        debugPrintStack(stackTrace: stackTrace);
-      }
-    }
-
     for (final type in changedIdTypes) {
       final newId = registrationsByType[type]!.id;
       _idsByType[type] = newId;
       _updateSubscription(type);
     }
 
+    for (final type in addedTypes) {
+      try {
+        final registration = registrationsByType[type]!;
+        final controller = registration.createController();
+        _controllersByType[type] = controller;
+        _idsByType[type] = registration.id;
+      } on Object catch (e, stackTrace) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: stackTrace);
+      }
+    }
+
     for (final registration in registrations) {
       registration.onUpdate(_controllersByType[registration.type]!);
+    }
+
+    final isWarmStart = IsWarmStartProvider.read(context);
+    for (final type in addedTypes) {
+      final registration = registrationsByType[type]!;
+      final controller = _controllersByType[type]!;
+      try {
+        final json = _jsonStore.get(registration.id);
+        controller.tryLoadFromJson(json, isWarmStart: isWarmStart);
+      } on Object catch (e, stackTrace) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: stackTrace);
+      }
+      try {
+        for (final initialization in widget.globalStateConfig.initializations) {
+          initialization.tryInitialize(controller);
+        }
+      } on Object catch (e, stackTrace) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: stackTrace);
+      }
+    }
+
+    for (final type in addedTypes) {
+      _updateSubscription(type);
     }
 
     _updatedControllersThisFrame = true;

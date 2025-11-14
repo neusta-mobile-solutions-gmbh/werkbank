@@ -81,9 +81,11 @@ linter:
     - prefer_null_aware_method_calls
     - prefer_single_quotes
     - prefer_void_to_null
+    - remove_deprecations_in_breaking_versions
     - sized_box_shrink_expand
     - sort_constructors_first
     - sort_unnamed_constructors_first
+    - switch_on_type
     - test_types_in_equals
     - type_annotate_public_apis
     - unawaited_futures
@@ -96,6 +98,7 @@ linter:
     - unnecessary_parenthesis
     - unnecessary_raw_strings
     - unnecessary_statements
+    - unnecessary_unawaited
     - unreachable_from_main
     - use_colored_box
     - use_decorated_box

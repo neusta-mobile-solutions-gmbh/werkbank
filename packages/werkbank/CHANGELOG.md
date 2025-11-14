@@ -1,3 +1,6 @@
+# 0.18.1
+- Add support for flutter 3.38.x
+
 # 0.18.0
 - Add new required `themeBrightnessBuilder` parameter to `AppConfig()` and `AppConfig.widget()` constructors. **(BREAKING CHANGE)**
   - `AppConfig.material()` and `AppConfig.cupertino()` are not affected.

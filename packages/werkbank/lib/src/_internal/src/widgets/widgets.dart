@@ -2,6 +2,7 @@
 
 export 'src/accessor_scope.dart';
 export 'src/flutter_error_provider.dart';
+export 'src/global_state_manager.dart';
 export 'src/pages/home_page/home_page.dart';
 export 'src/pages/main_page.dart';
 export 'src/pages/overview/overview_overflow_notifier.dart';
@@ -17,6 +18,8 @@ export 'src/panels/navigation_panel/order_executor.dart';
 export 'src/panels/navigation_panel/search_text_field.dart';
 export 'src/panels/navigation_panel/sliver_pinned_header.dart';
 export 'src/providers/descriptor_provider.dart';
+export 'src/providers/is_warm_start_provider.dart';
+export 'src/providers/json_store_provider.dart';
 export 'src/providers/theme_brightness_provider.dart';
 export 'src/providers/use_case_composition/use_case_composition_by_controller_provider.dart';
 export 'src/providers/use_case_composition/use_case_composition_provider.dart';

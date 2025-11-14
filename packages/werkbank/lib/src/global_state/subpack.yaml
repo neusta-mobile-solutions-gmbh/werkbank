@@ -1,0 +1,3 @@
+dependencies:
+  - /lib/src/routing
+  - /lib/src/_internal/src/routing

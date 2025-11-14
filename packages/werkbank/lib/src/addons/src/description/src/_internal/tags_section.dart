@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/description/description.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 class TagsSection extends StatelessWidget {
   const TagsSection({
@@ -35,9 +36,11 @@ class Tag extends StatelessWidget {
   Widget build(BuildContext context) {
     return WChip(
       onPressed: () {
-        WerkbankPersistence.maybeSearchQueryController(
-          context,
-        )?.updateSearchQuery('${DescriptionAddon.tagField}:"$tag"');
+        InspectControlSection.access
+                .globalStateControllerOf<SearchQueryController>(context)
+                .textEditingController
+                .text =
+            '${DescriptionAddon.tagField}:"$tag"';
       },
       label: Text(
         tag,

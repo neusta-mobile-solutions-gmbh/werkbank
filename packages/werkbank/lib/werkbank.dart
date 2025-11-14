@@ -10,6 +10,7 @@ export 'src/app_config/app_config.dart';
 export 'src/components/components.dart';
 export 'src/environment/environment.dart';
 export 'src/filter/filter.dart';
+export 'src/global_state/global_state.dart';
 export 'src/notifications/notifications.dart';
 export 'src/persistence/persistence.dart';
 export 'src/routing/routing.dart';

@@ -5,6 +5,7 @@ import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/theming/src/_internal/theme_option_applier.dart';
 import 'package:werkbank/src/addons/src/theming/src/_internal/theme_selector.dart';
 import 'package:werkbank/src/addons/src/theming/theming.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
@@ -20,24 +21,32 @@ class ThemingAddon extends Addon {
   @override
   AddonLayerEntries get layers {
     return AddonLayerEntries(
-      management: [
-        ManagementLayerEntry(
-          id: 'theming_manager',
-          builder: (context, child) => ThemingManager(
-            themeOptions: themeOptions,
-            child: child,
-          ),
-        ),
-      ],
+      // management: [
+      //   ManagementLayerEntry(
+      //     id: 'theming_manager',
+      //     builder: (context, child) => ThemingManager(
+      //       themeOptions: themeOptions,
+      //       child: child,
+      //     ),
+      //   ),
+      // ],
       affiliationTransition: [
         AffiliationTransitionLayerEntry(
           id: 'theme_option_applier',
           builder: (context, child) => ThemeOptionApplier(
-            themeOptions: themeOptions,
             child: child,
           ),
         ),
       ],
+    );
+  }
+
+  @override
+  void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
+    registry.register(
+      'theme',
+      ThemeController.new,
+      onUpdate: (controller) => controller.updateThemeOptions(themeOptions),
     );
   }
 

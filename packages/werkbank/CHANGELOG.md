@@ -1,3 +1,9 @@
+# 0.19.0
+- Make changes to persistence and holding global state
+  - Remove `WerkbankAppOnlyAccessor.acknowledgedController(context)` and `MaybeWerkbankAppAccessor.maybeAcknowledgedController(context)`. **(BREAKING CHANGE)**
+    - TODO: Mention replacement.
+  - Rename PanelTabsController to Sections controller. TODO: even mention this?
+
 # 0.18.1
 - Add support for flutter 3.38.x
 

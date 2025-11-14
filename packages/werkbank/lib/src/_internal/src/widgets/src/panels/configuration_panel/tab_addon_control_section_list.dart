@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 class TabAddonControlSectionList extends StatelessWidget {
@@ -64,17 +65,17 @@ class _AddonControlSectionList extends StatefulWidget {
 
 class _AddonControlSectionListState extends State<_AddonControlSectionList> {
   List<_AddonControlSectionWithAddonId>? _orderedSections;
-  late PanelTabsController _panelTabsController;
+  late SectionsController _sectionsController;
 
   void _updateSections() {
     final orderedList = widget.addonControlSections.toList()
       ..sort((a, b) => a.sortHint.compareTo(b.sortHint));
 
     setState(() {
-      _orderedSections = _panelTabsController.addAndOrderSections(
-        widget.tab,
-        orderedList,
-        (section) => section.id,
+      _orderedSections = _sectionsController.addAndOrderSections(
+        tab: widget.tab,
+        sections: orderedList,
+        getId: (section) => section.id,
       );
     });
   }
@@ -82,7 +83,7 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _panelTabsController = WerkbankPersistence.maybePanelTabsController(
+    _sectionsController = GlobalStateManager.maybeSectionsControllerOf(
       context,
     )!;
     if (_orderedSections == null) {
@@ -106,19 +107,20 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
     setState(() {
       _orderedSections!.move(oldIndex, fixedNewIndex);
     });
-    _panelTabsController.reorder(
-      widget.tab,
-      _orderedSections!.map((s) => s.id).toList(),
+    _sectionsController.reorder(
+      tab: widget.tab,
+      newSectionsOrder: _orderedSections!,
+      getId: (s) => s.id,
     );
   }
 
   void onToggleVisibility(int index) {
     final section = _orderedSections![index];
     setState(() {
-      _panelTabsController.setVisibility(
+      _sectionsController.setVisibility(
         widget.tab,
         section.id,
-        visible: !_panelTabsController.isVisible(widget.tab, section.id),
+        visible: !_sectionsController.isVisible(widget.tab, section.id),
       );
     });
   }
@@ -131,7 +133,7 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
           ControlSection(
             id: section.id,
             title: section.addonControlSection.title,
-            visible: _panelTabsController.isVisible(widget.tab, section.id),
+            visible: _sectionsController.isVisible(widget.tab, section.id),
             children: section.addonControlSection.children,
           ),
       ],

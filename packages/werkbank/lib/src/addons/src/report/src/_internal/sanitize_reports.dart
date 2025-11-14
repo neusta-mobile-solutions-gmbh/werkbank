@@ -1,7 +1,7 @@
 import 'package:werkbank/src/addons/src/report/report.dart';
-import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_data.dart';
+import 'package:werkbank/src/addons/src/report/src/_internal/report_data.dart';
 
-Set<Report> sanitizeReports(Set<Report> reports, ReportPersistentData data) {
+Set<Report> sanitizeReports(Set<Report> reports, ReportData data) {
   final sanitizedReports = <Report>{};
   for (final report in reports) {
     if (report.display(data)) {

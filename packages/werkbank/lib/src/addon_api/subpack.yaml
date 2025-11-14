@@ -11,4 +11,4 @@ dependencies:
   - /lib/src/environment
   - /lib/src/use_case
   - /lib/src/routing
-  - /lib/src/persistence
+  - /lib/src/global_state

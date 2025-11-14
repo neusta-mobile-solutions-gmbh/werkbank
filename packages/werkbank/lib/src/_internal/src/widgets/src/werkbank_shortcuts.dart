@@ -6,7 +6,6 @@ import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';
@@ -124,7 +123,7 @@ class WerkbankShortcuts extends StatelessWidget with OrderExecutor {
     return _Shortcuts(
       onToggelPanel: panelController.toggle,
       onSearch: () {
-        WerkbankPersistence.maybeSearchQueryController(
+        GlobalStateManager.maybeSearchQueryControllerOf(
           context,
         )?.focusNode.requestFocus();
       },

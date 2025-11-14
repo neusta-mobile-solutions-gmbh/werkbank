@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/report/report.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_component.dart';
-import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_controller.dart';
+import 'package:werkbank/src/addons/src/report/src/_internal/report_controller.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_provider.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
 /// {@category Configuring Addons}
 class ReportAddon extends Addon {
@@ -24,12 +24,9 @@ class ReportAddon extends Addon {
   final bool showFeatureIntroductions;
 
   @override
-  ControllerMapFactory get controllerMapFactory =>
-      (prefsWithCache) => {
-        ReportPersistentController: ReportPersistentController(
-          prefsWithCache: prefsWithCache,
-        ),
-      };
+  void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
+    registry.register('report', ReportController.new);
+  }
 
   @override
   AddonLayerEntries get layers {

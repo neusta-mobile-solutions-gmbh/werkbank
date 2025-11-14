@@ -348,6 +348,7 @@ class TranslationsAddonsRecentHistoryEn {
 
   // Translations
   String get homePageComponentTitle => 'Recently Visited';
+  String get noUseCasesVisited => 'No use cases visited yet.';
 }
 
 // Path: addons.acknowledged
@@ -358,6 +359,7 @@ class TranslationsAddonsAcknowledgedEn {
 
   // Translations
   String get homePageComponentTitle => 'Recently Added';
+  String get noNewUseCases => 'No new use cases added since your last visit.';
 }
 
 // Path: addons.constraints
@@ -650,6 +652,7 @@ class TranslationsAddonsThemingControlsEn {
 
   // Translations
   String get theme => 'Theme';
+  String get noTheme => '-';
 }
 
 // Path: addons.zoom.controls
@@ -1101,8 +1104,12 @@ extension on Translations {
         return 'Page Transition';
       case 'addons.recentHistory.homePageComponentTitle':
         return 'Recently Visited';
+      case 'addons.recentHistory.noUseCasesVisited':
+        return 'No use cases visited yet.';
       case 'addons.acknowledged.homePageComponentTitle':
         return 'Recently Added';
+      case 'addons.acknowledged.noNewUseCases':
+        return 'No new use cases added since your last visit.';
       case 'addons.constraints.name':
         return 'Constraints';
       case 'addons.constraints.controls.preset.name':
@@ -1145,6 +1152,8 @@ extension on Translations {
         return 'Theming';
       case 'addons.theming.controls.theme':
         return 'Theme';
+      case 'addons.theming.controls.noTheme':
+        return '-';
       case 'addons.zoom.name':
         return 'Zoom';
       case 'addons.zoom.controls.enabled':

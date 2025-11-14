@@ -3,7 +3,7 @@ import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/werkbank_theme/src/_internal/werkbank_theme_manager.dart';
 import 'package:werkbank/src/addons/src/werkbank_theme/src/_internal/werkbank_theme_selector.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
@@ -23,12 +23,9 @@ class WerkbankThemeAddon extends Addon {
   ];
 
   @override
-  ControllerMapFactory get controllerMapFactory =>
-      (prefsWithCache) => {
-        WerkbankThemePersistentController: WerkbankThemePersistentController(
-          prefsWithCache: prefsWithCache,
-        ),
-      };
+  void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
+    registry.register('werkbank_theme', WerkbankThemeController.new);
+  }
 
   @override
   AddonLayerEntries get layers => AddonLayerEntries(

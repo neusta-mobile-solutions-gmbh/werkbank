@@ -115,8 +115,10 @@ addons:
     name: Page Transition
   recentHistory:
     homePageComponentTitle: Recently Visited
+    noUseCasesVisited: No use cases visited yet.
   acknowledged:
     homePageComponentTitle: Recently Added
+    noNewUseCases: No new use cases added since your last visit.
   constraints:
     name: Constraints
     controls:
@@ -151,6 +153,7 @@ addons:
     name: Theming
     controls:
       theme: Theme
+      noTheme: "-"
   zoom:
     name: Zoom
     controls:

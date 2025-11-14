@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/filter/src/_internal/filter_executor.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
@@ -28,15 +29,15 @@ class _RootDescriptorArrangerState extends State<RootDescriptorFilter>
     super.didChangeDependencies();
     _rootDescriptor = WerkbankAppInfo.rootDescriptorOf(context);
 
-    _controller?.removeListener(onChange);
-    _controller = WerkbankPersistence.maybeSearchQueryController(context);
-    _controller?.addListener(onChange);
+    _controller?.textEditingController.removeListener(onChange);
+    _controller = GlobalStateManager.maybeSearchQueryControllerOf(context);
+    _controller?.textEditingController.addListener(onChange);
 
     onChange();
   }
 
   void onChange() {
-    final searchQuery = _controller?.query ?? '';
+    final searchQuery = _controller!.query;
 
     setState(() {
       _filterResult = doFilter(

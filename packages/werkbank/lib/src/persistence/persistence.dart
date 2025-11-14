@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/acknowledged/acknowledged_controller.dart';
 export 'src/acknowledged/acknowledged_controller_impl.dart';
 export 'src/acknowledged/acknowledged_descriptors.dart';

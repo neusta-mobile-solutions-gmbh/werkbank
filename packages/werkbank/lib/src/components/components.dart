@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/utility_widgets/global_callback_shortcuts.dart';
 export 'src/utility_widgets/mapping_value_listenable_builder.dart';
 export 'src/w_animated_visibility.dart';

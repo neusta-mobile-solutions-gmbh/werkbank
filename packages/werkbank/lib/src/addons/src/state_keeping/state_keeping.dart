@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/common_states_composer_extension.dart';
 export 'src/immutable_state_id.dart';
 export 'src/mutable_state_id.dart';

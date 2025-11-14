@@ -24,7 +24,7 @@ Future<void> main() async {
       ),
     ),
   );
-  final indexes = indexGeneratorYaml['index_generator']['indexes'];
+  final indexes = indexGeneratorYaml['index_generator']['libraries'];
   for (final subpackFile in subpackFiles) {
     final subpackagePath = p.dirname(subpackFile.path);
     final subpackYaml =
@@ -35,15 +35,15 @@ Future<void> main() async {
       continue;
     }
     final subpackageName = index['name'] ?? p.basename(subpackagePath);
-    final docs = index['docs'] ?? 'Generated using index_generator package.\n';
+    final docs = index['docs'];
     final exclude =
         (index['exclude'] as List<dynamic>?)?.cast<String>() ?? <String>[];
     indexes.add(
       {
-        'path': subpackagePath,
-        'name': subpackageName,
-        'library': '',
-        'docs': docs,
+        'directory_path': subpackagePath,
+        'file_name': subpackageName,
+        'include_library': docs != null,
+        if (docs != null) 'docs': docs,
         'include': [
           'src/**',
         ],

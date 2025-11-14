@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/full_access_notifications_controller.dart';
 export 'src/notification_controller.dart';
 export 'src/notification_subscription.dart';

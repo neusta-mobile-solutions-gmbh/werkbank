@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/colors_use_case_builder.dart';
 export 'src/conversions.dart';
 export 'src/icons_use_case_builder.dart';

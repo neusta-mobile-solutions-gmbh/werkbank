@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/accessor_scope.dart';
 export 'src/flutter_error_provider.dart';
 export 'src/global_state_manager.dart';

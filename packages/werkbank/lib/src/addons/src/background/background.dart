@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/background_addon.dart';
 export 'src/background_composer.dart';
 export 'src/background_manager.dart';

@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/buildable_knob.dart';
 export 'src/knob.dart';
 export 'src/knob_preset.dart';

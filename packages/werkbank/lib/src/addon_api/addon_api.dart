@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/accessor/addon_accessor.dart';
 export 'src/accessor/addon_control_section_accessor.dart';
 export 'src/accessor/addon_layer_accessor.dart';

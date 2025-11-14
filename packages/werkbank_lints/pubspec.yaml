@@ -5,6 +5,8 @@ version: 1.0.0
 environment:
   sdk: ^3.8.1
 
+resolution: workspace
+
 dependencies:
   flutter_lints: ^6.0.0
 

@@ -1,3 +1,12 @@
+# 0.19.0
+- Make changes to persistence and holding global state
+  - Remove `WerkbankAppOnlyAccessor.acknowledgedController(context)` and `MaybeWerkbankAppAccessor.maybeAcknowledgedController(context)`. **(BREAKING CHANGE)**
+    - TODO: Mention replacement.
+  - Rename PanelTabsController to Sections controller. TODO: even mention this?
+
+# 0.18.1
+- Add support for flutter 3.38.x
+
 # 0.18.0
 - Add new required `themeBrightnessBuilder` parameter to `AppConfig()` and `AppConfig.widget()` constructors. **(BREAKING CHANGE)**
   - `AppConfig.material()` and `AppConfig.cupertino()` are not affected.
@@ -14,10 +23,10 @@
   - Add new `AddonAccessor.addonsOf(context)` that returns a list of active addons. **(BREAKING CHANGE)**
   - Add `AddonAccessor.addonByIdOf(context, addonId)` to get an addon by its id.
   - Add `AddonAccessor.isAddonActive(context, addonId)` to check if an addon is active.
-- Make changes to persistence and holding global state
-  - Remove `WerkbankAppOnlyAccessor.acknowledgedController(context)` and `MaybeWerkbankAppAccessor.maybeAcknowledgedController(context)`. **(BREAKING CHANGE)**
-    - TODO: Mention replacement.
-  - Rename PanelTabsController to Sections controller. TODO: even mention this?
+- Increase maximum `go_router` version to 17.x.x.
+- Mark release as incompatible with Flutter 3.38.x due to breaking changes in Flutter.
+- Add missing properties from `SemanticsNode` to the semantics inspector.
+  These are `indexInParent`, `tags`, `linkUrl`, `locale`, `validationResult`, `inputType` and `controlsNodes`.
 
 # 0.17.3
 - When nodes of a tree in the UI become selected, their parents now expand, and they now scroll into view. This applies to:
@@ -52,7 +61,7 @@
     - "App" (previous implicit behavior)
       - The semantics of the whole use case-app (so the app as defined by the `AppConfig`, not the whole `WerkbankApp`) is shown.
       - This scope allows you to see the semantics of routes or other overlays introduced by the use case.
-      - However it usually shows two additional semantics nodes as parents of your use case semantics that are introduced by the app and routing. Most of the time these nodes are not interesting.
+      - However, it usually shows two additional semantics nodes as parents of your use case semantics that are introduced by the app and routing. Most of the time these nodes are not interesting.
 
 # 0.17.0
 - Add `StateKeepingAddon` to keep states in the use case.

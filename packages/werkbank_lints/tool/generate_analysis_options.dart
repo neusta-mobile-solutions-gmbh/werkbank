@@ -5,7 +5,6 @@ import 'lints.dart';
 
 final instantLintsFile = File('./lib/werkbank_lints.yaml');
 
-// TODO: migrate to new format
 Future<void> main() async {
   final oldLints = werkbankLintsPackageLints;
 

@@ -15,6 +15,7 @@
   - Add `AddonAccessor.addonByIdOf(context, addonId)` to get an addon by its id.
   - Add `AddonAccessor.isAddonActive(context, addonId)` to check if an addon is active.
 - Increase maximum `go_router` version to 17.x.x.
+- Mark release as incompatible with Flutter 3.38.x due to breaking changes in Flutter.
 
 # 0.17.3
 - When nodes of a tree in the UI become selected, their parents now expand, and they now scroll into view. This applies to:

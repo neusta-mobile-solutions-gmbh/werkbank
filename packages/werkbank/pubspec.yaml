@@ -7,7 +7,7 @@ homepage: https://neusta-ms.de/werkbank/
 
 environment:
   sdk: ^3.8.0
-  flutter: ">=3.35.0"
+  flutter: ">=3.35.0 <3.38.0"
 
 dependencies:
   flutter:

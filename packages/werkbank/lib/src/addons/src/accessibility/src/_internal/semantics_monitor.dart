@@ -1,8 +1,8 @@
-import 'package:equatable/equatable.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_node_snapshot.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 class SemanticsMonitor extends StatefulWidget {
@@ -177,6 +177,7 @@ class _SemanticsMonitorState extends State<SemanticsMonitor> {
           isMergedIntoParent: node.isMergedIntoParent,
           mergeAllDescendantsIntoThisNode: node.mergeAllDescendantsIntoThisNode,
           areUserActionsBlocked: node.areUserActionsBlocked,
+          indexInParent: node.indexInParent,
           children: children.lockUnsafe,
         );
       }
@@ -287,39 +288,6 @@ class SemanticsMonitoringSubscription {
   void cancel() {
     _controller._cancelSubscription(this);
   }
-}
-
-class SemanticsNodeSnapshot with EquatableMixin {
-  SemanticsNodeSnapshot({
-    required this.id,
-    required this.transform,
-    required this.data,
-    required this.isMergedIntoParent,
-    required this.mergeAllDescendantsIntoThisNode,
-    required this.areUserActionsBlocked,
-    required this.children,
-  });
-
-  final int id;
-  final Matrix4 transform;
-  final SemanticsData data;
-  final bool isMergedIntoParent;
-  final bool mergeAllDescendantsIntoThisNode;
-  final bool areUserActionsBlocked;
-  final IList<SemanticsNodeSnapshot> children;
-
-  Rect get rect => data.rect;
-
-  @override
-  List<Object?> get props => [
-    id,
-    transform,
-    data,
-    isMergedIntoParent,
-    mergeAllDescendantsIntoThisNode,
-    areUserActionsBlocked,
-    children,
-  ];
 }
 
 class IncludeInSemanticsMonitor extends StatelessWidget {

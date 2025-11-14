@@ -4,9 +4,11 @@ import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_data_fields/attributed_string_semantics_data_field.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_data_fields/link_semantics_data_field.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_data_fields/string_semantics_data_field.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_data_fields/text_span_semantics_data_field.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_node_snapshot.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class SemanticsInspectorNodeInfo extends StatelessWidget {
@@ -63,6 +65,17 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       }
     }
 
+    void addUriField(String label, Uri? uri) {
+      if (uri != null) {
+        fields.add(
+          LinkSemanticsDataField(
+            name: label,
+            uri: uri,
+          ),
+        );
+      }
+    }
+
     void addRawStringField(String label, String value) {
       if (value.isNotEmpty) {
         fields.add(
@@ -107,6 +120,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
     intField('id', snapshot.id);
     addStringField('identifier', data.identifier);
     intField('platformViewId', data.platformViewId);
+    intField('indexInParent', snapshot.indexInParent);
     addAttributedStringField(
       'value',
       data.attributedValue,
@@ -119,6 +133,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
     addAttributedStringField('decreasedValue', data.attributedDecreasedValue);
     addAttributedStringField('hint', data.attributedHint);
     addStringField('tooltip', data.tooltip);
+    addUriField('linkUrl', data.linkUrl);
     intField('headingLevel', data.headingLevel, hiddenValue: 0);
 
     final textDirection = data.textDirection;
@@ -166,6 +181,14 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
         ', ',
       ),
     );
+
+    final tags = data.tags;
+    if (tags != null && tags.isNotEmpty) {
+      addRawStringField(
+        'tags',
+        tags.map((tag) => tag.name).join(', '),
+      );
+    }
 
     return fields;
   }

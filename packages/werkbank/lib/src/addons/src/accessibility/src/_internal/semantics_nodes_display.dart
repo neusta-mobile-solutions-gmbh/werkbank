@@ -7,6 +7,7 @@ import 'package:vector_math/vector_math_64.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_node_snapshot.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class SemanticsNodesDisplay extends StatefulWidget {

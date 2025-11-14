@@ -37,7 +37,9 @@ class DirectiveExtractor with SubpackLogger {
     );
 
     // For now this is fine
-    final featureSet = FeatureSet.latestLanguageVersion();
+    final featureSet = FeatureSet.latestLanguageVersion(
+      flags: ['dot-shorthands'],
+    );
     final result = parseFile(path: file.file.path, featureSet: featureSet);
 
     final usages = <Usage>{};

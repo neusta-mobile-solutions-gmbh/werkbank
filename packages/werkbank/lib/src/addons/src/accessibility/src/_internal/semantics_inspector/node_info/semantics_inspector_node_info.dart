@@ -38,7 +38,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
   ) {
     final data = snapshot.data;
     final fields = <Widget>[];
-    void addStringField(String label, String value) {
+    void stringField(String label, String value) {
       if (value.isNotEmpty) {
         fields.add(
           StringSemanticsDataField(
@@ -49,7 +49,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       }
     }
 
-    void addAttributedStringField(
+    void attributedStringField(
       String label,
       AttributedString value, {
       TextSelection? textSelection,
@@ -65,7 +65,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       }
     }
 
-    void addUriField(String label, Uri? uri) {
+    void uriField(String label, Uri? uri) {
       if (uri != null) {
         fields.add(
           LinkSemanticsDataField(
@@ -76,7 +76,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       }
     }
 
-    void addRawStringField(String label, String value) {
+    void rawStringField(String label, String value) {
       if (value.isNotEmpty) {
         fields.add(
           TextSpanSemanticsDataField(
@@ -93,7 +93,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       int? hiddenValue,
     }) {
       if (value != null && (hiddenValue == null || value != hiddenValue)) {
-        addRawStringField(label, value.toString());
+        rawStringField(label, value.toString());
       }
     }
 
@@ -103,25 +103,25 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       double? hiddenValue,
     }) {
       if (value != null && (hiddenValue == null || value != hiddenValue)) {
-        addRawStringField(label, value.toString());
+        rawStringField(label, value.toString());
       }
     }
 
     if (snapshot.isMergedIntoParent) {
-      addRawStringField('isMergedIntoParent', 'true');
+      rawStringField('isMergedIntoParent', 'true');
     }
     if (snapshot.mergeAllDescendantsIntoThisNode) {
-      addRawStringField('mergeAllDescendantsIntoThisNode', 'true');
+      rawStringField('mergeAllDescendantsIntoThisNode', 'true');
     }
     if (snapshot.areUserActionsBlocked) {
-      addRawStringField('areUserActionsBlocked', 'true');
+      rawStringField('areUserActionsBlocked', 'true');
     }
-    addAttributedStringField('label', data.attributedLabel);
+    attributedStringField('label', data.attributedLabel);
     intField('id', snapshot.id);
-    addStringField('identifier', data.identifier);
+    stringField('identifier', data.identifier);
     intField('platformViewId', data.platformViewId);
     intField('indexInParent', snapshot.indexInParent);
-    addAttributedStringField(
+    attributedStringField(
       'value',
       data.attributedValue,
       textSelection: data.textSelection,
@@ -129,16 +129,16 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
     intField('maxValueLength', data.maxValueLength);
     intField('currentValueLength', data.currentValueLength);
 
-    addAttributedStringField('increasedValue', data.attributedIncreasedValue);
-    addAttributedStringField('decreasedValue', data.attributedDecreasedValue);
-    addAttributedStringField('hint', data.attributedHint);
-    addStringField('tooltip', data.tooltip);
-    addUriField('linkUrl', data.linkUrl);
+    attributedStringField('increasedValue', data.attributedIncreasedValue);
+    attributedStringField('decreasedValue', data.attributedDecreasedValue);
+    attributedStringField('hint', data.attributedHint);
+    stringField('tooltip', data.tooltip);
+    uriField('linkUrl', data.linkUrl);
     intField('headingLevel', data.headingLevel, hiddenValue: 0);
 
     final textDirection = data.textDirection;
     if (textDirection != null) {
-      addRawStringField(
+      rawStringField(
         'textDirection',
         switch (textDirection) {
           TextDirection.ltr => 'ltr',
@@ -154,15 +154,15 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
     doubleField('scrollExtentMin', data.scrollExtentMin);
 
     if (data.role != SemanticsRole.none) {
-      addRawStringField('role', data.role.name);
+      rawStringField('role', data.role.name);
     }
 
-    addRawStringField(
+    rawStringField(
       'flags',
       data.flagsCollection.toStrings().join(', '),
     );
 
-    addRawStringField(
+    rawStringField(
       'actions',
       [
         for (final action in SemanticsAction.values)
@@ -171,7 +171,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
         ', ',
       ),
     );
-    addRawStringField(
+    rawStringField(
       'custom actions',
       [
         for (final customActionId
@@ -184,7 +184,7 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
 
     final tags = data.tags;
     if (tags != null && tags.isNotEmpty) {
-      addRawStringField(
+      rawStringField(
         'tags',
         tags.map((tag) => tag.name).join(', '),
       );

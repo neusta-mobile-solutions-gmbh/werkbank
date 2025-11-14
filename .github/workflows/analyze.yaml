@@ -28,9 +28,10 @@ jobs:
         shell: python3 {0}
         run: |
           import json
+          import os
 
           fvmrc_version = json.load(open(".fvmrc"))["flutter"]
-          sdk_version = open("/sdks/flutter/version").read().strip()
+          sdk_version = os.environ["FLUTTER_VERSION"]
 
           assert fvmrc_version == sdk_version
 

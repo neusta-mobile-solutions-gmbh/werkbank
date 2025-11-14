@@ -84,40 +84,42 @@ final class SemanticsDataUtils {
       annotations.add(_TagSemanticsAnnotation(label: 'live region'));
     }
 
-    if (flags.hasCheckedState) {
-      bool? value = false;
-      if (flags.isChecked) {
-        value = true;
-      }
-      if (flags.isCheckStateMixed) {
-        value = null;
-      }
+    if (flags.isChecked != .none) {
       annotations.add(
         _ValueSemanticsAnnotation(
           label: 'checked',
-          value: switch (value) {
-            false => 'no',
-            true => 'yes',
-            null => 'mixed',
+          value: switch (flags.isChecked) {
+            .isFalse => 'no',
+            .isTrue => 'yes',
+            .mixed => 'mixed',
+            .none => throw AssertionError('Unreachable'),
           },
         ),
       );
     }
 
-    if (flags.hasToggledState) {
+    if (flags.isToggled != .none) {
       annotations.add(
         _ValueSemanticsAnnotation(
           label: 'toggled',
-          value: flags.isToggled ? 'yes' : 'no',
+          value: switch (flags.isToggled) {
+            .isFalse => 'no',
+            .isTrue => 'yes',
+            .none => throw AssertionError('Unreachable'),
+          },
         ),
       );
     }
 
-    if (flags.hasExpandedState) {
+    if (flags.isExpanded != .none) {
       annotations.add(
         _ValueSemanticsAnnotation(
           label: 'expanded',
-          value: flags.isExpanded ? 'yes' : 'no',
+          value: switch (flags.isExpanded) {
+            .isFalse => 'no',
+            .isTrue => 'yes',
+            .none => throw AssertionError('Unreachable'),
+          },
         ),
       );
     }
@@ -155,7 +157,7 @@ final class SemanticsDataUtils {
       // }
     }
 
-    if (flags.hasEnabledState && !flags.isEnabled) {
+    if (flags.isEnabled == .isFalse) {
       annotations.add(_TagSemanticsAnnotation(label: 'disabled'));
     }
 

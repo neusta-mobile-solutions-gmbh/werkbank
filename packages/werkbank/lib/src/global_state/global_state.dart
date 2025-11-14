@@ -1,8 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-/// Generated using index_generator package.
-library;
-
 export 'src/global_state_config.dart';
 export 'src/global_state_controller.dart';
 export 'src/global_state_controller_registry.dart';

@@ -1,0 +1,4 @@
+
+plugins:
+  werkbank_lints:
+    path: packages/werkbank_lints

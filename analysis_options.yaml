@@ -2,3 +2,11 @@
 plugins:
   werkbank_lints:
     path: packages/werkbank_lints
+
+consistent_argument_ordering:
+  parameter_definition_packages:
+    - werkbank
+    - werkbank_lints
+    - subpack_analyzer
+    - werkbank_werkbank
+    - example_werkbank

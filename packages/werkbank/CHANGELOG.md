@@ -1,6 +1,9 @@
 # 0.18.1
 - Add support for flutter 3.38.x
 
+# 0.18.0+1
+- Limit `slang` version to `<4.11.0` because of breaking change made without raising the major version.
+
 # 0.18.0
 - Add new required `themeBrightnessBuilder` parameter to `AppConfig()` and `AppConfig.widget()` constructors. **(BREAKING CHANGE)**
   - `AppConfig.material()` and `AppConfig.cupertino()` are not affected.

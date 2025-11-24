@@ -1,3 +1,6 @@
+# 0.18.1+1
+- Limit `slang` version to `<4.11.0` because of breaking change made without raising the major version.
+
 # 0.18.1
 - Add support for flutter 3.38.x
 

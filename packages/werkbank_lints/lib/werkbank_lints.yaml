@@ -9,6 +9,10 @@ analyzer:
     strict-inference: true
     strict-raw-types: true
 
+plugins:
+  werkbank_lints:
+    path: ../packages/werkbank_lints
+
 linter:
   rules:
     - always_declare_return_types
@@ -113,4 +117,3 @@ linter:
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
     - use_truncating_division
-  

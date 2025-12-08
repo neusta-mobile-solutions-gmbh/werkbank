@@ -16,18 +16,19 @@ class SemanticsDataField extends StatelessWidget {
     final textTheme = context.werkbankTextTheme;
     final colorScheme = context.werkbankColorScheme;
     return Wrap(
+      spacing: -10,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: Text(
-            '$name:',
-            style: textTheme.input.copyWith(
-              fontWeight: FontWeight.bold,
-              color: colorScheme.textLight,
-            ),
+        Text(
+          '$name:',
+          style: textTheme.input.copyWith(
+            fontWeight: FontWeight.bold,
+            color: colorScheme.textLight,
           ),
         ),
-        value,
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: value,
+        ),
       ],
     );
   }

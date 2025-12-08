@@ -76,14 +76,14 @@ class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    final semanticMode = AccessibilityManager.semanticModeOf(context);
-    final showSemantics = switch (semanticMode) {
-      SemanticMode.none => false,
-      SemanticMode.overlay || SemanticMode.inspection => true,
+    final semanticsMode = AccessibilityManager.semanticsModeOf(context);
+    final showSemantics = switch (semanticsMode) {
+      SemanticsMode.none => false,
+      SemanticsMode.overlay || SemanticsMode.inspection => true,
     };
-    final isInspectionMode = switch (semanticMode) {
-      SemanticMode.none || SemanticMode.overlay => false,
-      SemanticMode.inspection => true,
+    final isInspectionMode = switch (semanticsMode) {
+      SemanticsMode.none || SemanticsMode.overlay => false,
+      SemanticsMode.inspection => true,
     };
     final showMergedSemanticsNodes =
         AccessibilityManager.showMergedSemanticsNodesOf(context);

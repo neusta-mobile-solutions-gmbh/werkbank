@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
-import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantic_mode_control.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_inspector_node_info.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_tree.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_mode_control.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
 import 'package:werkbank/src/components/components.dart';
 
@@ -23,7 +23,7 @@ class SemanticsInspector extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        SemanticModeControl(),
+        SemanticsModeControl(),
         _SemanticsInspectorPanel(),
       ],
     );
@@ -35,10 +35,10 @@ class _SemanticsInspectorPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final semanticsMode = AccessibilityManager.semanticModeOf(context);
+    final semanticsMode = AccessibilityManager.semanticsModeOf(context);
     final isActive = switch (semanticsMode) {
-      SemanticMode.none => false,
-      SemanticMode.overlay || SemanticMode.inspection => true,
+      SemanticsMode.none => false,
+      SemanticsMode.overlay || SemanticsMode.inspection => true,
     };
     return WAnimatedVisibility(
       visible: isActive,

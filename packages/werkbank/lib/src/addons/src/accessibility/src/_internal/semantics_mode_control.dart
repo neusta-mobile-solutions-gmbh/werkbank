@@ -3,28 +3,28 @@ import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
 import 'package:werkbank/src/components/components.dart';
 
-class SemanticModeControl extends StatelessWidget {
-  const SemanticModeControl({super.key});
+class SemanticsModeControl extends StatelessWidget {
+  const SemanticsModeControl({super.key});
 
-  static final List<SemanticMode> _options = [
-    SemanticMode.none,
-    SemanticMode.overlay,
-    SemanticMode.inspection,
+  static final List<SemanticsMode> _options = [
+    SemanticsMode.none,
+    SemanticsMode.overlay,
+    SemanticsMode.inspection,
   ];
 
   @override
   Widget build(BuildContext context) {
-    final mode = AccessibilityManager.semanticModeOf(context);
+    final mode = AccessibilityManager.semanticsModeOf(context);
     return WControlItem(
       title: Text(
         context.sL10n.addons.accessibility.controls.semanticsMode.name,
       ),
-      control: WDropdown<SemanticMode>(
+      control: WDropdown<SemanticsMode>(
         // This is necessary for the DropdownMenuItem to have
         // the right width-constraints.
         value: mode,
         onChanged: (value) {
-          AccessibilityManager.setSemanticMode(
+          AccessibilityManager.setSemanticsMode(
             context,
             value,
           );
@@ -35,7 +35,7 @@ class SemanticModeControl extends StatelessWidget {
               value: mode,
               child: Text(
                 switch (mode) {
-                  SemanticMode.none =>
+                  SemanticsMode.none =>
                     context
                         .sL10n
                         .addons
@@ -44,7 +44,7 @@ class SemanticModeControl extends StatelessWidget {
                         .semanticsMode
                         .values
                         .none,
-                  SemanticMode.overlay =>
+                  SemanticsMode.overlay =>
                     context
                         .sL10n
                         .addons
@@ -53,7 +53,7 @@ class SemanticModeControl extends StatelessWidget {
                         .semanticsMode
                         .values
                         .overlay,
-                  SemanticMode.inspection =>
+                  SemanticsMode.inspection =>
                     context
                         .sL10n
                         .addons

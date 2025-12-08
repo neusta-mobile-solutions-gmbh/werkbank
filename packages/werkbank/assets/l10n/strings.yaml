@@ -23,6 +23,12 @@ addons:
           none: None
           overlay: Overlay
           inspection: Inspection
+          sideBySide: Side by Side
+      splitAxis:
+        name: Split
+        values:
+          vertical: Vertical
+          horizontal: Horizontal
       semanticsTree: Semantics Tree
       activeSemanticsNode: Active Semantics Node
       semanticsInspectionScope:

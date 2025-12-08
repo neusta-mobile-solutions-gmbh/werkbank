@@ -6,7 +6,6 @@ enum ColorBlindnessType {
     0, 0, -1, 0, 255,
     0, 0, 0, 1, 0,
   ]),
-
   grayscale([
     // grayscale
     0.2126, 0.7152, 0.0722, 0, 0,
@@ -14,7 +13,6 @@ enum ColorBlindnessType {
     0.2126, 0.7152, 0.0722, 0, 0,
     0, 0, 0, 1, 0,
   ]),
-
   protanopia([
     // red blindness
     0.152286, 1.052583, -0.204868, 0, 0,
@@ -22,7 +20,6 @@ enum ColorBlindnessType {
     -0.003882, -0.048116, 1.051998, 0, 0,
     0, 0, 0, 1, 0,
   ]),
-
   protanomaly([
     // red weakness
     0.458064, 0.679578, -0.137642, 0, 0,
@@ -30,7 +27,6 @@ enum ColorBlindnessType {
     -0.007494, -0.016807, 1.024301, 0, 0,
     0, 0, 0, 1, 0,
   ]),
-
   deuteranopia([
     // green blindness
     0.367322, 0.860646, -0.227968, 0, 0,
@@ -38,7 +34,6 @@ enum ColorBlindnessType {
     -0.011820, 0.042940, 0.968881, 0, 0,
     0, 0, 0, 1, 0,
   ]),
-
   deuteranomaly([
     // green weakness
     0.547494, 0.607765, -0.155259, 0, 0,
@@ -46,7 +41,6 @@ enum ColorBlindnessType {
     -0.010410, 0.027275, 0.983136, 0, 0,
     0, 0, 0, 1, 0,
   ]),
-
   tritanopia([
     // blue blindness
     1.255528, -0.076749, -0.178779, 0, 0,
@@ -54,14 +48,14 @@ enum ColorBlindnessType {
     0.004733, 0.691367, 0.303900, 0, 0,
     0, 0, 0, 1, 0,
   ]),
-
   tritanomaly([
     // blue weakness
     1.017277, 0.027029, -0.044306, 0, 0,
     -0.006113, 0.958479, 0.047634, 0, 0,
     0.006379, 0.248708, 0.744913, 0, 0,
     0, 0, 0, 1, 0,
-  ]);
+  ])
+  ;
 
   /// Creates a color mode simulation from a color mode
   const ColorBlindnessType(this.matrix);

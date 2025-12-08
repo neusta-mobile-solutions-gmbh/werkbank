@@ -10,6 +10,7 @@ class SemanticsModeControl extends StatelessWidget {
     SemanticsMode.none,
     SemanticsMode.overlay,
     SemanticsMode.inspection,
+    SemanticsMode.sideBySide,
   ];
 
   @override
@@ -62,6 +63,15 @@ class SemanticsModeControl extends StatelessWidget {
                         .semanticsMode
                         .values
                         .inspection,
+                  SemanticsMode.sideBySide =>
+                    context
+                        .sL10n
+                        .addons
+                        .accessibility
+                        .controls
+                        .semanticsMode
+                        .values
+                        .sideBySide,
                 },
               ),
             ),

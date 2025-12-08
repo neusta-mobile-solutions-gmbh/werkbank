@@ -38,7 +38,9 @@ class _SemanticsInspectorPanel extends StatelessWidget {
     final semanticsMode = AccessibilityManager.semanticsModeOf(context);
     final isActive = switch (semanticsMode) {
       SemanticsMode.none => false,
-      SemanticsMode.overlay || SemanticsMode.inspection => true,
+      SemanticsMode.overlay ||
+      SemanticsMode.inspection ||
+      SemanticsMode.sideBySide => true,
     };
     return WAnimatedVisibility(
       visible: isActive,

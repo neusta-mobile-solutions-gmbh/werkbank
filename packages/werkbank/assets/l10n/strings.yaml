@@ -23,6 +23,7 @@ addons:
           none: None
           overlay: Overlay
           inspection: Inspection
+          sideBySide: Side by Side
       semanticsTree: Semantics Tree
       activeSemanticsNode: Active Semantics Node
       semanticsInspectionScope:

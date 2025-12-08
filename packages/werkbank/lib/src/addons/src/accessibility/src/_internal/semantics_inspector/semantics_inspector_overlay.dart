@@ -7,6 +7,8 @@ import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_in
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_controller.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_nodes_display.dart';
+import 'package:werkbank/src/components/src/w_divider.dart';
+import 'package:werkbank/src/theme/theme.dart';
 
 class SemanticsInspectorOverlay extends StatefulWidget {
   const SemanticsInspectorOverlay({
@@ -23,6 +25,7 @@ class SemanticsInspectorOverlay extends StatefulWidget {
 
 class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
   late SemanticsInspectorController inspectorController;
+  final GlobalKey _childKey = GlobalKey();
 
   @override
   void didChangeDependencies() {
@@ -77,66 +80,98 @@ class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
   @override
   Widget build(BuildContext context) {
     final semanticsMode = AccessibilityManager.semanticsModeOf(context);
-    final showSemantics = switch (semanticsMode) {
-      SemanticsMode.none => false,
-      SemanticsMode.overlay || SemanticsMode.inspection => true,
-    };
-    final isInspectionMode = switch (semanticsMode) {
-      SemanticsMode.none || SemanticsMode.overlay => false,
-      SemanticsMode.inspection => true,
-    };
-    final showMergedSemanticsNodes =
+    late final showMergedSemanticsNodes =
         AccessibilityManager.showMergedSemanticsNodesOf(context);
-    final showHiddenSemanticsNodes =
+    late final showHiddenSemanticsNodes =
         AccessibilityManager.showHiddenSemanticsNodesOf(context);
-    final controller = inspectorController.semanticsMonitorController;
-    return Stack(
-      children: [
-        SemanticsMonitor(
-          controller: controller,
-          onlyListenToIncluded: true,
-          child: IgnorePointerWithSemantics(
-            ignoring: isInspectionMode,
-            child: widget.child,
-          ),
-        ),
-        if (showSemantics)
-          Positioned.fill(
-            child: IgnorePointer(
-              ignoring: !isInspectionMode,
-              child: Listener(
-                onPointerDown: (e) {
-                  if (e.buttons != kPrimaryButton) {
-                    return;
-                  }
-                  _handleTap();
-                },
-                behavior: HitTestBehavior.opaque,
-                child: SemanticsNodesDisplay(
-                  controller: controller,
-                  includeNodePredicate: (node) {
-                    if (!showMergedSemanticsNodes && node.isMergedIntoParent) {
-                      return false;
-                    }
-                    if (!showHiddenSemanticsNodes &&
-                        node.data.flagsCollection.isHidden) {
-                      return false;
-                    }
-                    return true;
-                  },
-                  semanticsBoxBuilder: (context, data) {
-                    return SemanticsBoxDisplay(
-                      displayData: data,
-                      onTap: () {
-                        _pressedIdStack.add(data.id);
-                      },
-                    );
-                  },
+    late final controller = inspectorController.semanticsMonitorController;
+
+    late final display = SemanticsNodesDisplay(
+      controller: controller,
+      includeNodePredicate: (node) {
+        if (!showMergedSemanticsNodes && node.isMergedIntoParent) {
+          return false;
+        }
+        if (!showHiddenSemanticsNodes && node.data.flagsCollection.isHidden) {
+          return false;
+        }
+        return true;
+      },
+      semanticsBoxBuilder: (context, data) {
+        return SemanticsBoxDisplay(
+          displayData: data,
+          onTap: () {
+            _pressedIdStack.add(data.id);
+          },
+        );
+      },
+    );
+
+    late final interactiveDisplay = Listener(
+      onPointerDown: (e) {
+        if (e.buttons != kPrimaryButton) {
+          return;
+        }
+        _handleTap();
+      },
+      behavior: HitTestBehavior.opaque,
+      child: display,
+    );
+
+    final monitoredChild = SemanticsMonitor(
+      key: _childKey,
+      controller: controller,
+      onlyListenToIncluded: true,
+      child: widget.child,
+    );
+
+    switch (semanticsMode) {
+      case SemanticsMode.none:
+        return monitoredChild;
+      case SemanticsMode.overlay:
+        return Stack(
+          clipBehavior: Clip.none,
+          fit: StackFit.expand,
+          children: [
+            monitoredChild,
+            Positioned.fill(
+              child: IgnorePointer(
+                child: display,
+              ),
+            ),
+          ],
+        );
+      case SemanticsMode.inspection:
+        return Stack(
+          clipBehavior: Clip.none,
+          fit: StackFit.expand,
+          children: [
+            IgnorePointerWithSemantics(
+              child: monitoredChild,
+            ),
+            Positioned.fill(
+              child: interactiveDisplay,
+            ),
+          ],
+        );
+      case SemanticsMode.sideBySide:
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: monitoredChild,
+            ),
+            const WDivider.vertical(),
+            Expanded(
+              child: ClipRect(
+                child: ColoredBox(
+                  color: context.werkbankColorScheme.surface,
+                  child: interactiveDisplay,
                 ),
               ),
             ),
-          ),
-      ],
-    );
+          ],
+        );
+    }
   }
 }

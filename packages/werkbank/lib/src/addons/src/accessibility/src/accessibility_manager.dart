@@ -214,6 +214,7 @@ enum SemanticsMode {
   none,
   overlay,
   inspection,
+  sideBySide,
 }
 
 enum SemanticsInspectionScope {

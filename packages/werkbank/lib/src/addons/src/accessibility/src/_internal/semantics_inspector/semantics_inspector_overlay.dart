@@ -7,7 +7,7 @@ import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_in
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_controller.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_nodes_display.dart';
-import 'package:werkbank/src/components/src/w_divider.dart';
+import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
 class SemanticsInspectorOverlay extends StatefulWidget {

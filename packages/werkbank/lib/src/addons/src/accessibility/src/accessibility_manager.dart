@@ -49,6 +49,18 @@ class AccessibilityManager extends StatefulWidget {
         .setSemanticsMode(semanticsMode: semanticsMode);
   }
 
+  static Axis splitAxisOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
+        .splitAxis;
+  }
+
+  static void setSplitAxis(BuildContext context, {required Axis splitAxis}) {
+    context.findAncestorStateOfType<_AccessibilityManagerState>()!.setSplitAxis(
+      splitAxis: splitAxis,
+    );
+  }
+
   static SemanticsInspectionScope semanticsInspectionScopeOf(
     BuildContext context,
   ) {
@@ -131,6 +143,7 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
   double textScaleFactor = 1;
   bool boldText = false;
   SemanticsMode semanticsMode = SemanticsMode.none;
+  Axis splitAxis = Axis.vertical;
   SemanticsInspectionScope semanticsInspectionScope =
       SemanticsInspectionScope.useCase;
   bool showMergedSemanticsNodes = false;
@@ -145,6 +158,9 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
 
   void setSemanticsMode({required SemanticsMode semanticsMode}) =>
       setState(() => this.semanticsMode = semanticsMode);
+
+  void setSplitAxis({required Axis splitAxis}) =>
+      setState(() => this.splitAxis = splitAxis);
 
   void setSemanticsInspectionScope({
     required SemanticsInspectionScope semanticsInspectionScope,
@@ -169,6 +185,7 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
       boldText: boldText,
       textScaleFactor: textScaleFactor,
       semanticsMode: semanticsMode,
+      splitAxis: splitAxis,
       semanticsInspectionScope: semanticsInspectionScope,
       showMergedSemanticsNodes: showMergedSemanticsNodes,
       showHiddenSemanticsNodes: showHiddenSemanticsNodes,
@@ -183,6 +200,7 @@ class _AccessibilityState extends InheritedWidget {
     required this.textScaleFactor,
     required this.boldText,
     required this.semanticsMode,
+    required this.splitAxis,
     required this.semanticsInspectionScope,
     required this.showMergedSemanticsNodes,
     required this.showHiddenSemanticsNodes,
@@ -193,6 +211,7 @@ class _AccessibilityState extends InheritedWidget {
   final double textScaleFactor;
   final bool boldText;
   final SemanticsMode semanticsMode;
+  final Axis splitAxis;
   final SemanticsInspectionScope semanticsInspectionScope;
   final bool showMergedSemanticsNodes;
   final bool showHiddenSemanticsNodes;
@@ -203,6 +222,7 @@ class _AccessibilityState extends InheritedWidget {
     return textScaleFactor != oldWidget.textScaleFactor ||
         boldText != oldWidget.boldText ||
         semanticsMode != oldWidget.semanticsMode ||
+        splitAxis != oldWidget.splitAxis ||
         semanticsInspectionScope != oldWidget.semanticsInspectionScope ||
         showMergedSemanticsNodes != oldWidget.showMergedSemanticsNodes ||
         showHiddenSemanticsNodes != oldWidget.showHiddenSemanticsNodes ||

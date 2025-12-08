@@ -155,13 +155,15 @@ class _SemanticsInspectorOverlayState extends State<SemanticsInspectorOverlay> {
           ],
         );
       case SemanticsMode.sideBySide:
-        return Row(
+        late final splitAxis = AccessibilityManager.splitAxisOf(context);
+        return Flex(
+          direction: flipAxis(splitAxis),
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: monitoredChild,
             ),
-            const WDivider.vertical(),
+            WDivider(axis: splitAxis),
             Expanded(
               child: ClipRect(
                 child: ColoredBox(

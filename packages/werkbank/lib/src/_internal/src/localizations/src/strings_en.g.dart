@@ -541,6 +541,7 @@ class TranslationsAddonsAccessibilityControlsEn {
 	String get boldText => 'Bold Text';
 
 	late final TranslationsAddonsAccessibilityControlsSemanticsModeEn semanticsMode = TranslationsAddonsAccessibilityControlsSemanticsModeEn._(_root);
+	late final TranslationsAddonsAccessibilityControlsSplitAxisEn splitAxis = TranslationsAddonsAccessibilityControlsSplitAxisEn._(_root);
 
 	/// en: 'Semantics Tree'
 	String get semanticsTree => 'Semantics Tree';
@@ -801,6 +802,20 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeEn {
 	late final TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn values = TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn._(_root);
 }
 
+// Path: addons.accessibility.controls.splitAxis
+class TranslationsAddonsAccessibilityControlsSplitAxisEn {
+	TranslationsAddonsAccessibilityControlsSplitAxisEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Split'
+	String get name => 'Split';
+
+	late final TranslationsAddonsAccessibilityControlsSplitAxisValuesEn values = TranslationsAddonsAccessibilityControlsSplitAxisValuesEn._(_root);
+}
+
 // Path: addons.accessibility.controls.semanticsInspectionScope
 class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn {
 	TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(this._root);
@@ -976,6 +991,21 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn {
 
 	/// en: 'Side by Side'
 	String get sideBySide => 'Side by Side';
+}
+
+// Path: addons.accessibility.controls.splitAxis.values
+class TranslationsAddonsAccessibilityControlsSplitAxisValuesEn {
+	TranslationsAddonsAccessibilityControlsSplitAxisValuesEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Vertical'
+	String get vertical => 'Vertical';
+
+	/// en: 'Horizontal'
+	String get horizontal => 'Horizontal';
 }
 
 // Path: addons.accessibility.controls.semanticsInspectionScope.values
@@ -1169,6 +1199,9 @@ extension on Translations {
 			'addons.accessibility.controls.semanticsMode.values.overlay' => 'Overlay',
 			'addons.accessibility.controls.semanticsMode.values.inspection' => 'Inspection',
 			'addons.accessibility.controls.semanticsMode.values.sideBySide' => 'Side by Side',
+			'addons.accessibility.controls.splitAxis.name' => 'Split',
+			'addons.accessibility.controls.splitAxis.values.vertical' => 'Vertical',
+			'addons.accessibility.controls.splitAxis.values.horizontal' => 'Horizontal',
 			'addons.accessibility.controls.semanticsTree' => 'Semantics Tree',
 			'addons.accessibility.controls.activeSemanticsNode' => 'Active Semantics Node',
 			'addons.accessibility.controls.semanticsInspectionScope.name' => 'Inspection Scope',

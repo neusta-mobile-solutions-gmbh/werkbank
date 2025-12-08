@@ -95,12 +95,60 @@ class _SemanticsInspectorPanelContentState
   @override
   Widget build(BuildContext context) {
     final sl10n = context.sL10n;
+    final semanticsMode = AccessibilityManager.semanticsModeOf(context);
+    final isSideBySide = switch (semanticsMode) {
+      SemanticsMode.none ||
+      SemanticsMode.overlay ||
+      SemanticsMode.inspection => false,
+      SemanticsMode.sideBySide => true,
+    };
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: 16,
       children: [
-        SemanticsInspectorTree(
-          subscription: subscription,
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            WAnimatedVisibility(
+              visible: isSideBySide,
+              padding: const EdgeInsets.only(bottom: 16),
+              child: WControlItem(
+                title: Text(sl10n.addons.accessibility.controls.splitAxis.name),
+                control: WSwitch(
+                  value:
+                      AccessibilityManager.splitAxisOf(context) ==
+                      Axis.horizontal,
+                  onChanged: (value) => AccessibilityManager.setSplitAxis(
+                    context,
+                    splitAxis: value ? Axis.horizontal : Axis.vertical,
+                  ),
+                  falseLabel: Text(
+                    sl10n
+                        .addons
+                        .accessibility
+                        .controls
+                        .splitAxis
+                        .values
+                        .vertical,
+                  ),
+                  trueLabel: Text(
+                    sl10n
+                        .addons
+                        .accessibility
+                        .controls
+                        .splitAxis
+                        .values
+                        .horizontal,
+                  ),
+                ),
+              ),
+            ),
+            SemanticsInspectorTree(
+              subscription: subscription,
+            ),
+          ],
         ),
         SemanticsInspectorNodeInfo(subscription: subscription),
         WControlItem(

@@ -15,9 +15,7 @@ class SemanticsDataField extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = context.werkbankTextTheme;
     final colorScheme = context.werkbankColorScheme;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.baseline,
-      textBaseline: TextBaseline.alphabetic,
+    return Wrap(
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 8),
@@ -29,9 +27,7 @@ class SemanticsDataField extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: value,
-        ),
+        value,
       ],
     );
   }

@@ -8,9 +8,9 @@ class SemanticsModeControl extends StatelessWidget {
 
   static final List<SemanticsMode> _options = [
     SemanticsMode.none,
+    SemanticsMode.sideBySide,
     SemanticsMode.overlay,
     SemanticsMode.inspection,
-    SemanticsMode.sideBySide,
   ];
 
   @override

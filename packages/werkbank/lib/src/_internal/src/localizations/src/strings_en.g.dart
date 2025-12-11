@@ -361,6 +361,9 @@ class TranslationsAddonsRecentHistoryEn {
 
 	/// en: 'Recently Visited'
 	String get homePageComponentTitle => 'Recently Visited';
+
+	/// en: 'No use cases visited yet.'
+	String get noUseCasesVisited => 'No use cases visited yet.';
 }
 
 // Path: addons.acknowledged
@@ -373,6 +376,9 @@ class TranslationsAddonsAcknowledgedEn {
 
 	/// en: 'Recently Added'
 	String get homePageComponentTitle => 'Recently Added';
+
+	/// en: 'No new use cases added since your last visit.'
+	String get noNewUseCases => 'No new use cases added since your last visit.';
 }
 
 // Path: addons.constraints
@@ -732,6 +738,9 @@ class TranslationsAddonsThemingControlsEn {
 
 	/// en: 'Theme'
 	String get theme => 'Theme';
+
+	/// en: '-'
+	String get noTheme => '-';
 }
 
 // Path: addons.zoom.controls
@@ -1260,7 +1269,9 @@ extension on Translations {
 			'addons.description.links' => 'External Links',
 			'addons.pageTransition.name' => 'Page Transition',
 			'addons.recentHistory.homePageComponentTitle' => 'Recently Visited',
+			'addons.recentHistory.noUseCasesVisited' => 'No use cases visited yet.',
 			'addons.acknowledged.homePageComponentTitle' => 'Recently Added',
+			'addons.acknowledged.noNewUseCases' => 'No new use cases added since your last visit.',
 			'addons.constraints.name' => 'Constraints',
 			'addons.constraints.controls.preset.name' => 'Preset',
 			'addons.constraints.controls.preset.values.initial' => 'Initial',
@@ -1282,6 +1293,7 @@ extension on Translations {
 			'addons.werkbank_theme.controls.theme' => 'Theme',
 			'addons.theming.name' => 'Theming',
 			'addons.theming.controls.theme' => 'Theme',
+			'addons.theming.controls.noTheme' => '-',
 			'addons.zoom.name' => 'Zoom',
 			'addons.zoom.controls.enabled' => 'Enabled',
 			'addons.zoom.controls.magnification' => 'Magnification',

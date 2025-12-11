@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
-import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantic_mode_control.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/node_info/semantics_inspector_node_info.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector_tree.dart';
+import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_mode_control.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_monitor.dart';
 import 'package:werkbank/src/components/components.dart';
 
@@ -23,7 +23,7 @@ class SemanticsInspector extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        SemanticModeControl(),
+        SemanticsModeControl(),
         _SemanticsInspectorPanel(),
       ],
     );
@@ -35,10 +35,12 @@ class _SemanticsInspectorPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final semanticsMode = AccessibilityManager.semanticModeOf(context);
+    final semanticsMode = AccessibilityManager.semanticsModeOf(context);
     final isActive = switch (semanticsMode) {
-      SemanticMode.none => false,
-      SemanticMode.overlay || SemanticMode.inspection => true,
+      SemanticsMode.none => false,
+      SemanticsMode.overlay ||
+      SemanticsMode.inspection ||
+      SemanticsMode.sideBySide => true,
     };
     return WAnimatedVisibility(
       visible: isActive,
@@ -93,12 +95,60 @@ class _SemanticsInspectorPanelContentState
   @override
   Widget build(BuildContext context) {
     final sl10n = context.sL10n;
+    final semanticsMode = AccessibilityManager.semanticsModeOf(context);
+    final isSideBySide = switch (semanticsMode) {
+      SemanticsMode.none ||
+      SemanticsMode.overlay ||
+      SemanticsMode.inspection => false,
+      SemanticsMode.sideBySide => true,
+    };
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: 16,
       children: [
-        SemanticsInspectorTree(
-          subscription: subscription,
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            WAnimatedVisibility(
+              visible: isSideBySide,
+              padding: const EdgeInsets.only(bottom: 16),
+              child: WControlItem(
+                title: Text(sl10n.addons.accessibility.controls.splitAxis.name),
+                control: WSwitch(
+                  value:
+                      AccessibilityManager.splitAxisOf(context) ==
+                      Axis.horizontal,
+                  onChanged: (value) => AccessibilityManager.setSplitAxis(
+                    context,
+                    splitAxis: value ? Axis.horizontal : Axis.vertical,
+                  ),
+                  falseLabel: Text(
+                    sl10n
+                        .addons
+                        .accessibility
+                        .controls
+                        .splitAxis
+                        .values
+                        .vertical,
+                  ),
+                  trueLabel: Text(
+                    sl10n
+                        .addons
+                        .accessibility
+                        .controls
+                        .splitAxis
+                        .values
+                        .horizontal,
+                  ),
+                ),
+              ),
+            ),
+            SemanticsInspectorTree(
+              subscription: subscription,
+            ),
+          ],
         ),
         SemanticsInspectorNodeInfo(subscription: subscription),
         WControlItem(

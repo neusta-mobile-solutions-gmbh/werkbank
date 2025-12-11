@@ -34,19 +34,31 @@ class AccessibilityManager extends StatefulWidget {
     );
   }
 
-  static SemanticMode semanticModeOf(BuildContext context) {
+  static SemanticsMode semanticsModeOf(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
-        .semanticMode;
+        .semanticsMode;
   }
 
-  static void setSemanticMode(
+  static void setSemanticsMode(
     BuildContext context,
-    SemanticMode semanticMode,
+    SemanticsMode semanticsMode,
   ) {
     context
         .findAncestorStateOfType<_AccessibilityManagerState>()!
-        .setSemanticMode(semanticMode: semanticMode);
+        .setSemanticsMode(semanticsMode: semanticsMode);
+  }
+
+  static Axis splitAxisOf(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<_AccessibilityState>()!
+        .splitAxis;
+  }
+
+  static void setSplitAxis(BuildContext context, {required Axis splitAxis}) {
+    context.findAncestorStateOfType<_AccessibilityManagerState>()!.setSplitAxis(
+      splitAxis: splitAxis,
+    );
   }
 
   static SemanticsInspectionScope semanticsInspectionScopeOf(
@@ -130,7 +142,8 @@ class AccessibilityManager extends StatefulWidget {
 class _AccessibilityManagerState extends State<AccessibilityManager> {
   double textScaleFactor = 1;
   bool boldText = false;
-  SemanticMode semanticMode = SemanticMode.none;
+  SemanticsMode semanticsMode = SemanticsMode.none;
+  Axis splitAxis = Axis.vertical;
   SemanticsInspectionScope semanticsInspectionScope =
       SemanticsInspectionScope.useCase;
   bool showMergedSemanticsNodes = false;
@@ -143,8 +156,11 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
   void setBoldText({required bool boldText}) =>
       setState(() => this.boldText = boldText);
 
-  void setSemanticMode({required SemanticMode semanticMode}) =>
-      setState(() => this.semanticMode = semanticMode);
+  void setSemanticsMode({required SemanticsMode semanticsMode}) =>
+      setState(() => this.semanticsMode = semanticsMode);
+
+  void setSplitAxis({required Axis splitAxis}) =>
+      setState(() => this.splitAxis = splitAxis);
 
   void setSemanticsInspectionScope({
     required SemanticsInspectionScope semanticsInspectionScope,
@@ -168,7 +184,8 @@ class _AccessibilityManagerState extends State<AccessibilityManager> {
     return _AccessibilityState(
       boldText: boldText,
       textScaleFactor: textScaleFactor,
-      semanticMode: semanticMode,
+      semanticsMode: semanticsMode,
+      splitAxis: splitAxis,
       semanticsInspectionScope: semanticsInspectionScope,
       showMergedSemanticsNodes: showMergedSemanticsNodes,
       showHiddenSemanticsNodes: showHiddenSemanticsNodes,
@@ -182,7 +199,8 @@ class _AccessibilityState extends InheritedWidget {
   const _AccessibilityState({
     required this.textScaleFactor,
     required this.boldText,
-    required this.semanticMode,
+    required this.semanticsMode,
+    required this.splitAxis,
     required this.semanticsInspectionScope,
     required this.showMergedSemanticsNodes,
     required this.showHiddenSemanticsNodes,
@@ -192,7 +210,8 @@ class _AccessibilityState extends InheritedWidget {
 
   final double textScaleFactor;
   final bool boldText;
-  final SemanticMode semanticMode;
+  final SemanticsMode semanticsMode;
+  final Axis splitAxis;
   final SemanticsInspectionScope semanticsInspectionScope;
   final bool showMergedSemanticsNodes;
   final bool showHiddenSemanticsNodes;
@@ -202,7 +221,8 @@ class _AccessibilityState extends InheritedWidget {
   bool updateShouldNotify(_AccessibilityState oldWidget) {
     return textScaleFactor != oldWidget.textScaleFactor ||
         boldText != oldWidget.boldText ||
-        semanticMode != oldWidget.semanticMode ||
+        semanticsMode != oldWidget.semanticsMode ||
+        splitAxis != oldWidget.splitAxis ||
         semanticsInspectionScope != oldWidget.semanticsInspectionScope ||
         showMergedSemanticsNodes != oldWidget.showMergedSemanticsNodes ||
         showHiddenSemanticsNodes != oldWidget.showHiddenSemanticsNodes ||
@@ -210,10 +230,11 @@ class _AccessibilityState extends InheritedWidget {
   }
 }
 
-enum SemanticMode {
+enum SemanticsMode {
   none,
   overlay,
   inspection,
+  sideBySide,
 }
 
 enum SemanticsInspectionScope {

@@ -315,7 +315,8 @@ enum ViewConstraintsParameter<T extends double?> {
   minWidth<double>(),
   maxWidth<double?>(),
   minHeight<double>(),
-  maxHeight<double?>();
+  maxHeight<double?>()
+  ;
 
   bool get isMin => switch (this) {
     minWidth => true,

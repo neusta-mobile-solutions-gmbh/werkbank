@@ -92,11 +92,10 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
     final id = _idsByType[type]!;
 
     void listener() {
-      final json = controller.toJson();
       try {
+        final json = controller.toJson();
         _jsonStore.set(id, json);
-        // ignore: avoid_catching_errors
-      } on JsonUnsupportedObjectError catch (e, stackTrace) {
+      } on Object catch (e, stackTrace) {
         debugPrint(e.toString());
         debugPrintStack(stackTrace: stackTrace);
       }
@@ -230,7 +229,12 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
   @override
   void dispose() {
     for (final controller in _controllersByType.values) {
-      controller.dispose();
+      try {
+        controller.dispose();
+      } on Object catch (e, stackTrace) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: stackTrace);
+      }
     }
     super.dispose();
   }

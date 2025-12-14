@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
@@ -91,7 +93,13 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
 
     void listener() {
       final json = controller.toJson();
-      _jsonStore.set(id, json);
+      try {
+        _jsonStore.set(id, json);
+        // ignore: avoid_catching_errors
+      } on JsonUnsupportedObjectError catch (e, stackTrace) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: stackTrace);
+      }
     }
 
     _subscriptionsByType[type] = controller.jsonChangedListenable.listen(

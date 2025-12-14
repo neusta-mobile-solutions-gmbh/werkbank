@@ -15,7 +15,7 @@ abstract class GlobalStateControllerRegistry {
   ///
   /// The [createController] function is used to create an instance of the
   /// controller.
-  /// Even though this [register] function can be called multiple times in
+  /// Even though this [register] function may be called multiple times in
   /// order to check if a new controller needs to be created for
   /// the given type [T], the [createController] function will only be called
   /// once and the controller is kept alive for the lifetime of the application.

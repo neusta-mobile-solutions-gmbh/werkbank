@@ -60,9 +60,7 @@ class ThemingAddon extends Addon {
         title: Text(context.sL10n.addons.theming.name),
         sortHint: SortHint.beforeMost,
         children: [
-          ThemeSelector(
-            themeOptions: themeOptions,
-          ),
+          const ThemeSelector(),
         ],
       ),
     ];

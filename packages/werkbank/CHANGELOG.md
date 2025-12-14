@@ -3,12 +3,14 @@
   - Remove `WerkbankAppOnlyAccessor.acknowledgedController(context)` and `MaybeWerkbankAppAccessor.maybeAcknowledgedController(context)`. **(BREAKING CHANGE)**
     - TODO: Mention replacement.
   - Rename PanelTabsController to Sections controller. TODO: even mention this?
+- Remove BackgroundAddon.initialBackgroundOptionName parameter. TODO
+- Add BackgroundController, Remove BackgroundManager TODO
 
 # 0.18.2
 - Add "Side by Side" semantics mode to semantics inspector.
   - In this mode, the normal use case view is shown on one side and its semantics visualization on the other side.
   - This allows you to interact with the use case as well as select semantics nodes at the same time.
-    In contrast the "Inspection" and "Overlay" modes allow you to only do one.
+    In contrast, the "Inspection" and "Overlay" modes allow you to only do one.
   - You can switch between a vertical and horizontal split.
 
 # 0.18.1+1

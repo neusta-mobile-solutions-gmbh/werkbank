@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/theming/theming.dart';
 
-class ThemeOptionApplier extends StatelessWidget {
+class ThemeOptionApplier extends StatefulWidget {
   const ThemeOptionApplier({
     super.key,
     required this.child,
@@ -11,16 +11,26 @@ class ThemeOptionApplier extends StatelessWidget {
   final Widget child;
 
   @override
+  State<ThemeOptionApplier> createState() => _ThemeOptionApplierState();
+}
+
+class _ThemeOptionApplierState extends State<ThemeOptionApplier> {
+  final _childKey = GlobalKey();
+
+  @override
   Widget build(BuildContext context) {
-    final themeController = SettingsControlSection.access
-        .globalStateControllerOf<ThemeController>(
+    final themeController = AffiliationTransitionLayerEntry.access
+        .maybeGlobalStateControllerOf<ThemeController>(
           context,
-        );
+        )!;
     return ListenableBuilder(
       listenable: themeController,
       builder: (context, _) {
         final themeOption = themeController.selectedThemeOption;
-        var result = child;
+        Widget result = KeyedSubtree(
+          key: _childKey,
+          child: widget.child,
+        );
         if (themeOption != null) {
           final wrapperBuilder = themeOption.wrapperBuilder;
 

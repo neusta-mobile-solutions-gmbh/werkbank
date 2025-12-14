@@ -7,10 +7,7 @@ import 'package:werkbank/src/components/components.dart';
 class ThemeSelector extends StatelessWidget {
   const ThemeSelector({
     super.key,
-    required this.themeOptions,
   });
-
-  final List<ThemeOption> themeOptions;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +32,7 @@ class ThemeSelector extends StatelessWidget {
                   value: null,
                   child: Text(context.sL10n.addons.theming.controls.noTheme),
                 ),
-              for (final themeOption in themeOptions)
+              for (final themeOption in themeController.availableThemOptions)
                 WDropdownMenuItem(
                   value: themeOption.name,
                   child: Text(themeOption.name),

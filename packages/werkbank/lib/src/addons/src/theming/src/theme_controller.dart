@@ -1,12 +1,21 @@
+import 'dart:collection';
+
 import 'package:werkbank/src/addons/src/theming/theming.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 class ThemeController extends GlobalStateController {
   late Map<String, ThemeOption> _themeOptionsByName;
+  late List<ThemeOption> _availableThemeOptions;
+
+  List<ThemeOption> get availableThemOptions => _availableThemeOptions;
+
+  ThemeOption? themeOptionByName(String name) => _themeOptionsByName[name];
+
   String? _selectedThemeOptionName;
 
   String? get selectedThemeOptionName => _selectedThemeOptionName;
 
+  // TODO: Prevent setting to invalid option.
   set selectedThemeOptionName(String? name) {
     _selectedThemeOptionName = name;
     notifyListeners();
@@ -26,7 +35,11 @@ class ThemeController extends GlobalStateController {
     _themeOptionsByName = {
       for (final themeOption in themeOptions) themeOption.name: themeOption,
     };
-    selectedThemeOptionName ??= themeOptions.firstOrNull?.name;
+    _availableThemeOptions = UnmodifiableListView(themeOptions);
+    if (selectedThemeOptionName == null ||
+        !_themeOptionsByName.containsKey(selectedThemeOptionName)) {
+      selectedThemeOptionName = themeOptions.firstOrNull?.name;
+    }
   }
 
   @override

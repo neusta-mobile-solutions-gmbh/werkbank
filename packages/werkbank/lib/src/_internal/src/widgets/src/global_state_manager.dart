@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
@@ -57,7 +55,7 @@ class GlobalStateManager extends StatefulWidget {
 
 class _GlobalStateManagerState extends State<GlobalStateManager> {
   final Map<Type, GlobalStateController> _controllersByType = {};
-  final Map<Type, String> _idsByType = {};
+  final Map<Type, String> _jsonStoreKeysByType = {};
   final Map<Type, ListenableSubscription> _subscriptionsByType = {};
   late final JsonStore _jsonStore;
   bool _updatedControllersThisFrame = false;
@@ -89,12 +87,12 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
   void _updateSubscription(Type type) {
     _subscriptionsByType[type]?.cancel();
     final controller = _controllersByType[type]!;
-    final id = _idsByType[type]!;
+    final jsonStoreKey = _jsonStoreKeysByType[type]!;
 
     void listener() {
       try {
         final json = controller.toJson();
-        _jsonStore.set(id, json);
+        _jsonStore.set(jsonStoreKey, json);
       } on Object catch (e, stackTrace) {
         debugPrint(e.toString());
         debugPrintStack(stackTrace: stackTrace);
@@ -112,16 +110,16 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
       return;
     }
     final registry = _GlobalStateControllerRegistryImpl();
-    registry.idPrefix = 'werkbank';
+    registry.jsonStoreKeyPrefix = 'werkbank';
     widget.registerWerkbankGlobalStateControllers(registry);
     final addons = AddonConfigProvider.addonsOf(context);
     for (final addon in addons) {
-      registry.idPrefix = addon.id;
+      registry.jsonStoreKeyPrefix = addon.id;
       addon.registerGlobalStateControllers(registry);
     }
     final registrations = registry._registrations;
     final registrationsByType = <Type, _Registration>{};
-    final registrationsById = <String, _Registration>{};
+    final registrationsByJsonStoreKey = <String, _Registration>{};
     for (final registration in registrations) {
       try {
         if (registrationsByType.containsKey(registration.type)) {
@@ -131,19 +129,21 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
           );
         }
         registrationsByType[registration.type] = registration;
-        if (registrationsById.containsKey(registration.id)) {
+        if (registrationsByJsonStoreKey.containsKey(
+          registration.jsonStoreKey,
+        )) {
           throw AssertionError(
             'Cannot register multiple global state controllers with '
-            'the same id: ${registration.id}',
+            'the same jsonStoreKey: ${registration.jsonStoreKey}',
           );
         }
-        registrationsById[registration.id] = registration;
+        registrationsByJsonStoreKey[registration.jsonStoreKey] = registration;
       } on Object catch (e, stackTrace) {
         debugPrint(e.toString());
         debugPrintStack(stackTrace: stackTrace);
       }
     }
-    final oldTypes = _idsByType.keys;
+    final oldTypes = _jsonStoreKeysByType.keys;
     final newTypes = registrationsByType.keys;
 
     final removedTypes = oldTypes
@@ -159,8 +159,8 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
           if (!oldTypes.contains(type)) {
             return false;
           }
-          final oldId = _idsByType[type]!;
-          final newId = registrationsByType[type]!.id;
+          final oldId = _jsonStoreKeysByType[type]!;
+          final newId = registrationsByType[type]!.jsonStoreKey;
           return oldId != newId;
         })
         .toList(growable: false);
@@ -170,12 +170,12 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
       _subscriptionsByType.remove(type);
       _controllersByType[type]!.dispose();
       _controllersByType.remove(type);
-      _idsByType.remove(type);
+      _jsonStoreKeysByType.remove(type);
     }
 
     for (final type in changedIdTypes) {
-      final newId = registrationsByType[type]!.id;
-      _idsByType[type] = newId;
+      final newId = registrationsByType[type]!.jsonStoreKey;
+      _jsonStoreKeysByType[type] = newId;
       _updateSubscription(type);
     }
 
@@ -184,7 +184,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
         final registration = registrationsByType[type]!;
         final controller = registration.createController();
         _controllersByType[type] = controller;
-        _idsByType[type] = registration.id;
+        _jsonStoreKeysByType[type] = registration.jsonStoreKey;
       } on Object catch (e, stackTrace) {
         debugPrint(e.toString());
         debugPrintStack(stackTrace: stackTrace);
@@ -200,7 +200,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
       final registration = registrationsByType[type]!;
       final controller = _controllersByType[type]!;
       try {
-        final json = _jsonStore.get(registration.id);
+        final json = _jsonStore.get(registration.jsonStoreKey);
         controller.tryLoadFromJson(json, isWarmStart: isWarmStart);
       } on Object catch (e, stackTrace) {
         debugPrint(e.toString());
@@ -272,17 +272,17 @@ class _GlobalStateControllerRegistryImpl
     implements GlobalStateControllerRegistry {
   final List<_Registration> _registrations = [];
 
-  late String idPrefix;
+  late String jsonStoreKeyPrefix;
 
   @override
   void register<T extends GlobalStateController>(
-    String id,
+    String jsonStoreKey,
     T Function() createController, {
     void Function(T controller)? onUpdate,
   }) {
     _registrations.add(
       _Registration(
-        id: '$idPrefix:$id',
+        jsonStoreKey: '$jsonStoreKeyPrefix:$jsonStoreKey',
         type: T,
         createController: createController,
         onUpdate: (controller) => onUpdate?.call(controller as T),
@@ -293,13 +293,13 @@ class _GlobalStateControllerRegistryImpl
 
 class _Registration {
   _Registration({
-    required this.id,
+    required this.jsonStoreKey,
     required this.type,
     required this.createController,
     required this.onUpdate,
   });
 
-  final String id;
+  final String jsonStoreKey;
   final Type type;
   final GlobalStateController Function() createController;
   final void Function(GlobalStateController controller) onUpdate;

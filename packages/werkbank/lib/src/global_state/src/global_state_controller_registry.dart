@@ -7,12 +7,11 @@ library;
 import 'package:werkbank/src/global_state/global_state.dart';
 
 abstract class GlobalStateControllerRegistry {
-  // TODO: Rename id to jsonKey?
   /// Registers a [GlobalStateController] for the given type [T].
   ///
-  /// The [id] is use as a key to store the json produced by the controller's
-  /// [GlobalStateController.toJson] method in the [JsonStore] defined by the
-  /// used [PersistenceConfig].
+  /// The [jsonStoreKey] is use as a key to store the json produced by
+  /// the controller's [GlobalStateController.toJson] method in
+  /// the [JsonStore] defined by the used [PersistenceConfig].
   ///
   /// The [createController] function is used to create an instance of the
   /// controller.
@@ -34,7 +33,7 @@ abstract class GlobalStateControllerRegistry {
   /// The [onUpdate] function will be called before
   /// [GlobalStateController.tryLoadFromJson] is called.
   void register<T extends GlobalStateController>(
-    String id,
+    String jsonStoreKey,
     T Function() createController, {
     void Function(T controller)? onUpdate,
   });

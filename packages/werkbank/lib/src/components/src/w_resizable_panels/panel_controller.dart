@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+// TODO: Use GlobalStateController
 class PanelController {
   PanelController({
     required TickerProvider vsync,

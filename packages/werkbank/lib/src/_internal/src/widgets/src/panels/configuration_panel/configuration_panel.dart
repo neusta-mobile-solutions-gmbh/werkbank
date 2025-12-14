@@ -54,6 +54,7 @@ class ConfigurationPanel extends StatelessWidget {
             ),
           ),
         ),
+        // TODO: Persist selected tab in global state
         tabArea: WTabView(
           tabs: [
             WTab(

@@ -6,6 +6,7 @@ library;
 
 import 'package:werkbank/src/global_state/global_state.dart';
 
+// TODO: Document. Also where do I get an instance?
 abstract class GlobalStateControllerRegistry {
   /// Registers a [GlobalStateController] for the given type [T].
   ///

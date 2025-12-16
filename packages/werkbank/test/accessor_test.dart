@@ -45,13 +45,12 @@ void main() {
           addonConfig: addonConfig,
           persistenceConfig: const PersistenceConfig.memory(),
           globalStateConfig: GlobalStateConfig(
-            initializations: [
-              GlobalStateInitialization<HistoryController>((c) {
-                // Pretend like we have visited the use case
-                // so that it is opened on startup.
-                c.logDescriptorVisit(useCase);
-              }),
-            ],
+            initialize: (globalState) {
+              // TODO: Use globalState.werkbankAppState.historyController when available.
+              // Pretend like we have visited the use case
+              // so that it is opened on startup.
+              globalState.get<HistoryController>().logDescriptorVisit(useCase);
+            },
             // The last visited use case is only restored
             // on warm starts.
             alwaysTreatLikeWarmStart: true,

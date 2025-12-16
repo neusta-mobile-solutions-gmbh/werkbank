@@ -21,6 +21,7 @@ class GlobalStateManager extends StatefulWidget {
   registerWerkbankGlobalStateControllers;
   final Widget child;
 
+  // TODO: Remove?
   /// {@template werkbank.controller_available_in_app}
   /// If the current context is a Werkbank App, not
   /// a UseCaseDisplay, it is safe to assume that the
@@ -30,11 +31,13 @@ class GlobalStateManager extends StatefulWidget {
     return maybeControllerOf<HistoryController>(context);
   }
 
+  // TODO: Remove?
   /// {@macro werkbank.controller_available_in_app}
   static SectionsController? maybeSectionsControllerOf(BuildContext context) {
     return maybeControllerOf<SectionsController>(context);
   }
 
+  // TODO: Remove?
   /// {@macro werkbank.controller_available_in_app}
   static SearchQueryController? maybeSearchQueryControllerOf(
     BuildContext context,
@@ -42,11 +45,21 @@ class GlobalStateManager extends StatefulWidget {
     return maybeControllerOf<SearchQueryController>(context);
   }
 
+  // TODO: Remove?
   static T? maybeControllerOf<T extends GlobalStateController>(
     BuildContext context,
-  ) {
-    return _InheritedWerkbankPersistence.of(context)?.controllersByType[T]
-        as T?;
+  ) => of(context).get<T>();
+
+  static GlobalState of(BuildContext context) {
+    final inherited = context
+        .dependOnInheritedWidgetOfExactType<_InheritedGlobalState>();
+    if (inherited == null) {
+      throw StateError(
+        'No GlobalState found in context. Make sure to wrap your widget tree '
+        'with a GlobalStateManager.',
+      );
+    }
+    return inherited.globalState;
   }
 
   @override
@@ -59,6 +72,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
   final Map<Type, ListenableSubscription> _subscriptionsByType = {};
   late final JsonStore _jsonStore;
   bool _updatedControllersThisFrame = false;
+  bool _isInitialized = false;
 
   @override
   void initState() {
@@ -70,6 +84,10 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _updateControllers();
+    if (!_isInitialized) {
+      _initializeGlobalState();
+      _isInitialized = true;
+    }
   }
 
   @override
@@ -82,6 +100,11 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
   void reassemble() {
     super.reassemble();
     _updateControllers();
+  }
+
+  GlobalState _createGlobalState() {
+    // We need to create a copy of the map because it is mutated later.
+    return _GlobalStateImpl(Map.of(_controllersByType));
   }
 
   void _updateSubscription(Type type) {
@@ -206,14 +229,6 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
         debugPrint(e.toString());
         debugPrintStack(stackTrace: stackTrace);
       }
-      try {
-        for (final initialization in widget.globalStateConfig.initializations) {
-          initialization.tryInitialize(controller);
-        }
-      } on Object catch (e, stackTrace) {
-        debugPrint(e.toString());
-        debugPrintStack(stackTrace: stackTrace);
-      }
     }
 
     for (final type in addedTypes) {
@@ -224,6 +239,15 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updatedControllersThisFrame = false;
     });
+  }
+
+  void _initializeGlobalState() {
+    try {
+      widget.globalStateConfig.initialize?.call(_createGlobalState());
+    } on Object catch (e, stackTrace) {
+      debugPrint(e.toString());
+      debugPrintStack(stackTrace: stackTrace);
+    }
   }
 
   @override
@@ -241,30 +265,24 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
 
   @override
   Widget build(BuildContext context) {
-    return _InheritedWerkbankPersistence(
-      // We need to create a copy of the map
-      controllersByType: Map.of(_controllersByType),
+    return _InheritedGlobalState(
+      globalState: _createGlobalState(),
       child: widget.child,
     );
   }
 }
 
-class _InheritedWerkbankPersistence extends InheritedWidget {
-  const _InheritedWerkbankPersistence({
-    required this.controllersByType,
+class _InheritedGlobalState extends InheritedWidget {
+  const _InheritedGlobalState({
+    required this.globalState,
     required super.child,
   });
 
-  final Map<Type, GlobalStateController> controllersByType;
-
-  static _InheritedWerkbankPersistence? of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<_InheritedWerkbankPersistence>();
-  }
+  final GlobalState globalState;
 
   @override
-  bool updateShouldNotify(_InheritedWerkbankPersistence oldWidget) {
-    return controllersByType != oldWidget.controllersByType;
+  bool updateShouldNotify(_InheritedGlobalState oldWidget) {
+    return globalState != oldWidget.globalState;
   }
 }
 
@@ -303,4 +321,15 @@ class _Registration {
   final Type type;
   final GlobalStateController Function() createController;
   final void Function(GlobalStateController controller) onUpdate;
+}
+
+class _GlobalStateImpl extends GlobalState {
+  _GlobalStateImpl(this._controllersByType);
+
+  final Map<Type, GlobalStateController> _controllersByType;
+
+  @override
+  T? maybeGet<T extends GlobalStateController>() {
+    return _controllersByType[T] as T?;
+  }
 }

@@ -294,15 +294,11 @@ class _PersistenceAndGlobalState extends StatelessWidget {
         child: GlobalStateManager(
           globalStateConfig: globalStateConfig,
           registerWerkbankGlobalStateControllers: (registry) {
-            registry.register(
-              'history',
-              HistoryController.new,
-            );
+            registry.register('history', HistoryController.new);
+            // TODO: Change key? Do we already break compatibility in this PR?
             registry.register('pane_tabs', SectionsController.new);
-            registry.register(
-              'search_query',
-              SearchQueryController.new,
-            );
+            registry.register('search_query', SearchQueryController.new);
+            registry.register('panel_tab', PanelTabController.new);
           },
           child: child,
         ),

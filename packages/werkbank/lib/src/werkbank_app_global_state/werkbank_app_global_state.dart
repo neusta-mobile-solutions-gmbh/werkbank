@@ -3,4 +3,5 @@
 export 'src/history/history_controller.dart';
 export 'src/search_query/search_query_controller.dart';
 export 'src/sections/sections_controller.dart';
+export 'src/tab/panel_tab_controller.dart';
 export 'src/werkbank_app_global_state.dart';

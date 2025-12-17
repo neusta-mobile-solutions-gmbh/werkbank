@@ -3,11 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
+import 'package:werkbank/src/werkbank_app_global_state/src/tab/panel_tab_controller.dart';
 
-// TODO: Move somewhere else.
-enum PanelTab { configure, inspect, settings }
-
-// TODO: Move somewhere else.
 class SectionsController extends GlobalStateController {
   static const _legacyTopLevelKey = 'tabs';
   static const _sectionIdOrderKey = 'sectionIdOrder';

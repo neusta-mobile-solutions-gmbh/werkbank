@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
-import 'package:werkbank/src/addons/src/werkbank_theme/src/_internal/werkbank_theme_manager.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/addons/src/werkbank_theme/werkbank_theme.dart';
 import 'package:werkbank/src/components/components.dart';
 
 class WerkbankThemeSelector extends StatelessWidget {
@@ -13,23 +14,28 @@ class WerkbankThemeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final werkbankThemeController = SettingsControlSection.access
+        .globalStateOf(context)
+        .werkbankTheme;
     return WControlItem(
       title: Text(context.sL10n.addons.theming.controls.theme),
-      control: WDropdown<String>(
-        value: WerkbankThemeManager.themeNameOf(context),
-        onChanged: (value) {
-          WerkbankThemeManager.setThemeNameOf(
-            context,
-            value,
+      control: ListenableBuilder(
+        listenable: werkbankThemeController,
+        builder: (context, _) {
+          return WDropdown<String>(
+            value: werkbankThemeController.themeName,
+            onChanged: (value) {
+              werkbankThemeController.themeName = value;
+            },
+            items: [
+              for (final themeName in themeNames)
+                WDropdownMenuItem(
+                  value: themeName,
+                  child: Text(themeName),
+                ),
+            ],
           );
         },
-        items: [
-          for (final themeName in themeNames)
-            WDropdownMenuItem(
-              value: themeName,
-              child: Text(themeName),
-            ),
-        ],
       ),
     );
   }

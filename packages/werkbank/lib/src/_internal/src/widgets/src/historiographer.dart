@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/routing/routing.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 
-// TODO: Move to somewhere internal.
 class Historiographer extends StatefulWidget {
   const Historiographer({
     required this.child,
@@ -25,9 +25,9 @@ class _HistoriographerState extends State<Historiographer> {
       DescriptorNavState(:final descriptor) => descriptor,
     };
     if (descriptor != null) {
-      GlobalStateManager.maybeHistoryOf(
+      GlobalStateManager.of(
         context,
-      )?.logDescriptorVisit(descriptor);
+      ).werkbankApp.history.logDescriptorVisit(descriptor);
     }
   }
 

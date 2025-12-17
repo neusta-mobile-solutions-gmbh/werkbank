@@ -9,6 +9,7 @@ import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
 class WerkbankShortcuts extends StatelessWidget with OrderExecutor {
@@ -123,9 +124,9 @@ class WerkbankShortcuts extends StatelessWidget with OrderExecutor {
     return _Shortcuts(
       onToggelPanel: panelController.toggle,
       onSearch: () {
-        GlobalStateManager.maybeSearchQueryControllerOf(
+        GlobalStateManager.of(
           context,
-        )?.focusNode.requestFocus();
+        ).werkbankApp.searchQuery.focusNode.requestFocus();
       },
       onOverview: () {
         WerkbankRouter.of(context).goTo(HomeNavState());

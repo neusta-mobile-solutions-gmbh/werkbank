@@ -5,6 +5,7 @@ import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
 typedef RoutesWidgetBuilder =
@@ -118,9 +119,9 @@ class _RouterBuilderState extends State<RouterBuilder> {
       return null;
     }
 
-    final lastVisitedDescriptorPath = GlobalStateManager.maybeHistoryOf(
+    final lastVisitedDescriptorPath = GlobalStateManager.of(
       context,
-    )?.lastVisitedPath;
+    ).werkbankApp.history.lastVisitedPath;
 
     if (lastVisitedDescriptorPath == null) {
       // There is no history, we can't restore anything.

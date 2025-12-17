@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/addons/src/werkbank_theme/src/_internal/werkbank_theme_manager.dart';
+import 'package:werkbank/src/addons/src/werkbank_theme/src/_internal/werkbank_theme_applier.dart';
 import 'package:werkbank/src/addons/src/werkbank_theme/src/_internal/werkbank_theme_selector.dart';
+import 'package:werkbank/src/addons/src/werkbank_theme/werkbank_theme.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
@@ -33,7 +34,7 @@ class WerkbankThemeAddon extends Addon {
       ManagementLayerEntry(
         id: 'werkbank_theme_manager',
         appOnly: true,
-        builder: (context, child) => WerkbankThemeManager(
+        builder: (context, child) => WerkbankThemeApplier(
           child: child,
         ),
       ),

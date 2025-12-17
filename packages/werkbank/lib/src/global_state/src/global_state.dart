@@ -11,6 +11,9 @@ import 'package:werkbank/src/global_state/global_state.dart';
 ///
 /// Addon authors should consider creating an extension on this class
 /// that add convenience getters for their own [GlobalStateController]s.
+/// That way users can easily customize the addons initial state by
+/// providing a [GlobalStateConfig.initialize] callback that uses
+/// those convenience getters to access and modify the controllers.
 abstract class GlobalState {
   /// {@template werkbank.global_state_locator.get}
   /// Returns the [GlobalStateController] with the given type [T] that was

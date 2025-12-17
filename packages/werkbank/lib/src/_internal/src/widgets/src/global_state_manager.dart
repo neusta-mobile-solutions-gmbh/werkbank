@@ -21,35 +21,6 @@ class GlobalStateManager extends StatefulWidget {
   registerWerkbankGlobalStateControllers;
   final Widget child;
 
-  // TODO: Remove?
-  /// {@template werkbank.controller_available_in_app}
-  /// If the current context is a Werkbank App, not
-  /// a UseCaseDisplay, it is safe to assume that the
-  /// controller is available.
-  /// {@endtemplate}
-  static HistoryController? maybeHistoryOf(BuildContext context) {
-    return maybeControllerOf<HistoryController>(context);
-  }
-
-  // TODO: Remove?
-  /// {@macro werkbank.controller_available_in_app}
-  static SectionsController? maybeSectionsControllerOf(BuildContext context) {
-    return maybeControllerOf<SectionsController>(context);
-  }
-
-  // TODO: Remove?
-  /// {@macro werkbank.controller_available_in_app}
-  static SearchQueryController? maybeSearchQueryControllerOf(
-    BuildContext context,
-  ) {
-    return maybeControllerOf<SearchQueryController>(context);
-  }
-
-  // TODO: Remove?
-  static T? maybeControllerOf<T extends GlobalStateController>(
-    BuildContext context,
-  ) => of(context).get<T>();
-
   static GlobalState of(BuildContext context) {
     final inherited = context
         .dependOnInheritedWidgetOfExactType<_InheritedGlobalState>();

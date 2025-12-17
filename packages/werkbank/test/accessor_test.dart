@@ -46,10 +46,9 @@ void main() {
           persistenceConfig: const PersistenceConfig.memory(),
           globalStateConfig: GlobalStateConfig(
             initialize: (globalState) {
-              // TODO: Use globalState.werkbankAppState.historyController when available.
               // Pretend like we have visited the use case
               // so that it is opened on startup.
-              globalState.get<HistoryController>().logDescriptorVisit(useCase);
+              globalState.werkbankApp.history.logDescriptorVisit(useCase);
             },
             // The last visited use case is only restored
             // on warm starts.
@@ -228,6 +227,7 @@ extension on AddonAccessor {
     final addons = addonsOf(context);
     addonByIdOf(context, addons.first.id);
     isAddonActiveOf(context, addons.first.id);
+    globalStateOf(context);
   }
 }
 
@@ -242,8 +242,6 @@ extension on WerkbankAppOnlyAccessor {
     werkbankNameOf(context);
     logoOf(context);
     lastUpdatedOf(context);
-    historyOf(context);
-    globalStateControllerOf<HistoryController>(context);
     final sub = subscribeToErrors(context, (_) {});
     unawaited(sub.cancel());
     addonSpecificationsOf(context);
@@ -263,8 +261,6 @@ extension on MaybeWerkbankAppAccessor {
     maybeWerkbankNameOf(context);
     maybeLogoOf(context);
     maybeLastUpdatedOf(context);
-    maybeHistoryOf(context);
-    maybeGlobalStateControllerOf<HistoryController>(context);
     maybeAddonSpecificationsOf(context);
   }
 }

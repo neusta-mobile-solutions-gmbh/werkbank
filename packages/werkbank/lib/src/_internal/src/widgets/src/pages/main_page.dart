@@ -4,7 +4,6 @@ import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_back
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 
 class MainPage extends StatelessWidget {

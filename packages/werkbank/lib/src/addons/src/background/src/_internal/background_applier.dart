@@ -13,9 +13,8 @@ class BackgroundApplier extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundController = UseCaseLayerEntry.access
-        .maybeGlobalStateControllerOf<BackgroundController>(
-          context,
-        )!;
+        .globalStateOf(context)
+        .background;
     return ListenableBuilder(
       listenable: backgroundController,
       builder: (context, _) {

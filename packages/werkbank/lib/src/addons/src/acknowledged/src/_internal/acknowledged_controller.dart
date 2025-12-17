@@ -113,3 +113,10 @@ class _AcknowledgedDescriptorEntry {
   final DateTime firstPresent;
   final bool hasBeenVisited;
 }
+
+extension AcknowledgedGlobalStateExtension on GlobalState {
+  AcknowledgedController get acknowledged => get<AcknowledgedController>();
+
+  AcknowledgedController? get maybeAcknowledged =>
+      maybeGet<AcknowledgedController>();
+}

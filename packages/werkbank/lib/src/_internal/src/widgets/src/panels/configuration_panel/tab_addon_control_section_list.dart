@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 
 class TabAddonControlSectionList extends StatelessWidget {
   const TabAddonControlSectionList({
@@ -83,9 +83,9 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _sectionsController = GlobalStateManager.maybeSectionsControllerOf(
+    _sectionsController = GlobalStateManager.of(
       context,
-    )!;
+    ).werkbankApp.sections;
     if (_orderedSections == null) {
       _updateSections();
     }

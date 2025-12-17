@@ -21,7 +21,8 @@ class _AcknowledgedRootDescriptorTrackerState
   void didChangeDependencies() {
     super.didChangeDependencies();
     final acknowledgedController = ApplicationOverlayLayerEntry.access
-        .globalStateControllerOf<AcknowledgedController>(context);
+        .globalStateOf(context)
+        .acknowledged;
     final rootDescriptor = ApplicationOverlayLayerEntry.access.rootDescriptorOf(
       context,
     );

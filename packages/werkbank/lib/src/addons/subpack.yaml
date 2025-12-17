@@ -10,6 +10,7 @@ dependencies:
   - /lib/src/use_case
   - /lib/src/notifications
   - /lib/src/global_state
+  - /lib/src/werkbank_app_global_state
   # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
   - /lib/src/widgets
   - /lib/src/use_case_metadata

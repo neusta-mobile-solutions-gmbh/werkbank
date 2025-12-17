@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/filter/src/_internal/filter_executor.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
-import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
 class RootDescriptorFilter extends StatefulWidget {
@@ -30,7 +30,7 @@ class _RootDescriptorArrangerState extends State<RootDescriptorFilter>
     _rootDescriptor = WerkbankAppInfo.rootDescriptorOf(context);
 
     _controller?.textEditingController.removeListener(onChange);
-    _controller = GlobalStateManager.maybeSearchQueryControllerOf(context);
+    _controller = GlobalStateManager.of(context).werkbankApp.searchQuery;
     _controller?.textEditingController.addListener(onChange);
 
     onChange();

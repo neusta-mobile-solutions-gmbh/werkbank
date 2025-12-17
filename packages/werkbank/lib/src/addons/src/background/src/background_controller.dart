@@ -57,3 +57,9 @@ class BackgroundController extends GlobalStateController {
     }
   }
 }
+
+extension BackgroundGlobalStateExtension on GlobalState {
+  BackgroundController get background => get<BackgroundController>();
+
+  BackgroundController? get maybeBackground => maybeGet<BackgroundController>();
+}

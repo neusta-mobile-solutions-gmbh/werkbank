@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/tree/tree.dart';
 
-// TODO: Move to somewhere else. (non _internal)
 class HistoryController extends GlobalStateController {
   static const int maxHistorySize = 100;
 

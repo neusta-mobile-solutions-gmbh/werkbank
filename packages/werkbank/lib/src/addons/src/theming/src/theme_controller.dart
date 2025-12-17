@@ -54,3 +54,9 @@ class ThemeController extends GlobalStateController {
     }
   }
 }
+
+extension ThemeGlobalStateExtension on GlobalState {
+  ThemeController get theme => get<ThemeController>();
+
+  ThemeController? get maybeTheme => maybeGet<ThemeController>();
+}

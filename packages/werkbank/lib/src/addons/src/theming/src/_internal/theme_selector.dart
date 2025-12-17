@@ -12,9 +12,8 @@ class ThemeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeController = SettingsControlSection.access
-        .globalStateControllerOf<ThemeController>(
-          context,
-        );
+        .globalStateOf(context)
+        .theme;
     return ListenableBuilder(
       listenable: themeController,
       builder: (context, _) {

@@ -37,7 +37,8 @@ class ReportProvider extends StatefulWidget {
       reports: reports,
       acceptReport: (report) {
         ApplicationOverlayLayerEntry.access
-            .globalStateControllerOf<ReportController>(context)
+            .globalStateOf(context)
+            .report
             .accept(report);
       },
     );
@@ -66,7 +67,8 @@ class _ReportProviderState extends State<ReportProvider> {
 
     if (!initialized) {
       _controller = ApplicationOverlayLayerEntry.access
-          .globalStateControllerOf<ReportController>(context);
+          .globalStateOf(context)
+          .report;
 
       _collectCandidates();
       _updateReports();

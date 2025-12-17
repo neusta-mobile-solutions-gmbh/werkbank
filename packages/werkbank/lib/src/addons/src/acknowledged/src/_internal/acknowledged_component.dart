@@ -28,7 +28,8 @@ class _AcknowledgedComponentState extends State<AcknowledgedComponent> {
     // navigates to a use case, even though we are transitioning away
     // from the home page. This would look janky.
     descriptors = HomePageComponent.access
-        .globalStateControllerOf<AcknowledgedController>(context)
+        .globalStateOf(context)
+        .acknowledged
         .getNewUseCases(rootDescriptor);
   }
 

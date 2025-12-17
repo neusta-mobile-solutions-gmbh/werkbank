@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
+import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 
 /// A class that provides access to data in the [BuildContext] that is
 /// available from every place where the [Addon] API gives access to a
@@ -66,5 +68,12 @@ abstract class AddonAccessor {
   /// Returns whether the [Addon] with the given [addonId] is active.
   bool isAddonActiveOf(BuildContext context, String addonId) {
     return AddonConfigProvider.isAddonActiveOf(context, addonId);
+  }
+
+  // TODO: Does this belong here?
+  /// Returns a [GlobalState] object that provides access to all
+  /// registered [GlobalStateController]s.
+  GlobalState globalStateOf(BuildContext context) {
+    return GlobalStateManager.of(context);
   }
 }

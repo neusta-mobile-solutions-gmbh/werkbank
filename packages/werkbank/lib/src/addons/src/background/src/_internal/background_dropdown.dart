@@ -10,9 +10,8 @@ class BackgroundDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundController = SettingsControlSection.access
-        .globalStateControllerOf<BackgroundController>(
-          context,
-        );
+        .globalStateOf(context)
+        .background;
     return WControlItem(
       title: Text(context.sL10n.addons.background.controls.background.label),
       control: ListenableBuilder(

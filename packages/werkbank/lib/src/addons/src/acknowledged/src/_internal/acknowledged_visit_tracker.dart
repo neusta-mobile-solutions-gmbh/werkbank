@@ -21,7 +21,8 @@ class _AcknowledgedVisitTrackerState extends State<AcknowledgedVisitTracker> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final acknowledgedController = ApplicationOverlayLayerEntry.access
-        .globalStateControllerOf<AcknowledgedController>(context);
+        .globalStateOf(context)
+        .acknowledged;
     final useCaseDescriptor = switch (ApplicationOverlayLayerEntry.access
         .navStateOf(context)) {
       HomeNavState() || ParentOverviewNavState() => null,

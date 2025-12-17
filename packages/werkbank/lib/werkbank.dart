@@ -19,4 +19,5 @@ export 'src/tree/tree.dart';
 export 'src/use_case/use_case.dart';
 export 'src/use_case_metadata/use_case_metadata.dart';
 export 'src/utils/utils.dart';
+export 'src/werkbank_app_global_state/werkbank_app_global_state.dart';
 export 'src/widgets/widgets.dart';

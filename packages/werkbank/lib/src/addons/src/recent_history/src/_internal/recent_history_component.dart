@@ -5,6 +5,7 @@ import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 
 class RecentHistoryComponent extends StatefulWidget {
   const RecentHistoryComponent({this.maxCount = 8, super.key});
@@ -27,7 +28,9 @@ class _RecentHistoryComponentState extends State<RecentHistoryComponent> {
     // navigates to a use case, even though we are transitioning away
     // from the home page. This would look janky.
     descriptors = HomePageComponent.access
-        .historyOf(context)
+        .globalStateOf(context)
+        .werkbankApp
+        .history
         .getRecentlyVisitedDescriptors(rootDescriptor)
         .map((r) => r.$1)
         .where(

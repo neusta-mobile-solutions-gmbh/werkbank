@@ -12,3 +12,4 @@ dependencies:
   - /lib/src/use_case
   - /lib/src/routing
   - /lib/src/global_state
+  - /lib/src/werkbank_app_global_state

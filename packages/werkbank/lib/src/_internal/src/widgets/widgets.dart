@@ -3,6 +3,7 @@
 export 'src/accessor_scope.dart';
 export 'src/flutter_error_provider.dart';
 export 'src/global_state_manager.dart';
+export 'src/historiographer.dart';
 export 'src/pages/home_page/home_page.dart';
 export 'src/pages/main_page.dart';
 export 'src/pages/overview/overview_overflow_notifier.dart';

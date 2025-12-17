@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
@@ -111,29 +110,6 @@ mixin MaybeWerkbankAppAccessor on AddonAccessor {
   DateTime? maybeLastUpdatedOf(BuildContext context) {
     return ensureReturns(
       () => WerkbankAppInfo.maybeOf(context)?.lastUpdated,
-    );
-  }
-
-  /// Gets the [HistoryController] of the current [WerkbankApp] if
-  /// we are currently in the context of a [WerkbankApp].
-  ///
-  /// {@macro werkbank.controller_available_in_app}
-  /// {@macro werkbank.null_in_use_case_display}
-  HistoryController? maybeHistoryOf(BuildContext context) {
-    return ensureReturns(() => GlobalStateManager.maybeHistoryOf(context));
-  }
-
-  // TODO: Move out of this accessor.
-  /// Gets the [GlobalStateController] of the given type
-  /// if we are currently in the
-  /// context of a [WerkbankApp].
-  ///
-  /// {@macro werkbank.null_in_use_case_display}
-  T? maybeGlobalStateControllerOf<T extends GlobalStateController>(
-    BuildContext context,
-  ) {
-    return ensureReturns(
-      () => GlobalStateManager.maybeControllerOf<T>(context),
     );
   }
 

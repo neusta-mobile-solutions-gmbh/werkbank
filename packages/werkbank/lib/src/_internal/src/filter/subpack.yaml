@@ -3,6 +3,7 @@ dependencies:
   - /lib/src/tree
   - /lib/src/_internal/src/widgets
   - /lib/src/global_state
+  - /lib/src/werkbank_app_global_state
   - /lib/src/theme
   - /lib/src/filter
   - /lib/src/widgets

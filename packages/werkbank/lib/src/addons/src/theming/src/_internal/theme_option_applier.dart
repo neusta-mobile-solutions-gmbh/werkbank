@@ -20,9 +20,8 @@ class _ThemeOptionApplierState extends State<ThemeOptionApplier> {
   @override
   Widget build(BuildContext context) {
     final themeController = AffiliationTransitionLayerEntry.access
-        .maybeGlobalStateControllerOf<ThemeController>(
-          context,
-        )!;
+        .globalStateOf(context)
+        .theme;
     return ListenableBuilder(
       listenable: themeController,
       builder: (context, _) {

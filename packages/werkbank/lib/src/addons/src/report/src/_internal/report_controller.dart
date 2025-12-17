@@ -49,3 +49,9 @@ class ReportController extends GlobalStateController {
     notifyListeners();
   }
 }
+
+extension ReportGlobalStateExtension on GlobalState {
+  ReportController get report => get<ReportController>();
+
+  ReportController? get maybeReport => maybeGet<ReportController>();
+}

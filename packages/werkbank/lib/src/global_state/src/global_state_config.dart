@@ -1,6 +1,7 @@
 /// @docImport 'package:werkbank/src/addon_api/addon_api.dart';
 /// @docImport 'package:werkbank/src/addons/addons.dart';
 /// @docImport 'package:werkbank/src/persistence/persistence.dart';
+/// @docImport 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 /// @docImport 'package:werkbank/src/widgets/widgets.dart';
 library;
 

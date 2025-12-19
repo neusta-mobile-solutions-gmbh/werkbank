@@ -44,24 +44,6 @@ class BackgroundDropdown extends StatelessWidget {
                 WDropdownMenuItem(
                   value: backgroundOption.name,
                   child: Text(backgroundOption.name),
-                  /* TODO(lzuttermeister): This currently has to be disabled,
-                       because the color preview does not work in the dropdown
-                       overlay since it doesn't have access to the right context.
-                       We need our own Dropdown implementation using portals. */
-                  // child: Row(
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   children: [
-                  //     Padding(
-                  //       padding: const EdgeInsets.only(right: 4),
-                  //       child: Text(backgroundOption.name),
-                  //     ),
-                  //     SizedBox(
-                  //       width: 16,
-                  //       height: 16,
-                  //       child: ClipOval(child: backgroundOption.backgroundWidget),
-                  //     ),
-                  //   ],
-                  // ),
                 ),
             ],
           );

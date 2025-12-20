@@ -6,13 +6,11 @@ WidgetBuilder wResizablePanelsUseCase(UseCaseComposer c) {
     const BoxConstraints(minWidth: 420),
   );
 
-  final controllerContainer = c.states.mutableWithTickerProvider(
+  final controllerContainer = c.states.mutable(
     'WPanelController',
-    create: (tickerProvider) => WPanelController(
-      vsync: tickerProvider,
-      // TODO: Remove Parameter?
-      initialMaxWidth: double.infinity,
-      initialWidth: 500,
+    create: () => WPanelController(
+      initialLeftWidth: 500,
+      initialRightWidth: 500,
     ),
     dispose: (controller) => controller.dispose(),
   );

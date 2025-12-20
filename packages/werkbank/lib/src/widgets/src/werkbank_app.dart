@@ -296,10 +296,7 @@ class _PersistenceAndGlobalState extends StatelessWidget {
             registry.register('pane_tabs', SectionsController.new);
             registry.register('search_query', SearchQueryController.new);
             registry.register('panel_tab', PanelTabController.new);
-            registry.registerWithTickerProvider(
-              'panel',
-              (tickerProvider) => PanelController(vsync: tickerProvider),
-            );
+            registry.register('panel', PanelController.new);
           },
           child: child,
         ),

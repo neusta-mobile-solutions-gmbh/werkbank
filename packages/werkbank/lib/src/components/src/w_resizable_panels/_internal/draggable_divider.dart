@@ -14,7 +14,7 @@ typedef DraggableDividerCallback =
 class DraggableDivider extends StatefulWidget {
   const DraggableDivider({
     required this.onUpdate,
-    required this.initial,
+    required this.getInitial,
     this.axis = Axis.horizontal,
     this.direction = DraggableDividerDirection.startToEnd,
     super.key,
@@ -22,7 +22,7 @@ class DraggableDivider extends StatefulWidget {
 
   final DraggableDividerCallback? onUpdate;
 
-  final double initial;
+  final double Function() getInitial;
 
   final Axis axis;
   final DraggableDividerDirection direction;
@@ -38,7 +38,7 @@ class _DraggableDividerState extends State<DraggableDivider> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onPanDown: (details) {
-        accumulator = widget.initial;
+        accumulator = widget.getInitial();
       },
       onPanUpdate: (details) {
         final sign = switch (widget.direction) {

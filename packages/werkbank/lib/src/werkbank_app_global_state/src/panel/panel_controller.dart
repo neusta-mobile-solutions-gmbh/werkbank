@@ -5,15 +5,12 @@ import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 class PanelController extends GlobalStateController {
-  PanelController({
-    required this.vsync,
-  }) {
+  PanelController() {
     Listenable.merge([
-      wPanelController.preferredLeft,
-      wPanelController.preferredRight,
-      // TODO: This updates too often, find a better way.
-      wPanelController.leftAnimation,
-      wPanelController.rightAnimation,
+      wPanelController.leftWidth,
+      wPanelController.rightWidth,
+      wPanelController.leftExpanded,
+      wPanelController.rightExpanded,
     ]).addListener(notifyListeners);
   }
 
@@ -22,14 +19,10 @@ class PanelController extends GlobalStateController {
   static const _leftExpandedKey = 'leftExpanded';
   static const _rightExpandedKey = 'rightExpanded';
 
-  final TickerProvider vsync;
-
   late final WPanelController wPanelController = WPanelController(
-    vsync: vsync,
-    // TODO: Remove argument? This will be updated later anyway.
-    initialMaxWidth: double.infinity,
     // TODO: Add way to calculate fitting initial width?
-    initialWidth: 500,
+    initialLeftWidth: 500,
+    initialRightWidth: 500,
   );
 
   @override
@@ -40,30 +33,20 @@ class PanelController extends GlobalStateController {
       _leftExpandedKey: final bool leftExpanded,
       _rightExpandedKey: final bool rightExpanded,
     }) {
-      wPanelController.proposePreferredLeft(leftWidth);
-      wPanelController.proposePreferredRight(rightWidth);
-      // TODO: This will trigger animations on load, find a better way.
-      unawaited(
-        leftExpanded
-            ? wPanelController.showLeft()
-            : wPanelController.hideLeft(),
-      );
-      unawaited(
-        rightExpanded
-            ? wPanelController.showRight()
-            : wPanelController.hideRight(),
-      );
+      wPanelController.leftWidth.value = leftWidth;
+      wPanelController.rightWidth.value = rightWidth;
+      wPanelController.leftExpanded.value = leftExpanded;
+      wPanelController.rightExpanded.value = rightExpanded;
     }
   }
 
   @override
   Object? toJson() {
     return {
-      _leftPanelWidthKey: wPanelController.preferredLeft.value,
-      _rightPanelWidthKey: wPanelController.preferredRight.value,
-      // TODO: Refactor so threshold is not needed.
-      _leftExpandedKey: wPanelController.leftAnimation.value > 0.5,
-      _rightExpandedKey: wPanelController.rightAnimation.value > 0.5,
+      _leftPanelWidthKey: wPanelController.leftWidth.value,
+      _rightPanelWidthKey: wPanelController.rightWidth.value,
+      _leftExpandedKey: wPanelController.leftExpanded.value,
+      _rightExpandedKey: wPanelController.rightExpanded.value,
     };
   }
 

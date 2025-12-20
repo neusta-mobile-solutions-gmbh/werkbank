@@ -24,25 +24,21 @@ class WResizablePanels extends StatelessWidget {
     return WPanelControllerProvider(
       controller: controller,
       child: PanelLayoutHandler(
-        builder: (context, leftPanelWidth, rightPanelWidth) {
-          return Row(
-            children: [
-              _LeftPanelLayout(
-                width: leftPanelWidth,
-                child: leftPanel,
-              ),
-              const _LeftSeparator(),
-              Expanded(
-                child: child,
-              ),
-              const _RightSeparator(),
-              _RightPanelLayout(
-                width: rightPanelWidth,
-                child: rightPanel,
-              ),
-            ],
-          );
-        },
+        child: Row(
+          children: [
+            _LeftPanelLayout(
+              child: leftPanel,
+            ),
+            const _LeftSeparator(),
+            Expanded(
+              child: child,
+            ),
+            const _RightSeparator(),
+            _RightPanelLayout(
+              child: rightPanel,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -50,25 +46,23 @@ class WResizablePanels extends StatelessWidget {
 
 class _LeftPanelLayout extends StatelessWidget {
   const _LeftPanelLayout({
-    required this.width,
     required this.child,
   });
 
-  final double width;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final panelController = WPanelControllerProvider.of(context);
+    final animation = PanelLayoutHandler.leftAnimationOf(context);
     return FadeTransition(
-      opacity: panelController.leftAnimation,
+      opacity: animation,
       child: SizeTransition(
-        sizeFactor: panelController.leftAnimation,
+        sizeFactor: animation,
         axisAlignment: 1,
         fixedCrossAxisSizeFactor: 1,
         axis: Axis.horizontal,
         child: SizedBox(
-          width: width,
+          width: PanelLayoutHandler.leftWidthOf(context),
           child: child,
         ),
       ),
@@ -78,25 +72,23 @@ class _LeftPanelLayout extends StatelessWidget {
 
 class _RightPanelLayout extends StatelessWidget {
   const _RightPanelLayout({
-    required this.width,
     required this.child,
   });
 
-  final double width;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final panelController = WPanelControllerProvider.of(context);
+    final animation = PanelLayoutHandler.rightAnimationOf(context);
     return FadeTransition(
-      opacity: panelController.rightAnimation,
+      opacity: animation,
       child: SizeTransition(
-        sizeFactor: panelController.rightAnimation,
+        sizeFactor: animation,
         axisAlignment: -1,
         fixedCrossAxisSizeFactor: 1,
         axis: Axis.horizontal,
         child: SizedBox(
-          width: width,
+          width: PanelLayoutHandler.rightWidthOf(context),
           child: child,
         ),
       ),
@@ -109,20 +101,11 @@ class _LeftSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = WPanelControllerProvider.of(context);
-    return ListenableBuilder(
-      listenable: Listenable.merge([
-        panelController.preferredLeft,
-        panelController.leftAnimation,
-      ]),
-      builder: (context, child) {
-        return DraggableDivider(
-          initial:
-              panelController.preferredLeft.value *
-              panelController.leftAnimation.value,
-          onUpdate: panelController.proposePreferredLeft,
-        );
-      },
+    return DraggableDivider(
+      getInitial: () =>
+          PanelLayoutHandler.leftWidthOf(context) *
+          PanelLayoutHandler.leftAnimationOf(context).value,
+      onUpdate: (value) => PanelLayoutHandler.updateLeftWidthOf(context, value),
     );
   }
 }
@@ -132,21 +115,13 @@ class _RightSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = WPanelControllerProvider.of(context);
-    return ListenableBuilder(
-      listenable: Listenable.merge([
-        panelController.preferredRight,
-        panelController.rightAnimation,
-      ]),
-      builder: (context, child) {
-        return DraggableDivider(
-          initial:
-              panelController.preferredRight.value *
-              panelController.rightAnimation.value,
-          onUpdate: panelController.proposePreferredRight,
-          direction: DraggableDividerDirection.endToStart,
-        );
-      },
+    return DraggableDivider(
+      direction: DraggableDividerDirection.endToStart,
+      getInitial: () =>
+          PanelLayoutHandler.rightWidthOf(context) *
+          PanelLayoutHandler.rightAnimationOf(context).value,
+      onUpdate: (value) =>
+          PanelLayoutHandler.updateRightWidthOf(context, value),
     );
   }
 }

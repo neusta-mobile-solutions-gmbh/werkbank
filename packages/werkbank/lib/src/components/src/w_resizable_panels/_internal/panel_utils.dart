@@ -5,14 +5,17 @@ import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/components/components.dart';
 
 mixin PanelCalcMixin {
+  static const _maxRelativPanelWidth = .45;
+  static const _minWidth = 200.0;
+
   double maxPanelWidth(double maxWidth) => max(
-    maxWidth * WPanelController.maxRelativPanelWidth,
-    WPanelController.minWidth,
+    maxWidth * _maxRelativPanelWidth,
+    _minWidth,
   );
 
   // TODO: Unused. Remove?
   double appropriatePanelWidth(double maxWidth) => lerpDouble(
-    WPanelController.minWidth,
+    _minWidth,
     maxWidth,
     // Room for improvement
     0.5,

@@ -199,7 +199,7 @@ class WerkbankApp extends StatelessWidget {
                       globalStateConfig: globalStateConfig,
                       child: WerkbankSettings.overwrite(
                         orderOption: OrderOption.alphabetic,
-                        werkbankTheme: WerkbankTheme(
+                        werkbankTheme: WerkbankThemeData(
                           colorScheme: WerkbankColorScheme.fromPalette(
                             const WerkbankPalette.dark(),
                           ),
@@ -252,14 +252,14 @@ class _ThemeBuilder extends StatelessWidget {
     required this.builder,
   });
 
-  final WerkbankTheme? werkbankTheme;
+  final WerkbankThemeData? werkbankTheme;
   final ThemedWidgetBuilder builder;
 
   @override
   Widget build(BuildContext context) {
     final effectiveWerkbankTheme =
         werkbankTheme ??
-        WerkbankTheme(
+        WerkbankThemeData(
           colorScheme: WerkbankColorScheme.fromPalette(
             const WerkbankPalette.light(),
           ),

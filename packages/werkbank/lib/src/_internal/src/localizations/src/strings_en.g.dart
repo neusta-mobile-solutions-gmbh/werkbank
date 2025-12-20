@@ -408,6 +408,7 @@ class TranslationsAddonsWerkbankThemeEn {
 	String get name => 'Werkbank Theme';
 
 	late final TranslationsAddonsWerkbankThemeControlsEn controls = TranslationsAddonsWerkbankThemeControlsEn._(_root);
+	late final TranslationsAddonsWerkbankThemeThemesEn themes = TranslationsAddonsWerkbankThemeThemesEn._(_root);
 }
 
 // Path: addons.theming
@@ -726,6 +727,24 @@ class TranslationsAddonsWerkbankThemeControlsEn {
 
 	/// en: 'Theme'
 	String get theme => 'Theme';
+}
+
+// Path: addons.werkbank_theme.themes
+class TranslationsAddonsWerkbankThemeThemesEn {
+	TranslationsAddonsWerkbankThemeThemesEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Werkbank System'
+	String get system => 'Werkbank System';
+
+	/// en: 'Werkbank Light'
+	String get light => 'Werkbank Light';
+
+	/// en: 'Werkbank Dark'
+	String get dark => 'Werkbank Dark';
 }
 
 // Path: addons.theming.controls
@@ -1291,6 +1310,9 @@ extension on Translations {
 			'addons.constraints.shortcuts.descriptionMaxSize' => 'Apply maximum size constraints',
 			'addons.werkbank_theme.name' => 'Werkbank Theme',
 			'addons.werkbank_theme.controls.theme' => 'Theme',
+			'addons.werkbank_theme.themes.system' => 'Werkbank System',
+			'addons.werkbank_theme.themes.light' => 'Werkbank Light',
+			'addons.werkbank_theme.themes.dark' => 'Werkbank Dark',
 			'addons.theming.name' => 'Theming',
 			'addons.theming.controls.theme' => 'Theme',
 			'addons.theming.controls.noTheme' => '-',

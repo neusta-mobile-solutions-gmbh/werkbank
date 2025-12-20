@@ -155,6 +155,10 @@ addons:
     name: Werkbank Theme
     controls:
       theme: Theme
+    themes:
+      system: Werkbank System
+      light: Werkbank Light
+      dark: Werkbank Dark
   theming:
     name: Theming
     controls:

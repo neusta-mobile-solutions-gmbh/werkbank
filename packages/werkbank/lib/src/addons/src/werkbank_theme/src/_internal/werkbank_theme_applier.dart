@@ -30,19 +30,19 @@ class WerkbankThemeApplier extends StatelessWidget {
           const WerkbankPalette.light(),
         );
 
-        final themeName = werkbankThemeController.themeName;
+        final themeName = werkbankThemeController.theme;
         return WerkbankSettings(
           orderOption: WerkbankSettings.orderOptionOf(context),
           werkbankTheme: switch (themeName) {
-            WerkbankThemeAddon.darkThemeName => WerkbankTheme(
+            WerkbankTheme.dark => WerkbankThemeData(
               colorScheme: darkColorScheme,
               textTheme: WerkbankTextTheme.standard(),
             ),
-            WerkbankThemeAddon.lightThemeName => WerkbankTheme(
+            WerkbankTheme.light => WerkbankThemeData(
               colorScheme: lightColorScheme,
               textTheme: WerkbankTextTheme.standard(),
             ),
-            WerkbankThemeAddon.systemThemeName || _ => WerkbankTheme(
+            WerkbankTheme.system || _ => WerkbankThemeData(
               colorScheme: switch (brightness) {
                 Brightness.dark => darkColorScheme,
                 Brightness.light => lightColorScheme,

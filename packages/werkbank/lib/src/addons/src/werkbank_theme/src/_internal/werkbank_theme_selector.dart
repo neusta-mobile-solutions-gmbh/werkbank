@@ -7,10 +7,13 @@ import 'package:werkbank/src/components/components.dart';
 class WerkbankThemeSelector extends StatelessWidget {
   const WerkbankThemeSelector({
     super.key,
-    required this.themeNames,
   });
 
-  final List<String> themeNames;
+  static const List<WerkbankTheme> themes = [
+    WerkbankTheme.system,
+    WerkbankTheme.light,
+    WerkbankTheme.dark,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +25,23 @@ class WerkbankThemeSelector extends StatelessWidget {
       control: ListenableBuilder(
         listenable: werkbankThemeController,
         builder: (context, _) {
-          return WDropdown<String>(
-            value: werkbankThemeController.themeName,
+          return WDropdown<WerkbankTheme>(
+            value: werkbankThemeController.theme,
             onChanged: (value) {
-              werkbankThemeController.themeName = value;
+              werkbankThemeController.theme = value;
             },
             items: [
-              for (final themeName in themeNames)
+              for (final theme in themes)
                 WDropdownMenuItem(
-                  value: themeName,
-                  child: Text(themeName),
+                  value: theme,
+                  child: Text(switch (theme) {
+                    WerkbankTheme.light =>
+                      context.sL10n.addons.werkbank_theme.themes.light,
+                    WerkbankTheme.dark =>
+                      context.sL10n.addons.werkbank_theme.themes.dark,
+                    WerkbankTheme.system =>
+                      context.sL10n.addons.werkbank_theme.themes.system,
+                  }),
                 ),
             ],
           );

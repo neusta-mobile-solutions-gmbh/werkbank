@@ -13,16 +13,6 @@ class WerkbankThemeAddon extends Addon {
 
   static const addonId = 'werkbank_theme';
 
-  static const lightThemeName = 'Werkbank Light';
-  static const darkThemeName = 'Werkbank Dark';
-  static const systemThemeName = 'Werkbank System';
-
-  static const List<String> _themeNames = [
-    lightThemeName,
-    darkThemeName,
-    systemThemeName,
-  ];
-
   @override
   void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
     registry.register('werkbank_theme', WerkbankThemeController.new);
@@ -51,7 +41,7 @@ class WerkbankThemeAddon extends Addon {
         sortHint: SortHint.afterMost,
         title: Text(context.sL10n.addons.werkbank_theme.name),
         children: [
-          const WerkbankThemeSelector(themeNames: _themeNames),
+          const WerkbankThemeSelector(),
         ],
       ),
     ];

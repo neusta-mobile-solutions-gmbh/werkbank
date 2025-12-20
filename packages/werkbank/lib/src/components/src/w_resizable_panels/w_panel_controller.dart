@@ -7,10 +7,10 @@ class WPanelController {
     required double initialRightWidth,
     bool leftInitiallyVisible = true,
     bool rightInitiallyVisible = true,
-  }) : leftWidth = ValueNotifier<double>(initialLeftWidth),
-       rightWidth = ValueNotifier<double>(initialRightWidth),
-       leftExpanded = ValueNotifier<bool>(leftInitiallyVisible),
-       rightExpanded = ValueNotifier<bool>(rightInitiallyVisible);
+  }) : leftWidth = ValueNotifier(initialLeftWidth),
+       rightWidth = ValueNotifier(initialRightWidth),
+       leftExpanded = ValueNotifier(leftInitiallyVisible),
+       rightExpanded = ValueNotifier(rightInitiallyVisible);
 
   bool get atLeastOneIsCurrentlyVisible =>
       leftExpanded.value || rightExpanded.value;

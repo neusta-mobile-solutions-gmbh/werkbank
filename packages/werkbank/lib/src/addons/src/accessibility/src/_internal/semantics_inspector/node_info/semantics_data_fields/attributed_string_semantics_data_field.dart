@@ -28,7 +28,7 @@ class _AttributedStringSemanticsDataFieldState
   TextSpan _toSpanWithRange(
     String value,
     TextRange? range,
-    WerkbankTheme theme,
+    WerkbankThemeData theme,
   ) {
     final colorScheme = theme.colorScheme;
     TextSpan escape(String string) {

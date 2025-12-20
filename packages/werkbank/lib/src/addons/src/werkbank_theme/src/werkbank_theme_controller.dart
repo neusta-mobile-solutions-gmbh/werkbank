@@ -1,16 +1,25 @@
-import 'package:werkbank/src/addons/src/werkbank_theme/werkbank_theme.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
+
+enum WerkbankTheme {
+  light,
+  dark,
+  system,
+}
 
 class WerkbankThemeController extends GlobalStateController {
   WerkbankThemeController();
 
-  String _themeName = WerkbankThemeAddon.systemThemeName;
+  static const _lightThemeName = 'Werkbank Light';
+  static const _darkThemeName = 'Werkbank Dark';
+  static const _systemThemeName = 'Werkbank System';
 
-  String get themeName => _themeName;
+  WerkbankTheme _theme = WerkbankTheme.system;
 
-  set themeName(String newThemeName) {
-    if (_themeName != newThemeName) {
-      _themeName = newThemeName;
+  WerkbankTheme get theme => _theme;
+
+  set theme(WerkbankTheme newThemeName) {
+    if (_theme != newThemeName) {
+      _theme = newThemeName;
       notifyListeners();
     }
   }
@@ -18,19 +27,28 @@ class WerkbankThemeController extends GlobalStateController {
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     if (json is String) {
-      themeName = json;
+      theme = switch (json) {
+        _lightThemeName => WerkbankTheme.light,
+        _darkThemeName => WerkbankTheme.dark,
+        _systemThemeName => WerkbankTheme.system,
+        _ => WerkbankTheme.system,
+      };
     }
   }
 
   @override
   Object? toJson() {
-    return themeName;
+    return switch (theme) {
+      WerkbankTheme.light => _lightThemeName,
+      WerkbankTheme.dark => _darkThemeName,
+      WerkbankTheme.system => _systemThemeName,
+    };
   }
 }
 
 extension WerkbankThemeGlobalStateExtension on GlobalState {
   WerkbankThemeController get werkbankTheme => get<WerkbankThemeController>();
 
-  WerkbankThemeController? get maybeWerkbankTheme =>
+  WerkbankThemeController? get maybeWerkbankThemeChoice =>
       maybeGet<WerkbankThemeController>();
 }

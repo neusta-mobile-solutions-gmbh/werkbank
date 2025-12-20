@@ -18,6 +18,9 @@ extension type WerkbankAppGlobalState(GlobalState _globalState) {
 
   /// Returns the [PanelTabController] used by the current [WerkbankApp].
   PanelTabController get panelTab => _globalState.get<PanelTabController>();
+
+  /// Returns the [PanelController] used by the current [WerkbankApp].
+  PanelController get panel => _globalState.get<PanelController>();
 }
 
 extension WerkbankAppGlobalStateExtension on GlobalState {

@@ -205,27 +205,24 @@ class WerkbankApp extends StatelessWidget {
                           ),
                           textTheme: WerkbankTextTheme.standard(),
                         ),
-                        child: PanelControllerProvider(
-                          child: UseCaseMetadataProvider(
-                            child: AddonLayerBuilder(
-                              layer: AddonLayer.management,
-                              child: RootDescriptorFilter(
-                                child: RouterBuilder(
-                                  appBuilder: (context, goRouter) =>
-                                      _MaterialApp(
-                                        goRouter: goRouter,
-                                        builder: (context, child) {
-                                          return AddonSpecificationsProvider(
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                  mainPageBuilder: (context, child) {
-                                    return MainPage(
-                                      mainView: child,
+                        child: UseCaseMetadataProvider(
+                          child: AddonLayerBuilder(
+                            layer: AddonLayer.management,
+                            child: RootDescriptorFilter(
+                              child: RouterBuilder(
+                                appBuilder: (context, goRouter) => _MaterialApp(
+                                  goRouter: goRouter,
+                                  builder: (context, child) {
+                                    return AddonSpecificationsProvider(
+                                      child: child,
                                     );
                                   },
                                 ),
+                                mainPageBuilder: (context, child) {
+                                  return MainPage(
+                                    mainView: child,
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -299,6 +296,10 @@ class _PersistenceAndGlobalState extends StatelessWidget {
             registry.register('pane_tabs', SectionsController.new);
             registry.register('search_query', SearchQueryController.new);
             registry.register('panel_tab', PanelTabController.new);
+            registry.registerWithTickerProvider(
+              'panel',
+              (tickerProvider) => PanelController(vsync: tickerProvider),
+            );
           },
           child: child,
         ),

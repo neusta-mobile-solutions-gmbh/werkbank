@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // TODO: Use GlobalStateController
-class PanelController {
-  PanelController({
+class WPanelController {
+  WPanelController({
     required TickerProvider vsync,
     bool initiallyVisible = true,
     required double initialMaxWidth,

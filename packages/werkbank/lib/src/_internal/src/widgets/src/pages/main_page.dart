@@ -5,6 +5,7 @@ import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
@@ -25,6 +26,9 @@ class MainPage extends StatelessWidget {
               layer: AddonLayer.applicationOverlay,
               child: UseCaseControllerManager(
                 child: WResizablePanels(
+                  controller: GlobalStateManager.of(
+                    context,
+                  ).werkbankApp.panel.wPanelController,
                   leftPanel: const NavigationPanel(),
                   rightPanel: const ConfigurationPanel(),
                   child: WerkbankNotificationsDisplay(

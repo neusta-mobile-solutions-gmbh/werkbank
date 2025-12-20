@@ -110,7 +110,9 @@ class WerkbankShortcuts extends StatelessWidget with OrderExecutor {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final panelController = GlobalStateManager.of(
+      context,
+    ).werkbankApp.panel.wPanelController;
     final filteredAndOrderedDescriptors = _filteredAndOrderedDescriptors(
       context,
     );

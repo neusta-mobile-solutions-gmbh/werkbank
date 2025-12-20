@@ -6,17 +6,19 @@ import 'package:werkbank/src/components/components.dart';
 
 mixin PanelCalcMixin {
   double maxPanelWidth(double maxWidth) => max(
-    maxWidth * PanelController.maxRelativPanelWidth,
-    PanelController.minWidth,
+    maxWidth * WPanelController.maxRelativPanelWidth,
+    WPanelController.minWidth,
   );
 
+  // TODO: Unused. Remove?
   double appropriatePanelWidth(double maxWidth) => lerpDouble(
-    PanelController.minWidth,
+    WPanelController.minWidth,
     maxWidth,
     // Room for improvement
     0.5,
   )!;
 
+  // TODO: Unused. Remove?
   bool initialVisible(double maxWidth) {
     return WBreakpoints.panelVisibilityBreakpoint < maxWidth;
   }

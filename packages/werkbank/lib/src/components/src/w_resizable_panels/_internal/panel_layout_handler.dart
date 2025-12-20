@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
+import 'package:werkbank/src/components/src/w_resizable_panels/_internal/panel_controller_provider.dart';
+import 'package:werkbank/src/components/src/w_resizable_panels/_internal/panel_utils.dart';
 
 typedef WidgetLayoutBuilder =
     Widget Function(
@@ -12,7 +14,7 @@ typedef WidgetLayoutBuilder =
 
 /// Sizes the panels and
 /// decides, if the panels need to be shrunk.
-/// Tells the [PanelController] to do so.
+/// Tells the [WPanelController] to do so.
 class PanelLayoutHandler extends StatelessWidget {
   const PanelLayoutHandler({
     required this.builder,
@@ -42,7 +44,7 @@ class _PanelShrinking extends StatelessWidget with PanelCalcMixin {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final panelController = WPanelControllerProvider.of(context);
     return LayoutBuilder(
       builder: (context, constraints) {
         final newMaxPanelWidth = maxPanelWidth(constraints.maxWidth);
@@ -76,7 +78,7 @@ class _PanelLayout extends StatefulWidget {
 class _PanelLayoutState extends State<_PanelLayout> with PanelCalcMixin {
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final panelController = WPanelControllerProvider.of(context);
     return ListenableBuilder(
       listenable: Listenable.merge([
         panelController.preferredLeft,
@@ -116,7 +118,7 @@ class _AutoVisibilityChange extends StatefulWidget {
 
 class _AutoVisibilityChangeState extends State<_AutoVisibilityChange>
     with PanelCalcMixin {
-  late PanelController controller;
+  late WPanelController controller;
   late bool previousVisibilityAutoSetting;
   bool initialized = false;
   double? previousMaxWidth;
@@ -124,7 +126,7 @@ class _AutoVisibilityChangeState extends State<_AutoVisibilityChange>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    controller = PanelControllerProvider.of(context);
+    controller = WPanelControllerProvider.of(context);
     if (!initialized) {
       previousVisibilityAutoSetting = controller.atLeastOneIsCurrentlyVisible;
       initialized = true;

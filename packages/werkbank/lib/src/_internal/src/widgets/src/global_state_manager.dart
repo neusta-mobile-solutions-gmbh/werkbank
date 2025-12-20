@@ -37,7 +37,8 @@ class GlobalStateManager extends StatefulWidget {
   State<GlobalStateManager> createState() => _GlobalStateManagerState();
 }
 
-class _GlobalStateManagerState extends State<GlobalStateManager> {
+class _GlobalStateManagerState extends State<GlobalStateManager>
+    with TickerProviderStateMixin {
   final Map<Type, GlobalStateController> _controllersByType = {};
   final Map<Type, String> _jsonStoreKeysByType = {};
   final Map<Type, ListenableSubscription> _subscriptionsByType = {};
@@ -103,7 +104,9 @@ class _GlobalStateManagerState extends State<GlobalStateManager> {
     if (_updatedControllersThisFrame) {
       return;
     }
-    final registry = _GlobalStateControllerRegistryImpl();
+    final registry = _GlobalStateControllerRegistryImpl(
+      tickerProvider: this,
+    );
     registry.jsonStoreKeyPrefix = 'werkbank';
     widget.registerWerkbankGlobalStateControllers(registry);
     final addons = AddonConfigProvider.addonsOf(context);
@@ -259,6 +262,12 @@ class _InheritedGlobalState extends InheritedWidget {
 
 class _GlobalStateControllerRegistryImpl
     implements GlobalStateControllerRegistry {
+  _GlobalStateControllerRegistryImpl({
+    required this.tickerProvider,
+  });
+
+  final TickerProvider tickerProvider;
+
   final List<_Registration> _registrations = [];
 
   late String jsonStoreKeyPrefix;
@@ -274,6 +283,22 @@ class _GlobalStateControllerRegistryImpl
         jsonStoreKey: '$jsonStoreKeyPrefix:$jsonStoreKey',
         type: T,
         createController: createController,
+        onUpdate: (controller) => onUpdate?.call(controller as T),
+      ),
+    );
+  }
+
+  @override
+  void registerWithTickerProvider<T extends GlobalStateController>(
+    String jsonStoreKey,
+    T Function(TickerProvider tickerProvider) createController, {
+    void Function(T controller)? onUpdate,
+  }) {
+    _registrations.add(
+      _Registration(
+        jsonStoreKey: '$jsonStoreKeyPrefix:$jsonStoreKey',
+        type: T,
+        createController: () => createController(tickerProvider),
         onUpdate: (controller) => onUpdate?.call(controller as T),
       ),
     );

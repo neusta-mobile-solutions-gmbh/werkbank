@@ -4,6 +4,7 @@
 /// @docImport 'package:werkbank/src/widgets/widgets.dart';
 library;
 
+import 'package:flutter/material.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 // TODO: Document. Also where do I get an instance?
@@ -36,6 +37,21 @@ abstract class GlobalStateControllerRegistry {
   void register<T extends GlobalStateController>(
     String jsonStoreKey,
     T Function() createController, {
+    void Function(T controller)? onUpdate,
+  });
+
+  /// Registers a [GlobalStateController] for the given type [T] that
+  /// requires a [TickerProvider].
+  ///
+  /// This works like [register], but the [createController] function
+  /// receives a [TickerProvider] that can, for example, be used
+  /// to create [AnimationController]s inside the [GlobalStateController].
+  ///
+  /// See the documentation of [register] for more information
+  /// about the parameters.
+  void registerWithTickerProvider<T extends GlobalStateController>(
+    String jsonStoreKey,
+    T Function(TickerProvider tickerProvider) createController, {
     void Function(T controller)? onUpdate,
   });
 }

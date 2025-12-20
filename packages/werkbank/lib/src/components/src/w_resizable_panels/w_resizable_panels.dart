@@ -1,42 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/components/src/w_resizable_panels/_internal/draggable_divider.dart';
+import 'package:werkbank/src/components/src/w_resizable_panels/_internal/panel_controller_provider.dart';
+import 'package:werkbank/src/components/src/w_resizable_panels/_internal/panel_layout_handler.dart';
 
 /// {@category Werkbank Components}
 class WResizablePanels extends StatelessWidget {
   const WResizablePanels({
     super.key,
+    required this.controller,
     required this.leftPanel,
     required this.rightPanel,
     required this.child,
   });
 
+  final WPanelController controller;
   final Widget leftPanel;
   final Widget rightPanel;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return PanelLayoutHandler(
-      builder: (context, leftPanelWidth, rightPanelWidth) {
-        return Row(
-          children: [
-            _LeftPanelLayout(
-              width: leftPanelWidth,
-              child: leftPanel,
-            ),
-            const _LeftSeparator(),
-            Expanded(
-              child: child,
-            ),
-            const _RightSeparator(),
-            _RightPanelLayout(
-              width: rightPanelWidth,
-              child: rightPanel,
-            ),
-          ],
-        );
-      },
+    return WPanelControllerProvider(
+      controller: controller,
+      child: PanelLayoutHandler(
+        builder: (context, leftPanelWidth, rightPanelWidth) {
+          return Row(
+            children: [
+              _LeftPanelLayout(
+                width: leftPanelWidth,
+                child: leftPanel,
+              ),
+              const _LeftSeparator(),
+              Expanded(
+                child: child,
+              ),
+              const _RightSeparator(),
+              _RightPanelLayout(
+                width: rightPanelWidth,
+                child: rightPanel,
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
@@ -52,7 +59,7 @@ class _LeftPanelLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final panelController = WPanelControllerProvider.of(context);
     return FadeTransition(
       opacity: panelController.leftAnimation,
       child: SizeTransition(
@@ -80,7 +87,7 @@ class _RightPanelLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final panelController = WPanelControllerProvider.of(context);
     return FadeTransition(
       opacity: panelController.rightAnimation,
       child: SizeTransition(
@@ -102,7 +109,7 @@ class _LeftSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final panelController = WPanelControllerProvider.of(context);
     return ListenableBuilder(
       listenable: Listenable.merge([
         panelController.preferredLeft,
@@ -125,7 +132,7 @@ class _RightSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final panelController = WPanelControllerProvider.of(context);
     return ListenableBuilder(
       listenable: Listenable.merge([
         panelController.preferredRight,

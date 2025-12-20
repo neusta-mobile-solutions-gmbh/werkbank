@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
@@ -20,7 +18,6 @@ class PanelController extends GlobalStateController {
   static const _rightExpandedKey = 'rightExpanded';
 
   late final WPanelController wPanelController = WPanelController(
-    // TODO: Add way to calculate fitting initial width?
     initialLeftWidth: 500,
     initialRightWidth: 500,
   );

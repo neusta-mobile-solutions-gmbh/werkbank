@@ -34,18 +34,6 @@ class DraggableDivider extends StatefulWidget {
 class _DraggableDividerState extends State<DraggableDivider> {
   late double accumulator;
 
-  void resetGestureDetector() {
-    // setState is needed to reset some inner Behavior
-    // of the GestureDetector.
-    // Otherwise, on the nect onPanDown + onPanUpdate
-    // the dx and dy can be larger than expected
-    // due to the old position of the GestureDetector.
-
-    setState(() {
-      accumulator = widget.initial;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -53,25 +41,17 @@ class _DraggableDividerState extends State<DraggableDivider> {
         accumulator = widget.initial;
       },
       onPanUpdate: (details) {
-        final vorzeichen =
-            widget.direction == DraggableDividerDirection.startToEnd ? 1 : -1;
-        switch (widget.axis) {
-          case Axis.horizontal:
-            final dx = vorzeichen * details.delta.dx;
-            final newValue = dx + accumulator;
-            accumulator += dx;
-            widget.onUpdate?.call(newValue);
-          case Axis.vertical:
-            final dy = vorzeichen * details.delta.dy;
-            final newValue = dy + accumulator;
-            accumulator += dy;
-            widget.onUpdate?.call(newValue);
-        }
+        final sign = switch (widget.direction) {
+          DraggableDividerDirection.startToEnd => 1,
+          DraggableDividerDirection.endToStart => -1,
+        };
+        final axisDelta = switch (widget.axis) {
+          Axis.horizontal => details.delta.dx,
+          Axis.vertical => details.delta.dy,
+        };
+        accumulator += sign * axisDelta;
+        widget.onUpdate?.call(accumulator);
       },
-      onPanEnd: (details) {
-        resetGestureDetector();
-      },
-      onPanCancel: resetGestureDetector,
       child: MouseRegion(
         cursor: widget.axis == Axis.horizontal
             ? SystemMouseCursors.resizeColumn

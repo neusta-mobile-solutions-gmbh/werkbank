@@ -103,6 +103,9 @@ class PanelController {
   void dispose() {
     _leftController.dispose();
     _rightController.dispose();
+    _preferredLeft.dispose();
+    _preferredRight.dispose();
+    _maxWidth.dispose();
   }
 
   // The absolute width
@@ -144,10 +147,10 @@ class PanelController {
       return true;
     }
 
-    final currentlyInvisible = controller.value == 0;
+    final currentlyVisible = controller.value > 0;
 
     final proposalVerySmall = width < verySmallWidth;
-    if (proposalVerySmall && !currentlyInvisible) {
+    if (proposalVerySmall && currentlyVisible) {
       unawaited(controller.animateTo(0, duration: Duration.zero));
 
       return true;
@@ -159,7 +162,7 @@ class PanelController {
       return false;
     }
 
-    if (currentlyInvisible) {
+    if (!currentlyVisible) {
       unawaited(controller.animateTo(1, duration: Duration.zero));
     }
     preferredWidth.value = width;

@@ -13,9 +13,7 @@ class PanelControllerProvider extends StatefulWidget {
     BuildContext context,
   ) {
     return context
-        .dependOnInheritedWidgetOfExactType<
-          _InheritedPanelVisibilityController
-        >()!
+        .dependOnInheritedWidgetOfExactType<_InheritedPanelController>()!
         .controller;
   }
 
@@ -63,15 +61,15 @@ class _PanelControllerProviderState extends State<PanelControllerProvider>
 
   @override
   Widget build(BuildContext context) {
-    return _InheritedPanelVisibilityController(
+    return _InheritedPanelController(
       controller: _panelController,
       child: widget.child,
     );
   }
 }
 
-class _InheritedPanelVisibilityController extends InheritedWidget {
-  const _InheritedPanelVisibilityController({
+class _InheritedPanelController extends InheritedWidget {
+  const _InheritedPanelController({
     required this.controller,
     required super.child,
   });
@@ -79,7 +77,7 @@ class _InheritedPanelVisibilityController extends InheritedWidget {
   final PanelController controller;
 
   @override
-  bool updateShouldNotify(_InheritedPanelVisibilityController oldWidget) {
+  bool updateShouldNotify(_InheritedPanelController oldWidget) {
     return controller != oldWidget.controller;
   }
 }

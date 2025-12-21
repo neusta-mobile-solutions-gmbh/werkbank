@@ -151,14 +151,14 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
         .whereNot(oldTypes.contains)
         .toList(growable: false);
 
-    final changedIdTypes = newTypes
+    final changedJsonStoreKeyTypes = newTypes
         .where((type) {
           if (!oldTypes.contains(type)) {
             return false;
           }
-          final oldId = _jsonStoreKeysByType[type]!;
-          final newId = registrationsByType[type]!.jsonStoreKey;
-          return oldId != newId;
+          final oldJsonStoreKey = _jsonStoreKeysByType[type]!;
+          final newJsonStoreKey = registrationsByType[type]!.jsonStoreKey;
+          return oldJsonStoreKey != newJsonStoreKey;
         })
         .toList(growable: false);
 
@@ -170,9 +170,9 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
       _jsonStoreKeysByType.remove(type);
     }
 
-    for (final type in changedIdTypes) {
-      final newId = registrationsByType[type]!.jsonStoreKey;
-      _jsonStoreKeysByType[type] = newId;
+    for (final type in changedJsonStoreKeyTypes) {
+      final newJsonStoreKey = registrationsByType[type]!.jsonStoreKey;
+      _jsonStoreKeysByType[type] = newJsonStoreKey;
       _updateSubscription(type);
     }
 

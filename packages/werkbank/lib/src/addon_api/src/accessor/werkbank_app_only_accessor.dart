@@ -6,7 +6,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
@@ -69,23 +68,6 @@ mixin WerkbankAppOnlyAccessor on AddonAccessor {
   /// Gets the last updated date of the current [WerkbankApp].
   DateTime? lastUpdatedOf(BuildContext context) {
     return _maybeAccess.maybeLastUpdatedOf(context);
-  }
-
-  /// Gets the [HistoryController] of the current [WerkbankApp].
-  HistoryController historyOf(BuildContext context) {
-    return ensureNotNull(_maybeAccess.maybeHistoryOf(context));
-  }
-
-  /// Gets the [AcknowledgedController] of the current [WerkbankApp].
-  AcknowledgedController acknowledgedController(BuildContext context) {
-    return ensureNotNull(_maybeAccess.maybeAcknowledgedController(context));
-  }
-
-  /// Gets the [PersistentController] of the given type.
-  T persistentControllerOf<T extends PersistentController>(
-    BuildContext context,
-  ) {
-    return ensureNotNull(_maybeAccess.maybePersistentControllerOf<T>(context));
   }
 
   /* TODO(lzuttermeister): Should we also add this to

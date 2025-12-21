@@ -10,6 +10,7 @@ import 'package:werkbank/src/environment/environment.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/routing/routing.dart';
 import 'package:werkbank/src/theme/theme.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 
 class ConfigurationPanel extends StatelessWidget {
   const ConfigurationPanel({super.key});
@@ -21,6 +22,9 @@ class ConfigurationPanel extends StatelessWidget {
       DescriptorNavState(:final descriptor) => descriptor,
     };
     final nameSegments = currentDescriptor?.nameSegments ?? [];
+    final panelTabController = GlobalStateManager.of(
+      context,
+    ).werkbankApp.panelTab;
     return SizedBox.expand(
       child: _ConfigurationPanelScaffold(
         pathInfoArea: Visibility(
@@ -54,25 +58,43 @@ class ConfigurationPanel extends StatelessWidget {
             ),
           ),
         ),
-        tabArea: WTabView(
-          tabs: [
-            WTab(
-              title: Text(context.sL10n.configurationPanel.tabs.configure),
-              child: const _UseCaseNeedingTabWrapper(
-                tab: ConfigureTab(),
-              ),
-            ),
-            WTab(
-              title: Text(context.sL10n.configurationPanel.tabs.inspect),
-              child: const _UseCaseNeedingTabWrapper(
-                tab: InspectTab(),
-              ),
-            ),
-            WTab(
-              title: Text(context.sL10n.configurationPanel.tabs.settings),
-              child: const SettingsTab(),
-            ),
-          ],
+        tabArea: ListenableBuilder(
+          listenable: panelTabController,
+          builder: (context, _) {
+            return WTabView(
+              index: switch (panelTabController.selectedTab) {
+                PanelTab.configure => 0,
+                PanelTab.inspect => 1,
+                PanelTab.settings => 2,
+              },
+              onIndexChanged: (index) {
+                panelTabController.selectedTab = switch (index) {
+                  0 => PanelTab.configure,
+                  1 => PanelTab.inspect,
+                  2 => PanelTab.settings,
+                  _ => PanelTab.configure,
+                };
+              },
+              tabs: [
+                WTab(
+                  title: Text(context.sL10n.configurationPanel.tabs.configure),
+                  child: const _UseCaseNeedingTabWrapper(
+                    tab: ConfigureTab(),
+                  ),
+                ),
+                WTab(
+                  title: Text(context.sL10n.configurationPanel.tabs.inspect),
+                  child: const _UseCaseNeedingTabWrapper(
+                    tab: InspectTab(),
+                  ),
+                ),
+                WTab(
+                  title: Text(context.sL10n.configurationPanel.tabs.settings),
+                  child: const SettingsTab(),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

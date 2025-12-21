@@ -8,5 +8,7 @@ dependencies:
   - /lib/src/persistence
   # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
   - /lib/src/_internal/src/widgets
+  # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.
+  - /lib/src/werkbank_app_global_state
   - go_router
   - animations

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 /// {@category Writing Your Own Addons}
@@ -21,6 +20,9 @@ abstract class Addon {
   List<LocalizationsDelegate<Object?>> buildLocalizationsDelegates(
     BuildContext context,
   ) => [];
+
+  // TODO: Document
+  void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {}
 
   /// Creates [TransientUseCaseStateEntry]s which are attached to the
   /// [UseCaseComposer] at the beginning of the use case setup.
@@ -92,12 +94,6 @@ abstract class Addon {
   ) => [];
 
   AddonLayerEntries get layers => AddonLayerEntries();
-
-  /// Experimental: This is not tested and might change in the future or even
-  /// be removed.
-  @experimental
-  ControllerMapFactory get controllerMapFactory =>
-      (prefsWithCache) => {};
 
   /// Add a description to the addon. This may be used in multiple ways
   /// and places in the future.

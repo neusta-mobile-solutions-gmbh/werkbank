@@ -4,6 +4,8 @@ import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addon_config/addon_config.dart';
 import 'package:werkbank/src/app_config/app_config.dart';
 import 'package:werkbank/src/environment/environment.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
+import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/utils/utils.dart';
@@ -21,14 +23,16 @@ class DisplayApp extends StatelessWidget {
     super.key,
     required this.appConfig,
     required this.addonConfig,
+    this.persistenceConfig = const PersistenceConfig.memory(),
+    this.globalStateConfig = const GlobalStateConfig(),
     required this.child,
   });
 
   /// A convenience constructor to create a [DisplayApp] with a
   /// [UseCaseDisplay] as child.
   ///
-  /// The [appConfig] and [addonConfig] parameters are passed to the
-  /// [DisplayApp].
+  /// The [appConfig], [addonConfig] and [persistenceConfig] parameters are
+  /// passed to the [DisplayApp].
   /// The [useCase] and [initialMutation] parameters are passed to the
   /// [UseCaseDisplay].
   /// The [useCaseWrapper] parameter can be used to wrap the
@@ -37,6 +41,7 @@ class DisplayApp extends StatelessWidget {
   factory DisplayApp.singleUseCase({
     required AppConfig appConfig,
     required AddonConfig addonConfig,
+    PersistenceConfig persistenceConfig = const PersistenceConfig.memory(),
     required UseCaseDescriptor useCase,
     UseCaseStateMutation? initialMutation,
     WrapperBuilder? useCaseWrapper,
@@ -61,30 +66,51 @@ class DisplayApp extends StatelessWidget {
     return DisplayApp(
       appConfig: appConfig,
       addonConfig: addonConfig,
+      persistenceConfig: persistenceConfig,
       child: effectiveUseCaseDisplay,
     );
   }
 
   final AppConfig appConfig;
   final AddonConfig addonConfig;
+
+  // TODO: Document
+  final PersistenceConfig persistenceConfig;
+
+  // TODO: Document
+  final GlobalStateConfig globalStateConfig;
+
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return WerkbankEnvironmentProvider(
       environment: WerkbankEnvironment.display,
-      // Technically we currently don't need a DescriptorProvider with null
-      // descriptor here, but changes to what can be accessed in which layer
-      // may change this in the future, so we keep it as a safe guard.
-      child: DescriptorProvider(
-        descriptor: null,
-        child: AddonConfigProvider(
-          addonConfig: addonConfig,
-          child: AddonLayerBuilder(
-            layer: AddonLayer.management,
-            child: UseCaseApp(
-              appConfig: appConfig,
-              child: child,
+      child: AddonConfigProvider(
+        addonConfig: addonConfig,
+        child: JsonStoreProvider(
+          persistenceConfig: persistenceConfig,
+          placeholder: const SizedBox.expand(),
+          child: IsWarmStartProvider(
+            alwaysTreatLikeWarmStart:
+                globalStateConfig.alwaysTreatLikeWarmStart,
+            child: GlobalStateManager(
+              globalStateConfig: globalStateConfig,
+              registerWerkbankGlobalStateControllers: (registry) {},
+              // Technically we currently don't need a DescriptorProvider with
+              // null descriptor here, but changes to what can be accessed in
+              // which layer may change this in the future, so we keep it as
+              // a safe guard.
+              child: DescriptorProvider(
+                descriptor: null,
+                child: AddonLayerBuilder(
+                  layer: AddonLayer.management,
+                  child: UseCaseApp(
+                    appConfig: appConfig,
+                    child: child,
+                  ),
+                ),
+              ),
             ),
           ),
         ),

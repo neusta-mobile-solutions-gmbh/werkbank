@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_data.dart';
+import 'package:werkbank/src/addons/src/report/src/_internal/report_data.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
@@ -22,7 +22,7 @@ abstract class Report {
 
   final bool collapsible;
 
-  bool display(ReportPersistentData data);
+  bool display(ReportData data);
 }
 
 class PermanentReport extends Report {
@@ -49,7 +49,7 @@ class PermanentReport extends Report {
   }
 
   @override
-  bool display(ReportPersistentData data) {
+  bool display(ReportData data) {
     return true;
   }
 }
@@ -78,7 +78,7 @@ class AcceptableReport extends Report {
   }
 
   @override
-  bool display(ReportPersistentData data) {
+  bool display(ReportData data) {
     final entry = data.entries[id];
     return !(entry?.accepted ?? false);
   }
@@ -113,7 +113,7 @@ class NewContentReport extends Report {
   final DateTime publishDate;
 
   @override
-  bool display(ReportPersistentData data) {
+  bool display(ReportData data) {
     final entry = data.entries[id];
     final notAcceptedYet = !(entry?.accepted ?? false);
     final wasAddedRecently = data.firstTimeReportAddonWasExecuted.isBefore(

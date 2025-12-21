@@ -5,7 +5,7 @@ import 'package:werkbank/src/addons/src/background/background.dart';
 import 'package:werkbank/src/addons/src/background/src/_internal/background_applier.dart';
 import 'package:werkbank/src/addons/src/background/src/_internal/background_dropdown.dart';
 import 'package:werkbank/src/components/components.dart';
-import 'package:werkbank/src/tree/tree.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 /// {@category Configuring Addons}
@@ -22,19 +22,8 @@ class BackgroundAddon extends Addon {
   /// - Checkerboard
   ///
   /// Additionally, you can provide your own [backgroundOptions].
-  ///
-  /// The [initialBackgroundOptionName] can be used to set the
-  /// [BackgroundOption] that is initially selected for all use cases.
-  /// When this is `null`, the default background option of the use case
-  /// is used, which can be controlled by calls of methods on the
-  /// [BackgroundComposer] while composing the use case.
-  /// Consider keeping this `null` and setting the default background
-  /// using one of the methods on the [BackgroundComposer] inside of the
-  /// [WerkbankRoot.builder]. This way, nested use cases can still override
-  /// this with a different default background.
   BackgroundAddon({
     bool includeDefaultBackgrounds = true,
-    this.initialBackgroundOptionName,
     List<BackgroundOption> backgroundOptions = const [],
   }) : backgroundOptions = [
          if (includeDefaultBackgrounds) ..._defaultBackgroundOptions,
@@ -69,31 +58,19 @@ class BackgroundAddon extends Addon {
   /// localization etc. is already applied within their [BuildContext].
   final List<BackgroundOption> backgroundOptions;
 
-  /// The name of the initially used background option.
-  /// This may be a background option introduced by this addon or by another
-  /// addon.
-  /// If this is `null`, the default background option of the use case is used.
-  final String? initialBackgroundOptionName;
+  @override
+  void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
+    registry.register(
+      'background',
+      BackgroundController.new,
+      onUpdate: (controller) =>
+          controller.updateBackgroundOptions(backgroundOptions),
+    );
+  }
 
   @override
   AddonLayerEntries get layers {
     return AddonLayerEntries(
-      management: [
-        ManagementLayerEntry(
-          id: 'background_state',
-          after: const [
-            FullLayerEntryId(
-              addonId: 'device_frame',
-              entryId: 'device_frame_state',
-            ),
-          ],
-          builder: (context, child) => BackgroundManager(
-            backgroundOptions: backgroundOptions,
-            initialBackgroundOptionName: initialBackgroundOptionName,
-            child: child,
-          ),
-        ),
-      ],
       useCase: [
         UseCaseLayerEntry(
           id: 'background_applier',

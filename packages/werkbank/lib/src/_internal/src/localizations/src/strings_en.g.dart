@@ -361,6 +361,9 @@ class TranslationsAddonsRecentHistoryEn {
 
 	/// en: 'Recently Visited'
 	String get homePageComponentTitle => 'Recently Visited';
+
+	/// en: 'No use cases visited yet.'
+	String get noUseCasesVisited => 'No use cases visited yet.';
 }
 
 // Path: addons.acknowledged
@@ -373,6 +376,9 @@ class TranslationsAddonsAcknowledgedEn {
 
 	/// en: 'Recently Added'
 	String get homePageComponentTitle => 'Recently Added';
+
+	/// en: 'No new use cases added since your last visit.'
+	String get noNewUseCases => 'No new use cases added since your last visit.';
 }
 
 // Path: addons.constraints
@@ -402,6 +408,7 @@ class TranslationsAddonsWerkbankThemeEn {
 	String get name => 'Werkbank Theme';
 
 	late final TranslationsAddonsWerkbankThemeControlsEn controls = TranslationsAddonsWerkbankThemeControlsEn._(_root);
+	late final TranslationsAddonsWerkbankThemeThemesEn themes = TranslationsAddonsWerkbankThemeThemesEn._(_root);
 }
 
 // Path: addons.theming
@@ -722,6 +729,24 @@ class TranslationsAddonsWerkbankThemeControlsEn {
 	String get theme => 'Theme';
 }
 
+// Path: addons.werkbank_theme.themes
+class TranslationsAddonsWerkbankThemeThemesEn {
+	TranslationsAddonsWerkbankThemeThemesEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Werkbank System'
+	String get system => 'Werkbank System';
+
+	/// en: 'Werkbank Light'
+	String get light => 'Werkbank Light';
+
+	/// en: 'Werkbank Dark'
+	String get dark => 'Werkbank Dark';
+}
+
 // Path: addons.theming.controls
 class TranslationsAddonsThemingControlsEn {
 	TranslationsAddonsThemingControlsEn._(this._root);
@@ -732,6 +757,9 @@ class TranslationsAddonsThemingControlsEn {
 
 	/// en: 'Theme'
 	String get theme => 'Theme';
+
+	/// en: '-'
+	String get noTheme => '-';
 }
 
 // Path: addons.zoom.controls
@@ -1260,7 +1288,9 @@ extension on Translations {
 			'addons.description.links' => 'External Links',
 			'addons.pageTransition.name' => 'Page Transition',
 			'addons.recentHistory.homePageComponentTitle' => 'Recently Visited',
+			'addons.recentHistory.noUseCasesVisited' => 'No use cases visited yet.',
 			'addons.acknowledged.homePageComponentTitle' => 'Recently Added',
+			'addons.acknowledged.noNewUseCases' => 'No new use cases added since your last visit.',
 			'addons.constraints.name' => 'Constraints',
 			'addons.constraints.controls.preset.name' => 'Preset',
 			'addons.constraints.controls.preset.values.initial' => 'Initial',
@@ -1280,8 +1310,12 @@ extension on Translations {
 			'addons.constraints.shortcuts.descriptionMaxSize' => 'Apply maximum size constraints',
 			'addons.werkbank_theme.name' => 'Werkbank Theme',
 			'addons.werkbank_theme.controls.theme' => 'Theme',
+			'addons.werkbank_theme.themes.system' => 'Werkbank System',
+			'addons.werkbank_theme.themes.light' => 'Werkbank Light',
+			'addons.werkbank_theme.themes.dark' => 'Werkbank Dark',
 			'addons.theming.name' => 'Theming',
 			'addons.theming.controls.theme' => 'Theme',
+			'addons.theming.controls.noTheme' => '-',
 			'addons.zoom.name' => 'Zoom',
 			'addons.zoom.controls.enabled' => 'Enabled',
 			'addons.zoom.controls.magnification' => 'Magnification',

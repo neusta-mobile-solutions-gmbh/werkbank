@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO: Use GlobalStateController
 class LocalizationManager extends StatefulWidget {
   const LocalizationManager({
     super.key,

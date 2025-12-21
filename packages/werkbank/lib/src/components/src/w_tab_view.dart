@@ -2,57 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
-// TODO(lzuttermeister): Make a stateless WTabBar instead?
 /// {@category Werkbank Components}
-class WTabView extends StatefulWidget {
+class WTabView extends StatelessWidget {
   const WTabView({
     super.key,
-    this.initialIndex = 0,
+    required this.index,
+    required this.onIndexChanged,
     required this.tabs,
   });
 
-  final int initialIndex;
+  final int index;
+  final ValueChanged<int> onIndexChanged;
   final List<WTab> tabs;
-
-  @override
-  State<WTabView> createState() => _WTabViewState();
-}
-
-class _WTabViewState extends State<WTabView> {
-  late int _index;
-
-  @override
-  void initState() {
-    super.initState();
-    _index = widget.initialIndex.clamp(0, widget.tabs.length - 1);
-  }
-
-  @override
-  void didUpdateWidget(covariant WTabView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _index = _index.clamp(0, widget.tabs.length - 1);
-  }
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.werkbankColorScheme;
-    final selectedTab = widget.tabs[_index];
+    final selectedTab = tabs[index.clamp(0, tabs.length - 1)];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
           children: [
-            for (final (i, tab) in widget.tabs.indexed)
+            for (final (i, tab) in tabs.indexed)
               Expanded(
                 child: _WTabButton(
-                  onPressed: () {
-                    setState(() {
-                      _index = i;
-                    });
-                  },
-                  isActive: i == _index,
+                  onPressed: () => onIndexChanged(i),
+                  isActive: i == index,
                   isAtStart: i == 0,
-                  isAtEnd: i == widget.tabs.length - 1,
+                  isAtEnd: i == tabs.length - 1,
                   title: tab.title,
                 ),
               ),

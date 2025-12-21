@@ -25,7 +25,7 @@ class WerkbankSettings extends StatelessWidget {
     return result!.orderOption;
   }
 
-  static WerkbankTheme werkbankThemeOf(BuildContext context) {
+  static WerkbankThemeData werkbankThemeOf(BuildContext context) {
     final result = context
         .dependOnInheritedWidgetOfExactType<_InheritedWerkbankSettings>(
           aspect: _WerkbankSettingsAspects.werkbankTheme,
@@ -35,14 +35,14 @@ class WerkbankSettings extends StatelessWidget {
   }
 
   final OrderOption? orderOption;
-  final WerkbankTheme? werkbankTheme;
+  final WerkbankThemeData? werkbankTheme;
   final bool overwrite;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final OrderOption orderOption;
-    final WerkbankTheme werkbankTheme;
+    final WerkbankThemeData werkbankTheme;
 
     if (overwrite) {
       orderOption = this.orderOption!;
@@ -81,7 +81,7 @@ class _InheritedWerkbankSettings
   });
 
   final OrderOption orderOption;
-  final WerkbankTheme werkbankTheme;
+  final WerkbankThemeData werkbankTheme;
 
   @override
   bool updateShouldNotify(_InheritedWerkbankSettings oldWidget) {

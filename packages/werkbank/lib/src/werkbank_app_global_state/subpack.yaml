@@ -1,0 +1,4 @@
+dependencies:
+  - /lib/src/tree
+  - /lib/src/global_state
+  - /lib/src/components

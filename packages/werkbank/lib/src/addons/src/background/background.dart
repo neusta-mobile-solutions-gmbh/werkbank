@@ -2,6 +2,6 @@
 
 export 'src/background_addon.dart';
 export 'src/background_composer.dart';
-export 'src/background_manager.dart';
+export 'src/background_controller.dart';
 export 'src/background_metadata.dart';
 export 'src/background_option.dart';

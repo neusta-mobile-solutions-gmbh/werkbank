@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/theming/theming.dart';
 
-class ThemeOptionApplier extends StatelessWidget {
+class ThemeOptionApplier extends StatefulWidget {
   const ThemeOptionApplier({
     super.key,
-    required this.themeOptions,
     required this.child,
   });
 
-  final List<ThemeOption> themeOptions;
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
-    final themeOption = ThemingManager.selectedThemeOptionOf(context);
-    var result = child;
-    if (themeOption != null) {
-      final wrapperBuilder = themeOption.wrapperBuilder;
+  State<ThemeOptionApplier> createState() => _ThemeOptionApplierState();
+}
 
-      if (wrapperBuilder != null) {
-        result = wrapperBuilder(context, result);
-      }
-    }
-    return result;
+class _ThemeOptionApplierState extends State<ThemeOptionApplier> {
+  final _childKey = GlobalKey();
+
+  @override
+  Widget build(BuildContext context) {
+    final themeController = AffiliationTransitionLayerEntry.access
+        .globalStateOf(context)
+        .theme;
+    return ListenableBuilder(
+      listenable: themeController,
+      builder: (context, _) {
+        final themeOption = themeController.selectedThemeOption;
+        Widget result = KeyedSubtree(
+          key: _childKey,
+          child: widget.child,
+        );
+        if (themeOption != null) {
+          final wrapperBuilder = themeOption.wrapperBuilder;
+
+          if (wrapperBuilder != null) {
+            result = wrapperBuilder(context, result);
+          }
+        }
+        return result;
+      },
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 enum WerkbankTheme {
@@ -6,7 +7,8 @@ enum WerkbankTheme {
   system,
 }
 
-class WerkbankThemeController extends GlobalStateController {
+class WerkbankThemeController extends GlobalStateController
+    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   WerkbankThemeController();
 
   static const _lightThemeName = 'Werkbank Light';

@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
-class PanelController extends GlobalStateController {
-  PanelController() {
-    Listenable.merge([
-      wPanelController.leftWidth,
-      wPanelController.rightWidth,
-      wPanelController.leftExpanded,
-      wPanelController.rightExpanded,
-    ]).addListener(notifyListeners);
-  }
+class PanelController extends GlobalStateController
+    with PersistedGlobalStateControllerMixin {
+  PanelController();
 
   static const _leftPanelWidthKey = 'leftPanelWidth';
   static const _rightPanelWidthKey = 'rightPanelWidth';
@@ -21,6 +15,14 @@ class PanelController extends GlobalStateController {
     initialLeftWidth: 500,
     initialRightWidth: 500,
   );
+
+  @override
+  Listenable get jsonChangedListenable => Listenable.merge([
+    wPanelController.leftWidth,
+    wPanelController.rightWidth,
+    wPanelController.leftExpanded,
+    wPanelController.rightExpanded,
+  ]);
 
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
@@ -50,6 +52,5 @@ class PanelController extends GlobalStateController {
   @override
   void dispose() {
     wPanelController.dispose();
-    super.dispose();
   }
 }

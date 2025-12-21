@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/tree/tree.dart';
 
-class AcknowledgedController extends GlobalStateController {
+class AcknowledgedController extends GlobalStateController
+    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   static const _fieldFirstPresentKey = 'firstPresent';
   static const _fieldHasBeenVisitedKey = 'hasBeenVisited';
 

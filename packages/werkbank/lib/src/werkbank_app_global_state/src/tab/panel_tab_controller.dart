@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 enum PanelTab { configure, inspect, settings }
 
-class PanelTabController extends GlobalStateController {
+class PanelTabController extends GlobalStateController
+    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   PanelTab _selectedTab = PanelTab.configure;
 
   PanelTab get selectedTab => _selectedTab;

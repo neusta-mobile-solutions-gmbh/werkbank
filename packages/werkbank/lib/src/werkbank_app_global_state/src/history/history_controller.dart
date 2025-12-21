@@ -1,9 +1,11 @@
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/tree/tree.dart';
 
-class HistoryController extends GlobalStateController {
+class HistoryController extends GlobalStateController
+    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   static const int maxHistorySize = 100;
 
   final Map<String, DateTime> _lastVisitTimeMap = {};

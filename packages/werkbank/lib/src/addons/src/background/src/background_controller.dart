@@ -1,9 +1,11 @@
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/background/background.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
-class BackgroundController extends GlobalStateController {
+class BackgroundController extends GlobalStateController
+    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   late Map<String, BackgroundOption> _backgroundOptionsByName;
   late List<BackgroundOption> _availableBackgroundOptions;
 

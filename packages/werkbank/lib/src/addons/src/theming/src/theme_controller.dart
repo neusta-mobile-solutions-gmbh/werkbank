@@ -1,9 +1,11 @@
 import 'dart:collection';
 
+import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/theming/theming.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
-class ThemeController extends GlobalStateController {
+class ThemeController extends GlobalStateController
+    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   late Map<String, ThemeOption> _themeOptionsByName;
   late List<ThemeOption> _availableThemeOptions;
 
@@ -35,6 +37,7 @@ class ThemeController extends GlobalStateController {
     _themeOptionsByName = {
       for (final themeOption in themeOptions) themeOption.name: themeOption,
     };
+    // TODO: Should we notify listeners here?
     _availableThemeOptions = UnmodifiableListView(themeOptions);
     if (selectedThemeOptionName == null ||
         !_themeOptionsByName.containsKey(selectedThemeOptionName)) {

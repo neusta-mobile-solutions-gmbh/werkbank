@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 /// [Addon]s can create and register [GlobalStateController]s by overriding the
 /// [Addon.registerGlobalStateControllers] method.
 abstract class GlobalStateController {
+  @mustCallSuper
   void dispose();
 }
 

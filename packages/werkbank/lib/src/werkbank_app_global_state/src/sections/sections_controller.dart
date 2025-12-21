@@ -1,11 +1,11 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
-import 'package:meta/meta.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/utils/utils.dart';
 import 'package:werkbank/src/werkbank_app_global_state/src/tab/panel_tab_controller.dart';
 
-class SectionsController extends GlobalStateController {
+class SectionsController extends GlobalStateController
+    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   static const _legacyTopLevelKey = 'tabs';
   static const _sectionIdOrderKey = 'sectionIdOrder';
   static const _hiddenSectionIdsKey = 'hiddenSectionIds';
@@ -76,6 +76,7 @@ class SectionsController extends GlobalStateController {
     _sectionsDataByTab[tab] = sectionsData.copyWith(
       sectionIdOrder: newOrder.lockUnsafe,
     );
+    // TODO: Only notify when new are added?
     notifyListeners();
     final orderedSections = <T>[];
     final sectionsById = {

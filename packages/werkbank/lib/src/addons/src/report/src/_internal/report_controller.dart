@@ -4,9 +4,11 @@ import 'package:werkbank/src/addons/src/report/report.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/report_data.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
-class ReportController extends GlobalStateController {
+class ReportController extends GlobalStateController
+    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
+    // TODO: Refactor this
     try {
       _persistentData = ReportData.fromJson(json);
       notifyListeners();
@@ -29,6 +31,7 @@ class ReportController extends GlobalStateController {
     firstTimeReportAddonWasExecuted: DateTime.now(),
   );
 
+  // TODO: Rename
   ReportData get persistentData => _persistentData;
 
   void accept(Report report) {

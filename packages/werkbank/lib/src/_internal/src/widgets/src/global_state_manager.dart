@@ -83,6 +83,9 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
     _subscriptionsByType[type]?.cancel();
     final controller = _controllersByType[type]!;
     final jsonStoreKey = _jsonStoreKeysByType[type]!;
+    if (controller is! PersistedGlobalStateControllerMixin) {
+      return;
+    }
 
     void listener() {
       try {
@@ -170,12 +173,6 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
       _jsonStoreKeysByType.remove(type);
     }
 
-    for (final type in changedJsonStoreKeyTypes) {
-      final newJsonStoreKey = registrationsByType[type]!.jsonStoreKey;
-      _jsonStoreKeysByType[type] = newJsonStoreKey;
-      _updateSubscription(type);
-    }
-
     for (final type in addedTypes) {
       try {
         final registration = registrationsByType[type]!;
@@ -196,16 +193,24 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
     for (final type in addedTypes) {
       final registration = registrationsByType[type]!;
       final controller = _controllersByType[type]!;
-      try {
-        final json = _jsonStore.get(registration.jsonStoreKey);
-        controller.tryLoadFromJson(json, isWarmStart: isWarmStart);
-      } on Object catch (e, stackTrace) {
-        debugPrint(e.toString());
-        debugPrintStack(stackTrace: stackTrace);
+      if (controller is PersistedGlobalStateControllerMixin) {
+        try {
+          final json = _jsonStore.get(registration.jsonStoreKey);
+          controller.tryLoadFromJson(json, isWarmStart: isWarmStart);
+        } on Object catch (e, stackTrace) {
+          debugPrint(e.toString());
+          debugPrintStack(stackTrace: stackTrace);
+        }
       }
     }
 
     for (final type in addedTypes) {
+      _updateSubscription(type);
+    }
+
+    for (final type in changedJsonStoreKeyTypes) {
+      final newJsonStoreKey = registrationsByType[type]!.jsonStoreKey;
+      _jsonStoreKeysByType[type] = newJsonStoreKey;
       _updateSubscription(type);
     }
 

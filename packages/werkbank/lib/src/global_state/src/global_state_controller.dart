@@ -24,6 +24,8 @@ abstract class ValueNotifierGlobalStateController<T> extends ValueNotifier<T>
 /// would change the value returned by [toJson], the [jsonChangedListenable]
 /// must notify its listeners.
 mixin PersistedGlobalStateControllerMixin on GlobalStateController {
+  // TODO: Add jsonStoreKey getter here?
+
   /// A listenable that notifies its listeners if the value returned by
   /// [toJson] has changed.
   Listenable get jsonChangedListenable;

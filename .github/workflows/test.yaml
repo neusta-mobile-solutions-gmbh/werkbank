@@ -1,0 +1,41 @@
+name: test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        directory:
+          - "example/example_werkbank"
+          - "packages/werkbank"
+
+    name: flutter test
+    runs-on: ubuntu-latest
+    container: ghcr.io/cirruslabs/flutter:3.32.2
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check expected flutter version
+        shell: python3 {0}
+        run: |
+          import json
+
+          fvmrc_version = json.load(open(".fvmrc"))["flutter"]
+          sdk_version = open("/sdks/flutter/version").read().strip()
+
+          assert fvmrc_version == sdk_version
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.directory }}
+        run: flutter pub get
+
+      - name: Run Unit Tests
+        working-directory: ${{ matrix.directory }}
+        run: flutter test

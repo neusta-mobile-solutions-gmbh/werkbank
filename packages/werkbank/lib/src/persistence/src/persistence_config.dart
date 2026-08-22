@@ -24,6 +24,7 @@ import 'package:werkbank/src/persistence/src/json_store.dart';
 /// application.
 interface class PersistenceConfig {
   const PersistenceConfig()
+    // TODO: Is comment this still relevant? Initializations are in the GlobalStateConfig.
     // The default [PersistenceConfig] does not have initializations,
     // because they would only be applied if they are present before the
     // respective addon is loaded for the first time.
@@ -31,6 +32,7 @@ interface class PersistenceConfig {
     // why the initializations are not applied.
     : this._(createJsonStore: _createSharedPreferencesStore);
 
+  // TODO: Is comment this still relevant? GlobalStateConfig has alwaysTreatLikeWarmStart.
   // TODO: Add "treatAsWarmStart" parameter?
   const PersistenceConfig.memory()
     : this._(

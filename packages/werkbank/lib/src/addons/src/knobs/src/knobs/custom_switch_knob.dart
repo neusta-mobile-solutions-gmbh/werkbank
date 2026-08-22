@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
@@ -154,8 +156,7 @@ class _CustomSwitchKnob<T> extends StatelessWidget {
       }
       // ignore: avoid_catching_errors
     } on ArgumentError catch (e, stackTrace) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: stackTrace);
+      Zone.current.handleUncaughtError(e, stackTrace);
       isRight = false;
     }
 

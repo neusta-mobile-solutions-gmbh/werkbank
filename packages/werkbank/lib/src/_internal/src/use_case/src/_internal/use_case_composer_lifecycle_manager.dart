@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/use_case/src/_internal/use_case_composer_impl.dart';
 import 'package:werkbank/src/_internal/src/use_case/src/_internal/use_case_composition_impl.dart';
@@ -69,8 +71,7 @@ class UseCaseComposerLifecycleManager {
         rethrow;
       }
     } on Object catch (e, stackTrace) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: stackTrace);
+      Zone.current.handleUncaughtError(e, stackTrace);
       return UseCaseComposerLifecycleManager._initialize(
         useCaseDescriptor,
         addonConfig: addonConfig,

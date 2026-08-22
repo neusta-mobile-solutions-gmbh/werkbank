@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -138,8 +140,7 @@ class WerkbankApp extends StatelessWidget {
       return RootDescriptor.fromWerkbankRoot(root);
     } on DuplicateDescriptorPathsException catch (e, stackTrace) {
       final duplicatePaths = e.duplicatePaths;
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: stackTrace);
+      Zone.current.handleUncaughtError(e, stackTrace);
 
       UseCase.dispatchNotification(
         context,

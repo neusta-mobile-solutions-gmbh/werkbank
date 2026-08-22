@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
@@ -92,8 +94,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
         final json = controller.toJson();
         _jsonStore.set(jsonStoreKey, json);
       } on Object catch (e, stackTrace) {
-        debugPrint(e.toString());
-        debugPrintStack(stackTrace: stackTrace);
+        Zone.current.handleUncaughtError(e, stackTrace);
       }
     }
 
@@ -139,8 +140,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
         }
         registrationsByJsonStoreKey[registration.jsonStoreKey] = registration;
       } on Object catch (e, stackTrace) {
-        debugPrint(e.toString());
-        debugPrintStack(stackTrace: stackTrace);
+        Zone.current.handleUncaughtError(e, stackTrace);
       }
     }
     final oldTypes = _jsonStoreKeysByType.keys;
@@ -180,8 +180,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
         _controllersByType[type] = controller;
         _jsonStoreKeysByType[type] = registration.jsonStoreKey;
       } on Object catch (e, stackTrace) {
-        debugPrint(e.toString());
-        debugPrintStack(stackTrace: stackTrace);
+        Zone.current.handleUncaughtError(e, stackTrace);
       }
     }
 
@@ -198,8 +197,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
           final json = _jsonStore.get(registration.jsonStoreKey);
           controller.tryLoadFromJson(json, isWarmStart: isWarmStart);
         } on Object catch (e, stackTrace) {
-          debugPrint(e.toString());
-          debugPrintStack(stackTrace: stackTrace);
+          Zone.current.handleUncaughtError(e, stackTrace);
         }
       }
     }
@@ -224,8 +222,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
     try {
       widget.globalStateConfig.initialize?.call(_createGlobalState());
     } on Object catch (e, stackTrace) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: stackTrace);
+      Zone.current.handleUncaughtError(e, stackTrace);
     }
   }
 
@@ -235,8 +232,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
       try {
         controller.dispose();
       } on Object catch (e, stackTrace) {
-        debugPrint(e.toString());
-        debugPrintStack(stackTrace: stackTrace);
+        Zone.current.handleUncaughtError(e, stackTrace);
       }
     }
     super.dispose();

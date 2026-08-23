@@ -27,6 +27,9 @@ class WerkbankThemeController extends GlobalStateController
   }
 
   @override
+  String get jsonStoreKey => 'werkbank_theme';
+
+  @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     if (json is String) {
       theme = switch (json) {

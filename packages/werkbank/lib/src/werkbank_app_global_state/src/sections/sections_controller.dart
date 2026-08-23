@@ -20,6 +20,10 @@ class SectionsController extends GlobalStateController
     for (final tab in PanelTab.values) tab: _SectionsData.empty,
   };
 
+  // TODO: Change key? Do we already break compatibility in this PR?
+  @override
+  String get jsonStoreKey => 'pane_tabs';
+
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     var effectiveJson = json;

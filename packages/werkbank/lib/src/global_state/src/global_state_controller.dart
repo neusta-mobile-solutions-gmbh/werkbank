@@ -28,9 +28,8 @@ abstract class GlobalStateController {
     GlobalStateControllerData data,
   ) {}
 
-  // TODO: Give this an empty body?
   @mustCallSuper
-  void dispose();
+  void dispose() {}
 
   // TODO: Document super call requirement.
   /// Builds a widget that can supplement the functionality of the

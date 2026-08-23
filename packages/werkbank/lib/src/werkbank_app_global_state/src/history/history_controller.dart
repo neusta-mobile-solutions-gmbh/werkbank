@@ -74,11 +74,7 @@ class HistoryController extends GlobalStateController
   }
 
   @override
-  Object? toJson() {
-    return {
-      for (final entry in _sortedVisits) entry.$1: entry.$2.toIso8601String(),
-    };
-  }
+  String get jsonStoreKey => 'history';
 
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
@@ -97,5 +93,12 @@ class HistoryController extends GlobalStateController
       }
       notifyListeners();
     }
+  }
+
+  @override
+  Object? toJson() {
+    return {
+      for (final entry in _sortedVisits) entry.$1: entry.$2.toIso8601String(),
+    };
   }
 }

@@ -44,7 +44,6 @@ class ThemingAddon extends Addon {
   @override
   void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
     registry.register(
-      'theme',
       ThemeController.new,
       onUpdate: (controller) => controller.updateThemeOptions(themeOptions),
     );

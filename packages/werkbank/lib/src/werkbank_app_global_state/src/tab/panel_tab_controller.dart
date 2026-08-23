@@ -15,11 +15,7 @@ class PanelTabController extends GlobalStateController
   }
 
   @override
-  Object? toJson() => switch (selectedTab) {
-    PanelTab.configure => 'configure',
-    PanelTab.inspect => 'inspect',
-    PanelTab.settings => 'settings',
-  };
+  String get jsonStoreKey => 'panel_tab';
 
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
@@ -32,4 +28,11 @@ class PanelTabController extends GlobalStateController
       };
     }
   }
+
+  @override
+  Object? toJson() => switch (selectedTab) {
+    PanelTab.configure => 'configure',
+    PanelTab.inspect => 'inspect',
+    PanelTab.settings => 'settings',
+  };
 }

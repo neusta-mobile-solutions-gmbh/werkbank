@@ -10,19 +10,7 @@ class AcknowledgedController extends GlobalStateController
   Map<String, _AcknowledgedDescriptorEntry>? _acknowledgedMap;
 
   @override
-  Object? toJson() {
-    final acknowledgedMap = _acknowledgedMap;
-    if (acknowledgedMap == null) {
-      return null;
-    }
-    return {
-      for (final MapEntry(key: path, value: entry) in acknowledgedMap.entries)
-        path: {
-          _fieldFirstPresentKey: entry.firstPresent.toIso8601String(),
-          _fieldHasBeenVisitedKey: entry.hasBeenVisited,
-        },
-    };
-  }
+  String get jsonStoreKey => 'acknowledged';
 
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
@@ -45,6 +33,21 @@ class AcknowledgedController extends GlobalStateController
       }
       _acknowledgedMap = acknowledgedMap;
     }
+  }
+
+  @override
+  Object? toJson() {
+    final acknowledgedMap = _acknowledgedMap;
+    if (acknowledgedMap == null) {
+      return null;
+    }
+    return {
+      for (final MapEntry(key: path, value: entry) in acknowledgedMap.entries)
+        path: {
+          _fieldFirstPresentKey: entry.firstPresent.toIso8601String(),
+          _fieldHasBeenVisitedKey: entry.hasBeenVisited,
+        },
+    };
   }
 
   void logRootDescriptorChange(RootDescriptor rootDescriptor) {

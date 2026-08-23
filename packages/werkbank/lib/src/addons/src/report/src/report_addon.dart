@@ -25,7 +25,7 @@ class ReportAddon extends Addon {
 
   @override
   void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
-    registry.register('report', ReportController.new);
+    registry.register(ReportController.new);
   }
 
   @override

@@ -46,15 +46,18 @@ class ThemeController extends GlobalStateController
   }
 
   @override
-  Object? toJson() {
-    return _selectedThemeOptionName;
-  }
+  String get jsonStoreKey => 'theme';
 
   @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     if (json is String) {
       selectedThemeOptionName = json;
     }
+  }
+
+  @override
+  Object? toJson() {
+    return _selectedThemeOptionName;
   }
 }
 

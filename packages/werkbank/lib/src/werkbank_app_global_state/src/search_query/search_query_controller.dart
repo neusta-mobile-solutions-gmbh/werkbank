@@ -18,6 +18,9 @@ class SearchQueryController extends GlobalStateController
   Listenable get jsonChangedListenable => textEditingController;
 
   @override
+  String get jsonStoreKey => 'search_query';
+
+  @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     if (!isWarmStart) {
       return;
@@ -34,6 +37,7 @@ class SearchQueryController extends GlobalStateController
 
   @override
   void dispose() {
+    super.dispose();
     focusNode.dispose();
     textEditingController.dispose();
   }

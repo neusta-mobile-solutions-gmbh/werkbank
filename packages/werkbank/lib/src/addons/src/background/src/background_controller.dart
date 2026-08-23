@@ -48,6 +48,9 @@ class BackgroundController extends GlobalStateController
   }
 
   @override
+  String get jsonStoreKey => 'background';
+
+  @override
   Object? toJson() {
     return _selectedBackgroundOptionName;
   }

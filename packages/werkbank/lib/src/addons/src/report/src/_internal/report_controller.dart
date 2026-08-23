@@ -7,6 +7,9 @@ import 'package:werkbank/src/global_state/global_state.dart';
 class ReportController extends GlobalStateController
     with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
   @override
+  String get jsonStoreKey => 'report';
+
+  @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     // TODO: Refactor this
     try {

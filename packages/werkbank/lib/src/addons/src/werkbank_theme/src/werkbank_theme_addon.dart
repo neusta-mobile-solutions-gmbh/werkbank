@@ -15,7 +15,7 @@ class WerkbankThemeAddon extends Addon {
 
   @override
   void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
-    registry.register('werkbank_theme', WerkbankThemeController.new);
+    registry.register(WerkbankThemeController.new);
   }
 
   @override

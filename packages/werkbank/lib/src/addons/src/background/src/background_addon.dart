@@ -61,7 +61,6 @@ class BackgroundAddon extends Addon {
   @override
   void registerGlobalStateControllers(GlobalStateControllerRegistry registry) {
     registry.register(
-      'background',
       BackgroundController.new,
       onUpdate: (controller) =>
           controller.updateBackgroundOptions(backgroundOptions),

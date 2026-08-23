@@ -25,6 +25,9 @@ class PanelController extends GlobalStateController
   ]);
 
   @override
+  String get jsonStoreKey => 'panel';
+
+  @override
   void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
     if (json case {
       _leftPanelWidthKey: final double leftWidth,
@@ -52,5 +55,6 @@ class PanelController extends GlobalStateController
   @override
   void dispose() {
     wPanelController.dispose();
+    super.dispose();
   }
 }

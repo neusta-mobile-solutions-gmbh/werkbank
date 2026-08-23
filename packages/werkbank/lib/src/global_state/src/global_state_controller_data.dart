@@ -2,8 +2,8 @@ import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
 // TODO: document
-class GlobalStateControllerBuildData {
-  GlobalStateControllerBuildData({
+class GlobalStateControllerData {
+  GlobalStateControllerData({
     required this.jsonStore,
     required this.globalState,
     required this.isWarmStart,

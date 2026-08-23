@@ -30,56 +30,24 @@ mixin PersistedGlobalStateControllerMixin on GlobalStateController {
 
   Object? toJson();
 
-  @override
-  Widget build(
-    BuildContext context,
-    GlobalStateControllerBuildData data,
-    Widget child,
-  ) => _Persister(
-    controller: this,
-    jsonStore: data.jsonStore,
-    isWarmStart: data.isWarmStart,
-    child: super.build(context, data, child),
-  );
-}
-
-class _Persister extends StatefulWidget {
-  const _Persister({
-    required this.controller,
-    required this.jsonStore,
-    required this.isWarmStart,
-    required this.child,
-  });
-
-  final PersistedGlobalStateControllerMixin controller;
-  final JsonStore jsonStore;
-  final bool isWarmStart;
-
-  final Widget child;
-
-  @override
-  State<_Persister> createState() => _PersisterState();
-}
-
-class _PersisterState extends State<_Persister> {
   late final ListenableSubscription _jsonChangedSubscription;
 
   @override
-  void initState() {
-    super.initState();
+  void init<C extends GlobalStateController>(GlobalStateControllerData data) {
+    super.init<C>(data);
     try {
-      widget.controller.tryLoadFromJson(
-        widget.jsonStore.get(widget.controller.jsonStoreKey),
-        isWarmStart: widget.isWarmStart,
+      tryLoadFromJson(
+        data.jsonStore.get(jsonStoreKey),
+        isWarmStart: data.isWarmStart,
       );
     } on Object catch (e, stackTrace) {
       Zone.current.handleUncaughtError(e, stackTrace);
     }
-    _jsonChangedSubscription = widget.controller.jsonChangedListenable.listen(
+    _jsonChangedSubscription = jsonChangedListenable.listen(
       () {
         try {
-          final json = widget.controller.toJson();
-          widget.jsonStore.set(widget.controller.jsonStoreKey, json);
+          final json = toJson();
+          data.jsonStore.set(jsonStoreKey, json);
         } on Object catch (e, stackTrace) {
           Zone.current.handleUncaughtError(e, stackTrace);
         }
@@ -92,7 +60,4 @@ class _PersisterState extends State<_Persister> {
     _jsonChangedSubscription.cancel();
     super.dispose();
   }
-
-  @override
-  Widget build(BuildContext context) => widget.child;
 }

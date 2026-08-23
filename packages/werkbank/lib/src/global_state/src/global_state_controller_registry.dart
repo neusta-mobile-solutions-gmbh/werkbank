@@ -9,6 +9,7 @@ import 'package:werkbank/src/global_state/global_state.dart';
 
 // TODO: Document. Also where do I get an instance?
 abstract class GlobalStateControllerRegistry {
+  // TODO: Call type parameter C for consistency?
   /// Registers a [GlobalStateController] for the given type [T].
   ///
   /// The [createController] function is used to create an instance of the
@@ -28,8 +29,6 @@ abstract class GlobalStateControllerRegistry {
   /// to the [WerkbankApp] or [DisplayApp] changes.
   /// This means the [onUpdate] callback is a good place to inform
   /// the controller about changes to the [Addon] in which it was registered.
-  /// The [onUpdate] function will be called before
-  /// [GlobalStateController.tryLoadFromJson] is called.
   void register<T extends GlobalStateController>(
     T Function() createController, {
     void Function(T controller)? onUpdate,

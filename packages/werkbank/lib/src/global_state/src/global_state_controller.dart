@@ -18,6 +18,17 @@ import 'package:werkbank/src/global_state/global_state.dart';
 /// - [ListeningPersistedGlobalStateControllerMixin]
 /// - [NotifiablePersistedGlobalStateControllerMixin]
 abstract class GlobalStateController {
+  /// Initializes the [GlobalStateController] after it has been created
+  /// and registered.
+  /// The type parameter [C] is the type under which this
+  /// [GlobalStateController] instance was registered.
+  /// This type is unique among all registered [GlobalStateController]s.
+  @mustCallSuper
+  void init<C extends GlobalStateController>(
+    GlobalStateControllerData data,
+  ) {}
+
+  // TODO: Give this an empty body?
   @mustCallSuper
   void dispose();
 
@@ -38,14 +49,14 @@ abstract class GlobalStateController {
   /// So you should not rely on widgets from other [GlobalStateController]s
   /// being available in the widget tree.
   /// You can however access other [GlobalStateController]s themselves from
-  /// the [GlobalStateControllerBuildData] passed to this method.
+  /// the [GlobalStateControllerData] passed to this method.
   /// Building a stateful widget that uses another [GlobalStateController]
   /// in its [State.initState] method or other methods is a valid way to
   /// let different [GlobalStateController]s interact with each other.
   @mustCallSuper
   Widget build(
     BuildContext context,
-    GlobalStateControllerBuildData data,
+    GlobalStateControllerData data,
     Widget child,
   ) => child;
 }

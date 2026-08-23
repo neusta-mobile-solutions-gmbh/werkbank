@@ -84,6 +84,19 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
     });
   }
 
+  GlobalStateControllerData _createGlobalStateControllerData(
+    _GlobalStateControllerWithAddon controllerWithAddon,
+  ) {
+    return GlobalStateControllerData(
+      jsonStore: _PrefixingJsonStore(
+        prefix: controllerWithAddon.addonId,
+        delegate: _jsonStore,
+      ),
+      globalState: _createGlobalState(),
+      isWarmStart: IsWarmStartProvider.read(context),
+    );
+  }
+
   void _updateControllers() {
     if (_updatedControllersThisFrame) {
       return;
@@ -144,6 +157,18 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
       }
     }
 
+    for (final type in newTypes) {
+      final registration = registrationsByType[type]!;
+      final controllerWithAddon = _controllersByType[type]!;
+      final controller = controllerWithAddon.controller;
+      final data = _createGlobalStateControllerData(controllerWithAddon);
+      try {
+        registration.init(controller, data);
+      } on Object catch (e, stackTrace) {
+        Zone.current.handleUncaughtError(e, stackTrace);
+      }
+    }
+
     for (final registration in registrations) {
       registration.onUpdate(_controllersByType[registration.type]!.controller);
     }
@@ -187,7 +212,6 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
       child: widget.child,
     );
     final globalState = _createGlobalState();
-    final isWarmStart = IsWarmStartProvider.read(context);
     for (final controllerWithAddon in _controllersByType.values) {
       // We need to store this, because result will have changed by the type
       // the builder is called.
@@ -199,10 +223,8 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
         // new global state controllers are added or removed.
         key: _GlobalStateControllerGlobalKey(controllerWithAddon.controller),
         builder: (context) {
-          final data = GlobalStateControllerBuildData(
-            jsonStore: _jsonStore,
-            globalState: globalState,
-            isWarmStart: isWarmStart,
+          final data = _createGlobalStateControllerData(
+            controllerWithAddon,
           );
           return controllerWithAddon.controller.build(context, data, child);
         },
@@ -210,7 +232,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
     }
     return _InheritedGlobalState(
       globalState: globalState,
-      child: widget.child,
+      child: result,
     );
   }
 }
@@ -265,6 +287,7 @@ class _GlobalStateControllerRegistryImpl
         type: T,
         createController: createController,
         onUpdate: (controller) => onUpdate?.call(controller as T),
+        init: (controller, data) => controller.init<T>(data),
         addonId: addonId,
       ),
     );
@@ -280,6 +303,7 @@ class _GlobalStateControllerRegistryImpl
         type: T,
         createController: () => createController(tickerProvider),
         onUpdate: (controller) => onUpdate?.call(controller as T),
+        init: (controller, data) => controller.init<T>(data),
         addonId: addonId,
       ),
     );
@@ -291,12 +315,18 @@ class _Registration {
     required this.type,
     required this.createController,
     required this.onUpdate,
+    required this.init,
     required this.addonId,
   });
 
   final Type type;
   final GlobalStateController Function() createController;
   final void Function(GlobalStateController controller) onUpdate;
+  final void Function(
+    GlobalStateController controller,
+    GlobalStateControllerData data,
+  )
+  init;
   final String addonId;
 }
 

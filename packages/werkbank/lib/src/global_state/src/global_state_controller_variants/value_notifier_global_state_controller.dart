@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
+// TODO: Use wherever possible.
 // TODO: document
 abstract base class ValueNotifierGlobalStateController<T>
     extends ValueNotifier<T>

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
+// TODO: Add second variant that also implements Listenable? Or do this here?
 // TODO: document
 mixin NotifiablePersistedGlobalStateControllerMixin
     on PersistedGlobalStateControllerMixin {

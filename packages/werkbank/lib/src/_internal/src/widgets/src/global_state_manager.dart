@@ -41,12 +41,12 @@ class GlobalStateManager extends StatefulWidget {
 
 class _GlobalStateManagerState extends State<GlobalStateManager>
     with TickerProviderStateMixin {
-  final Map<Type, GlobalStateController> _controllersByType = {};
-  final Map<Type, String> _jsonStoreKeysByType = {};
+  final Map<Type, _GlobalStateControllerWithAddon> _controllersByType = {};
   final Map<Type, ListenableSubscription> _subscriptionsByType = {};
   late final JsonStore _jsonStore;
   bool _updatedControllersThisFrame = false;
   bool _isInitialized = false;
+  final GlobalKey _childKey = GlobalKey();
 
   @override
   void initState() {
@@ -78,30 +78,10 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
 
   GlobalState _createGlobalState() {
     // We need to create a copy of the map because it is mutated later.
-    return _GlobalStateImpl(Map.of(_controllersByType));
-  }
-
-  void _updateSubscription(Type type) {
-    _subscriptionsByType[type]?.cancel();
-    final controller = _controllersByType[type]!;
-    final jsonStoreKey = _jsonStoreKeysByType[type]!;
-    if (controller is! PersistedGlobalStateControllerMixin) {
-      return;
-    }
-
-    void listener() {
-      try {
-        final json = controller.toJson();
-        _jsonStore.set(jsonStoreKey, json);
-      } on Object catch (e, stackTrace) {
-        Zone.current.handleUncaughtError(e, stackTrace);
-      }
-    }
-
-    _subscriptionsByType[type] = controller.jsonChangedListenable.listen(
-      listener,
-    );
-    listener();
+    return _GlobalStateImpl({
+      for (final entry in _controllersByType.entries)
+        entry.key: entry.value.controller,
+    });
   }
 
   void _updateControllers() {
@@ -111,16 +91,15 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
     final registry = _GlobalStateControllerRegistryImpl(
       tickerProvider: this,
     );
-    registry.jsonStoreKeyPrefix = 'werkbank';
+    registry.addonId = 'werkbank';
     widget.registerWerkbankGlobalStateControllers(registry);
     final addons = AddonConfigProvider.addonsOf(context);
     for (final addon in addons) {
-      registry.jsonStoreKeyPrefix = addon.id;
+      registry.addonId = addon.id;
       addon.registerGlobalStateControllers(registry);
     }
     final registrations = registry._registrations;
     final registrationsByType = <Type, _Registration>{};
-    final registrationsByJsonStoreKey = <String, _Registration>{};
     for (final registration in registrations) {
       try {
         if (registrationsByType.containsKey(registration.type)) {
@@ -130,20 +109,11 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
           );
         }
         registrationsByType[registration.type] = registration;
-        if (registrationsByJsonStoreKey.containsKey(
-          registration.jsonStoreKey,
-        )) {
-          throw AssertionError(
-            'Cannot register multiple global state controllers with '
-            'the same jsonStoreKey: ${registration.jsonStoreKey}',
-          );
-        }
-        registrationsByJsonStoreKey[registration.jsonStoreKey] = registration;
       } on Object catch (e, stackTrace) {
         Zone.current.handleUncaughtError(e, stackTrace);
       }
     }
-    final oldTypes = _jsonStoreKeysByType.keys;
+    final oldTypes = _controllersByType.keys;
     final newTypes = registrationsByType.keys;
 
     final removedTypes = oldTypes
@@ -154,62 +124,28 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
         .whereNot(oldTypes.contains)
         .toList(growable: false);
 
-    final changedJsonStoreKeyTypes = newTypes
-        .where((type) {
-          if (!oldTypes.contains(type)) {
-            return false;
-          }
-          final oldJsonStoreKey = _jsonStoreKeysByType[type]!;
-          final newJsonStoreKey = registrationsByType[type]!.jsonStoreKey;
-          return oldJsonStoreKey != newJsonStoreKey;
-        })
-        .toList(growable: false);
-
     for (final type in removedTypes) {
       _subscriptionsByType[type]!.cancel();
       _subscriptionsByType.remove(type);
-      _controllersByType[type]!.dispose();
+      _controllersByType[type]!.controller.dispose();
       _controllersByType.remove(type);
-      _jsonStoreKeysByType.remove(type);
     }
 
     for (final type in addedTypes) {
       try {
         final registration = registrationsByType[type]!;
         final controller = registration.createController();
-        _controllersByType[type] = controller;
-        _jsonStoreKeysByType[type] = registration.jsonStoreKey;
+        _controllersByType[type] = _GlobalStateControllerWithAddon(
+          controller: controller,
+          addonId: registration.addonId,
+        );
       } on Object catch (e, stackTrace) {
         Zone.current.handleUncaughtError(e, stackTrace);
       }
     }
 
     for (final registration in registrations) {
-      registration.onUpdate(_controllersByType[registration.type]!);
-    }
-
-    final isWarmStart = IsWarmStartProvider.read(context);
-    for (final type in addedTypes) {
-      final registration = registrationsByType[type]!;
-      final controller = _controllersByType[type]!;
-      if (controller is PersistedGlobalStateControllerMixin) {
-        try {
-          final json = _jsonStore.get(registration.jsonStoreKey);
-          controller.tryLoadFromJson(json, isWarmStart: isWarmStart);
-        } on Object catch (e, stackTrace) {
-          Zone.current.handleUncaughtError(e, stackTrace);
-        }
-      }
-    }
-
-    for (final type in addedTypes) {
-      _updateSubscription(type);
-    }
-
-    for (final type in changedJsonStoreKeyTypes) {
-      final newJsonStoreKey = registrationsByType[type]!.jsonStoreKey;
-      _jsonStoreKeysByType[type] = newJsonStoreKey;
-      _updateSubscription(type);
+      registration.onUpdate(_controllersByType[registration.type]!.controller);
     }
 
     _updatedControllersThisFrame = true;
@@ -228,9 +164,9 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
 
   @override
   void dispose() {
-    for (final controller in _controllersByType.values) {
+    for (final controllerWithAddon in _controllersByType.values) {
       try {
-        controller.dispose();
+        controllerWithAddon.controller.dispose();
       } on Object catch (e, stackTrace) {
         Zone.current.handleUncaughtError(e, stackTrace);
       }
@@ -240,11 +176,47 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
 
   @override
   Widget build(BuildContext context) {
+    // TODO: remove?
+    Widget result = KeyedSubtree(
+      // Technically we should not need a GlobalKey here, since the
+      // global state controllers are required to preserve the state of
+      // the child.
+      // But this is a safe guard in case a global state controller
+      // does not do that.
+      key: _childKey,
+      child: widget.child,
+    );
+    final globalState = _createGlobalState();
+    final isWarmStart = IsWarmStartProvider.read(context);
+    for (final controllerWithAddon in _controllersByType.values) {
+      // We need to store this, because result will have changed by the type
+      // the builder is called.
+      final child = result;
+      result = Builder(
+        // TODO: Use copy of nested package? Also for addons?
+        // We need to use a GlobalKey here, because the widgets built by
+        // the global state controllers must not lose their state when
+        // new global state controllers are added or removed.
+        key: _GlobalStateControllerGlobalKey(controllerWithAddon.controller),
+        builder: (context) {
+          final data = GlobalStateControllerBuildData(
+            jsonStore: _jsonStore,
+            globalState: globalState,
+            isWarmStart: isWarmStart,
+          );
+          return controllerWithAddon.controller.build(context, data, child);
+        },
+      );
+    }
     return _InheritedGlobalState(
-      globalState: _createGlobalState(),
+      globalState: globalState,
       child: widget.child,
     );
   }
+}
+
+class _GlobalStateControllerGlobalKey extends GlobalObjectKey {
+  const _GlobalStateControllerGlobalKey(super.value);
 }
 
 class _InheritedGlobalState extends InheritedWidget {
@@ -261,6 +233,16 @@ class _InheritedGlobalState extends InheritedWidget {
   }
 }
 
+class _GlobalStateControllerWithAddon {
+  _GlobalStateControllerWithAddon({
+    required this.controller,
+    required this.addonId,
+  });
+
+  final GlobalStateController controller;
+  final String addonId;
+}
+
 class _GlobalStateControllerRegistryImpl
     implements GlobalStateControllerRegistry {
   _GlobalStateControllerRegistryImpl({
@@ -271,36 +253,34 @@ class _GlobalStateControllerRegistryImpl
 
   final List<_Registration> _registrations = [];
 
-  late String jsonStoreKeyPrefix;
+  late String addonId;
 
   @override
   void register<T extends GlobalStateController>(
-    String jsonStoreKey,
     T Function() createController, {
     void Function(T controller)? onUpdate,
   }) {
     _registrations.add(
       _Registration(
-        jsonStoreKey: '$jsonStoreKeyPrefix:$jsonStoreKey',
         type: T,
         createController: createController,
         onUpdate: (controller) => onUpdate?.call(controller as T),
+        addonId: addonId,
       ),
     );
   }
 
   @override
   void registerWithTickerProvider<T extends GlobalStateController>(
-    String jsonStoreKey,
     T Function(TickerProvider tickerProvider) createController, {
     void Function(T controller)? onUpdate,
   }) {
     _registrations.add(
       _Registration(
-        jsonStoreKey: '$jsonStoreKeyPrefix:$jsonStoreKey',
         type: T,
         createController: () => createController(tickerProvider),
         onUpdate: (controller) => onUpdate?.call(controller as T),
+        addonId: addonId,
       ),
     );
   }
@@ -308,16 +288,16 @@ class _GlobalStateControllerRegistryImpl
 
 class _Registration {
   _Registration({
-    required this.jsonStoreKey,
     required this.type,
     required this.createController,
     required this.onUpdate,
+    required this.addonId,
   });
 
-  final String jsonStoreKey;
   final Type type;
   final GlobalStateController Function() createController;
   final void Function(GlobalStateController controller) onUpdate;
+  final String addonId;
 }
 
 class _GlobalStateImpl extends GlobalState {
@@ -328,5 +308,25 @@ class _GlobalStateImpl extends GlobalState {
   @override
   T? maybeGet<T extends GlobalStateController>() {
     return _controllersByType[T] as T?;
+  }
+}
+
+class _PrefixingJsonStore implements JsonStore {
+  _PrefixingJsonStore({
+    required this.prefix,
+    required this.delegate,
+  });
+
+  final String prefix;
+  final JsonStore delegate;
+
+  @override
+  Object? get(String key) {
+    return delegate.get('$prefix:$key');
+  }
+
+  @override
+  void set(String key, Object? value) {
+    delegate.set('$prefix:$key', value);
   }
 }

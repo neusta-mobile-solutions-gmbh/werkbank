@@ -2,60 +2,50 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 
+// TODO: Summarize variant uses
 /// A controller that manages and persists state that is global to
 /// the whole application.
 ///
 /// [Addon]s can create and register [GlobalStateController]s by overriding the
 /// [Addon.registerGlobalStateControllers] method.
+///
+/// Also consider extending or mixing in one of the [GlobalStateController]
+/// variants, such as:
+/// - [ValueNotifierGlobalStateController]
+/// - [PersistedGlobalStateControllerMixin]
+/// - [ListeningPersistedGlobalStateControllerMixin]
+/// - [NotifiablePersistedGlobalStateControllerMixin]
 abstract class GlobalStateController {
   @mustCallSuper
   void dispose();
-}
 
-abstract class ValueNotifierGlobalStateController<T> extends ValueNotifier<T>
-    implements GlobalStateController {
-  ValueNotifierGlobalStateController(super._value);
-}
-
-/// When using this mixin, you must implement the [tryLoadFromJson]
-/// and [toJson] methods to load and persist the state.
-/// Once the [GlobalStateController] changes its state in a way that
-/// would change the value returned by [toJson], the [jsonChangedListenable]
-/// must notify its listeners.
-mixin PersistedGlobalStateControllerMixin on GlobalStateController {
-  // TODO: Add jsonStoreKey getter here?
-
-  /// A listenable that notifies its listeners if the value returned by
-  /// [toJson] has changed.
-  Listenable get jsonChangedListenable;
-
-  void tryLoadFromJson(Object? json, {required bool isWarmStart});
-
-  Object? toJson();
-}
-
-mixin NotifiablePersistedGlobalStateControllerMixin on GlobalStateController
-    implements PersistedGlobalStateControllerMixin {
-  final _jsonChangedNotifier = _JsonChangedNotifier();
-
-  @override
-  Listenable get jsonChangedListenable => _jsonChangedNotifier;
-
-  void notifyJsonChanged() {
-    _jsonChangedNotifier.notifyPersistenceChanged();
-  }
-}
-
-class _JsonChangedNotifier extends ChangeNotifier {
-  void notifyPersistenceChanged() {
-    notifyListeners();
-  }
-}
-
-mixin ListeningPersistedGlobalStateControllerMixin
-    on GlobalStateController, Listenable
-    implements PersistedGlobalStateControllerMixin {
-  @override
-  Listenable get jsonChangedListenable => this;
+  // TODO: Document super call requirement.
+  /// Builds a widget that can supplement the functionality of the
+  /// [GlobalStateController].
+  ///
+  /// The returned widget must wrap the [child] widget, which contains most of
+  /// the werkbank application.
+  /// The child will even contain widgets defined by [Addon]s
+  /// in any [AddonLayer].
+  ///
+  /// The [child] must be built in a way that keeps its state when the
+  /// [GlobalStateController] rebuilds it.
+  ///
+  /// The order in which the returned widgets of multiple
+  /// [GlobalStateController]s are nested is arbitrary.
+  /// So you should not rely on widgets from other [GlobalStateController]s
+  /// being available in the widget tree.
+  /// You can however access other [GlobalStateController]s themselves from
+  /// the [GlobalStateControllerBuildData] passed to this method.
+  /// Building a stateful widget that uses another [GlobalStateController]
+  /// in its [State.initState] method or other methods is a valid way to
+  /// let different [GlobalStateController]s interact with each other.
+  @mustCallSuper
+  Widget build(
+    BuildContext context,
+    GlobalStateControllerBuildData data,
+    Widget child,
+  ) => child;
 }

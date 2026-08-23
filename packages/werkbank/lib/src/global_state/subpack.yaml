@@ -1,1 +1,2 @@
 dependencies:
+  - /lib/src/persistence

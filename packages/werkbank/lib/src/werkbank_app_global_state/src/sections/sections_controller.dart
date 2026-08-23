@@ -5,7 +5,10 @@ import 'package:werkbank/src/utils/utils.dart';
 import 'package:werkbank/src/werkbank_app_global_state/src/tab/panel_tab_controller.dart';
 
 class SectionsController extends GlobalStateController
-    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
+    with
+        ChangeNotifier,
+        PersistedGlobalStateControllerMixin,
+        SelfListeningPersistedGlobalStateControllerMixin {
   static const _legacyTopLevelKey = 'tabs';
   static const _sectionIdOrderKey = 'sectionIdOrder';
   static const _hiddenSectionIdsKey = 'hiddenSectionIds';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 // TODO: document
-mixin NotifiablePersistedGlobalStateControllerMixin on GlobalStateController
-    implements PersistedGlobalStateControllerMixin {
+mixin NotifiablePersistedGlobalStateControllerMixin
+    on PersistedGlobalStateControllerMixin {
   final _jsonChangedNotifier = _JsonChangedNotifier();
 
   @override

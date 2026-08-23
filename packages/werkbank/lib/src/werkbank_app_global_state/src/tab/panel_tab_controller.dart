@@ -4,7 +4,10 @@ import 'package:werkbank/src/global_state/global_state.dart';
 enum PanelTab { configure, inspect, settings }
 
 class PanelTabController extends GlobalStateController
-    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
+    with
+        ChangeNotifier,
+        PersistedGlobalStateControllerMixin,
+        SelfListeningPersistedGlobalStateControllerMixin {
   PanelTab _selectedTab = PanelTab.configure;
 
   PanelTab get selectedTab => _selectedTab;

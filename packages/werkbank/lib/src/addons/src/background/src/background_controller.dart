@@ -5,7 +5,10 @@ import 'package:werkbank/src/addons/src/background/background.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 class BackgroundController extends GlobalStateController
-    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
+    with
+        ChangeNotifier,
+        PersistedGlobalStateControllerMixin,
+        SelfListeningPersistedGlobalStateControllerMixin {
   late Map<String, BackgroundOption> _backgroundOptionsByName;
   late List<BackgroundOption> _availableBackgroundOptions;
 

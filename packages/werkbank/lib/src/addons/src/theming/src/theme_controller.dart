@@ -5,7 +5,10 @@ import 'package:werkbank/src/addons/src/theming/theming.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 class ThemeController extends GlobalStateController
-    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
+    with
+        ChangeNotifier,
+        PersistedGlobalStateControllerMixin,
+        SelfListeningPersistedGlobalStateControllerMixin {
   late Map<String, ThemeOption> _themeOptionsByName;
   late List<ThemeOption> _availableThemeOptions;
 

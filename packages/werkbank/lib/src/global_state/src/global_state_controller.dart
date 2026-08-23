@@ -15,9 +15,13 @@ import 'package:werkbank/src/global_state/global_state.dart';
 /// variants, such as:
 /// - [ValueNotifierGlobalStateController]
 /// - [PersistedGlobalStateControllerMixin]
-/// - [ListeningPersistedGlobalStateControllerMixin]
+/// - [SelfListeningPersistedGlobalStateControllerMixin]
 /// - [NotifiablePersistedGlobalStateControllerMixin]
 abstract class GlobalStateController {
+  /* TODO: Should init have access to the GlobalState in the data?
+       Makes it a bit inconsistent, since if a controller is added later,
+       others that may have wanted to depend on it are not notified.
+       Also you may access uninitialized controllers. */
   /// Initializes the [GlobalStateController] after it has been created
   /// and registered.
   /// The type parameter [C] is the type under which this
@@ -49,9 +53,6 @@ abstract class GlobalStateController {
   /// being available in the widget tree.
   /// You can however access other [GlobalStateController]s themselves from
   /// the [GlobalStateControllerData] passed to this method.
-  /// Building a stateful widget that uses another [GlobalStateController]
-  /// in its [State.initState] method or other methods is a valid way to
-  /// let different [GlobalStateController]s interact with each other.
   @mustCallSuper
   Widget build(
     BuildContext context,

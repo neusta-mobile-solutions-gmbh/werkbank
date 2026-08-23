@@ -3,7 +3,10 @@ import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/tree/tree.dart';
 
 class AcknowledgedController extends GlobalStateController
-    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
+    with
+        ChangeNotifier,
+        PersistedGlobalStateControllerMixin,
+        SelfListeningPersistedGlobalStateControllerMixin {
   static const _fieldFirstPresentKey = 'firstPresent';
   static const _fieldHasBeenVisitedKey = 'hasBeenVisited';
 

@@ -5,7 +5,10 @@ import 'package:werkbank/src/addons/src/report/src/_internal/report_data.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 class ReportController extends GlobalStateController
-    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
+    with
+        ChangeNotifier,
+        PersistedGlobalStateControllerMixin,
+        SelfListeningPersistedGlobalStateControllerMixin {
   @override
   String get jsonStoreKey => 'report';
 

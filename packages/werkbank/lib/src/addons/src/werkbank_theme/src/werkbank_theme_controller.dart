@@ -8,7 +8,10 @@ enum WerkbankTheme {
 }
 
 class WerkbankThemeController extends GlobalStateController
-    with ChangeNotifier, ListeningPersistedGlobalStateControllerMixin {
+    with
+        ChangeNotifier,
+        PersistedGlobalStateControllerMixin,
+        SelfListeningPersistedGlobalStateControllerMixin {
   WerkbankThemeController();
 
   static const _lightThemeName = 'Werkbank Light';

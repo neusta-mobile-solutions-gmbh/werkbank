@@ -157,7 +157,7 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
       }
     }
 
-    for (final type in newTypes) {
+    for (final type in addedTypes) {
       final registration = registrationsByType[type]!;
       final controllerWithAddon = _controllersByType[type]!;
       final controller = controllerWithAddon.controller;

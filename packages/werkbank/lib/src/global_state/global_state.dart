@@ -5,7 +5,7 @@ export 'src/global_state_config.dart';
 export 'src/global_state_controller.dart';
 export 'src/global_state_controller_data.dart';
 export 'src/global_state_controller_registry.dart';
-export 'src/global_state_controller_variants/listening_persisted_global_state_controller_mixin.dart';
 export 'src/global_state_controller_variants/notifiable_persisted_global_state_controller_mixin.dart';
 export 'src/global_state_controller_variants/persisted_global_state_controller_mixin.dart';
+export 'src/global_state_controller_variants/self_listening_persisted_global_state_controller_mixin.dart';
 export 'src/global_state_controller_variants/value_notifier_global_state_controller.dart';

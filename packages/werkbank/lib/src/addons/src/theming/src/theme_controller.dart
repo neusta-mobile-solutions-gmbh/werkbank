@@ -1,0 +1,71 @@
+import 'dart:collection';
+
+import 'package:flutter/material.dart';
+import 'package:werkbank/src/addons/src/theming/theming.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
+
+class ThemeController extends GlobalStateController
+    with
+        ChangeNotifier,
+        PersistedGlobalStateControllerMixin,
+        SelfListeningPersistedGlobalStateControllerMixin {
+  late Map<String, ThemeOption> _themeOptionsByName;
+  late List<ThemeOption> _availableThemeOptions;
+
+  List<ThemeOption> get availableThemOptions => _availableThemeOptions;
+
+  ThemeOption? themeOptionByName(String name) => _themeOptionsByName[name];
+
+  String? _selectedThemeOptionName;
+
+  String? get selectedThemeOptionName => _selectedThemeOptionName;
+
+  // TODO: Prevent setting to invalid option.
+  set selectedThemeOptionName(String? name) {
+    _selectedThemeOptionName = name;
+    notifyListeners();
+  }
+
+  ThemeOption? get selectedThemeOption {
+    if (selectedThemeOptionName == null) {
+      return null;
+    }
+    return _themeOptionsByName[selectedThemeOptionName!];
+  }
+
+  set selectedThemeOption(ThemeOption? themeOption) =>
+      selectedThemeOptionName = themeOption?.name;
+
+  void updateThemeOptions(List<ThemeOption> themeOptions) {
+    _themeOptionsByName = {
+      for (final themeOption in themeOptions) themeOption.name: themeOption,
+    };
+    // TODO: Should we notify listeners here?
+    _availableThemeOptions = UnmodifiableListView(themeOptions);
+    if (selectedThemeOptionName == null ||
+        !_themeOptionsByName.containsKey(selectedThemeOptionName)) {
+      selectedThemeOptionName = themeOptions.firstOrNull?.name;
+    }
+  }
+
+  @override
+  String get jsonStoreKey => 'theme';
+
+  @override
+  void tryLoadFromJson(Object? json, {required bool isWarmStart}) {
+    if (json is String) {
+      selectedThemeOptionName = json;
+    }
+  }
+
+  @override
+  Object? toJson() {
+    return _selectedThemeOptionName;
+  }
+}
+
+extension ThemeGlobalStateExtension on GlobalState {
+  ThemeController get theme => get<ThemeController>();
+
+  ThemeController? get maybeTheme => maybeGet<ThemeController>();
+}

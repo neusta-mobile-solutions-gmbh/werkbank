@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werkbank/src/components/src/w_resizable_panels/_internal/draggable_region.dart';
+import 'package:werkbank/src/components/src/w_notification/_internal/draggable_region.dart';
 
 sealed class BorderBehavior {
   const BorderBehavior({

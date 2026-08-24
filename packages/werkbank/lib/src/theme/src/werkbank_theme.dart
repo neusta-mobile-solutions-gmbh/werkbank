@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData getThemeData(
   BuildContext context,
-  WerkbankTheme werkbankTheme,
+  WerkbankThemeData werkbankTheme,
 ) {
   return ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
@@ -33,15 +33,15 @@ ThemeData getThemeData(
 }
 
 extension WerkbankThemeExtension on BuildContext {
-  WerkbankTheme get werkbankTheme => Theme.of(this).extension()!;
+  WerkbankThemeData get werkbankTheme => Theme.of(this).extension()!;
 
   WerkbankColorScheme get werkbankColorScheme => werkbankTheme.colorScheme;
 
   WerkbankTextTheme get werkbankTextTheme => werkbankTheme.textTheme;
 }
 
-class WerkbankTheme extends ThemeExtension<WerkbankTheme> {
-  WerkbankTheme({
+class WerkbankThemeData extends ThemeExtension<WerkbankThemeData> {
+  WerkbankThemeData({
     required this.colorScheme,
     required this.textTheme,
   });
@@ -50,14 +50,14 @@ class WerkbankTheme extends ThemeExtension<WerkbankTheme> {
   final WerkbankTextTheme textTheme;
 
   @override
-  ThemeExtension<WerkbankTheme> copyWith() {
+  ThemeExtension<WerkbankThemeData> copyWith() {
     // TODO(lzuttermeister): Implement
     throw UnimplementedError();
   }
 
   @override
-  ThemeExtension<WerkbankTheme> lerp(
-    covariant ThemeExtension<WerkbankTheme>? other,
+  ThemeExtension<WerkbankThemeData> lerp(
+    covariant ThemeExtension<WerkbankThemeData>? other,
     double t,
   ) {
     if (other == null) {

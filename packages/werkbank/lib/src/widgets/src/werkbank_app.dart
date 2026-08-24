@@ -13,12 +13,14 @@ import 'package:werkbank/src/addon_config/addon_config.dart';
 import 'package:werkbank/src/app_config/app_config.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/environment/environment.dart';
+import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/theme/theme.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 import 'package:werkbank/src/utils/utils.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
 /// {@category Welcome}
@@ -43,6 +45,8 @@ class WerkbankApp extends StatelessWidget {
     this.lastUpdated,
     required this.appConfig,
     required this.addonConfig,
+    this.persistenceConfig = const PersistenceConfig(),
+    this.globalStateConfig = const GlobalStateConfig(),
     required this.root,
     super.key,
   });
@@ -94,6 +98,12 @@ class WerkbankApp extends StatelessWidget {
   /// ),
   /// ```
   final AddonConfig addonConfig;
+
+  // TODO: Document
+  final PersistenceConfig persistenceConfig;
+
+  // TODO: Document
+  final GlobalStateConfig globalStateConfig;
 
   /// The root of the use case tree.
   ///
@@ -183,39 +193,37 @@ class WerkbankApp extends StatelessWidget {
                   // That way the controller manager will reassemble the
                   // controllers.
                   rootDescriptor: _getRootDescriptor(context),
-                  child: _WerkbankPersistance(
+                  child: AddonConfigProvider(
                     addonConfig: addonConfig,
-                    child: WerkbankSettings.overwrite(
-                      orderOption: OrderOption.alphabetic,
-                      werkbankTheme: WerkbankTheme(
-                        colorScheme: WerkbankColorScheme.fromPalette(
-                          const WerkbankPalette.dark(),
+                    child: _PersistenceAndGlobalState(
+                      persistenceConfig: persistenceConfig,
+                      globalStateConfig: globalStateConfig,
+                      child: WerkbankSettings.overwrite(
+                        orderOption: OrderOption.alphabetic,
+                        werkbankTheme: WerkbankThemeData(
+                          colorScheme: WerkbankColorScheme.fromPalette(
+                            const WerkbankPalette.dark(),
+                          ),
+                          textTheme: WerkbankTextTheme.standard(),
                         ),
-                        textTheme: WerkbankTextTheme.standard(),
-                      ),
-                      child: PanelControllerProvider(
-                        child: AddonConfigProvider(
-                          addonConfig: addonConfig,
-                          child: UseCaseMetadataProvider(
-                            child: AddonLayerBuilder(
-                              layer: AddonLayer.management,
-                              child: RootDescriptorFilter(
-                                child: RouterBuilder(
-                                  appBuilder: (context, goRouter) =>
-                                      _MaterialApp(
-                                        goRouter: goRouter,
-                                        builder: (context, child) {
-                                          return AddonSpecificationsProvider(
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                  mainPageBuilder: (context, child) {
-                                    return MainPage(
-                                      mainView: child,
+                        child: UseCaseMetadataProvider(
+                          child: AddonLayerBuilder(
+                            layer: AddonLayer.management,
+                            child: RootDescriptorFilter(
+                              child: RouterBuilder(
+                                appBuilder: (context, goRouter) => _MaterialApp(
+                                  goRouter: goRouter,
+                                  builder: (context, child) {
+                                    return AddonSpecificationsProvider(
+                                      child: child,
                                     );
                                   },
                                 ),
+                                mainPageBuilder: (context, child) {
+                                  return MainPage(
+                                    mainView: child,
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -245,14 +253,14 @@ class _ThemeBuilder extends StatelessWidget {
     required this.builder,
   });
 
-  final WerkbankTheme? werkbankTheme;
+  final WerkbankThemeData? werkbankTheme;
   final ThemedWidgetBuilder builder;
 
   @override
   Widget build(BuildContext context) {
     final effectiveWerkbankTheme =
         werkbankTheme ??
-        WerkbankTheme(
+        WerkbankThemeData(
           colorScheme: WerkbankColorScheme.fromPalette(
             const WerkbankPalette.light(),
           ),
@@ -263,66 +271,36 @@ class _ThemeBuilder extends StatelessWidget {
   }
 }
 
-class _WerkbankPersistance extends StatelessWidget {
-  const _WerkbankPersistance({
-    required this.addonConfig,
+class _PersistenceAndGlobalState extends StatelessWidget {
+  const _PersistenceAndGlobalState({
+    required this.persistenceConfig,
+    required this.globalStateConfig,
     required this.child,
   });
 
-  final AddonConfig addonConfig;
+  final PersistenceConfig persistenceConfig;
+  final GlobalStateConfig globalStateConfig;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final descendantsPaths = WerkbankAppInfo.rootDescriptorOf(
-      context,
-    ).descendants.map((e) => e.path).toSet();
-    return WerkbankPersistence(
-      controllerMapFactory: (prefsWithCache) {
-        final wasAliveController = WasAliveController(
-          prefsWithCache: prefsWithCache,
-        );
-        return {
-          for (final addon in addonConfig.addons)
-            ...addon.controllerMapFactory(prefsWithCache),
-          HistoryController: HistoryControllerImpl(
-            prefsWithCache: prefsWithCache,
-          ),
-          // Since this only gets executed once per app start,
-          // hot-reload does not lead to a new path being added.
-          // But this is fine.
-          AcknowledgedController: AcknowledgedControllerImpl(
-            prefsWithCache: prefsWithCache,
-            /* TODO(lwiedekamp): Maybe improve this someday. Instead
-                 add a method to update the descendantsPaths at runtime.
-                 Maybe AcknowledgedTracker should call this method. */
-            descendantsPaths: descendantsPaths,
-          ),
-          PanelTabsController: PanelTabsController(
-            prefsWithCache: prefsWithCache,
-          ),
-          WasAliveController: wasAliveController,
-          SearchQueryController: SearchQueryController(
-            prefsWithCache: prefsWithCache,
-            wasAliveController: wasAliveController,
-          ),
-        };
-      },
-      builder: (context, phase) => switch (phase) {
-        PersistenceInitializing() =>
-          // While initializing the Persistence, almost the whole werkbank
-          // widget-tree will not be built and therefore there will be
-          // no conflicts regarding the missing Persistence.
-          //
-          // But this widget (SizedBox) is never visible either, since
-          // [WerkbankPersistence] defers the first frame until
-          // the persistence is ready.
-          // This way we avoid a jumping color effect when building the first
-          // frames.
-          const SizedBox.expand(),
-        PersistenceReady(:final child) => child,
-      },
-      child: child,
+    return JsonStoreProvider(
+      persistenceConfig: persistenceConfig,
+      placeholder: const SizedBox.expand(),
+      child: IsWarmStartProvider(
+        alwaysTreatLikeWarmStart: globalStateConfig.alwaysTreatLikeWarmStart,
+        child: GlobalStateManager(
+          globalStateConfig: globalStateConfig,
+          registerWerkbankGlobalStateControllers: (registry) {
+            registry.register(HistoryController.new);
+            registry.register(SectionsController.new);
+            registry.register(SearchQueryController.new);
+            registry.register(PanelTabController.new);
+            registry.register(PanelController.new);
+          },
+          child: child,
+        ),
+      ),
     );
   }
 }

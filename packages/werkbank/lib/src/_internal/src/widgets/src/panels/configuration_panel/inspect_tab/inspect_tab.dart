@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
-import 'package:werkbank/src/persistence/persistence.dart';
+import 'package:werkbank/src/werkbank_app_global_state/werkbank_app_global_state.dart';
 
 class InspectTab extends StatelessWidget {
   const InspectTab({super.key});

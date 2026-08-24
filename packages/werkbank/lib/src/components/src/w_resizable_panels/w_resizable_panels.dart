@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/components/src/w_resizable_panels/_internal/draggable_divider.dart';
+import 'package:werkbank/src/components/src/w_resizable_panels/_internal/panel_controller_provider.dart';
+import 'package:werkbank/src/components/src/w_resizable_panels/_internal/panel_layout_handler.dart';
 
 /// {@category Werkbank Components}
 class WResizablePanels extends StatelessWidget {
   const WResizablePanels({
     super.key,
+    required this.controller,
     required this.leftPanel,
     required this.rightPanel,
     required this.child,
   });
 
+  final WPanelController controller;
   final Widget leftPanel;
   final Widget rightPanel;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return PanelLayoutHandler(
-      builder: (context, leftPanelWidth, rightPanelWidth) {
-        return Row(
+    return WPanelControllerProvider(
+      controller: controller,
+      child: PanelLayoutHandler(
+        child: Row(
           children: [
             _LeftPanelLayout(
-              width: leftPanelWidth,
               child: leftPanel,
             ),
             const _LeftSeparator(),
@@ -31,37 +35,34 @@ class WResizablePanels extends StatelessWidget {
             ),
             const _RightSeparator(),
             _RightPanelLayout(
-              width: rightPanelWidth,
               child: rightPanel,
             ),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 }
 
 class _LeftPanelLayout extends StatelessWidget {
   const _LeftPanelLayout({
-    required this.width,
     required this.child,
   });
 
-  final double width;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final animation = PanelLayoutHandler.leftAnimationOf(context);
     return FadeTransition(
-      opacity: panelController.leftAnimation,
+      opacity: animation,
       child: SizeTransition(
-        sizeFactor: panelController.leftAnimation,
+        sizeFactor: animation,
         axisAlignment: 1,
         fixedCrossAxisSizeFactor: 1,
         axis: Axis.horizontal,
         child: SizedBox(
-          width: width,
+          width: PanelLayoutHandler.leftWidthOf(context),
           child: child,
         ),
       ),
@@ -71,25 +72,23 @@ class _LeftPanelLayout extends StatelessWidget {
 
 class _RightPanelLayout extends StatelessWidget {
   const _RightPanelLayout({
-    required this.width,
     required this.child,
   });
 
-  final double width;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
+    final animation = PanelLayoutHandler.rightAnimationOf(context);
     return FadeTransition(
-      opacity: panelController.rightAnimation,
+      opacity: animation,
       child: SizeTransition(
-        sizeFactor: panelController.rightAnimation,
+        sizeFactor: animation,
         axisAlignment: -1,
         fixedCrossAxisSizeFactor: 1,
         axis: Axis.horizontal,
         child: SizedBox(
-          width: width,
+          width: PanelLayoutHandler.rightWidthOf(context),
           child: child,
         ),
       ),
@@ -102,20 +101,11 @@ class _LeftSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
-    return ListenableBuilder(
-      listenable: Listenable.merge([
-        panelController.preferredLeft,
-        panelController.leftAnimation,
-      ]),
-      builder: (context, child) {
-        return DraggableDivider(
-          initial:
-              panelController.preferredLeft.value *
-              panelController.leftAnimation.value,
-          onUpdate: panelController.proposePreferredLeft,
-        );
-      },
+    return DraggableDivider(
+      getInitial: () =>
+          PanelLayoutHandler.leftWidthOf(context) *
+          PanelLayoutHandler.leftAnimationOf(context).value,
+      onUpdate: (value) => PanelLayoutHandler.updateLeftWidthOf(context, value),
     );
   }
 }
@@ -125,21 +115,13 @@ class _RightSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panelController = PanelControllerProvider.of(context);
-    return ListenableBuilder(
-      listenable: Listenable.merge([
-        panelController.preferredRight,
-        panelController.rightAnimation,
-      ]),
-      builder: (context, child) {
-        return DraggableDivider(
-          initial:
-              panelController.preferredRight.value *
-              panelController.rightAnimation.value,
-          onUpdate: panelController.proposePreferredRight,
-          direction: DraggableDividerDirection.endToStart,
-        );
-      },
+    return DraggableDivider(
+      direction: DraggableDividerDirection.endToStart,
+      getInitial: () =>
+          PanelLayoutHandler.rightWidthOf(context) *
+          PanelLayoutHandler.rightAnimationOf(context).value,
+      onUpdate: (value) =>
+          PanelLayoutHandler.updateRightWidthOf(context, value),
     );
   }
 }

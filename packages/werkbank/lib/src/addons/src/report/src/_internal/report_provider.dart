@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/report/report.dart';
-import 'package:werkbank/src/addons/src/report/src/_internal/report_persistent_controller.dart';
+import 'package:werkbank/src/addons/src/report/src/_internal/report_controller.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/reports/feature_introductions.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/reports/report_change_log.dart';
 import 'package:werkbank/src/addons/src/report/src/_internal/sanitize_reports.dart';
@@ -37,7 +37,8 @@ class ReportProvider extends StatefulWidget {
       reports: reports,
       acceptReport: (report) {
         ApplicationOverlayLayerEntry.access
-            .persistentControllerOf<ReportPersistentController>(context)
+            .globalStateOf(context)
+            .report
             .accept(report);
       },
     );
@@ -55,7 +56,7 @@ class ReportProvider extends StatefulWidget {
 }
 
 class _ReportProviderState extends State<ReportProvider> {
-  late final ReportPersistentController _controller;
+  late final ReportController _controller;
   bool initialized = false;
   final Set<Report> _reportCandidates = {};
   late Set<Report> _reports;
@@ -66,7 +67,8 @@ class _ReportProviderState extends State<ReportProvider> {
 
     if (!initialized) {
       _controller = ApplicationOverlayLayerEntry.access
-          .persistentControllerOf<ReportPersistentController>(context);
+          .globalStateOf(context)
+          .report;
 
       _collectCandidates();
       _updateReports();

@@ -3,6 +3,8 @@ library;
 
 import 'package:werkbank/src/global_state/global_state.dart';
 
+/* TODO: Should we still encourage extension methods with get AND maybeGet?
+     Maybe just one of them? Probably get for convenience. */
 /// An object that provides access to all [GlobalStateController]s that
 /// have been registered, either by addons or by the [WerkbankApp] itself.
 ///

@@ -4,6 +4,7 @@ library;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 import 'package:werkbank/src/utils/utils.dart';
@@ -14,11 +15,13 @@ import 'package:werkbank/src/utils/utils.dart';
 /// would change the value returned by [toJson], the [jsonChangedListenable]
 /// must notify its listeners.
 mixin PersistedGlobalStateControllerMixin on GlobalStateController {
+  @visibleForOverriding
   /// Used as a key to store the json produced by
   /// the [toJson] method in the [JsonStore] defined by
   /// the used [PersistenceConfig].
   String get jsonStoreKey;
 
+  @visibleForOverriding
   /// A listenable that notifies its listeners if the value returned by
   /// [toJson] has changed.
   ///
@@ -26,8 +29,10 @@ mixin PersistedGlobalStateControllerMixin on GlobalStateController {
   /// the lifetime of the [GlobalStateController].
   Listenable get jsonChangedListenable;
 
+  @visibleForOverriding
   void tryLoadFromJson(Object? json, {required bool isWarmStart});
 
+  @visibleForOverriding
   Object? toJson();
 
   late final ListenableSubscription _jsonChangedSubscription;

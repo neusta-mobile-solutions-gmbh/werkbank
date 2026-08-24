@@ -27,11 +27,13 @@ abstract class GlobalStateController {
   /// The type parameter [C] is the type under which this
   /// [GlobalStateController] instance was registered.
   /// This type is unique among all registered [GlobalStateController]s.
+  @protected
   @mustCallSuper
   void init<C extends GlobalStateController>(
     GlobalStateControllerData data,
   ) {}
 
+  @protected
   @mustCallSuper
   void dispose() {}
 
@@ -53,6 +55,7 @@ abstract class GlobalStateController {
   /// being available in the widget tree.
   /// You can however access other [GlobalStateController]s themselves from
   /// the [GlobalStateControllerData] passed to this method.
+  @protected
   @mustCallSuper
   Widget build(
     BuildContext context,

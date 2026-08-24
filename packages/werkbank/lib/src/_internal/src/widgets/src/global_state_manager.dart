@@ -140,6 +140,9 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
     for (final type in removedTypes) {
       _subscriptionsByType[type]!.cancel();
       _subscriptionsByType.remove(type);
+      // We don't want others to use the protected `dispose` method,
+      // but we need to call it here.
+      // ignore: invalid_use_of_protected_member
       _controllersByType[type]!.controller.dispose();
       _controllersByType.remove(type);
     }
@@ -191,6 +194,9 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
   void dispose() {
     for (final controllerWithAddon in _controllersByType.values) {
       try {
+        // We don't want others to use the protected `dispose` method,
+        // but we need to call it here.
+        // ignore: invalid_use_of_protected_member
         controllerWithAddon.controller.dispose();
       } on Object catch (e, stackTrace) {
         Zone.current.handleUncaughtError(e, stackTrace);
@@ -226,6 +232,9 @@ class _GlobalStateManagerState extends State<GlobalStateManager>
           final data = _createGlobalStateControllerData(
             controllerWithAddon,
           );
+          // We don't want others to use the protected `build` method,
+          // but we need to call it here.
+          // ignore: invalid_use_of_protected_member
           return controllerWithAddon.controller.build(context, data, child);
         },
       );
@@ -287,6 +296,9 @@ class _GlobalStateControllerRegistryImpl
         type: T,
         createController: createController,
         onUpdate: (controller) => onUpdate?.call(controller as T),
+        // We don't want others to use the protected `init` method,
+        // but we need to call it here.
+        // ignore: invalid_use_of_protected_member
         init: (controller, data) => controller.init<T>(data),
         addonId: addonId,
       ),
@@ -303,6 +315,9 @@ class _GlobalStateControllerRegistryImpl
         type: T,
         createController: () => createController(tickerProvider),
         onUpdate: (controller) => onUpdate?.call(controller as T),
+        // We don't want others to use the protected `init` method,
+        // but we need to call it here.
+        // ignore: invalid_use_of_protected_member
         init: (controller, data) => controller.init<T>(data),
         addonId: addonId,
       ),

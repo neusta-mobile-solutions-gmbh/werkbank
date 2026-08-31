@@ -132,11 +132,13 @@ linter:
     # - use_is_even_rather_than_modulo
     # - use_late_for_private_fields_and_variables
     # - use_named_constants
-    # TODO: Disabled for now, since the IDE analysis server doesn't yet work well with null aware elements.
-    - use_null_aware_elements
     # - use_raw_strings
     # - use_setters_to_change_properties
     # - use_string_buffers
     # - use_test_throws_matchers
     # - use_to_and_as_if_applicable
     # - use_truncating_division
+    # TODO: Unreleased. Consider later?
+    - future_sync_value
+    # TODO: Unreleased. Consider later?
+    - unnecessary_this_alias

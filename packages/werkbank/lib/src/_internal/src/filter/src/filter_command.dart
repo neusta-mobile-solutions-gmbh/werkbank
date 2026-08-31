@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class FilterCommand
     with
         // For toString-Method
-        EquatableMixin {
+        Equatable {
   factory FilterCommand({required String searchQuery}) {
     return _parse(searchQuery);
   }

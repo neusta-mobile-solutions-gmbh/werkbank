@@ -86,7 +86,7 @@ class WTreeItem extends StatelessWidget {
                   child: label,
                 ),
               ),
-              if (trailing != null) trailing!,
+              ?trailing,
             ],
           ),
         ),

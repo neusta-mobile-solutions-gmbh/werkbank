@@ -4,8 +4,7 @@ import 'package:meta/meta.dart';
 enum PanelTab {
   configure('configure'),
   inspect('inspect'),
-  settings('settings')
-  ;
+  settings('settings');
 
   const PanelTab(this._jsonKey);
 

@@ -54,8 +54,7 @@ enum ColorBlindnessType {
     -0.006113, 0.958479, 0.047634, 0, 0,
     0.006379, 0.248708, 0.744913, 0, 0,
     0, 0, 0, 1, 0,
-  ])
-  ;
+  ]);
 
   /// Creates a color mode simulation from a color mode
   const ColorBlindnessType(this.matrix);

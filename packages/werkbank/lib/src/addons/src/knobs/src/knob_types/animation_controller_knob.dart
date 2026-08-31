@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/animation_controller_status_listenable_builder.dart';
@@ -87,9 +85,9 @@ class AnimationControllerKnob extends _AnimationControllerKnobBase
         // before we (re)-start it.
         switch (snapshot.status) {
           case AnimationStatus.forward:
-            unawaited(_animationController.forward());
+            _animationController.forward();
           case AnimationStatus.reverse:
-            unawaited(_animationController.reverse());
+            _animationController.reverse();
           case AnimationStatus.completed:
           case AnimationStatus.dismissed:
             break;
@@ -140,9 +138,9 @@ class AnimationControllerKnob extends _AnimationControllerKnobBase
                       if (isAnimating) {
                         _animationController.stop();
                       } else if (_animationController.value == 1) {
-                        unawaited(_animationController.forward(from: 0));
+                        _animationController.forward(from: 0);
                       } else {
-                        unawaited(_animationController.forward());
+                        _animationController.forward();
                       }
                     },
                     icon: Icon(

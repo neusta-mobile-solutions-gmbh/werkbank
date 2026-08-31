@@ -176,7 +176,7 @@ class _SubscriptionManager
       ..._oldSubscriptions.map(
         (subscription) => subscription.controller,
       ),
-      if (currentController != null) currentController!,
+      ?currentController,
     ];
     for (final controller in controllers) {
       final useCase = _state.rootDescriptor.maybeFromPath(path);

@@ -26,7 +26,7 @@ class DependenciesFailiureModel extends DependenciesModel {
 
 sealed class Dependency {}
 
-class SubpackageDependency extends Dependency with EquatableMixin {
+class SubpackageDependency extends Dependency with Equatable {
   SubpackageDependency({required this.subpackDirectory});
 
   final SubpackDirectory subpackDirectory;

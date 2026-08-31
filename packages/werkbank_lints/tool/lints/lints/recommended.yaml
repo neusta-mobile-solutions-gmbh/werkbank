@@ -1,3 +1,14 @@
+# This set of lints builds on top of `package:lints/core.yaml`.
+# It includes lints that help identify additional issues that might lead to
+# problems when running or consuming Dart code, as well as lints
+# that enforce writing Dart using a single, idiomatic style.
+# Check out https://github.com/dart-lang/lints for more information.
+#
+# To learn more about customizing static analysis for your package or app,
+# visit https://dart.dev/tools/analysis.
+
+include: package:lints/core.yaml
+
 linter:
   rules:
     - annotate_overrides
@@ -36,6 +47,8 @@ linter:
     - prefer_null_aware_operators
     - prefer_spread_collections
     - recursive_getters
+    - simple_directive_paths
+    - simplify_variable_pattern
     - slash_for_doc_comments
     - type_init_formals
     - unnecessary_brace_in_string_interps
@@ -52,7 +65,9 @@ linter:
     - unnecessary_string_interpolations
     - unnecessary_this
     - unnecessary_to_list_in_spreads
+    - unnecessary_unawaited
     - unnecessary_underscores
     - use_function_type_syntax_for_parameters
+    - use_null_aware_elements
     - use_rethrow_when_possible
     - use_super_parameters

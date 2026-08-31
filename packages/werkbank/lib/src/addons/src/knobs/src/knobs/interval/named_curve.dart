@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class NamedCurve with EquatableMixin {
+class NamedCurve with Equatable {
   const NamedCurve(
     this.name,
     this.trailing,

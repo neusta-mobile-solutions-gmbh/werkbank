@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class NamedDuration with EquatableMixin implements Comparable<NamedDuration> {
+class NamedDuration with Equatable implements Comparable<NamedDuration> {
   const NamedDuration(
     this.name,
     this.duration,

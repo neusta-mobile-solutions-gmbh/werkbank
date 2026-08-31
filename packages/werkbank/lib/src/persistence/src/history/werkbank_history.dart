@@ -51,7 +51,7 @@ class WerkbankHistory {
       entries.isNotEmpty ? entries.last : null;
 }
 
-class WerkbankHistoryEntry with EquatableMixin {
+class WerkbankHistoryEntry with Equatable {
   WerkbankHistoryEntry({
     required this.path,
     required this.timestamp,

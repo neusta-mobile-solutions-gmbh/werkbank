@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class NamedInterval with EquatableMixin {
+class NamedInterval with Equatable {
   const NamedInterval(
     this.begin,
     this.end,
@@ -16,7 +16,7 @@ class NamedInterval with EquatableMixin {
   ];
 }
 
-class NamedDouble with EquatableMixin {
+class NamedDouble with Equatable {
   const NamedDouble(
     this.name,
     this.value,

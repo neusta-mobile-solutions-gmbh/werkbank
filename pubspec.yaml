@@ -1,9 +1,9 @@
-name: _
+name: werkbank_workspace
 
 publish_to: none
 
 environment:
-  sdk: '>=3.10.0 <4.0.0'
+  sdk: '>=3.13.0 <4.0.0'
 
 workspace:
   - packages/werkbank
@@ -13,11 +13,19 @@ workspace:
   - example/example_werkbank
 
 dev_dependencies:
-  melos: ^7.3.0
+  melos: ^8.6.0
   path: ^1.9.1
 
 melos:
   sdkPath: .fvm/flutter_sdk
+
+  command:
+    bootstrap:
+      # Use `fvm dart run melos run` instead of `melos run` in the run configurations to
+      # ensure the correct melos version is used.
+      hooks:
+        post: |
+          sed $( [[ "$OSTYPE" == darwin* || "$OSTYPE" == bsd* ]] && echo "-i ''" || echo "-i" ) 's|<option name="SCRIPT_TEXT" value="melos run|<option name="SCRIPT_TEXT" value="fvm dart run melos run|g' .idea/runConfigurations/melos_run_*.xml
 
   scripts:
     dart:format:

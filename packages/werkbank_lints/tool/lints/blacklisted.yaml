@@ -142,3 +142,6 @@ linter:
     - future_sync_value
     # TODO: Unreleased. Consider later?
     - unnecessary_this_alias
+    # - migrate_design_widgets
+    # TODO: A bit too opinionated right now. Consider later, once this is more common place in the ecosystem?
+    - unnecessary_type_name_in_constructor

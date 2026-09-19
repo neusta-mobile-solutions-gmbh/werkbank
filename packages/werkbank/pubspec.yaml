@@ -142,6 +142,15 @@ flutter:
         - asset: assets/fonts/JetBrainsMono-Thin.ttf
           weight: 100
 
+# Added just in case, because pana reported locally, that web is not supported. It is though.
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
 screenshots:
   - description: "An animation showcasing use cases."
     path: pub_images/use_cases.webp

@@ -9,7 +9,7 @@ part of 'strings.g.dart';
 
 // Path: <root>
 typedef TranslationsEn = Translations; // ignore: unused_element
-class Translations implements BaseTranslations<AppLocale, Translations> {
+class Translations with BaseTranslations<AppLocale, Translations> {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
@@ -34,55 +34,55 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
-	late final TranslationsGenericEn generic = TranslationsGenericEn._(_root);
-	late final TranslationsAddonsEn addons = TranslationsAddonsEn._(_root);
-	late final TranslationsAppEn app = TranslationsAppEn._(_root);
-	late final TranslationsNavigationPanelEn navigationPanel = TranslationsNavigationPanelEn._(_root);
-	late final TranslationsConfigurationPanelEn configurationPanel = TranslationsConfigurationPanelEn._(_root);
-	late final TranslationsShortcutsEn shortcuts = TranslationsShortcutsEn._(_root);
-	late final TranslationsOverviewEn overview = TranslationsOverviewEn._(_root);
+	late final Translations$generic$en generic = Translations$generic$en._(_root);
+	late final Translations$addons$en addons = Translations$addons$en._(_root);
+	late final Translations$app$en app = Translations$app$en._(_root);
+	late final Translations$navigationPanel$en navigationPanel = Translations$navigationPanel$en._(_root);
+	late final Translations$configurationPanel$en configurationPanel = Translations$configurationPanel$en._(_root);
+	late final Translations$shortcuts$en shortcuts = Translations$shortcuts$en._(_root);
+	late final Translations$overview$en overview = Translations$overview$en._(_root);
 }
 
 // Path: generic
-class TranslationsGenericEn {
-	TranslationsGenericEn._(this._root);
+class Translations$generic$en {
+	Translations$generic$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsGenericYesNoSwitchEn yesNoSwitch = TranslationsGenericYesNoSwitchEn._(_root);
-	late final TranslationsGenericOnOffSwitchEn onOffSwitch = TranslationsGenericOnOffSwitchEn._(_root);
-	late final TranslationsGenericShowHideSwitchEn showHideSwitch = TranslationsGenericShowHideSwitchEn._(_root);
+	late final Translations$generic$yesNoSwitch$en yesNoSwitch = Translations$generic$yesNoSwitch$en._(_root);
+	late final Translations$generic$onOffSwitch$en onOffSwitch = Translations$generic$onOffSwitch$en._(_root);
+	late final Translations$generic$showHideSwitch$en showHideSwitch = Translations$generic$showHideSwitch$en._(_root);
 }
 
 // Path: addons
-class TranslationsAddonsEn {
-	TranslationsAddonsEn._(this._root);
+class Translations$addons$en {
+	Translations$addons$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAddonsAccessibilityEn accessibility = TranslationsAddonsAccessibilityEn._(_root);
-	late final TranslationsAddonsBackgroundEn background = TranslationsAddonsBackgroundEn._(_root);
-	late final TranslationsAddonsDebuggingEn debugging = TranslationsAddonsDebuggingEn._(_root);
-	late final TranslationsAddonsHotReloadEffectEn hotReloadEffect = TranslationsAddonsHotReloadEffectEn._(_root);
-	late final TranslationsAddonsKnobsEn knobs = TranslationsAddonsKnobsEn._(_root);
-	late final TranslationsAddonsLocalizationEn localization = TranslationsAddonsLocalizationEn._(_root);
-	late final TranslationsAddonsOrderingEn ordering = TranslationsAddonsOrderingEn._(_root);
-	late final TranslationsAddonsColorPickerEn colorPicker = TranslationsAddonsColorPickerEn._(_root);
-	late final TranslationsAddonsDescriptionEn description = TranslationsAddonsDescriptionEn._(_root);
-	late final TranslationsAddonsPageTransitionEn pageTransition = TranslationsAddonsPageTransitionEn._(_root);
-	late final TranslationsAddonsRecentHistoryEn recentHistory = TranslationsAddonsRecentHistoryEn._(_root);
-	late final TranslationsAddonsAcknowledgedEn acknowledged = TranslationsAddonsAcknowledgedEn._(_root);
-	late final TranslationsAddonsConstraintsEn constraints = TranslationsAddonsConstraintsEn._(_root);
-	late final TranslationsAddonsWerkbankThemeEn werkbank_theme = TranslationsAddonsWerkbankThemeEn._(_root);
-	late final TranslationsAddonsThemingEn theming = TranslationsAddonsThemingEn._(_root);
-	late final TranslationsAddonsZoomEn zoom = TranslationsAddonsZoomEn._(_root);
+	late final Translations$addons$accessibility$en accessibility = Translations$addons$accessibility$en._(_root);
+	late final Translations$addons$background$en background = Translations$addons$background$en._(_root);
+	late final Translations$addons$debugging$en debugging = Translations$addons$debugging$en._(_root);
+	late final Translations$addons$hotReloadEffect$en hotReloadEffect = Translations$addons$hotReloadEffect$en._(_root);
+	late final Translations$addons$knobs$en knobs = Translations$addons$knobs$en._(_root);
+	late final Translations$addons$localization$en localization = Translations$addons$localization$en._(_root);
+	late final Translations$addons$ordering$en ordering = Translations$addons$ordering$en._(_root);
+	late final Translations$addons$colorPicker$en colorPicker = Translations$addons$colorPicker$en._(_root);
+	late final Translations$addons$description$en description = Translations$addons$description$en._(_root);
+	late final Translations$addons$pageTransition$en pageTransition = Translations$addons$pageTransition$en._(_root);
+	late final Translations$addons$recentHistory$en recentHistory = Translations$addons$recentHistory$en._(_root);
+	late final Translations$addons$acknowledged$en acknowledged = Translations$addons$acknowledged$en._(_root);
+	late final Translations$addons$constraints$en constraints = Translations$addons$constraints$en._(_root);
+	late final Translations$addons$werkbank_theme$en werkbank_theme = Translations$addons$werkbank_theme$en._(_root);
+	late final Translations$addons$theming$en theming = Translations$addons$theming$en._(_root);
+	late final Translations$addons$zoom$en zoom = Translations$addons$zoom$en._(_root);
 }
 
 // Path: app
-class TranslationsAppEn {
-	TranslationsAppEn._(this._root);
+class Translations$app$en {
+	Translations$app$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -96,8 +96,8 @@ class TranslationsAppEn {
 }
 
 // Path: navigationPanel
-class TranslationsNavigationPanelEn {
-	TranslationsNavigationPanelEn._(this._root);
+class Translations$navigationPanel$en {
+	Translations$navigationPanel$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -106,15 +106,15 @@ class TranslationsNavigationPanelEn {
 	/// en: 'LAST UPDATED $date'
 	String lastUpdated({required Object date}) => 'LAST UPDATED ${date}';
 
-	late final TranslationsNavigationPanelSearchEn search = TranslationsNavigationPanelSearchEn._(_root);
+	late final Translations$navigationPanel$search$en search = Translations$navigationPanel$search$en._(_root);
 
 	/// en: 'Overview'
 	String get overview => 'Overview';
 }
 
 // Path: configurationPanel
-class TranslationsConfigurationPanelEn {
-	TranslationsConfigurationPanelEn._(this._root);
+class Translations$configurationPanel$en {
+	Translations$configurationPanel$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -129,33 +129,33 @@ class TranslationsConfigurationPanelEn {
 	/// en: 'No use case selected'
 	String get noUseCaseSelected => 'No use case selected';
 
-	late final TranslationsConfigurationPanelTabsEn tabs = TranslationsConfigurationPanelTabsEn._(_root);
+	late final Translations$configurationPanel$tabs$en tabs = Translations$configurationPanel$tabs$en._(_root);
 }
 
 // Path: shortcuts
-class TranslationsShortcutsEn {
-	TranslationsShortcutsEn._(this._root);
+class Translations$shortcuts$en {
+	Translations$shortcuts$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsShortcutsGeneralEn general = TranslationsShortcutsGeneralEn._(_root);
-	late final TranslationsShortcutsNavigationModeEn navigationMode = TranslationsShortcutsNavigationModeEn._(_root);
+	late final Translations$shortcuts$general$en general = Translations$shortcuts$general$en._(_root);
+	late final Translations$shortcuts$navigationMode$en navigationMode = Translations$shortcuts$navigationMode$en._(_root);
 }
 
 // Path: overview
-class TranslationsOverviewEn {
-	TranslationsOverviewEn._(this._root);
+class Translations$overview$en {
+	Translations$overview$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsOverviewOverflowNotificationEn overflow_notification = TranslationsOverviewOverflowNotificationEn._(_root);
+	late final Translations$overview$overflow_notification$en overflow_notification = Translations$overview$overflow_notification$en._(_root);
 }
 
 // Path: generic.yesNoSwitch
-class TranslationsGenericYesNoSwitchEn {
-	TranslationsGenericYesNoSwitchEn._(this._root);
+class Translations$generic$yesNoSwitch$en {
+	Translations$generic$yesNoSwitch$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -169,8 +169,8 @@ class TranslationsGenericYesNoSwitchEn {
 }
 
 // Path: generic.onOffSwitch
-class TranslationsGenericOnOffSwitchEn {
-	TranslationsGenericOnOffSwitchEn._(this._root);
+class Translations$generic$onOffSwitch$en {
+	Translations$generic$onOffSwitch$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -184,8 +184,8 @@ class TranslationsGenericOnOffSwitchEn {
 }
 
 // Path: generic.showHideSwitch
-class TranslationsGenericShowHideSwitchEn {
-	TranslationsGenericShowHideSwitchEn._(this._root);
+class Translations$generic$showHideSwitch$en {
+	Translations$generic$showHideSwitch$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -199,8 +199,8 @@ class TranslationsGenericShowHideSwitchEn {
 }
 
 // Path: addons.accessibility
-class TranslationsAddonsAccessibilityEn {
-	TranslationsAddonsAccessibilityEn._(this._root);
+class Translations$addons$accessibility$en {
+	Translations$addons$accessibility$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -209,13 +209,13 @@ class TranslationsAddonsAccessibilityEn {
 	/// en: 'Accessibility'
 	String get name => 'Accessibility';
 
-	late final TranslationsAddonsAccessibilityControlsEn controls = TranslationsAddonsAccessibilityControlsEn._(_root);
-	late final TranslationsAddonsAccessibilityInspectorEn inspector = TranslationsAddonsAccessibilityInspectorEn._(_root);
+	late final Translations$addons$accessibility$controls$en controls = Translations$addons$accessibility$controls$en._(_root);
+	late final Translations$addons$accessibility$inspector$en inspector = Translations$addons$accessibility$inspector$en._(_root);
 }
 
 // Path: addons.background
-class TranslationsAddonsBackgroundEn {
-	TranslationsAddonsBackgroundEn._(this._root);
+class Translations$addons$background$en {
+	Translations$addons$background$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -224,12 +224,12 @@ class TranslationsAddonsBackgroundEn {
 	/// en: 'Background'
 	String get name => 'Background';
 
-	late final TranslationsAddonsBackgroundControlsEn controls = TranslationsAddonsBackgroundControlsEn._(_root);
+	late final Translations$addons$background$controls$en controls = Translations$addons$background$controls$en._(_root);
 }
 
 // Path: addons.debugging
-class TranslationsAddonsDebuggingEn {
-	TranslationsAddonsDebuggingEn._(this._root);
+class Translations$addons$debugging$en {
+	Translations$addons$debugging$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -238,12 +238,12 @@ class TranslationsAddonsDebuggingEn {
 	/// en: 'Debugging (Experimental)'
 	String get name => 'Debugging (Experimental)';
 
-	late final TranslationsAddonsDebuggingControlsEn controls = TranslationsAddonsDebuggingControlsEn._(_root);
+	late final Translations$addons$debugging$controls$en controls = Translations$addons$debugging$controls$en._(_root);
 }
 
 // Path: addons.hotReloadEffect
-class TranslationsAddonsHotReloadEffectEn {
-	TranslationsAddonsHotReloadEffectEn._(this._root);
+class Translations$addons$hotReloadEffect$en {
+	Translations$addons$hotReloadEffect$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -252,12 +252,12 @@ class TranslationsAddonsHotReloadEffectEn {
 	/// en: 'Hot Reload Effect'
 	String get name => 'Hot Reload Effect';
 
-	late final TranslationsAddonsHotReloadEffectControlsEn controls = TranslationsAddonsHotReloadEffectControlsEn._(_root);
+	late final Translations$addons$hotReloadEffect$controls$en controls = Translations$addons$hotReloadEffect$controls$en._(_root);
 }
 
 // Path: addons.knobs
-class TranslationsAddonsKnobsEn {
-	TranslationsAddonsKnobsEn._(this._root);
+class Translations$addons$knobs$en {
+	Translations$addons$knobs$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -266,13 +266,13 @@ class TranslationsAddonsKnobsEn {
 	/// en: 'Knobs'
 	String get name => 'Knobs';
 
-	late final TranslationsAddonsKnobsControlsEn controls = TranslationsAddonsKnobsControlsEn._(_root);
-	late final TranslationsAddonsKnobsKnobsEn knobs = TranslationsAddonsKnobsKnobsEn._(_root);
+	late final Translations$addons$knobs$controls$en controls = Translations$addons$knobs$controls$en._(_root);
+	late final Translations$addons$knobs$knobs$en knobs = Translations$addons$knobs$knobs$en._(_root);
 }
 
 // Path: addons.localization
-class TranslationsAddonsLocalizationEn {
-	TranslationsAddonsLocalizationEn._(this._root);
+class Translations$addons$localization$en {
+	Translations$addons$localization$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -281,12 +281,12 @@ class TranslationsAddonsLocalizationEn {
 	/// en: 'Localization'
 	String get name => 'Localization';
 
-	late final TranslationsAddonsLocalizationControlsEn controls = TranslationsAddonsLocalizationControlsEn._(_root);
+	late final Translations$addons$localization$controls$en controls = Translations$addons$localization$controls$en._(_root);
 }
 
 // Path: addons.ordering
-class TranslationsAddonsOrderingEn {
-	TranslationsAddonsOrderingEn._(this._root);
+class Translations$addons$ordering$en {
+	Translations$addons$ordering$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -295,12 +295,12 @@ class TranslationsAddonsOrderingEn {
 	/// en: 'Ordering'
 	String get name => 'Ordering';
 
-	late final TranslationsAddonsOrderingControlsEn controls = TranslationsAddonsOrderingControlsEn._(_root);
+	late final Translations$addons$ordering$controls$en controls = Translations$addons$ordering$controls$en._(_root);
 }
 
 // Path: addons.colorPicker
-class TranslationsAddonsColorPickerEn {
-	TranslationsAddonsColorPickerEn._(this._root);
+class Translations$addons$colorPicker$en {
+	Translations$addons$colorPicker$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -309,12 +309,12 @@ class TranslationsAddonsColorPickerEn {
 	/// en: 'Color Picker'
 	String get name => 'Color Picker';
 
-	late final TranslationsAddonsColorPickerControlsEn controls = TranslationsAddonsColorPickerControlsEn._(_root);
+	late final Translations$addons$colorPicker$controls$en controls = Translations$addons$colorPicker$controls$en._(_root);
 }
 
 // Path: addons.description
-class TranslationsAddonsDescriptionEn {
-	TranslationsAddonsDescriptionEn._(this._root);
+class Translations$addons$description$en {
+	Translations$addons$description$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -340,8 +340,8 @@ class TranslationsAddonsDescriptionEn {
 }
 
 // Path: addons.pageTransition
-class TranslationsAddonsPageTransitionEn {
-	TranslationsAddonsPageTransitionEn._(this._root);
+class Translations$addons$pageTransition$en {
+	Translations$addons$pageTransition$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -352,8 +352,8 @@ class TranslationsAddonsPageTransitionEn {
 }
 
 // Path: addons.recentHistory
-class TranslationsAddonsRecentHistoryEn {
-	TranslationsAddonsRecentHistoryEn._(this._root);
+class Translations$addons$recentHistory$en {
+	Translations$addons$recentHistory$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -364,8 +364,8 @@ class TranslationsAddonsRecentHistoryEn {
 }
 
 // Path: addons.acknowledged
-class TranslationsAddonsAcknowledgedEn {
-	TranslationsAddonsAcknowledgedEn._(this._root);
+class Translations$addons$acknowledged$en {
+	Translations$addons$acknowledged$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -376,8 +376,8 @@ class TranslationsAddonsAcknowledgedEn {
 }
 
 // Path: addons.constraints
-class TranslationsAddonsConstraintsEn {
-	TranslationsAddonsConstraintsEn._(this._root);
+class Translations$addons$constraints$en {
+	Translations$addons$constraints$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -386,13 +386,13 @@ class TranslationsAddonsConstraintsEn {
 	/// en: 'Constraints'
 	String get name => 'Constraints';
 
-	late final TranslationsAddonsConstraintsControlsEn controls = TranslationsAddonsConstraintsControlsEn._(_root);
-	late final TranslationsAddonsConstraintsShortcutsEn shortcuts = TranslationsAddonsConstraintsShortcutsEn._(_root);
+	late final Translations$addons$constraints$controls$en controls = Translations$addons$constraints$controls$en._(_root);
+	late final Translations$addons$constraints$shortcuts$en shortcuts = Translations$addons$constraints$shortcuts$en._(_root);
 }
 
 // Path: addons.werkbank_theme
-class TranslationsAddonsWerkbankThemeEn {
-	TranslationsAddonsWerkbankThemeEn._(this._root);
+class Translations$addons$werkbank_theme$en {
+	Translations$addons$werkbank_theme$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -401,12 +401,12 @@ class TranslationsAddonsWerkbankThemeEn {
 	/// en: 'Werkbank Theme'
 	String get name => 'Werkbank Theme';
 
-	late final TranslationsAddonsWerkbankThemeControlsEn controls = TranslationsAddonsWerkbankThemeControlsEn._(_root);
+	late final Translations$addons$werkbank_theme$controls$en controls = Translations$addons$werkbank_theme$controls$en._(_root);
 }
 
 // Path: addons.theming
-class TranslationsAddonsThemingEn {
-	TranslationsAddonsThemingEn._(this._root);
+class Translations$addons$theming$en {
+	Translations$addons$theming$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -415,12 +415,12 @@ class TranslationsAddonsThemingEn {
 	/// en: 'Theming'
 	String get name => 'Theming';
 
-	late final TranslationsAddonsThemingControlsEn controls = TranslationsAddonsThemingControlsEn._(_root);
+	late final Translations$addons$theming$controls$en controls = Translations$addons$theming$controls$en._(_root);
 }
 
 // Path: addons.zoom
-class TranslationsAddonsZoomEn {
-	TranslationsAddonsZoomEn._(this._root);
+class Translations$addons$zoom$en {
+	Translations$addons$zoom$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -429,13 +429,13 @@ class TranslationsAddonsZoomEn {
 	/// en: 'Zoom'
 	String get name => 'Zoom';
 
-	late final TranslationsAddonsZoomControlsEn controls = TranslationsAddonsZoomControlsEn._(_root);
-	late final TranslationsAddonsZoomShortcutsEn shortcuts = TranslationsAddonsZoomShortcutsEn._(_root);
+	late final Translations$addons$zoom$controls$en controls = Translations$addons$zoom$controls$en._(_root);
+	late final Translations$addons$zoom$shortcuts$en shortcuts = Translations$addons$zoom$shortcuts$en._(_root);
 }
 
 // Path: navigationPanel.search
-class TranslationsNavigationPanelSearchEn {
-	TranslationsNavigationPanelSearchEn._(this._root);
+class Translations$navigationPanel$search$en {
+	Translations$navigationPanel$search$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -446,8 +446,8 @@ class TranslationsNavigationPanelSearchEn {
 }
 
 // Path: configurationPanel.tabs
-class TranslationsConfigurationPanelTabsEn {
-	TranslationsConfigurationPanelTabsEn._(this._root);
+class Translations$configurationPanel$tabs$en {
+	Translations$configurationPanel$tabs$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -464,8 +464,8 @@ class TranslationsConfigurationPanelTabsEn {
 }
 
 // Path: shortcuts.general
-class TranslationsShortcutsGeneralEn {
-	TranslationsShortcutsGeneralEn._(this._root);
+class Translations$shortcuts$general$en {
+	Translations$shortcuts$general$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -485,8 +485,8 @@ class TranslationsShortcutsGeneralEn {
 }
 
 // Path: shortcuts.navigationMode
-class TranslationsShortcutsNavigationModeEn {
-	TranslationsShortcutsNavigationModeEn._(this._root);
+class Translations$shortcuts$navigationMode$en {
+	Translations$shortcuts$navigationMode$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -509,8 +509,8 @@ class TranslationsShortcutsNavigationModeEn {
 }
 
 // Path: overview.overflow_notification
-class TranslationsOverviewOverflowNotificationEn {
-	TranslationsOverviewOverflowNotificationEn._(this._root);
+class Translations$overview$overflow_notification$en {
+	Translations$overview$overflow_notification$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -527,8 +527,8 @@ class TranslationsOverviewOverflowNotificationEn {
 }
 
 // Path: addons.accessibility.controls
-class TranslationsAddonsAccessibilityControlsEn {
-	TranslationsAddonsAccessibilityControlsEn._(this._root);
+class Translations$addons$accessibility$controls$en {
+	Translations$addons$accessibility$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -540,8 +540,8 @@ class TranslationsAddonsAccessibilityControlsEn {
 	/// en: 'Bold Text'
 	String get boldText => 'Bold Text';
 
-	late final TranslationsAddonsAccessibilityControlsSemanticsModeEn semanticsMode = TranslationsAddonsAccessibilityControlsSemanticsModeEn._(_root);
-	late final TranslationsAddonsAccessibilityControlsSplitAxisEn splitAxis = TranslationsAddonsAccessibilityControlsSplitAxisEn._(_root);
+	late final Translations$addons$accessibility$controls$semanticsMode$en semanticsMode = Translations$addons$accessibility$controls$semanticsMode$en._(_root);
+	late final Translations$addons$accessibility$controls$splitAxis$en splitAxis = Translations$addons$accessibility$controls$splitAxis$en._(_root);
 
 	/// en: 'Semantics Tree'
 	String get semanticsTree => 'Semantics Tree';
@@ -549,7 +549,7 @@ class TranslationsAddonsAccessibilityControlsEn {
 	/// en: 'Active Semantics Node'
 	String get activeSemanticsNode => 'Active Semantics Node';
 
-	late final TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn semanticsInspectionScope = TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(_root);
+	late final Translations$addons$accessibility$controls$semanticsInspectionScope$en semanticsInspectionScope = Translations$addons$accessibility$controls$semanticsInspectionScope$en._(_root);
 
 	/// en: 'Merged Nodes'
 	String get mergedSemanticsNodes => 'Merged Nodes';
@@ -557,12 +557,12 @@ class TranslationsAddonsAccessibilityControlsEn {
 	/// en: 'Hidden Nodes'
 	String get hiddenSemanticsNodes => 'Hidden Nodes';
 
-	late final TranslationsAddonsAccessibilityControlsColorModeEn colorMode = TranslationsAddonsAccessibilityControlsColorModeEn._(_root);
+	late final Translations$addons$accessibility$controls$colorMode$en colorMode = Translations$addons$accessibility$controls$colorMode$en._(_root);
 }
 
 // Path: addons.accessibility.inspector
-class TranslationsAddonsAccessibilityInspectorEn {
-	TranslationsAddonsAccessibilityInspectorEn._(this._root);
+class Translations$addons$accessibility$inspector$en {
+	Translations$addons$accessibility$inspector$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -573,18 +573,18 @@ class TranslationsAddonsAccessibilityInspectorEn {
 }
 
 // Path: addons.background.controls
-class TranslationsAddonsBackgroundControlsEn {
-	TranslationsAddonsBackgroundControlsEn._(this._root);
+class Translations$addons$background$controls$en {
+	Translations$addons$background$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAddonsBackgroundControlsBackgroundEn background = TranslationsAddonsBackgroundControlsBackgroundEn._(_root);
+	late final Translations$addons$background$controls$background$en background = Translations$addons$background$controls$background$en._(_root);
 }
 
 // Path: addons.debugging.controls
-class TranslationsAddonsDebuggingControlsEn {
-	TranslationsAddonsDebuggingControlsEn._(this._root);
+class Translations$addons$debugging$controls$en {
+	Translations$addons$debugging$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -610,8 +610,8 @@ class TranslationsAddonsDebuggingControlsEn {
 }
 
 // Path: addons.hotReloadEffect.controls
-class TranslationsAddonsHotReloadEffectControlsEn {
-	TranslationsAddonsHotReloadEffectControlsEn._(this._root);
+class Translations$addons$hotReloadEffect$controls$en {
+	Translations$addons$hotReloadEffect$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -622,29 +622,29 @@ class TranslationsAddonsHotReloadEffectControlsEn {
 }
 
 // Path: addons.knobs.controls
-class TranslationsAddonsKnobsControlsEn {
-	TranslationsAddonsKnobsControlsEn._(this._root);
+class Translations$addons$knobs$controls$en {
+	Translations$addons$knobs$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAddonsKnobsControlsPresetEn preset = TranslationsAddonsKnobsControlsPresetEn._(_root);
+	late final Translations$addons$knobs$controls$preset$en preset = Translations$addons$knobs$controls$preset$en._(_root);
 }
 
 // Path: addons.knobs.knobs
-class TranslationsAddonsKnobsKnobsEn {
-	TranslationsAddonsKnobsKnobsEn._(this._root);
+class Translations$addons$knobs$knobs$en {
+	Translations$addons$knobs$knobs$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAddonsKnobsKnobsIntervalEn interval = TranslationsAddonsKnobsKnobsIntervalEn._(_root);
-	late final TranslationsAddonsKnobsKnobsFocusnodeEn focusnode = TranslationsAddonsKnobsKnobsFocusnodeEn._(_root);
+	late final Translations$addons$knobs$knobs$interval$en interval = Translations$addons$knobs$knobs$interval$en._(_root);
+	late final Translations$addons$knobs$knobs$focusnode$en focusnode = Translations$addons$knobs$knobs$focusnode$en._(_root);
 }
 
 // Path: addons.localization.controls
-class TranslationsAddonsLocalizationControlsEn {
-	TranslationsAddonsLocalizationControlsEn._(this._root);
+class Translations$addons$localization$controls$en {
+	Translations$addons$localization$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -655,40 +655,40 @@ class TranslationsAddonsLocalizationControlsEn {
 }
 
 // Path: addons.ordering.controls
-class TranslationsAddonsOrderingControlsEn {
-	TranslationsAddonsOrderingControlsEn._(this._root);
+class Translations$addons$ordering$controls$en {
+	Translations$addons$ordering$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAddonsOrderingControlsOrderEn order = TranslationsAddonsOrderingControlsOrderEn._(_root);
+	late final Translations$addons$ordering$controls$order$en order = Translations$addons$ordering$controls$order$en._(_root);
 }
 
 // Path: addons.colorPicker.controls
-class TranslationsAddonsColorPickerControlsEn {
-	TranslationsAddonsColorPickerControlsEn._(this._root);
+class Translations$addons$colorPicker$controls$en {
+	Translations$addons$colorPicker$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAddonsColorPickerControlsColorPickerEn colorPicker = TranslationsAddonsColorPickerControlsColorPickerEn._(_root);
+	late final Translations$addons$colorPicker$controls$colorPicker$en colorPicker = Translations$addons$colorPicker$controls$colorPicker$en._(_root);
 }
 
 // Path: addons.constraints.controls
-class TranslationsAddonsConstraintsControlsEn {
-	TranslationsAddonsConstraintsControlsEn._(this._root);
+class Translations$addons$constraints$controls$en {
+	Translations$addons$constraints$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsAddonsConstraintsControlsPresetEn preset = TranslationsAddonsConstraintsControlsPresetEn._(_root);
-	late final TranslationsAddonsConstraintsControlsConstraintsEn constraints = TranslationsAddonsConstraintsControlsConstraintsEn._(_root);
-	late final TranslationsAddonsConstraintsControlsSizeEn size = TranslationsAddonsConstraintsControlsSizeEn._(_root);
+	late final Translations$addons$constraints$controls$preset$en preset = Translations$addons$constraints$controls$preset$en._(_root);
+	late final Translations$addons$constraints$controls$constraints$en constraints = Translations$addons$constraints$controls$constraints$en._(_root);
+	late final Translations$addons$constraints$controls$size$en size = Translations$addons$constraints$controls$size$en._(_root);
 }
 
 // Path: addons.constraints.shortcuts
-class TranslationsAddonsConstraintsShortcutsEn {
-	TranslationsAddonsConstraintsShortcutsEn._(this._root);
+class Translations$addons$constraints$shortcuts$en {
+	Translations$addons$constraints$shortcuts$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -711,8 +711,8 @@ class TranslationsAddonsConstraintsShortcutsEn {
 }
 
 // Path: addons.werkbank_theme.controls
-class TranslationsAddonsWerkbankThemeControlsEn {
-	TranslationsAddonsWerkbankThemeControlsEn._(this._root);
+class Translations$addons$werkbank_theme$controls$en {
+	Translations$addons$werkbank_theme$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -723,8 +723,8 @@ class TranslationsAddonsWerkbankThemeControlsEn {
 }
 
 // Path: addons.theming.controls
-class TranslationsAddonsThemingControlsEn {
-	TranslationsAddonsThemingControlsEn._(this._root);
+class Translations$addons$theming$controls$en {
+	Translations$addons$theming$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -735,8 +735,8 @@ class TranslationsAddonsThemingControlsEn {
 }
 
 // Path: addons.zoom.controls
-class TranslationsAddonsZoomControlsEn {
-	TranslationsAddonsZoomControlsEn._(this._root);
+class Translations$addons$zoom$controls$en {
+	Translations$addons$zoom$controls$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -750,8 +750,8 @@ class TranslationsAddonsZoomControlsEn {
 }
 
 // Path: addons.zoom.shortcuts
-class TranslationsAddonsZoomShortcutsEn {
-	TranslationsAddonsZoomShortcutsEn._(this._root);
+class Translations$addons$zoom$shortcuts$en {
+	Translations$addons$zoom$shortcuts$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -789,8 +789,8 @@ class TranslationsAddonsZoomShortcutsEn {
 }
 
 // Path: addons.accessibility.controls.semanticsMode
-class TranslationsAddonsAccessibilityControlsSemanticsModeEn {
-	TranslationsAddonsAccessibilityControlsSemanticsModeEn._(this._root);
+class Translations$addons$accessibility$controls$semanticsMode$en {
+	Translations$addons$accessibility$controls$semanticsMode$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -799,12 +799,12 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeEn {
 	/// en: 'Semantics Mode'
 	String get name => 'Semantics Mode';
 
-	late final TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn values = TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn._(_root);
+	late final Translations$addons$accessibility$controls$semanticsMode$values$en values = Translations$addons$accessibility$controls$semanticsMode$values$en._(_root);
 }
 
 // Path: addons.accessibility.controls.splitAxis
-class TranslationsAddonsAccessibilityControlsSplitAxisEn {
-	TranslationsAddonsAccessibilityControlsSplitAxisEn._(this._root);
+class Translations$addons$accessibility$controls$splitAxis$en {
+	Translations$addons$accessibility$controls$splitAxis$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -813,12 +813,12 @@ class TranslationsAddonsAccessibilityControlsSplitAxisEn {
 	/// en: 'Split'
 	String get name => 'Split';
 
-	late final TranslationsAddonsAccessibilityControlsSplitAxisValuesEn values = TranslationsAddonsAccessibilityControlsSplitAxisValuesEn._(_root);
+	late final Translations$addons$accessibility$controls$splitAxis$values$en values = Translations$addons$accessibility$controls$splitAxis$values$en._(_root);
 }
 
 // Path: addons.accessibility.controls.semanticsInspectionScope
-class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn {
-	TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn._(this._root);
+class Translations$addons$accessibility$controls$semanticsInspectionScope$en {
+	Translations$addons$accessibility$controls$semanticsInspectionScope$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -827,12 +827,12 @@ class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeEn {
 	/// en: 'Inspection Scope'
 	String get name => 'Inspection Scope';
 
-	late final TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn values = TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn._(_root);
+	late final Translations$addons$accessibility$controls$semanticsInspectionScope$values$en values = Translations$addons$accessibility$controls$semanticsInspectionScope$values$en._(_root);
 }
 
 // Path: addons.accessibility.controls.colorMode
-class TranslationsAddonsAccessibilityControlsColorModeEn {
-	TranslationsAddonsAccessibilityControlsColorModeEn._(this._root);
+class Translations$addons$accessibility$controls$colorMode$en {
+	Translations$addons$accessibility$controls$colorMode$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -841,12 +841,12 @@ class TranslationsAddonsAccessibilityControlsColorModeEn {
 	/// en: 'Simulated Color Blindness'
 	String get name => 'Simulated Color Blindness';
 
-	late final TranslationsAddonsAccessibilityControlsColorModeValuesEn values = TranslationsAddonsAccessibilityControlsColorModeValuesEn._(_root);
+	late final Translations$addons$accessibility$controls$colorMode$values$en values = Translations$addons$accessibility$controls$colorMode$values$en._(_root);
 }
 
 // Path: addons.background.controls.background
-class TranslationsAddonsBackgroundControlsBackgroundEn {
-	TranslationsAddonsBackgroundControlsBackgroundEn._(this._root);
+class Translations$addons$background$controls$background$en {
+	Translations$addons$background$controls$background$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -855,12 +855,12 @@ class TranslationsAddonsBackgroundControlsBackgroundEn {
 	/// en: 'Background'
 	String get label => 'Background';
 
-	late final TranslationsAddonsBackgroundControlsBackgroundValuesEn values = TranslationsAddonsBackgroundControlsBackgroundValuesEn._(_root);
+	late final Translations$addons$background$controls$background$values$en values = Translations$addons$background$controls$background$values$en._(_root);
 }
 
 // Path: addons.knobs.controls.preset
-class TranslationsAddonsKnobsControlsPresetEn {
-	TranslationsAddonsKnobsControlsPresetEn._(this._root);
+class Translations$addons$knobs$controls$preset$en {
+	Translations$addons$knobs$controls$preset$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -869,12 +869,12 @@ class TranslationsAddonsKnobsControlsPresetEn {
 	/// en: 'Preset'
 	String get name => 'Preset';
 
-	late final TranslationsAddonsKnobsControlsPresetValuesEn values = TranslationsAddonsKnobsControlsPresetValuesEn._(_root);
+	late final Translations$addons$knobs$controls$preset$values$en values = Translations$addons$knobs$controls$preset$values$en._(_root);
 }
 
 // Path: addons.knobs.knobs.interval
-class TranslationsAddonsKnobsKnobsIntervalEn {
-	TranslationsAddonsKnobsKnobsIntervalEn._(this._root);
+class Translations$addons$knobs$knobs$interval$en {
+	Translations$addons$knobs$knobs$interval$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -888,8 +888,8 @@ class TranslationsAddonsKnobsKnobsIntervalEn {
 }
 
 // Path: addons.knobs.knobs.focusnode
-class TranslationsAddonsKnobsKnobsFocusnodeEn {
-	TranslationsAddonsKnobsKnobsFocusnodeEn._(this._root);
+class Translations$addons$knobs$knobs$focusnode$en {
+	Translations$addons$knobs$knobs$focusnode$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -903,8 +903,8 @@ class TranslationsAddonsKnobsKnobsFocusnodeEn {
 }
 
 // Path: addons.ordering.controls.order
-class TranslationsAddonsOrderingControlsOrderEn {
-	TranslationsAddonsOrderingControlsOrderEn._(this._root);
+class Translations$addons$ordering$controls$order$en {
+	Translations$addons$ordering$controls$order$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -913,12 +913,12 @@ class TranslationsAddonsOrderingControlsOrderEn {
 	/// en: 'Order'
 	String get name => 'Order';
 
-	late final TranslationsAddonsOrderingControlsOrderValuesEn values = TranslationsAddonsOrderingControlsOrderValuesEn._(_root);
+	late final Translations$addons$ordering$controls$order$values$en values = Translations$addons$ordering$controls$order$values$en._(_root);
 }
 
 // Path: addons.colorPicker.controls.colorPicker
-class TranslationsAddonsColorPickerControlsColorPickerEn {
-	TranslationsAddonsColorPickerControlsColorPickerEn._(this._root);
+class Translations$addons$colorPicker$controls$colorPicker$en {
+	Translations$addons$colorPicker$controls$colorPicker$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -927,12 +927,12 @@ class TranslationsAddonsColorPickerControlsColorPickerEn {
 	/// en: 'Color Picker'
 	String get name => 'Color Picker';
 
-	late final TranslationsAddonsColorPickerControlsColorPickerValuesEn values = TranslationsAddonsColorPickerControlsColorPickerValuesEn._(_root);
+	late final Translations$addons$colorPicker$controls$colorPicker$values$en values = Translations$addons$colorPicker$controls$colorPicker$values$en._(_root);
 }
 
 // Path: addons.constraints.controls.preset
-class TranslationsAddonsConstraintsControlsPresetEn {
-	TranslationsAddonsConstraintsControlsPresetEn._(this._root);
+class Translations$addons$constraints$controls$preset$en {
+	Translations$addons$constraints$controls$preset$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -941,12 +941,12 @@ class TranslationsAddonsConstraintsControlsPresetEn {
 	/// en: 'Preset'
 	String get name => 'Preset';
 
-	late final TranslationsAddonsConstraintsControlsPresetValuesEn values = TranslationsAddonsConstraintsControlsPresetValuesEn._(_root);
+	late final Translations$addons$constraints$controls$preset$values$en values = Translations$addons$constraints$controls$preset$values$en._(_root);
 }
 
 // Path: addons.constraints.controls.constraints
-class TranslationsAddonsConstraintsControlsConstraintsEn {
-	TranslationsAddonsConstraintsControlsConstraintsEn._(this._root);
+class Translations$addons$constraints$controls$constraints$en {
+	Translations$addons$constraints$controls$constraints$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -955,12 +955,12 @@ class TranslationsAddonsConstraintsControlsConstraintsEn {
 	/// en: 'Constraints'
 	String get name => 'Constraints';
 
-	late final TranslationsAddonsConstraintsControlsConstraintsValuesEn values = TranslationsAddonsConstraintsControlsConstraintsValuesEn._(_root);
+	late final Translations$addons$constraints$controls$constraints$values$en values = Translations$addons$constraints$controls$constraints$values$en._(_root);
 }
 
 // Path: addons.constraints.controls.size
-class TranslationsAddonsConstraintsControlsSizeEn {
-	TranslationsAddonsConstraintsControlsSizeEn._(this._root);
+class Translations$addons$constraints$controls$size$en {
+	Translations$addons$constraints$controls$size$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -969,12 +969,12 @@ class TranslationsAddonsConstraintsControlsSizeEn {
 	/// en: 'Size'
 	String get name => 'Size';
 
-	late final TranslationsAddonsConstraintsControlsSizeValuesEn values = TranslationsAddonsConstraintsControlsSizeValuesEn._(_root);
+	late final Translations$addons$constraints$controls$size$values$en values = Translations$addons$constraints$controls$size$values$en._(_root);
 }
 
 // Path: addons.accessibility.controls.semanticsMode.values
-class TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn {
-	TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn._(this._root);
+class Translations$addons$accessibility$controls$semanticsMode$values$en {
+	Translations$addons$accessibility$controls$semanticsMode$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -994,8 +994,8 @@ class TranslationsAddonsAccessibilityControlsSemanticsModeValuesEn {
 }
 
 // Path: addons.accessibility.controls.splitAxis.values
-class TranslationsAddonsAccessibilityControlsSplitAxisValuesEn {
-	TranslationsAddonsAccessibilityControlsSplitAxisValuesEn._(this._root);
+class Translations$addons$accessibility$controls$splitAxis$values$en {
+	Translations$addons$accessibility$controls$splitAxis$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1009,8 +1009,8 @@ class TranslationsAddonsAccessibilityControlsSplitAxisValuesEn {
 }
 
 // Path: addons.accessibility.controls.semanticsInspectionScope.values
-class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn {
-	TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn._(this._root);
+class Translations$addons$accessibility$controls$semanticsInspectionScope$values$en {
+	Translations$addons$accessibility$controls$semanticsInspectionScope$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1024,8 +1024,8 @@ class TranslationsAddonsAccessibilityControlsSemanticsInspectionScopeValuesEn {
 }
 
 // Path: addons.accessibility.controls.colorMode.values
-class TranslationsAddonsAccessibilityControlsColorModeValuesEn {
-	TranslationsAddonsAccessibilityControlsColorModeValuesEn._(this._root);
+class Translations$addons$accessibility$controls$colorMode$values$en {
+	Translations$addons$accessibility$controls$colorMode$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1060,8 +1060,8 @@ class TranslationsAddonsAccessibilityControlsColorModeValuesEn {
 }
 
 // Path: addons.background.controls.background.values
-class TranslationsAddonsBackgroundControlsBackgroundValuesEn {
-	TranslationsAddonsBackgroundControlsBackgroundValuesEn._(this._root);
+class Translations$addons$background$controls$background$values$en {
+	Translations$addons$background$controls$background$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1072,8 +1072,8 @@ class TranslationsAddonsBackgroundControlsBackgroundValuesEn {
 }
 
 // Path: addons.knobs.controls.preset.values
-class TranslationsAddonsKnobsControlsPresetValuesEn {
-	TranslationsAddonsKnobsControlsPresetValuesEn._(this._root);
+class Translations$addons$knobs$controls$preset$values$en {
+	Translations$addons$knobs$controls$preset$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1087,8 +1087,8 @@ class TranslationsAddonsKnobsControlsPresetValuesEn {
 }
 
 // Path: addons.ordering.controls.order.values
-class TranslationsAddonsOrderingControlsOrderValuesEn {
-	TranslationsAddonsOrderingControlsOrderValuesEn._(this._root);
+class Translations$addons$ordering$controls$order$values$en {
+	Translations$addons$ordering$controls$order$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1102,8 +1102,8 @@ class TranslationsAddonsOrderingControlsOrderValuesEn {
 }
 
 // Path: addons.colorPicker.controls.colorPicker.values
-class TranslationsAddonsColorPickerControlsColorPickerValuesEn {
-	TranslationsAddonsColorPickerControlsColorPickerValuesEn._(this._root);
+class Translations$addons$colorPicker$controls$colorPicker$values$en {
+	Translations$addons$colorPicker$controls$colorPicker$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1123,8 +1123,8 @@ class TranslationsAddonsColorPickerControlsColorPickerValuesEn {
 }
 
 // Path: addons.constraints.controls.preset.values
-class TranslationsAddonsConstraintsControlsPresetValuesEn {
-	TranslationsAddonsConstraintsControlsPresetValuesEn._(this._root);
+class Translations$addons$constraints$controls$preset$values$en {
+	Translations$addons$constraints$controls$preset$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1138,8 +1138,8 @@ class TranslationsAddonsConstraintsControlsPresetValuesEn {
 }
 
 // Path: addons.constraints.controls.constraints.values
-class TranslationsAddonsConstraintsControlsConstraintsValuesEn {
-	TranslationsAddonsConstraintsControlsConstraintsValuesEn._(this._root);
+class Translations$addons$constraints$controls$constraints$values$en {
+	Translations$addons$constraints$controls$constraints$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1159,8 +1159,8 @@ class TranslationsAddonsConstraintsControlsConstraintsValuesEn {
 }
 
 // Path: addons.constraints.controls.size.values
-class TranslationsAddonsConstraintsControlsSizeValuesEn {
-	TranslationsAddonsConstraintsControlsSizeValuesEn._(this._root);
+class Translations$addons$constraints$controls$size$values$en {
+	Translations$addons$constraints$controls$size$values$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 
@@ -1180,10 +1180,6 @@ class TranslationsAddonsConstraintsControlsSizeValuesEn {
 /// so the map is split into smaller functions (512 entries each).
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
-		return _flatMapFunction$0(path);
-	}
-
-	dynamic _flatMapFunction$0(String path) {
 		return switch (path) {
 			'generic.yesNoSwitch.no' => 'NO',
 			'generic.yesNoSwitch.yes' => 'YES',
@@ -1322,4 +1318,3 @@ extension on Translations {
 		};
 	}
 }
-

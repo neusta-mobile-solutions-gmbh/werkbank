@@ -5,22 +5,20 @@ import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:werkbank/src/persistence/persistence.dart';
 
-typedef PersistencePhaseWidgetBuilder =
-    Widget Function(
-      BuildContext context,
-      WerkbankPersistencePhase phase,
-    );
+typedef PersistencePhaseWidgetBuilder = Widget Function(
+  BuildContext context,
+  WerkbankPersistencePhase phase,
+);
 
-typedef ControllerMapFactory =
-    Map<Type, PersistentController> Function(
-      SharedPreferencesWithCache prefsWithCache,
-    );
+typedef ControllerMapFactory = Map<Type, PersistentController> Function(
+  SharedPreferencesWithCache prefsWithCache,
+);
 
 sealed class WerkbankPersistencePhase {
   const WerkbankPersistencePhase();
 }
 
-class PersistenceInitializing extends WerkbankPersistencePhase {}
+class PersistenceInitializing extends WerkbankPersistencePhase;
 
 class PersistenceReady extends WerkbankPersistencePhase {
   const PersistenceReady(this.child);

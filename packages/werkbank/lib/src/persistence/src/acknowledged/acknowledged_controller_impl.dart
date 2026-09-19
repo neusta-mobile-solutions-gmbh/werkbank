@@ -6,8 +6,8 @@ class AcknowledgedControllerImpl extends PersistentController
     implements AcknowledgedController {
   AcknowledgedControllerImpl({
     required super.prefsWithCache,
-    required Set<String> descendantsPaths,
-  }) : _descendantsPaths = descendantsPaths;
+    required this._descendantsPaths,
+  });
 
   @override
   String get id => 'acknowledged';

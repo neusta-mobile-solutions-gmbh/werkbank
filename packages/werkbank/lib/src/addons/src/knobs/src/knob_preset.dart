@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-sealed class KnobPreset with EquatableMixin {
+sealed class KnobPreset with Equatable {
   const KnobPreset();
 }
 

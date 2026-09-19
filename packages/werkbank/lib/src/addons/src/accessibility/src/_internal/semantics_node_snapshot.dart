@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/rendering.dart';
 
-class SemanticsNodeSnapshot with EquatableMixin {
+class SemanticsNodeSnapshot with Equatable {
   SemanticsNodeSnapshot({
     required this.id,
     required this.transform,

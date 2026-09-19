@@ -99,12 +99,8 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
   }
 
   void onReorder(int oldIndex, int newIndex) {
-    // Flutter uses a weird definition of the new index.
-    // For example if oldIndex == 2, both newIndex == 2 and newIndex == 3 will
-    // not change the order.
-    final fixedNewIndex = newIndex > oldIndex ? newIndex - 1 : newIndex;
     setState(() {
-      _orderedSections!.move(oldIndex, fixedNewIndex);
+      _orderedSections!.move(oldIndex, newIndex);
     });
     _panelTabsController.reorder(
       widget.tab,

@@ -7,17 +7,15 @@ import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';
 import 'package:werkbank/src/widgets/widgets.dart';
 
-typedef RoutesWidgetBuilder =
-    Widget Function(
-      BuildContext context,
-      GoRouter router,
-    );
+typedef RoutesWidgetBuilder = Widget Function(
+  BuildContext context,
+  GoRouter router,
+);
 
-typedef ShellBuilder =
-    ShellRoute Function(
-      BuildContext context,
-      List<RouteBase> routes,
-    );
+typedef ShellBuilder = ShellRoute Function(
+  BuildContext context,
+  List<RouteBase> routes,
+);
 
 class RouterBuilder extends StatefulWidget {
   const RouterBuilder({

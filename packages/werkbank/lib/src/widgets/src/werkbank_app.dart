@@ -233,11 +233,10 @@ class WerkbankApp extends StatelessWidget {
   }
 }
 
-typedef ThemedWidgetBuilder =
-    Widget Function(
-      BuildContext context,
-      ThemeData theme,
-    );
+typedef ThemedWidgetBuilder = Widget Function(
+  BuildContext context,
+  ThemeData theme,
+);
 
 class _ThemeBuilder extends StatelessWidget {
   const _ThemeBuilder({

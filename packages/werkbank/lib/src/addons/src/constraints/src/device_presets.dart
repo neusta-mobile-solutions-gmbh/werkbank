@@ -101,8 +101,7 @@ enum _DeviceType {
 
 enum _Orientation {
   portrait,
-  landscape
-  ;
+  landscape;
 
   _Orientation get opposite => switch (this) {
     portrait => landscape,

@@ -48,7 +48,7 @@ class WTextArea extends StatelessWidget {
               style: textStyle,
             ),
           ),
-          if (trailing != null) trailing!,
+          ?trailing,
         ],
       ),
     );

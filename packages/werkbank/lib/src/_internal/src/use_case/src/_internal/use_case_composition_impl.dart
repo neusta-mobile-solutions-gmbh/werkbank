@@ -5,11 +5,10 @@ import 'package:werkbank/src/use_case/use_case.dart';
 
 class UseCaseCompositionImpl implements UseCaseComposition {
   UseCaseCompositionImpl({
-    required UseCaseController controller,
+    required this._controller,
     required this.metadata,
     required IMap<Type, AnyTransientUseCaseStateEntry> transientStateEntries,
-  }) : _controller = controller,
-       _transientState = transientStateEntries;
+  }) : _transientState = transientStateEntries;
 
   final UseCaseController _controller;
   @override

@@ -6,12 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
-typedef AppBuilder =
-    Widget Function(
-      BuildContext context,
-      TransitionBuilder builder,
-      Widget home,
-    );
+typedef AppBuilder = Widget Function(
+  BuildContext context,
+  TransitionBuilder builder,
+  Widget home,
+);
 
 typedef ThemeBrightnessBuilder = Brightness Function(BuildContext context);
 
@@ -150,11 +149,11 @@ abstract interface class AppConfig {
 
 class _CallbackAppConfig implements AppConfig {
   const _CallbackAppConfig({
-    required AppBuilder buildApp,
+    required this._buildApp,
     this.additionalBuilder,
     required this.defaultTextStyleBuilder,
     required this.themeBrightnessBuilder,
-  }) : _buildApp = buildApp;
+  });
 
   final AppBuilder _buildApp;
 

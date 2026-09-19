@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
 
-typedef RegularKnobBuilder<T> =
-    Widget Function(
-      BuildContext context,
-      ValueNotifier<T> valueNotifier,
-    );
+typedef RegularKnobBuilder<T> = Widget Function(
+  BuildContext context,
+  ValueNotifier<T> valueNotifier,
+);
 
 extension RegularKnobsExtension on KnobsComposer {
   /// Creates and registers a knob, which can be used to control a value in
@@ -49,12 +48,11 @@ class RegularKnob<T> extends BuildableWritableKnob<T>
   RegularKnob({
     required super.label,
     required this.initialValue,
-    required RegularKnobBuilder<T> knobBuilder,
+    required this._knobBuilder,
     required this.rebuildKnobBuilderOnChange,
     required this.forceSpaciousLayout,
     this.trailingIconButton,
-  }) : _knobBuilder = knobBuilder,
-       super(initialValue: initialValue);
+  }) : super(initialValue: initialValue);
 
   final T initialValue;
   final RegularKnobBuilder<T> _knobBuilder;

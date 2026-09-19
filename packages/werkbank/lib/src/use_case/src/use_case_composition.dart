@@ -9,10 +9,9 @@ import 'package:werkbank/src/use_case/use_case.dart';
 
 /// A function that mutates the state of a use case using the provided
 /// [UseCaseComposition].
-typedef UseCaseStateMutation =
-    void Function(
-      UseCaseComposition controller,
-    );
+typedef UseCaseStateMutation = void Function(
+  UseCaseComposition controller,
+);
 
 /// A class that holds the result of composing a use cases using a
 /// [UseCaseComposer].

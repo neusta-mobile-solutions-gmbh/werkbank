@@ -3,13 +3,12 @@ import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
-typedef NullableKnobBuilder<T extends Object> =
-    Widget Function(
-      BuildContext context,
-      // ignore: avoid_positional_boolean_parameters
-      bool enabled,
-      ValueNotifier<T> valueNotifier,
-    );
+typedef NullableKnobBuilder<T extends Object> = Widget Function(
+  BuildContext context,
+  // ignore: avoid_positional_boolean_parameters
+  bool enabled,
+  ValueNotifier<T> valueNotifier,
+);
 
 extension type NullableKnobsComposer(KnobsComposer _knobs) {
   WritableKnob<T?> makeNullableKnob<T extends Object>(
@@ -45,11 +44,10 @@ class NullableKnob<T extends Object> extends BuildableWritableKnob<T?>
     required super.label,
     required this.initialNonNullableValue,
     required this.isInitiallyNull,
-    required NullableKnobBuilder<T> knobBuilder,
+    required this._knobBuilder,
     required this.rebuildKnobBuilderOnChange,
     required this.forceSpaciousLayout,
-  }) : _knobBuilder = knobBuilder,
-       nonNullableValueNotifier = ValueNotifier<T>(initialNonNullableValue),
+  }) : nonNullableValueNotifier = ValueNotifier<T>(initialNonNullableValue),
        super(
          initialValue: isInitiallyNull ? null : initialNonNullableValue,
        ) {

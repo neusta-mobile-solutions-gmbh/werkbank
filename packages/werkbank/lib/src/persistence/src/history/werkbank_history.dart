@@ -10,11 +10,11 @@ class WerkbankHistory {
 
   // Throws FormatException if the JSON is invalid or contains invalid data.
   static WerkbankHistory fromJson(String json) {
-    final map = jsonDecode(json) as Map<String, dynamic>;
-    if (map case {'entries': final List<dynamic> entries}) {
+    final Object? jsonObject = jsonDecode(json);
+    if (jsonObject case {'entries': final List<Object?> entries}) {
       return WerkbankHistory(
         entries: IList<WerkbankHistoryEntry>(
-          entries.map((dynamic entry) {
+          entries.map((entry) {
             if (entry case {
               'path': final String path,
               'timestamp': final String timestamp,
@@ -51,7 +51,7 @@ class WerkbankHistory {
       entries.isNotEmpty ? entries.last : null;
 }
 
-class WerkbankHistoryEntry with EquatableMixin {
+class WerkbankHistoryEntry with Equatable {
   WerkbankHistoryEntry({
     required this.path,
     required this.timestamp,

@@ -43,7 +43,7 @@ Future<void> main() async {
         'directory_path': subpackagePath,
         'file_name': subpackageName,
         'include_library': docs != null,
-        if (docs != null) 'docs': docs,
+        'docs': ?docs,
         'include': [
           'src/**',
         ],

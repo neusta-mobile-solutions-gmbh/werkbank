@@ -10,7 +10,7 @@ jobs:
   build-example:
     name: build example project
     runs-on: ubuntu-latest
-    container: ghcr.io/cirruslabs/flutter:3.38.1
+    container: ghcr.io/gmeligio/flutter-web:3.47.4
 
     steps:
       - uses: actions/checkout@v4
@@ -19,12 +19,18 @@ jobs:
         shell: python3 {0}
         run: |
           import json
-          import os
+          import subprocess
 
           fvmrc_version = json.load(open(".fvmrc"))["flutter"]
-          sdk_version = os.environ["FLUTTER_VERSION"]
+          version_output = subprocess.run(
+              ["flutter", "--version", "--machine"],
+              capture_output=True,
+              text=True,
+              check=True,
+          ).stdout
+          sdk_version = json.loads(version_output[version_output.index("{"):])["frameworkVersion"]
 
-          assert fvmrc_version == sdk_version
+          assert fvmrc_version == sdk_version, f"{fvmrc_version} != {sdk_version}"
 
       - name: Install dependencies
         working-directory: example/example_werkbank

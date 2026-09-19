@@ -1,1 +1,10 @@
+analyzer:
+  exclude:
+    - build/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+    - android/**
+    - ios/**
 include: package:werkbank_lints/werkbank_lints.yaml

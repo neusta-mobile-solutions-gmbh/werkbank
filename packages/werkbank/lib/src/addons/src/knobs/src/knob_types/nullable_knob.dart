@@ -3,13 +3,12 @@ import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
-typedef NullableKnobBuilder<T extends Object> =
-    Widget Function(
-      BuildContext context,
-      // ignore: avoid_positional_boolean_parameters
-      bool enabled,
-      ValueNotifier<T> valueNotifier,
-    );
+typedef NullableKnobBuilder<T extends Object> = Widget Function(
+  BuildContext context,
+  // ignore: avoid_positional_boolean_parameters
+  bool enabled,
+  ValueNotifier<T> valueNotifier,
+);
 
 extension type NullableKnobsComposer(KnobsComposer _knobs) {
   WritableKnob<T?> makeNullableKnob<T extends Object>(

@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
 
-typedef RegularKnobBuilder<T> =
-    Widget Function(
-      BuildContext context,
-      ValueNotifier<T> valueNotifier,
-    );
+typedef RegularKnobBuilder<T> = Widget Function(
+  BuildContext context,
+  ValueNotifier<T> valueNotifier,
+);
 
 extension RegularKnobsExtension on KnobsComposer {
   /// Creates and registers a knob, which can be used to control a value in

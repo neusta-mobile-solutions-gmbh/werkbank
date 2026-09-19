@@ -6,10 +6,9 @@ enum DraggableDividerDirection {
   endToStart,
 }
 
-typedef DraggableDividerCallback =
-    void Function(
-      double unboundedValue,
-    );
+typedef DraggableDividerCallback = void Function(
+  double unboundedValue,
+);
 
 class DraggableDivider extends StatefulWidget {
   const DraggableDivider({

@@ -56,11 +56,10 @@ Widget _defaultPageTransitionBuilder(
   );
 }
 
-typedef PageTransitionBuilder =
-    Widget Function(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      Color fillColor,
-      Widget child,
-    );
+typedef PageTransitionBuilder = Widget Function(
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Color fillColor,
+  Widget child,
+);

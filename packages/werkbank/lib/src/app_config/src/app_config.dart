@@ -6,12 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
-typedef AppBuilder =
-    Widget Function(
-      BuildContext context,
-      TransitionBuilder builder,
-      Widget home,
-    );
+typedef AppBuilder = Widget Function(
+  BuildContext context,
+  TransitionBuilder builder,
+  Widget home,
+);
 
 typedef ThemeBrightnessBuilder = Brightness Function(BuildContext context);
 

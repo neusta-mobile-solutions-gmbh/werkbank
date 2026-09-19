@@ -3,12 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/components/components.dart';
 
-typedef WidgetLayoutBuilder =
-    Widget Function(
-      BuildContext context,
-      double leftPanelWidth,
-      double rightPanelWidth,
-    );
+typedef WidgetLayoutBuilder = Widget Function(
+  BuildContext context,
+  double leftPanelWidth,
+  double rightPanelWidth,
+);
 
 /// Sizes the panels and
 /// decides, if the panels need to be shrunk.

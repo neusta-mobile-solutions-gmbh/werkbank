@@ -19,7 +19,7 @@ jobs:
 
     name: flutter analyze
     runs-on: ubuntu-latest
-    container: ghcr.io/cirruslabs/flutter:3.38.1
+    container: ghcr.io/gmeligio/flutter-web:3.47.4
 
     steps:
       - uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
   subpack-analyze:
     name: subpack analyze
     runs-on: ubuntu-latest
-    container: ghcr.io/cirruslabs/flutter:3.38.1
+    container: ghcr.io/gmeligio/flutter-web:3.47.4
 
     steps:
       - uses: actions/checkout@v4

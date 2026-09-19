@@ -10,7 +10,7 @@ jobs:
   build-example:
     name: build example project
     runs-on: ubuntu-latest
-    container: ghcr.io/cirruslabs/flutter:3.38.1
+    container: ghcr.io/gmeligio/flutter-web:3.47.4
 
     steps:
       - uses: actions/checkout@v4

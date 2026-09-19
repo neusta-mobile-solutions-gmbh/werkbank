@@ -1,4 +1,11 @@
-# 0.18.
+# 0.18.3
+- Raise Dart SDK constraint to `^3.13.0`.
+- Raise Flutter SDK constraint to `>=3.47.0`.
+  - This release does not switch to the new `material_ui` and `cupertino_ui` packages.
+    That will come in a later, breaking release once the `flutter_markdown_plus` dependency has migrated.
+- Update some dependency constraints.
+- Add missing properties to the semantics inspector.
+  They are `minValue`, `minValue`, `hitTestBehavior`, `traversalParentIdentifier`, `traversalChildIdentifier`.
 
 # 0.18.2
 - Add "Side by Side" semantics mode to semantics inspector.

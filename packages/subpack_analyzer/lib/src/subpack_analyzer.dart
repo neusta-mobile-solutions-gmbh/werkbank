@@ -69,7 +69,10 @@ class SubpackAnalyzer with SubpackLogger {
     );
     switch (dependenciesModel) {
       case DependenciesFailiureModel():
-        return finalizeAnalysis(exitCode: 1, errors: dependenciesModel.errors);
+        return await finalizeAnalysis(
+          exitCode: 1,
+          errors: dependenciesModel.errors,
+        );
       case DependenciesSuccessModel():
     }
 
@@ -92,11 +95,11 @@ class SubpackAnalyzer with SubpackLogger {
     );
     switch (result) {
       case AnalyzerFailiureModel():
-        return finalizeAnalysis(exitCode: 1, errors: result.errors);
+        return await finalizeAnalysis(exitCode: 1, errors: result.errors);
       case AnalyzerSuccessModel():
     }
 
-    return finalizeAnalysis(exitCode: 0, errors: null);
+    return await finalizeAnalysis(exitCode: 0, errors: null);
   }
 
   Future<int> finalizeAnalysis({

@@ -4,7 +4,7 @@ import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 @immutable
-sealed class NavState {}
+sealed class NavState;
 
 class HomeNavState extends NavState {
   @override
@@ -31,7 +31,7 @@ sealed class DescriptorNavState extends NavState {
   Descriptor get descriptor;
 }
 
-sealed class OverviewNavState extends DescriptorNavState {}
+sealed class OverviewNavState extends DescriptorNavState;
 
 sealed class UseCaseNavState extends DescriptorNavState {
   @override

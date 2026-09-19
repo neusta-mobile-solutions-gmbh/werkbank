@@ -20,7 +20,7 @@ sealed class WerkbankPersistencePhase {
   const WerkbankPersistencePhase();
 }
 
-class PersistenceInitializing extends WerkbankPersistencePhase {}
+class PersistenceInitializing extends WerkbankPersistencePhase;
 
 class PersistenceReady extends WerkbankPersistencePhase {
   const PersistenceReady(this.child);

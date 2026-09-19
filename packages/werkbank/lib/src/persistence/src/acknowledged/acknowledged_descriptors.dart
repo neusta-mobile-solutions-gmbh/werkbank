@@ -21,11 +21,11 @@ class AcknowledgedDescriptors {
 
   // Throws FormatException if the JSON is invalid or contains invalid data.
   static AcknowledgedDescriptors fromJson(String json) {
-    final map = jsonDecode(json) as Map<String, dynamic>;
-    if (map case {'entries': final List<dynamic> entries}) {
+    final Object? jsonObject = jsonDecode(json);
+    if (jsonObject case {'entries': final List<Object?> entries}) {
       return AcknowledgedDescriptors(
         entries: IList<AcknowledgedDescriptorEntry>(
-          entries.map((dynamic entry) {
+          entries.map((entry) {
             if (entry case {
               'path': final String path,
               'firstSeen': final String firstSeen,

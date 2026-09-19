@@ -6,7 +6,7 @@ enum PanelTab {
   inspect('inspect'),
   settings('settings');
 
-  const PanelTab(this._jsonKey);
+  PanelTab(this._jsonKey);
 
   final String _jsonKey;
 }
@@ -16,7 +16,7 @@ class PanelTabsPersistentData {
 
   final IMap<PanelTab, TabSectionData> tabs;
 
-  static PanelTabsPersistentData fromJson(dynamic json) {
+  static PanelTabsPersistentData fromJson(Object? json) {
     if (json case {'tabs': final Map<String, dynamic> tabs}) {
       return PanelTabsPersistentData(
         tabs: {
@@ -74,7 +74,7 @@ class TabSectionData {
   final IList<String> sectionIdOrder;
   final ISet<String> hiddenSectionIds;
 
-  static TabSectionData fromJson(dynamic json) {
+  static TabSectionData fromJson(Object? json) {
     if (json case {
       'sectionIdOrder': final List<dynamic> sectionIdOrder,
       'hiddenSectionIds': final List<dynamic> hiddenSectionIds,

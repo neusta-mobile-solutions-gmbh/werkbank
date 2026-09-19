@@ -8,7 +8,7 @@ class SearchQueryPersistentData {
 
   final String query;
 
-  static SearchQueryPersistentData fromJson(dynamic json) {
+  static SearchQueryPersistentData fromJson(Object? json) {
     if (json case {
       'query': final String query,
     }) {

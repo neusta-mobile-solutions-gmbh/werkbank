@@ -150,11 +150,11 @@ abstract interface class AppConfig {
 
 class _CallbackAppConfig implements AppConfig {
   const _CallbackAppConfig({
-    required AppBuilder buildApp,
+    required this._buildApp,
     this.additionalBuilder,
     required this.defaultTextStyleBuilder,
     required this.themeBrightnessBuilder,
-  }) : _buildApp = buildApp;
+  });
 
   final AppBuilder _buildApp;
 

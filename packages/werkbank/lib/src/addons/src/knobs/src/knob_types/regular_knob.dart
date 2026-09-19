@@ -49,12 +49,11 @@ class RegularKnob<T> extends BuildableWritableKnob<T>
   RegularKnob({
     required super.label,
     required this.initialValue,
-    required RegularKnobBuilder<T> knobBuilder,
+    required this._knobBuilder,
     required this.rebuildKnobBuilderOnChange,
     required this.forceSpaciousLayout,
     this.trailingIconButton,
-  }) : _knobBuilder = knobBuilder,
-       super(initialValue: initialValue);
+  }) : super(initialValue: initialValue);
 
   final T initialValue;
   final RegularKnobBuilder<T> _knobBuilder;

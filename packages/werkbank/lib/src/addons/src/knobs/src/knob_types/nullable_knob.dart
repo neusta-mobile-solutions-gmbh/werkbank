@@ -45,11 +45,10 @@ class NullableKnob<T extends Object> extends BuildableWritableKnob<T?>
     required super.label,
     required this.initialNonNullableValue,
     required this.isInitiallyNull,
-    required NullableKnobBuilder<T> knobBuilder,
+    required this._knobBuilder,
     required this.rebuildKnobBuilderOnChange,
     required this.forceSpaciousLayout,
-  }) : _knobBuilder = knobBuilder,
-       nonNullableValueNotifier = ValueNotifier<T>(initialNonNullableValue),
+  }) : nonNullableValueNotifier = ValueNotifier<T>(initialNonNullableValue),
        super(
          initialValue: isInitiallyNull ? null : initialNonNullableValue,
        ) {

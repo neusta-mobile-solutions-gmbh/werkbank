@@ -57,7 +57,7 @@ enum ColorBlindnessType {
   ]);
 
   /// Creates a color mode simulation from a color mode
-  const ColorBlindnessType(this.matrix);
+  ColorBlindnessType(this.matrix);
 
   /// The matrix that is used to simulate the colorblindness mode
   final List<double> matrix;

@@ -1,3 +1,5 @@
+# 0.18.
+
 # 0.18.2
 - Add "Side by Side" semantics mode to semantics inspector.
   - In this mode, the normal use case view is shown on one side and its semantics visualization on the other side.

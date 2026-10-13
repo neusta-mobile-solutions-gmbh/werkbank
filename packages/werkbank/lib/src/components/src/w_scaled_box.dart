@@ -38,12 +38,10 @@ class WScaledBox extends SingleChildRenderObjectWidget {
 
 class RenderSScaledBox extends RenderProxyBox {
   RenderSScaledBox({
-    required double scaleX,
-    required double scaleY,
+    required this._scaleX,
+    required this._scaleY,
     RenderBox? child,
-  }) : _scaleX = scaleX,
-       _scaleY = scaleY,
-       super(child);
+  }) : super(child);
 
   double get scaleX => _scaleX;
   double _scaleX;

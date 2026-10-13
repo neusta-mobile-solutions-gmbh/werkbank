@@ -28,7 +28,7 @@ void main() {
         };
         final testName = [
           useCase.nameSegments.join('/'),
-          if (presetName != null) presetName,
+          ?presetName,
         ].join(' ');
         // Test the use case with the respective knob preset
         testWidgets(testName, (tester) async {

@@ -7,7 +7,7 @@ extension BackgroundMetadataExtension on UseCaseMetadata {
 }
 
 sealed class DefaultBackgroundOption
-    extends UseCaseMetadataEntry<DefaultBackgroundOption> {}
+    extends UseCaseMetadataEntry<DefaultBackgroundOption>;
 
 class NamedBackgroundOption extends DefaultBackgroundOption {
   NamedBackgroundOption({required this.name});

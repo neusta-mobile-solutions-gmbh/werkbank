@@ -6,8 +6,8 @@ import 'package:werkbank/src/persistence/persistence.dart';
 class SearchQueryController extends PersistentController {
   SearchQueryController({
     required super.prefsWithCache,
-    required WasAliveController wasAliveController,
-  }) : _wasAliveController = wasAliveController;
+    required this._wasAliveController,
+  });
 
   final WasAliveController _wasAliveController;
 

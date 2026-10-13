@@ -11,7 +11,7 @@ class WasAlivePersistentData {
   // Keep that in mind when using this value
   final DateTime appWasAlive;
 
-  static WasAlivePersistentData fromJson(dynamic json) {
+  static WasAlivePersistentData fromJson(Object? json) {
     if (json case {'appWasAlive': final String appWasAlive}) {
       return WasAlivePersistentData(
         appWasAlive: DateTime.parse(appWasAlive),

@@ -65,7 +65,7 @@ class _HotReloadEffectHandlerState extends State<HotReloadEffectHandler>
   void reassemble() {
     super.reassemble();
     if (_appStartupDone) {
-      unawaited(controller?.forward(from: 0));
+      controller?.forward(from: 0);
     }
   }
 

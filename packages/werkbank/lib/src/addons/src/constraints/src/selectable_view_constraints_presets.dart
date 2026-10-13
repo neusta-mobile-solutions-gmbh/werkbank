@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-sealed class SelectableViewConstraintsPreset with EquatableMixin {
+sealed class SelectableViewConstraintsPreset with Equatable {
   const SelectableViewConstraintsPreset();
 }
 

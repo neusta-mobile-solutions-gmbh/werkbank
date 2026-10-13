@@ -188,8 +188,7 @@ enum ConstraintsMode {
   // Those modes support using both axes at the same time
   min,
   max,
-  bothTight
-  ;
+  bothTight;
 
   bool get supportsBothAxes => this != ConstraintsMode.tightOneAxis;
 

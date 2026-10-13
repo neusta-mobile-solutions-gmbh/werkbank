@@ -68,7 +68,7 @@ typedef UseCaseBuilder = WidgetBuilder Function(UseCaseComposer c);
 
 /// {@category Structure}
 /// A node in the Werkbank tree.
-sealed class WerkbankNode {}
+sealed class WerkbankNode;
 
 /// A superclass for [WerkbankNode]s which can have children.
 ///

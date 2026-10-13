@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class PersistentController extends ChangeNotifier {
   PersistentController({
-    required SharedPreferencesWithCache prefsWithCache,
-  }) : _prefsWithCache = prefsWithCache {
+    required this._prefsWithCache,
+  }) {
     final json = _prefsWithCache.getString(id);
     init(json);
   }

@@ -93,10 +93,8 @@ class _WNotificationState extends State<WNotification>
       cachedCounter = widget.counter;
     }
     if (counterChanged) {
-      unawaited(
-        _counterVisibilityController.animateTo(
-          widget.counter != null ? 1 : 0,
-        ),
+      _counterVisibilityController.animateTo(
+        widget.counter != null ? 1 : 0,
       );
     }
   }

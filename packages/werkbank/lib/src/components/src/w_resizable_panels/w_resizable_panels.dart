@@ -57,7 +57,7 @@ class _LeftPanelLayout extends StatelessWidget {
       opacity: panelController.leftAnimation,
       child: SizeTransition(
         sizeFactor: panelController.leftAnimation,
-        axisAlignment: 1,
+        alignment: Alignment.centerRight,
         fixedCrossAxisSizeFactor: 1,
         axis: Axis.horizontal,
         child: SizedBox(
@@ -85,7 +85,7 @@ class _RightPanelLayout extends StatelessWidget {
       opacity: panelController.rightAnimation,
       child: SizeTransition(
         sizeFactor: panelController.rightAnimation,
-        axisAlignment: -1,
+        alignment: Alignment.centerLeft,
         fixedCrossAxisSizeFactor: 1,
         axis: Axis.horizontal,
         child: SizedBox(

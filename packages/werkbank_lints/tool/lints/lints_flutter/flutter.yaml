@@ -1,3 +1,7 @@
+# Recommended lints for Flutter apps, packages, and plugins.
+
+include: package:lints/recommended.yaml
+
 linter:
   rules:
     - avoid_print

@@ -48,7 +48,7 @@ class _WControlSectionListState extends State<WControlSectionList> {
     return Overlay.wrap(
       child: ReorderableListView.builder(
         itemCount: widget.sections.length,
-        onReorder: widget.onReorder,
+        onReorderItem: widget.onReorder,
         proxyDecorator: (child, index, animation) {
           return _ProxyDecorator(
             animation: animation,

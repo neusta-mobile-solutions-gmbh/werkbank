@@ -69,7 +69,7 @@ class RunCommand extends Command<void> {
       },
       zoneValues: {
         #verbose: verbose,
-        if (supportAnsi != null) AnsiCode: supportAnsi,
+        AnsiCode: ?supportAnsi,
       },
     );
   }

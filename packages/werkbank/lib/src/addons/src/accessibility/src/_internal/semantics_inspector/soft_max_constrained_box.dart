@@ -43,12 +43,10 @@ class SoftMaxConstrainedBox extends SingleChildRenderObjectWidget {
 
 class RenderSoftMaxConstrainedBox extends RenderProxyBox {
   RenderSoftMaxConstrainedBox({
-    required Axis constrainedAxis,
-    required double softMaxAxisConstraint,
+    required this._constrainedAxis,
+    required this._softMaxAxisConstraint,
     RenderBox? child,
-  }) : _constrainedAxis = constrainedAxis,
-       _softMaxAxisConstraint = softMaxAxisConstraint,
-       super(child);
+  }) : super(child);
 
   Axis get constrainedAxis => _constrainedAxis;
   Axis _constrainedAxis;

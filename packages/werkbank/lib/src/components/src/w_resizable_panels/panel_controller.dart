@@ -147,8 +147,7 @@ class PanelController {
 
     final proposalVerySmall = width < verySmallWidth;
     if (proposalVerySmall && !currentlyInvisible) {
-      unawaited(controller.animateTo(0, duration: Duration.zero));
-
+      controller.animateTo(0, duration: Duration.zero);
       return true;
     }
 
@@ -159,7 +158,7 @@ class PanelController {
     }
 
     if (currentlyInvisible) {
-      unawaited(controller.animateTo(1, duration: Duration.zero));
+      controller.animateTo(1, duration: Duration.zero);
     }
     preferredWidth.value = width;
     return true;

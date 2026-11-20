@@ -29,9 +29,6 @@ class OrderingAddon extends Addon {
   final OrderOption initialOrder;
 
   /// Whether to show the control to change the order in the settings tab.
-  ///
-  /// If you set this to `false`, the [initialOrder] will effectively be only
-  /// available order.
   final bool showControl;
 
   @override

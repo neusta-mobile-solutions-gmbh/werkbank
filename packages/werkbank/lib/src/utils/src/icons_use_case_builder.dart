@@ -13,6 +13,9 @@ UseCaseBuilder iconsUseCaseBuilder({
   Color? onSurfaceColor,
 }) {
   return (c) {
+    final filterKnob = c.isAddonActive(KnobsAddon.addonId)
+        ? c.knobs.string('Filter', initialValue: '')
+        : null;
     final sizeKnob = c.isAddonActive(KnobsAddon.addonId)
         ? c.knobs.doubleSlider(
             'Size',
@@ -54,8 +57,13 @@ UseCaseBuilder iconsUseCaseBuilder({
             Brightness.dark => Colors.white,
             Brightness.light => Colors.black,
           };
+      final filter = filterKnob?.value.toLowerCase() ?? '';
       return _IconsUseCase(
-        icons: icons(context),
+        icons: {
+          for (final entry in icons(context).entries)
+            if (entry.key.toLowerCase().contains(filter))
+              entry.key: entry.value,
+        },
         size: sizeKnob?.value ?? initialSize,
         surfaceColor: effectiveSurfaceColor,
         onSurfaceColor: effectiveOnSurfaceColor,

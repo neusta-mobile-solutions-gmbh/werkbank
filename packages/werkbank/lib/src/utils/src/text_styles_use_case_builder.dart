@@ -14,6 +14,9 @@ UseCaseBuilder textStylesUseCaseBuilder({
   Color? onSurfaceColor,
 }) {
   return (c) {
+    final filterKnob = c.isAddonActive(KnobsAddon.addonId)
+        ? c.knobs.string('Filter', initialValue: '')
+        : null;
     final textKnob = c.isAddonActive(KnobsAddon.addonId)
         ? c.knobs.nullable.stringMultiLine(
             'Text',
@@ -57,8 +60,13 @@ UseCaseBuilder textStylesUseCaseBuilder({
             Brightness.dark => Colors.white,
             Brightness.light => Colors.black,
           };
+      final filter = filterKnob?.value.toLowerCase() ?? '';
       return _TextStylesUseCase(
-        styles: styles(context),
+        styles: {
+          for (final entry in styles(context).entries)
+            if (entry.key.toLowerCase().contains(filter))
+              entry.key: entry.value,
+        },
         text: textKnob != null ? textKnob.value : initialText,
         surfaceColor: effectiveSurfaceColor,
         onSurfaceColor: effectiveOnSurfaceColor,

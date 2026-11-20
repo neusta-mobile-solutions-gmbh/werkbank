@@ -1,3 +1,6 @@
+# 0.18.4
+- Add "Filter" knobs to `colorsUseCaseBuilder`, `iconsUseCaseBuilder` and `textStylesUseCaseBuilder`.
+
 # 0.18.3
 - Raise Dart SDK constraint to `^3.13.0`.
 - Raise Flutter SDK constraint to `>=3.47.0`.

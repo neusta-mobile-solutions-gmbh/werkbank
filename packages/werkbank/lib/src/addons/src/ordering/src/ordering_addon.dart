@@ -7,6 +7,7 @@ import 'package:werkbank/src/addons/src/ordering/src/_internal/ordering_manager.
 import 'package:werkbank/src/addons/src/ordering/src/_internal/ordering_selector.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/utils/utils.dart';
+import 'package:werkbank/src/widgets/widgets.dart';
 
 /// {@category Configuring Addons}
 /// An [Addon] that enables control over the ordering of the [WerkbankNode]
@@ -17,9 +18,21 @@ import 'package:werkbank/src/utils/utils.dart';
 /// It is mainly provided as an example of how to control
 /// the ordering of nodes via an Addon.
 class OrderingAddon extends Addon {
-  const OrderingAddon() : super(id: addonId);
+  const OrderingAddon({
+    this.initialOrder = OrderOption.alphabetic,
+    this.showControl = true,
+  }) : super(id: addonId);
 
   static const addonId = 'ordering';
+
+  /// Defines the initially selected [OrderOption].
+  final OrderOption initialOrder;
+
+  /// Whether to show the control to change the order in the settings tab.
+  ///
+  /// If you set this to `false`, the [initialOrder] will effectively be only
+  /// available order.
+  final bool showControl;
 
   @override
   AddonLayerEntries get layers {
@@ -29,6 +42,7 @@ class OrderingAddon extends Addon {
           id: 'ordering_manager',
           appOnly: true,
           builder: (context, child) => OrderingManager(
+            initialOrder: initialOrder,
             child: child,
           ),
         ),
@@ -40,6 +54,9 @@ class OrderingAddon extends Addon {
   List<SettingsControlSection> buildSettingsTabControlSections(
     BuildContext context,
   ) {
+    if (!showControl) {
+      return super.buildSettingsTabControlSections(context);
+    }
     return [
       const SettingsControlSection(
         id: 'ordering',

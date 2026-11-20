@@ -1,5 +1,6 @@
 # 0.18.4
 - Add "Filter" knobs to `colorsUseCaseBuilder`, `iconsUseCaseBuilder` and `textStylesUseCaseBuilder`.
+- Add `initialOrder` and `showControl` parameters to `OrderingAddon`.
 
 # 0.18.3
 - Raise Dart SDK constraint to `^3.13.0`.

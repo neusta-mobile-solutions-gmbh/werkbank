@@ -18,18 +18,18 @@ import 'package:werkbank/src/widgets/widgets.dart';
 /// It is mainly provided as an example of how to control
 /// the ordering of nodes via an Addon.
 class OrderingAddon extends Addon {
-  const OrderingAddon({
-    this.initialOrder = OrderOption.alphabetic,
-    this.showControl = true,
-  }) : super(id: addonId);
+  const OrderingAddon() : _fixedOrder = null, super(id: addonId);
+
+  /// Creates an [OrderingAddon] that always uses the given [order].
+  ///
+  /// No control to change the ordering is shown in the settings tab.
+  const OrderingAddon.fixed({required OrderOption order})
+    : _fixedOrder = order,
+      super(id: addonId);
 
   static const addonId = 'ordering';
 
-  /// Defines the initially selected [OrderOption].
-  final OrderOption initialOrder;
-
-  /// Whether to show the control to change the order in the settings tab.
-  final bool showControl;
+  final OrderOption? _fixedOrder;
 
   @override
   AddonLayerEntries get layers {
@@ -39,7 +39,7 @@ class OrderingAddon extends Addon {
           id: 'ordering_manager',
           appOnly: true,
           builder: (context, child) => OrderingManager(
-            initialOrder: initialOrder,
+            fixedOrder: _fixedOrder,
             child: child,
           ),
         ),
@@ -51,7 +51,7 @@ class OrderingAddon extends Addon {
   List<SettingsControlSection> buildSettingsTabControlSections(
     BuildContext context,
   ) {
-    if (!showControl) {
+    if (_fixedOrder != null) {
       return super.buildSettingsTabControlSections(context);
     }
     return [

@@ -4,11 +4,11 @@ import 'package:werkbank/src/widgets/widgets.dart';
 class OrderingManager extends StatefulWidget {
   const OrderingManager({
     super.key,
-    required this.initialOrder,
+    required this.fixedOrder,
     required this.child,
   });
 
-  final OrderOption initialOrder;
+  final OrderOption? fixedOrder;
   final Widget child;
 
   static OrderOption selectedOrderingOf(BuildContext context) {
@@ -34,7 +34,7 @@ class _OrderingManagerState extends State<OrderingManager> {
   @override
   void initState() {
     super.initState();
-    selectedOrderingState = widget.initialOrder;
+    selectedOrderingState = OrderOption.alphabetic;
   }
 
   void setSelectedOrderingState({required OrderOption ordering}) {
@@ -44,7 +44,7 @@ class _OrderingManagerState extends State<OrderingManager> {
   @override
   Widget build(BuildContext context) {
     return WerkbankSettings(
-      orderOption: selectedOrderingState,
+      orderOption: widget.fixedOrder ?? selectedOrderingState,
       child: widget.child,
     );
   }

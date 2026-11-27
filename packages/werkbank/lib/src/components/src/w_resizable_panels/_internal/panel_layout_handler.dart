@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/src/w_resizable_panels/_internal/panel_controller_provider.dart';
 
 class PanelLayoutHandler extends StatelessWidget {

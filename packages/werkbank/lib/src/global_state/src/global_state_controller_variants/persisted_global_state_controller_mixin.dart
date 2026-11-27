@@ -3,7 +3,7 @@ library;
 
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 import 'package:werkbank/src/persistence/persistence.dart';

@@ -4,7 +4,7 @@
 /// @docImport 'package:werkbank/src/widgets/widgets.dart';
 library;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/global_state/global_state.dart';
 
 // TODO: Document. Also where do I get an instance?

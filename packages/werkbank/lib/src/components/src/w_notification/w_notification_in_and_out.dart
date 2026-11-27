@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// {@category Werkbank Components}
 class WNotificationInAndOut extends StatefulWidget {
@@ -28,7 +26,7 @@ class _WNotificationInAndOutState extends State<WNotificationInAndOut>
       vsync: this,
       duration: Durations.short2,
     );
-    unawaited(primary.forward());
+    primary.forward();
   }
 
   @override

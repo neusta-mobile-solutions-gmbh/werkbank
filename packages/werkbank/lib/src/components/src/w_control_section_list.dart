@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
@@ -48,7 +48,7 @@ class _WControlSectionListState extends State<WControlSectionList> {
     return Overlay.wrap(
       child: ReorderableListView.builder(
         itemCount: widget.sections.length,
-        onReorder: widget.onReorder,
+        onReorderItem: widget.onReorder,
         proxyDecorator: (child, index, animation) {
           return _ProxyDecorator(
             animation: animation,

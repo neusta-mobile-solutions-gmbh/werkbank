@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
@@ -48,7 +48,7 @@ class WTextArea extends StatelessWidget {
               style: textStyle,
             ),
           ),
-          if (trailing != null) trailing!,
+          ?trailing,
         ],
       ),
     );

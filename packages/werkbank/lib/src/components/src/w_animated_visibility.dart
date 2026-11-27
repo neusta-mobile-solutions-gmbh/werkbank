@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/components.dart';
 
 /// {@category Werkbank Components}
@@ -36,13 +36,11 @@ class _WAnimatedVisibilityState
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _sizeFactorTween =
-        visitor(
-              _sizeFactorTween,
-              widget.visible ? 1.0 : 0.0,
-              (dynamic value) => Tween<double>(begin: value as double),
-            )
-            as Tween<double>?;
+    _sizeFactorTween = visitor(
+      _sizeFactorTween,
+      widget.visible ? 1.0 : 0.0,
+      (dynamic value) => Tween<double>(begin: value as double),
+    ) as Tween<double>?;
   }
 
   @override

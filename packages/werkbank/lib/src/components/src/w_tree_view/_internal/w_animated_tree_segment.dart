@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/components/src/w_tree_view/_internal/ensure_visible_in_scrollable_ancestor.dart';
 import 'package:werkbank/src/components/src/w_tree_view/_internal/highlight_event_provider.dart';

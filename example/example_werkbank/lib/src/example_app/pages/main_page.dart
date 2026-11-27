@@ -2,7 +2,7 @@ import 'package:example_werkbank/src/example_app/components/fidget_spinner_simul
 import 'package:example_werkbank/src/example_app/pages/fidgets_page.dart';
 import 'package:example_werkbank/src/example_app/pages/profile_page.dart';
 import 'package:example_werkbank/src/example_app/pages/relaxation_page.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

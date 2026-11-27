@@ -14,6 +14,7 @@ linter:
     - always_declare_return_types
     - always_use_package_imports
     - annotate_redeclares
+    - async_return_with_no_await
     - avoid_bool_literals_in_conditional_expressions
     - avoid_catches_without_on_clauses
     - avoid_catching_errors
@@ -46,9 +47,11 @@ linter:
     - deprecated_member_use_from_same_package
     - directives_ordering
     - discarded_futures
+    - empty_container_bodies
     - eol_at_end_of_file
     - flutter_style_todos
     - implicit_reopen
+    - initialize_in_field_declaration
     - invalid_case_patterns
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
@@ -56,12 +59,15 @@ linter:
     - lines_longer_than_80_chars
     - literal_only_boolean_expressions
     - matching_super_parameters
+    - migrate_design_widgets
     - missing_code_block_language_in_doc_comment
     - missing_whitespace_between_adjacent_strings
     - no_adjacent_strings_in_list
     - no_default_cases
+    - no_dynamic_casts
     - no_literal_bool_comparisons
-    - no_runtimeType_toString
+    - no_raw_types
+    - no_runtimetype_tostring
     - no_self_assignments
     - noop_primitive_operations
     - omit_local_variable_types
@@ -85,22 +91,23 @@ linter:
     - sized_box_shrink_expand
     - sort_constructors_first
     - sort_unnamed_constructors_first
-    - switch_on_type
     - test_types_in_equals
     - type_annotate_public_apis
     - unawaited_futures
     - unnecessary_async
     - unnecessary_breaks
+    - unnecessary_const_in_enum_constructor
     - unnecessary_ignore
     - unnecessary_lambdas
     - unnecessary_null_aware_operator_on_extension_on_nullable
     - unnecessary_null_checks
     - unnecessary_parenthesis
+    - unnecessary_primary_constructor_body
     - unnecessary_raw_strings
     - unnecessary_statements
-    - unnecessary_unawaited
     - unreachable_from_main
     - use_colored_box
+    - use_declaring_parameters
     - use_decorated_box
     - use_enums
     - use_if_null_to_convert_nulls_to_bools
@@ -113,4 +120,5 @@ linter:
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
     - use_truncating_division
+    - var_with_no_type_annotation
   

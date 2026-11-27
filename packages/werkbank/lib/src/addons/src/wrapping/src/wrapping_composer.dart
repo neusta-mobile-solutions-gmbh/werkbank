@@ -1,7 +1,7 @@
 /// @docImport 'package:werkbank/src/addons/addons.dart';
 library;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/wrapping/src/_internal/wrapping_state_entry.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
@@ -54,11 +54,11 @@ extension WrappingComposerExtension on UseCaseComposer {
   /// Like inside of [WidgetBuilder] from the use case the static methods on
   /// [UseCase] can be used inside the [builder].
   ///
-  /// If this method is called multiple times, later calls will be nested
-  /// within the widgets from earlier calls.
+  /// If this method is called multiple times, the widgets from later calls
+  /// will be wrapped around the widgets from earlier calls.
   ///
   /// This means [UseCaseComposer.addLateExecutionCallback] can be
-  /// used to ensure that the widgets are nested more deeply.
+  /// used to ensure that the widgets are wrapped further outside.
   void wrapUseCase(
     WrapperBuilder builder, {
     WrappingLayer layer = WrappingLayer.fitted,

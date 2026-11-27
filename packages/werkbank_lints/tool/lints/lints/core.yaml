@@ -1,3 +1,9 @@
+# This is a set of core lints used to identify critical issues.
+# Check out https://github.com/dart-lang/lints for more information.
+#
+# To learn more about customizing static analysis for your package or app,
+# visit https://dart.dev/tools/analysis.
+
 linter:
   rules:
     - avoid_empty_else
@@ -28,6 +34,7 @@ linter:
     - provide_deprecation_message
     - secure_pubspec_urls
     - strict_top_level_inference
+    - switch_on_type
     - type_literal_in_constant_pattern
     - unintended_html_in_doc_comment
     - unnecessary_overrides

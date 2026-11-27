@@ -1,10 +1,32 @@
-# 0.19.0
+# 0.20.0
 - Make changes to persistence and holding global state
   - Remove `WerkbankAppOnlyAccessor.acknowledgedController(context)` and `MaybeWerkbankAppAccessor.maybeAcknowledgedController(context)`. **(BREAKING CHANGE)**
     - TODO: Mention replacement.
   - Rename PanelTabsController to Sections controller. TODO: even mention this?
 - Remove BackgroundAddon.initialBackgroundOptionName parameter. TODO
 - Add BackgroundController, Remove BackgroundManager TODO
+
+# 0.19.0
+- Migrate to `material_ui` and `cupertino_ui` packages.
+- Remove dependency on `flutter_markdown_plus`. We now copy the package internally to support Markdown.
+- Update some dependency constraints.
+
+# 0.18.4
+- Add "Filter" knobs to `colorsUseCaseBuilder`, `iconsUseCaseBuilder` and `textStylesUseCaseBuilder`.
+- Add `OrderingAddon.fixed()` constructor, which always uses the given order and shows no control to change it.
+- Fix component tiles in the overview not respecting the selected order for their use cases.
+- Add `lines` parameter to `stringMultiLine` and `customFieldMultiLine` knobs to control the height of the text field.
+- Add `layoutBuilder` parameter to `UseCaseDisplay` and `DisplayApp.singleUseCase()`, which wraps the use case between the `AddonLayer.useCase` and `AddonLayer.useCaseLayout` layers.
+
+
+# 0.18.3
+- Raise Dart SDK constraint to `^3.13.0`.
+- Raise Flutter SDK constraint to `>=3.47.0`.
+  - This release does not switch to the new `material_ui` and `cupertino_ui` packages.
+    That will come in a later, breaking release once the `flutter_markdown_plus` dependency has migrated.
+- Update some dependency constraints.
+- Add missing properties to the semantics inspector.
+  They are `minValue`, `minValue`, `hitTestBehavior`, `traversalParentIdentifier`, `traversalChildIdentifier`.
 
 # 0.18.2
 - Add "Side by Side" semantics mode to semantics inspector.

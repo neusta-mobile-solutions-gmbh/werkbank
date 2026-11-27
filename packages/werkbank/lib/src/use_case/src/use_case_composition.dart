@@ -3,16 +3,15 @@
 /// @docImport 'package:werkbank/src/widgets/widgets.dart';
 library;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/tree/tree.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 /// A function that mutates the state of a use case using the provided
 /// [UseCaseComposition].
-typedef UseCaseStateMutation =
-    void Function(
-      UseCaseComposition controller,
-    );
+typedef UseCaseStateMutation = void Function(
+  UseCaseComposition controller,
+);
 
 /// A class that holds the result of composing a use cases using a
 /// [UseCaseComposer].

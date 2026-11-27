@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/components.dart';
 
 enum DraggableDividerDirection {
@@ -6,10 +6,9 @@ enum DraggableDividerDirection {
   endToStart,
 }
 
-typedef DraggableDividerCallback =
-    void Function(
-      double unboundedValue,
-    );
+typedef DraggableDividerCallback = void Function(
+  double unboundedValue,
+);
 
 class DraggableDivider extends StatefulWidget {
   const DraggableDivider({

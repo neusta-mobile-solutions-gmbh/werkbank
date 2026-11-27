@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/addons/src/constraints/src/_internal/constraints_gestures.dart';
@@ -188,8 +188,7 @@ enum ConstraintsMode {
   // Those modes support using both axes at the same time
   min,
   max,
-  bothTight
-  ;
+  bothTight;
 
   bool get supportsBothAxes => this != ConstraintsMode.tightOneAxis;
 

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/state_keeping/src/_internal/immutable/immutable_state_holders_snapshot.dart';
 
 class ImmutableStateHolder<T> extends ValueNotifier<T> {

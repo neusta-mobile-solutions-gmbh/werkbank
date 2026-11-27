@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-typedef DraggableRegionCallback =
-    void Function(
-      Offset unboundedValue,
-    );
+typedef DraggableRegionCallback = void Function(
+  Offset unboundedValue,
+);
 
 class DraggableRegion extends StatefulWidget {
   const DraggableRegion({

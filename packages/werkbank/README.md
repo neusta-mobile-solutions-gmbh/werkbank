@@ -9,8 +9,12 @@
   <a href="https://neusta-mobile-solutions-gmbh.github.io/werkbank/">Web Demo</a>
 </p>
 
-> [!WARNING]
-> Werkbank is feature-rich but still evolving. Documentation is incomplete, and APIs may change before the stable release.
+> [!NOTE]
+> #### AI Disclosure
+> Most of the code was written from July 2024 to July 2025 without major use of AI.
+We did use Next Edit Suggestions, but not counting that, the vast majority of the code is human written.
+The documentation is also human written and structured, just with some typo fixing, grammar correction and minor polishing done with AI.
+Werkbank is made with passion, and we want it to stay that way.
 
 ## Features
 

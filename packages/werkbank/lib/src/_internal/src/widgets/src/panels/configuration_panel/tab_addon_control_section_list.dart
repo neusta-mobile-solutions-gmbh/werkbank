@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/components/components.dart';
@@ -100,12 +100,8 @@ class _AddonControlSectionListState extends State<_AddonControlSectionList> {
   }
 
   void onReorder(int oldIndex, int newIndex) {
-    // Flutter uses a weird definition of the new index.
-    // For example if oldIndex == 2, both newIndex == 2 and newIndex == 3 will
-    // not change the order.
-    final fixedNewIndex = newIndex > oldIndex ? newIndex - 1 : newIndex;
     setState(() {
-      _orderedSections!.move(oldIndex, fixedNewIndex);
+      _orderedSections!.move(oldIndex, newIndex);
     });
     _sectionsController.reorder(
       tab: widget.tab,

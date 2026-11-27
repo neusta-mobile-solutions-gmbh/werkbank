@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 import 'package:werkbank/src/components/components.dart';
@@ -315,8 +315,7 @@ enum ViewConstraintsParameter<T extends double?> {
   minWidth<double>(),
   maxWidth<double?>(),
   minHeight<double>(),
-  maxHeight<double?>()
-  ;
+  maxHeight<double?>();
 
   bool get isMin => switch (this) {
     minWidth => true,

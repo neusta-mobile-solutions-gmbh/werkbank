@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/accessibility/accessibility.dart';
@@ -139,6 +139,8 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       data.attributedValue,
       textSelection: data.textSelection,
     );
+    rawStringField('minValue', data.minValue);
+    rawStringField('maxValue', data.maxValue);
     intField('maxValueLength', data.maxValueLength);
     intField('currentValueLength', data.currentValueLength);
     attributedStringField('increasedValue', data.attributedIncreasedValue);
@@ -153,6 +155,11 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
       data.validationResult.name,
       condition: data.validationResult != SemanticsValidationResult.none,
     );
+    rawStringField(
+      'hitTestBehavior',
+      data.hitTestBehavior.name,
+      condition: data.hitTestBehavior != SemanticsHitTestBehavior.defer,
+    );
     uriField('linkUrl', data.linkUrl);
     stringField('tooltip', data.tooltip);
     attributedStringField('hint', data.attributedHint);
@@ -160,7 +167,6 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
     intField('scrollIndex', data.scrollIndex);
     doubleField('scrollPosition', data.scrollPosition);
     doubleField('scrollExtentMax', data.scrollExtentMax);
-    doubleField('scrollExtentMin', data.scrollExtentMin);
     doubleField('scrollExtentMin', data.scrollExtentMin);
 
     rawStringField(
@@ -186,6 +192,14 @@ class SemanticsInspectorNodeInfo extends StatelessWidget {
 
     intField('id', snapshot.id);
     stringField('identifier', data.identifier);
+    rawStringField(
+      'traversalParentIdentifier',
+      data.traversalParentIdentifier?.toString(),
+    );
+    rawStringField(
+      'traversalChildIdentifier',
+      data.traversalChildIdentifier?.toString(),
+    );
     intField('platformViewId', data.platformViewId);
     intField('indexInParent', snapshot.indexInParent);
     rawStringField('controlsNodes', data.controlsNodes?.join(', '));

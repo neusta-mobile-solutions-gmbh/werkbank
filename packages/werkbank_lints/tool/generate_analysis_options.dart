@@ -3,7 +3,7 @@ import 'lints.dart';
 
 // ignore_for_file: avoid_print
 
-final instantLintsFile = File('./lib/werkbank_lints.yaml');
+final werkbankLintsFile = File('./lib/werkbank_lints.yaml');
 
 Future<void> main() async {
   final oldLints = werkbankLintsPackageLints;
@@ -17,7 +17,7 @@ Future<void> main() async {
   print('\nRemoved Lints:');
   printLintSet(oldLints.difference(newLints));
 
-  await instantLintsFile.writeAsString(generateYaml(newLints), flush: true);
+  await werkbankLintsFile.writeAsString(generateYaml(newLints), flush: true);
 }
 
 String generateYaml(Set<String> lints) {

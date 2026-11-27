@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/addons/src/hot_reload_effect/hot_reload_effect.dart';
 import 'package:werkbank/src/components/components.dart';
@@ -29,7 +27,7 @@ class _RestartEffectHandlerState extends State<RestartEffectHandler>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        unawaited(controller?.forward(from: 0));
+        controller?.forward(from: 0);
       }
     });
   }

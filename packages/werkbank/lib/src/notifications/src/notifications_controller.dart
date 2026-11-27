@@ -1,5 +1,5 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 
 abstract class NotificationsController implements ChangeNotifier {

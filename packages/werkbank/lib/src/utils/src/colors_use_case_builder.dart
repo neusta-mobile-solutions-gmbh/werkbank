@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/addons.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/tree/tree.dart';
@@ -14,6 +14,9 @@ UseCaseBuilder colorsUseCaseBuilder({
   Color? onSurfaceColor,
 }) {
   return (c) {
+    final filterKnob = c.isAddonActive(KnobsAddon.addonId)
+        ? c.knobs.string('Filter', initialValue: '')
+        : null;
     final sizeKnob = c.isAddonActive(KnobsAddon.addonId)
         ? c.knobs.doubleSlider(
             'Size',
@@ -57,14 +60,43 @@ UseCaseBuilder colorsUseCaseBuilder({
             Brightness.dark => Colors.white,
             Brightness.light => Colors.black,
           };
+      final filter = filterKnob?.value.toLowerCase() ?? '';
       return _ColorsUseCase(
-        colors: colors(context),
+        colors: {
+          for (final entry in colors(context).entries)
+            if (_colorMatchesFilter(entry.key, entry.value, filter))
+              entry.key: entry.value,
+        },
         size: sizeKnob?.value ?? initialSize,
         surfaceColor: effectiveSurfaceColor,
         onSurfaceColor: effectiveOnSurfaceColor,
       );
     };
   };
+}
+
+bool _colorMatchesFilter(String name, Color color, String filter) {
+  if (filter.isEmpty) {
+    return true;
+  }
+  if (name.toLowerCase().contains(filter)) {
+    return true;
+  }
+  final argbHex = _colorArgbHex(color);
+  final hexFilter = switch (filter) {
+    _ when filter.startsWith('0x') => filter.substring(2),
+    _ when filter.startsWith('#') => filter.substring(1),
+    _ => null,
+  };
+  if (hexFilter == null) {
+    return argbHex.contains(filter);
+  }
+  return argbHex.startsWith(hexFilter) ||
+      argbHex.substring(2).startsWith(hexFilter);
+}
+
+String _colorArgbHex(Color color) {
+  return color.toARGB32().toRadixString(16).padLeft(8, '0');
 }
 
 class _ColorsUseCase extends StatelessWidget {
@@ -100,11 +132,7 @@ class _ColorsUseCase extends StatelessWidget {
               for (final color in colors.entries)
                 Builder(
                   builder: (context) {
-                    final colorHex = color.value
-                        .toARGB32()
-                        .toRadixString(16)
-                        .padLeft(8, '0');
-                    final colorHexText = '0x$colorHex';
+                    final colorHexText = '0x${_colorArgbHex(color.value)}';
                     return DecoratedBox(
                       position: DecorationPosition.foreground,
                       decoration: BoxDecoration(

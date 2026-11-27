@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/_internal/page_background.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/pages/overview/_internal/component_overview_tile.dart';
@@ -77,7 +77,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                             return ComponentOverviewTile(
                               key: ValueKey(child.path),
                               useCaseDescriptors: filter.filteredDescriptors(
-                                child.useCases,
+                                orderChildren(child.useCases, orderOption),
                               ),
                               hasThumbnail: (useCaseDescriptor) =>
                                   metadataMap[useCaseDescriptor]!

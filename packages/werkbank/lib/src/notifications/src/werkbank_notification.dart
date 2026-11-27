@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart';
 
-abstract class WerkbankNotification with EquatableMixin {
+abstract class WerkbankNotification with Equatable {
   const WerkbankNotification({
     required this.key,
     required this.source,

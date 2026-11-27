@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-class ViewConstraints with EquatableMixin {
+class ViewConstraints with Equatable {
   const ViewConstraints({
     required this.minWidth,
     required this.maxWidth,

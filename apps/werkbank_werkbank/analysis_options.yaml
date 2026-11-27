@@ -6,3 +6,10 @@ analyzer:
     - lib/src/localization/**
     - lib/**/*_icons.dart
     - test/**/*.*.dart
+    - build/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+    - android/**
+    - ios/**

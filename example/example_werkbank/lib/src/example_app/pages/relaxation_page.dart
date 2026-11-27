@@ -1,5 +1,5 @@
 import 'package:example_werkbank/src/example_app/components/relaxation_card.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RelaxationPage extends StatelessWidget {
   const RelaxationPage({super.key});

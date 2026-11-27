@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension ValueNotifierExtension<T> on ValueNotifier<T> {
   /// A method to change the value of the [ValueNotifier].

@@ -2,7 +2,7 @@
 /// @docImport 'package:werkbank/src/widgets/widgets.dart';
 library;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addon_config/addon_config.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
@@ -68,7 +68,7 @@ typedef UseCaseBuilder = WidgetBuilder Function(UseCaseComposer c);
 
 /// {@category Structure}
 /// A node in the Werkbank tree.
-sealed class WerkbankNode {}
+sealed class WerkbankNode;
 
 /// A superclass for [WerkbankNode]s which can have children.
 ///

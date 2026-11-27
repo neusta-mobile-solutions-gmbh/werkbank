@@ -65,7 +65,7 @@ class ReportData {
   }
 }
 
-class ReportEntry with EquatableMixin {
+class ReportEntry with Equatable {
   const ReportEntry({
     required this.accepted,
   });

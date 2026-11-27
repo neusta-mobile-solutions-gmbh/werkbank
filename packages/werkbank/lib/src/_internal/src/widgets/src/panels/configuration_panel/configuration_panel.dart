@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';

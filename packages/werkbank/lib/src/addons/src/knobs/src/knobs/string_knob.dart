@@ -24,15 +24,19 @@ extension StringKnobExtension on KnobsComposer {
   /// {@macro werkbank.knobs.label}
   ///
   /// {@macro werkbank.knobs.regularInitial}
+  ///
+  /// {@macro werkbank.knobs.multiLine.lines}
   WritableKnob<String> stringMultiLine(
     String label, {
     required String initialValue,
+    int lines = 3,
   }) {
     return customFieldMultiLine(
       label,
       initialValue: initialValue,
       parser: InputParseSuccess.new,
       formatter: _identityFormatter,
+      lines: lines,
     );
   }
 }
@@ -64,16 +68,20 @@ extension NullableStringKnobExtension on NullableKnobsComposer {
   /// {@macro werkbank.knobs.label}
   ///
   /// {@macro werkbank.knobs.nullableInitial}
+  ///
+  /// {@macro werkbank.knobs.multiLine.lines}
   WritableKnob<String?> stringMultiLine(
     String label, {
     required String initialValue,
     bool initiallyNull = false,
+    int lines = 3,
   }) {
     return customFieldMultiLine(
       label,
       initialValue: initialValue,
       parser: InputParseSuccess.new,
       formatter: _identityFormatter,
+      lines: lines,
       initiallyNull: initiallyNull,
     );
   }

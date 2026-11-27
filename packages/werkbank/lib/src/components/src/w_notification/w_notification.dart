@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/notifications/notifications.dart';
 import 'package:werkbank/src/theme/theme.dart';
@@ -93,10 +93,8 @@ class _WNotificationState extends State<WNotification>
       cachedCounter = widget.counter;
     }
     if (counterChanged) {
-      unawaited(
-        _counterVisibilityController.animateTo(
-          widget.counter != null ? 1 : 0,
-        ),
+      _counterVisibilityController.animateTo(
+        widget.counter != null ? 1 : 0,
       );
     }
   }

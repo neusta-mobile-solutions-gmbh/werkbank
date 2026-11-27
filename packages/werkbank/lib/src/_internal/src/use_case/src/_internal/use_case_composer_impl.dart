@@ -7,11 +7,10 @@ import 'package:werkbank/src/use_case/use_case.dart';
 
 class UseCaseComposerImpl implements UseCaseComposer {
   UseCaseComposerImpl({
-    required WerkbankUseCase useCase,
+    required this._useCase,
     required List<AnyTransientUseCaseStateEntry> transientStateEntries,
-    required Set<String> activeAddonIds,
-  }) : _activeAddonIds = activeAddonIds,
-       _useCase = useCase {
+    required this._activeAddonIds,
+  }) {
     final transientStateEntriesMap = <Type, AnyTransientUseCaseStateEntry>{};
     for (final entry in transientStateEntries) {
       final type = entry.type;

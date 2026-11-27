@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
@@ -241,11 +241,10 @@ class WerkbankApp extends StatelessWidget {
   }
 }
 
-typedef ThemedWidgetBuilder =
-    Widget Function(
-      BuildContext context,
-      ThemeData theme,
-    );
+typedef ThemedWidgetBuilder = Widget Function(
+  BuildContext context,
+  ThemeData theme,
+);
 
 class _ThemeBuilder extends StatelessWidget {
   const _ThemeBuilder({

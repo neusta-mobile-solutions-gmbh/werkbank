@@ -52,8 +52,8 @@ class MutableStateRetainmentStateEntry
 class _DisposableMutableValue {
   _DisposableMutableValue({
     required this.value,
-    required void Function(Object value) dispose,
-  }) : _dispose = dispose;
+    required this._dispose,
+  });
 
   final Object value;
   final void Function(Object value) _dispose;

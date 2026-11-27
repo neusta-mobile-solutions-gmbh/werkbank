@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/src/w_notification/_internal/draggable_region.dart';
 
 sealed class BorderBehavior {

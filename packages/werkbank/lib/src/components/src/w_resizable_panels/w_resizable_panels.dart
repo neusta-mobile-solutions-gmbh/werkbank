@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/components/src/w_resizable_panels/_internal/draggable_divider.dart';
 import 'package:werkbank/src/components/src/w_resizable_panels/_internal/panel_controller_provider.dart';
@@ -58,7 +58,7 @@ class _LeftPanelLayout extends StatelessWidget {
       opacity: animation,
       child: SizeTransition(
         sizeFactor: animation,
-        axisAlignment: 1,
+        alignment: Alignment.centerRight,
         fixedCrossAxisSizeFactor: 1,
         axis: Axis.horizontal,
         child: SizedBox(
@@ -84,7 +84,7 @@ class _RightPanelLayout extends StatelessWidget {
       opacity: animation,
       child: SizeTransition(
         sizeFactor: animation,
-        axisAlignment: -1,
+        alignment: Alignment.centerLeft,
         fixedCrossAxisSizeFactor: 1,
         axis: Axis.horizontal,
         child: SizedBox(

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 extension BackgroundMetadataExtension on UseCaseMetadata {
@@ -7,7 +7,7 @@ extension BackgroundMetadataExtension on UseCaseMetadata {
 }
 
 sealed class DefaultBackgroundOption
-    extends UseCaseMetadataEntry<DefaultBackgroundOption> {}
+    extends UseCaseMetadataEntry<DefaultBackgroundOption>;
 
 class NamedBackgroundOption extends DefaultBackgroundOption {
   NamedBackgroundOption({required this.name});

@@ -1,15 +1,14 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/use_case/use_case.dart';
 import 'package:werkbank/src/use_case/use_case.dart';
 
 class UseCaseCompositionImpl implements UseCaseComposition {
   UseCaseCompositionImpl({
-    required UseCaseController controller,
+    required this._controller,
     required this.metadata,
     required IMap<Type, AnyTransientUseCaseStateEntry> transientStateEntries,
-  }) : _controller = controller,
-       _transientState = transientStateEntries;
+  }) : _transientState = transientStateEntries;
 
   final UseCaseController _controller;
   @override

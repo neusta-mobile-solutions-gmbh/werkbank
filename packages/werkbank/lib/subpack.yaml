@@ -10,6 +10,8 @@ index:
 
 dependencies:
   - flutter
+  - material_ui
+  - cupertino_ui
   - meta
   - fast_immutable_collections
   - collection

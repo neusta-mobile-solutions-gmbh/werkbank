@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/constraints/constraints.dart';
 
 extension DevicePresetComposerExtension on ViewConstraintsComposer {
@@ -101,8 +101,7 @@ enum _DeviceType {
 
 enum _Orientation {
   portrait,
-  landscape
-  ;
+  landscape;
 
   _Orientation get opposite => switch (this) {
     portrait => landscape,

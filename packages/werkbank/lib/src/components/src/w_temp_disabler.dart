@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// This is a temporary workaround for easily adding a disabled state to an
 /// input widget. This should be removed, once proper disabled states have been

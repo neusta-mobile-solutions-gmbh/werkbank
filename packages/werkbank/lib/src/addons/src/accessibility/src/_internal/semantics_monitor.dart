@@ -1,7 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_node_snapshot.dart';
 import 'package:werkbank/src/utils/utils.dart';
 

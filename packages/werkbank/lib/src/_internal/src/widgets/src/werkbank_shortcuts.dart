@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/_internal/src/routing/routing.dart';
@@ -202,20 +202,17 @@ class _Shortcuts extends StatelessWidget {
           const SingleActivator(LogicalKeyboardKey.arrowDown): onNext!,
           const SingleActivator(LogicalKeyboardKey.pageDown): onNext!,
         },
-        if (onOverview != null)
-          const SingleActivator(LogicalKeyboardKey.escape): onOverview!,
-        if (onSearch != null)
-          SingleActivator(
-            LogicalKeyboardKey.keyF,
-            control: !isApple,
-            meta: isApple,
-          ): onSearch!,
-        if (onToggelPanel != null)
-          SingleActivator(
-            LogicalKeyboardKey.period,
-            control: !isApple,
-            meta: isApple,
-          ): onToggelPanel!,
+        const SingleActivator(LogicalKeyboardKey.escape): ?onOverview,
+        SingleActivator(
+          LogicalKeyboardKey.keyF,
+          control: !isApple,
+          meta: isApple,
+        ): ?onSearch,
+        SingleActivator(
+          LogicalKeyboardKey.period,
+          control: !isApple,
+          meta: isApple,
+        ): ?onToggelPanel,
       },
       child: child,
     );

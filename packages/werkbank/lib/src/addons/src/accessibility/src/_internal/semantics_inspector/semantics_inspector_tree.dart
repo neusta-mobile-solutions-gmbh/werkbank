@@ -70,7 +70,7 @@ class _SemanticsInspectorTreeState extends State<SemanticsInspectorTree> {
   }
 
   Widget _buildLabel(
-    WerkbankTheme theme,
+    WerkbankThemeData theme,
     SemanticsNodeSnapshot node,
     bool isSelected,
   ) {
@@ -129,7 +129,7 @@ class _SemanticsInspectorTreeState extends State<SemanticsInspectorTree> {
         AccessibilityManager.showMergedSemanticsNodesOf(context);
 
     WTreeNode? buildTreeNode(
-      WerkbankTheme theme,
+      WerkbankThemeData theme,
       SemanticsNodeSnapshot node,
       int? activeNodeId,
       SemanticsInspectorController controller,

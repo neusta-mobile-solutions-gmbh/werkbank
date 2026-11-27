@@ -12,6 +12,8 @@ dependencies:
   - /lib/src/addon_config
   - /lib/src/theme
   - /lib/src/persistence
+  - /lib/src/global_state
+  - /lib/src/werkbank_app_global_state
   - /lib/src/notifications
   - /lib/src/components
   # TODO(lzuttermeister): Unwanted dependency. Refactor code so that we can remove it.

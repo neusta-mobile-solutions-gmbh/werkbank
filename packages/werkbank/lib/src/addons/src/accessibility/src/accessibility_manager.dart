@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/colorblindness_overlay/colorblindness_type.dart';
 
+// TODO: Use GlobalStateController
 class AccessibilityManager extends StatefulWidget {
   const AccessibilityManager({
     super.key,

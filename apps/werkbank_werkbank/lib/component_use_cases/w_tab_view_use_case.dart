@@ -19,9 +19,16 @@ WidgetBuilder wTabViewUseCase(UseCaseComposer c) {
     ..minimumSize(width: 300)
     ..withoutPadding();
 
+  final selectedTabNotifier = c.states.immutable(
+    'Selected Tab',
+    initialValue: 0,
+  );
+
   return (context) {
-    return const WTabView(
-      tabs: [
+    return WTabView(
+      index: selectedTabNotifier.value,
+      onIndexChanged: selectedTabNotifier.setValue,
+      tabs: const [
         WTab(
           title: Text('KNOBS'),
           child: _Content('KNOBS'),

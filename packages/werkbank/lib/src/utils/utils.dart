@@ -3,6 +3,7 @@
 export 'src/colors_use_case_builder.dart';
 export 'src/conversions.dart';
 export 'src/icons_use_case_builder.dart';
+export 'src/listenable_utils.dart';
 export 'src/order_utils.dart';
 export 'src/platform_context_extension.dart';
 export 'src/single_attachment_mixin.dart';

@@ -14,20 +14,21 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = meta ?? TranslationMetadata(
+		  _meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.en,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
 		  ) {
-		$meta.setFlatMapFunction(_flatMapFunction);
+		_meta.setFlatMapFunction(_flatMapFunction);
 	}
 
 	/// Metadata for the translations of <en>.
-	@override final TranslationMetadata<AppLocale, Translations> $meta;
+	final TranslationMetadata<AppLocale, Translations> _meta;
+	@override TranslationMetadata<AppLocale, Translations> get $meta => _meta;
 
 	/// Access flat map
-	dynamic operator[](String key) => $meta.getTranslation(key);
+	dynamic operator[](String key) => _meta.getTranslation(key);
 
 	late final Translations _root = this; // ignore: unused_field
 
@@ -361,6 +362,9 @@ class Translations$addons$recentHistory$en {
 
 	/// en: 'Recently Visited'
 	String get homePageComponentTitle => 'Recently Visited';
+
+	/// en: 'No use cases visited yet.'
+	String get noUseCasesVisited => 'No use cases visited yet.';
 }
 
 // Path: addons.acknowledged
@@ -373,6 +377,9 @@ class Translations$addons$acknowledged$en {
 
 	/// en: 'Recently Added'
 	String get homePageComponentTitle => 'Recently Added';
+
+	/// en: 'No new use cases added since your last visit.'
+	String get noNewUseCases => 'No new use cases added since your last visit.';
 }
 
 // Path: addons.constraints
@@ -402,6 +409,7 @@ class Translations$addons$werkbank_theme$en {
 	String get name => 'Werkbank Theme';
 
 	late final Translations$addons$werkbank_theme$controls$en controls = Translations$addons$werkbank_theme$controls$en._(_root);
+	late final Translations$addons$werkbank_theme$themes$en themes = Translations$addons$werkbank_theme$themes$en._(_root);
 }
 
 // Path: addons.theming
@@ -722,6 +730,24 @@ class Translations$addons$werkbank_theme$controls$en {
 	String get theme => 'Theme';
 }
 
+// Path: addons.werkbank_theme.themes
+class Translations$addons$werkbank_theme$themes$en {
+	Translations$addons$werkbank_theme$themes$en._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Werkbank System'
+	String get system => 'Werkbank System';
+
+	/// en: 'Werkbank Light'
+	String get light => 'Werkbank Light';
+
+	/// en: 'Werkbank Dark'
+	String get dark => 'Werkbank Dark';
+}
+
 // Path: addons.theming.controls
 class Translations$addons$theming$controls$en {
 	Translations$addons$theming$controls$en._(this._root);
@@ -732,6 +758,9 @@ class Translations$addons$theming$controls$en {
 
 	/// en: 'Theme'
 	String get theme => 'Theme';
+
+	/// en: '-'
+	String get noTheme => '-';
 }
 
 // Path: addons.zoom.controls
@@ -1256,7 +1285,9 @@ extension on Translations {
 			'addons.description.links' => 'External Links',
 			'addons.pageTransition.name' => 'Page Transition',
 			'addons.recentHistory.homePageComponentTitle' => 'Recently Visited',
+			'addons.recentHistory.noUseCasesVisited' => 'No use cases visited yet.',
 			'addons.acknowledged.homePageComponentTitle' => 'Recently Added',
+			'addons.acknowledged.noNewUseCases' => 'No new use cases added since your last visit.',
 			'addons.constraints.name' => 'Constraints',
 			'addons.constraints.controls.preset.name' => 'Preset',
 			'addons.constraints.controls.preset.values.initial' => 'Initial',
@@ -1276,8 +1307,12 @@ extension on Translations {
 			'addons.constraints.shortcuts.descriptionMaxSize' => 'Apply maximum size constraints',
 			'addons.werkbank_theme.name' => 'Werkbank Theme',
 			'addons.werkbank_theme.controls.theme' => 'Theme',
+			'addons.werkbank_theme.themes.system' => 'Werkbank System',
+			'addons.werkbank_theme.themes.light' => 'Werkbank Light',
+			'addons.werkbank_theme.themes.dark' => 'Werkbank Dark',
 			'addons.theming.name' => 'Theming',
 			'addons.theming.controls.theme' => 'Theme',
+			'addons.theming.controls.noTheme' => '-',
 			'addons.zoom.name' => 'Zoom',
 			'addons.zoom.controls.enabled' => 'Enabled',
 			'addons.zoom.controls.magnification' => 'Magnification',

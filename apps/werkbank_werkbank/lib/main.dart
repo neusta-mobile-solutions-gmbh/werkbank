@@ -19,7 +19,7 @@ AddonConfig get addons => AddonConfig(
           name: 'Light',
           themeDataBuilder: (context) => getThemeData(
             context,
-            WerkbankTheme(
+            WerkbankThemeData(
               colorScheme: WerkbankColorScheme.fromPalette(
                 const WerkbankPalette.light(),
               ),
@@ -39,7 +39,7 @@ AddonConfig get addons => AddonConfig(
           name: 'Dark',
           themeDataBuilder: (context) => getThemeData(
             context,
-            WerkbankTheme(
+            WerkbankThemeData(
               colorScheme: WerkbankColorScheme.fromPalette(
                 const WerkbankPalette.dark(),
               ),

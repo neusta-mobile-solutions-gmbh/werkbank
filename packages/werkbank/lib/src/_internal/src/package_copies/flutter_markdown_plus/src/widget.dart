@@ -21,20 +21,31 @@ import '_functions_io.dart' if (dart.library.js_interop) '_functions_web.dart';
 /// [text] for the caller to process.
 ///
 /// Used by [MarkdownWidget.onSelectionChanged]
-typedef MarkdownOnSelectionChangedCallback =
-    void Function(String? text, TextSelection selection, SelectionChangedCause? cause);
+typedef MarkdownOnSelectionChangedCallback = void Function(
+  String? text,
+  TextSelection selection,
+  SelectionChangedCause? cause,
+);
 
 /// Signature for callbacks used by [MarkdownWidget] when the user taps a link.
 /// The callback will return the link text, destination, and title from the
 /// Markdown link tag in the document.
 ///
 /// Used by [MarkdownWidget.onTapLink].
-typedef MarkdownTapLinkCallback = void Function(String text, String? href, String title);
+typedef MarkdownTapLinkCallback = void Function(
+  String text,
+  String? href,
+  String title,
+);
 
 /// Signature for custom image widget.
 ///
 /// Used by [MarkdownWidget.imageBuilder]
-typedef MarkdownImageBuilder = Widget Function(Uri uri, String? title, String? alt);
+typedef MarkdownImageBuilder = Widget Function(
+  Uri uri,
+  String? title,
+  String? alt,
+);
 
 /// Signature for custom checkbox widget.
 ///
@@ -44,14 +55,20 @@ typedef MarkdownCheckboxBuilder = Widget Function(bool value);
 /// Signature for custom bullet widget.
 ///
 /// Used by [MarkdownWidget.bulletBuilder]
-typedef MarkdownBulletBuilder = Widget Function(MarkdownBulletParameters parameters);
+typedef MarkdownBulletBuilder = Widget Function(
+  MarkdownBulletParameters parameters,
+);
 
 /// An parameters of [MarkdownBulletBuilder].
 ///
 /// Used by [MarkdownWidget.bulletBuilder]
 class MarkdownBulletParameters {
   /// Creates a new instance of [MarkdownBulletParameters].
-  const MarkdownBulletParameters({required this.index, required this.style, required this.nestLevel});
+  const MarkdownBulletParameters({
+    required this.index,
+    required this.style,
+    required this.nestLevel,
+  });
 
   /// The index of the bullet on that nesting level.
   final int index;
@@ -129,7 +146,8 @@ abstract class MarkdownElementBuilder {
   ///
   /// If you needn't build a widget, return null.
   @Deprecated('Use visitElementAfterWithContext() instead.')
-  Widget? visitElementAfter(md.Element element, TextStyle? preferredStyle) => null;
+  Widget? visitElementAfter(md.Element element, TextStyle? preferredStyle) =>
+      null;
 }
 
 /// Enum to specify which theme being used when creating [MarkdownStyleSheet]
@@ -219,7 +237,8 @@ abstract class MarkdownWidget extends StatefulWidget {
     this.builders = const <String, MarkdownElementBuilder>{},
     this.paddingBuilders = const <String, MarkdownPaddingBuilder>{},
     this.fitContent = false,
-    this.listItemCrossAxisAlignment = MarkdownListItemCrossAxisAlignment.baseline,
+    this.listItemCrossAxisAlignment =
+        MarkdownListItemCrossAxisAlignment.baseline,
     this.softLineBreak = false,
   });
 
@@ -273,8 +292,13 @@ abstract class MarkdownWidget extends StatefulWidget {
   /// to null to suppress the text selection context menu.
   final EditableTextContextMenuBuilder? contextMenuBuilder;
 
-  static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
-    return AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
+  static Widget _defaultContextMenuBuilder(
+    BuildContext context,
+    EditableTextState editableTextState,
+  ) {
+    return AdaptiveTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
+    );
   }
 
   /// The base directory holding images referenced by Img tags with local or network file paths.
@@ -352,7 +376,8 @@ abstract class MarkdownWidget extends StatefulWidget {
   State<MarkdownWidget> createState() => _MarkdownWidgetState();
 }
 
-class _MarkdownWidgetState extends State<MarkdownWidget> implements MarkdownBuilderDelegate {
+class _MarkdownWidgetState extends State<MarkdownWidget>
+    implements MarkdownBuilderDelegate {
   List<Widget>? _children;
   final List<GestureRecognizer> _recognizers = <GestureRecognizer>[];
 
@@ -379,8 +404,13 @@ class _MarkdownWidgetState extends State<MarkdownWidget> implements MarkdownBuil
   }
 
   void _parseMarkdown() {
-    final MarkdownStyleSheet fallbackStyleSheet = kFallbackStyle(context, widget.styleSheetTheme);
-    final MarkdownStyleSheet styleSheet = fallbackStyleSheet.merge(widget.styleSheet);
+    final MarkdownStyleSheet fallbackStyleSheet = kFallbackStyle(
+      context,
+      widget.styleSheetTheme,
+    );
+    final MarkdownStyleSheet styleSheet = fallbackStyleSheet.merge(
+      widget.styleSheet,
+    );
 
     _disposeRecognizers();
 
@@ -423,7 +453,8 @@ class _MarkdownWidgetState extends State<MarkdownWidget> implements MarkdownBuil
     if (_recognizers.isEmpty) {
       return;
     }
-    final List<GestureRecognizer> localRecognizers = List<GestureRecognizer>.from(_recognizers);
+    final List<GestureRecognizer> localRecognizers =
+        List<GestureRecognizer>.from(_recognizers);
     _recognizers.clear();
     for (final GestureRecognizer recognizer in localRecognizers) {
       recognizer.dispose();
@@ -505,7 +536,9 @@ class MarkdownBody extends MarkdownWidget {
     }
     return Column(
       mainAxisSize: shrinkWrap ? MainAxisSize.min : MainAxisSize.max,
-      crossAxisAlignment: fitContent ? CrossAxisAlignment.start : CrossAxisAlignment.stretch,
+      crossAxisAlignment: fitContent
+          ? CrossAxisAlignment.start
+          : CrossAxisAlignment.stretch,
       children: children,
     );
   }
@@ -598,10 +631,14 @@ class Markdown extends MarkdownWidget {
 /// Parse [task list items](https://github.github.com/gfm/#task-list-items-extension-).
 ///
 /// This class is no longer used as Markdown now supports checkbox syntax natively.
-@Deprecated('Use [OrderedListWithCheckBoxSyntax] or [UnorderedListWithCheckBoxSyntax]')
+@Deprecated(
+  'Use [OrderedListWithCheckBoxSyntax] or [UnorderedListWithCheckBoxSyntax]',
+)
 class TaskListSyntax extends md.InlineSyntax {
   /// Creates a new instance.
-  @Deprecated('Use [OrderedListWithCheckBoxSyntax] or [UnorderedListWithCheckBoxSyntax]')
+  @Deprecated(
+    'Use [OrderedListWithCheckBoxSyntax] or [UnorderedListWithCheckBoxSyntax]',
+  )
   TaskListSyntax() : super(_pattern);
 
   static const String _pattern = r'^ *\[([ xX])\] +';

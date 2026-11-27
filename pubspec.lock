@@ -253,10 +253,10 @@ packages:
     dependency: transitive
     description:
       name: fast_immutable_collections
-      sha256: "3f791151fe63e27beffdba12835db33c60031e324351f683879ebe18d1b10588"
+      sha256: "3b738aeb4241d97bba17f73b47bd57eef970116e2cb9b2b01671dd80f9e60ba5"
       url: "https://pub.dev"
     source: hosted
-    version: "11.2.1"
+    version: "12.0.1"
   ffi:
     dependency: transitive
     description:

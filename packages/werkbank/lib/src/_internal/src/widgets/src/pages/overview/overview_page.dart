@@ -77,7 +77,7 @@ class OverviewPage extends StatelessWidget with OrderExecutor {
                             return ComponentOverviewTile(
                               key: ValueKey(child.path),
                               useCaseDescriptors: filter.filteredDescriptors(
-                                child.useCases,
+                                orderChildren(child.useCases, orderOption),
                               ),
                               hasThumbnail: (useCaseDescriptor) =>
                                   metadataMap[useCaseDescriptor]!

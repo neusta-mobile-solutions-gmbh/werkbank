@@ -1,8 +1,10 @@
 # 0.18.4
 - Add "Filter" knobs to `colorsUseCaseBuilder`, `iconsUseCaseBuilder` and `textStylesUseCaseBuilder`.
 - Add `OrderingAddon.fixed()` constructor, which always uses the given order and shows no control to change it.
+- Fix component tiles in the overview not respecting the selected order for their use cases.
 - Add `lines` parameter to `stringMultiLine` and `customFieldMultiLine` knobs to control the height of the text field.
 - Add `layoutBuilder` parameter to `UseCaseDisplay` and `DisplayApp.singleUseCase()`, which wraps the use case inside the `AddonLayer.useCase` layer.
+
 
 # 0.18.3
 - Raise Dart SDK constraint to `^3.13.0`.

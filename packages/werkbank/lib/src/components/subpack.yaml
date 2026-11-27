@@ -8,3 +8,4 @@ dependencies:
   - url_launcher
   - /lib/src/_internal/src/localizations
   - /lib/src/_internal/src/package_copies/dropdown_button2
+  - /lib/src/_internal/src/package_copies/flutter_markdown_plus

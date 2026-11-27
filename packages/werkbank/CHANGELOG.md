@@ -3,7 +3,7 @@
 - Add `OrderingAddon.fixed()` constructor, which always uses the given order and shows no control to change it.
 - Fix component tiles in the overview not respecting the selected order for their use cases.
 - Add `lines` parameter to `stringMultiLine` and `customFieldMultiLine` knobs to control the height of the text field.
-- Add `layoutBuilder` parameter to `UseCaseDisplay` and `DisplayApp.singleUseCase()`, which wraps the use case inside the `AddonLayer.useCase` layer.
+- Add `layoutBuilder` parameter to `UseCaseDisplay` and `DisplayApp.singleUseCase()`, which wraps the use case between the `AddonLayer.useCase` and `AddonLayer.useCaseLayout` layers.
 
 
 # 0.18.3

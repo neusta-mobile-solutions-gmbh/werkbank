@@ -14,20 +14,21 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// Constructing via the enum [AppLocale.build] is preferred.
 	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = meta ?? TranslationMetadata(
+		  _meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.en,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
 		  ) {
-		$meta.setFlatMapFunction(_flatMapFunction);
+		_meta.setFlatMapFunction(_flatMapFunction);
 	}
 
 	/// Metadata for the translations of <en>.
-	@override final TranslationMetadata<AppLocale, Translations> $meta;
+	final TranslationMetadata<AppLocale, Translations> _meta;
+	@override TranslationMetadata<AppLocale, Translations> get $meta => _meta;
 
 	/// Access flat map
-	dynamic operator[](String key) => $meta.getTranslation(key);
+	dynamic operator[](String key) => _meta.getTranslation(key);
 
 	late final Translations _root = this; // ignore: unused_field
 
@@ -408,7 +409,7 @@ class Translations$addons$werkbank_theme$en {
 	String get name => 'Werkbank Theme';
 
 	late final Translations$addons$werkbank_theme$controls$en controls = Translations$addons$werkbank_theme$controls$en._(_root);
-	late final TranslationsAddonsWerkbankThemeThemesEn themes = TranslationsAddonsWerkbankThemeThemesEn._(_root);
+	late final Translations$addons$werkbank_theme$themes$en themes = Translations$addons$werkbank_theme$themes$en._(_root);
 }
 
 // Path: addons.theming
@@ -730,8 +731,8 @@ class Translations$addons$werkbank_theme$controls$en {
 }
 
 // Path: addons.werkbank_theme.themes
-class TranslationsAddonsWerkbankThemeThemesEn {
-	TranslationsAddonsWerkbankThemeThemesEn._(this._root);
+class Translations$addons$werkbank_theme$themes$en {
+	Translations$addons$werkbank_theme$themes$en._(this._root);
 
 	final Translations _root; // ignore: unused_field
 

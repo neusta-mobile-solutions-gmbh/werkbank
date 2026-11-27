@@ -4,7 +4,7 @@
 # This file should be version controlled and should not be manually edited.
 
 version:
-  revision: "8defaa71a77c16e8547abdbfad2053ce3a6e2d5b"
+  revision: "ab2912035e160d9cad6306df307576da6128ebdb"
   channel: "stable"
 
 project_type: app
@@ -13,14 +13,14 @@ project_type: app
 migration:
   platforms:
     - platform: root
-      create_revision: 8defaa71a77c16e8547abdbfad2053ce3a6e2d5b
-      base_revision: 8defaa71a77c16e8547abdbfad2053ce3a6e2d5b
+      create_revision: ab2912035e160d9cad6306df307576da6128ebdb
+      base_revision: ab2912035e160d9cad6306df307576da6128ebdb
     - platform: linux
       create_revision: 8defaa71a77c16e8547abdbfad2053ce3a6e2d5b
       base_revision: 8defaa71a77c16e8547abdbfad2053ce3a6e2d5b
     - platform: macos
-      create_revision: 8defaa71a77c16e8547abdbfad2053ce3a6e2d5b
-      base_revision: 8defaa71a77c16e8547abdbfad2053ce3a6e2d5b
+      create_revision: ab2912035e160d9cad6306df307576da6128ebdb
+      base_revision: ab2912035e160d9cad6306df307576da6128ebdb
     - platform: web
       create_revision: 8defaa71a77c16e8547abdbfad2053ce3a6e2d5b
       base_revision: 8defaa71a77c16e8547abdbfad2053ce3a6e2d5b

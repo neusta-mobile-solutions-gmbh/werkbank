@@ -2,8 +2,8 @@
 /// @docImport 'package:werkbank/src/widgets/widgets.dart';
 library;
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/utils/utils.dart';
 
 typedef AppBuilder = Widget Function(

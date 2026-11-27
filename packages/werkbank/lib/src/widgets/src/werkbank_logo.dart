@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// The Werkbank logo as a widget.
 class WerkbankLogo extends StatelessWidget {

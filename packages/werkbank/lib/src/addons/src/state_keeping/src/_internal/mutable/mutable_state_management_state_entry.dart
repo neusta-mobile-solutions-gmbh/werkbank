@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/state_keeping/src/_internal/mutable/mutable_state_holder.dart';
 import 'package:werkbank/src/addons/src/state_keeping/src/_internal/mutable/mutable_state_retainment_state_entry.dart';
 import 'package:werkbank/src/addons/src/state_keeping/src/_internal/mutable_state_ticker_provider_provider.dart';

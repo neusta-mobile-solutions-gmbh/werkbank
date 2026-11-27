@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/routing/src/_internal/transitions/fade_page_transition.dart';
 
 /// A widget that allows you to control the page transition and its duration

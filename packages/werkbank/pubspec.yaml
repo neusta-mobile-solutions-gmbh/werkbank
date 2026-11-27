@@ -31,6 +31,8 @@ dependencies:
   web: ^1.1.1
   markdown: ^7.3.1
   path: ^1.9.1
+  material_ui: ^1.0.0
+  cupertino_ui: ^1.0.0
 
 dev_dependencies:
   flutter_test:

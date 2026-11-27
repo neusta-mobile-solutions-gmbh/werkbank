@@ -4,9 +4,9 @@
 
 import 'dart:js_interop';
 
-import 'package:flutter/cupertino.dart' show CupertinoTheme;
-import 'package:flutter/material.dart' show Theme;
+import 'package:cupertino_ui/cupertino_ui.dart' show CupertinoTheme;
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' show Theme;
 import 'package:path/path.dart' as p;
 
 import 'style_sheet.dart';

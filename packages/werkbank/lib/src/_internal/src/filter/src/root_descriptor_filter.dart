@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/filter/filter.dart';
 import 'package:werkbank/src/_internal/src/filter/src/_internal/filter_executor.dart';
 import 'package:werkbank/src/persistence/persistence.dart';

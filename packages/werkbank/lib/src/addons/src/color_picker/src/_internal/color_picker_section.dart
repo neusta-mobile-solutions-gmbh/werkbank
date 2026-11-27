@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/color_picker_mouse_handler.dart';
 import 'package:werkbank/src/addons/src/color_picker/src/_internal/custom_repaint_boundary.dart';
 

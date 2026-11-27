@@ -1,5 +1,5 @@
 import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Copy of [FadeThroughTransition] from the animations package
 /// but without FadeOut and ScaleTransition

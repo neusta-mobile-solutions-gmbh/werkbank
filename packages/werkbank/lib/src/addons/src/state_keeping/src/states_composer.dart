@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/state_keeping/src/_internal/immutable/immutable_state_holder.dart';
 import 'package:werkbank/src/addons/src/state_keeping/src/_internal/immutable/immutable_state_holders_state_entry.dart';
 import 'package:werkbank/src/addons/src/state_keeping/src/_internal/mutable/mutable_state_management_state_entry.dart';

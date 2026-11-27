@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:werkbank/src/_internal/src/package_copies/flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:werkbank/src/theme/theme.dart';

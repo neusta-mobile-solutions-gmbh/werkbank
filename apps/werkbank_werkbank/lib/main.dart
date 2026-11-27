@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 // Normally werkbank does not export its localizations.
 // The werkbank_werkbank has to make an exception here.
 // ignore: implementation_imports

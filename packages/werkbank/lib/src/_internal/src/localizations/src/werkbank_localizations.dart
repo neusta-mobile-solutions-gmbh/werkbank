@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/localizations/src/strings.g.dart';
 
 export 'package:werkbank/src/_internal/src/localizations/src/strings.g.dart';

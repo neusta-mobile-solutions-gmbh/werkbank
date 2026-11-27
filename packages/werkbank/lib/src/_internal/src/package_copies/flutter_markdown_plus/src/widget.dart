@@ -5,9 +5,9 @@
 import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:markdown/markdown.dart' as md;
+import 'package:material_ui/material_ui.dart';
 
 import '../flutter_markdown_plus.dart';
 import '_functions_io.dart' if (dart.library.js_interop) '_functions_web.dart';

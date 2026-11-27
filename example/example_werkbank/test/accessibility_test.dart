@@ -1,8 +1,8 @@
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:example_werkbank/src/example_werkbank/addon_config.dart';
 import 'package:example_werkbank/src/example_werkbank/app_config.dart';
 import 'package:example_werkbank/src/example_werkbank/custom_metadata/testing_metadata.dart';
 import 'package:example_werkbank/src/example_werkbank/use_cases/root.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:werkbank/werkbank.dart';
 

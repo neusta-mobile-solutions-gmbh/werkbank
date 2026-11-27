@@ -1,6 +1,6 @@
 import 'package:example_werkbank/src/example_app/components/animated_fidget_spinner.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FidgetSpinnerSimulation extends StatefulWidget {
   const FidgetSpinnerSimulation({

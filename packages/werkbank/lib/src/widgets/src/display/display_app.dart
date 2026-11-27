@@ -29,8 +29,8 @@ class DisplayApp extends StatelessWidget {
   ///
   /// The [appConfig] and [addonConfig] parameters are passed to the
   /// [DisplayApp].
-  /// The [useCase] and [initialMutation] parameters are passed to the
-  /// [UseCaseDisplay].
+  /// The [useCase], [initialMutation] and [layoutBuilder] parameters are
+  /// passed to the [UseCaseDisplay].
   /// The [useCaseWrapper] parameter can be used to wrap the
   /// [UseCaseDisplay], effectively inserting a widget between it and the
   /// [DisplayApp].
@@ -39,11 +39,13 @@ class DisplayApp extends StatelessWidget {
     required AddonConfig addonConfig,
     required UseCaseDescriptor useCase,
     UseCaseStateMutation? initialMutation,
+    WrapperBuilder? layoutBuilder,
     WrapperBuilder? useCaseWrapper,
   }) {
     final useCaseDisplay = UseCaseDisplay(
       useCase: useCase,
       initialMutation: initialMutation,
+      layoutBuilder: layoutBuilder,
     );
     final Widget effectiveUseCaseDisplay;
     if (useCaseWrapper != null) {

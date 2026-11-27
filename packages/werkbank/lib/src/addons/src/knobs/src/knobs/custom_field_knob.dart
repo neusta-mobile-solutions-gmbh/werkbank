@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
@@ -94,7 +96,7 @@ extension CustomFieldKnobExtension on KnobsComposer {
         valueNotifier: valueNotifier,
         parser: parser,
         formatter: formatter,
-        isMultiLine: false,
+        lines: 1,
         enabled: true,
       ),
       rebuildKnobBuilderOnChange: false,
@@ -111,6 +113,14 @@ extension CustomFieldKnobExtension on KnobsComposer {
   /// {@macro werkbank.knobs.regularInitial}
   ///
   /// {@macro werkbank.knobs.customField.parserFormatter}
+  ///
+  /// {@template werkbank.knobs.multiLine.lines}
+  /// The [lines] parameter defines the height of the text field in lines.
+  /// Content exceeding this height can be scrolled.
+  /// It must be at least 2.
+  /// For a single-line text field, use the non-multi-line variant
+  /// of this knob instead.
+  /// {@endtemplate}
   ///
   /// {@template werkbank.knobs.customFieldMultiLine.example}
   /// See the example below for how to use this to create a `List<String>` knob:
@@ -163,7 +173,9 @@ extension CustomFieldKnobExtension on KnobsComposer {
     required T initialValue,
     required InputParser<T> parser,
     required ValueFormatter<T> formatter,
+    int lines = 3,
   }) {
+    assert(lines >= 2, 'lines must be at least 2.');
     return makeRegularKnob(
       label,
       initialValue: initialValue,
@@ -171,7 +183,7 @@ extension CustomFieldKnobExtension on KnobsComposer {
         valueNotifier: valueNotifier,
         parser: parser,
         formatter: formatter,
-        isMultiLine: true,
+        lines: max(lines, 2),
         enabled: true,
       ),
       rebuildKnobBuilderOnChange: false,
@@ -209,7 +221,7 @@ extension NullableCustomFieldKnobExtension on NullableKnobsComposer {
         valueNotifier: valueNotifier,
         parser: parser,
         formatter: formatter,
-        isMultiLine: false,
+        lines: 1,
         enabled: enabled,
       ),
       rebuildKnobBuilderOnChange: false,
@@ -227,6 +239,8 @@ extension NullableCustomFieldKnobExtension on NullableKnobsComposer {
   ///
   /// {@macro werkbank.knobs.customField.parserFormatter}
   ///
+  /// {@macro werkbank.knobs.multiLine.lines}
+  ///
   /// {@macro werkbank.knobs.customFieldMultiLine.example}
   WritableKnob<T?> customFieldMultiLine<T extends Object>(
     String label, {
@@ -234,7 +248,9 @@ extension NullableCustomFieldKnobExtension on NullableKnobsComposer {
     required InputParser<T> parser,
     required ValueFormatter<T> formatter,
     bool initiallyNull = false,
+    int lines = 3,
   }) {
+    assert(lines >= 2, 'lines must be at least 2.');
     return makeNullableKnob(
       label,
       initialValue: initialValue,
@@ -243,7 +259,7 @@ extension NullableCustomFieldKnobExtension on NullableKnobsComposer {
         valueNotifier: valueNotifier,
         parser: parser,
         formatter: formatter,
-        isMultiLine: true,
+        lines: max(lines, 2),
         enabled: enabled,
       ),
       rebuildKnobBuilderOnChange: false,
@@ -257,14 +273,14 @@ class _CustomFieldKnob<T> extends StatefulWidget {
     required this.valueNotifier,
     required this.parser,
     required this.formatter,
-    required this.isMultiLine,
+    required this.lines,
     required this.enabled,
   });
 
   final ValueNotifier<T> valueNotifier;
   final InputParser<T> parser;
   final ValueFormatter<T> formatter;
-  final bool isMultiLine;
+  final int lines;
   final bool enabled;
 
   @override
@@ -403,7 +419,7 @@ class _CustomFieldKnobState<T> extends State<_CustomFieldKnob<T>> {
                       color: colorScheme.fieldContent.withValues(alpha: 0.8),
                     ),
             ),
-      maxLines: widget.isMultiLine ? 3 : 1,
+      maxLines: widget.lines,
       enabled: widget.enabled,
     );
   }

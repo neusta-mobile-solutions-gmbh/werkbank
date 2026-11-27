@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// An inherited widget that allows to provide a transform which is applied to
 /// the viewport of a use case.

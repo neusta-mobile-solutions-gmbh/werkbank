@@ -1,3 +1,5 @@
+include: package:werkbank_lints/werkbank_lints.yaml
+
 analyzer:
   exclude:
     - build/**
@@ -7,4 +9,3 @@ analyzer:
     - linux/**
     - android/**
     - ios/**
-include: package:werkbank_lints/werkbank_lints.yaml

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension PlatformContextExtension on BuildContext {
   bool get isApple => switch (Theme.of(this).platform) {

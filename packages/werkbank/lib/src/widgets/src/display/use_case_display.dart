@@ -1,7 +1,7 @@
 /// @docImport 'package:werkbank/src/addons/src/background/background.dart';
 library;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/widgets/widgets.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 import 'package:werkbank/src/tree/tree.dart';

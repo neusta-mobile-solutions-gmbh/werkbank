@@ -1,3 +1,8 @@
+# 0.19.0
+- Migrate to `material_ui` and `cupertino_ui` packages.
+- Remove dependency on `flutter_markdown_plus`. We now copy the package internally to support Markdown.
+- Update some dependency constraints.
+
 # 0.18.4
 - Add "Filter" knobs to `colorsUseCaseBuilder`, `iconsUseCaseBuilder` and `textStylesUseCaseBuilder`.
 - Add `OrderingAddon.fixed()` constructor, which always uses the given order and shows no control to change it.

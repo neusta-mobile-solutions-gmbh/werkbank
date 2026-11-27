@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// This is a workaround because the original AnimationController does not
 /// notify its listeners when it was stopped.

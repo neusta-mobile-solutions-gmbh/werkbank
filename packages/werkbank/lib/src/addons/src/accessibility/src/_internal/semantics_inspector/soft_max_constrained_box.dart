@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Tries to limit either the width or height
 /// (depending on the [constrainedAxis]) to [softMaxAxisConstraint].

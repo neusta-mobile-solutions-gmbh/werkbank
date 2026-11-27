@@ -99,3 +99,10 @@ melos:
           - werkbank
       run: cd packages/werkbank &&
         fvm dart run ../subpack_analyzer/bin/subpack_analyzer.dart run --analysisDirs=tool,example --verbose
+
+    pana:
+      description: Run pana
+      packageFilters:
+        scope:
+          - werkbank
+      run: pana --flutter-sdk=../../.fvm/flutter_sdk --dart-sdk=../../.fvm/flutter_sdk/bin/cache/dart-sdk

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/localizations/localizations.dart';
 import 'package:werkbank/src/addons/src/debugging/src/_internal/debugging_performance_overlay.dart';
 import 'package:werkbank/src/addons/src/debugging/src/_internal/debugging_repaint_children.dart';

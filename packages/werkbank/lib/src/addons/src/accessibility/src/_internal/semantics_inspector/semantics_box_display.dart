@@ -1,5 +1,5 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantic_data_summary.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_inspector/semantics_inspector.dart';
 import 'package:werkbank/src/addons/src/accessibility/src/_internal/semantics_nodes_display.dart';

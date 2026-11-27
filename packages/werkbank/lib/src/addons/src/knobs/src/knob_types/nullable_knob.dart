@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/components/components.dart';
 import 'package:werkbank/src/theme/theme.dart';
 
 typedef NullableKnobBuilder<T extends Object> = Widget Function(
   BuildContext context,
-  // ignore: avoid_positional_boolean_parameters
   bool enabled,
   ValueNotifier<T> valueNotifier,
 );

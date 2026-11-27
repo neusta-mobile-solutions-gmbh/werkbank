@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/_internal/src/widgets/src/web_fixer/_internal/fix_web_other.dart'
     if (dart.library.js_interop) 'package:werkbank/src/_internal/src/widgets/src/web_fixer/_internal/fix_web_web.dart';
 

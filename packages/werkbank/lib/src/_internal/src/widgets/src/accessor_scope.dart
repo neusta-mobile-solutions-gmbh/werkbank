@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addon_api/addon_api.dart';
 
 class AccessorScope<T extends AddonAccessor> extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:werkbank/src/addons/src/knobs/knobs.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/animation_controller_status_listenable_builder.dart';
 import 'package:werkbank/src/addons/src/knobs/src/_internal/verbose_animation_controller.dart';
